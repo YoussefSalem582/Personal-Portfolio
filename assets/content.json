@@ -1,0 +1,290 @@
+{
+  "personal": {
+    "name": "Youssef Salem Hassan",
+    "title": "Flutter Developer",
+    "shortBio": "Flutter Developer with expertise in cross-platform mobile app development, machine learning integration, and modern UI/UX design. Experienced with Dart, Python, TensorFlow, and Firebase.",
+    "longBio": "I'm a dedicated Flutter developer with a strong background in mobile app development and machine learning. I specialize in creating cross-platform applications that deliver exceptional user experiences across iOS, Android, and web platforms. Currently working as a freelancer on Mostaql.com and continuously expanding my skills through specialized programs.",
+    "profileImage": "assets/images/profile.jpeg",
+    "location": "Egypt",
+    "availableForWork": true
+  },
+  "contact": {
+    "email": "youssef.salem.hassan582@gmail.com",
+    "phone": "+201026855881",
+    "linkedin": "https://www.linkedin.com/in/youssef-hassan-8529372b7/",
+    "github": "https://github.com/YoussefSalem582",
+    "portfolio": "https://v0-youssef-salem-hassan.vercel.app/",
+    "twitter": ""
+  },
+  "skills": {
+    "technical": [
+      {
+        "category": "Mobile Development",
+        "skills": ["Dart", "Flutter", "iOS", "Android", "BLoC", "Riverpod"]
+      },
+      {
+        "category": "Backend & Database",
+        "skills": ["Python", "Firebase", "Git", "REST APIs"]
+      },
+      {
+        "category": "Machine Learning",
+        "skills": ["TensorFlow", "Computer Vision", "Audio Processing", "Multimodal AI"]
+      },
+      {
+        "category": "State Management",
+        "skills": ["BLoC", "Riverpod", "Provider"]
+      }
+    ],
+    "soft": [
+      "Problem Solving",
+      "Self-Learning",
+      "Project Management",
+      "Communication",
+      "Creativity",
+      "Analytical Thinking"
+    ]
+  },
+  "experience": [
+    {
+      "company": "Mostaql.com",
+      "position": "Mobile App Developer Freelancer",
+      "location": "Remote",
+      "startDate": "2025-04",
+      "endDate": "Present",
+      "description": "Freelance mobile app developer working on various Flutter projects for clients.",
+      "achievements": [
+        "Developing custom Flutter applications for diverse client needs",
+        "Implementing modern UI/UX designs with responsive layouts",
+        "Integrating Firebase services for backend functionality",
+        "Maintaining high client satisfaction through quality deliverables"
+      ]
+    },
+    {
+      "company": "Route IT",
+      "position": "Flutter Development Diploma",
+      "location": "Egypt",
+      "startDate": "2025-02",
+      "endDate": "2025-06",
+      "description": "Intensive Flutter development training program focusing on modern mobile app development.",
+      "achievements": [
+        "Mastered Flutter framework and Dart programming language",
+        "Learned advanced state management with BLoC and Riverpod",
+        "Built multiple hands-on projects including music player and chat applications",
+        "Gained expertise in Firebase integration and API consumption"
+      ]
+    },
+    {
+      "company": "DEPI Microsoft",
+      "position": "ML Engineer Program",
+      "location": "Egypt",
+      "startDate": "2024-10",
+      "endDate": "2025-05",
+      "description": "Machine Learning engineering program focusing on practical AI applications.",
+      "achievements": [
+        "Developed expertise in TensorFlow and Python for ML applications",
+        "Created multimodal emotion recognition system using audio and video",
+        "Learned computer vision techniques and audio processing",
+        "Applied ML models in real-world mobile applications"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "Cairo University",
+      "degree": "Bachelor of Computer Science",
+      "location": "Cairo, Egypt",
+      "startDate": "2015-09",
+      "endDate": "2019-06",
+      "gpa": "3.8/4.0",
+      "achievements": [
+        "Graduated with Honors",
+        "President of Computer Science Student Association",
+        "Published research paper on machine learning applications"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "multi-emotion-recognition",
+      "title": "Multi-Emotion Recognition for Customer service",
+      "shortDescription": "Multimodal ML framework for emotion detection from audio/video.",
+      "description": "Developed a comprehensive multimodal machine learning framework that analyzes emotions from both audio and video inputs. This advanced system combines computer vision and audio processing techniques to provide accurate emotion recognition for customer service applications.",
+      "technologies": ["Python", "TensorFlow", "OpenCV", "Audio Processing", "Computer Vision", "ML"],
+      "startDate": "2025-06",
+      "endDate": "2025-07",
+      "status": "completed",
+      "repositoryUrl": "https://github.com/YoussefSalem582/",
+      "liveUrl": "https://emosense-app-links.vercel.app/",
+      "images": [
+        "assets/images/projects/emotion-recognition-1.jpg",
+        "assets/images/projects/emotion-recognition-2.jpg",
+        "assets/images/projects/emotion-recognition-3.jpg"
+      ],
+      "features": [
+        "Real-time emotion detection from video feed",
+        "Audio emotion analysis from voice patterns",
+        "Multimodal fusion for improved accuracy",
+        "Customer service dashboard integration",
+        "Analytics and reporting system"
+      ],
+      "challenges": [
+        "Combining audio and video modalities effectively",
+        "Optimizing ML models for real-time performance",
+        "Handling diverse emotional expressions and audio quality"
+      ]
+    },
+    {
+      "id": "music-player-app",
+      "title": "Music Player App",
+      "shortDescription": "Feature-rich Flutter music player.",
+      "description": "Built a comprehensive music player application using Flutter with modern UI design and essential music playback features. The app provides a smooth user experience with intuitive controls and playlist management.",
+      "technologies": ["Flutter", "Dart", "Audio Service", "Provider", "Material Design"],
+      "startDate": "2025-02",
+      "endDate": "2025-03",
+      "status": "completed",
+      "repositoryUrl": "https://github.com/YoussefSalem582/Music-Player-App",
+      "liveUrl": "",
+      "images": [
+        "assets/images/projects/music-player-1.jpg",
+        "assets/images/projects/music-player-2.jpg",
+        "assets/images/projects/music-player-3.jpg"
+      ],
+      "features": [
+        "Clean and intuitive user interface",
+        "Music playback controls",
+        "Playlist creation and management",
+        "Background audio playback",
+        "Material Design principles"
+      ],
+      "challenges": [
+        "Implementing smooth audio playback",
+        "Managing app state during background play",
+        "Creating responsive UI for different screen sizes"
+      ]
+    },
+    {
+      "id": "chat-app",
+      "title": "Chat App",
+      "shortDescription": "Real-time chat with Firebase auth and Firestore.",
+      "description": "Developed a real-time chat application using Flutter and Firebase services. The app features secure authentication, real-time messaging, and cloud-based message storage with a modern, user-friendly interface.",
+      "technologies": ["Flutter", "Firebase", "Firestore", "Firebase Auth", "Dart"],
+      "startDate": "2025-02",
+      "endDate": "2025-03",
+      "status": "completed",
+      "repositoryUrl": "https://github.com/YoussefSalem582/chat-app",
+      "liveUrl": "",
+      "images": [
+        "assets/images/projects/chat-app-1.jpg",
+        "assets/images/projects/chat-app-2.jpg",
+        "assets/images/projects/chat-app-3.jpg"
+      ],
+      "features": [
+        "Real-time messaging with Firestore",
+        "Secure user authentication",
+        "Cloud-based message storage",
+        "User-friendly chat interface",
+        "Message status indicators"
+      ],
+      "challenges": [
+        "Implementing real-time data synchronization",
+        "Managing user authentication states",
+        "Optimizing Firestore queries for performance"
+      ]
+    },
+    {
+      "id": "chargehub-app",
+      "title": "ChargeHub App",
+      "shortDescription": "EV & gas station finder with maps and BLoC.",
+      "description": "Created a comprehensive charging station finder application for electric vehicles and gas stations. The app uses Google Maps integration and BLoC pattern for state management, providing users with nearby charging options and navigation features.",
+      "technologies": ["Flutter", "BLoC", "Google Maps API", "Dart", "Material Design"],
+      "startDate": "2024-08",
+      "endDate": "2024-09",
+      "status": "completed",
+      "repositoryUrl": "https://github.com/YoussefSalem582/ChargeHub-App",
+      "liveUrl": "",
+      "images": [
+        "assets/images/projects/chargehub-1.jpg",
+        "assets/images/projects/chargehub-2.jpg",
+        "assets/images/projects/chargehub-3.jpg"
+      ],
+      "features": [
+        "Interactive Google Maps integration",
+        "EV charging station locations",
+        "Gas station finder functionality",
+        "BLoC state management implementation",
+        "Location-based services"
+      ],
+      "challenges": [
+        "Integrating Google Maps API effectively",
+        "Implementing BLoC pattern for complex state management",
+        "Optimizing location services and map performance"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Google Flutter Developer Certification",
+      "issuer": "Google",
+      "date": "2023-06",
+      "credentialId": "GFD-2023-YSH-001"
+    },
+    {
+      "name": "AWS Certified Solutions Architect",
+      "issuer": "Amazon Web Services",
+      "date": "2022-11",
+      "credentialId": "AWS-SAA-YSH-2022"
+    },
+    {
+      "name": "TensorFlow Developer Certificate",
+      "issuer": "TensorFlow",
+      "date": "2021-09",
+      "credentialId": "TDC-2021-YSH"
+    }
+  ],
+  "achievements": [
+    {
+      "title": "Best Mobile App Award",
+      "description": "Won first place in the Regional Mobile App Development Competition",
+      "date": "2023-03"
+    },
+    {
+      "title": "Open Source Contributor",
+      "description": "Active contributor to Flutter and Dart open source projects with 50+ merged PRs",
+      "date": "2022-present"
+    }
+  ],
+  "testimonials": [
+    {
+      "name": "Sarah Johnson",
+      "position": "Product Manager at TechCorp",
+      "text": "Youssef is an exceptional Flutter developer who consistently delivers high-quality applications. His attention to detail and problem-solving skills are outstanding.",
+      "image": "assets/images/testimonials/sarah.jpg"
+    },
+    {
+      "name": "Ahmed Mohamed",
+      "position": "CTO at Mobile Innovations",
+      "text": "Working with Youssef was a pleasure. He brought innovative solutions to complex problems and his expertise in machine learning integration was invaluable.",
+      "image": "assets/images/testimonials/ahmed.jpg"
+    }
+  ],
+  "blog": [
+    {
+      "id": "flutter-performance-tips",
+      "title": "10 Essential Flutter Performance Optimization Tips",
+      "excerpt": "Learn how to optimize your Flutter applications for better performance and user experience.",
+      "date": "2023-09-15",
+      "readTime": "8 min read",
+      "tags": ["Flutter", "Performance", "Mobile Development"],
+      "content": "assets/blog/flutter-performance-tips.md"
+    },
+    {
+      "id": "ml-integration-flutter",
+      "title": "Integrating Machine Learning Models in Flutter Apps",
+      "excerpt": "A comprehensive guide to incorporating TensorFlow Lite models in your Flutter applications.",
+      "date": "2023-08-22",
+      "readTime": "12 min read",
+      "tags": ["Flutter", "Machine Learning", "TensorFlow"],
+      "content": "assets/blog/ml-integration-flutter.md"
+    }
+  ]
+}
