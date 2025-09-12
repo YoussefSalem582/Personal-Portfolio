@@ -1,108 +1,45 @@
-# Dependency directories
-node_modules/
-.npm/
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
 
 # Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
 .dart_tool/
-pubspec.lock
-
-# Build directories
-build/
 .flutter-plugins
 .flutter-plugins-dependencies
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Files and directories created by pub
-.packages
 .pub-cache/
 .pub/
+/build/
 
-# Coverage
-coverage/
+# Symbolication related
+app.*.symbols
 
-# Environment variables
-.env
-.env.local
-.env.production
+# Obfuscation related
+app.*.map.json
 
-# Firebase
-.firebase/
-firebase-debug.log
-
-# Testing
-test/coverage_helper_test.dart
-
-# Analytics and crash reporting
-google-services.json
-GoogleService-Info.plist
-
-# Key files
-keystore.jks
-key.properties
-
-# Local configuration
-local.properties
-
-# Generated files
-*.g.dart
-*.freezed.dart
-*.mocks.dart
-
-# Web build artifacts
-web/favicon.png
-web/icons/
-web/manifest.json
-
-# Android
-android/app/debug/
-android/app/profile/
-android/app/release/
-android/key.properties
-android/local.properties
-android/.gradle/
-android/captures/
-android/gradlew
-android/gradlew.bat
-android/gradle/wrapper/gradle-wrapper.jar
-
-# iOS
-ios/Flutter/Flutter.framework
-ios/Flutter/Flutter.podspec
-ios/Flutter/Generated.xcconfig
-ios/Flutter/ephemeral/
-ios/Flutter/flutter_export_environment.sh
-ios/Runner/GeneratedPluginRegistrant.*
-ios/Pods/
-ios/.symlinks/
-ios/DerivedData/
-
-# macOS
-macos/Flutter/GeneratedPluginRegistrant.swift
-macos/Flutter/ephemeral/
-
-# Windows
-windows/flutter/generated_plugin_registrant.cc
-windows/flutter/generated_plugin_registrant.h
-windows/flutter/generated_plugins.cmake
-
-# Linux
-linux/flutter/generated_plugin_registrant.cc
-linux/flutter/generated_plugin_registrant.h
-linux/flutter/generated_plugins.cmake
-
-# Logs
-*.log
-
-# Temporary files
-*.tmp
-*.temp
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
