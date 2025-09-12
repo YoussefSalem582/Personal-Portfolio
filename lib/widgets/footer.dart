@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../theme/app_theme.dart';
 import '../utils/responsive_helper.dart';
 import '../utils/portfolio_data.dart';
@@ -121,6 +122,7 @@ class Footer extends StatelessWidget {
               _buildFooterLink('Projects', () => _scrollToSection('projects')),
               _buildFooterLink('Skills', () => _scrollToSection('skills')),
               _buildFooterLink('Contact', () => _scrollToSection('contact')),
+              _buildFooterLink('Resume PDF', () => _downloadResume()),
             ],
           ),
         ),
@@ -249,6 +251,23 @@ class Footer extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
         ),
+
+        const SizedBox(height: AppTheme.spacingL),
+
+        // Resume download button
+        ElevatedButton.icon(
+          onPressed: () => _downloadResume(),
+          icon: const Icon(Icons.download, size: 18),
+          label: const Text('Download Resume'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppTheme.accentColor,
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(8),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -311,5 +330,14 @@ class Footer extends StatelessWidget {
   void _scrollToSection(String section) {
     // TODO: Implement scrolling to sections
     // This would require passing a scroll controller or using a named route
+  }
+
+  void _downloadResume() async {
+    try {
+      await UrlHelper.launchURL(PortfolioData.resumeUrl);
+    } catch (e) {
+      // Handle error silently or show a message
+      debugPrint('Error downloading resume: $e');
+    }
   }
 }

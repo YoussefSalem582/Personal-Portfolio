@@ -2,16 +2,16 @@ import '../models/project.dart';
 import '../models/skill.dart';
 import '../models/contact.dart';
 import '../models/contact_form.dart';
+import '../models/certificate.dart';
 
 class PortfolioData {
   // Personal information
   static const String fullName = 'Youssef Salem Hassan';
   static const String title = 'Flutter Developer';
-  static const String subtitle = 'Mobile & Web Application Developer';
+  static const String subtitle = 'Building fast cross-platform apps';
   static const String bio =
-      'Passionate Flutter developer with expertise in creating beautiful, performant mobile and web applications. '
-      'I specialize in cross-platform development using Flutter and Dart, with experience in AI integration, '
-      'real-time applications, and modern UI/UX design.';
+      'Flutter developer and ML practitioner. I build cross-platform mobile & web apps, '
+      'and integrate machine learning into real-world applications (facial recognition, emotion analysis).';
 
   static const String email = 'youssef.salem.hassan582@gmail.com';
   static const String phone = '+20 123 456 7890'; // Replace with actual phone
@@ -21,6 +21,7 @@ class PortfolioData {
 
   // Resume download URL
   static const String resumeUrl = 'assets/resume.pdf';
+  static const String profileImageUrl = 'assets/profile.jpeg';
 
   // Social links
   static const List<SocialLink> socialLinks = [
@@ -101,121 +102,183 @@ class PortfolioData {
   // Projects
   static final List<Project> projects = [
     Project(
-      id: 'emosense',
-      title: 'EmoSense App',
-      shortDescription: 'AI-powered emotion detection mobile application',
+      id: 'multi-emotion-recognition',
+      title: 'Multi-Emotion Recognition for Customer Service',
+      shortDescription:
+          'Multimodal ML framework for analyzing audio and video to detect emotions',
       description:
-          'An innovative mobile application that uses artificial intelligence to detect and analyze human emotions in real-time. The app features advanced computer vision algorithms, real-time emotion recognition, and intuitive user interface design.',
+          'A multimodal ML framework for analyzing audio and video to detect emotions and support mental-health diagnostics. '
+          'Includes privacy-first design and model evaluation. Graduation Project completed in July 2025.',
       technologies: [
-        'Flutter',
-        'Dart',
-        'AI/ML',
-        'Computer Vision',
+        'Python',
         'TensorFlow',
+        'Computer Vision',
+        'Audio Processing',
+        'Machine Learning',
       ],
-      githubUrl: 'https://github.com/YoussefSalem582/EmoSense-App',
-      liveUrl: 'https://emosense-app-links.vercel.app/',
-      imageUrl: 'assets/images/emosense.png',
-      createdAt: DateTime(2024, 1, 15),
+      githubUrl: 'https://github.com/YoussefSalem582/Multi-Emotion-Recognition',
+      imageUrl: 'assets/images/projects/emotion-recognition.png',
+      createdAt: DateTime(2025, 7, 1),
       isFeatured: true,
     ),
     Project(
       id: 'music-player',
       title: 'Music Player App',
-      shortDescription: 'Feature-rich music player with modern UI',
+      shortDescription:
+          'Flutter music player with playlists, playback controls, search, and modern UI',
       description:
-          'A beautiful and functional music player application built with Flutter. Features include playlist management, audio visualization, background playback, and a sleek modern interface.',
+          'Flutter music player with playlists, playback controls, search, and a modern UI — built during an internship in March 2025. '
+          'Features include audio visualization, background playback, and seamless user experience.',
       technologies: ['Flutter', 'Dart', 'Audio Processing', 'State Management'],
       githubUrl: 'https://github.com/YoussefSalem582/Music-Player-App',
-      imageUrl: 'assets/images/music-player.png',
-      createdAt: DateTime(2023, 11, 20),
+      imageUrl: 'assets/images/projects/Music app/Home Page.png',
+      galleryImages: [
+        'assets/images/projects/Music app/Home Page.png',
+        'assets/images/projects/Music app/Home Screen 1.png',
+        'assets/images/projects/Music app/Home Screen 2.png',
+        'assets/images/projects/Music app/Music player screen.png',
+        'assets/images/projects/Music app/playlist screen.png',
+        'assets/images/projects/Music app/liked songs page.png',
+      ],
+      createdAt: DateTime(2025, 3, 1),
       isFeatured: true,
     ),
     Project(
       id: 'chat-app',
-      title: 'Real-time Chat App',
-      shortDescription: 'Secure messaging application with real-time features',
+      title: 'Chat App',
+      shortDescription:
+          'Cross-platform chat using Firebase Auth and Realtime messaging',
       description:
-          'A comprehensive chat application with real-time messaging, user authentication, media sharing, and group chat functionality. Built with modern security practices and responsive design.',
+          'Cross-platform chat using Firebase Auth and Realtime messaging; includes light/dark modes and a polished UI. '
+          'Built in March 2025 with comprehensive real-time features.',
       technologies: [
         'Flutter',
         'Dart',
         'Firebase',
         'Real-time Database',
         'Authentication',
+        'BLoC',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/chat-app',
-      imageUrl: 'assets/images/chat-app.png',
-      createdAt: DateTime(2023, 9, 10),
+      imageUrl: 'assets/images/projects/chat app/home page.png',
+      galleryImages: [
+        'assets/images/projects/chat app/home page.png',
+        'assets/images/projects/chat app/chat.png',
+        'assets/images/projects/chat app/login.png',
+        'assets/images/projects/chat app/register.png',
+        'assets/images/projects/chat app/lightmode.png',
+        'assets/images/projects/chat app/settings page.png',
+        'assets/images/projects/chat app/drawer.png',
+      ],
+      createdAt: DateTime(2025, 3, 1),
       isFeatured: true,
     ),
     Project(
       id: 'quizhub',
       title: 'QuizHub App',
-      shortDescription: 'Interactive quiz and learning platform',
+      shortDescription: 'Online Exam platform with interactive quiz features',
       description:
-          'An educational quiz application that provides interactive learning experiences. Features multiple quiz categories, progress tracking, leaderboards, and adaptive learning algorithms.',
+          'An educational quiz application providing interactive learning experiences. Features multiple quiz categories, '
+          'progress tracking, review functionality, and comprehensive exam management.',
       technologies: ['Flutter', 'Dart', 'SQLite', 'State Management'],
       githubUrl: 'https://github.com/YoussefSalem582/QuizHub-App',
-      imageUrl: 'assets/images/quiz-hub.png',
-      createdAt: DateTime(2023, 7, 5),
+      imageUrl: 'assets/images/projects/QuizHub/Home Screen.png',
+      galleryImages: [
+        'assets/images/projects/QuizHub/Home Screen.png',
+        'assets/images/projects/QuizHub/Quiz.png',
+        'assets/images/projects/QuizHub/Correct.png',
+        'assets/images/projects/QuizHub/Incorrect.png',
+        'assets/images/projects/QuizHub/Quiz Complete.png',
+        'assets/images/projects/QuizHub/Review Page.png',
+      ],
+      createdAt: DateTime(2024, 1, 1),
     ),
     Project(
       id: 'chargehub',
       title: 'ChargeHub App',
-      shortDescription: 'Electric vehicle charging station locator',
+      shortDescription:
+          'EV & gas station finder with interactive maps and BLoC-based state management',
       description:
-          'A comprehensive app for electric vehicle owners to locate charging stations, check availability, and manage charging sessions. Includes real-time data and navigation integration.',
-      technologies: ['Flutter', 'Dart', 'Maps API', 'REST API', 'GPS'],
+          'EV & gas station finder with interactive maps and BLoC-based state management. Built in September 2024, '
+          'this app helps users locate charging stations and gas stations with real-time availability.',
+      technologies: ['Flutter', 'Dart', 'Maps API', 'BLoC', 'GPS'],
       githubUrl: 'https://github.com/YoussefSalem582/ChargeHub-App',
-      imageUrl: 'assets/images/charge-hub.png',
-      createdAt: DateTime(2023, 5, 15),
+      imageUrl: 'assets/images/projects/ChargeHub/homescreen.png',
+      galleryImages: [
+        'assets/images/projects/ChargeHub/homescreen.png',
+        'assets/images/projects/ChargeHub/Map.png',
+        'assets/images/projects/ChargeHub/login.png',
+        'assets/images/projects/ChargeHub/signup.png',
+        'assets/images/projects/ChargeHub/EV car.png',
+        'assets/images/projects/ChargeHub/gas car.png',
+      ],
+      createdAt: DateTime(2024, 9, 1),
     ),
     Project(
-      id: 'market-we',
-      title: 'Market WE App',
-      shortDescription: 'E-commerce marketplace application',
+      id: 'gogesh-marketplace',
+      title: 'Gogesh Marketplace App',
+      shortDescription:
+          'Comprehensive e-commerce marketplace with modern UI/UX',
       description:
-          'A full-featured e-commerce application with product catalog, shopping cart, payment integration, and order management. Designed with modern UI/UX principles.',
+          'A full-featured e-commerce marketplace application with product catalog, shopping cart, '
+          'user authentication, order management, and payment integration. Features modern UI/UX design principles.',
       technologies: [
         'Flutter',
         'Dart',
         'REST API',
-        'Payment Gateway',
         'State Management',
+        'Firebase',
       ],
-      githubUrl: 'https://github.com/YoussefSalem582/Market-WE-App',
-      imageUrl: 'assets/images/market-we.png',
-      createdAt: DateTime(2023, 3, 20),
+      githubUrl: 'https://github.com/YoussefSalem582/Gogesh-App',
+      imageUrl: 'assets/images/projects/gogesh/Screenshot_20250829_042338.png',
+      galleryImages: [
+        'assets/images/projects/gogesh/Screenshot_20250829_042338.png',
+        'assets/images/projects/gogesh/Screenshot_20250829_042552.png',
+        'assets/images/projects/gogesh/Screenshot_20250829_042600.png',
+        'assets/images/projects/gogesh/Screenshot_20250829_042614.png',
+        'assets/images/projects/gogesh/Screenshot_20250829_042708.png',
+        'assets/images/projects/gogesh/Screenshot_20250829_043105.png',
+        'assets/images/projects/gogesh/Screenshot_20250829_043343.png',
+        'assets/images/projects/gogesh/Screenshot_20250829_044334.png',
+      ],
+      createdAt: DateTime(2024, 8, 29),
     ),
     Project(
-      id: 'quote-generator',
-      title: 'Random Quote Generator',
-      shortDescription: 'Inspirational quotes app with sharing features',
+      id: 'quotehub',
+      title: 'QuoteHub App',
+      shortDescription: 'Random quote generator with categories and favorites',
       description:
-          'A simple yet elegant app that displays random inspirational quotes. Features include quote sharing, favorites, and a clean, minimalist design.',
-      technologies: ['Flutter', 'Dart', 'REST API', 'Social Sharing'],
+          'A simple yet elegant app that displays random inspirational quotes with category selection. '
+          'Features include quote sharing, favorites, category filtering, and a clean, minimalist design.',
+      technologies: ['Flutter', 'Dart', 'REST API', 'Local Storage'],
       githubUrl:
           'https://github.com/YoussefSalem582/Random-Quote-Generator-App',
-      imageUrl: 'assets/images/quote-generator.png',
-      createdAt: DateTime(2023, 2, 10),
+      imageUrl: 'assets/images/projects/QuoteHub/Home Screen with Quotes.png',
+      galleryImages: [
+        'assets/images/projects/QuoteHub/Home Screen with Quotes.png',
+        'assets/images/projects/QuoteHub/Home Screen.png',
+        'assets/images/projects/QuoteHub/Select Category.png',
+        'assets/images/projects/QuoteHub/Favorite Page.png',
+      ],
+      createdAt: DateTime(2024, 2, 10),
     ),
     Project(
       id: 'facial-recognition',
       title: 'Facial Recognition System',
       shortDescription: 'AI-powered facial recognition and analysis',
       description:
-          'An advanced facial recognition system using computer vision and machine learning. Capable of face detection, recognition, and analysis with high accuracy.',
+          'An advanced facial recognition system using computer vision and machine learning. '
+          'Capable of face detection, recognition, and analysis with high accuracy using OpenCV and TensorFlow.',
       technologies: [
         'Python',
         'OpenCV',
         'TensorFlow',
         'Computer Vision',
-        'AI/ML',
+        'Machine Learning',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/Facial-Recognition-System',
-      imageUrl: 'assets/images/facial-recognition.png',
-      createdAt: DateTime(2022, 12, 5),
+      imageUrl: 'assets/images/projects/facial-recognition.png',
+      createdAt: DateTime(2024, 12, 5),
     ),
     Project(
       id: 'sign-language-translator',
@@ -223,34 +286,116 @@ class PortfolioData {
       shortDescription:
           'AI system for sign language recognition and translation',
       description:
-          'An innovative AI-powered system that recognizes sign language gestures and translates them to text or speech. Uses advanced computer vision and machine learning algorithms.',
+          'An innovative AI-powered system that recognizes sign language gestures and translates them to text or speech. '
+          'Uses advanced computer vision and machine learning algorithms for real-time gesture recognition.',
       technologies: [
         'Python',
         'OpenCV',
         'TensorFlow',
         'Computer Vision',
-        'NLP',
+        'Machine Learning',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/Sign-Language-Translator',
-      imageUrl: 'assets/images/sign-language.png',
-      createdAt: DateTime(2022, 10, 20),
+      imageUrl: 'assets/images/projects/sign-language.png',
+      createdAt: DateTime(2024, 10, 20),
     ),
     Project(
-      id: 'road-condition-detector',
-      title: 'Road Condition Detector',
-      shortDescription: 'AI system for real-time road condition analysis',
+      id: 'pothole-detection',
+      title: 'Comparative Analysis of ML Models for Street Pothole Detection',
+      shortDescription:
+          'Research paper comparing CNN, ResNet-50, and Decision Trees',
       description:
-          'An intelligent system that analyzes road conditions using computer vision and machine learning. Helps in traffic management and road safety assessment.',
+          'Comparative research evaluating CNN, ResNet-50, and Decision Trees for pothole detection. '
+          'Shows ML and data-focused experience with comprehensive model evaluation and performance analysis.',
       technologies: [
         'Python',
-        'OpenCV',
         'TensorFlow',
-        'Computer Vision',
-        'Image Processing',
+        'CNN',
+        'ResNet-50',
+        'Machine Learning',
       ],
-      githubUrl: 'https://github.com/YoussefSalem582/Road-Condition-Detector',
-      imageUrl: 'assets/images/road-detector.png',
-      createdAt: DateTime(2022, 8, 15),
+      githubUrl:
+          'https://github.com/YoussefSalem582/Street-Pothole-Detection-Research',
+      imageUrl: 'assets/images/projects/pothole-detection.png',
+      createdAt: DateTime(2024, 8, 15),
+    ),
+  ];
+
+  // Certificates and achievements
+  static final List<Certificate> certificates = [
+    Certificate(
+      id: 'route-flutter-diploma',
+      title: 'Flutter Diploma Certificate',
+      issuer: 'Route Academy',
+      description:
+          'Comprehensive Flutter development certification covering mobile app development, state management, and UI/UX design.',
+      issueDate: DateTime(2025, 1, 1),
+      pdfUrl: 'assets/certificates/Route Flutter Diploma Certificate .pdf',
+      imageUrl:
+          'assets/certificates/photos/Route Flutter Diploma Certificate.png',
+    ),
+    Certificate(
+      id: 'ml-depi',
+      title: 'Machine Learning Certificate',
+      issuer: 'DEPI (Digital Egypt Pioneers Initiative)',
+      description:
+          'Advanced machine learning certification covering neural networks, deep learning, and AI model development.',
+      issueDate: DateTime(2024, 12, 1),
+      pdfUrl: 'assets/certificates/ML - DEPI.pdf',
+    ),
+    Certificate(
+      id: 'codealpha-certificate',
+      title: 'CodeAlpha Internship Certificate',
+      issuer: 'CodeAlpha',
+      description:
+          'Software development internship focusing on mobile app development and practical programming skills.',
+      issueDate: DateTime(2024, 11, 1),
+      pdfUrl: 'assets/certificates/CodeAlpha Certificate.pdf',
+    ),
+    Certificate(
+      id: 'codealpha-lor',
+      title: 'CodeAlpha Letter of Recommendation',
+      issuer: 'CodeAlpha',
+      description:
+          'Letter of recommendation for outstanding performance during software development internship.',
+      issueDate: DateTime(2024, 11, 1),
+      pdfUrl: 'assets/certificates/CodeAlpha LOR.pdf',
+    ),
+    Certificate(
+      id: 'ecpc',
+      title: 'Egyptian Collegiate Programming Contest',
+      issuer: 'ECPC',
+      description:
+          'Participation certificate in the Egyptian Collegiate Programming Contest demonstrating problem-solving skills.',
+      issueDate: DateTime(2024, 10, 1),
+      pdfUrl: 'assets/certificates/ECPC.pdf',
+      imageUrl: 'assets/certificates/photos/ECPC.jpg',
+    ),
+    Certificate(
+      id: 'intro-jupyter',
+      title: 'Introduction to Jupyter',
+      issuer: 'Educational Platform',
+      description:
+          'Certificate in Jupyter notebook usage for data science and machine learning applications.',
+      issueDate: DateTime(2024, 8, 1),
+      pdfUrl: 'assets/certificates/Intro to jupyter.pdf',
+    ),
+    Certificate(
+      id: 'intro-python',
+      title: 'Introduction to Python',
+      issuer: 'Educational Platform',
+      description:
+          'Python programming fundamentals certificate covering syntax, data structures, and algorithms.',
+      issueDate: DateTime(2024, 7, 1),
+      pdfUrl: 'assets/certificates/Intro to python.pdf',
+    ),
+    Certificate(
+      id: 'we-certificate',
+      title: 'WE Certificate',
+      issuer: 'WE (Telecom Egypt)',
+      description: 'Technology and telecommunications industry certificate.',
+      issueDate: DateTime(2024, 6, 1),
+      pdfUrl: 'assets/certificates/We certificate.pdf',
     ),
   ];
 

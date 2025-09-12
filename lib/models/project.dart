@@ -7,6 +7,7 @@ class Project {
   final String? githubUrl;
   final String? liveUrl;
   final String? imageUrl;
+  final List<String>? galleryImages;
   final DateTime createdAt;
   final bool isFeatured;
 
@@ -19,6 +20,7 @@ class Project {
     this.githubUrl,
     this.liveUrl,
     this.imageUrl,
+    this.galleryImages,
     required this.createdAt,
     this.isFeatured = false,
   });
@@ -33,6 +35,9 @@ class Project {
       githubUrl: json['githubUrl'],
       liveUrl: json['liveUrl'],
       imageUrl: json['imageUrl'],
+      galleryImages: json['galleryImages'] != null
+          ? List<String>.from(json['galleryImages'])
+          : null,
       createdAt: DateTime.parse(json['createdAt']),
       isFeatured: json['isFeatured'] ?? false,
     );
@@ -48,6 +53,7 @@ class Project {
       'githubUrl': githubUrl,
       'liveUrl': liveUrl,
       'imageUrl': imageUrl,
+      'galleryImages': galleryImages,
       'createdAt': createdAt.toIso8601String(),
       'isFeatured': isFeatured,
     };

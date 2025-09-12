@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../theme/app_theme.dart';
 import '../models/project.dart';
 import '../utils/url_helper.dart';
+import '../screens/project_case_study.dart';
+import 'lazy_image.dart';
 
 class ProjectCard extends StatelessWidget {
   final Project project;
@@ -42,12 +44,13 @@ class ProjectCard extends StatelessWidget {
                       top: Radius.circular(AppTheme.radiusL),
                     ),
                     child: project.imageUrl != null
-                        ? Image.asset(
-                            project.imageUrl!,
+                        ? LazyImage(
+                            imageUrl: project.imageUrl!,
                             fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return _buildPlaceholderImage();
-                            },
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(AppTheme.radiusL),
+                            ),
+                            errorWidget: _buildPlaceholderImage(),
                           )
                         : _buildPlaceholderImage(),
                   ),
@@ -201,40 +204,11 @@ class ProjectDetailsDialog extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Project image
-                    if (project.imageUrl != null)
-                      Container(
-                        width: double.infinity,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(AppTheme.radiusM),
-                          color: AppTheme.accentColor.withOpacity(0.1),
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(AppTheme.radiusM),
-                          child: Image.asset(
-                            project.imageUrl!,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  color: AppTheme.accentColor.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(
-                                    AppTheme.radiusM,
-                                  ),
-                                ),
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.image,
-                                    size: 50,
-                                    color: AppTheme.accentColor,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
+                    // Project image gallery or single image
+                    if (project.imageUrl != null ||
+                        (project.galleryImages != null &&
+                            project.galleryImages!.isNotEmpty))
+                      _buildImageGallery(),
 
                     const SizedBox(height: AppTheme.spacingL),
 
@@ -278,34 +252,138 @@ class ProjectDetailsDialog extends StatelessWidget {
             // Action buttons
             Padding(
               padding: const EdgeInsets.all(AppTheme.spacingM),
-              child: Row(
+              child: Column(
                 children: [
-                  if (project.githubUrl != null)
-                    Expanded(
-                      child: OutlinedButton.icon(
-                        onPressed: () =>
-                            UrlHelper.launchURL(project.githubUrl!),
-                        icon: const Icon(Icons.code),
-                        label: const Text('View Code'),
-                      ),
-                    ),
-
-                  if (project.githubUrl != null && project.liveUrl != null)
-                    const SizedBox(width: AppTheme.spacingM),
-
-                  if (project.liveUrl != null)
-                    Expanded(
+                  // Case Study button for featured projects
+                  if (project.isFeatured)
+                    Container(
+                      width: double.infinity,
+                      margin: const EdgeInsets.only(bottom: AppTheme.spacingM),
                       child: ElevatedButton.icon(
-                        onPressed: () => UrlHelper.launchURL(project.liveUrl!),
-                        icon: const Icon(Icons.launch),
-                        label: const Text('Live Demo'),
+                        onPressed: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => ProjectCaseStudy(project: project),
+                          ),
+                        ),
+                        icon: const Icon(Icons.article_outlined),
+                        label: const Text('View Case Study'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppTheme.primaryColor,
+                          foregroundColor: Colors.white,
+                        ),
                       ),
                     ),
+                  
+                  // Original action buttons
+                  Row(
+                    children: [
+                      if (project.githubUrl != null)
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: () =>
+                                UrlHelper.launchURL(project.githubUrl!),
+                            icon: const Icon(Icons.code),
+                            label: const Text('View Code'),
+                          ),
+                        ),
+
+                      if (project.githubUrl != null && project.liveUrl != null)
+                        const SizedBox(width: AppTheme.spacingM),
+
+                      if (project.liveUrl != null)
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed: () => UrlHelper.launchURL(project.liveUrl!),
+                            icon: const Icon(Icons.launch),
+                            label: const Text('Live Demo'),
+                          ),
+                        ),
+                    ],
+                  ),
                 ],
               ),
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildImageGallery() {
+    final List<String> images =
+        project.galleryImages ??
+        (project.imageUrl != null ? [project.imageUrl!] : []);
+
+    if (images.isEmpty) return const SizedBox.shrink();
+
+    return Container(
+      width: double.infinity,
+      height: 250,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+        color: AppTheme.accentColor.withOpacity(0.1),
+      ),
+      child: images.length == 1
+          ? LazyImage(
+              imageUrl: images.first,
+              fit: BoxFit.cover,
+              borderRadius: BorderRadius.circular(AppTheme.radiusM),
+              errorWidget: _buildImagePlaceholder(),
+            )
+          : PageView.builder(
+              itemCount: images.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                    child: Stack(
+                      children: [
+                        LazyImage(
+                          imageUrl: images[index],
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                          errorWidget: _buildImagePlaceholder(),
+                        ),
+                        // Image counter overlay
+                        Positioned(
+                          top: 8,
+                          right: 8,
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 4,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.black.withOpacity(0.7),
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Text(
+                              '${index + 1}/${images.length}',
+                              style: AppTheme.bodySmall.copyWith(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+    );
+  }
+
+  Widget _buildImagePlaceholder() {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppTheme.accentColor.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+      ),
+      child: const Center(
+        child: Icon(Icons.image, size: 50, color: AppTheme.accentColor),
       ),
     );
   }

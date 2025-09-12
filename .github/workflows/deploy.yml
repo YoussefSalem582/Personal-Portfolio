@@ -1,54 +1,45 @@
-name: Deploy Flutter Web to GitHub Pages
+name: Flutter Web CI
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ main, master ]
-  workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: stable
+      - name: Get dependencies
+        run: flutter pub get
+      - name: Run tests
+        run: flutter test --coverage
+      - name: Build web
+        run: flutter build web --release --base-href "/Personal-Portfolio/"
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-build
+          path: build/web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
     
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
-      
-    - name: Setup Flutter
-      uses: subosito/flutter-action@v2
-      with:
-        flutter-version: '3.19.0'
-        channel: 'stable'
-        
-    - name: Get dependencies
-      run: flutter pub get
-      
-    - name: Run tests
-      run: flutter test --no-sound-null-safety || true  # Continue on test failures for now
-      
-    - name: Build web
-      run: |
-        flutter build web --base-href "/personal_portfolio/"
-        
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./build/web
-        
-    - name: Deploy to Netlify (Alternative)
-      if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-      uses: nwtgck/actions-netlify@v2.0
-      with:
-        publish-dir: './build/web'
-        production-branch: main
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        deploy-message: "Deploy from GitHub Actions"
-        enable-pull-request-comment: false
-        enable-commit-comment: true
-        overwrites-pull-request-comment: true
-      env:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+      - uses: actions/checkout@v4
+      - name: Download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: web-build
+          path: build/web
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/web

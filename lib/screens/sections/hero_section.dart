@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/portfolio_data.dart';
@@ -45,51 +46,80 @@ class HeroSection extends StatelessWidget {
   }
 
   Widget _buildDesktopLayout(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        // Left side - Text content
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildHeroText(),
-              const SizedBox(height: AppTheme.spacingXL),
-              _buildActionButtons(context),
-            ],
+    return AnimationLimiter(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // Left side - Text content
+          Expanded(
+            child: AnimationConfiguration.staggeredList(
+              position: 0,
+              duration: const Duration(milliseconds: 1000),
+              child: SlideAnimation(
+                verticalOffset: 50.0,
+                child: FadeInAnimation(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildHeroText(),
+                      const SizedBox(height: AppTheme.spacingXL),
+                      _buildActionButtons(context),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
-        ),
 
-        const SizedBox(width: AppTheme.spacingXXL),
+          const SizedBox(width: AppTheme.spacingXXL),
 
-        // Right side - Profile image and featured projects
-        Expanded(
-          child: Column(
-            children: [
-              _buildProfileImage(),
-              const SizedBox(height: AppTheme.spacingXL),
-              _buildFeaturedProjects(context),
-            ],
+          // Right side - Profile image and featured projects
+          Expanded(
+            child: AnimationConfiguration.staggeredList(
+              position: 1,
+              duration: const Duration(milliseconds: 1000),
+              child: SlideAnimation(
+                verticalOffset: 50.0,
+                child: FadeInAnimation(
+                  child: Column(
+                    children: [
+                      _buildProfileImage(),
+                      const SizedBox(height: AppTheme.spacingXL),
+                      _buildFeaturedProjects(context),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 
   Widget _buildMobileLayout(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        const SizedBox(height: AppTheme.spacingXL),
-        _buildProfileImage(),
-        const SizedBox(height: AppTheme.spacingXL),
-        _buildHeroText(),
-        const SizedBox(height: AppTheme.spacingXL),
-        _buildActionButtons(context),
-        const SizedBox(height: AppTheme.spacingXXL),
-        _buildFeaturedProjects(context),
-      ],
+    return AnimationLimiter(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: AnimationConfiguration.toStaggeredList(
+          duration: const Duration(milliseconds: 375),
+          childAnimationBuilder: (widget) => SlideAnimation(
+            verticalOffset: 50.0,
+            child: FadeInAnimation(child: widget),
+          ),
+          children: [
+            const SizedBox(height: AppTheme.spacingXL),
+            _buildProfileImage(),
+            const SizedBox(height: AppTheme.spacingXL),
+            _buildHeroText(),
+            const SizedBox(height: AppTheme.spacingXL),
+            _buildActionButtons(context),
+            const SizedBox(height: AppTheme.spacingXXL),
+            _buildFeaturedProjects(context),
+          ],
+        ),
+      ),
     );
   }
 

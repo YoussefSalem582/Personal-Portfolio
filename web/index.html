@@ -18,19 +18,70 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="Youssef Hassan - Flutter Developer building fast cross-platform mobile and web apps. Expertise in Dart, Python, TensorFlow, Firebase, and machine learning integration.">
+  <meta name="keywords" content="Flutter Developer, Mobile App Development, Cross-platform Apps, Dart, Python, TensorFlow, Firebase, Machine Learning, Web Development, Youssef Hassan">
+  <meta name="author" content="Youssef Hassan">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Youssef Hassan - Flutter Developer Portfolio">
+  <meta property="og:description" content="Flutter Developer building fast cross-platform mobile and web apps. Expertise in Dart, Python, TensorFlow, Firebase, and machine learning integration.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://youssefsalem582.github.io/Personal-Portfolio/">
+  <meta property="og:image" content="https://youssefsalem582.github.io/Personal-Portfolio/assets/profile.jpeg">
+  <meta property="og:site_name" content="Youssef Hassan Portfolio">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Youssef Hassan - Flutter Developer Portfolio">
+  <meta name="twitter:description" content="Flutter Developer building fast cross-platform mobile and web apps. Expertise in Dart, Python, TensorFlow, Firebase, and machine learning integration.">
+  <meta name="twitter:image" content="https://youssefsalem582.github.io/Personal-Portfolio/assets/profile.jpeg">
+  <meta name="twitter:creator" content="@YoussefSalem582">
+  
+  <!-- Additional Meta Tags -->
+  <meta name="theme-color" content="#2196F3">
+  <meta name="msapplication-TileColor" content="#2196F3">
+  <meta name="msapplication-TileImage" content="icons/Icon-144.png">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="personal_portfolio">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Youssef Hassan Portfolio">
   <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
 
-  <title>personal_portfolio</title>
+  <title>Youssef Hassan - Flutter Developer Portfolio</title>
   <link rel="manifest" href="manifest.json">
+  
+  <!-- Google Analytics 4 (Consent-First) -->
+  <script>
+    // Check if user has consented to analytics
+    if (localStorage.getItem('analytics-consent') === 'true') {
+      // Load Google Analytics only if user consented
+      (function() {
+        var script = document.createElement('script');
+        script.async = true;
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID';
+        document.head.appendChild(script);
+        
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID', {
+          anonymize_ip: true,
+          cookie_flags: 'secure;samesite=strict'
+        });
+      })();
+    }
+  </script>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>

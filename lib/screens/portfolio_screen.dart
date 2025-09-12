@@ -6,8 +6,10 @@ import 'sections/hero_section.dart';
 import 'sections/about_section.dart';
 import 'sections/projects_section.dart';
 import 'sections/skills_section.dart';
+import 'sections/certificates_section.dart';
 import 'sections/contact_section.dart';
 import '../widgets/footer.dart';
+import '../widgets/privacy_consent_banner.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -18,7 +20,7 @@ class PortfolioScreen extends StatefulWidget {
 
 class _PortfolioScreenState extends State<PortfolioScreen> {
   final ScrollController _scrollController = ScrollController();
-  final List<GlobalKey> _sectionKeys = List.generate(5, (index) => GlobalKey());
+  final List<GlobalKey> _sectionKeys = List.generate(6, (index) => GlobalKey());
   int _currentSection = 0;
 
   @override
@@ -77,48 +79,58 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               currentIndex: _currentSection,
             ).buildMobileDrawer(context)
           : null,
-      body: Column(
+      body: Stack(
         children: [
-          // Navigation
-          AppNavigation(
-            onItemSelected: _scrollToSection,
-            currentIndex: _currentSection,
-          ),
-
-          // Content
-          Expanded(
-            child: SingleChildScrollView(
-              controller: _scrollController,
-              child: Column(
-                children: [
-                  // Hero Section
-                  HeroSection(key: _sectionKeys[0]),
-
-                  // About Section
-                  AboutSection(key: _sectionKeys[1]),
-
-                  // Projects Section
-                  ProjectsSection(key: _sectionKeys[2]),
-
-                  // Skills Section
-                  SkillsSection(key: _sectionKeys[3]),
-
-                  // Contact Section
-                  ContactSection(key: _sectionKeys[4]),
-
-                  // Footer
-                  const Footer(),
-                ],
+          Column(
+            children: [
+              // Navigation
+              AppNavigation(
+                onItemSelected: _scrollToSection,
+                currentIndex: _currentSection,
               ),
-            ),
+
+              // Content
+              Expanded(
+                child: SingleChildScrollView(
+                  controller: _scrollController,
+                  child: Column(
+                    children: [
+                      // Hero Section
+                      HeroSection(key: _sectionKeys[0]),
+
+                      // About Section
+                      AboutSection(key: _sectionKeys[1]),
+
+                      // Projects Section
+                      ProjectsSection(key: _sectionKeys[2]),
+
+                      // Skills Section
+                      SkillsSection(key: _sectionKeys[3]),
+
+                      // Certificates Section
+                      CertificatesSection(key: _sectionKeys[4]),
+
+                      // Contact Section
+                      ContactSection(key: _sectionKeys[5]),
+
+                      // Footer
+                      const Footer(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
+          
+          // Privacy Consent Banner
+          const PrivacyConsentBanner(),
         ],
       ),
 
       // Floating Action Button for mobile
       floatingActionButton: isMobile
           ? FloatingActionButton(
-              onPressed: () => _scrollToSection(4), // Go to contact
+              onPressed: () => _scrollToSection(5), // Go to contact
               backgroundColor: AppTheme.accentColor,
               child: const Icon(Icons.message, color: AppTheme.surfaceColor),
             )

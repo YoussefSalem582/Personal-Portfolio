@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../theme/app_theme.dart';
 import '../utils/responsive_helper.dart';
 
@@ -52,6 +53,23 @@ class AppNavigation extends StatelessWidget {
 
           // Navigation items
           Row(children: _buildNavigationItems(false)),
+
+          const SizedBox(width: 24),
+
+          // Resume download button
+          ElevatedButton.icon(
+            onPressed: () => _downloadResume(context),
+            icon: const Icon(Icons.download, size: 18),
+            label: const Text('Resume'),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppTheme.accentColor,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -110,10 +128,17 @@ class AppNavigation extends StatelessWidget {
         isVertical: isVertical,
       ),
       _NavigationItem(
-        title: 'Contact',
+        title: 'Certificates',
         index: 4,
         isSelected: currentIndex == 4,
         onTap: () => onItemSelected(4),
+        isVertical: isVertical,
+      ),
+      _NavigationItem(
+        title: 'Contact',
+        index: 5,
+        isSelected: currentIndex == 5,
+        onTap: () => onItemSelected(5),
         isVertical: isVertical,
       ),
     ];
@@ -155,13 +180,61 @@ class AppNavigation extends StatelessWidget {
             Expanded(
               child: ListView(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                children: _buildNavigationItems(true),
+                children: [
+                  ..._buildNavigationItems(true),
+                  const Divider(),
+                  ListTile(
+                    leading: const Icon(
+                      Icons.download,
+                      color: AppTheme.accentColor,
+                    ),
+                    title: Text(
+                      'Download Resume',
+                      style: AppTheme.bodyLarge.copyWith(
+                        color: AppTheme.accentColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                      _downloadResume(context);
+                    },
+                  ),
+                ],
               ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _downloadResume(BuildContext context) async {
+    const url = 'assets/resume.pdf';
+    try {
+      final uri = Uri.parse(url);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+      } else {
+        if (context.mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Could not download resume. Please try again.'),
+              backgroundColor: Colors.red,
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Error downloading resume. Please try again.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }
 
