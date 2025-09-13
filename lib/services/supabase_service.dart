@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../config/supabase_config.dart';
 
@@ -21,7 +22,7 @@ class SupabaseService {
     try {
       final response = await client.storage
           .from(bucketName)
-          .uploadBinary(fileName, fileBytes,
+          .uploadBinary(fileName, Uint8List.fromList(fileBytes),
               fileOptions: FileOptions(
                 contentType: contentType,
                 upsert: true,

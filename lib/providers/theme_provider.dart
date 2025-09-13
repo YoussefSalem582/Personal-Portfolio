@@ -18,12 +18,14 @@ class ThemeProvider extends ChangeNotifier {
       try {
         // Use dynamic import for web-only localStorage access
         // ignore: avoid_web_libraries_in_flutter
-        final html = (kIsWeb) ? ((){
-          // This will only be called on web
-          // We'll handle this with shared_preferences instead
-          return null;
-        })() : null;
-        
+        final html = (kIsWeb)
+            ? (() {
+                // This will only be called on web
+                // We'll handle this with shared_preferences instead
+                return null;
+              })()
+            : null;
+
         // Default to dark mode since localStorage is complex
         _themeMode = ThemeMode.dark;
         notifyListeners();
@@ -42,7 +44,8 @@ class ThemeProvider extends ChangeNotifier {
       try {
         // For now, we'll skip localStorage to avoid dart:html issues
         // This can be implemented later with proper conditional imports
-        debugPrint('Theme saved: ${_themeMode == ThemeMode.dark ? 'dark' : 'light'}');
+        debugPrint(
+            'Theme saved: ${_themeMode == ThemeMode.dark ? 'dark' : 'light'}');
       } catch (e) {
         // Handle localStorage not available
         debugPrint('Could not save theme preference: $e');

@@ -48,53 +48,63 @@ class PortfolioData {
   ];
 
   // Skills
-  static const List<SkillCategory> skills = [
+  static final List<SkillCategory> skills = [
     SkillCategory(
+      id: 'mobile-dev',
       name: 'Mobile Development',
+      icon: 'phone_android',
       skills: [
-        Skill(name: 'Flutter', category: 'Mobile', proficiency: 5),
-        Skill(name: 'Dart', category: 'Mobile', proficiency: 5),
-        Skill(name: 'Android', category: 'Mobile', proficiency: 4),
-        Skill(name: 'iOS', category: 'Mobile', proficiency: 4),
-        Skill(name: 'Firebase', category: 'Mobile', proficiency: 4),
+        Skill(id: 'flutter', name: 'Flutter', category: 'mobile-dev', proficiency: 90),
+        Skill(id: 'dart', name: 'Dart', category: 'mobile-dev', proficiency: 90),
+        Skill(id: 'android', name: 'Android', category: 'mobile-dev', proficiency: 80),
+        Skill(id: 'ios', name: 'iOS', category: 'mobile-dev', proficiency: 75),
+        Skill(id: 'firebase', name: 'Firebase', category: 'mobile-dev', proficiency: 80),
       ],
     ),
     SkillCategory(
+      id: 'programming',
       name: 'Programming Languages',
+      icon: 'code',
       skills: [
-        Skill(name: 'Dart', category: 'Language', proficiency: 5),
-        Skill(name: 'Python', category: 'Language', proficiency: 4),
-        Skill(name: 'JavaScript', category: 'Language', proficiency: 3),
-        Skill(name: 'Java', category: 'Language', proficiency: 3),
-        Skill(name: 'C++', category: 'Language', proficiency: 3),
+        Skill(id: 'dart-lang', name: 'Dart', category: 'programming', proficiency: 90),
+        Skill(id: 'python', name: 'Python', category: 'programming', proficiency: 85),
+        Skill(id: 'javascript', name: 'JavaScript', category: 'programming', proficiency: 70),
+        Skill(id: 'java', name: 'Java', category: 'programming', proficiency: 70),
+        Skill(id: 'cpp', name: 'C++', category: 'programming', proficiency: 65),
       ],
     ),
     SkillCategory(
+      id: 'web-dev',
       name: 'Web Development',
+      icon: 'web',
       skills: [
-        Skill(name: 'Flutter Web', category: 'Web', proficiency: 4),
-        Skill(name: 'HTML/CSS', category: 'Web', proficiency: 4),
-        Skill(name: 'JavaScript', category: 'Web', proficiency: 3),
-        Skill(name: 'Responsive Design', category: 'Web', proficiency: 4),
+        Skill(id: 'flutter-web', name: 'Flutter Web', category: 'web-dev', proficiency: 80),
+        Skill(id: 'html-css', name: 'HTML/CSS', category: 'web-dev', proficiency: 80),
+        Skill(id: 'js-web', name: 'JavaScript', category: 'web-dev', proficiency: 70),
+        Skill(id: 'responsive', name: 'Responsive Design', category: 'web-dev', proficiency: 80),
       ],
     ),
     SkillCategory(
+      id: 'ai-ml',
       name: 'AI & Machine Learning',
+      icon: 'psychology',
       skills: [
-        Skill(name: 'Computer Vision', category: 'AI', proficiency: 4),
-        Skill(name: 'TensorFlow', category: 'AI', proficiency: 3),
-        Skill(name: 'OpenCV', category: 'AI', proficiency: 4),
-        Skill(name: 'Machine Learning', category: 'AI', proficiency: 3),
+        Skill(id: 'computer-vision', name: 'Computer Vision', category: 'ai-ml', proficiency: 80),
+        Skill(id: 'tensorflow', name: 'TensorFlow', category: 'ai-ml', proficiency: 75),
+        Skill(id: 'opencv', name: 'OpenCV', category: 'ai-ml', proficiency: 80),
+        Skill(id: 'ml', name: 'Machine Learning', category: 'ai-ml', proficiency: 75),
       ],
     ),
     SkillCategory(
+      id: 'tools',
       name: 'Tools & Technologies',
+      icon: 'build',
       skills: [
-        Skill(name: 'Git', category: 'Tool', proficiency: 4),
-        Skill(name: 'VS Code', category: 'Tool', proficiency: 5),
-        Skill(name: 'Android Studio', category: 'Tool', proficiency: 4),
-        Skill(name: 'REST APIs', category: 'Tool', proficiency: 4),
-        Skill(name: 'State Management', category: 'Tool', proficiency: 4),
+        Skill(id: 'git', name: 'Git', category: 'tools', proficiency: 80),
+        Skill(id: 'vscode', name: 'VS Code', category: 'tools', proficiency: 90),
+        Skill(id: 'android-studio', name: 'Android Studio', category: 'tools', proficiency: 80),
+        Skill(id: 'rest-api', name: 'REST APIs', category: 'tools', proficiency: 80),
+        Skill(id: 'state-mgmt', name: 'State Management', category: 'tools', proficiency: 80),
       ],
     ),
   ];
