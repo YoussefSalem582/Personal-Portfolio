@@ -3,6 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/portfolio_data.dart';
+import '../../models/skill.dart';
 
 class SkillsSection extends StatelessWidget {
   const SkillsSection({super.key});
@@ -11,10 +12,11 @@ class SkillsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       width: double.infinity,
-      color: AppTheme.surfaceColor,
+      color: isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
         vertical: AppTheme.spacingXXL,
@@ -29,7 +31,10 @@ class SkillsSection extends StatelessWidget {
             // Section title
             Text(
               'Skills & Technologies',
-              style: AppTheme.headingLarge.copyWith(fontSize: 36),
+              style: (isDark
+                      ? AppTheme.headingLargeForTheme(context)
+                      : AppTheme.headingLarge)
+                  .copyWith(fontSize: 36),
               textAlign: TextAlign.center,
             ),
 
@@ -39,7 +44,9 @@ class SkillsSection extends StatelessWidget {
               width: 60,
               height: 4,
               decoration: BoxDecoration(
-                gradient: AppTheme.primaryGradient,
+                gradient: isDark
+                    ? AppTheme.darkPrimaryGradient
+                    : AppTheme.primaryGradient,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -48,7 +55,11 @@ class SkillsSection extends StatelessWidget {
 
             Text(
               'Technologies and tools I work with',
-              style: AppTheme.bodyLarge,
+              style: AppTheme.bodyLarge.copyWith(
+                color: isDark
+                    ? AppTheme.darkTextSecondary
+                    : AppTheme.textSecondary,
+              ),
               textAlign: TextAlign.center,
             ),
 
@@ -116,105 +127,136 @@ class SkillsSection extends StatelessWidget {
     );
   }
 
-  Widget _buildSkillCategory(category) {
-    return Card(
-      elevation: 4,
-      shadowColor: Colors.black12,
-      child: Container(
-        padding: const EdgeInsets.all(AppTheme.spacingL),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppTheme.radiusL),
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [
-              AppTheme.surfaceColor,
-              AppTheme.accentColor.withOpacity(0.02),
-            ],
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Category title
-            Row(
+  Widget _buildSkillCategory(SkillCategory category) {
+    return Builder(
+      builder: (context) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+
+        return Card(
+          elevation: 4,
+          shadowColor: Colors.black12,
+          child: Container(
+            padding: const EdgeInsets.all(AppTheme.spacingL),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(AppTheme.radiusL),
+              gradient: LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: isDark
+                    ? [
+                        AppTheme.darkSurfaceColor,
+                        AppTheme.darkAccentColor.withOpacity(0.02),
+                      ]
+                    : [
+                        AppTheme.surfaceColor,
+                        AppTheme.accentColor.withOpacity(0.02),
+                      ],
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  padding: const EdgeInsets.all(AppTheme.spacingS),
-                  decoration: BoxDecoration(
-                    color: AppTheme.accentColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(AppTheme.radiusS),
-                  ),
-                  child: Icon(
-                    _getCategoryIcon(category.name),
-                    size: 24,
-                    color: AppTheme.accentColor,
-                  ),
+                // Category title
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(AppTheme.spacingS),
+                      decoration: BoxDecoration(
+                        color: isDark
+                            ? AppTheme.darkAccentColor.withOpacity(0.1)
+                            : AppTheme.accentColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(AppTheme.radiusS),
+                      ),
+                      child: Icon(
+                        _getCategoryIcon(category.name),
+                        size: 24,
+                        color: isDark
+                            ? AppTheme.darkAccentColor
+                            : AppTheme.accentColor,
+                      ),
+                    ),
+                    const SizedBox(width: AppTheme.spacingM),
+                    Expanded(
+                      child: Text(
+                        category.name,
+                        style: AppTheme.headingSmall.copyWith(
+                          fontSize: 18,
+                          color: isDark
+                              ? AppTheme.darkTextPrimary
+                              : AppTheme.textPrimary,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(width: AppTheme.spacingM),
+
+                const SizedBox(height: AppTheme.spacingL),
+
+                // Skills list
                 Expanded(
-                  child: Text(
-                    category.name,
-                    style: AppTheme.headingSmall.copyWith(fontSize: 18),
+                  child: Column(
+                    children: category.skills
+                        .map(
+                          (skill) => Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: AppTheme.spacingM,
+                            ),
+                            child: _buildSkillItem(skill),
+                          ),
+                        )
+                        .toList(),
                   ),
                 ),
               ],
             ),
-
-            const SizedBox(height: AppTheme.spacingL),
-
-            // Skills list
-            Expanded(
-              child: Column(
-                children: category.skills
-                    .map(
-                      (skill) => Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: AppTheme.spacingM,
-                        ),
-                        child: _buildSkillItem(skill),
-                      ),
-                    )
-                    .toList(),
-              ),
-            ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
-  Widget _buildSkillItem(skill) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  Widget _buildSkillItem(Skill skill) {
+    return Builder(
+      builder: (context) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: Text(
-                skill.name,
-                style: AppTheme.bodyMedium.copyWith(
-                  fontWeight: FontWeight.w600,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    skill.name,
+                    style: AppTheme.bodyMedium.copyWith(
+                      fontWeight: FontWeight.w600,
+                      color: isDark
+                          ? AppTheme.darkTextPrimary
+                          : AppTheme.textPrimary,
+                    ),
+                  ),
                 ),
-              ),
+                _buildProficiencyStars(skill.proficiency),
+              ],
             ),
-            _buildProficiencyStars(skill.proficiency),
+
+            const SizedBox(height: AppTheme.spacingS),
+
+            // Progress bar
+            LinearProgressIndicator(
+              value: skill.proficiency / 5.0,
+              backgroundColor: isDark
+                  ? AppTheme.darkAccentColor.withOpacity(0.1)
+                  : AppTheme.accentColor.withOpacity(0.1),
+              valueColor: AlwaysStoppedAnimation<Color>(
+                _getProficiencyColor(skill.proficiency),
+              ),
+              minHeight: 4,
+            ),
           ],
-        ),
-
-        const SizedBox(height: AppTheme.spacingS),
-
-        // Progress bar
-        LinearProgressIndicator(
-          value: skill.proficiency / 5.0,
-          backgroundColor: AppTheme.accentColor.withOpacity(0.1),
-          valueColor: AlwaysStoppedAnimation<Color>(
-            _getProficiencyColor(skill.proficiency),
-          ),
-          minHeight: 4,
-        ),
-      ],
+        );
+      },
     );
   }
 

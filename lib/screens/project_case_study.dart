@@ -14,18 +14,26 @@ class ProjectCaseStudy extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
+      backgroundColor:
+          isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
       appBar: AppBar(
-        backgroundColor: AppTheme.surfaceColor,
+        backgroundColor:
+            isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
         elevation: 1,
         title: Text(
           project.title,
-          style: AppTheme.headingMedium,
+          style: AppTheme.headingMedium.copyWith(
+            color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
+          ),
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(
+            Icons.arrow_back,
+            color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
+          ),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -55,7 +63,8 @@ class ProjectCaseStudy extends StatelessWidget {
                     const SizedBox(height: AppTheme.spacingXXL),
                     _buildTechnicalDetails(),
                     const SizedBox(height: AppTheme.spacingXXL),
-                    if (project.galleryImages != null && project.galleryImages!.isNotEmpty)
+                    if (project.galleryImages != null &&
+                        project.galleryImages!.isNotEmpty)
                       _buildGallerySection(),
                     const SizedBox(height: AppTheme.spacingXXL),
                     _buildChallengesAndSolutions(),
@@ -137,28 +146,52 @@ class ProjectCaseStudy extends StatelessWidget {
   }
 
   Widget _buildProjectOverview() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Project Overview', style: AppTheme.headingLarge),
-        const SizedBox(height: AppTheme.spacingL),
-        Container(
-          padding: const EdgeInsets.all(AppTheme.spacingL),
-          decoration: BoxDecoration(
-            color: AppTheme.surfaceColor,
-            borderRadius: BorderRadius.circular(AppTheme.radiusM),
-            border: Border.all(
-              color: AppTheme.accentColor.withOpacity(0.1),
+    return Builder(
+      builder: (context) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Project Overview',
+              style: AppTheme.headingLarge.copyWith(
+                color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
+              ),
             ),
-          ),
-          child: Text(
-            project.description,
-            style: AppTheme.bodyLarge.copyWith(
-              height: 1.6,
+            const SizedBox(height: AppTheme.spacingL),
+            Container(
+              padding: const EdgeInsets.all(AppTheme.spacingL),
+              decoration: BoxDecoration(
+                color:
+                    isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
+                borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                border: Border.all(
+                  color:
+                      (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+                          .withOpacity(0.1),
+                ),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    _getProjectOverviewText(),
+                    style: AppTheme.bodyLarge.copyWith(
+                      height: 1.6,
+                      color: isDark
+                          ? AppTheme.darkTextSecondary
+                          : AppTheme.textSecondary,
+                    ),
+                  ),
+                  if (project.id == 'emosense-app')
+                    _buildEmosenseFeatures(isDark),
+                ],
+              ),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 
@@ -231,7 +264,7 @@ class ProjectCaseStudy extends StatelessWidget {
 
   Widget _buildChallengesAndSolutions() {
     final challenges = _getProjectChallenges();
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -282,7 +315,7 @@ class ProjectCaseStudy extends StatelessWidget {
 
   Widget _buildLessonsLearned() {
     final lessons = _getProjectLessons();
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -334,10 +367,8 @@ class ProjectCaseStudy extends StatelessWidget {
               ),
             ),
           ),
-        
         if (project.githubUrl != null && project.liveUrl != null)
           const SizedBox(width: AppTheme.spacingM),
-          
         if (project.liveUrl != null)
           Expanded(
             child: OutlinedButton.icon(
@@ -358,37 +389,43 @@ class ProjectCaseStudy extends StatelessWidget {
   List<Map<String, String>> _getProjectChallenges() {
     // This could be dynamically generated based on project type/technologies
     switch (project.id) {
-      case 'multi-emotion-recognition':
+      case 'emosense-app':
         return [
           {
             'title': 'Multimodal Data Integration',
-            'description': 'Combining audio and video processing required careful synchronization and data preprocessing to ensure accurate emotion detection across different modalities.',
+            'description':
+                'Combining audio and video processing required careful synchronization and data preprocessing to ensure accurate emotion detection across different modalities.',
           },
           {
             'title': 'Privacy-First Design',
-            'description': 'Implementing local processing while maintaining accuracy was challenging, but essential for user privacy in mental health applications.',
+            'description':
+                'Implementing local processing while maintaining accuracy was challenging, but essential for user privacy in mental health applications.',
           },
         ];
       case 'music-player':
         return [
           {
             'title': 'Background Audio Processing',
-            'description': 'Implementing smooth background playback while maintaining UI responsiveness required careful state management and audio session handling.',
+            'description':
+                'Implementing smooth background playback while maintaining UI responsiveness required careful state management and audio session handling.',
           },
           {
             'title': 'Cross-Platform Audio Support',
-            'description': 'Ensuring consistent audio playback across different platforms required platform-specific optimizations and fallback mechanisms.',
+            'description':
+                'Ensuring consistent audio playback across different platforms required platform-specific optimizations and fallback mechanisms.',
           },
         ];
       default:
         return [
           {
             'title': 'Performance Optimization',
-            'description': 'Ensuring smooth performance across different devices required careful optimization of rendering and state management.',
+            'description':
+                'Ensuring smooth performance across different devices required careful optimization of rendering and state management.',
           },
           {
             'title': 'User Experience Design',
-            'description': 'Creating an intuitive interface that works well on both mobile and web platforms required responsive design considerations.',
+            'description':
+                'Creating an intuitive interface that works well on both mobile and web platforms required responsive design considerations.',
           },
         ];
     }
@@ -396,7 +433,7 @@ class ProjectCaseStudy extends StatelessWidget {
 
   List<String> _getProjectLessons() {
     switch (project.id) {
-      case 'multi-emotion-recognition':
+      case 'emosense-app':
         return [
           'Deep understanding of machine learning model evaluation and performance metrics',
           'Experience with multimodal data processing and synchronization',
@@ -418,5 +455,109 @@ class ProjectCaseStudy extends StatelessWidget {
           'Modern development practices and testing methodologies',
         ];
     }
+  }
+
+  String _getProjectOverviewText() {
+    if (project.id == 'emosense-app') {
+      return 'Emosense represents the culmination of my academic journey, combining cutting-edge AI technology with real-world applications. '
+          'This multimodal emotion recognition system demonstrates expertise in machine learning, computer vision, and audio processing. '
+          'The project addresses critical needs in mental health monitoring and customer service enhancement through innovative technology.';
+    }
+    return project.description;
+  }
+
+  Widget _buildEmosenseFeatures(bool isDark) {
+    final features = [
+      {
+        'icon': Icons.psychology,
+        'title': 'Real-time Emotion Detection',
+        'description':
+            'Advanced ML models analyze facial expressions and vocal patterns for accurate emotion recognition'
+      },
+      {
+        'icon': Icons.security,
+        'title': 'Privacy-First Architecture',
+        'description':
+            'Built with privacy by design principles, ensuring user data protection and compliance'
+      },
+      {
+        'icon': Icons.multitrack_audio,
+        'title': 'Multimodal Analysis',
+        'description':
+            'Combines audio and video processing for comprehensive emotion understanding'
+      },
+      {
+        'icon': Icons.analytics,
+        'title': 'Advanced Analytics',
+        'description':
+            'Comprehensive emotion analytics dashboard with insights and reporting capabilities'
+      },
+    ];
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: AppTheme.spacingXL),
+        Text(
+          'Key Features',
+          style: AppTheme.headingMedium.copyWith(
+            color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
+          ),
+        ),
+        const SizedBox(height: AppTheme.spacingL),
+        ...features
+            .map((feature) => Padding(
+                  padding: const EdgeInsets.only(bottom: AppTheme.spacingL),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(AppTheme.spacingS),
+                        decoration: BoxDecoration(
+                          color: (isDark
+                                  ? AppTheme.darkAccentColor
+                                  : AppTheme.accentColor)
+                              .withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(AppTheme.radiusS),
+                        ),
+                        child: Icon(
+                          feature['icon'] as IconData,
+                          color: isDark
+                              ? AppTheme.darkAccentColor
+                              : AppTheme.accentColor,
+                          size: 24,
+                        ),
+                      ),
+                      const SizedBox(width: AppTheme.spacingM),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              feature['title'] as String,
+                              style: AppTheme.headingSmall.copyWith(
+                                color: isDark
+                                    ? AppTheme.darkTextPrimary
+                                    : AppTheme.textPrimary,
+                              ),
+                            ),
+                            const SizedBox(height: AppTheme.spacingS),
+                            Text(
+                              feature['description'] as String,
+                              style: AppTheme.bodyMedium.copyWith(
+                                color: isDark
+                                    ? AppTheme.darkTextSecondary
+                                    : AppTheme.textSecondary,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ))
+            .toList(),
+      ],
+    );
   }
 }

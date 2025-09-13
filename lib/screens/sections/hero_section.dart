@@ -15,17 +15,20 @@ class HeroSection extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       width: double.infinity,
       constraints: BoxConstraints(
         minHeight: screenHeight - 80, // Minus navigation height
       ),
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [AppTheme.backgroundColor, Color(0xFFF0F2F5)],
+          colors: isDark
+              ? [AppTheme.darkBackgroundColor, const Color(0xFF0A0E13)]
+              : [AppTheme.backgroundColor, const Color(0xFFF0F2F5)],
         ),
       ),
       child: Padding(
@@ -124,129 +127,166 @@ class HeroSection extends StatelessWidget {
   }
 
   Widget _buildHeroText() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Greeting
-        Text(
-          'Hello, I\'m',
-          style: AppTheme.bodyLarge.copyWith(
-            color: AppTheme.accentColor,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+    return Builder(
+      builder: (context) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
 
-        const SizedBox(height: AppTheme.spacingS),
-
-        // Name
-        Text(
-          PortfolioData.fullName,
-          style: AppTheme.headingLarge.copyWith(fontSize: 42),
-        ),
-
-        const SizedBox(height: AppTheme.spacingM),
-
-        // Animated role text
-        Row(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Greeting
             Text(
-              'A ',
-              style: AppTheme.headingMedium.copyWith(
-                color: AppTheme.textSecondary,
-                fontSize: 28,
+              'Hello, I\'m',
+              style: AppTheme.bodyLarge.copyWith(
+                color: isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
+                fontWeight: FontWeight.w600,
               ),
             ),
-            AnimatedTextKit(
-              animatedTexts: [
-                TypewriterAnimatedText(
-                  'Flutter Developer',
-                  textStyle: AppTheme.headingMedium.copyWith(
-                    color: AppTheme.accentColor,
+
+            const SizedBox(height: AppTheme.spacingS),
+
+            // Name
+            Text(
+              PortfolioData.fullName,
+              style: (isDark
+                      ? AppTheme.headingLargeForTheme(context)
+                      : AppTheme.headingLarge)
+                  .copyWith(fontSize: 42),
+            ),
+
+            const SizedBox(height: AppTheme.spacingM),
+
+            // Animated role text
+            Row(
+              children: [
+                Text(
+                  'A ',
+                  style: AppTheme.headingMedium.copyWith(
+                    color: isDark
+                        ? AppTheme.darkTextSecondary
+                        : AppTheme.textSecondary,
                     fontSize: 28,
                   ),
-                  speed: const Duration(milliseconds: 100),
                 ),
-                TypewriterAnimatedText(
-                  'Mobile App Developer',
-                  textStyle: AppTheme.headingMedium.copyWith(
-                    color: AppTheme.accentColor,
-                    fontSize: 28,
-                  ),
-                  speed: const Duration(milliseconds: 100),
-                ),
-                TypewriterAnimatedText(
-                  'AI Enthusiast',
-                  textStyle: AppTheme.headingMedium.copyWith(
-                    color: AppTheme.accentColor,
-                    fontSize: 28,
-                  ),
-                  speed: const Duration(milliseconds: 100),
+                AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      'Flutter Developer',
+                      textStyle: AppTheme.headingMedium.copyWith(
+                        color: isDark
+                            ? AppTheme.darkAccentColor
+                            : AppTheme.accentColor,
+                        fontSize: 28,
+                      ),
+                      speed: const Duration(milliseconds: 100),
+                    ),
+                    TypewriterAnimatedText(
+                      'Mobile App Developer',
+                      textStyle: AppTheme.headingMedium.copyWith(
+                        color: isDark
+                            ? AppTheme.darkAccentColor
+                            : AppTheme.accentColor,
+                        fontSize: 28,
+                      ),
+                      speed: const Duration(milliseconds: 100),
+                    ),
+                    TypewriterAnimatedText(
+                      'AI Enthusiast',
+                      textStyle: AppTheme.headingMedium.copyWith(
+                        color: isDark
+                            ? AppTheme.darkAccentColor
+                            : AppTheme.accentColor,
+                        fontSize: 28,
+                      ),
+                      speed: const Duration(milliseconds: 100),
+                    ),
+                  ],
+                  repeatForever: true,
+                  pause: const Duration(milliseconds: 2000),
                 ),
               ],
-              repeatForever: true,
-              pause: const Duration(milliseconds: 2000),
+            ),
+
+            const SizedBox(height: AppTheme.spacingL),
+
+            // Bio
+            Text(
+              PortfolioData.bio,
+              style: AppTheme.bodyLarge.copyWith(
+                color: isDark
+                    ? AppTheme.darkTextSecondary
+                    : AppTheme.textSecondary,
+              ),
+              maxLines: 4,
+              overflow: TextOverflow.ellipsis,
             ),
           ],
-        ),
-
-        const SizedBox(height: AppTheme.spacingL),
-
-        // Bio
-        Text(
-          PortfolioData.bio,
-          style: AppTheme.bodyLarge,
-          maxLines: 4,
-          overflow: TextOverflow.ellipsis,
-        ),
-      ],
+        );
+      },
     );
   }
 
   Widget _buildProfileImage() {
-    return Container(
-      width: 200,
-      height: 200,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: AppTheme.primaryGradient,
-        boxShadow: [
-          BoxShadow(
-            color: AppTheme.accentColor.withOpacity(0.3),
-            blurRadius: 20,
-            spreadRadius: 5,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isDark = Theme.of(context).brightness == Brightness.dark;
+        final size = constraints.maxWidth > 600 ? 300.0 : 200.0;
+
+        return AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          width: size,
+          height: size,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            gradient: isDark
+                ? AppTheme.darkPrimaryGradient
+                : AppTheme.primaryGradient,
+            boxShadow: [
+              BoxShadow(
+                color: isDark
+                    ? AppTheme.darkAccentColor.withOpacity(0.4)
+                    : AppTheme.accentColor.withOpacity(0.3),
+                blurRadius: 20,
+                spreadRadius: 5,
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Container(
-        margin: const EdgeInsets.all(4),
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: AppTheme.surfaceColor,
-        ),
-        child: ClipOval(
-          child: Image.asset(
-            'assets/profile.jpeg',
-            width: 192,
-            height: 192,
-            fit: BoxFit.cover,
-            errorBuilder: (context, error, stackTrace) {
-              return Container(
-                width: 192,
-                height: 192,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppTheme.accentColor.withOpacity(0.1),
-                ),
-                child: Icon(
-                  Icons.person,
-                  size: 80,
-                  color: AppTheme.accentColor,
-                ),
-              );
-            },
+          child: Container(
+            margin: const EdgeInsets.all(4),
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
+            ),
+            child: ClipOval(
+              child: Image.asset(
+                'assets/profile.jpeg',
+                width: size - 8,
+                height: size - 8,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    width: size - 8,
+                    height: size - 8,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: isDark
+                          ? AppTheme.darkAccentColor.withOpacity(0.1)
+                          : AppTheme.accentColor.withOpacity(0.1),
+                    ),
+                    child: Icon(
+                      Icons.person,
+                      size: size * 0.3,
+                      color: isDark
+                          ? AppTheme.darkAccentColor
+                          : AppTheme.accentColor,
+                    ),
+                  );
+                },
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -274,14 +314,18 @@ class HeroSection extends StatelessWidget {
   Widget _buildFeaturedProjects(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final featuredProjects = PortfolioData.featuredProjects;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Featured Projects', style: AppTheme.headingSmall),
-
+        Text(
+          'Featured Projects',
+          style: AppTheme.headingSmall.copyWith(
+            color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
+          ),
+        ),
         const SizedBox(height: AppTheme.spacingL),
-
         if (ResponsiveHelper.isMobile(screenWidth))
           // Mobile: Single column
           Column(

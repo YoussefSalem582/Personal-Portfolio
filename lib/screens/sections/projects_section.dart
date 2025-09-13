@@ -24,32 +24,71 @@ class _ProjectsSectionState extends State<ProjectsSection> {
   }
 
   void _initializeFilters() {
-    final allTechs = <String>{};
-    for (final project in PortfolioData.projects) {
-      allTechs.addAll(project.technologies);
-    }
-
-    _filters = ['All', ...allTechs.toList()];
-    _filters.sort();
+    // Simplified filter tags for better UX
+    _filters = [
+      'All',
+      'Flutter',
+      'Python',
+      'API',
+      'AI/ML',
+      'Firebase',
+      'Maps',
+      'Chat',
+      'TensorFlow',
+      'Computer Vision',
+    ];
   }
 
   List<dynamic> get _filteredProjects {
     if (_selectedFilter == 'All') {
       return PortfolioData.projects;
     }
-    return PortfolioData.projects
-        .where((project) => project.technologies.contains(_selectedFilter))
-        .toList();
+
+    return PortfolioData.projects.where((project) {
+      final projectTechs = project.technologies.join(' ').toLowerCase();
+
+      switch (_selectedFilter) {
+        case 'Flutter':
+          return projectTechs.contains('flutter') ||
+              projectTechs.contains('dart');
+        case 'Python':
+          return projectTechs.contains('python');
+        case 'API':
+          return projectTechs.contains('api') || projectTechs.contains('rest');
+        case 'AI/ML':
+          return projectTechs.contains('machine learning') ||
+              projectTechs.contains('tensorflow') ||
+              projectTechs.contains('ai') ||
+              projectTechs.contains('ml');
+        case 'Firebase':
+          return projectTechs.contains('firebase');
+        case 'Maps':
+          return projectTechs.contains('maps') ||
+              projectTechs.contains('location');
+        case 'Chat':
+          return projectTechs.contains('chat') ||
+              projectTechs.contains('messaging');
+        case 'TensorFlow':
+          return projectTechs.contains('tensorflow');
+        case 'Computer Vision':
+          return projectTechs.contains('computer vision') ||
+              projectTechs.contains('opencv') ||
+              projectTechs.contains('cv');
+        default:
+          return project.technologies.contains(_selectedFilter);
+      }
+    }).toList();
   }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       width: double.infinity,
-      color: AppTheme.backgroundColor,
+      color: isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
         vertical: AppTheme.spacingXXL,
@@ -64,7 +103,10 @@ class _ProjectsSectionState extends State<ProjectsSection> {
             // Section title
             Text(
               'My Projects',
-              style: AppTheme.headingLarge.copyWith(fontSize: 36),
+              style: (isDark
+                      ? AppTheme.headingLargeForTheme(context)
+                      : AppTheme.headingLarge)
+                  .copyWith(fontSize: 36),
               textAlign: TextAlign.center,
             ),
 
@@ -74,7 +116,9 @@ class _ProjectsSectionState extends State<ProjectsSection> {
               width: 60,
               height: 4,
               decoration: BoxDecoration(
-                gradient: AppTheme.primaryGradient,
+                gradient: isDark
+                    ? AppTheme.darkPrimaryGradient
+                    : AppTheme.primaryGradient,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -83,7 +127,11 @@ class _ProjectsSectionState extends State<ProjectsSection> {
 
             Text(
               'Here are some of the projects I\'ve worked on',
-              style: AppTheme.bodyLarge,
+              style: AppTheme.bodyLarge.copyWith(
+                color: isDark
+                    ? AppTheme.darkTextSecondary
+                    : AppTheme.textSecondary,
+              ),
               textAlign: TextAlign.center,
             ),
 
@@ -138,12 +186,15 @@ class _ProjectsSectionState extends State<ProjectsSection> {
 
   Widget _buildFilterChip(String filter) {
     final isSelected = _selectedFilter == filter;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return FilterChip(
       label: Text(
         filter,
         style: AppTheme.bodyMedium.copyWith(
-          color: isSelected ? AppTheme.surfaceColor : AppTheme.textPrimary,
+          color: isSelected
+              ? Colors.white
+              : (isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary),
           fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
         ),
       ),
@@ -153,12 +204,14 @@ class _ProjectsSectionState extends State<ProjectsSection> {
           _selectedFilter = filter;
         });
       },
-      backgroundColor: AppTheme.surfaceColor,
-      selectedColor: AppTheme.accentColor,
+      backgroundColor:
+          isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
+      selectedColor: isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
       side: BorderSide(
         color: isSelected
-            ? AppTheme.accentColor
-            : AppTheme.textSecondary.withOpacity(0.3),
+            ? (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+            : (isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary)
+                .withOpacity(0.3),
       ),
     );
   }
@@ -166,6 +219,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
   Widget _buildProjectsGrid(double screenWidth) {
     final columns = ResponsiveHelper.getGridColumns(screenWidth);
     final filteredProjects = _filteredProjects;
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (filteredProjects.isEmpty) {
       return Container(
@@ -176,12 +230,18 @@ class _ProjectsSectionState extends State<ProjectsSection> {
             Icon(
               Icons.search_off_rounded,
               size: 64,
-              color: AppTheme.textSecondary.withOpacity(0.5),
+              color:
+                  (isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary)
+                      .withOpacity(0.5),
             ),
             const SizedBox(height: AppTheme.spacingM),
             Text(
               'No projects found for "$_selectedFilter"',
-              style: AppTheme.bodyLarge.copyWith(color: AppTheme.textSecondary),
+              style: AppTheme.bodyLarge.copyWith(
+                color: isDark
+                    ? AppTheme.darkTextSecondary
+                    : AppTheme.textSecondary,
+              ),
             ),
           ],
         ),
@@ -227,9 +287,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
           style: AppTheme.bodyLarge,
           textAlign: TextAlign.center,
         ),
-
         const SizedBox(height: AppTheme.spacingM),
-
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -238,9 +296,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
               icon: const Icon(Icons.grid_view_rounded),
               label: const Text('View All Projects'),
             ),
-
             const SizedBox(width: AppTheme.spacingM),
-
             ElevatedButton.icon(
               onPressed: () => _navigateToGitHub(),
               icon: const Icon(Icons.code_rounded),

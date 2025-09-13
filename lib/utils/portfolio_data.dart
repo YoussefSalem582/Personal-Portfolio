@@ -102,13 +102,14 @@ class PortfolioData {
   // Projects
   static final List<Project> projects = [
     Project(
-      id: 'multi-emotion-recognition',
-      title: 'Multi-Emotion Recognition for Customer Service',
+      id: 'emosense-app',
+      title: 'Emosense App',
       shortDescription:
-          'Multimodal ML framework for analyzing audio and video to detect emotions',
+          'AI-powered emotion recognition app for mental health and customer service',
       description:
-          'A multimodal ML framework for analyzing audio and video to detect emotions and support mental-health diagnostics. '
-          'Includes privacy-first design and model evaluation. Graduation Project completed in July 2025.',
+          'Emosense is an innovative AI-powered mobile application that analyzes audio and video to detect emotions in real-time. '
+          'Designed for mental health monitoring and customer service enhancement, it features multimodal ML models, '
+          'privacy-first architecture, and comprehensive emotion analytics. My graduation project completed in July 2025.',
       technologies: [
         'Python',
         'TensorFlow',
@@ -116,8 +117,19 @@ class PortfolioData {
         'Audio Processing',
         'Machine Learning',
       ],
-      githubUrl: 'https://github.com/YoussefSalem582/Multi-Emotion-Recognition',
-      imageUrl: 'assets/images/projects/emotion-recognition.png',
+      githubUrl: 'https://github.com/YoussefSalem582/Emosense-App',
+      imageUrl:
+          'assets/images/projects/emosense_photos/employee/Screenshot_20250717_162654.png',
+      galleryImages: [
+        'assets/images/projects/emosense_photos/employee/Screenshot_20250717_162654.png',
+        'assets/images/projects/emosense_photos/employee/Screenshot_20250717_162719.png',
+        'assets/images/projects/emosense_photos/employee/Screenshot_20250717_162750.png',
+        'assets/images/projects/emosense_photos/employee/Screenshot_20250717_162801.png',
+        'assets/images/projects/emosense_photos/employee/Screenshot_20250717_162813.png',
+        'assets/images/projects/emosense_photos/admin/Screenshot_20250717_163525.png',
+        'assets/images/projects/emosense_photos/admin/Screenshot_20250717_163542.png',
+        'assets/images/projects/emosense_photos/admin/Screenshot_20250717_163552.png',
+      ],
       createdAt: DateTime(2025, 7, 1),
       isFeatured: true,
     ),
@@ -277,7 +289,7 @@ class PortfolioData {
         'Machine Learning',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/Facial-Recognition-System',
-      imageUrl: 'assets/images/projects/facial-recognition.png',
+      imageUrl: null, // No specific image available
       createdAt: DateTime(2024, 12, 5),
     ),
     Project(
@@ -296,7 +308,7 @@ class PortfolioData {
         'Machine Learning',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/Sign-Language-Translator',
-      imageUrl: 'assets/images/projects/sign-language.png',
+      imageUrl: null, // No specific image available
       createdAt: DateTime(2024, 10, 20),
     ),
     Project(
@@ -316,7 +328,7 @@ class PortfolioData {
       ],
       githubUrl:
           'https://github.com/YoussefSalem582/Street-Pothole-Detection-Research',
-      imageUrl: 'assets/images/projects/pothole-detection.png',
+      imageUrl: null, // No specific image available
       createdAt: DateTime(2024, 8, 15),
     ),
   ];

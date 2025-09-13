@@ -11,10 +11,11 @@ class AboutSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       width: double.infinity,
-      color: AppTheme.surfaceColor,
+      color: isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
         vertical: AppTheme.spacingXXL,
@@ -29,7 +30,10 @@ class AboutSection extends StatelessWidget {
             // Section title
             Text(
               'About Me',
-              style: AppTheme.headingLarge.copyWith(fontSize: 36),
+              style: (isDark
+                      ? AppTheme.headingLargeForTheme(context)
+                      : AppTheme.headingLarge)
+                  .copyWith(fontSize: 36),
               textAlign: TextAlign.center,
             ),
 
@@ -39,7 +43,9 @@ class AboutSection extends StatelessWidget {
               width: 60,
               height: 4,
               decoration: BoxDecoration(
-                gradient: AppTheme.primaryGradient,
+                gradient: isDark
+                    ? AppTheme.darkPrimaryGradient
+                    : AppTheme.primaryGradient,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -112,27 +118,21 @@ class AboutSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Get In Touch', style: AppTheme.headingSmall),
-
         const SizedBox(height: AppTheme.spacingM),
-
         _buildContactItem(
           Icons.email_outlined,
           'Email',
           PortfolioData.email,
           () => UrlHelper.launchEmail(email: PortfolioData.email),
         ),
-
         const SizedBox(height: AppTheme.spacingS),
-
         _buildContactItem(
           Icons.location_on_outlined,
           'Location',
           PortfolioData.location,
           null,
         ),
-
         const SizedBox(height: AppTheme.spacingS),
-
         _buildContactItem(
           Icons.web_outlined,
           'Portfolio',
@@ -289,18 +289,14 @@ class AboutSection extends StatelessWidget {
               size: 40,
               color: AppTheme.surfaceColor,
             ),
-
             const SizedBox(height: AppTheme.spacingM),
-
             Text(
               'Download Resume',
               style: AppTheme.headingSmall.copyWith(
                 color: AppTheme.surfaceColor,
               ),
             ),
-
             const SizedBox(height: AppTheme.spacingS),
-
             Text(
               'Get a copy of my detailed CV',
               style: AppTheme.bodyMedium.copyWith(
@@ -308,9 +304,7 @@ class AboutSection extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-
             const SizedBox(height: AppTheme.spacingL),
-
             ElevatedButton(
               onPressed: () => UrlHelper.downloadFile(PortfolioData.resumeUrl),
               style: ElevatedButton.styleFrom(
@@ -333,9 +327,7 @@ class AboutSection extends StatelessWidget {
           style: AppTheme.headingSmall,
           textAlign: TextAlign.center,
         ),
-
         const SizedBox(height: AppTheme.spacingL),
-
         Wrap(
           spacing: AppTheme.spacingM,
           runSpacing: AppTheme.spacingM,

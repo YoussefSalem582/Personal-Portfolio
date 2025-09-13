@@ -86,6 +86,8 @@ class _PrivacyConsentBannerState extends State<PrivacyConsentBanner>
     // Only show on web platform
     if (!kIsWeb || !_isVisible) return const SizedBox.shrink();
 
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Positioned(
       bottom: 0,
       left: 0,
@@ -96,7 +98,7 @@ class _PrivacyConsentBannerState extends State<PrivacyConsentBanner>
           margin: const EdgeInsets.all(16),
           padding: const EdgeInsets.all(20),
           decoration: BoxDecoration(
-            color: AppTheme.surfaceColor,
+            color: isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
             borderRadius: BorderRadius.circular(AppTheme.radiusM),
             boxShadow: [
               BoxShadow(
@@ -118,7 +120,9 @@ class _PrivacyConsentBannerState extends State<PrivacyConsentBanner>
                 children: [
                   Icon(
                     Icons.privacy_tip_outlined,
-                    color: AppTheme.accentColor,
+                    color: isDark
+                        ? AppTheme.darkAccentColor
+                        : AppTheme.accentColor,
                     size: 24,
                   ),
                   const SizedBox(width: 12),
@@ -126,7 +130,9 @@ class _PrivacyConsentBannerState extends State<PrivacyConsentBanner>
                     child: Text(
                       'Privacy & Analytics',
                       style: AppTheme.headingSmall.copyWith(
-                        color: AppTheme.textPrimary,
+                        color: isDark
+                            ? AppTheme.darkTextPrimary
+                            : AppTheme.textPrimary,
                       ),
                     ),
                   ),
@@ -138,7 +144,9 @@ class _PrivacyConsentBannerState extends State<PrivacyConsentBanner>
                 'No personal information is collected, and all data is anonymized. '
                 'You can choose to opt-out at any time.',
                 style: AppTheme.bodyMedium.copyWith(
-                  color: AppTheme.textSecondary,
+                  color: isDark
+                      ? AppTheme.darkTextSecondary
+                      : AppTheme.textSecondary,
                 ),
               ),
               const SizedBox(height: 16),
@@ -148,7 +156,9 @@ class _PrivacyConsentBannerState extends State<PrivacyConsentBanner>
                   TextButton(
                     onPressed: () => _handleConsent(false),
                     style: TextButton.styleFrom(
-                      foregroundColor: AppTheme.textSecondary,
+                      foregroundColor: isDark
+                          ? AppTheme.darkTextSecondary
+                          : AppTheme.textSecondary,
                     ),
                     child: const Text('Decline'),
                   ),

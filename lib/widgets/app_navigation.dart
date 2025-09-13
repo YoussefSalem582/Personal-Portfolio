@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../theme/app_theme.dart';
 import '../utils/responsive_helper.dart';
+import '../widgets/theme_toggle.dart';
 
 class AppNavigation extends StatelessWidget {
   final Function(int) onItemSelected;
@@ -25,6 +26,8 @@ class AppNavigation extends StatelessWidget {
   }
 
   Widget _buildDesktopNavigation(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Container(
       height: 80,
       padding: EdgeInsets.symmetric(
@@ -32,10 +35,14 @@ class AppNavigation extends StatelessWidget {
           MediaQuery.of(context).size.width,
         ),
       ),
-      decoration: const BoxDecoration(
-        color: AppTheme.surfaceColor,
+      decoration: BoxDecoration(
+        color: isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
         boxShadow: [
-          BoxShadow(color: Colors.black12, blurRadius: 4, offset: Offset(0, 2)),
+          BoxShadow(
+            color: isDark ? Colors.black26 : Colors.black12,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
         ],
       ),
       child: Row(
@@ -44,7 +51,7 @@ class AppNavigation extends StatelessWidget {
           Text(
             'Youssef Salem',
             style: AppTheme.headingSmall.copyWith(
-              color: AppTheme.primaryColor,
+              color: isDark ? AppTheme.darkTextPrimary : AppTheme.primaryColor,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -56,13 +63,19 @@ class AppNavigation extends StatelessWidget {
 
           const SizedBox(width: 24),
 
+          // Theme toggle
+          const ThemeToggle(isCompact: true),
+
+          const SizedBox(width: 16),
+
           // Resume download button
           ElevatedButton.icon(
             onPressed: () => _downloadResume(context),
             icon: const Icon(Icons.download, size: 18),
             label: const Text('Resume'),
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppTheme.accentColor,
+              backgroundColor:
+                  isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
               foregroundColor: Colors.white,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               shape: RoundedRectangleBorder(
@@ -76,20 +89,26 @@ class AppNavigation extends StatelessWidget {
   }
 
   Widget _buildMobileNavigation(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return AppBar(
-      backgroundColor: AppTheme.surfaceColor,
+      backgroundColor:
+          isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
       elevation: 2,
-      shadowColor: Colors.black12,
+      shadowColor: isDark ? Colors.black26 : Colors.black12,
       leading: Builder(
         builder: (context) => IconButton(
-          icon: const Icon(Icons.menu, color: AppTheme.primaryColor),
+          icon: Icon(
+            Icons.menu,
+            color: isDark ? AppTheme.darkTextPrimary : AppTheme.primaryColor,
+          ),
           onPressed: () => Scaffold.of(context).openDrawer(),
         ),
       ),
       title: Text(
         'Youssef Salem',
         style: AppTheme.headingSmall.copyWith(
-          color: AppTheme.primaryColor,
+          color: isDark ? AppTheme.darkTextPrimary : AppTheme.primaryColor,
           fontSize: 20,
         ),
       ),
@@ -154,23 +173,27 @@ class AppNavigation extends StatelessWidget {
   }
 
   Widget buildMobileDrawer(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Drawer(
       child: Container(
-        color: AppTheme.surfaceColor,
+        color: isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
         child: Column(
           children: [
             // Header
             Container(
               height: 120,
               width: double.infinity,
-              decoration: const BoxDecoration(
-                gradient: AppTheme.primaryGradient,
+              decoration: BoxDecoration(
+                gradient: isDark
+                    ? AppTheme.darkPrimaryGradient
+                    : AppTheme.primaryGradient,
               ),
               child: Center(
                 child: Text(
                   'Youssef Salem Hassan',
                   style: AppTheme.headingSmall.copyWith(
-                    color: AppTheme.surfaceColor,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -183,6 +206,28 @@ class AppNavigation extends StatelessWidget {
                 children: [
                   ..._buildNavigationItems(true),
                   const Divider(),
+
+                  // Theme toggle
+                  ListTile(
+                    leading: const Icon(
+                      Icons.brightness_6,
+                      color: AppTheme.accentColor,
+                    ),
+                    title: Text(
+                      'Theme',
+                      style: AppTheme.bodyLarge.copyWith(
+                        color: isDark
+                            ? AppTheme.darkTextPrimary
+                            : AppTheme.textPrimary,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    trailing: const ThemeToggleSwitch(),
+                    onTap: () {},
+                  ),
+
+                  const Divider(),
+
                   ListTile(
                     leading: const Icon(
                       Icons.download,
@@ -255,17 +300,23 @@ class _NavigationItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     if (isVertical) {
       return ListTile(
         title: Text(
           title,
           style: AppTheme.bodyLarge.copyWith(
-            color: isSelected ? AppTheme.accentColor : AppTheme.textPrimary,
+            color: isSelected
+                ? (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+                : (isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary),
             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
           ),
         ),
         selected: isSelected,
-        selectedTileColor: AppTheme.accentColor.withOpacity(0.1),
+        selectedTileColor:
+            (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+                .withOpacity(0.1),
         onTap: () {
           onTap();
           Navigator.of(context).pop(); // Close drawer
@@ -280,13 +331,16 @@ class _NavigationItem extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: isSelected
-                ? AppTheme.accentColor.withOpacity(0.1)
+                ? (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+                    .withOpacity(0.1)
                 : Colors.transparent,
           ),
           child: Text(
             title,
             style: AppTheme.bodyMedium.copyWith(
-              color: isSelected ? AppTheme.accentColor : AppTheme.textPrimary,
+              color: isSelected
+                  ? (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+                  : (isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary),
               fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
             ),
           ),
