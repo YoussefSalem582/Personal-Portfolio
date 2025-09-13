@@ -103,6 +103,7 @@ flutter:
     - assets/images/projects/QuoteHub/
     - assets/icons/
     - assets/certificates/
+    - assets/certificates/photos/
     - assets/projects/
     - assets/resume.pdf
     - assets/resume.docx
