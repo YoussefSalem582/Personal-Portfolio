@@ -25,35 +25,68 @@ class PortfolioDataProvider extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get error => _error;
 
-  List<Project> get projects => _useSupabaseData ? _projects : PortfolioData.projects;
-  List<Certificate> get certificates => _useSupabaseData ? _certificates : PortfolioData.certificates;
-  List<SkillCategory> get skillCategories => _useSupabaseData ? _skillCategories : PortfolioData.skills;
-  
-  String get fullName => _useSupabaseData ? (_personalInfo?['full_name'] ?? 'Your Name') : PortfolioData.fullName;
-  String get title => _useSupabaseData ? (_personalInfo?['title'] ?? 'Your Title') : PortfolioData.title;
-  String get subtitle => _useSupabaseData ? (_personalInfo?['subtitle'] ?? 'Your Subtitle') : PortfolioData.subtitle;
-  String get bio => _useSupabaseData ? (_personalInfo?['bio'] ?? 'Your Bio') : PortfolioData.bio;
-  String get email => _useSupabaseData ? (_personalInfo?['email'] ?? 'your@email.com') : PortfolioData.email;
-  String get phone => _useSupabaseData ? (_personalInfo?['phone'] ?? '+1234567890') : PortfolioData.phone;
-  String get location => _useSupabaseData ? (_personalInfo?['location'] ?? 'Your Location') : PortfolioData.location;
-  String get portfolioUrl => _useSupabaseData ? (_personalInfo?['portfolio_url'] ?? '#') : PortfolioData.portfolioUrl;
-  String get resumeUrl => _useSupabaseData ? (_personalInfo?['resume_url'] ?? '#') : PortfolioData.resumeUrl;
-  String get profileImageUrl => _useSupabaseData ? (_personalInfo?['profile_image_url'] ?? 'assets/profile.jpeg') : PortfolioData.profileImageUrl;
+  List<Project> get projects =>
+      _useSupabaseData ? _projects : PortfolioData.projects;
+  List<Certificate> get certificates =>
+      _useSupabaseData ? _certificates : PortfolioData.certificates;
+  List<SkillCategory> get skillCategories =>
+      _useSupabaseData ? _skillCategories : PortfolioData.skills;
 
-  List<Map<String, dynamic>> get socialLinks => _useSupabaseData ? _socialLinks : [
-    {'platform': 'GitHub', 'url': 'https://github.com/YoussefSalem582', 'icon': 'github'},
-    {'platform': 'LinkedIn', 'url': 'https://linkedin.com/in/youssef-salem', 'icon': 'linkedin'},
-    // Add more static social links as needed
-  ];
+  String get fullName => _useSupabaseData
+      ? (_personalInfo?['full_name'] ?? 'Your Name')
+      : PortfolioData.fullName;
+  String get title => _useSupabaseData
+      ? (_personalInfo?['title'] ?? 'Your Title')
+      : PortfolioData.title;
+  String get subtitle => _useSupabaseData
+      ? (_personalInfo?['subtitle'] ?? 'Your Subtitle')
+      : PortfolioData.subtitle;
+  String get bio => _useSupabaseData
+      ? (_personalInfo?['bio'] ?? 'Your Bio')
+      : PortfolioData.bio;
+  String get email => _useSupabaseData
+      ? (_personalInfo?['email'] ?? 'your@email.com')
+      : PortfolioData.email;
+  String get phone => _useSupabaseData
+      ? (_personalInfo?['phone'] ?? '+1234567890')
+      : PortfolioData.phone;
+  String get location => _useSupabaseData
+      ? (_personalInfo?['location'] ?? 'Your Location')
+      : PortfolioData.location;
+  String get portfolioUrl => _useSupabaseData
+      ? (_personalInfo?['portfolio_url'] ?? '#')
+      : PortfolioData.portfolioUrl;
+  String get resumeUrl => _useSupabaseData
+      ? (_personalInfo?['resume_url'] ?? '#')
+      : PortfolioData.resumeUrl;
+  String get profileImageUrl => _useSupabaseData
+      ? (_personalInfo?['profile_image_url'] ?? 'assets/profile.jpeg')
+      : PortfolioData.profileImageUrl;
+
+  List<Map<String, dynamic>> get socialLinks => _useSupabaseData
+      ? _socialLinks
+      : [
+          {
+            'platform': 'GitHub',
+            'url': 'https://github.com/YoussefSalem582',
+            'icon': 'github'
+          },
+          {
+            'platform': 'LinkedIn',
+            'url': 'https://linkedin.com/in/youssef-salem',
+            'icon': 'linkedin'
+          },
+          // Add more static social links as needed
+        ];
 
   // Toggle between static and Supabase data
   Future<void> toggleDataSource() async {
     _useSupabaseData = !_useSupabaseData;
-    
+
     if (_useSupabaseData) {
       await loadSupabaseData();
     }
-    
+
     notifyListeners();
   }
 
@@ -92,7 +125,7 @@ class PortfolioDataProvider extends ChangeNotifier {
   // Refresh specific data types
   Future<void> refreshProjects() async {
     if (!_useSupabaseData) return;
-    
+
     try {
       _projects = await ProjectsService.getAllProjects();
       notifyListeners();
@@ -104,7 +137,7 @@ class PortfolioDataProvider extends ChangeNotifier {
 
   Future<void> refreshCertificates() async {
     if (!_useSupabaseData) return;
-    
+
     try {
       _certificates = await CertificatesService.getAllCertificates();
       notifyListeners();
@@ -116,7 +149,7 @@ class PortfolioDataProvider extends ChangeNotifier {
 
   Future<void> refreshSkills() async {
     if (!_useSupabaseData) return;
-    
+
     try {
       _skillCategories = await SkillsService.getAllSkillCategories();
       notifyListeners();
@@ -128,7 +161,7 @@ class PortfolioDataProvider extends ChangeNotifier {
 
   Future<void> refreshPersonalInfo() async {
     if (!_useSupabaseData) return;
-    
+
     try {
       _personalInfo = await PersonalInfoService.getPersonalInfo();
       _socialLinks = await PersonalInfoService.getSocialLinks();

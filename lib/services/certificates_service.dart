@@ -27,11 +27,8 @@ class CertificatesService {
   // Fetch a single certificate by ID
   static Future<Certificate?> getCertificateById(String id) async {
     try {
-      final response = await _client
-          .from(tableName)
-          .select()
-          .eq('id', id)
-          .single();
+      final response =
+          await _client.from(tableName).select().eq('id', id).single();
 
       return Certificate.fromJson(response);
     } catch (e) {
@@ -76,10 +73,7 @@ class CertificatesService {
   // Delete a certificate
   static Future<bool> deleteCertificate(String id) async {
     try {
-      await _client
-          .from(tableName)
-          .delete()
-          .eq('id', id);
+      await _client.from(tableName).delete().eq('id', id);
       return true;
     } catch (e) {
       print('Error deleting certificate: $e');
@@ -95,7 +89,7 @@ class CertificatesService {
     String? contentType,
   }) async {
     final storagePath = 'certificates/$certificateId/$fileName';
-    
+
     return await SupabaseService.uploadFile(
       bucketName: SupabaseConfig.certificateImagesBucket,
       fileName: storagePath,
@@ -111,7 +105,7 @@ class CertificatesService {
     required String fileName,
   }) async {
     final storagePath = 'certificates/$certificateId/pdfs/$fileName';
-    
+
     return await SupabaseService.uploadFile(
       bucketName: SupabaseConfig.certificateImagesBucket,
       fileName: storagePath,
@@ -126,10 +120,10 @@ class CertificatesService {
     required String fileName,
     bool isPdf = false,
   }) async {
-    final storagePath = isPdf 
+    final storagePath = isPdf
         ? 'certificates/$certificateId/pdfs/$fileName'
         : 'certificates/$certificateId/$fileName';
-    
+
     return await SupabaseService.deleteFile(
       bucketName: SupabaseConfig.certificateImagesBucket,
       fileName: storagePath,

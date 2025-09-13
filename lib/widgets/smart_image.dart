@@ -22,7 +22,8 @@ class SmartImage extends StatelessWidget {
     this.borderRadius,
   });
 
-  bool get _isNetworkImage => imageUrl.startsWith('http') || imageUrl.startsWith('https');
+  bool get _isNetworkImage =>
+      imageUrl.startsWith('http') || imageUrl.startsWith('https');
 
   Widget _buildPlaceholder(BuildContext context) {
     if (placeholder != null) {
@@ -30,12 +31,14 @@ class SmartImage extends StatelessWidget {
     }
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    
+
     return Container(
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: isDark ? AppTheme.darkSurfaceColor.withOpacity(0.1) : AppTheme.surfaceColor.withOpacity(0.1),
+        color: isDark
+            ? AppTheme.darkSurfaceColor.withOpacity(0.1)
+            : AppTheme.surfaceColor.withOpacity(0.1),
         borderRadius: borderRadius,
       ),
       child: Center(
@@ -48,7 +51,8 @@ class SmartImage extends StatelessWidget {
               child: CircularProgressIndicator(
                 strokeWidth: 2,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor).withOpacity(0.6),
+                  (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+                      .withOpacity(0.6),
                 ),
               ),
             ),
@@ -56,7 +60,7 @@ class SmartImage extends StatelessWidget {
             Text(
               'Loading...',
               style: AppTheme.bodySmall.copyWith(
-                color: isDark 
+                color: isDark
                     ? AppTheme.darkTextSecondary.withOpacity(0.6)
                     : AppTheme.textSecondary.withOpacity(0.6),
               ),
@@ -78,7 +82,9 @@ class SmartImage extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-        color: isDark ? AppTheme.darkSurfaceColor.withOpacity(0.1) : AppTheme.surfaceColor.withOpacity(0.1),
+        color: isDark
+            ? AppTheme.darkSurfaceColor.withOpacity(0.1)
+            : AppTheme.surfaceColor.withOpacity(0.1),
         borderRadius: borderRadius,
       ),
       child: Center(
@@ -88,7 +94,7 @@ class SmartImage extends StatelessWidget {
             Icon(
               Icons.broken_image_outlined,
               size: 32,
-              color: isDark 
+              color: isDark
                   ? AppTheme.darkTextSecondary.withOpacity(0.5)
                   : AppTheme.textSecondary.withOpacity(0.5),
             ),
@@ -96,7 +102,7 @@ class SmartImage extends StatelessWidget {
             Text(
               'Image not found',
               style: AppTheme.bodySmall.copyWith(
-                color: isDark 
+                color: isDark
                     ? AppTheme.darkTextSecondary.withOpacity(0.5)
                     : AppTheme.textSecondary.withOpacity(0.5),
               ),
@@ -133,7 +139,8 @@ class SmartImage extends StatelessWidget {
           width: width,
           height: height,
           fit: fit,
-          errorBuilder: (context, error, stackTrace) => _buildErrorWidget(context),
+          errorBuilder: (context, error, stackTrace) =>
+              _buildErrorWidget(context),
         ),
       );
     }

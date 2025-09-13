@@ -10,10 +10,7 @@ class PersonalInfoService {
   // Fetch personal information
   static Future<Map<String, dynamic>?> getPersonalInfo() async {
     try {
-      final response = await _client
-          .from(tableName)
-          .select()
-          .single();
+      final response = await _client.from(tableName).select().single();
 
       return response;
     } catch (e) {
@@ -25,10 +22,7 @@ class PersonalInfoService {
   // Update personal information
   static Future<bool> updatePersonalInfo(Map<String, dynamic> info) async {
     try {
-      await _client
-          .from(tableName)
-          .update(info)
-          .eq('id', info['id']);
+      await _client.from(tableName).update(info).eq('id', info['id']);
       return true;
     } catch (e) {
       print('Error updating personal info: $e');
@@ -83,10 +77,7 @@ class PersonalInfoService {
     required Map<String, dynamic> updates,
   }) async {
     try {
-      await _client
-          .from(socialLinksTableName)
-          .update(updates)
-          .eq('id', id);
+      await _client.from(socialLinksTableName).update(updates).eq('id', id);
       return true;
     } catch (e) {
       print('Error updating social link: $e');
@@ -97,10 +88,7 @@ class PersonalInfoService {
   // Delete a social link
   static Future<bool> deleteSocialLink(String id) async {
     try {
-      await _client
-          .from(socialLinksTableName)
-          .delete()
-          .eq('id', id);
+      await _client.from(socialLinksTableName).delete().eq('id', id);
       return true;
     } catch (e) {
       print('Error deleting social link: $e');
@@ -115,7 +103,7 @@ class PersonalInfoService {
     String? contentType,
   }) async {
     final storagePath = 'profile/$fileName';
-    
+
     return await SupabaseService.uploadFile(
       bucketName: SupabaseConfig.profileImagesBucket,
       fileName: storagePath,
@@ -131,8 +119,9 @@ class PersonalInfoService {
     String fileType = 'pdf',
   }) async {
     final storagePath = 'resume/$fileName';
-    final contentType = fileType == 'pdf' ? 'application/pdf' : 'application/msword';
-    
+    final contentType =
+        fileType == 'pdf' ? 'application/pdf' : 'application/msword';
+
     return await SupabaseService.uploadFile(
       bucketName: SupabaseConfig.profileImagesBucket,
       fileName: storagePath,
@@ -144,7 +133,7 @@ class PersonalInfoService {
   // Delete profile image
   static Future<bool> deleteProfileImage(String fileName) async {
     final storagePath = 'profile/$fileName';
-    
+
     return await SupabaseService.deleteFile(
       bucketName: SupabaseConfig.profileImagesBucket,
       fileName: storagePath,
@@ -154,7 +143,7 @@ class PersonalInfoService {
   // Delete resume file
   static Future<bool> deleteResume(String fileName) async {
     final storagePath = 'resume/$fileName';
-    
+
     return await SupabaseService.deleteFile(
       bucketName: SupabaseConfig.profileImagesBucket,
       fileName: storagePath,

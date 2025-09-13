@@ -21,7 +21,7 @@ class SkillsService {
           .order('proficiency', ascending: false);
 
       final categories = <SkillCategory>[];
-      
+
       for (final categoryJson in categoriesResponse) {
         final categorySkills = (skillsResponse as List)
             .where((skill) => skill['category_id'] == categoryJson['id'])
@@ -101,8 +101,7 @@ class SkillsService {
     try {
       await _client
           .from(skillsTableName)
-          .update({'proficiency': proficiency})
-          .eq('id', skillId);
+          .update({'proficiency': proficiency}).eq('id', skillId);
       return true;
     } catch (e) {
       print('Error updating skill proficiency: $e');
@@ -113,10 +112,7 @@ class SkillsService {
   // Delete a skill
   static Future<bool> deleteSkill(String skillId) async {
     try {
-      await _client
-          .from(skillsTableName)
-          .delete()
-          .eq('id', skillId);
+      await _client.from(skillsTableName).delete().eq('id', skillId);
       return true;
     } catch (e) {
       print('Error deleting skill: $e');
@@ -134,11 +130,8 @@ class SkillsService {
           .eq('category_id', categoryId);
 
       // Then delete the category
-      await _client
-          .from(categoriesTableName)
-          .delete()
-          .eq('id', categoryId);
-      
+      await _client.from(categoriesTableName).delete().eq('id', categoryId);
+
       return true;
     } catch (e) {
       print('Error deleting skill category: $e');

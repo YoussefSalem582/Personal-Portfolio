@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:provider/provider.dart';
 import 'theme/app_theme.dart';
@@ -7,18 +8,25 @@ import 'utils/portfolio_data.dart';
 import 'providers/theme_provider.dart';
 import 'providers/portfolio_data_provider.dart';
 import 'services/supabase_service.dart';
+import 'utils/supabase_test.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize Supabase
   try {
     await SupabaseService.initialize();
+    debugPrint('✅ Supabase initialized successfully');
+    
+    // Test connection in debug mode
+    if (kDebugMode) {
+      await SupabaseTest.testConnection();
+    }
   } catch (e) {
-    debugPrint('Supabase initialization failed: $e');
+    debugPrint('❌ Supabase initialization failed: $e');
     // Continue with app initialization - will use static data
   }
-  
+
   runApp(
     MultiProvider(
       providers: [

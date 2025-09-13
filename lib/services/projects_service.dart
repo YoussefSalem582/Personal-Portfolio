@@ -15,9 +15,7 @@ class ProjectsService {
           .select()
           .order('created_at', ascending: false);
 
-      return (response as List)
-          .map((json) => Project.fromJson(json))
-          .toList();
+      return (response as List).map((json) => Project.fromJson(json)).toList();
     } catch (e) {
       print('Error fetching projects: $e');
       return [];
@@ -27,11 +25,8 @@ class ProjectsService {
   // Fetch a single project by ID
   static Future<Project?> getProjectById(String id) async {
     try {
-      final response = await _client
-          .from(tableName)
-          .select()
-          .eq('id', id)
-          .single();
+      final response =
+          await _client.from(tableName).select().eq('id', id).single();
 
       return Project.fromJson(response);
     } catch (e) {
@@ -76,10 +71,7 @@ class ProjectsService {
   // Delete a project
   static Future<bool> deleteProject(String id) async {
     try {
-      await _client
-          .from(tableName)
-          .delete()
-          .eq('id', id);
+      await _client.from(tableName).delete().eq('id', id);
       return true;
     } catch (e) {
       print('Error deleting project: $e');
@@ -95,7 +87,7 @@ class ProjectsService {
     String? contentType,
   }) async {
     final storagePath = 'projects/$projectId/$fileName';
-    
+
     return await SupabaseService.uploadFile(
       bucketName: SupabaseConfig.projectImagesBucket,
       fileName: storagePath,
@@ -107,10 +99,11 @@ class ProjectsService {
   // Upload multiple gallery images for a project
   static Future<List<String>> uploadProjectGallery({
     required String projectId,
-    required List<Map<String, dynamic>> images, // {bytes: List<int>, fileName: String, contentType: String?}
+    required List<Map<String, dynamic>>
+        images, // {bytes: List<int>, fileName: String, contentType: String?}
   }) async {
     final List<String> uploadedUrls = [];
-    
+
     for (final image in images) {
       final url = await uploadProjectImage(
         projectId: projectId,
@@ -118,12 +111,12 @@ class ProjectsService {
         fileName: image['fileName'],
         contentType: image['contentType'],
       );
-      
+
       if (url != null) {
         uploadedUrls.add(url);
       }
     }
-    
+
     return uploadedUrls;
   }
 
@@ -133,7 +126,7 @@ class ProjectsService {
     required String fileName,
   }) async {
     final storagePath = 'projects/$projectId/$fileName';
-    
+
     return await SupabaseService.deleteFile(
       bucketName: SupabaseConfig.projectImagesBucket,
       fileName: storagePath,
