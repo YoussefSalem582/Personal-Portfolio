@@ -65,8 +65,8 @@ void main() {
         createTestWidget(ProjectCard(project: testProject)),
       );
 
-      // Tap on the project card
-      await tester.tap(find.byType(InkWell));
+      // Tap on the project card specifically (first InkWell)
+      await tester.tap(find.byType(InkWell).first);
       await tester.pumpAndSettle();
 
       // Check if the details dialog is opened

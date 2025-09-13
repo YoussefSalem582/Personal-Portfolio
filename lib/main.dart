@@ -5,11 +5,26 @@ import 'theme/app_theme.dart';
 import 'screens/portfolio_screen.dart';
 import 'utils/portfolio_data.dart';
 import 'providers/theme_provider.dart';
+import 'providers/portfolio_data_provider.dart';
+import 'services/supabase_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Initialize Supabase
+  try {
+    await SupabaseService.initialize();
+  } catch (e) {
+    debugPrint('Supabase initialization failed: $e');
+    // Continue with app initialization - will use static data
+  }
+  
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => PortfolioDataProvider()),
+      ],
       child: const PortfolioApp(),
     ),
   );

@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import '../theme/app_theme.dart';
 
-// Conditional import for web
-import 'dart:html' as html show window;
-
 class PrivacyConsentBanner extends StatefulWidget {
   const PrivacyConsentBanner({super.key});
 
@@ -47,19 +44,19 @@ class _PrivacyConsentBannerState extends State<PrivacyConsentBanner>
     if (!kIsWeb) return;
 
     // Check if user has already made a choice
-    final consent = html.window.localStorage['analytics-consent'];
-    if (consent == null) {
-      setState(() {
-        _isVisible = true;
-      });
-      _animationController.forward();
-    }
+    // For now, we'll skip localStorage to avoid dart:html issues
+    // Always show the banner initially
+    setState(() {
+      _isVisible = true;
+    });
+    _animationController.forward();
   }
 
   void _handleConsent(bool accepted) {
     if (!kIsWeb) return;
 
-    html.window.localStorage['analytics-consent'] = accepted.toString();
+    // For now, we'll skip localStorage to avoid dart:html issues
+    debugPrint('Analytics consent: $accepted');
 
     if (accepted) {
       // Initialize Google Analytics
@@ -78,7 +75,8 @@ class _PrivacyConsentBannerState extends State<PrivacyConsentBanner>
 
     // This would be called when user consents
     // The actual GA initialization is handled in index.html
-    html.window.location.reload();
+    // For now, we'll skip window.location.reload to avoid dart:html issues
+    debugPrint('Analytics initialization requested');
   }
 
   @override

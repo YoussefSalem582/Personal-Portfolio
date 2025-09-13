@@ -56,6 +56,14 @@ dependencies:
   
   # State management
   provider: ^6.1.1
+  
+  # Supabase for backend services
+  supabase_flutter: ^2.5.6
+  
+  # Additional dependencies for Supabase functionality
+  image_picker: ^1.0.7
+  cached_network_image: ^3.3.1
+  uuid: ^4.4.0
 
 dev_dependencies:
   flutter_test:
@@ -84,6 +92,15 @@ flutter:
     - assets/
     - assets/images/
     - assets/images/projects/
+    - assets/images/projects/emosense_photos/
+    - assets/images/projects/emosense_photos/employee/
+    - assets/images/projects/emosense_photos/admin/
+    - assets/images/projects/ChargeHub/
+    - assets/images/projects/chat app/
+    - assets/images/projects/gogesh/
+    - assets/images/projects/Music app/
+    - assets/images/projects/QuizHub/
+    - assets/images/projects/QuoteHub/
     - assets/icons/
     - assets/certificates/
     - assets/projects/
