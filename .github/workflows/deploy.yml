@@ -13,11 +13,11 @@ jobs:
       - name: Install Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: stable
+          channel: 'stable'
       - name: Get dependencies
         run: flutter pub get
       - name: Run tests
-        run: flutter test --coverage
+        run: flutter test
       - name: Build web
         run: flutter build web --release --base-href "/Personal-Portfolio/"
       - name: Upload build artifact
