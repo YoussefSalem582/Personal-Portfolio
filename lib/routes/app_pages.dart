@@ -4,6 +4,7 @@ import '../screens/project_case_study.dart';
 import '../bindings/initial_bindings.dart';
 import '../controllers/portfolio_controller.dart';
 import 'app_routes.dart';
+import 'admin_routes.dart';
 
 /// Application pages configuration
 ///
@@ -12,7 +13,7 @@ class AppPages {
   /// Initial route for the app
   static const initial = AppRoutes.home;
 
-  /// List of all application routes
+  /// List of all application routes (including admin routes)
   static final routes = [
     // Home/Portfolio Screen
     GetPage(
@@ -79,6 +80,9 @@ class AppPages {
       binding: InitialBindings(),
       transition: Transition.fadeIn,
     ),
+
+    // Admin routes
+    ...AdminPages.routes,
   ];
 
   /// Unknown route handler (404 page)

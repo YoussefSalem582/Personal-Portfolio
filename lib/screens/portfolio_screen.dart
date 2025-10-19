@@ -11,7 +11,7 @@ import 'sections/skills_section.dart';
 import 'sections/certificates_section.dart';
 import 'sections/contact_section.dart';
 import '../widgets/footer.dart';
-import '../widgets/privacy_consent_banner.dart';
+import '../widgets/skeleton_loading.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -85,19 +85,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       body: Obx(() {
         // Show loading state
         if (controller.isLoading) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircularProgressIndicator(),
-                const SizedBox(height: AppTheme.spacingL),
-                Text(
-                  'Loading portfolio...',
-                  style: AppTheme.bodyLarge,
-                ),
-              ],
-            ),
-          );
+          return const SkeletonLoading();
         }
 
         // Show error state
@@ -178,9 +166,6 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 ),
               ],
             ),
-
-            // Privacy Consent Banner
-            const PrivacyConsentBanner(),
           ],
         );
       }),

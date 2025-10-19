@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 /// GetX Helper Utilities
 /// Provides convenient methods for common GetX operations
@@ -69,15 +70,28 @@ class GetXHelper {
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const CircularProgressIndicator(),
-                  if (message != null) ...[
-                    const SizedBox(height: 16),
-                    Text(message),
+              child: Skeletonizer(
+                enabled: true,
+                effect: const ShimmerEffect(
+                  duration: Duration(milliseconds: 1500),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      width: 48,
+                      height: 48,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                    if (message != null) ...[
+                      const SizedBox(height: 16),
+                      Text(message, style: const TextStyle(fontSize: 14)),
+                    ],
                   ],
-                ],
+                ),
               ),
             ),
           ),

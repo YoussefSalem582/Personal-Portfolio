@@ -245,26 +245,37 @@ class AboutSection extends StatelessWidget {
                 ],
               ),
             ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  stat['title']!,
-                  style: AppTheme.headingMedium.copyWith(
-                    color: AppTheme.accentColor,
-                    fontSize: 24,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      stat['title']!,
+                      style: AppTheme.headingMedium.copyWith(
+                        color: AppTheme.accentColor,
+                        fontSize: 22,
+                      ),
+                    ),
                   ),
-                ),
-                const SizedBox(height: AppTheme.spacingS),
-                Text(
-                  stat['subtitle']!,
-                  style: AppTheme.bodySmall.copyWith(
-                    color: AppTheme.textSecondary,
-                    fontWeight: FontWeight.w500,
+                  const SizedBox(height: 4),
+                  Flexible(
+                    child: Text(
+                      stat['subtitle']!,
+                      style: AppTheme.bodySmall.copyWith(
+                        color: AppTheme.textSecondary,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 11,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         );
@@ -350,7 +361,8 @@ class AboutSection extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppTheme.accentColor.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
-          border: Border.all(color: AppTheme.accentColor.withValues(alpha: 0.2)),
+          border:
+              Border.all(color: AppTheme.accentColor.withValues(alpha: 0.2)),
         ),
         child: Icon(
           _getSocialIcon(social.name),

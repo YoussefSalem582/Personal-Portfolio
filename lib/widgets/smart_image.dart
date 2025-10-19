@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../theme/app_theme.dart';
 
 class SmartImage extends StatelessWidget {
@@ -32,40 +33,25 @@ class SmartImage extends StatelessWidget {
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Container(
-      width: width,
-      height: height,
-      decoration: BoxDecoration(
-        color: isDark
-            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.1)
-            : AppTheme.surfaceColor.withValues(alpha: 0.1),
-        borderRadius: borderRadius,
+    return Skeletonizer(
+      enabled: true,
+      effect: ShimmerEffect(
+        baseColor: isDark
+            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.3)
+            : AppTheme.surfaceColor.withValues(alpha: 0.3),
+        highlightColor: isDark
+            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
+            : AppTheme.accentColor.withValues(alpha: 0.1),
+        duration: const Duration(milliseconds: 1500),
       ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 24,
-              height: 24,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                      .withValues(alpha: 0.6),
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Loading...',
-              style: AppTheme.bodySmall.copyWith(
-                color: isDark
-                    ? AppTheme.darkTextSecondary.withValues(alpha: 0.6)
-                    : AppTheme.textSecondary.withValues(alpha: 0.6),
-              ),
-            ),
-          ],
+      child: Container(
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          color: isDark
+              ? AppTheme.darkSurfaceColor.withValues(alpha: 0.2)
+              : AppTheme.surfaceColor.withValues(alpha: 0.2),
+          borderRadius: borderRadius,
         ),
       ),
     );

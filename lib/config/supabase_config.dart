@@ -31,9 +31,6 @@ class SupabaseConfig {
   static String get twitterUrl => dotenv.env['TWITTER_URL'] ?? '';
   static String get email => dotenv.env['EMAIL'] ?? '';
 
-  // Analytics
-  static String get gaMeasurementId => dotenv.env['GA_MEASUREMENT_ID'] ?? '';
-
   // Contact form
   static String get contactFormEndpoint =>
       dotenv.env['CONTACT_FORM_ENDPOINT'] ?? '';

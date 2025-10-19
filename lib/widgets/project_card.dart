@@ -6,132 +6,374 @@ import '../utils/url_helper.dart';
 import '../routes/app_routes.dart';
 import 'lazy_image.dart';
 
-class ProjectCard extends StatelessWidget {
+class ProjectCard extends StatefulWidget {
   final Project project;
   final bool isCompact;
 
   const ProjectCard({super.key, required this.project, this.isCompact = false});
 
   @override
+  State<ProjectCard> createState() => _ProjectCardState();
+}
+
+class _ProjectCardState extends State<ProjectCard>
+    with SingleTickerProviderStateMixin {
+  bool _isHovered = false;
+  late AnimationController _controller;
+  late Animation<double> _scaleAnimation;
+  late Animation<double> _elevationAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 200),
+      vsync: this,
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.02).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+    );
+    _elevationAnimation = Tween<double>(begin: 4.0, end: 12.0).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Card(
-      elevation: 4,
-      shadowColor: Colors.black12,
-      child: InkWell(
-        onTap: () => _showProjectDetails(context),
-        borderRadius: BorderRadius.circular(AppTheme.radiusL),
-        child: Container(
-          height: isCompact ? 200 : 280,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(AppTheme.radiusL),
-            gradient:
-                isDark ? AppTheme.darkCardGradient : AppTheme.cardGradient,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Project image
-              Expanded(
-                flex: isCompact ? 2 : 3,
-                child: Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(AppTheme.radiusL),
-                    ),
-                    color: AppTheme.accentColor.withValues(alpha: 0.1),
+    return MouseRegion(
+      onEnter: (_) {
+        setState(() => _isHovered = true);
+        _controller.forward();
+      },
+      onExit: (_) {
+        setState(() => _isHovered = false);
+        _controller.reverse();
+      },
+      cursor: SystemMouseCursors.click,
+      child: AnimatedBuilder(
+        animation: _controller,
+        builder: (context, child) {
+          return Transform.scale(
+            scale: _scaleAnimation.value,
+            child: Container(
+              height: widget.isCompact ? 260 : 360,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                boxShadow: [
+                  BoxShadow(
+                    color: _isHovered
+                        ? (isDark
+                            ? AppTheme.darkAccentColor.withValues(alpha: 0.3)
+                            : AppTheme.accentColor.withValues(alpha: 0.3))
+                        : Colors.black.withValues(alpha: 0.1),
+                    blurRadius: _elevationAnimation.value * 2,
+                    offset: Offset(0, _elevationAnimation.value / 2),
+                    spreadRadius: _isHovered ? 2 : 0,
                   ),
-                  child: ClipRRect(
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(AppTheme.radiusL),
+                ],
+              ),
+              child: Card(
+                elevation: 0,
+                margin: EdgeInsets.zero,
+                clipBehavior: Clip.antiAlias,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                  side: BorderSide(
+                    color: _isHovered
+                        ? (isDark
+                            ? AppTheme.darkAccentColor.withValues(alpha: 0.5)
+                            : AppTheme.accentColor.withValues(alpha: 0.5))
+                        : Colors.transparent,
+                    width: _isHovered ? 2 : 0,
+                  ),
+                ),
+                child: InkWell(
+                  onTap: () => _showProjectDetails(context),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      gradient: isDark
+                          ? AppTheme.darkCardGradient
+                          : AppTheme.cardGradient,
                     ),
-                    child: project.imageUrl != null
-                        ? LazyImage(
-                            imageUrl: project.imageUrl!,
-                            fit: BoxFit.cover,
-                            borderRadius: const BorderRadius.vertical(
-                              top: Radius.circular(AppTheme.radiusL),
-                            ),
-                            errorWidget: _buildPlaceholderImage(),
-                          )
-                        : _buildPlaceholderImage(),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Enhanced Project Image Section
+                        _buildImageSection(context, isDark),
+
+                        // Enhanced Content Section
+                        _buildContentSection(isDark),
+                      ],
+                    ),
                   ),
                 ),
               ),
+            ),
+          );
+        },
+      ),
+    );
+  }
 
-              // Project info
-              Expanded(
-                flex: isCompact ? 3 : 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(AppTheme.spacingM),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+  Widget _buildImageSection(BuildContext context, bool isDark) {
+    return SizedBox(
+      height: widget.isCompact ? 140 : 200,
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          // Image with perfect fitting - shows full mobile mockup
+          widget.project.imageUrl != null
+              ? Container(
+                  color: isDark
+                      ? AppTheme.darkCardColor.withValues(alpha: 0.5)
+                      : Colors.grey.shade100,
+                  child: LazyImage(
+                    imageUrl: widget.project.imageUrl!,
+                    fit: BoxFit.contain,
+                    width: double.infinity,
+                    height: double.infinity,
+                    errorWidget: _buildPlaceholderImage(),
+                  ),
+                )
+              : _buildPlaceholderImage(),
+
+          // Subtle gradient overlay (less aggressive to show full image)
+          Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Colors.transparent,
+                  Colors.black.withValues(alpha: 0.3),
+                ],
+                stops: const [0.7, 1.0],
+              ),
+            ),
+          ),
+
+          // Featured Badge
+          if (widget.project.isFeatured)
+            Positioned(
+              top: 12,
+              right: 12,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 6,
+                ),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      AppTheme.accentColor,
+                      AppTheme.primaryColor,
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppTheme.accentColor.withValues(alpha: 0.5),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Icon(
+                      Icons.star_rounded,
+                      size: 16,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      'Featured',
+                      style: AppTheme.bodySmall.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+          // Hover Overlay with View Project button
+          AnimatedOpacity(
+            duration: const Duration(milliseconds: 200),
+            opacity: _isHovered ? 1.0 : 0.0,
+            child: Container(
+              color: Colors.black.withValues(alpha: 0.5),
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        AppTheme.accentColor,
+                        AppTheme.primaryColor,
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(30),
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppTheme.accentColor.withValues(alpha: 0.5),
+                        blurRadius: 12,
+                        offset: const Offset(0, 4),
+                      ),
+                    ],
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      // Title
+                      const Icon(
+                        Icons.visibility_rounded,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
                       Text(
-                        project.title,
-                        style: AppTheme.headingSmall.copyWith(
-                          fontSize: 18,
-                          color: isDark
-                              ? AppTheme.darkTextPrimary
-                              : AppTheme.textPrimary,
+                        'View Project',
+                        style: AppTheme.bodyMedium.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-
-                      const SizedBox(height: AppTheme.spacingS),
-
-                      // Description
-                      Expanded(
-                        child: Text(
-                          project.shortDescription,
-                          style: AppTheme.bodyMedium.copyWith(
-                            color: isDark
-                                ? AppTheme.darkTextSecondary
-                                : AppTheme.textSecondary,
-                          ),
-                          maxLines: isCompact ? 2 : 3,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-
-                      const SizedBox(height: AppTheme.spacingS),
-
-                      // Technologies
-                      Wrap(
-                        spacing: AppTheme.spacingXS,
-                        runSpacing: AppTheme.spacingXS,
-                        children: project.technologies
-                            .take(isCompact ? 2 : 3)
-                            .map(
-                              (tech) => Chip(
-                                label: Text(
-                                  tech,
-                                  style: AppTheme.bodySmall.copyWith(
-                                    color: AppTheme.accentColor,
-                                  ),
-                                ),
-                                backgroundColor:
-                                    AppTheme.accentColor.withValues(alpha: 0.1),
-                                side: BorderSide.none,
-                                materialTapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
-                                ),
-                              ),
-                            )
-                            .toList(),
                       ),
                     ],
                   ),
                 ),
               ),
-            ],
+            ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildContentSection(bool isDark) {
+    return Flexible(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // Title with icon
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    widget.project.title,
+                    style: AppTheme.headingSmall.copyWith(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: _isHovered
+                          ? (isDark
+                              ? AppTheme.darkAccentColor
+                              : AppTheme.accentColor)
+                          : (isDark
+                              ? AppTheme.darkTextPrimary
+                              : AppTheme.textPrimary),
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Icon(
+                  Icons.arrow_forward_rounded,
+                  size: 16,
+                  color: _isHovered
+                      ? (isDark
+                          ? AppTheme.darkAccentColor
+                          : AppTheme.accentColor)
+                      : (isDark
+                          ? AppTheme.darkTextSecondary
+                          : AppTheme.textSecondary),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 6),
+
+            // Description
+            Flexible(
+              child: Text(
+                widget.project.shortDescription,
+                style: AppTheme.bodyMedium.copyWith(
+                  color: isDark
+                      ? AppTheme.darkTextSecondary
+                      : AppTheme.textSecondary,
+                  height: 1.3,
+                  fontSize: 12,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+
+            const SizedBox(height: 6),
+
+            // Enhanced Technology Chips
+            Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: widget.project.technologies
+                  .take(widget.isCompact ? 2 : 4)
+                  .map(
+                    (tech) => Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
+                      ),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            (isDark
+                                    ? AppTheme.darkAccentColor
+                                    : AppTheme.accentColor)
+                                .withValues(alpha: 0.15),
+                            (isDark
+                                    ? AppTheme.darkAccentColor
+                                    : AppTheme.accentColor)
+                                .withValues(alpha: 0.05),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(
+                          color: (isDark
+                                  ? AppTheme.darkAccentColor
+                                  : AppTheme.accentColor)
+                              .withValues(alpha: 0.3),
+                          width: 1,
+                        ),
+                      ),
+                      child: Text(
+                        tech,
+                        style: AppTheme.bodySmall.copyWith(
+                          color: isDark
+                              ? AppTheme.darkAccentColor
+                              : AppTheme.accentColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12,
+                        ),
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ],
         ),
       ),
     );
@@ -140,24 +382,45 @@ class ProjectCard extends StatelessWidget {
   Widget _buildPlaceholderImage() {
     return Container(
       width: double.infinity,
+      height: double.infinity,
       decoration: BoxDecoration(
-        color: AppTheme.accentColor.withValues(alpha: 0.1),
-        borderRadius: const BorderRadius.vertical(
-          top: Radius.circular(AppTheme.radiusL),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppTheme.accentColor.withValues(alpha: 0.2),
+            AppTheme.primaryColor.withValues(alpha: 0.2),
+          ],
         ),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.code, size: 40, color: AppTheme.accentColor),
-          const SizedBox(height: AppTheme.spacingS),
-          Text(
-            project.title,
-            style: AppTheme.bodyMedium.copyWith(
-              color: AppTheme.accentColor,
-              fontWeight: FontWeight.w600,
+          Container(
+            padding: const EdgeInsets.all(20),
+            decoration: BoxDecoration(
+              color: AppTheme.accentColor.withValues(alpha: 0.2),
+              shape: BoxShape.circle,
             ),
-            textAlign: TextAlign.center,
+            child: Icon(
+              Icons.code_rounded,
+              size: 48,
+              color: AppTheme.accentColor,
+            ),
+          ),
+          const SizedBox(height: AppTheme.spacingM),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+              widget.project.title,
+              style: AppTheme.bodyMedium.copyWith(
+                color: AppTheme.accentColor,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       ),
@@ -167,7 +430,7 @@ class ProjectCard extends StatelessWidget {
   void _showProjectDetails(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => ProjectDetailsDialog(project: project),
+      builder: (context) => ProjectDetailsDialog(project: widget.project),
     );
   }
 }
@@ -368,17 +631,20 @@ class ProjectDetailsDialog extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      height: 250,
+      height: 350,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
-        color: AppTheme.accentColor.withValues(alpha: 0.1),
+        color: Colors.grey.shade100,
       ),
       child: images.length == 1
-          ? LazyImage(
-              imageUrl: images.first,
-              fit: BoxFit.cover,
+          ? ClipRRect(
               borderRadius: BorderRadius.circular(AppTheme.radiusM),
-              errorWidget: _buildImagePlaceholder(),
+              child: LazyImage(
+                imageUrl: images.first,
+                fit: BoxFit.contain,
+                borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                errorWidget: _buildImagePlaceholder(),
+              ),
             )
           : PageView.builder(
               itemCount: images.length,
@@ -391,7 +657,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                       children: [
                         LazyImage(
                           imageUrl: images[index],
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                           width: double.infinity,
                           borderRadius: BorderRadius.circular(AppTheme.radiusM),
                           errorWidget: _buildImagePlaceholder(),

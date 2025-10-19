@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '../theme/app_theme.dart';
 
 class LazyImage extends StatefulWidget {
@@ -76,35 +77,27 @@ class _LazyImageState extends State<LazyImage>
       return widget.placeholder!;
     }
 
-    return Container(
-      width: widget.width,
-      height: widget.height,
-      decoration: BoxDecoration(
-        color: AppTheme.surfaceColor.withValues(alpha: 0.1),
-        borderRadius: widget.borderRadius,
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Skeletonizer(
+      enabled: true,
+      effect: ShimmerEffect(
+        baseColor: isDark
+            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.3)
+            : AppTheme.surfaceColor.withValues(alpha: 0.3),
+        highlightColor: isDark
+            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
+            : AppTheme.accentColor.withValues(alpha: 0.1),
+        duration: const Duration(milliseconds: 1500),
       ),
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 24,
-              height: 24,
-              child: CircularProgressIndicator(
-                strokeWidth: 2,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  AppTheme.accentColor.withValues(alpha: 0.6),
-                ),
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Loading...',
-              style: AppTheme.bodySmall.copyWith(
-                color: AppTheme.textSecondary.withValues(alpha: 0.6),
-              ),
-            ),
-          ],
+      child: Container(
+        width: widget.width,
+        height: widget.height,
+        decoration: BoxDecoration(
+          color: isDark
+              ? AppTheme.darkSurfaceColor.withValues(alpha: 0.2)
+              : AppTheme.surfaceColor.withValues(alpha: 0.2),
+          borderRadius: widget.borderRadius,
         ),
       ),
     );
