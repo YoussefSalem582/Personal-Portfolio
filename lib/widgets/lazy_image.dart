@@ -80,7 +80,7 @@ class _LazyImageState extends State<LazyImage>
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
-        color: AppTheme.surfaceColor.withOpacity(0.1),
+        color: AppTheme.surfaceColor.withValues(alpha: 0.1),
         borderRadius: widget.borderRadius,
       ),
       child: Center(
@@ -93,7 +93,7 @@ class _LazyImageState extends State<LazyImage>
               child: CircularProgressIndicator(
                 strokeWidth: 2,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  AppTheme.accentColor.withOpacity(0.6),
+                  AppTheme.accentColor.withValues(alpha: 0.6),
                 ),
               ),
             ),
@@ -101,7 +101,7 @@ class _LazyImageState extends State<LazyImage>
             Text(
               'Loading...',
               style: AppTheme.bodySmall.copyWith(
-                color: AppTheme.textSecondary.withOpacity(0.6),
+                color: AppTheme.textSecondary.withValues(alpha: 0.6),
               ),
             ),
           ],
@@ -119,7 +119,7 @@ class _LazyImageState extends State<LazyImage>
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
-        color: AppTheme.surfaceColor.withOpacity(0.1),
+        color: AppTheme.surfaceColor.withValues(alpha: 0.1),
         borderRadius: widget.borderRadius,
       ),
       child: Center(
@@ -129,13 +129,13 @@ class _LazyImageState extends State<LazyImage>
             Icon(
               Icons.broken_image_outlined,
               size: 32,
-              color: AppTheme.textSecondary.withOpacity(0.5),
+              color: AppTheme.textSecondary.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 8),
             Text(
               'Image not found',
               style: AppTheme.bodySmall.copyWith(
-                color: AppTheme.textSecondary.withOpacity(0.5),
+                color: AppTheme.textSecondary.withValues(alpha: 0.5),
               ),
             ),
           ],

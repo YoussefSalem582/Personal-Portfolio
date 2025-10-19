@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/skill.dart';
 import 'supabase_service.dart';
@@ -36,7 +37,7 @@ class SkillsService {
 
       return categories;
     } catch (e) {
-      print('Error fetching skill categories: $e');
+      debugPrint('Error fetching skill categories: $e');
       return [];
     }
   }
@@ -62,7 +63,7 @@ class SkillsService {
 
       return SkillCategory.fromJson({...response, 'skills': []});
     } catch (e) {
-      print('Error creating skill category: $e');
+      debugPrint('Error creating skill category: $e');
       return null;
     }
   }
@@ -88,7 +89,7 @@ class SkillsService {
 
       return Skill.fromJson(response);
     } catch (e) {
-      print('Error creating skill: $e');
+      debugPrint('Error creating skill: $e');
       return null;
     }
   }
@@ -104,7 +105,7 @@ class SkillsService {
           .update({'proficiency': proficiency}).eq('id', skillId);
       return true;
     } catch (e) {
-      print('Error updating skill proficiency: $e');
+      debugPrint('Error updating skill proficiency: $e');
       return false;
     }
   }
@@ -115,7 +116,7 @@ class SkillsService {
       await _client.from(skillsTableName).delete().eq('id', skillId);
       return true;
     } catch (e) {
-      print('Error deleting skill: $e');
+      debugPrint('Error deleting skill: $e');
       return false;
     }
   }
@@ -134,7 +135,7 @@ class SkillsService {
 
       return true;
     } catch (e) {
-      print('Error deleting skill category: $e');
+      debugPrint('Error deleting skill category: $e');
       return false;
     }
   }

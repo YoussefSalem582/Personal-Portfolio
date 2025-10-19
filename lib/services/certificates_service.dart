@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/certificate.dart';
 import '../config/supabase_config.dart';
@@ -19,7 +20,7 @@ class CertificatesService {
           .map((json) => Certificate.fromJson(json))
           .toList();
     } catch (e) {
-      print('Error fetching certificates: $e');
+      debugPrint('Error fetching certificates: $e');
       return [];
     }
   }
@@ -32,7 +33,7 @@ class CertificatesService {
 
       return Certificate.fromJson(response);
     } catch (e) {
-      print('Error fetching certificate: $e');
+      debugPrint('Error fetching certificate: $e');
       return null;
     }
   }
@@ -48,7 +49,7 @@ class CertificatesService {
 
       return Certificate.fromJson(response);
     } catch (e) {
-      print('Error creating certificate: $e');
+      debugPrint('Error creating certificate: $e');
       return null;
     }
   }
@@ -65,7 +66,7 @@ class CertificatesService {
 
       return Certificate.fromJson(response);
     } catch (e) {
-      print('Error updating certificate: $e');
+      debugPrint('Error updating certificate: $e');
       return null;
     }
   }
@@ -76,7 +77,7 @@ class CertificatesService {
       await _client.from(tableName).delete().eq('id', id);
       return true;
     } catch (e) {
-      print('Error deleting certificate: $e');
+      debugPrint('Error deleting certificate: $e');
       return false;
     }
   }

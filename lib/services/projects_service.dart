@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../models/project.dart';
 import '../config/supabase_config.dart';
@@ -17,7 +18,7 @@ class ProjectsService {
 
       return (response as List).map((json) => Project.fromJson(json)).toList();
     } catch (e) {
-      print('Error fetching projects: $e');
+      debugPrint('Error fetching projects: $e');
       return [];
     }
   }
@@ -30,7 +31,7 @@ class ProjectsService {
 
       return Project.fromJson(response);
     } catch (e) {
-      print('Error fetching project: $e');
+      debugPrint('Error fetching project: $e');
       return null;
     }
   }
@@ -46,7 +47,7 @@ class ProjectsService {
 
       return Project.fromJson(response);
     } catch (e) {
-      print('Error creating project: $e');
+      debugPrint('Error creating project: $e');
       return null;
     }
   }
@@ -63,7 +64,7 @@ class ProjectsService {
 
       return Project.fromJson(response);
     } catch (e) {
-      print('Error updating project: $e');
+      debugPrint('Error updating project: $e');
       return null;
     }
   }
@@ -74,7 +75,7 @@ class ProjectsService {
       await _client.from(tableName).delete().eq('id', id);
       return true;
     } catch (e) {
-      print('Error deleting project: $e');
+      debugPrint('Error deleting project: $e');
       return false;
     }
   }

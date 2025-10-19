@@ -100,13 +100,13 @@ class _PrivacyConsentBannerState extends State<PrivacyConsentBanner>
             borderRadius: BorderRadius.circular(AppTheme.radiusM),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 10,
                 spreadRadius: 2,
               ),
             ],
             border: Border.all(
-              color: AppTheme.accentColor.withOpacity(0.2),
+              color: AppTheme.accentColor.withValues(alpha: 0.2),
               width: 1,
             ),
           ),

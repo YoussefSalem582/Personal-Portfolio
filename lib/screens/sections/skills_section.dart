@@ -145,11 +145,11 @@ class SkillsSection extends StatelessWidget {
                 colors: isDark
                     ? [
                         AppTheme.darkSurfaceColor,
-                        AppTheme.darkAccentColor.withOpacity(0.02),
+                        AppTheme.darkAccentColor.withValues(alpha: 0.02),
                       ]
                     : [
                         AppTheme.surfaceColor,
-                        AppTheme.accentColor.withOpacity(0.02),
+                        AppTheme.accentColor.withValues(alpha: 0.02),
                       ],
               ),
             ),
@@ -163,8 +163,8 @@ class SkillsSection extends StatelessWidget {
                       padding: const EdgeInsets.all(AppTheme.spacingS),
                       decoration: BoxDecoration(
                         color: isDark
-                            ? AppTheme.darkAccentColor.withOpacity(0.1)
-                            : AppTheme.accentColor.withOpacity(0.1),
+                            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
+                            : AppTheme.accentColor.withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(AppTheme.radiusS),
                       ),
                       child: Icon(
@@ -247,8 +247,8 @@ class SkillsSection extends StatelessWidget {
             LinearProgressIndicator(
               value: skill.proficiency / 5.0,
               backgroundColor: isDark
-                  ? AppTheme.darkAccentColor.withOpacity(0.1)
-                  : AppTheme.accentColor.withOpacity(0.1),
+                  ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
+                  : AppTheme.accentColor.withValues(alpha: 0.1),
               valueColor: AlwaysStoppedAnimation<Color>(
                 _getProficiencyColor(skill.proficiency),
               ),
@@ -269,7 +269,7 @@ class SkillsSection extends StatelessWidget {
           size: 16,
           color: index < proficiency
               ? _getProficiencyColor(proficiency)
-              : AppTheme.textSecondary.withOpacity(0.3),
+              : AppTheme.textSecondary.withValues(alpha: 0.3),
         );
       }),
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../providers/theme_provider.dart';
+import 'package:get/get.dart';
+import '../controllers/theme_controller.dart';
 import '../theme/app_theme.dart';
 
 class ThemeToggle extends StatelessWidget {
@@ -10,75 +10,75 @@ class ThemeToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
-      builder: (context, themeProvider, child) {
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          child: InkWell(
-            onTap: themeProvider.toggleTheme,
-            borderRadius: BorderRadius.circular(20),
-            child: Container(
-              padding: EdgeInsets.all(isCompact ? 8 : 12),
-              decoration: BoxDecoration(
-                color: themeProvider.isDarkMode
-                    ? AppTheme.darkSurfaceColor
-                    : AppTheme.surfaceColor,
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: themeProvider.isDarkMode
-                      ? AppTheme.darkAccentColor.withOpacity(0.3)
-                      : AppTheme.accentColor.withOpacity(0.3),
-                  width: 1,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: themeProvider.isDarkMode
-                        ? Colors.black.withOpacity(0.2)
-                        : Colors.black.withOpacity(0.1),
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
+    final themeController = Get.find<ThemeController>();
+
+    return Obx(() {
+      return AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        child: InkWell(
+          onTap: themeController.toggleTheme,
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            padding: EdgeInsets.all(isCompact ? 8 : 12),
+            decoration: BoxDecoration(
+              color: themeController.isDarkMode
+                  ? AppTheme.darkSurfaceColor
+                  : AppTheme.surfaceColor,
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: themeController.isDarkMode
+                    ? AppTheme.darkAccentColor.withValues(alpha: 0.3)
+                    : AppTheme.accentColor.withValues(alpha: 0.3),
+                width: 1,
               ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    child: Icon(
-                      themeProvider.isDarkMode
-                          ? Icons.dark_mode
-                          : Icons.light_mode,
-                      color: themeProvider.isDarkMode
-                          ? AppTheme.darkAccentColor
-                          : AppTheme.accentColor,
-                      size: isCompact ? 18 : 20,
-                    ),
+              boxShadow: [
+                BoxShadow(
+                  color: themeController.isDarkMode
+                      ? Colors.black.withValues(alpha: 0.2)
+                      : Colors.black.withValues(alpha: 0.1),
+                  blurRadius: 4,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 200),
+                  child: Icon(
+                    themeController.isDarkMode
+                        ? Icons.dark_mode
+                        : Icons.light_mode,
+                    color: themeController.isDarkMode
+                        ? AppTheme.darkAccentColor
+                        : AppTheme.accentColor,
+                    size: isCompact ? 18 : 20,
                   ),
-                  if (!isCompact) ...[
-                    const SizedBox(width: 8),
-                    AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 200),
-                      child: Text(
-                        themeProvider.isDarkMode ? 'Dark' : 'Light',
-                        key: ValueKey(themeProvider.isDarkMode),
-                        style: TextStyle(
-                          color: themeProvider.isDarkMode
-                              ? AppTheme.darkTextPrimary
-                              : AppTheme.textPrimary,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
+                ),
+                if (!isCompact) ...[
+                  const SizedBox(width: 8),
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 200),
+                    child: Text(
+                      themeController.isDarkMode ? 'Dark' : 'Light',
+                      key: ValueKey(themeController.isDarkMode),
+                      style: TextStyle(
+                        color: themeController.isDarkMode
+                            ? AppTheme.darkTextPrimary
+                            : AppTheme.textPrimary,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ],
+                  ),
                 ],
-              ),
+              ],
             ),
           ),
-        );
-      },
-    );
+        ),
+      );
+    });
   }
 }
 
@@ -87,58 +87,58 @@ class ThemeToggleSwitch extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<ThemeProvider>(
-      builder: (context, themeProvider, child) {
-        return Container(
-          width: 56,
-          height: 28,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(14),
-            color: themeProvider.isDarkMode
-                ? AppTheme.darkAccentColor
-                : AppTheme.accentColor.withOpacity(0.3),
-          ),
-          child: Stack(
-            children: [
-              AnimatedPositioned(
-                duration: const Duration(milliseconds: 200),
-                curve: Curves.easeInOut,
-                left: themeProvider.isDarkMode ? 30 : 2,
-                top: 2,
-                child: GestureDetector(
-                  onTap: themeProvider.toggleTheme,
-                  child: Container(
-                    width: 24,
-                    height: 24,
-                    decoration: BoxDecoration(
-                      color: themeProvider.isDarkMode
-                          ? AppTheme.darkSurfaceColor
-                          : AppTheme.surfaceColor,
-                      borderRadius: BorderRadius.circular(12),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          blurRadius: 2,
-                          offset: const Offset(0, 1),
-                        ),
-                      ],
-                    ),
-                    child: Icon(
-                      themeProvider.isDarkMode
-                          ? Icons.dark_mode
-                          : Icons.light_mode,
-                      size: 14,
-                      color: themeProvider.isDarkMode
-                          ? AppTheme.darkAccentColor
-                          : AppTheme.accentColor,
-                    ),
+    final themeController = Get.find<ThemeController>();
+
+    return Obx(() {
+      return Container(
+        width: 56,
+        height: 28,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          color: themeController.isDarkMode
+              ? AppTheme.darkAccentColor
+              : AppTheme.accentColor.withValues(alpha: 0.3),
+        ),
+        child: Stack(
+          children: [
+            AnimatedPositioned(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              left: themeController.isDarkMode ? 30 : 2,
+              top: 2,
+              child: GestureDetector(
+                onTap: themeController.toggleTheme,
+                child: Container(
+                  width: 24,
+                  height: 24,
+                  decoration: BoxDecoration(
+                    color: themeController.isDarkMode
+                        ? AppTheme.darkSurfaceColor
+                        : AppTheme.surfaceColor,
+                    borderRadius: BorderRadius.circular(12),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.2),
+                        blurRadius: 2,
+                        offset: const Offset(0, 1),
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    themeController.isDarkMode
+                        ? Icons.dark_mode
+                        : Icons.light_mode,
+                    size: 14,
+                    color: themeController.isDarkMode
+                        ? AppTheme.darkAccentColor
+                        : AppTheme.accentColor,
                   ),
                 ),
               ),
-            ],
-          ),
-        );
-      },
-    );
+            ),
+          ],
+        ),
+      );
+    });
   }
 }

@@ -111,7 +111,7 @@ class ProjectCaseStudy extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
                   Colors.transparent,
-                  Colors.black.withOpacity(0.7),
+                  Colors.black.withValues(alpha: 0.7),
                 ],
               ),
             ),
@@ -134,7 +134,7 @@ class ProjectCaseStudy extends StatelessWidget {
                 Text(
                   project.shortDescription,
                   style: AppTheme.bodyLarge.copyWith(
-                    color: Colors.white.withOpacity(0.9),
+                    color: Colors.white.withValues(alpha: 0.9),
                   ),
                 ),
               ],
@@ -169,7 +169,7 @@ class ProjectCaseStudy extends StatelessWidget {
                 border: Border.all(
                   color:
                       (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                          .withOpacity(0.1),
+                          .withValues(alpha: 0.1),
                 ),
               ),
               child: Column(
@@ -211,10 +211,10 @@ class ProjectCaseStudy extends StatelessWidget {
                 vertical: AppTheme.spacingS,
               ),
               decoration: BoxDecoration(
-                color: AppTheme.accentColor.withOpacity(0.1),
+                color: AppTheme.accentColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(AppTheme.radiusS),
                 border: Border.all(
-                  color: AppTheme.accentColor.withOpacity(0.3),
+                  color: AppTheme.accentColor.withValues(alpha: 0.3),
                 ),
               ),
               child: Text(
@@ -278,7 +278,7 @@ class ProjectCaseStudy extends StatelessWidget {
               color: AppTheme.surfaceColor,
               borderRadius: BorderRadius.circular(AppTheme.radiusM),
               border: Border.all(
-                color: AppTheme.accentColor.withOpacity(0.1),
+                color: AppTheme.accentColor.withValues(alpha: 0.1),
               ),
             ),
             child: Column(
@@ -517,7 +517,7 @@ class ProjectCaseStudy extends StatelessWidget {
                           color: (isDark
                                   ? AppTheme.darkAccentColor
                                   : AppTheme.accentColor)
-                              .withOpacity(0.1),
+                              .withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(AppTheme.radiusS),
                         ),
                         child: Icon(

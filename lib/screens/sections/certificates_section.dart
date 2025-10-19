@@ -130,7 +130,7 @@ class CertificateCard extends StatelessWidget {
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(AppTheme.radiusL),
                     ),
-                    color: AppTheme.accentColor.withOpacity(0.1),
+                    color: AppTheme.accentColor.withValues(alpha: 0.1),
                   ),
                   child: ClipRRect(
                     borderRadius: const BorderRadius.vertical(
@@ -224,7 +224,7 @@ class CertificateCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppTheme.accentColor.withOpacity(0.1),
+        color: AppTheme.accentColor.withValues(alpha: 0.1),
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(AppTheme.radiusL),
         ),
@@ -328,7 +328,7 @@ class CertificateDetailsDialog extends StatelessWidget {
                         height: 200,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(AppTheme.radiusM),
-                          color: AppTheme.accentColor.withOpacity(0.1),
+                          color: AppTheme.accentColor.withValues(alpha: 0.1),
                         ),
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(AppTheme.radiusM),
@@ -338,7 +338,7 @@ class CertificateDetailsDialog extends StatelessWidget {
                             errorBuilder: (context, error, stackTrace) {
                               return Container(
                                 decoration: BoxDecoration(
-                                  color: AppTheme.accentColor.withOpacity(0.1),
+                                  color: AppTheme.accentColor.withValues(alpha: 0.1),
                                   borderRadius: BorderRadius.circular(
                                     AppTheme.radiusM,
                                   ),

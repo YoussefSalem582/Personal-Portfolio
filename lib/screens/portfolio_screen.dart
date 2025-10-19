@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../theme/app_theme.dart';
 import '../widgets/app_navigation.dart';
 import '../utils/responsive_helper.dart';
+import '../controllers/portfolio_controller.dart';
 import 'sections/hero_section.dart';
 import 'sections/about_section.dart';
 import 'sections/projects_section.dart';
@@ -70,6 +72,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final controller = Get.find<PortfolioController>();
 
     return Scaffold(
       backgroundColor: AppTheme.backgroundColor,
@@ -79,53 +82,108 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               currentIndex: _currentSection,
             ).buildMobileDrawer(context)
           : null,
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              // Navigation
-              AppNavigation(
-                onItemSelected: _scrollToSection,
-                currentIndex: _currentSection,
-              ),
+      body: Obx(() {
+        // Show loading state
+        if (controller.isLoading) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const CircularProgressIndicator(),
+                const SizedBox(height: AppTheme.spacingL),
+                Text(
+                  'Loading portfolio...',
+                  style: AppTheme.bodyLarge,
+                ),
+              ],
+            ),
+          );
+        }
 
-              // Content
-              Expanded(
-                child: SingleChildScrollView(
-                  controller: _scrollController,
-                  child: Column(
-                    children: [
-                      // Hero Section
-                      HeroSection(key: _sectionKeys[0]),
+        // Show error state
+        if (controller.error != null) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  Icons.error_outline,
+                  size: 64,
+                  color: AppTheme.errorColor,
+                ),
+                const SizedBox(height: AppTheme.spacingL),
+                Text(
+                  'Error loading portfolio',
+                  style: AppTheme.headingMedium,
+                ),
+                const SizedBox(height: AppTheme.spacingM),
+                Text(
+                  controller.error!,
+                  style: AppTheme.bodyMedium.copyWith(
+                    color: AppTheme.textSecondary,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: AppTheme.spacingL),
+                ElevatedButton.icon(
+                  onPressed: () => controller.refresh(),
+                  icon: const Icon(Icons.refresh),
+                  label: const Text('Retry'),
+                ),
+              ],
+            ),
+          );
+        }
 
-                      // About Section
-                      AboutSection(key: _sectionKeys[1]),
+        // Show main content
+        return Stack(
+          children: [
+            Column(
+              children: [
+                // Navigation
+                AppNavigation(
+                  onItemSelected: _scrollToSection,
+                  currentIndex: _currentSection,
+                ),
 
-                      // Projects Section
-                      ProjectsSection(key: _sectionKeys[2]),
+                // Content
+                Expanded(
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    child: Column(
+                      children: [
+                        // Hero Section
+                        HeroSection(key: _sectionKeys[0]),
 
-                      // Skills Section
-                      SkillsSection(key: _sectionKeys[3]),
+                        // About Section
+                        AboutSection(key: _sectionKeys[1]),
 
-                      // Certificates Section
-                      CertificatesSection(key: _sectionKeys[4]),
+                        // Projects Section
+                        ProjectsSection(key: _sectionKeys[2]),
 
-                      // Contact Section
-                      ContactSection(key: _sectionKeys[5]),
+                        // Skills Section
+                        SkillsSection(key: _sectionKeys[3]),
 
-                      // Footer
-                      const Footer(),
-                    ],
+                        // Certificates Section
+                        CertificatesSection(key: _sectionKeys[4]),
+
+                        // Contact Section
+                        ContactSection(key: _sectionKeys[5]),
+
+                        // Footer
+                        const Footer(),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-          
-          // Privacy Consent Banner
-          const PrivacyConsentBanner(),
-        ],
-      ),
+              ],
+            ),
+
+            // Privacy Consent Banner
+            const PrivacyConsentBanner(),
+          ],
+        );
+      }),
 
       // Floating Action Button for mobile
       floatingActionButton: isMobile

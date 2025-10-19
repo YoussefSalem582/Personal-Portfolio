@@ -240,8 +240,8 @@ class AboutSection extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  AppTheme.accentColor.withOpacity(0.1),
-                  AppTheme.primaryColor.withOpacity(0.05),
+                  AppTheme.accentColor.withValues(alpha: 0.1),
+                  AppTheme.primaryColor.withValues(alpha: 0.05),
                 ],
               ),
             ),
@@ -300,7 +300,7 @@ class AboutSection extends StatelessWidget {
             Text(
               'Get a copy of my detailed CV',
               style: AppTheme.bodyMedium.copyWith(
-                color: AppTheme.surfaceColor.withOpacity(0.9),
+                color: AppTheme.surfaceColor.withValues(alpha: 0.9),
               ),
               textAlign: TextAlign.center,
             ),
@@ -348,9 +348,9 @@ class AboutSection extends StatelessWidget {
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-          color: AppTheme.accentColor.withOpacity(0.1),
+          color: AppTheme.accentColor.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
-          border: Border.all(color: AppTheme.accentColor.withOpacity(0.2)),
+          border: Border.all(color: AppTheme.accentColor.withValues(alpha: 0.2)),
         ),
         child: Icon(
           _getSocialIcon(social.name),

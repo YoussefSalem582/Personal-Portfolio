@@ -21,11 +21,12 @@ Visit the live portfolio: [https://youssefsalem582.github.io/Personal-Portfolio/
 
 - **Framework**: Flutter Web
 - **Language**: Dart
-- **State Management**: Provider
+- **State Management**: GetX (reactive state management)
 - **Styling**: Custom theme with responsive design
 - **Testing**: Flutter Test (unit & widget tests)
 - **CI/CD**: GitHub Actions
 - **Deployment**: GitHub Pages
+- **Backend**: Supabase (PostgreSQL + Storage)
 
 ## 📦 Dependencies
 
@@ -43,7 +44,8 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   animated_text_kit: ^4.2.2
   http: ^1.1.2
-  provider: ^6.1.1
+  get: ^4.6.6
+  supabase_flutter: ^2.5.6
 
 dev_dependencies:
   flutter_test:

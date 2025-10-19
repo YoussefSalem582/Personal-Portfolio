@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../theme/app_theme.dart';
 import '../models/project.dart';
 import '../utils/url_helper.dart';
-import '../screens/project_case_study.dart';
+import '../routes/app_routes.dart';
 import 'lazy_image.dart';
 
 class ProjectCard extends StatelessWidget {
@@ -40,7 +41,7 @@ class ProjectCard extends StatelessWidget {
                     borderRadius: const BorderRadius.vertical(
                       top: Radius.circular(AppTheme.radiusL),
                     ),
-                    color: AppTheme.accentColor.withOpacity(0.1),
+                    color: AppTheme.accentColor.withValues(alpha: 0.1),
                   ),
                   child: ClipRRect(
                     borderRadius: const BorderRadius.vertical(
@@ -114,7 +115,7 @@ class ProjectCard extends StatelessWidget {
                                   ),
                                 ),
                                 backgroundColor:
-                                    AppTheme.accentColor.withOpacity(0.1),
+                                    AppTheme.accentColor.withValues(alpha: 0.1),
                                 side: BorderSide.none,
                                 materialTapTargetSize:
                                     MaterialTapTargetSize.shrinkWrap,
@@ -140,7 +141,7 @@ class ProjectCard extends StatelessWidget {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppTheme.accentColor.withOpacity(0.1),
+        color: AppTheme.accentColor.withValues(alpha: 0.1),
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(AppTheme.radiusL),
         ),
@@ -286,7 +287,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                               backgroundColor: (isDark
                                       ? AppTheme.darkAccentColor
                                       : AppTheme.accentColor)
-                                  .withOpacity(0.1),
+                                  .withValues(alpha: 0.1),
                               side: BorderSide.none,
                             ),
                           )
@@ -310,11 +311,9 @@ class ProjectDetailsDialog extends StatelessWidget {
                       width: double.infinity,
                       margin: const EdgeInsets.only(bottom: AppTheme.spacingM),
                       child: ElevatedButton.icon(
-                        onPressed: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                ProjectCaseStudy(project: project),
-                          ),
+                        onPressed: () => Get.toNamed(
+                          AppRoutes.project,
+                          parameters: {'id': project.id},
                         ),
                         icon: const Icon(Icons.article_outlined),
                         label: const Text('View Case Study'),
@@ -372,7 +371,7 @@ class ProjectDetailsDialog extends StatelessWidget {
       height: 250,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
-        color: AppTheme.accentColor.withOpacity(0.1),
+        color: AppTheme.accentColor.withValues(alpha: 0.1),
       ),
       child: images.length == 1
           ? LazyImage(
@@ -407,7 +406,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.7),
+                              color: Colors.black.withValues(alpha: 0.7),
                               borderRadius: BorderRadius.circular(12),
                             ),
                             child: Text(
@@ -430,7 +429,7 @@ class ProjectDetailsDialog extends StatelessWidget {
   Widget _buildImagePlaceholder() {
     return Container(
       decoration: BoxDecoration(
-        color: AppTheme.accentColor.withOpacity(0.1),
+        color: AppTheme.accentColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
       ),
       child: const Center(

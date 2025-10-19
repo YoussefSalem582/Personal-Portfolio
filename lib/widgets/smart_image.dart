@@ -37,8 +37,8 @@ class SmartImage extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         color: isDark
-            ? AppTheme.darkSurfaceColor.withOpacity(0.1)
-            : AppTheme.surfaceColor.withOpacity(0.1),
+            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.1)
+            : AppTheme.surfaceColor.withValues(alpha: 0.1),
         borderRadius: borderRadius,
       ),
       child: Center(
@@ -52,7 +52,7 @@ class SmartImage extends StatelessWidget {
                 strokeWidth: 2,
                 valueColor: AlwaysStoppedAnimation<Color>(
                   (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                      .withOpacity(0.6),
+                      .withValues(alpha: 0.6),
                 ),
               ),
             ),
@@ -61,8 +61,8 @@ class SmartImage extends StatelessWidget {
               'Loading...',
               style: AppTheme.bodySmall.copyWith(
                 color: isDark
-                    ? AppTheme.darkTextSecondary.withOpacity(0.6)
-                    : AppTheme.textSecondary.withOpacity(0.6),
+                    ? AppTheme.darkTextSecondary.withValues(alpha: 0.6)
+                    : AppTheme.textSecondary.withValues(alpha: 0.6),
               ),
             ),
           ],
@@ -83,8 +83,8 @@ class SmartImage extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         color: isDark
-            ? AppTheme.darkSurfaceColor.withOpacity(0.1)
-            : AppTheme.surfaceColor.withOpacity(0.1),
+            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.1)
+            : AppTheme.surfaceColor.withValues(alpha: 0.1),
         borderRadius: borderRadius,
       ),
       child: Center(
@@ -95,16 +95,16 @@ class SmartImage extends StatelessWidget {
               Icons.broken_image_outlined,
               size: 32,
               color: isDark
-                  ? AppTheme.darkTextSecondary.withOpacity(0.5)
-                  : AppTheme.textSecondary.withOpacity(0.5),
+                  ? AppTheme.darkTextSecondary.withValues(alpha: 0.5)
+                  : AppTheme.textSecondary.withValues(alpha: 0.5),
             ),
             const SizedBox(height: 8),
             Text(
               'Image not found',
               style: AppTheme.bodySmall.copyWith(
                 color: isDark
-                    ? AppTheme.darkTextSecondary.withOpacity(0.5)
-                    : AppTheme.textSecondary.withOpacity(0.5),
+                    ? AppTheme.darkTextSecondary.withValues(alpha: 0.5)
+                    : AppTheme.textSecondary.withValues(alpha: 0.5),
               ),
             ),
           ],

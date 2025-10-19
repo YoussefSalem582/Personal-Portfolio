@@ -48,36 +48,47 @@ class AppNavigation extends StatelessWidget {
       child: Row(
         children: [
           // Logo/Name
-          Text(
-            'Youssef Salem',
-            style: AppTheme.headingSmall.copyWith(
-              color: isDark ? AppTheme.darkTextPrimary : AppTheme.primaryColor,
-              fontWeight: FontWeight.bold,
+          Flexible(
+            child: Text(
+              'Youssef Salem',
+              style: AppTheme.headingSmall.copyWith(
+                color:
+                    isDark ? AppTheme.darkTextPrimary : AppTheme.primaryColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
 
           const Spacer(),
 
-          // Navigation items
-          Row(children: _buildNavigationItems(false)),
+          // Navigation items - wrapped in Flexible to prevent overflow
+          Flexible(
+            flex: 3,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(children: _buildNavigationItems(false)),
+            ),
+          ),
 
-          const SizedBox(width: 24),
+          const SizedBox(width: 16),
 
           // Theme toggle
           const ThemeToggle(isCompact: true),
 
-          const SizedBox(width: 16),
+          const SizedBox(width: 12),
 
           // Resume download button
           ElevatedButton.icon(
             onPressed: () => _downloadResume(context),
-            icon: const Icon(Icons.download, size: 18),
-            label: const Text('Resume'),
+            icon: const Icon(Icons.download, size: 16),
+            label: const Text('CV'),
             style: ElevatedButton.styleFrom(
               backgroundColor:
                   isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
               foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -316,7 +327,7 @@ class _NavigationItem extends StatelessWidget {
         selected: isSelected,
         selectedTileColor:
             (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                .withOpacity(0.1),
+                .withValues(alpha: 0.1),
         onTap: () {
           onTap();
           Navigator.of(context).pop(); // Close drawer
@@ -332,7 +343,7 @@ class _NavigationItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             color: isSelected
                 ? (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                    .withOpacity(0.1)
+                    .withValues(alpha: 0.1)
                 : Colors.transparent,
           ),
           child: Text(

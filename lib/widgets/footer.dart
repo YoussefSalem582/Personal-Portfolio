@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../theme/app_theme.dart';
 import '../utils/responsive_helper.dart';
 import '../utils/portfolio_data.dart';
@@ -30,7 +29,7 @@ class Footer extends StatelessWidget {
 
             const SizedBox(height: AppTheme.spacingL),
 
-            Container(height: 1, color: Colors.white.withOpacity(0.2)),
+            Container(height: 1, color: Colors.white.withValues(alpha: 0.2)),
 
             const SizedBox(height: AppTheme.spacingL),
 
@@ -38,7 +37,7 @@ class Footer extends StatelessWidget {
             Text(
               '© ${DateTime.now().year} ${PortfolioData.fullName}. All rights reserved.',
               style: AppTheme.bodyMedium.copyWith(
-                color: Colors.white.withOpacity(0.8),
+                color: Colors.white.withValues(alpha: 0.8),
               ),
               textAlign: TextAlign.center,
             ),
@@ -48,7 +47,7 @@ class Footer extends StatelessWidget {
             Text(
               'Built with Flutter 💙',
               style: AppTheme.bodySmall.copyWith(
-                color: Colors.white.withOpacity(0.6),
+                color: Colors.white.withValues(alpha: 0.6),
               ),
               textAlign: TextAlign.center,
             ),
@@ -75,9 +74,7 @@ class Footer extends StatelessWidget {
                   fontSize: 24,
                 ),
               ),
-
               const SizedBox(height: AppTheme.spacingM),
-
               Text(
                 PortfolioData.title,
                 style: AppTheme.bodyLarge.copyWith(
@@ -85,13 +82,11 @@ class Footer extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-
               const SizedBox(height: AppTheme.spacingS),
-
               Text(
                 'Creating beautiful and functional applications with Flutter.',
                 style: AppTheme.bodyMedium.copyWith(
-                  color: Colors.white.withOpacity(0.8),
+                  color: Colors.white.withValues(alpha: 0.8),
                 ),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
@@ -115,9 +110,7 @@ class Footer extends StatelessWidget {
                   fontSize: 18,
                 ),
               ),
-
               const SizedBox(height: AppTheme.spacingM),
-
               _buildFooterLink('About', () => _scrollToSection('about')),
               _buildFooterLink('Projects', () => _scrollToSection('projects')),
               _buildFooterLink('Skills', () => _scrollToSection('skills')),
@@ -170,7 +163,7 @@ class Footer extends StatelessWidget {
                       onPressed: () => UrlHelper.launchURL(social.url),
                       icon: Icon(
                         _getSocialIcon(social.name),
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white.withValues(alpha: 0.8),
                         size: 20,
                       ),
                       constraints: const BoxConstraints(
@@ -228,7 +221,7 @@ class Footer extends StatelessWidget {
                 onPressed: () => UrlHelper.launchURL(social.url),
                 icon: Icon(
                   _getSocialIcon(social.name),
-                  color: Colors.white.withOpacity(0.8),
+                  color: Colors.white.withValues(alpha: 0.8),
                   size: 24,
                 ),
               ),
@@ -280,7 +273,7 @@ class Footer extends StatelessWidget {
         child: Text(
           title,
           style: AppTheme.bodyMedium.copyWith(
-            color: Colors.white.withOpacity(0.8),
+            color: Colors.white.withValues(alpha: 0.8),
           ),
         ),
       ),
@@ -294,13 +287,13 @@ class Footer extends StatelessWidget {
         onTap: onTap,
         child: Row(
           children: [
-            Icon(icon, size: 16, color: Colors.white.withOpacity(0.6)),
+            Icon(icon, size: 16, color: Colors.white.withValues(alpha: 0.6)),
             const SizedBox(width: AppTheme.spacingS),
             Expanded(
               child: Text(
                 text,
                 style: AppTheme.bodySmall.copyWith(
-                  color: Colors.white.withOpacity(0.8),
+                  color: Colors.white.withValues(alpha: 0.8),
                 ),
               ),
             ),

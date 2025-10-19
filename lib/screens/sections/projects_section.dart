@@ -211,7 +211,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
         color: isSelected
             ? (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
             : (isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary)
-                .withOpacity(0.3),
+                .withValues(alpha: 0.3),
       ),
     );
   }
@@ -232,7 +232,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
               size: 64,
               color:
                   (isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary)
-                      .withOpacity(0.5),
+                      .withValues(alpha: 0.5),
             ),
             const SizedBox(height: AppTheme.spacingM),
             Text(
@@ -380,7 +380,7 @@ class _AllProjectsDialog extends StatelessWidget {
                           width: 50,
                           height: 50,
                           decoration: BoxDecoration(
-                            color: AppTheme.accentColor.withOpacity(0.1),
+                            color: AppTheme.accentColor.withValues(alpha: 0.1),
                             borderRadius: BorderRadius.circular(
                               AppTheme.radiusS,
                             ),

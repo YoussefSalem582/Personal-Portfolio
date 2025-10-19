@@ -1,0 +1,25 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        # Install Flutter
+        - git clone https://github.com/flutter/flutter.git -b stable --depth 1
+        - export PATH="$PATH:`pwd`/flutter/bin"
+        - flutter --version
+        - flutter config --enable-web
+        - flutter precache --web
+    build:
+      commands:
+        # Get dependencies
+        - flutter pub get
+        # Build for production
+        - flutter build web --release --web-renderer canvaskit
+  artifacts:
+    baseDirectory: build/web
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - flutter/**/*
+      - .pub-cache/**/*

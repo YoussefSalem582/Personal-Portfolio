@@ -1,4 +1,4 @@
-import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../config/supabase_config.dart';
 
@@ -37,7 +37,7 @@ class SupabaseService {
       }
       return null;
     } catch (e) {
-      print('Error uploading file: $e');
+      debugPrint('Error uploading file: $e');
       return null;
     }
   }
@@ -51,7 +51,7 @@ class SupabaseService {
       await client.storage.from(bucketName).remove([fileName]);
       return true;
     } catch (e) {
-      print('Error deleting file: $e');
+      debugPrint('Error deleting file: $e');
       return false;
     }
   }

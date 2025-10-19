@@ -39,7 +39,7 @@ class _ContactSectionState extends State<ContactSection> {
 
     return Container(
       width: double.infinity,
-      color: AppTheme.primaryColor.withOpacity(0.02),
+      color: AppTheme.primaryColor.withValues(alpha: 0.02),
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
         vertical: AppTheme.spacingXXL,
@@ -211,7 +211,7 @@ class _ContactSectionState extends State<ContactSection> {
             Container(
               padding: const EdgeInsets.all(AppTheme.spacingS),
               decoration: BoxDecoration(
-                color: AppTheme.accentColor.withOpacity(0.1),
+                color: AppTheme.accentColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(AppTheme.radiusS),
               ),
               child: Icon(icon, size: 20, color: AppTheme.accentColor),
@@ -259,7 +259,7 @@ class _ContactSectionState extends State<ContactSection> {
       label: Text(title),
       style: OutlinedButton.styleFrom(
         foregroundColor: AppTheme.accentColor,
-        side: BorderSide(color: AppTheme.accentColor.withOpacity(0.3)),
+        side: BorderSide(color: AppTheme.accentColor.withValues(alpha: 0.3)),
         padding: const EdgeInsets.symmetric(
           horizontal: AppTheme.spacingM,
           vertical: AppTheme.spacingS,
@@ -370,8 +370,8 @@ class _ContactSectionState extends State<ContactSection> {
                   padding: const EdgeInsets.all(AppTheme.spacingM),
                   decoration: BoxDecoration(
                     color: _submitStatus!.contains('Error')
-                        ? AppTheme.errorColor.withOpacity(0.1)
-                        : AppTheme.successColor.withOpacity(0.1),
+                        ? AppTheme.errorColor.withValues(alpha: 0.1)
+                        : AppTheme.successColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(AppTheme.radiusS),
                   ),
                   child: Row(
@@ -464,7 +464,7 @@ class _ContactSectionState extends State<ContactSection> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusS),
           borderSide: BorderSide(
-            color: AppTheme.textSecondary.withOpacity(0.3),
+            color: AppTheme.textSecondary.withValues(alpha: 0.3),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -474,7 +474,7 @@ class _ContactSectionState extends State<ContactSection> {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusS),
           borderSide: BorderSide(
-            color: AppTheme.textSecondary.withOpacity(0.3),
+            color: AppTheme.textSecondary.withValues(alpha: 0.3),
           ),
         ),
         errorBorder: OutlineInputBorder(

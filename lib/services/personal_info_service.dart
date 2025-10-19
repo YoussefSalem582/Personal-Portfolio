@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import '../config/supabase_config.dart';
 import 'supabase_service.dart';
@@ -14,7 +15,7 @@ class PersonalInfoService {
 
       return response;
     } catch (e) {
-      print('Error fetching personal info: $e');
+      debugPrint('Error fetching personal info: $e');
       return null;
     }
   }
@@ -25,7 +26,7 @@ class PersonalInfoService {
       await _client.from(tableName).update(info).eq('id', info['id']);
       return true;
     } catch (e) {
-      print('Error updating personal info: $e');
+      debugPrint('Error updating personal info: $e');
       return false;
     }
   }
@@ -40,7 +41,7 @@ class PersonalInfoService {
 
       return List<Map<String, dynamic>>.from(response);
     } catch (e) {
-      print('Error fetching social links: $e');
+      debugPrint('Error fetching social links: $e');
       return [];
     }
   }
@@ -66,7 +67,7 @@ class PersonalInfoService {
 
       return response;
     } catch (e) {
-      print('Error creating social link: $e');
+      debugPrint('Error creating social link: $e');
       return null;
     }
   }
@@ -80,7 +81,7 @@ class PersonalInfoService {
       await _client.from(socialLinksTableName).update(updates).eq('id', id);
       return true;
     } catch (e) {
-      print('Error updating social link: $e');
+      debugPrint('Error updating social link: $e');
       return false;
     }
   }
@@ -91,7 +92,7 @@ class PersonalInfoService {
       await _client.from(socialLinksTableName).delete().eq('id', id);
       return true;
     } catch (e) {
-      print('Error deleting social link: $e');
+      debugPrint('Error deleting social link: $e');
       return false;
     }
   }
