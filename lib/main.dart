@@ -1,40 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:get/get.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'theme/app_theme.dart';
 import 'bindings/initial_bindings.dart';
-import 'services/supabase_service.dart';
-import 'utils/supabase_test.dart';
 import 'routes/app_pages.dart';
-import 'config/supabase_config.dart';
 
+/// Main entry point - Static Portfolio App
+/// No backend dependencies - uses only local assets and data
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Load environment variables
-  try {
-    await dotenv.load(fileName: ".env");
-    debugPrint('✅ Environment variables loaded');
-  } catch (e) {
-    debugPrint('⚠️ .env file not found, using default configuration: $e');
-    // Continue with default values from SupabaseConfig
-  }
-
-  // Initialize Supabase
-  try {
-    await SupabaseService.initialize();
-    debugPrint('✅ Supabase initialized successfully');
-
-    // Test connection in debug mode
-    if (kDebugMode) {
-      await SupabaseTest.testConnection();
-    }
-  } catch (e) {
-    debugPrint('❌ Supabase initialization failed: $e');
-    // Continue with app initialization - will use static data
-  }
+  debugPrint('✅ Portfolio App starting with static data');
 
   runApp(const PortfolioApp());
 }
@@ -48,12 +24,11 @@ class PortfolioApp extends StatelessWidget {
     InitialBindings().dependencies();
 
     return GetMaterialApp(
-      title: SupabaseConfig.appName,
+      title: 'Youssef Salem Hassan - Portfolio',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode
-          .dark, // Use Get.find<ThemeController>().themeMode after binding
+      themeMode: ThemeMode.dark,
       initialBinding: InitialBindings(),
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,

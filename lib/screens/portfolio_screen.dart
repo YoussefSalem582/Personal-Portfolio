@@ -88,42 +88,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           return const SkeletonLoading();
         }
 
-        // Show error state
-        if (controller.error != null) {
-          return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  Icons.error_outline,
-                  size: 64,
-                  color: AppTheme.errorColor,
-                ),
-                const SizedBox(height: AppTheme.spacingL),
-                Text(
-                  'Error loading portfolio',
-                  style: AppTheme.headingMedium,
-                ),
-                const SizedBox(height: AppTheme.spacingM),
-                Text(
-                  controller.error!,
-                  style: AppTheme.bodyMedium.copyWith(
-                    color: AppTheme.textSecondary,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: AppTheme.spacingL),
-                ElevatedButton.icon(
-                  onPressed: () => controller.refresh(),
-                  icon: const Icon(Icons.refresh),
-                  label: const Text('Retry'),
-                ),
-              ],
-            ),
-          );
-        }
-
-        // Show main content
+        // Show main content (static data is always available)
         return Stack(
           children: [
             Column(

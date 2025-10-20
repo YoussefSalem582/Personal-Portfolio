@@ -4,7 +4,7 @@ import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/portfolio_data.dart';
 import '../../utils/url_helper.dart';
-import '../../widgets/project_card.dart';
+import '../../widgets/project_card_advanced.dart';
 
 class ProjectsSection extends StatefulWidget {
   const ProjectsSection({super.key});
@@ -254,9 +254,9 @@ class _ProjectsSectionState extends State<ProjectsSection> {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: columns,
-          crossAxisSpacing: AppTheme.spacingL,
-          mainAxisSpacing: AppTheme.spacingL,
-          childAspectRatio: 0.8,
+          crossAxisSpacing: 20,
+          mainAxisSpacing: 20,
+          childAspectRatio: 0.9,
         ),
         itemCount: filteredProjects.length,
         itemBuilder: (context, index) {
@@ -267,9 +267,10 @@ class _ProjectsSectionState extends State<ProjectsSection> {
             child: SlideAnimation(
               verticalOffset: 50.0,
               child: FadeInAnimation(
-                child: ProjectCard(
+                child: ProjectCardAdvanced(
                   project: filteredProjects[index],
                   isCompact: false,
+                  index: index,
                 ),
               ),
             ),

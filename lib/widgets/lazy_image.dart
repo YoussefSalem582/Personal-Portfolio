@@ -29,7 +29,6 @@ class LazyImage extends StatefulWidget {
 class _LazyImageState extends State<LazyImage>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
-  late Animation<double> _fadeAnimation;
   bool _isLoaded = false;
   bool _hasError = false;
 
@@ -40,13 +39,6 @@ class _LazyImageState extends State<LazyImage>
       duration: const Duration(milliseconds: 300),
       vsync: this,
     );
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    ));
   }
 
   @override
@@ -139,47 +131,59 @@ class _LazyImageState extends State<LazyImage>
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        // Show placeholder while loading
-        if (!_isLoaded && !_hasError) _buildPlaceholder(),
-
-        // Show error widget if image failed to load
-        if (_hasError) _buildErrorWidget(),
-
-        // Show image when loaded
-        if (!_hasError)
-          FadeTransition(
-            opacity: _fadeAnimation,
-            child: ClipRRect(
-              borderRadius: widget.borderRadius ?? BorderRadius.zero,
-              child: Image.asset(
-                widget.imageUrl,
-                width: widget.width,
-                height: widget.height,
-                fit: widget.fit,
-                frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
-                  if (wasSynchronouslyLoaded) {
-                    _onImageLoaded();
-                    return child;
-                  }
-                  if (frame != null && !_isLoaded) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      _onImageLoaded();
-                    });
-                  }
-                  return child;
-                },
-                errorBuilder: (context, error, stackTrace) {
+    return ClipRRect(
+      borderRadius: widget.borderRadius ?? BorderRadius.zero,
+      child: Stack(
+        fit: StackFit.passthrough,
+        children: [
+          // Show image immediately (asset images load synchronously)
+          Image.asset(
+            widget.imageUrl,
+            width: widget.width,
+            height: widget.height,
+            fit: widget.fit,
+            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+              if (wasSynchronouslyLoaded) {
+                // Asset images load synchronously, so mark as loaded immediately
+                if (!_isLoaded) {
                   WidgetsBinding.instance.addPostFrameCallback((_) {
-                    _onImageError();
+                    _onImageLoaded();
                   });
-                  return const SizedBox.shrink();
-                },
-              ),
-            ),
+                }
+                return child;
+              }
+              // For async loading (shouldn't happen with assets but keep as fallback)
+              if (frame != null) {
+                if (!_isLoaded) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    _onImageLoaded();
+                  });
+                }
+                return child;
+              }
+              return _buildPlaceholder();
+            },
+            errorBuilder: (context, error, stackTrace) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _onImageError();
+              });
+              return _buildErrorWidget();
+            },
           ),
-      ],
+
+          // Show placeholder overlay while loading (will fade out)
+          if (!_isLoaded && !_hasError)
+            FadeTransition(
+              opacity: Tween<double>(begin: 1.0, end: 0.0).animate(
+                CurvedAnimation(
+                  parent: _animationController,
+                  curve: Curves.easeOut,
+                ),
+              ),
+              child: _buildPlaceholder(),
+            ),
+        ],
+      ),
     );
   }
 }

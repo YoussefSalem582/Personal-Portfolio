@@ -6,38 +6,33 @@ import '../utils/responsive_helper.dart';
 import '../utils/url_helper.dart';
 import '../widgets/lazy_image.dart';
 
-class ProjectCaseStudy extends StatelessWidget {
+class ProjectCaseStudy extends StatefulWidget {
   final Project project;
 
   const ProjectCaseStudy({super.key, required this.project});
+
+  @override
+  State<ProjectCaseStudy> createState() => _ProjectCaseStudyState();
+}
+
+class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Scaffold(
-      backgroundColor:
-          isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
-      appBar: AppBar(
-        backgroundColor:
-            isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
-        elevation: 1,
-        title: Text(
-          project.title,
-          style: AppTheme.headingMedium.copyWith(
-            color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
-          ),
-        ),
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
-          ),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
-      body: SingleChildScrollView(
+    return Material(
+      color: isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
+      child: SingleChildScrollView(
         child: ConstrainedBox(
           constraints: BoxConstraints(
             maxWidth: ResponsiveHelper.getMaxWidth(screenWidth),
@@ -63,8 +58,8 @@ class ProjectCaseStudy extends StatelessWidget {
                     const SizedBox(height: AppTheme.spacingXXL),
                     _buildTechnicalDetails(),
                     const SizedBox(height: AppTheme.spacingXXL),
-                    if (project.galleryImages != null &&
-                        project.galleryImages!.isNotEmpty)
+                    if (widget.project.galleryImages != null &&
+                        widget.project.galleryImages!.isNotEmpty)
                       _buildGallerySection(),
                     const SizedBox(height: AppTheme.spacingXXL),
                     _buildChallengesAndSolutions(),
@@ -83,6 +78,9 @@ class ProjectCaseStudy extends StatelessWidget {
   }
 
   Widget _buildHeroSection(BuildContext context) {
+    // Calculate total pages based on gallery images + 1 for main hero
+    final totalPages = (widget.project.galleryImages?.length ?? 0) + 1;
+
     return Container(
       width: double.infinity,
       height: 400,
@@ -92,11 +90,11 @@ class ProjectCaseStudy extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          if (project.imageUrl != null)
+          if (widget.project.imageUrl != null)
             ClipRRect(
               borderRadius: BorderRadius.circular(AppTheme.radiusL),
               child: LazyImage(
-                imageUrl: project.imageUrl!,
+                imageUrl: widget.project.imageUrl!,
                 width: double.infinity,
                 height: 400,
                 fit: BoxFit.cover,
@@ -116,6 +114,36 @@ class ProjectCaseStudy extends StatelessWidget {
               ),
             ),
           ),
+
+          // Page indicator badge (like "1/8")
+          if (totalPages > 1)
+            Positioned(
+              top: 16,
+              right: 16,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.white.withOpacity(0.2),
+                    width: 1,
+                  ),
+                ),
+                child: Text(
+                  '${_currentPage + 1}/$totalPages',
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+
           Positioned(
             bottom: AppTheme.spacingXL,
             left: AppTheme.spacingXL,
@@ -124,7 +152,7 @@ class ProjectCaseStudy extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  project.title,
+                  widget.project.title,
                   style: AppTheme.headingLarge.copyWith(
                     color: Colors.white,
                     fontSize: 32,
@@ -132,7 +160,7 @@ class ProjectCaseStudy extends StatelessWidget {
                 ),
                 const SizedBox(height: AppTheme.spacingM),
                 Text(
-                  project.shortDescription,
+                  widget.project.shortDescription,
                   style: AppTheme.bodyLarge.copyWith(
                     color: Colors.white.withValues(alpha: 0.9),
                   ),
@@ -184,7 +212,7 @@ class ProjectCaseStudy extends StatelessWidget {
                           : AppTheme.textSecondary,
                     ),
                   ),
-                  if (project.id == 'emosense-app')
+                  if (widget.project.id == 'emosense-app')
                     _buildEmosenseFeatures(isDark),
                 ],
               ),
@@ -204,7 +232,7 @@ class ProjectCaseStudy extends StatelessWidget {
         Wrap(
           spacing: AppTheme.spacingM,
           runSpacing: AppTheme.spacingM,
-          children: project.technologies.map((tech) {
+          children: widget.project.technologies.map((tech) {
             return Container(
               padding: const EdgeInsets.symmetric(
                 horizontal: AppTheme.spacingM,
@@ -246,12 +274,12 @@ class ProjectCaseStudy extends StatelessWidget {
             mainAxisSpacing: AppTheme.spacingM,
             childAspectRatio: 0.7,
           ),
-          itemCount: project.galleryImages!.length,
+          itemCount: widget.project.galleryImages!.length,
           itemBuilder: (context, index) {
             return ClipRRect(
               borderRadius: BorderRadius.circular(AppTheme.radiusM),
               child: LazyImage(
-                imageUrl: project.galleryImages![index],
+                imageUrl: widget.project.galleryImages![index],
                 fit: BoxFit.cover,
                 borderRadius: BorderRadius.circular(AppTheme.radiusM),
               ),
@@ -352,33 +380,54 @@ class ProjectCaseStudy extends StatelessWidget {
   }
 
   Widget _buildActionButtons(BuildContext context) {
-    return Row(
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Column(
       children: [
-        if (project.githubUrl != null)
-          Expanded(
+        // View Case Study button (primary)
+        if (widget.project.liveUrl != null)
+          SizedBox(
+            width: double.infinity,
             child: ElevatedButton.icon(
-              onPressed: () => UrlHelper.launchURL(project.githubUrl!),
-              icon: const Icon(Icons.code),
-              label: const Text('View Source Code'),
+              onPressed: () => UrlHelper.launchURL(widget.project.liveUrl!),
+              icon: const Icon(Icons.description_outlined, size: 20),
+              label: const Text('View Case Study'),
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                backgroundColor: AppTheme.accentColor,
+                padding: const EdgeInsets.symmetric(vertical: 18),
+                backgroundColor:
+                    isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
                 foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                elevation: 0,
               ),
             ),
           ),
-        if (project.githubUrl != null && project.liveUrl != null)
-          const SizedBox(width: AppTheme.spacingM),
-        if (project.liveUrl != null)
-          Expanded(
+
+        if (widget.project.liveUrl != null && widget.project.githubUrl != null)
+          const SizedBox(height: AppTheme.spacingM),
+
+        // View Code button (secondary)
+        if (widget.project.githubUrl != null)
+          SizedBox(
+            width: double.infinity,
             child: OutlinedButton.icon(
-              onPressed: () => UrlHelper.launchURL(project.liveUrl!),
-              icon: const Icon(Icons.launch),
-              label: const Text('Live Demo'),
+              onPressed: () => UrlHelper.launchURL(widget.project.githubUrl!),
+              icon: const Icon(Icons.code_outlined, size: 20),
+              label: const Text('View Code'),
               style: OutlinedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                side: BorderSide(color: AppTheme.accentColor),
-                foregroundColor: AppTheme.accentColor,
+                padding: const EdgeInsets.symmetric(vertical: 18),
+                side: BorderSide(
+                  color:
+                      isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
+                  width: 2,
+                ),
+                foregroundColor:
+                    isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
             ),
           ),
@@ -388,7 +437,7 @@ class ProjectCaseStudy extends StatelessWidget {
 
   List<Map<String, String>> _getProjectChallenges() {
     // This could be dynamically generated based on project type/technologies
-    switch (project.id) {
+    switch (widget.project.id) {
       case 'emosense-app':
         return [
           {
@@ -432,7 +481,7 @@ class ProjectCaseStudy extends StatelessWidget {
   }
 
   List<String> _getProjectLessons() {
-    switch (project.id) {
+    switch (widget.project.id) {
       case 'emosense-app':
         return [
           'Deep understanding of machine learning model evaluation and performance metrics',
@@ -458,12 +507,12 @@ class ProjectCaseStudy extends StatelessWidget {
   }
 
   String _getProjectOverviewText() {
-    if (project.id == 'emosense-app') {
+    if (widget.project.id == 'emosense-app') {
       return 'Emosense represents the culmination of my academic journey, combining cutting-edge AI technology with real-world applications. '
           'This multimodal emotion recognition system demonstrates expertise in machine learning, computer vision, and audio processing. '
           'The project addresses critical needs in mental health monitoring and customer service enhancement through innovative technology.';
     }
-    return project.description;
+    return widget.project.description;
   }
 
   Widget _buildEmosenseFeatures(bool isDark) {

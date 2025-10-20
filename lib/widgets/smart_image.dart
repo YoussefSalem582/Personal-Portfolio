@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../theme/app_theme.dart';
 
-class SmartImage extends StatelessWidget {
+/// SmartImage widget - Simplified for static asset-only deployment
+/// Now only handles local asset images (no network/Supabase images)
+class SmartImage extends StatefulWidget {
   final String imageUrl;
   final double? width;
   final double? height;
@@ -23,12 +24,51 @@ class SmartImage extends StatelessWidget {
     this.borderRadius,
   });
 
-  bool get _isNetworkImage =>
-      imageUrl.startsWith('http') || imageUrl.startsWith('https');
+  @override
+  State<SmartImage> createState() => _SmartImageState();
+}
 
-  Widget _buildPlaceholder(BuildContext context) {
-    if (placeholder != null) {
-      return placeholder!;
+class _SmartImageState extends State<SmartImage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _animationController;
+  bool _isLoaded = false;
+  bool _hasError = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 300),
+      vsync: this,
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
+  }
+
+  void _onImageLoaded() {
+    if (mounted) {
+      setState(() {
+        _isLoaded = true;
+      });
+      _animationController.forward();
+    }
+  }
+
+  void _onImageError() {
+    if (mounted) {
+      setState(() {
+        _hasError = true;
+      });
+    }
+  }
+
+  Widget _buildPlaceholder() {
+    if (widget.placeholder != null) {
+      return widget.placeholder!;
     }
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -45,33 +85,33 @@ class SmartImage extends StatelessWidget {
         duration: const Duration(milliseconds: 1500),
       ),
       child: Container(
-        width: width,
-        height: height,
+        width: widget.width,
+        height: widget.height,
         decoration: BoxDecoration(
           color: isDark
               ? AppTheme.darkSurfaceColor.withValues(alpha: 0.2)
               : AppTheme.surfaceColor.withValues(alpha: 0.2),
-          borderRadius: borderRadius,
+          borderRadius: widget.borderRadius,
         ),
       ),
     );
   }
 
-  Widget _buildErrorWidget(BuildContext context) {
-    if (errorWidget != null) {
-      return errorWidget!;
+  Widget _buildErrorWidget() {
+    if (widget.errorWidget != null) {
+      return widget.errorWidget!;
     }
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      width: width,
-      height: height,
+      width: widget.width,
+      height: widget.height,
       decoration: BoxDecoration(
         color: isDark
             ? AppTheme.darkSurfaceColor.withValues(alpha: 0.1)
             : AppTheme.surfaceColor.withValues(alpha: 0.1),
-        borderRadius: borderRadius,
+        borderRadius: widget.borderRadius,
       ),
       child: Center(
         child: Column(
@@ -101,34 +141,60 @@ class SmartImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (_isNetworkImage) {
-      // Use CachedNetworkImage for network URLs (Supabase)
-      return ClipRRect(
-        borderRadius: borderRadius ?? BorderRadius.zero,
-        child: CachedNetworkImage(
-          imageUrl: imageUrl,
-          width: width,
-          height: height,
-          fit: fit,
-          placeholder: (context, url) => _buildPlaceholder(context),
-          errorWidget: (context, url, error) => _buildErrorWidget(context),
-          fadeInDuration: const Duration(milliseconds: 300),
-          fadeOutDuration: const Duration(milliseconds: 100),
-        ),
-      );
-    } else {
-      // Use Image.asset for local assets
-      return ClipRRect(
-        borderRadius: borderRadius ?? BorderRadius.zero,
-        child: Image.asset(
-          imageUrl,
-          width: width,
-          height: height,
-          fit: fit,
-          errorBuilder: (context, error, stackTrace) =>
-              _buildErrorWidget(context),
-        ),
-      );
-    }
+    // Only handle asset images (static deployment)
+    return ClipRRect(
+      borderRadius: widget.borderRadius ?? BorderRadius.zero,
+      child: Stack(
+        fit: StackFit.passthrough,
+        children: [
+          // Image loads immediately (asset images are synchronous)
+          Image.asset(
+            widget.imageUrl,
+            width: widget.width,
+            height: widget.height,
+            fit: widget.fit,
+            frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
+              if (wasSynchronouslyLoaded) {
+                // Asset images load synchronously
+                if (!_isLoaded) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    _onImageLoaded();
+                  });
+                }
+                return child;
+              }
+              // Fallback for async loading
+              if (frame != null) {
+                if (!_isLoaded) {
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    _onImageLoaded();
+                  });
+                }
+                return child;
+              }
+              return _buildPlaceholder();
+            },
+            errorBuilder: (context, error, stackTrace) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                _onImageError();
+              });
+              return _buildErrorWidget();
+            },
+          ),
+
+          // Placeholder overlay (fades out)
+          if (!_isLoaded && !_hasError)
+            FadeTransition(
+              opacity: Tween<double>(begin: 1.0, end: 0.0).animate(
+                CurvedAnimation(
+                  parent: _animationController,
+                  curve: Curves.easeOut,
+                ),
+              ),
+              child: _buildPlaceholder(),
+            ),
+        ],
+      ),
+    );
   }
 }

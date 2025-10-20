@@ -47,6 +47,10 @@ class _ProjectCardState extends State<ProjectCard>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    // Fixed dimensions - no flex!
+    final double cardHeight = widget.isCompact ? 190.0 : 220.0;
+    final double imageHeight = widget.isCompact ? 145.0 : 165.0;
+    final double contentHeight = cardHeight - imageHeight;
 
     return MouseRegion(
       onEnter: (_) {
@@ -64,7 +68,8 @@ class _ProjectCardState extends State<ProjectCard>
           return Transform.scale(
             scale: _scaleAnimation.value,
             child: Container(
-              height: widget.isCompact ? 260 : 360,
+              width: double.infinity,
+              height: cardHeight,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(AppTheme.radiusL),
                 boxShadow: [
@@ -98,19 +103,22 @@ class _ProjectCardState extends State<ProjectCard>
                 child: InkWell(
                   onTap: () => _showProjectDetails(context),
                   child: Container(
+                    width: double.infinity,
+                    height: cardHeight,
                     decoration: BoxDecoration(
                       gradient: isDark
                           ? AppTheme.darkCardGradient
                           : AppTheme.cardGradient,
                     ),
                     child: Column(
+                      mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Enhanced Project Image Section
-                        _buildImageSection(context, isDark),
+                        // Fixed Image Section
+                        _buildImageSection(context, isDark, imageHeight),
 
-                        // Enhanced Content Section
-                        _buildContentSection(isDark),
+                        // Fixed Content Section
+                        _buildContentSection(isDark, contentHeight),
                       ],
                     ),
                   ),
@@ -123,9 +131,10 @@ class _ProjectCardState extends State<ProjectCard>
     );
   }
 
-  Widget _buildImageSection(BuildContext context, bool isDark) {
+  Widget _buildImageSection(BuildContext context, bool isDark, double height) {
     return SizedBox(
-      height: widget.isCompact ? 140 : 200,
+      width: double.infinity,
+      height: height,
       child: Stack(
         fit: StackFit.expand,
         children: [
@@ -262,116 +271,125 @@ class _ProjectCardState extends State<ProjectCard>
     );
   }
 
-  Widget _buildContentSection(bool isDark) {
-    return Flexible(
+  Widget _buildContentSection(bool isDark, double height) {
+    return SizedBox(
+      width: double.infinity,
+      height: height,
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Title with icon
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    widget.project.title,
-                    style: AppTheme.headingSmall.copyWith(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: _isHovered
-                          ? (isDark
-                              ? AppTheme.darkAccentColor
-                              : AppTheme.accentColor)
-                          : (isDark
-                              ? AppTheme.darkTextPrimary
-                              : AppTheme.textPrimary),
+            // Title with icon - Fixed height
+            SizedBox(
+              height: 18.0,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      widget.project.title,
+                      style: AppTheme.headingSmall.copyWith(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: _isHovered
+                            ? (isDark
+                                ? AppTheme.darkAccentColor
+                                : AppTheme.accentColor)
+                            : (isDark
+                                ? AppTheme.darkTextPrimary
+                                : AppTheme.textPrimary),
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-                Icon(
-                  Icons.arrow_forward_rounded,
-                  size: 16,
-                  color: _isHovered
-                      ? (isDark
-                          ? AppTheme.darkAccentColor
-                          : AppTheme.accentColor)
-                      : (isDark
-                          ? AppTheme.darkTextSecondary
-                          : AppTheme.textSecondary),
-                ),
-              ],
+                  Icon(
+                    Icons.arrow_forward_rounded,
+                    size: 11,
+                    color: _isHovered
+                        ? (isDark
+                            ? AppTheme.darkAccentColor
+                            : AppTheme.accentColor)
+                        : (isDark
+                            ? AppTheme.darkTextSecondary
+                            : AppTheme.textSecondary),
+                  ),
+                ],
+              ),
             ),
 
-            const SizedBox(height: 6),
+            const SizedBox(height: 3),
 
-            // Description
-            Flexible(
+            // Description - Fixed height
+            SizedBox(
+              height: 13.0,
               child: Text(
                 widget.project.shortDescription,
                 style: AppTheme.bodyMedium.copyWith(
                   color: isDark
                       ? AppTheme.darkTextSecondary
                       : AppTheme.textSecondary,
-                  height: 1.3,
-                  fontSize: 12,
+                  height: 1.2,
+                  fontSize: 9,
                 ),
-                maxLines: 2,
+                maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
 
-            const SizedBox(height: 6),
+            const SizedBox(height: 3),
 
-            // Enhanced Technology Chips
-            Wrap(
-              spacing: 6,
-              runSpacing: 6,
-              children: widget.project.technologies
-                  .take(widget.isCompact ? 2 : 4)
-                  .map(
-                    (tech) => Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            (isDark
+            // Technology Chips - Fixed height
+            SizedBox(
+              height: 16.0,
+              child: Wrap(
+                spacing: 2,
+                runSpacing: 2,
+                children: widget.project.technologies
+                    .take(widget.isCompact ? 2 : 3)
+                    .map(
+                      (tech) => Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 2,
+                        ),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              (isDark
+                                      ? AppTheme.darkAccentColor
+                                      : AppTheme.accentColor)
+                                  .withValues(alpha: 0.15),
+                              (isDark
+                                      ? AppTheme.darkAccentColor
+                                      : AppTheme.accentColor)
+                                  .withValues(alpha: 0.05),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: (isDark
                                     ? AppTheme.darkAccentColor
                                     : AppTheme.accentColor)
-                                .withValues(alpha: 0.15),
-                            (isDark
-                                    ? AppTheme.darkAccentColor
-                                    : AppTheme.accentColor)
-                                .withValues(alpha: 0.05),
-                          ],
+                                .withValues(alpha: 0.3),
+                            width: 1,
+                          ),
                         ),
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(
-                          color: (isDark
-                                  ? AppTheme.darkAccentColor
-                                  : AppTheme.accentColor)
-                              .withValues(alpha: 0.3),
-                          width: 1,
-                        ),
-                      ),
-                      child: Text(
-                        tech,
-                        style: AppTheme.bodySmall.copyWith(
-                          color: isDark
-                              ? AppTheme.darkAccentColor
-                              : AppTheme.accentColor,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12,
+                        child: Text(
+                          tech,
+                          style: AppTheme.bodySmall.copyWith(
+                            color: isDark
+                                ? AppTheme.darkAccentColor
+                                : AppTheme.accentColor,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 8,
+                          ),
                         ),
                       ),
-                    ),
-                  )
-                  .toList(),
+                    )
+                    .toList(),
+              ),
             ),
           ],
         ),
@@ -629,6 +647,10 @@ class ProjectDetailsDialog extends StatelessWidget {
 
     if (images.isEmpty) return const SizedBox.shrink();
 
+    // Controller for PageView navigation
+    final PageController pageController = PageController();
+    final ValueNotifier<int> currentPageNotifier = ValueNotifier<int>(0);
+
     return Container(
       width: double.infinity,
       height: 350,
@@ -646,49 +668,170 @@ class ProjectDetailsDialog extends StatelessWidget {
                 errorWidget: _buildImagePlaceholder(),
               ),
             )
-          : PageView.builder(
-              itemCount: images.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(AppTheme.radiusM),
-                    child: Stack(
-                      children: [
-                        LazyImage(
-                          imageUrl: images[index],
-                          fit: BoxFit.contain,
-                          width: double.infinity,
-                          borderRadius: BorderRadius.circular(AppTheme.radiusM),
-                          errorWidget: _buildImagePlaceholder(),
-                        ),
-                        // Image counter overlay
-                        Positioned(
-                          top: 8,
-                          right: 8,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
+          : Stack(
+              children: [
+                // PageView with images
+                PageView.builder(
+                  controller: pageController,
+                  itemCount: images.length,
+                  onPageChanged: (index) {
+                    currentPageNotifier.value = index;
+                  },
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 4),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                        child: Stack(
+                          children: [
+                            LazyImage(
+                              imageUrl: images[index],
+                              fit: BoxFit.contain,
+                              width: double.infinity,
+                              borderRadius:
+                                  BorderRadius.circular(AppTheme.radiusM),
+                              errorWidget: _buildImagePlaceholder(),
                             ),
-                            decoration: BoxDecoration(
-                              color: Colors.black.withValues(alpha: 0.7),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Text(
-                              '${index + 1}/${images.length}',
-                              style: AppTheme.bodySmall.copyWith(
-                                color: Colors.white,
+                            // Image counter overlay
+                            Positioned(
+                              top: 8,
+                              right: 8,
+                              child: Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.black.withValues(alpha: 0.7),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Text(
+                                  '${index + 1}/${images.length}',
+                                  style: AppTheme.bodySmall.copyWith(
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+                // Previous button (left arrow)
+                ValueListenableBuilder<int>(
+                  valueListenable: currentPageNotifier,
+                  builder: (context, currentPage, _) {
+                    if (currentPage == 0) return const SizedBox.shrink();
+                    return Positioned(
+                      left: 16,
+                      top: 0,
+                      bottom: 0,
+                      child: Center(
+                        child: _buildNavigationButton(
+                          icon: Icons.arrow_back_ios_new,
+                          onPressed: () {
+                            pageController.previousPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+                // Next button (right arrow)
+                ValueListenableBuilder<int>(
+                  valueListenable: currentPageNotifier,
+                  builder: (context, currentPage, _) {
+                    if (currentPage == images.length - 1) {
+                      return const SizedBox.shrink();
+                    }
+                    return Positioned(
+                      right: 16,
+                      top: 0,
+                      bottom: 0,
+                      child: Center(
+                        child: _buildNavigationButton(
+                          icon: Icons.arrow_forward_ios,
+                          onPressed: () {
+                            pageController.nextPage(
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+
+                // Page indicator dots (bottom center)
+                Positioned(
+                  bottom: 16,
+                  left: 0,
+                  right: 0,
+                  child: ValueListenableBuilder<int>(
+                    valueListenable: currentPageNotifier,
+                    builder: (context, currentPage, _) {
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(
+                          images.length,
+                          (index) => Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
+                            width: currentPage == index ? 24 : 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color: currentPage == index
+                                  ? AppTheme.accentColor
+                                  : Colors.white.withValues(alpha: 0.5),
+                              borderRadius: BorderRadius.circular(4),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
+                ),
+              ],
             ),
+    );
+  }
+
+  Widget _buildNavigationButton({
+    required IconData icon,
+    required VoidCallback onPressed,
+  }) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            color: Colors.black.withValues(alpha: 0.6),
+            shape: BoxShape.circle,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.3),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 20,
+          ),
+        ),
+      ),
     );
   }
 
