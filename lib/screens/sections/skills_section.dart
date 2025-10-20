@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/portfolio_data.dart';
 import '../../models/skill.dart';
 
-class SkillsSection extends StatelessWidget {
+class SkillsSection extends StatefulWidget {
   const SkillsSection({super.key});
+
+  @override
+  State<SkillsSection> createState() => _SkillsSectionState();
+}
+
+class _SkillsSectionState extends State<SkillsSection> {
+  String? _selectedCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -63,78 +69,57 @@ class SkillsSection extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
 
-            const SizedBox(height: AppTheme.spacingXL),
+            const SizedBox(height: AppTheme.spacingXXL),
 
-            // Skills categories
-            if (isMobile)
-              _buildMobileSkillsLayout()
-            else
-              _buildDesktopSkillsLayout(),
+            // Skills categories - Simplified layout
+            _buildSkillsGrid(isDark, isMobile),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildDesktopSkillsLayout() {
-    return AnimationLimiter(
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: AppTheme.spacingXL,
-          mainAxisSpacing: AppTheme.spacingXL,
-          childAspectRatio: 1.2,
-        ),
-        itemCount: PortfolioData.skills.length,
-        itemBuilder: (context, index) {
-          return AnimationConfiguration.staggeredGrid(
-            position: index,
-            duration: const Duration(milliseconds: 500),
-            columnCount: 2,
-            child: SlideAnimation(
-              verticalOffset: 50.0,
-              child: FadeInAnimation(
-                child: _buildSkillCategory(PortfolioData.skills[index]),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildMobileSkillsLayout() {
-    return AnimationLimiter(
-      child: Column(
-        children: AnimationConfiguration.toStaggeredList(
-          duration: const Duration(milliseconds: 500),
-          childAnimationBuilder: (widget) => SlideAnimation(
-            verticalOffset: 50.0,
-            child: FadeInAnimation(child: widget),
+  Widget _buildSkillsGrid(bool isDark, bool isMobile) {
+    return Wrap(
+      spacing: AppTheme.spacingL,
+      runSpacing: AppTheme.spacingL,
+      alignment: WrapAlignment.center,
+      children: PortfolioData.skills.map((category) {
+        return ConstrainedBox(
+          constraints: BoxConstraints(
+            minWidth: isMobile ? double.infinity : 400,
+            maxWidth: isMobile ? double.infinity : 500,
           ),
-          children: PortfolioData.skills
-              .map(
-                (category) => Padding(
-                  padding: const EdgeInsets.only(bottom: AppTheme.spacingL),
-                  child: _buildSkillCategory(category),
-                ),
-              )
-              .toList(),
-        ),
-      ),
+          child: _buildSkillCategory(category, isDark),
+        );
+      }).toList(),
     );
   }
 
-  Widget _buildSkillCategory(SkillCategory category) {
-    return Builder(
-      builder: (context) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
-
-        return Card(
-          elevation: 4,
-          shadowColor: Colors.black12,
+  Widget _buildSkillCategory(SkillCategory category, bool isDark) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 200),
+      child: Card(
+        elevation: _selectedCategory == category.name ? 8 : 2,
+        shadowColor: isDark ? Colors.black38 : Colors.black12,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppTheme.radiusL),
+          side: _selectedCategory == category.name
+              ? BorderSide(
+                  color:
+                      isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
+                  width: 2,
+                )
+              : BorderSide.none,
+        ),
+        child: InkWell(
+          onTap: () {
+            setState(() {
+              _selectedCategory =
+                  _selectedCategory == category.name ? null : category.name;
+            });
+          },
+          borderRadius: BorderRadius.circular(AppTheme.radiusL),
           child: Container(
             padding: const EdgeInsets.all(AppTheme.spacingL),
             decoration: BoxDecoration(
@@ -144,134 +129,195 @@ class SkillsSection extends StatelessWidget {
                 end: Alignment.bottomRight,
                 colors: isDark
                     ? [
+                        AppTheme.darkCardColor,
                         AppTheme.darkSurfaceColor,
-                        AppTheme.darkAccentColor.withValues(alpha: 0.02),
                       ]
                     : [
                         AppTheme.surfaceColor,
-                        AppTheme.accentColor.withValues(alpha: 0.02),
+                        AppTheme.backgroundColor,
                       ],
               ),
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                // Category title
+                // Category header
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(AppTheme.spacingS),
+                      padding: const EdgeInsets.all(AppTheme.spacingM),
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-                            : AppTheme.accentColor.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(AppTheme.radiusS),
+                        gradient: isDark
+                            ? AppTheme.darkPrimaryGradient
+                            : AppTheme.primaryGradient,
+                        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                        boxShadow: [
+                          BoxShadow(
+                            color: (isDark
+                                    ? AppTheme.darkAccentColor
+                                    : AppTheme.accentColor)
+                                .withValues(alpha: 0.3),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
                       ),
                       child: Icon(
                         _getCategoryIcon(category.name),
                         size: 24,
-                        color: isDark
-                            ? AppTheme.darkAccentColor
-                            : AppTheme.accentColor,
+                        color: Colors.white,
                       ),
                     ),
                     const SizedBox(width: AppTheme.spacingM),
                     Expanded(
-                      child: Text(
-                        category.name,
-                        style: AppTheme.headingSmall.copyWith(
-                          fontSize: 18,
-                          color: isDark
-                              ? AppTheme.darkTextPrimary
-                              : AppTheme.textPrimary,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            category.name,
+                            style: AppTheme.headingSmall.copyWith(
+                              fontSize: 18,
+                              color: isDark
+                                  ? AppTheme.darkTextPrimary
+                                  : AppTheme.textPrimary,
+                            ),
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            '${category.skills.length} skills',
+                            style: AppTheme.bodySmall.copyWith(
+                              color: isDark
+                                  ? AppTheme.darkTextSecondary
+                                  : AppTheme.textSecondary,
+                            ),
+                          ),
+                        ],
                       ),
+                    ),
+                    Icon(
+                      _selectedCategory == category.name
+                          ? Icons.expand_less
+                          : Icons.expand_more,
+                      color: isDark
+                          ? AppTheme.darkTextSecondary
+                          : AppTheme.textSecondary,
                     ),
                   ],
                 ),
 
-                const SizedBox(height: AppTheme.spacingL),
-
-                // Skills list
-                Expanded(
-                  child: Column(
-                    children: category.skills
-                        .map(
-                          (skill) => Padding(
-                            padding: const EdgeInsets.only(
-                              bottom: AppTheme.spacingM,
-                            ),
-                            child: _buildSkillItem(skill),
-                          ),
-                        )
-                        .toList(),
+                // Expandable skills list
+                AnimatedCrossFade(
+                  duration: const Duration(milliseconds: 300),
+                  crossFadeState: _selectedCategory == category.name
+                      ? CrossFadeState.showSecond
+                      : CrossFadeState.showFirst,
+                  firstChild: const SizedBox.shrink(),
+                  secondChild: Column(
+                    children: [
+                      const SizedBox(height: AppTheme.spacingL),
+                      const Divider(),
+                      const SizedBox(height: AppTheme.spacingM),
+                      ...category.skills.map(
+                        (skill) => Padding(
+                          padding:
+                              const EdgeInsets.only(bottom: AppTheme.spacingM),
+                          child: _buildSkillItem(skill, isDark),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 
-  Widget _buildSkillItem(Skill skill) {
-    return Builder(
-      builder: (context) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
+  Widget _buildSkillItem(Skill skill, bool isDark) {
+    final proficiencyPercent = (skill.proficiency / 5.0 * 100).toInt();
+    final proficiencyColor = _getProficiencyColor(skill.proficiency);
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Text(
-                    skill.name,
-                    style: AppTheme.bodyMedium.copyWith(
-                      fontWeight: FontWeight.w600,
-                      color: isDark
-                          ? AppTheme.darkTextPrimary
-                          : AppTheme.textPrimary,
-                    ),
+    return Container(
+      padding: const EdgeInsets.all(AppTheme.spacingM),
+      decoration: BoxDecoration(
+        color: isDark
+            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.5)
+            : Colors.white.withValues(alpha: 0.5),
+        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+        border: Border.all(
+          color: isDark
+              ? AppTheme.darkTextSecondary.withValues(alpha: 0.1)
+              : AppTheme.textSecondary.withValues(alpha: 0.1),
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
+                  skill.name,
+                  style: AppTheme.bodyMedium.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: isDark
+                        ? AppTheme.darkTextPrimary
+                        : AppTheme.textPrimary,
                   ),
                 ),
-                _buildProficiencyStars(skill.proficiency),
-              ],
-            ),
-
-            const SizedBox(height: AppTheme.spacingS),
-
-            // Progress bar
-            LinearProgressIndicator(
-              value: skill.proficiency / 5.0,
-              backgroundColor: isDark
-                  ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-                  : AppTheme.accentColor.withValues(alpha: 0.1),
-              valueColor: AlwaysStoppedAnimation<Color>(
-                _getProficiencyColor(skill.proficiency),
               ),
-              minHeight: 4,
-            ),
-          ],
-        );
-      },
-    );
-  }
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppTheme.spacingS,
+                  vertical: 2,
+                ),
+                decoration: BoxDecoration(
+                  color: proficiencyColor.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(
+                    color: proficiencyColor.withValues(alpha: 0.3),
+                  ),
+                ),
+                child: Text(
+                  '$proficiencyPercent%',
+                  style: AppTheme.bodySmall.copyWith(
+                    fontWeight: FontWeight.w600,
+                    color: proficiencyColor,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+            ],
+          ),
 
-  Widget _buildProficiencyStars(int proficiency) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: List.generate(5, (index) {
-        return Icon(
-          index < proficiency ? Icons.star : Icons.star_border,
-          size: 16,
-          color: index < proficiency
-              ? _getProficiencyColor(proficiency)
-              : AppTheme.textSecondary.withValues(alpha: 0.3),
-        );
-      }),
+          const SizedBox(height: AppTheme.spacingS),
+
+          // Modern progress bar
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: TweenAnimationBuilder<double>(
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.easeOutCubic,
+              tween: Tween<double>(
+                begin: 0.0,
+                end: skill.proficiency / 5.0,
+              ),
+              builder: (context, value, _) => LinearProgressIndicator(
+                value: value,
+                backgroundColor: isDark
+                    ? AppTheme.darkTextSecondary.withValues(alpha: 0.1)
+                    : AppTheme.textSecondary.withValues(alpha: 0.1),
+                valueColor: AlwaysStoppedAnimation<Color>(proficiencyColor),
+                minHeight: 6,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 

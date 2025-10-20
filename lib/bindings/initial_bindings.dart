@@ -9,9 +9,9 @@ import '../controllers/portfolio_controller.dart';
 class InitialBindings extends Bindings {
   @override
   void dependencies() {
-    // Lazy load controllers (only instantiated when first used)
-    Get.lazyPut<ThemeController>(() => ThemeController());
-    Get.lazyPut<PortfolioController>(() => PortfolioController());
+    // Put controllers permanently (persist across routes)
+    Get.put<ThemeController>(ThemeController(), permanent: true);
+    Get.put<PortfolioController>(PortfolioController(), permanent: true);
 
     // Admin controller disabled for static deployment
     // Uncomment to enable admin dashboard:

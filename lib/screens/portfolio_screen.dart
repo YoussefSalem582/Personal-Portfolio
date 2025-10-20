@@ -12,6 +12,7 @@ import 'sections/certificates_section.dart';
 import 'sections/contact_section.dart';
 import '../widgets/footer.dart';
 import '../widgets/skeleton_loading.dart';
+import '../widgets/lazy_load_widget.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -72,10 +73,12 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     final controller = Get.find<PortfolioController>();
 
     return Scaffold(
-      backgroundColor: AppTheme.backgroundColor,
+      backgroundColor:
+          isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
       drawer: isMobile
           ? AppNavigation(
               onItemSelected: _scrollToSection,
@@ -88,48 +91,78 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           return const SkeletonLoading();
         }
 
-        // Show main content (static data is always available)
-        return Stack(
+        // Show main content with optimized Slivers for better performance
+        return Column(
           children: [
-            Column(
-              children: [
-                // Navigation
-                AppNavigation(
-                  onItemSelected: _scrollToSection,
-                  currentIndex: _currentSection,
+            // Fixed Navigation Bar
+            AppNavigation(
+              onItemSelected: _scrollToSection,
+              currentIndex: _currentSection,
+            ),
+
+            // Scrollable Content with Optimized Slivers
+            Expanded(
+              child: CustomScrollView(
+                controller: _scrollController,
+                physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics(),
                 ),
+                cacheExtent:
+                    1000, // Cache 1000 pixels ahead for smooth scrolling
+                slivers: [
+                  // Hero Section - Always visible, no lazy loading
+                  SliverToBoxAdapter(
+                    child: HeroSection(key: _sectionKeys[0]),
+                  ),
 
-                // Content
-                Expanded(
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    child: Column(
-                      children: [
-                        // Hero Section
-                        HeroSection(key: _sectionKeys[0]),
-
-                        // About Section
-                        AboutSection(key: _sectionKeys[1]),
-
-                        // Projects Section
-                        ProjectsSection(key: _sectionKeys[2]),
-
-                        // Skills Section
-                        SkillsSection(key: _sectionKeys[3]),
-
-                        // Certificates Section
-                        CertificatesSection(key: _sectionKeys[4]),
-
-                        // Contact Section
-                        ContactSection(key: _sectionKeys[5]),
-
-                        // Footer
-                        const Footer(),
-                      ],
+                  // About Section - Lazy loaded
+                  SliverToBoxAdapter(
+                    child: LazyLoadWidget(
+                      placeholder: const SectionPlaceholder(height: 600),
+                      child: AboutSection(key: _sectionKeys[1]),
                     ),
                   ),
-                ),
-              ],
+
+                  // Projects Section - Lazy loaded with higher threshold
+                  SliverToBoxAdapter(
+                    child: LazyLoadWidget(
+                      placeholder: const SectionPlaceholder(height: 800),
+                      visibilityThreshold: 0.05,
+                      child: ProjectsSection(key: _sectionKeys[2]),
+                    ),
+                  ),
+
+                  // Skills Section - Lazy loaded
+                  SliverToBoxAdapter(
+                    child: LazyLoadWidget(
+                      placeholder: const SectionPlaceholder(height: 500),
+                      child: SkillsSection(key: _sectionKeys[3]),
+                    ),
+                  ),
+
+                  // Certificates Section - Lazy loaded (image heavy)
+                  SliverToBoxAdapter(
+                    child: LazyLoadWidget(
+                      placeholder: const SectionPlaceholder(height: 700),
+                      visibilityThreshold: 0.05,
+                      child: CertificatesSection(key: _sectionKeys[4]),
+                    ),
+                  ),
+
+                  // Contact Section - Lazy loaded
+                  SliverToBoxAdapter(
+                    child: LazyLoadWidget(
+                      placeholder: const SectionPlaceholder(height: 600),
+                      child: ContactSection(key: _sectionKeys[5]),
+                    ),
+                  ),
+
+                  // Footer - Always load
+                  const SliverToBoxAdapter(
+                    child: Footer(),
+                  ),
+                ],
+              ),
             ),
           ],
         );
@@ -139,8 +172,13 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       floatingActionButton: isMobile
           ? FloatingActionButton(
               onPressed: () => _scrollToSection(5), // Go to contact
-              backgroundColor: AppTheme.accentColor,
-              child: const Icon(Icons.message, color: AppTheme.surfaceColor),
+              backgroundColor:
+                  isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
+              child: Icon(
+                Icons.message,
+                color:
+                    isDark ? AppTheme.darkTextPrimary : AppTheme.surfaceColor,
+              ),
             )
           : null,
     );

@@ -28,144 +28,207 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final isMobile = ResponsiveHelper.isMobile(screenWidth);
 
-    return Material(
-      color: isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
-      child: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: ResponsiveHelper.getMaxWidth(screenWidth),
-          ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
-              vertical: AppTheme.spacingXL,
-            ),
-            child: AnimationLimiter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: AnimationConfiguration.toStaggeredList(
-                  duration: const Duration(milliseconds: 375),
-                  childAnimationBuilder: (widget) => SlideAnimation(
-                    verticalOffset: 50.0,
-                    child: FadeInAnimation(child: widget),
+    return Scaffold(
+      backgroundColor:
+          isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                // Hero section (full viewport height)
+                _buildHeroSection(context, screenHeight),
+
+                // Content section
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: ResponsiveHelper.getMaxWidth(screenWidth),
                   ),
-                  children: [
-                    _buildHeroSection(context),
-                    const SizedBox(height: AppTheme.spacingXXL),
-                    _buildProjectOverview(),
-                    const SizedBox(height: AppTheme.spacingXXL),
-                    _buildTechnicalDetails(),
-                    const SizedBox(height: AppTheme.spacingXXL),
-                    if (widget.project.galleryImages != null &&
-                        widget.project.galleryImages!.isNotEmpty)
-                      _buildGallerySection(),
-                    const SizedBox(height: AppTheme.spacingXXL),
-                    _buildChallengesAndSolutions(),
-                    const SizedBox(height: AppTheme.spacingXXL),
-                    _buildLessonsLearned(),
-                    const SizedBox(height: AppTheme.spacingXXL),
-                    _buildActionButtons(context),
-                  ],
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal:
+                          ResponsiveHelper.getHorizontalPadding(screenWidth),
+                      vertical: AppTheme.spacingXL,
+                    ),
+                    child: AnimationLimiter(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: AnimationConfiguration.toStaggeredList(
+                          duration: const Duration(milliseconds: 375),
+                          childAnimationBuilder: (widget) => SlideAnimation(
+                            verticalOffset: 50.0,
+                            child: FadeInAnimation(child: widget),
+                          ),
+                          children: [
+                            _buildProjectOverview(),
+                            const SizedBox(height: AppTheme.spacingXXL),
+                            _buildTechnicalDetails(),
+                            const SizedBox(height: AppTheme.spacingXXL),
+                            if (widget.project.galleryImages != null &&
+                                widget.project.galleryImages!.isNotEmpty)
+                              _buildGallerySection(isMobile),
+                            if (widget.project.galleryImages != null &&
+                                widget.project.galleryImages!.isNotEmpty)
+                              const SizedBox(height: AppTheme.spacingXXL),
+                            _buildChallengesAndSolutions(),
+                            const SizedBox(height: AppTheme.spacingXXL),
+                            _buildLessonsLearned(),
+                            const SizedBox(height: AppTheme.spacingXXL),
+                            _buildActionButtons(context),
+                            const SizedBox(height: AppTheme.spacingXXL),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Back button overlay
+          Positioned(
+            top: 16,
+            left: 16,
+            child: SafeArea(
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  onTap: () => Navigator.of(context).pop(),
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.6),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.2),
+                        width: 1,
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
 
-  Widget _buildHeroSection(BuildContext context) {
+  Widget _buildHeroSection(BuildContext context, double screenHeight) {
     // Calculate total pages based on gallery images + 1 for main hero
     final totalPages = (widget.project.galleryImages?.length ?? 0) + 1;
+    final heroHeight = screenHeight * 0.5; // 50% of screen height, max 500px
+    final clampedHeight = heroHeight.clamp(350.0, 500.0);
 
     return Container(
       width: double.infinity,
-      height: 400,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppTheme.radiusL),
+      height: clampedHeight,
+      decoration: const BoxDecoration(
         gradient: AppTheme.primaryGradient,
       ),
       child: Stack(
         children: [
           if (widget.project.imageUrl != null)
-            ClipRRect(
-              borderRadius: BorderRadius.circular(AppTheme.radiusL),
-              child: LazyImage(
-                imageUrl: widget.project.imageUrl!,
-                width: double.infinity,
-                height: 400,
-                fit: BoxFit.cover,
-                borderRadius: BorderRadius.circular(AppTheme.radiusL),
-              ),
+            LazyImage(
+              imageUrl: widget.project.imageUrl!,
+              width: double.infinity,
+              height: clampedHeight,
+              fit: BoxFit.contain,
             ),
           Container(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppTheme.radiusL),
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.transparent,
+                  Colors.black.withValues(alpha: 0.3),
                   Colors.black.withValues(alpha: 0.7),
                 ],
               ),
             ),
           ),
 
-          // Page indicator badge (like "1/8")
+          // Page indicator badge (like "1/9")
           if (totalPages > 1)
             Positioned(
               top: 16,
               right: 16,
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 8,
-                ),
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Colors.white.withOpacity(0.2),
-                    width: 1,
+              child: SafeArea(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
                   ),
-                ),
-                child: Text(
-                  '${_currentPage + 1}/$totalPages',
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.2),
+                      width: 1,
+                    ),
+                  ),
+                  child: Text(
+                    '${_currentPage + 1}/$totalPages',
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
             ),
 
           Positioned(
-            bottom: AppTheme.spacingXL,
+            bottom: AppTheme.spacingXXL,
             left: AppTheme.spacingXL,
             right: AppTheme.spacingXL,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.project.title,
-                  style: AppTheme.headingLarge.copyWith(
-                    color: Colors.white,
-                    fontSize: 32,
+            child: SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    widget.project.title,
+                    style: AppTheme.headingLarge.copyWith(
+                      color: Colors.white,
+                      fontSize: 36,
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black.withOpacity(0.5),
+                          blurRadius: 10,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(height: AppTheme.spacingM),
-                Text(
-                  widget.project.shortDescription,
-                  style: AppTheme.bodyLarge.copyWith(
-                    color: Colors.white.withValues(alpha: 0.9),
+                  const SizedBox(height: AppTheme.spacingM),
+                  Text(
+                    widget.project.shortDescription,
+                    style: AppTheme.bodyLarge.copyWith(
+                      color: Colors.white.withValues(alpha: 0.95),
+                      fontSize: 16,
+                      shadows: [
+                        Shadow(
+                          color: Colors.black.withOpacity(0.5),
+                          blurRadius: 8,
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
@@ -259,7 +322,7 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
     );
   }
 
-  Widget _buildGallerySection() {
+  Widget _buildGallerySection(bool isMobile) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -268,11 +331,11 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
         GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: isMobile ? 2 : 3,
             crossAxisSpacing: AppTheme.spacingM,
             mainAxisSpacing: AppTheme.spacingM,
-            childAspectRatio: 0.7,
+            childAspectRatio: 0.65,
           ),
           itemCount: widget.project.galleryImages!.length,
           itemBuilder: (context, index) {
@@ -280,7 +343,7 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
               borderRadius: BorderRadius.circular(AppTheme.radiusM),
               child: LazyImage(
                 imageUrl: widget.project.galleryImages![index],
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 borderRadius: BorderRadius.circular(AppTheme.radiusM),
               ),
             );

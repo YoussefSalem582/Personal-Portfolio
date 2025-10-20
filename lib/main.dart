@@ -28,7 +28,7 @@ class PortfolioApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.system, // Use system theme by default
       initialBinding: InitialBindings(),
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,

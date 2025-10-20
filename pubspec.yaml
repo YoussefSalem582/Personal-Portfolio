@@ -61,6 +61,10 @@ dependencies:
   # Internationalization
   intl: ^0.19.0
   skeletonizer: ^2.1.0+1
+  
+  # Performance optimization
+  visibility_detector: ^0.4.0+2
+  cached_network_image: ^3.3.1
 
 dev_dependencies:
   flutter_test:
@@ -101,6 +105,12 @@ flutter:
     - assets/images/projects/app_images/QuoteHub/
     - assets/images/projects/app_pdf/
     - assets/icons/
+    # Explicit SVG icons for better web compatibility
+    - assets/icons/github_icon.svg
+    - assets/icons/linkedin_icon.svg
+    - assets/icons/youtube_icon.svg
+    - assets/icons/upwork_icon.svg
+    - assets/icons/cv.gif
     - assets/images/certificates/
     - assets/images/certificates/photos/
 

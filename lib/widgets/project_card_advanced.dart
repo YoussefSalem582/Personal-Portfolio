@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import '../theme/app_theme.dart';
 import '../models/project.dart';
+import '../routes/app_routes.dart';
 import 'lazy_image.dart';
 import 'project_card.dart'; // Import for ProjectDetailsDialog
 
@@ -602,8 +605,8 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                   if (hasLiveDemo && hasGithub) const SizedBox(width: 16),
                   if (hasGithub)
                     _buildStatItem(
-                      icon: Icons.code_rounded,
-                      label: 'Open',
+                      svgAsset: 'assets/icons/github_icon.svg',
+                      label: 'GitHub',
                       isDark: isDark,
                       color: Colors.purple,
                     ),
@@ -617,7 +620,8 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
   }
 
   Widget _buildStatItem({
-    required IconData icon,
+    IconData? icon,
+    String? svgAsset,
     required String label,
     required bool isDark,
     Color? color,
@@ -646,11 +650,21 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(
-                    icon,
-                    size: 14,
-                    color: effectiveColor,
-                  ),
+                  if (svgAsset != null)
+                    SizedBox(
+                      width: 14,
+                      height: 14,
+                      child: SvgPicture.asset(
+                        svgAsset,
+                        fit: BoxFit.contain,
+                      ),
+                    )
+                  else if (icon != null)
+                    Icon(
+                      icon,
+                      size: 14,
+                      color: effectiveColor,
+                    ),
                   const SizedBox(width: 4),
                   Text(
                     label,
@@ -914,10 +928,26 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
   }
 
   void _showProjectDetails(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => ProjectDetailsDialog(project: widget.project),
-    );
+    debugPrint('🎯 Project tapped: ${widget.project.title}');
+    debugPrint('📋 Project ID: ${widget.project.id}');
+    debugPrint('⭐ Is Featured: ${widget.project.isFeatured}');
+
+    // Navigate to case study page for featured projects
+    if (widget.project.isFeatured) {
+      // Use the helper method to construct the full route
+      final route = AppRoutes.getProjectRoute(widget.project.id);
+      debugPrint('🚀 Navigating to: $route');
+
+      // Navigate directly to the constructed route (not using parameters)
+      Get.toNamed(route);
+    } else {
+      debugPrint('💬 Opening dialog for non-featured project');
+      // Show dialog for non-featured projects
+      showDialog(
+        context: context,
+        builder: (context) => ProjectDetailsDialog(project: widget.project),
+      );
+    }
   }
 }
 

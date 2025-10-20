@@ -365,7 +365,7 @@ class AboutSection extends StatelessWidget {
               Border.all(color: AppTheme.accentColor.withValues(alpha: 0.2)),
         ),
         child: Icon(
-          _getSocialIcon(social.name),
+          _getIconForPlatform(social.name),
           color: AppTheme.accentColor,
           size: 24,
         ),
@@ -373,16 +373,16 @@ class AboutSection extends StatelessWidget {
     );
   }
 
-  IconData _getSocialIcon(String name) {
+  IconData _getIconForPlatform(String name) {
     switch (name.toLowerCase()) {
       case 'github':
-        return Icons.code;
+        return Icons.code; // GitHub icon
       case 'linkedin':
-        return Icons.business;
-      case 'portfolio':
-        return Icons.web;
-      case 'mostaql':
-        return Icons.work;
+        return Icons.work; // LinkedIn icon
+      case 'youtube':
+        return Icons.play_arrow; // YouTube icon
+      case 'upwork':
+        return Icons.work_outline; // Upwork icon
       default:
         return Icons.link;
     }

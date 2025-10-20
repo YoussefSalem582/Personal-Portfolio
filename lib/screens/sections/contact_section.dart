@@ -36,10 +36,13 @@ class _ContactSectionState extends State<ContactSection> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       width: double.infinity,
-      color: AppTheme.primaryColor.withValues(alpha: 0.02),
+      color: isDark
+          ? AppTheme.darkBackgroundColor
+          : AppTheme.primaryColor.withValues(alpha: 0.02),
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
         vertical: AppTheme.spacingXXL,
@@ -61,7 +64,10 @@ class _ContactSectionState extends State<ContactSection> {
                 // Section title
                 Text(
                   'Get In Touch',
-                  style: AppTheme.headingLarge.copyWith(fontSize: 36),
+                  style: (isDark
+                          ? AppTheme.headingLargeForTheme(context)
+                          : AppTheme.headingLarge)
+                      .copyWith(fontSize: 36),
                   textAlign: TextAlign.center,
                 ),
 
@@ -71,7 +77,9 @@ class _ContactSectionState extends State<ContactSection> {
                   width: 60,
                   height: 4,
                   decoration: BoxDecoration(
-                    gradient: AppTheme.primaryGradient,
+                    gradient: isDark
+                        ? AppTheme.darkPrimaryGradient
+                        : AppTheme.primaryGradient,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -80,7 +88,9 @@ class _ContactSectionState extends State<ContactSection> {
 
                 Text(
                   'Let\'s discuss your next project or collaboration opportunity',
-                  style: AppTheme.bodyLarge,
+                  style: isDark
+                      ? AppTheme.bodyLargeForTheme(context)
+                      : AppTheme.bodyLarge,
                   textAlign: TextAlign.center,
                 ),
 
@@ -125,12 +135,17 @@ class _ContactSectionState extends State<ContactSection> {
   }
 
   Widget _buildContactInfo() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           'Contact Information',
-          style: AppTheme.headingMedium.copyWith(fontSize: 24),
+          style: (isDark
+                  ? AppTheme.headingMediumForTheme(context)
+                  : AppTheme.headingMedium)
+              .copyWith(fontSize: 24),
         ),
 
         const SizedBox(height: AppTheme.spacingL),
@@ -165,31 +180,23 @@ class _ContactSectionState extends State<ContactSection> {
         // Social links
         Text(
           'Connect With Me',
-          style: AppTheme.headingSmall.copyWith(fontSize: 18),
+          style: (isDark
+                  ? AppTheme.headingSmallForTheme(context)
+                  : AppTheme.headingSmall)
+              .copyWith(fontSize: 18),
         ),
 
         const SizedBox(height: AppTheme.spacingL),
 
         Wrap(
           spacing: AppTheme.spacingL,
-          children: [
-            _buildSocialButton(
-              'GitHub',
-              Icons.code,
-              () => UrlHelper.launchURL(PortfolioData.contactInfo.github),
-            ),
-            _buildSocialButton(
-              'LinkedIn',
-              Icons.work,
-              () => UrlHelper.launchURL(PortfolioData.contactInfo.linkedin),
-            ),
-            if (PortfolioData.contactInfo.twitter.isNotEmpty)
-              _buildSocialButton(
-                'Twitter',
-                Icons.alternate_email,
-                () => UrlHelper.launchURL(PortfolioData.contactInfo.twitter),
-              ),
-          ],
+          children: PortfolioData.socialLinks.map((social) {
+            return _buildSocialButton(
+              social.name,
+              social.iconPath,
+              () => UrlHelper.launchURL(social.url),
+            );
+          }).toList(),
         ),
       ],
     );
@@ -201,6 +208,10 @@ class _ContactSectionState extends State<ContactSection> {
     String value,
     VoidCallback? onTap,
   ) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final accentColor =
+        isDark ? AppTheme.darkAccentColor : AppTheme.accentColor;
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(AppTheme.radiusS),
@@ -211,72 +222,110 @@ class _ContactSectionState extends State<ContactSection> {
             Container(
               padding: const EdgeInsets.all(AppTheme.spacingS),
               decoration: BoxDecoration(
-                color: AppTheme.accentColor.withValues(alpha: 0.1),
+                color: accentColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(AppTheme.radiusS),
               ),
-              child: Icon(icon, size: 20, color: AppTheme.accentColor),
+              child: Icon(icon, size: 20, color: accentColor),
             ),
-
             const SizedBox(width: AppTheme.spacingM),
-
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,
-                    style: AppTheme.bodySmall.copyWith(
-                      color: AppTheme.textSecondary,
+                    style: (isDark
+                            ? AppTheme.bodySmallForTheme(context)
+                            : AppTheme.bodySmall)
+                        .copyWith(
+                      color: isDark
+                          ? AppTheme.darkTextSecondary
+                          : AppTheme.textSecondary,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     value,
-                    style: AppTheme.bodyMedium.copyWith(
+                    style: (isDark
+                            ? AppTheme.bodyMediumForTheme(context)
+                            : AppTheme.bodyMedium)
+                        .copyWith(
                       fontWeight: FontWeight.w600,
                       color: onTap != null
-                          ? AppTheme.accentColor
-                          : AppTheme.textPrimary,
+                          ? accentColor
+                          : (isDark
+                              ? AppTheme.darkTextPrimary
+                              : AppTheme.textPrimary),
                     ),
                   ),
                 ],
               ),
             ),
-
             if (onTap != null)
-              Icon(Icons.arrow_outward, size: 16, color: AppTheme.accentColor),
+              Icon(Icons.arrow_outward, size: 16, color: accentColor),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSocialButton(String title, IconData icon, VoidCallback onTap) {
-    return OutlinedButton.icon(
+  Widget _buildSocialButton(String title, String iconPath, VoidCallback onTap) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final accentColor =
+        isDark ? AppTheme.darkAccentColor : AppTheme.accentColor;
+
+    return OutlinedButton(
       onPressed: onTap,
-      icon: Icon(icon, size: 18),
-      label: Text(title),
       style: OutlinedButton.styleFrom(
-        foregroundColor: AppTheme.accentColor,
-        side: BorderSide(color: AppTheme.accentColor.withValues(alpha: 0.3)),
+        foregroundColor: accentColor,
+        side: BorderSide(color: accentColor.withValues(alpha: 0.3)),
         padding: const EdgeInsets.symmetric(
           horizontal: AppTheme.spacingM,
           vertical: AppTheme.spacingS,
         ),
       ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(
+            _getIconForPlatform(title),
+            color: accentColor,
+            size: 18,
+          ),
+          const SizedBox(width: 8),
+          Text(title),
+        ],
+      ),
     );
   }
 
+  IconData _getIconForPlatform(String name) {
+    switch (name.toLowerCase()) {
+      case 'github':
+        return Icons.code; // GitHub icon
+      case 'linkedin':
+        return Icons.work; // LinkedIn icon
+      case 'youtube':
+        return Icons.play_arrow; // YouTube icon
+      case 'upwork':
+        return Icons.work_outline; // Upwork icon
+      default:
+        return Icons.link;
+    }
+  }
+
   Widget _buildContactForm() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Card(
       elevation: 8,
-      shadowColor: Colors.black12,
+      shadowColor: isDark ? Colors.black26 : Colors.black12,
       child: Container(
         padding: const EdgeInsets.all(AppTheme.spacingXL),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
-          color: AppTheme.surfaceColor,
+          color: isDark ? AppTheme.darkCardColor : AppTheme.surfaceColor,
         ),
         child: Form(
           key: _formKey,
@@ -285,7 +334,10 @@ class _ContactSectionState extends State<ContactSection> {
             children: [
               Text(
                 'Send Me a Message',
-                style: AppTheme.headingMedium.copyWith(fontSize: 24),
+                style: (isDark
+                        ? AppTheme.headingMediumForTheme(context)
+                        : AppTheme.headingMedium)
+                    .copyWith(fontSize: 24),
               ),
 
               const SizedBox(height: AppTheme.spacingL),
@@ -452,29 +504,42 @@ class _ContactSectionState extends State<ContactSection> {
     int maxLines = 1,
     String? Function(String?)? validator,
   }) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final accentColor =
+        isDark ? AppTheme.darkAccentColor : AppTheme.accentColor;
+    final textSecondary =
+        isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary;
+    final fillColor =
+        isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor;
+
     return TextFormField(
       controller: controller,
       keyboardType: keyboardType,
       maxLines: maxLines,
       validator: validator,
+      style: TextStyle(
+        color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
+      ),
       decoration: InputDecoration(
         labelText: label,
         hintText: hint,
-        prefixIcon: Icon(icon, color: AppTheme.accentColor),
+        labelStyle: TextStyle(color: textSecondary),
+        hintStyle: TextStyle(color: textSecondary.withValues(alpha: 0.6)),
+        prefixIcon: Icon(icon, color: accentColor),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusS),
           borderSide: BorderSide(
-            color: AppTheme.textSecondary.withValues(alpha: 0.3),
+            color: textSecondary.withValues(alpha: 0.3),
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusS),
-          borderSide: const BorderSide(color: AppTheme.accentColor, width: 2),
+          borderSide: BorderSide(color: accentColor, width: 2),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusS),
           borderSide: BorderSide(
-            color: AppTheme.textSecondary.withValues(alpha: 0.3),
+            color: textSecondary.withValues(alpha: 0.3),
           ),
         ),
         errorBorder: OutlineInputBorder(
@@ -482,7 +547,7 @@ class _ContactSectionState extends State<ContactSection> {
           borderSide: const BorderSide(color: AppTheme.errorColor),
         ),
         filled: true,
-        fillColor: AppTheme.surfaceColor,
+        fillColor: fillColor,
       ),
     );
   }

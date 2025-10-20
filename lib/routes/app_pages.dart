@@ -43,19 +43,33 @@ class AppPages {
       name: AppRoutes.project,
       page: () {
         final projectId = Get.parameters['id'] ?? '';
-        final controller = Get.find<PortfolioController>();
+        debugPrint('🔍 Route: Looking for project with ID: $projectId');
 
-        final project = controller.projects.firstWhereOrNull(
-          (p) => p.id == projectId,
-        );
+        try {
+          final controller = Get.find<PortfolioController>();
+          debugPrint(
+              '✅ Controller found with ${controller.projects.length} projects');
 
-        if (project == null) {
-          // Redirect to home if project not found
+          final project = controller.projects.firstWhereOrNull(
+            (p) => p.id == projectId,
+          );
+
+          if (project == null) {
+            debugPrint('❌ Project not found with ID: $projectId');
+            debugPrint(
+                '📋 Available project IDs: ${controller.projects.map((p) => p.id).join(", ")}');
+            // Redirect to home if project not found
+            Future.microtask(() => Get.offAllNamed(AppRoutes.home));
+            return const PortfolioScreen();
+          }
+
+          debugPrint('✅ Project found: ${project.title}');
+          return ProjectCaseStudy(project: project);
+        } catch (e) {
+          debugPrint('❌ Error finding controller or project: $e');
           Future.microtask(() => Get.offAllNamed(AppRoutes.home));
           return const PortfolioScreen();
         }
-
-        return ProjectCaseStudy(project: project);
       },
       transition: Transition.rightToLeftWithFade,
       transitionDuration: transitionDuration,

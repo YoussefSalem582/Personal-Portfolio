@@ -28,22 +28,24 @@ class PortfolioData {
     SocialLink(
       name: 'GitHub',
       url: 'https://github.com/YoussefSalem582',
-      iconPath: 'assets/icons/github.svg',
+      iconPath: 'assets/icons/github_icon.svg',
     ),
     SocialLink(
       name: 'LinkedIn',
       url: 'https://www.linkedin.com/in/youssef-hassan-8529372b7/',
-      iconPath: 'assets/icons/linkedin.svg',
+      iconPath: 'assets/icons/linkedin_icon.svg',
     ),
     SocialLink(
-      name: 'Portfolio',
-      url: 'https://v0-youssef-salem-hassan.vercel.app/',
-      iconPath: 'assets/icons/web.svg',
+      name: 'YouTube',
+      url:
+          'https://youtube.com/@YourChannel', // Update with your YouTube channel
+      iconPath: 'assets/icons/youtube_icon.svg',
     ),
     SocialLink(
-      name: 'Mostaql',
-      url: 'https://mostaql.com/u/Youssef_Salem17',
-      iconPath: 'assets/icons/mostaql.svg',
+      name: 'Upwork',
+      url:
+          'https://www.upwork.com/freelancers/~yourprofile', // Update with your Upwork profile
+      iconPath: 'assets/icons/upwork_icon.svg',
     ),
   ];
 
@@ -433,6 +435,7 @@ class PortfolioData {
           'Advanced machine learning certification covering neural networks, deep learning, and AI model development.',
       issueDate: DateTime(2024, 12, 1),
       pdfUrl: 'assets/images/certificates/ml_depi_certificate.pdf',
+      imageUrl: 'assets/images/certificates/photos/ml_depi_certificate.png',
     ),
     Certificate(
       id: 'codealpha-certificate',
@@ -442,15 +445,17 @@ class PortfolioData {
           'Software development internship focusing on mobile app development and practical programming skills.',
       issueDate: DateTime(2024, 11, 1),
       pdfUrl: 'assets/images/certificates/CodeAlpha Certificate.pdf',
+      imageUrl: 'assets/images/certificates/photos/CodeAlpha Certificate.png',
     ),
     Certificate(
-      id: 'codealpha-lor',
-      title: 'CodeAlpha Letter of Recommendation',
-      issuer: 'CodeAlpha',
+      id: 'uneeq-internship',
+      title: 'Uneeq Internship Certificate',
+      issuer: 'Uneeq',
       description:
-          'Letter of recommendation for outstanding performance during software development internship.',
-      issueDate: DateTime(2024, 11, 1),
-      pdfUrl: 'assets/images/certificates/CodeAlpha LOR.pdf',
+          'Internship certificate for software development and professional experience at Uneeq.',
+      issueDate: DateTime(2024, 11, 15),
+      imageUrl:
+          'assets/images/certificates/photos/uneeq_intern_certificate.png',
     ),
     Certificate(
       id: 'ecpc',
@@ -463,22 +468,22 @@ class PortfolioData {
       imageUrl: 'assets/images/certificates/photos/ECPC.jpg',
     ),
     Certificate(
-      id: 'intro-jupyter',
-      title: 'Introduction to Jupyter',
-      issuer: 'Educational Platform',
+      id: 'ugrf-1',
+      title: 'UGRF Certificate',
+      issuer: 'UGRF (Undergraduate Research Forum)',
       description:
-          'Certificate in Jupyter notebook usage for data science and machine learning applications.',
-      issueDate: DateTime(2024, 8, 1),
-      pdfUrl: 'assets/images/certificates/Intro to jupyter.pdf',
+          'Undergraduate research participation certificate recognizing academic contribution.',
+      issueDate: DateTime(2024, 9, 1),
+      imageUrl: 'assets/images/certificates/photos/UGRF 1.jpg',
     ),
     Certificate(
-      id: 'intro-python',
-      title: 'Introduction to Python',
-      issuer: 'Educational Platform',
+      id: 'ugrf-2',
+      title: 'UGRF Recognition',
+      issuer: 'UGRF (Undergraduate Research Forum)',
       description:
-          'Python programming fundamentals certificate covering syntax, data structures, and algorithms.',
-      issueDate: DateTime(2024, 7, 1),
-      pdfUrl: 'assets/images/certificates/Intro to python.pdf',
+          'Additional recognition certificate for outstanding undergraduate research work.',
+      issueDate: DateTime(2024, 9, 1),
+      imageUrl: 'assets/images/certificates/photos/UGRF .jpg',
     ),
     Certificate(
       id: 'we-certificate',
@@ -487,6 +492,7 @@ class PortfolioData {
       description: 'Technology and telecommunications industry certificate.',
       issueDate: DateTime(2024, 6, 1),
       pdfUrl: 'assets/images/certificates/we_certificate.pdf',
+      imageUrl: 'assets/images/certificates/photos/we_certificate.png',
     ),
   ];
 

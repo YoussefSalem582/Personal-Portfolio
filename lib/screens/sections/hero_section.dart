@@ -259,7 +259,7 @@ class HeroSection extends StatelessWidget {
             ),
             child: ClipOval(
               child: Image.asset(
-                'assets/profile.jpeg',
+                'assets/images/profile.jpeg',
                 width: size - 8,
                 height: size - 8,
                 fit: BoxFit.cover,

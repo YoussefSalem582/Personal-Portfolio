@@ -159,18 +159,21 @@ class Footer extends StatelessWidget {
                 children: PortfolioData.socialLinks.map((social) {
                   return Padding(
                     padding: const EdgeInsets.only(right: AppTheme.spacingM),
-                    child: IconButton(
-                      onPressed: () => UrlHelper.launchURL(social.url),
-                      icon: Icon(
-                        _getSocialIcon(social.name),
-                        color: Colors.white.withValues(alpha: 0.8),
-                        size: 20,
+                    child: InkWell(
+                      onTap: () => UrlHelper.launchURL(social.url),
+                      child: Container(
+                        width: 32,
+                        height: 32,
+                        decoration: BoxDecoration(
+                          color: Colors.white.withValues(alpha: 0.1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Icon(
+                          _getIconForPlatform(social.name),
+                          color: Colors.white.withValues(alpha: 0.8),
+                          size: 18,
+                        ),
                       ),
-                      constraints: const BoxConstraints(
-                        minWidth: 32,
-                        minHeight: 32,
-                      ),
-                      padding: EdgeInsets.zero,
                     ),
                   );
                 }).toList(),
@@ -217,12 +220,20 @@ class Footer extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: AppTheme.spacingS,
               ),
-              child: IconButton(
-                onPressed: () => UrlHelper.launchURL(social.url),
-                icon: Icon(
-                  _getSocialIcon(social.name),
-                  color: Colors.white.withValues(alpha: 0.8),
-                  size: 24,
+              child: InkWell(
+                onTap: () => UrlHelper.launchURL(social.url),
+                child: Container(
+                  width: 48,
+                  height: 48,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    _getIconForPlatform(social.name),
+                    color: Colors.white.withValues(alpha: 0.8),
+                    size: 24,
+                  ),
                 ),
               ),
             );
@@ -303,18 +314,16 @@ class Footer extends StatelessWidget {
     );
   }
 
-  IconData _getSocialIcon(String name) {
+  IconData _getIconForPlatform(String name) {
     switch (name.toLowerCase()) {
       case 'github':
-        return Icons.code;
+        return Icons.code; // GitHub icon
       case 'linkedin':
-        return Icons.work;
-      case 'twitter':
-        return Icons.alternate_email;
-      case 'portfolio':
-        return Icons.web;
-      case 'mostaql':
-        return Icons.business;
+        return Icons.work; // LinkedIn icon
+      case 'youtube':
+        return Icons.play_arrow; // YouTube icon
+      case 'upwork':
+        return Icons.work_outline; // Upwork icon
       default:
         return Icons.link;
     }

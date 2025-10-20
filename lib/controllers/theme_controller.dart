@@ -4,10 +4,16 @@ import 'package:flutter/foundation.dart';
 
 class ThemeController extends GetxController {
   // Observable theme mode
-  final Rx<ThemeMode> _themeMode = ThemeMode.dark.obs;
+  final Rx<ThemeMode> _themeMode = ThemeMode.system.obs;
 
   ThemeMode get themeMode => _themeMode.value;
-  bool get isDarkMode => _themeMode.value == ThemeMode.dark;
+  bool get isDarkMode {
+    if (_themeMode.value == ThemeMode.system) {
+      // Check system brightness
+      return Get.isDarkMode;
+    }
+    return _themeMode.value == ThemeMode.dark;
+  }
 
   @override
   void onInit() {
@@ -18,15 +24,15 @@ class ThemeController extends GetxController {
   void _loadThemeFromStorage() {
     if (kIsWeb) {
       try {
-        // Default to dark mode since localStorage is complex
-        _themeMode.value = ThemeMode.dark;
+        // Default to system theme preference
+        _themeMode.value = ThemeMode.system;
       } catch (e) {
-        // Fallback to dark mode if localStorage is not available
-        _themeMode.value = ThemeMode.dark;
+        // Fallback to system theme if localStorage is not available
+        _themeMode.value = ThemeMode.system;
       }
     } else {
-      // Default to dark mode on non-web platforms
-      _themeMode.value = ThemeMode.dark;
+      // Default to system theme on non-web platforms
+      _themeMode.value = ThemeMode.system;
     }
   }
 
