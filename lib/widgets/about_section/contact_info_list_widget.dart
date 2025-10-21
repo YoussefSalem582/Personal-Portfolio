@@ -18,11 +18,22 @@ class ContactInfoListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Section heading
-        Text('Get In Touch', style: AppTheme.headingSmall),
+        Text(
+          'Get In Touch',
+          style: (isDark
+                  ? AppTheme.headingSmallForTheme(context)
+                  : AppTheme.headingSmall)
+              .copyWith(
+            color: isDark ? Colors.white : Colors.grey.shade900,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
 
         const SizedBox(height: AppTheme.spacingM),
 

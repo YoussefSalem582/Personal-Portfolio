@@ -17,6 +17,8 @@ class ResumeCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Card(
       elevation: 4,
       child: Container(
@@ -24,7 +26,8 @@ class ResumeCardWidget extends StatelessWidget {
         padding: const EdgeInsets.all(AppTheme.spacingL),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
-          gradient: AppTheme.primaryGradient,
+          gradient:
+              isDark ? AppTheme.darkPrimaryGradient : AppTheme.primaryGradient,
         ),
         child: Column(
           children: [
@@ -32,7 +35,7 @@ class ResumeCardWidget extends StatelessWidget {
             const Icon(
               Icons.download_rounded,
               size: 40,
-              color: AppTheme.surfaceColor,
+              color: Colors.white,
             ),
 
             const SizedBox(height: AppTheme.spacingM),
@@ -40,8 +43,12 @@ class ResumeCardWidget extends StatelessWidget {
             // Card title
             Text(
               'Download Resume',
-              style: AppTheme.headingSmall.copyWith(
-                color: AppTheme.surfaceColor,
+              style: (isDark
+                      ? AppTheme.headingSmallForTheme(context)
+                      : AppTheme.headingSmall)
+                  .copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
               ),
             ),
 
@@ -50,8 +57,12 @@ class ResumeCardWidget extends StatelessWidget {
             // Card description
             Text(
               'Get a copy of my detailed CV',
-              style: AppTheme.bodyMedium.copyWith(
-                color: AppTheme.surfaceColor.withValues(alpha: 0.9),
+              style: (isDark
+                      ? AppTheme.bodyMediumForTheme(context)
+                      : AppTheme.bodyMedium)
+                  .copyWith(
+                color: Colors.white.withOpacity(0.95),
+                fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,
             ),
@@ -62,10 +73,19 @@ class ResumeCardWidget extends StatelessWidget {
             ElevatedButton(
               onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.surfaceColor,
-                foregroundColor: AppTheme.primaryColor,
+                backgroundColor: Colors.white,
+                foregroundColor:
+                    isDark ? AppTheme.primaryColor : AppTheme.accentColor,
+                elevation: 2,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: AppTheme.spacingL,
+                  vertical: AppTheme.spacingM,
+                ),
               ),
-              child: const Text('View Resume'),
+              child: const Text(
+                'View Resume',
+                style: TextStyle(fontWeight: FontWeight.w600),
+              ),
             ),
           ],
         ),

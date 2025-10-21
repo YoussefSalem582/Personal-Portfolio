@@ -17,12 +17,20 @@ class SocialLinksWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Column(
       children: [
         // Section heading
         Text(
           'Connect With Me',
-          style: AppTheme.headingSmall,
+          style: (isDark
+                  ? AppTheme.headingSmallForTheme(context)
+                  : AppTheme.headingSmall)
+              .copyWith(
+            color: isDark ? Colors.white : Colors.grey.shade900,
+            fontWeight: FontWeight.w700,
+          ),
           textAlign: TextAlign.center,
         ),
 

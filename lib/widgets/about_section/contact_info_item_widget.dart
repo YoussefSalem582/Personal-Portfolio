@@ -33,6 +33,8 @@ class ContactInfoItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(AppTheme.radiusS),
@@ -41,7 +43,11 @@ class ContactInfoItemWidget extends StatelessWidget {
         child: Row(
           children: [
             // Icon with accent color
-            Icon(icon, size: 20, color: AppTheme.accentColor),
+            Icon(
+              icon,
+              size: 20,
+              color: isDark ? AppTheme.primaryColor : AppTheme.accentColor,
+            ),
 
             const SizedBox(width: AppTheme.spacingM),
 
@@ -52,20 +58,33 @@ class ContactInfoItemWidget extends StatelessWidget {
                 // Label text (smaller, secondary color)
                 Text(
                   label,
-                  style: AppTheme.bodySmall.copyWith(
-                    color: AppTheme.textSecondary,
+                  style: (isDark
+                          ? AppTheme.bodySmallForTheme(context)
+                          : AppTheme.bodySmall)
+                      .copyWith(
+                    color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
                     fontWeight: FontWeight.w600,
+                    fontSize: 13,
                   ),
                 ),
 
                 // Value text (larger, clickable items get accent color and underline)
                 Text(
                   value,
-                  style: AppTheme.bodyMedium.copyWith(
+                  style: (isDark
+                          ? AppTheme.bodyMediumForTheme(context)
+                          : AppTheme.bodyMedium)
+                      .copyWith(
                     color: onTap != null
-                        ? AppTheme.accentColor
-                        : AppTheme.textPrimary,
+                        ? (isDark
+                            ? AppTheme.primaryColor
+                            : AppTheme.accentColor)
+                        : (isDark
+                            ? Colors.grey.shade300
+                            : Colors.grey.shade800),
                     decoration: onTap != null ? TextDecoration.underline : null,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
                   ),
                 ),
               ],

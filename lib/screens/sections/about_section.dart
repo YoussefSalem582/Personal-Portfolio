@@ -6,13 +6,12 @@ import '../../widgets/about_section/stats_section_widget.dart';
 
 /// The about section of the portfolio displaying biographical information and statistics.
 ///
-/// This section provides two main components:
-/// 1. BioSectionWidget - Shows bio text and contact information
-/// 2. StatsSectionWidget - Displays stats, resume download, and social links
-///
-/// The layout is responsive:
-/// - Desktop: Side-by-side layout (bio: 66%, stats: 33%)
-/// - Mobile: Stacked layout (bio above stats)
+/// Enhanced with:
+/// - Gradient background for depth
+/// - Animated gradient text on title
+/// - Larger, bolder typography
+/// - Improved spacing and visual hierarchy
+/// - Glassmorphism effect
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
 
@@ -25,10 +24,29 @@ class AboutSection extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      color: isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
+      decoration: BoxDecoration(
+        gradient: isDark
+            ? LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppTheme.darkSurfaceColor,
+                  AppTheme.darkCardColor.withOpacity(0.5),
+                ],
+              )
+            : LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppTheme.surfaceColor,
+                  Colors.grey.shade50,
+                ],
+              ),
+      ),
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
-        vertical: AppTheme.spacingXXL,
+        vertical:
+            isMobile ? AppTheme.spacingXXL * 1.5 : AppTheme.spacingXXL * 2,
       ),
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -37,31 +55,73 @@ class AboutSection extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Section title
-            Text(
-              'About Me',
-              style: (isDark
-                      ? AppTheme.headingLargeForTheme(context)
-                      : AppTheme.headingLarge)
-                  .copyWith(fontSize: 36),
-              textAlign: TextAlign.center,
+            // Section title with gradient effect
+            ShaderMask(
+              shaderCallback: (bounds) => LinearGradient(
+                colors: isDark
+                    ? [AppTheme.primaryColor, AppTheme.accentColor]
+                    : [AppTheme.accentColor, AppTheme.primaryColor],
+              ).createShader(bounds),
+              child: Text(
+                'About Me',
+                style: (isDark
+                        ? AppTheme.headingLargeForTheme(context)
+                        : AppTheme.headingLarge)
+                    .copyWith(
+                  fontSize: isMobile ? 36 : 48,
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: -1,
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
 
-            const SizedBox(height: AppTheme.spacingS),
+            const SizedBox(height: AppTheme.spacingM),
 
-            // Decorative gradient underline
+            // Decorative gradient underline with glow
             Container(
-              width: 60,
-              height: 4,
+              width: isMobile ? 70 : 90,
+              height: 5,
               decoration: BoxDecoration(
                 gradient: isDark
                     ? AppTheme.darkPrimaryGradient
                     : AppTheme.primaryGradient,
-                borderRadius: BorderRadius.circular(2),
+                borderRadius: BorderRadius.circular(3),
+                boxShadow: [
+                  BoxShadow(
+                    color:
+                        (isDark ? AppTheme.primaryColor : AppTheme.accentColor)
+                            .withOpacity(0.4),
+                    blurRadius: 12,
+                    spreadRadius: 2,
+                  ),
+                ],
               ),
             ),
 
-            const SizedBox(height: AppTheme.spacingXXL),
+            const SizedBox(height: AppTheme.spacingL),
+
+            // Subtitle description
+            Text(
+              'Discover my journey, skills, and passion for technology',
+              style: (isDark
+                      ? AppTheme.bodyLargeForTheme(context)
+                      : AppTheme.bodyLarge)
+                  .copyWith(
+                fontSize: isMobile ? 15 : 17,
+                color: isDark
+                    ? AppTheme.darkTextSecondary.withOpacity(0.9)
+                    : AppTheme.textSecondary,
+                letterSpacing: 0.3,
+              ),
+              textAlign: TextAlign.center,
+            ),
+
+            SizedBox(
+                height: isMobile
+                    ? AppTheme.spacingXXL * 1.5
+                    : AppTheme.spacingXXL * 2),
 
             // Content - responsive layout
             // Mobile: Stack vertically (bio above stats)

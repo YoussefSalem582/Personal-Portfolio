@@ -217,12 +217,15 @@ class _StatCardWidgetState extends State<StatCardWidget>
                       // Subtitle (stat description)
                       Text(
                         widget.subtitle,
-                        style: AppTheme.bodyMedium.copyWith(
+                        style: (isDark
+                                ? AppTheme.bodyMediumForTheme(context)
+                                : AppTheme.bodyMedium)
+                            .copyWith(
                           color: isDark
-                              ? AppTheme.darkTextSecondary
-                              : AppTheme.textSecondary,
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade700,
                           fontWeight: FontWeight.w600,
-                          fontSize: 12,
+                          fontSize: 13,
                           letterSpacing: 0.5,
                         ),
                         textAlign: TextAlign.center,
