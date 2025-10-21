@@ -336,7 +336,7 @@ class Footer extends StatelessWidget {
 
   void _downloadResume() async {
     try {
-      await UrlHelper.launchURL(PortfolioData.resumeUrl);
+      await UrlHelper.openFile(PortfolioData.resumeUrl);
     } catch (e) {
       // Handle error silently or show a message
       debugPrint('Error downloading resume: $e');

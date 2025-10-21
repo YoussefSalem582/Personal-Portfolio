@@ -43,7 +43,7 @@ class CertificatesData {
       description:
           'Software development internship focusing on mobile app development and practical programming skills.',
       issueDate: DateTime(2024, 11, 1),
-      pdfUrl: 'assets/images/certificates/pdf/CodeAlpha Certificate.pdf',
+      pdfUrl: 'assets/images/certificates/pdf/CodeAlpha_Certificate.pdf',
       imageUrl: 'assets/images/certificates/photos/CodeAlpha Certificate.png',
     ),
     Certificate(
@@ -53,7 +53,7 @@ class CertificatesData {
       description:
           'Letter of recommendation recognizing outstanding performance and contributions during the internship period.',
       issueDate: DateTime(2024, 11, 1),
-      pdfUrl: 'assets/images/certificates/pdf/CodeAlpha LOR.pdf',
+      pdfUrl: 'assets/images/certificates/pdf/CodeAlpha_LOR.pdf',
       imageUrl: 'assets/images/certificates/photos/CodeAlpha Certificate.png',
     ),
     Certificate(
@@ -84,7 +84,7 @@ class CertificatesData {
       description:
           'Certificate of completion for Introduction to Jupyter Notebook course, covering data science fundamentals and notebook usage.',
       issueDate: DateTime(2024, 9, 15),
-      pdfUrl: 'assets/images/certificates/pdf/Intro to jupyter.pdf',
+      pdfUrl: 'assets/images/certificates/pdf/Intro_to_jupyter.pdf',
       imageUrl: 'assets/images/certificates/photos/ml_depi_certificate.png',
     ),
     Certificate(
@@ -94,7 +94,7 @@ class CertificatesData {
       description:
           'Certificate of completion for Introduction to Python programming course, covering fundamental programming concepts and Python syntax.',
       issueDate: DateTime(2024, 9, 10),
-      pdfUrl: 'assets/images/certificates/pdf/Intro to python.pdf',
+      pdfUrl: 'assets/images/certificates/pdf/Intro_to_python.pdf',
       imageUrl: 'assets/images/certificates/photos/ml_depi_certificate.png',
     ),
     Certificate(
