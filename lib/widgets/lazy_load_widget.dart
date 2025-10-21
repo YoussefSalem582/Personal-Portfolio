@@ -138,11 +138,20 @@ class SectionPlaceholder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    return SizedBox(
       height: height,
-      color: color ?? Colors.grey.shade100,
-      child: const Center(
-        child: CircularProgressIndicator(),
+      child: Center(
+        child: SizedBox(
+          width: 24,
+          height: 24,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            valueColor: AlwaysStoppedAnimation<Color>(
+              isDark ? Colors.blue.shade400 : Colors.blue.shade600,
+            ),
+          ),
+        ),
       ),
     );
   }

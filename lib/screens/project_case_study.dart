@@ -17,7 +17,7 @@ class ProjectCaseStudy extends StatefulWidget {
 
 class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
   final PageController _pageController = PageController();
-  int _currentPage = 0;
+  final int _currentPage = 0;
 
   @override
   void dispose() {
@@ -399,7 +399,7 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
               ],
             ),
           );
-        }).toList(),
+        }),
       ],
     );
   }
@@ -437,7 +437,7 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
               ],
             ),
           );
-        }).toList(),
+        }),
       ],
     );
   }
@@ -617,58 +617,56 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
           ),
         ),
         const SizedBox(height: AppTheme.spacingL),
-        ...features
-            .map((feature) => Padding(
-                  padding: const EdgeInsets.only(bottom: AppTheme.spacingL),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.all(AppTheme.spacingS),
-                        decoration: BoxDecoration(
-                          color: (isDark
-                                  ? AppTheme.darkAccentColor
-                                  : AppTheme.accentColor)
-                              .withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(AppTheme.radiusS),
-                        ),
-                        child: Icon(
-                          feature['icon'] as IconData,
-                          color: isDark
+        ...features.map((feature) => Padding(
+              padding: const EdgeInsets.only(bottom: AppTheme.spacingL),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(AppTheme.spacingS),
+                    decoration: BoxDecoration(
+                      color: (isDark
                               ? AppTheme.darkAccentColor
-                              : AppTheme.accentColor,
-                          size: 24,
-                        ),
-                      ),
-                      const SizedBox(width: AppTheme.spacingM),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              feature['title'] as String,
-                              style: AppTheme.headingSmall.copyWith(
-                                color: isDark
-                                    ? AppTheme.darkTextPrimary
-                                    : AppTheme.textPrimary,
-                              ),
-                            ),
-                            const SizedBox(height: AppTheme.spacingS),
-                            Text(
-                              feature['description'] as String,
-                              style: AppTheme.bodyMedium.copyWith(
-                                color: isDark
-                                    ? AppTheme.darkTextSecondary
-                                    : AppTheme.textSecondary,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                              : AppTheme.accentColor)
+                          .withValues(alpha: 0.1),
+                      borderRadius: BorderRadius.circular(AppTheme.radiusS),
+                    ),
+                    child: Icon(
+                      feature['icon'] as IconData,
+                      color: isDark
+                          ? AppTheme.darkAccentColor
+                          : AppTheme.accentColor,
+                      size: 24,
+                    ),
                   ),
-                ))
-            .toList(),
+                  const SizedBox(width: AppTheme.spacingM),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          feature['title'] as String,
+                          style: AppTheme.headingSmall.copyWith(
+                            color: isDark
+                                ? AppTheme.darkTextPrimary
+                                : AppTheme.textPrimary,
+                          ),
+                        ),
+                        const SizedBox(height: AppTheme.spacingS),
+                        Text(
+                          feature['description'] as String,
+                          style: AppTheme.bodyMedium.copyWith(
+                            color: isDark
+                                ? AppTheme.darkTextSecondary
+                                : AppTheme.textSecondary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            )),
       ],
     );
   }

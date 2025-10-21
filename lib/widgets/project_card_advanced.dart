@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:ui';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../theme/app_theme.dart';
@@ -25,92 +24,33 @@ class ProjectCardAdvanced extends StatefulWidget {
 }
 
 class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
-    with TickerProviderStateMixin {
+    with SingleTickerProviderStateMixin {
   bool _isHovered = false;
   late AnimationController _hoverController;
-  late AnimationController _shimmerController;
-  late AnimationController _pulseController;
-  late AnimationController _rippleController;
   late Animation<double> _scaleAnimation;
-  late Animation<double> _rotateAnimation;
-  late Animation<Offset> _slideAnimation;
-  late Animation<double> _fadeAnimation;
-  late Animation<double> _pulseAnimation;
 
   @override
   void initState() {
     super.initState();
 
-    // Hover animation controller
+    // Single hover animation controller for better performance
     _hoverController = AnimationController(
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 200),
       vsync: this,
     );
-
-    // Shimmer effect controller
-    _shimmerController = AnimationController(
-      duration: const Duration(milliseconds: 1500),
-      vsync: this,
-    )..repeat();
-
-    // Pulse animation for featured badge
-    _pulseController = AnimationController(
-      duration: const Duration(milliseconds: 2000),
-      vsync: this,
-    )..repeat(reverse: true);
 
     _scaleAnimation = Tween<double>(
       begin: 1.0,
-      end: 1.05,
+      end: 1.03,
     ).animate(CurvedAnimation(
       parent: _hoverController,
-      curve: Curves.easeOutCubic,
+      curve: Curves.easeOut,
     ));
-
-    _rotateAnimation = Tween<double>(
-      begin: 0.0,
-      end: 0.02,
-    ).animate(CurvedAnimation(
-      parent: _hoverController,
-      curve: Curves.easeInOut,
-    ));
-
-    _slideAnimation = Tween<Offset>(
-      begin: Offset.zero,
-      end: const Offset(0, -10),
-    ).animate(CurvedAnimation(
-      parent: _hoverController,
-      curve: Curves.easeOutCubic,
-    ));
-
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _hoverController,
-      curve: Curves.easeInOut,
-    ));
-
-    _pulseAnimation = Tween<double>(
-      begin: 1.0,
-      end: 1.1,
-    ).animate(CurvedAnimation(
-      parent: _pulseController,
-      curve: Curves.easeInOut,
-    ));
-
-    _rippleController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 1000),
-    );
   }
 
   @override
   void dispose() {
     _hoverController.dispose();
-    _shimmerController.dispose();
-    _pulseController.dispose();
-    _rippleController.dispose();
     super.dispose();
   }
 
@@ -119,42 +59,30 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final double cardHeight = widget.isCompact ? 320.0 : 380.0;
 
-    return MouseRegion(
-      onEnter: (_) {
-        if (!_isHovered) {
-          setState(() => _isHovered = true);
-          _hoverController.forward();
-          _rippleController.forward(from: 0);
-        }
-      },
-      onExit: (_) {
-        if (_isHovered) {
-          setState(() => _isHovered = false);
-          _hoverController.reverse();
-        }
-      },
-      onHover: (_) {
-        // Keep hover state active while mouse is moving over the card
-        if (!_isHovered) {
-          setState(() => _isHovered = true);
-          _hoverController.forward();
-        }
-      },
-      cursor: SystemMouseCursors.click,
-      child: AnimatedBuilder(
-        animation: _hoverController,
-        builder: (context, child) {
-          return Transform.translate(
-            offset: _slideAnimation.value,
-            child: Transform.scale(
-              scale: _scaleAnimation.value,
-              child: Transform.rotate(
-                angle: _rotateAnimation.value * (widget.index.isEven ? 1 : -1),
-                child: _buildCard(context, isDark, cardHeight),
-              ),
-            ),
-          );
+    return RepaintBoundary(
+      child: MouseRegion(
+        onEnter: (_) {
+          if (!_isHovered) {
+            setState(() => _isHovered = true);
+            _hoverController.forward();
+          }
         },
+        onExit: (_) {
+          if (_isHovered) {
+            setState(() => _isHovered = false);
+            _hoverController.reverse();
+          }
+        },
+        cursor: SystemMouseCursors.click,
+        child: AnimatedBuilder(
+          animation: _scaleAnimation,
+          builder: (context, child) {
+            return Transform.scale(
+              scale: _scaleAnimation.value,
+              child: _buildCard(context, isDark, cardHeight),
+            );
+          },
+        ),
       ),
     );
   }
@@ -165,39 +93,42 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
       child: Container(
         height: cardHeight,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
               color: _isHovered
                   ? (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                      .withOpacity(0.4)
-                  : Colors.black.withOpacity(0.1),
-              blurRadius: _isHovered ? 30 : 15,
-              offset: Offset(0, _isHovered ? 15 : 8),
-              spreadRadius: _isHovered ? 5 : 0,
+                      .withOpacity(0.25)
+                  : Colors.black.withOpacity(0.08),
+              blurRadius: _isHovered ? 20 : 10,
+              offset: Offset(0, _isHovered ? 8 : 4),
             ),
-            if (_isHovered)
-              BoxShadow(
-                color:
-                    (isDark ? AppTheme.darkPrimaryColor : AppTheme.primaryColor)
-                        .withOpacity(0.2),
-                blurRadius: 40,
-                offset: const Offset(0, 20),
-                spreadRadius: 10,
-              ),
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(20),
           child: Stack(
             children: [
-              // Glassmorphism background
-              _buildGlassBackground(isDark),
+              // Simple background
+              Container(
+                decoration: BoxDecoration(
+                  color: isDark ? AppTheme.darkCardColor : Colors.white,
+                  border: Border.all(
+                    color: _isHovered
+                        ? (isDark
+                                ? AppTheme.darkAccentColor
+                                : AppTheme.accentColor)
+                            .withOpacity(0.5)
+                        : (isDark ? Colors.white24 : Colors.black12),
+                    width: 1,
+                  ),
+                ),
+              ),
 
               // Content
               Column(
                 children: [
-                  // Image Section with parallax effect
+                  // Image Section
                   _buildImageSection(context, isDark),
 
                   // Content Section
@@ -205,55 +136,12 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                 ],
               ),
 
-              // Animated border
-              _buildAnimatedBorder(isDark),
-
-              // Ripple effect on hover
-              _buildRippleEffect(isDark),
-
-              // Featured badge with animation
+              // Featured badge
               if (widget.project.isFeatured) _buildFeaturedBadge(isDark),
 
-              // Hover overlay with blur
-              _buildHoverOverlay(context, isDark),
-
-              // Shimmer effect on hover
-              if (_isHovered) _buildShimmerEffect(),
+              // Hover overlay (simplified)
+              if (_isHovered) _buildHoverOverlay(context, isDark),
             ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildGlassBackground(bool isDark) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(24),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 20, sigmaY: 20),
-        child: Container(
-          height: double.infinity,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: isDark
-                  ? [
-                      AppTheme.darkCardColor.withOpacity(0.8),
-                      AppTheme.darkSurfaceColor.withOpacity(0.6),
-                    ]
-                  : [
-                      Colors.white.withOpacity(0.9),
-                      Colors.white.withOpacity(0.7),
-                    ],
-            ),
-            border: Border.all(
-              color: (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                  .withOpacity(0.3),
-              width: 1,
-            ),
-            borderRadius: BorderRadius.circular(24),
           ),
         ),
       ),
@@ -266,26 +154,14 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
       child: Stack(
         fit: StackFit.expand,
         children: [
-          // Image with parallax effect
+          // Image
           widget.project.imageUrl != null
-              ? AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  transform: Matrix4.identity()
-                    ..translate(0.0, _isHovered ? -5.0 : 0.0),
+              ? RepaintBoundary(
                   child: Container(
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [
-                          isDark
-                              ? AppTheme.darkCardColor.withOpacity(0.3)
-                              : Colors.grey.shade50,
-                          isDark
-                              ? AppTheme.darkCardColor.withOpacity(0.5)
-                              : Colors.grey.shade100,
-                        ],
-                      ),
+                      color: isDark
+                          ? AppTheme.darkCardColor.withOpacity(0.3)
+                          : Colors.grey.shade50,
                     ),
                     child: LazyImage(
                       imageUrl: widget.project.imageUrl!,
@@ -297,10 +173,9 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                 )
               : _buildPlaceholderImage(isDark),
 
-          // Gradient overlay with blur
+          // Simple gradient overlay
           Positioned.fill(
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
+            child: DecoratedBox(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -308,32 +183,14 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                   colors: [
                     Colors.transparent,
                     Colors.transparent,
-                    (isDark ? Colors.black : Colors.white).withOpacity(0.6),
-                    (isDark ? Colors.black : Colors.white).withOpacity(0.9),
+                    (isDark ? Colors.black : Colors.white).withOpacity(0.5),
+                    (isDark ? Colors.black : Colors.white).withOpacity(0.85),
                   ],
-                  stops: const [0.0, 0.4, 0.7, 1.0],
+                  stops: const [0.0, 0.5, 0.8, 1.0],
                 ),
               ),
             ),
           ),
-
-          // Interactive glow effect
-          if (_isHovered)
-            Positioned.fill(
-              child: Container(
-                decoration: BoxDecoration(
-                  gradient: RadialGradient(
-                    center: Alignment.center,
-                    radius: 1.5,
-                    colors: [
-                      (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                          .withOpacity(0.3),
-                      Colors.transparent,
-                    ],
-                  ),
-                ),
-              ),
-            ),
         ],
       ),
     );
@@ -473,82 +330,42 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
 
             const SizedBox(height: 12),
 
-            // Technology chips with animation
+            // Technology chips (simplified)
             Wrap(
               spacing: 6,
               runSpacing: 6,
               children: widget.project.technologies
                   .take(4)
-                  .toList()
-                  .asMap()
-                  .entries
                   .map(
-                    (entry) => TweenAnimationBuilder<double>(
-                      duration: Duration(milliseconds: 300 + (entry.key * 50)),
-                      tween: Tween<double>(
-                        begin: 0.0,
-                        end: _isHovered ? 1.0 : 0.8,
+                    (tech) => Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 4,
                       ),
-                      curve: Curves.easeOutBack,
-                      builder: (context, value, child) {
-                        return Transform.scale(
-                          scale: value,
-                          child: MouseRegion(
-                            cursor: SystemMouseCursors.click,
-                            child: AnimatedContainer(
-                              duration: const Duration(milliseconds: 200),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 10,
-                                vertical: 6,
-                              ),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  colors: [
-                                    (isDark
-                                            ? AppTheme.darkAccentColor
-                                            : AppTheme.accentColor)
-                                        .withOpacity(0.2),
-                                    (isDark
-                                            ? AppTheme.darkPrimaryColor
-                                            : AppTheme.primaryColor)
-                                        .withOpacity(0.1),
-                                  ],
-                                ),
-                                borderRadius: BorderRadius.circular(20),
-                                border: Border.all(
-                                  color: (isDark
-                                          ? AppTheme.darkAccentColor
-                                          : AppTheme.accentColor)
-                                      .withOpacity(0.4),
-                                  width: 1.5,
-                                ),
-                                boxShadow: _isHovered
-                                    ? [
-                                        BoxShadow(
-                                          color: (isDark
-                                                  ? AppTheme.darkAccentColor
-                                                  : AppTheme.accentColor)
-                                              .withOpacity(0.3),
-                                          blurRadius: 8,
-                                          offset: const Offset(0, 2),
-                                        ),
-                                      ]
-                                    : null,
-                              ),
-                              child: Text(
-                                entry.value,
-                                style: AppTheme.bodySmall.copyWith(
-                                  color: isDark
-                                      ? AppTheme.darkAccentColor
-                                      : AppTheme.accentColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 10,
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                      decoration: BoxDecoration(
+                        color: (isDark
+                                ? AppTheme.darkAccentColor
+                                : AppTheme.accentColor)
+                            .withOpacity(0.15),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: (isDark
+                                  ? AppTheme.darkAccentColor
+                                  : AppTheme.accentColor)
+                              .withOpacity(0.4),
+                          width: 1,
+                        ),
+                      ),
+                      child: Text(
+                        tech,
+                        style: AppTheme.bodySmall.copyWith(
+                          color: isDark
+                              ? AppTheme.darkAccentColor
+                              : AppTheme.accentColor,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 10,
+                        ),
+                      ),
                     ),
                   )
                   .toList(),
@@ -564,58 +381,47 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
     final hasLiveDemo = widget.project.liveUrl?.isNotEmpty ?? false;
     final hasGithub = widget.project.githubUrl?.isNotEmpty ?? false;
 
-    return TweenAnimationBuilder<double>(
-      duration: const Duration(milliseconds: 800),
-      tween: Tween<double>(begin: 0.0, end: 1.0),
-      curve: Curves.easeOutCubic,
-      builder: (context, value, child) {
-        return Transform.translate(
-          offset: Offset(0, 10 * (1 - value)),
-          child: Opacity(
-            opacity: value,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-              decoration: BoxDecoration(
-                color: isDark
-                    ? Colors.white.withOpacity(0.05)
-                    : Colors.black.withOpacity(0.03),
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(
-                  color: isDark
-                      ? Colors.white.withOpacity(0.1)
-                      : Colors.black.withOpacity(0.05),
-                  width: 1,
-                ),
-              ),
-              child: Row(
-                children: [
-                  _buildStatItem(
-                    icon: Icons.code_rounded,
-                    label: '$techCount Tech',
-                    isDark: isDark,
-                  ),
-                  const SizedBox(width: 16),
-                  if (hasLiveDemo)
-                    _buildStatItem(
-                      icon: Icons.public_rounded,
-                      label: 'Live',
-                      isDark: isDark,
-                      color: Colors.green,
-                    ),
-                  if (hasLiveDemo && hasGithub) const SizedBox(width: 16),
-                  if (hasGithub)
-                    _buildStatItem(
-                      svgAsset: 'assets/icons/github_icon.svg',
-                      label: 'GitHub',
-                      isDark: isDark,
-                      color: Colors.purple,
-                    ),
-                ],
-              ),
-            ),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: isDark
+            ? Colors.white.withOpacity(0.05)
+            : Colors.black.withOpacity(0.03),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: isDark
+              ? Colors.white.withOpacity(0.1)
+              : Colors.black.withOpacity(0.05),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        children: [
+          _buildStatItem(
+            icon: Icons.code_rounded,
+            label: '$techCount Tech',
+            isDark: isDark,
           ),
-        );
-      },
+          if (hasLiveDemo) ...[
+            const SizedBox(width: 12),
+            _buildStatItem(
+              icon: Icons.public_rounded,
+              label: 'Live',
+              isDark: isDark,
+              color: Colors.green,
+            ),
+          ],
+          if (hasGithub) ...[
+            const SizedBox(width: 12),
+            _buildStatItem(
+              svgAsset: 'assets/icons/github_icon.svg',
+              label: 'GitHub',
+              isDark: isDark,
+              color: Colors.purple,
+            ),
+          ],
+        ],
+      ),
     );
   }
 
@@ -629,163 +435,85 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
     final effectiveColor =
         color ?? (isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary);
 
-    return MouseRegion(
-      cursor: SystemMouseCursors.click,
-      child: TweenAnimationBuilder<double>(
-        duration: const Duration(milliseconds: 300),
-        tween: Tween<double>(begin: 0.0, end: 1.0),
-        builder: (context, value, child) {
-          return Transform.scale(
-            scale: 0.9 + (0.1 * value),
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-              decoration: BoxDecoration(
-                color: effectiveColor.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(
-                  color: effectiveColor.withOpacity(0.2),
-                  width: 1,
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (svgAsset != null)
-                    SizedBox(
-                      width: 14,
-                      height: 14,
-                      child: SvgPicture.asset(
-                        svgAsset,
-                        fit: BoxFit.contain,
-                      ),
-                    )
-                  else if (icon != null)
-                    Icon(
-                      icon,
-                      size: 14,
-                      color: effectiveColor,
-                    ),
-                  const SizedBox(width: 4),
-                  Text(
-                    label,
-                    style: AppTheme.bodySmall.copyWith(
-                      color: effectiveColor,
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+      decoration: BoxDecoration(
+        color: effectiveColor.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(6),
       ),
-    );
-  }
-
-  Widget _buildAnimatedBorder(bool isDark) {
-    return AnimatedBuilder(
-      animation: _hoverController,
-      builder: (context, child) {
-        return Positioned.fill(
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              border: Border.all(
-                width: 2,
-                color: _isHovered
-                    ? (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                        .withOpacity(_fadeAnimation.value * 0.8)
-                    : Colors.transparent,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (svgAsset != null)
+            SizedBox(
+              width: 12,
+              height: 12,
+              child: SvgPicture.asset(
+                svgAsset,
+                fit: BoxFit.contain,
               ),
+            )
+          else if (icon != null)
+            Icon(
+              icon,
+              size: 12,
+              color: effectiveColor,
+            ),
+          const SizedBox(width: 3),
+          Text(
+            label,
+            style: AppTheme.bodySmall.copyWith(
+              color: effectiveColor,
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
             ),
           ),
-        );
-      },
-    );
-  }
-
-  Widget _buildRippleEffect(bool isDark) {
-    return AnimatedBuilder(
-      animation: _rippleController,
-      builder: (context, child) {
-        return Positioned.fill(
-          child: CustomPaint(
-            painter: RipplePainter(
-              progress: _rippleController.value,
-              color: isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
-            ),
-          ),
-        );
-      },
+        ],
+      ),
     );
   }
 
   Widget _buildFeaturedBadge(bool isDark) {
     return Positioned(
-      top: 16,
-      right: 16,
-      child: AnimatedBuilder(
-        animation: _pulseAnimation,
-        builder: (context, child) {
-          return Transform.scale(
-            scale: _pulseAnimation.value,
-            child: TweenAnimationBuilder<double>(
-              duration: const Duration(milliseconds: 600),
-              tween: Tween<double>(begin: 0.0, end: 1.0),
-              builder: (context, value, child) {
-                return Transform.scale(
-                  scale: value,
-                  child: Transform.rotate(
-                    angle: (1 - value) * 0.5,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            const Color(0xFFFFD700),
-                            const Color(0xFFFFA500),
-                          ],
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFFFFD700)
-                                .withOpacity(0.5 * _pulseAnimation.value),
-                            blurRadius: 12 + (8 * (_pulseAnimation.value - 1)),
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.star_rounded,
-                            size: 16,
-                            color: Colors.white,
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            'Featured',
-                            style: AppTheme.bodySmall.copyWith(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 11,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
+      top: 12,
+      right: 12,
+      child: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 5,
+        ),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
+          ),
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: const Color(0xFFFFD700).withOpacity(0.3),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
             ),
-          );
-        },
+          ],
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.star_rounded,
+              size: 14,
+              color: Colors.white,
+            ),
+            const SizedBox(width: 4),
+            Text(
+              'Featured',
+              style: AppTheme.bodySmall.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 10,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -794,96 +522,59 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
     return Positioned.fill(
       child: IgnorePointer(
         child: AnimatedOpacity(
-          duration: const Duration(milliseconds: 200),
+          duration: const Duration(milliseconds: 150),
           opacity: _isHovered ? 1.0 : 0.0,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(24),
-            child: BackdropFilter(
-              filter: ImageFilter.blur(sigmaX: 8, sigmaY: 8),
+          child: Container(
+            decoration: BoxDecoration(
+              color: (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+                  .withOpacity(0.1),
+            ),
+            child: Center(
               child: Container(
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: isDark
-                        ? [
-                            AppTheme.darkAccentColor.withOpacity(0.3),
-                            AppTheme.darkPrimaryColor.withOpacity(0.2),
-                          ]
-                        : [
-                            AppTheme.accentColor.withOpacity(0.2),
-                            AppTheme.primaryColor.withOpacity(0.15),
-                          ],
-                  ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
                 ),
-                child: Center(
-                  child: Transform.scale(
-                    scale: _scaleAnimation.value,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 16,
-                      ),
-                      decoration: BoxDecoration(
-                        color: (isDark
-                                ? AppTheme.darkPrimaryColor
-                                : AppTheme.primaryColor)
-                            .withOpacity(0.9),
-                        borderRadius: BorderRadius.circular(50),
-                        boxShadow: [
-                          BoxShadow(
-                            color: (isDark
-                                    ? AppTheme.darkAccentColor
-                                    : AppTheme.accentColor)
-                                .withOpacity(0.5),
-                            blurRadius: 20,
-                            spreadRadius: 5,
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.visibility_rounded,
-                            color: Colors.white,
-                            size: 24,
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            'View Project',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: 0.5,
-                            ),
-                          ),
-                        ],
+                decoration: BoxDecoration(
+                  color: (isDark
+                          ? AppTheme.darkPrimaryColor
+                          : AppTheme.primaryColor)
+                      .withOpacity(0.95),
+                  borderRadius: BorderRadius.circular(30),
+                  boxShadow: [
+                    BoxShadow(
+                      color: (isDark
+                              ? AppTheme.darkAccentColor
+                              : AppTheme.accentColor)
+                          .withOpacity(0.4),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const [
+                    Icon(
+                      Icons.visibility_rounded,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      'View Project',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildShimmerEffect() {
-    return Positioned.fill(
-      child: AnimatedBuilder(
-        animation: _shimmerController,
-        builder: (context, child) {
-          return CustomPaint(
-            painter: ShimmerPainter(
-              animation: _shimmerController,
-              color: Colors.white.withOpacity(0.3),
-            ),
-          );
-        },
       ),
     );
   }
@@ -948,77 +639,5 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
         builder: (context) => ProjectDetailsDialog(project: widget.project),
       );
     }
-  }
-}
-
-// Custom shimmer painter
-class ShimmerPainter extends CustomPainter {
-  final Animation<double> animation;
-  final Color color;
-
-  ShimmerPainter({required this.animation, required this.color});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..shader = LinearGradient(
-        begin: Alignment.topLeft,
-        end: Alignment.bottomRight,
-        colors: [
-          Colors.transparent,
-          color,
-          Colors.transparent,
-        ],
-        stops: [
-          animation.value - 0.3,
-          animation.value,
-          animation.value + 0.3,
-        ].map((e) => e.clamp(0.0, 1.0)).toList(),
-      ).createShader(Rect.fromLTWH(0, 0, size.width, size.height));
-
-    canvas.drawRect(Rect.fromLTWH(0, 0, size.width, size.height), paint);
-  }
-
-  @override
-  bool shouldRepaint(covariant ShimmerPainter oldDelegate) {
-    return animation.value != oldDelegate.animation.value;
-  }
-}
-
-// Ripple Painter for hover effect
-class RipplePainter extends CustomPainter {
-  final double progress;
-  final Color color;
-
-  RipplePainter({
-    required this.progress,
-    required this.color,
-  });
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    if (progress == 0) return;
-
-    final center = Offset(size.width / 2, size.height / 2);
-    final maxRadius = size.width > size.height ? size.width : size.height;
-
-    // Draw multiple ripple circles
-    for (int i = 0; i < 3; i++) {
-      final rippleProgress = (progress - (i * 0.1)).clamp(0.0, 1.0);
-      final radius = maxRadius * rippleProgress;
-      final opacity = (1.0 - rippleProgress) * 0.3;
-
-      final paint = Paint()
-        ..color = color.withOpacity(opacity)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2.0;
-
-      canvas.drawCircle(center, radius, paint);
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant RipplePainter oldDelegate) {
-    return progress != oldDelegate.progress;
   }
 }

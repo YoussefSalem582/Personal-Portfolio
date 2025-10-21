@@ -222,7 +222,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     if (filteredProjects.isEmpty) {
-      return Container(
+      return SizedBox(
         height: 200,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -254,24 +254,21 @@ class _ProjectsSectionState extends State<ProjectsSection> {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: columns,
-          crossAxisSpacing: 20,
-          mainAxisSpacing: 20,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
           childAspectRatio: 0.9,
         ),
         itemCount: filteredProjects.length,
         itemBuilder: (context, index) {
           return AnimationConfiguration.staggeredGrid(
             position: index,
-            duration: const Duration(milliseconds: 500),
+            duration: const Duration(milliseconds: 300),
             columnCount: columns,
-            child: SlideAnimation(
-              verticalOffset: 50.0,
-              child: FadeInAnimation(
-                child: ProjectCardAdvanced(
-                  project: filteredProjects[index],
-                  isCompact: false,
-                  index: index,
-                ),
+            child: FadeInAnimation(
+              child: ProjectCardAdvanced(
+                project: filteredProjects[index],
+                isCompact: false,
+                index: index,
               ),
             ),
           );

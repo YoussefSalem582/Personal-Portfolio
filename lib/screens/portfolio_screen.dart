@@ -107,8 +107,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics(),
                 ),
-                cacheExtent:
-                    1000, // Cache 1000 pixels ahead for smooth scrolling
+                cacheExtent: 500, // Reduced cache for better performance
                 slivers: [
                   // Hero Section - Always visible, no lazy loading
                   SliverToBoxAdapter(
@@ -119,6 +118,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   SliverToBoxAdapter(
                     child: LazyLoadWidget(
                       placeholder: const SectionPlaceholder(height: 600),
+                      visibilityThreshold: 0.15,
                       child: AboutSection(key: _sectionKeys[1]),
                     ),
                   ),
@@ -127,7 +127,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   SliverToBoxAdapter(
                     child: LazyLoadWidget(
                       placeholder: const SectionPlaceholder(height: 800),
-                      visibilityThreshold: 0.05,
+                      visibilityThreshold: 0.1,
                       child: ProjectsSection(key: _sectionKeys[2]),
                     ),
                   ),
@@ -136,6 +136,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   SliverToBoxAdapter(
                     child: LazyLoadWidget(
                       placeholder: const SectionPlaceholder(height: 500),
+                      visibilityThreshold: 0.15,
                       child: SkillsSection(key: _sectionKeys[3]),
                     ),
                   ),
@@ -144,7 +145,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   SliverToBoxAdapter(
                     child: LazyLoadWidget(
                       placeholder: const SectionPlaceholder(height: 700),
-                      visibilityThreshold: 0.05,
+                      visibilityThreshold: 0.1,
                       child: CertificatesSection(key: _sectionKeys[4]),
                     ),
                   ),
@@ -153,6 +154,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   SliverToBoxAdapter(
                     child: LazyLoadWidget(
                       placeholder: const SectionPlaceholder(height: 600),
+                      visibilityThreshold: 0.15,
                       child: ContactSection(key: _sectionKeys[5]),
                     ),
                   ),
