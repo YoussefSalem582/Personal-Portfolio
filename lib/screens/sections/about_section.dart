@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
-import '../../utils/portfolio_data.dart';
+import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 
 class AboutSection extends StatelessWidget {

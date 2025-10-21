@@ -12,9 +12,5 @@ class InitialBindings extends Bindings {
     // Put controllers permanently (persist across routes)
     Get.put<ThemeController>(ThemeController(), permanent: true);
     Get.put<PortfolioController>(PortfolioController(), permanent: true);
-
-    // Admin controller disabled for static deployment
-    // Uncomment to enable admin dashboard:
-    // Get.lazyPut<AdminController>(() => AdminController());
   }
 }

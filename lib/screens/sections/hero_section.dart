@@ -3,7 +3,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
-import '../../utils/portfolio_data.dart';
+import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import '../../widgets/project_card.dart';
 

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:personal_portfolio/utils/portfolio_data.dart';
+import 'package:personal_portfolio/utils/data/portfolio_data.dart';
 
 void main() {
   group('PortfolioData Tests', () {
@@ -58,9 +58,8 @@ void main() {
     test('should have skills categorized correctly', () {
       expect(PortfolioData.skills.isNotEmpty, true);
 
-      final categoryNames = PortfolioData.skills
-          .map((cat) => cat.name)
-          .toList();
+      final categoryNames =
+          PortfolioData.skills.map((cat) => cat.name).toList();
       expect(categoryNames.contains('Mobile Development'), true);
       expect(categoryNames.contains('Programming Languages'), true);
       expect(categoryNames.contains('AI & Machine Learning'), true);
@@ -69,9 +68,8 @@ void main() {
     test('should have certificates list', () {
       expect(PortfolioData.certificates.isNotEmpty, true);
 
-      final certificateTitles = PortfolioData.certificates
-          .map((c) => c.title)
-          .toList();
+      final certificateTitles =
+          PortfolioData.certificates.map((c) => c.title).toList();
       expect(certificateTitles.any((title) => title.contains('Flutter')), true);
       expect(
         certificateTitles.any((title) => title.contains('Machine Learning')),

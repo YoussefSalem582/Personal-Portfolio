@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../models/project.dart';
 import '../models/certificate.dart';
 import '../models/skill.dart';
-import '../utils/portfolio_data.dart';
+import '../utils/data/portfolio_data.dart';
 
 /// Portfolio Controller - Static Data Version
 /// This controller uses only local assets and static data
