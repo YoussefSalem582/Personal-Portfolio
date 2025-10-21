@@ -300,8 +300,8 @@ class HeroSection extends StatelessWidget {
           child: const Text('Get In Touch'),
         ),
         OutlinedButton(
-          onPressed: () => UrlHelper.downloadFile(PortfolioData.resumeUrl),
-          child: const Text('Download CV'),
+          onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
+          child: const Text('View Resume'),
         ),
         OutlinedButton(
           onPressed: () => _scrollToSection(context, 2), // Projects section

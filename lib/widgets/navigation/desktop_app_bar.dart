@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
 import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
+import '../../utils/url_helper.dart';
+import '../../utils/data/portfolio_data.dart';
 import '../theme_toggle.dart';
 import 'navigation_item.dart';
 
@@ -158,7 +159,7 @@ class DesktopAppBar extends StatelessWidget {
 
           const SizedBox(width: 16),
 
-          // Resume download button with enhanced styling
+          // Resume view button with enhanced styling
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -185,10 +186,10 @@ class DesktopAppBar extends StatelessWidget {
               ],
             ),
             child: ElevatedButton.icon(
-              onPressed: () => _downloadResume(context),
-              icon: const Icon(Icons.download_rounded, size: 18),
+              onPressed: () => _openResume(context),
+              icon: const Icon(Icons.article_rounded, size: 18),
               label: const Text(
-                'Download CV',
+                'View Resume',
                 style: TextStyle(
                   fontWeight: FontWeight.w700,
                   letterSpacing: 0.5,
@@ -268,9 +269,9 @@ class DesktopAppBar extends StatelessWidget {
     }
   }
 
-  void _downloadResume(BuildContext context) {
+  void _openResume(BuildContext context) async {
     try {
-      html.window.open('assets/images/resume.pdf', '_blank');
+      await UrlHelper.openFile(PortfolioData.resumeUrl);
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

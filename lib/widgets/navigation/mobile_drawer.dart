@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'dart:html' as html;
+import '../../utils/url_helper.dart';
+import '../../utils/data/portfolio_data.dart';
 import '../theme_toggle.dart';
 import 'navigation_item.dart';
 
@@ -153,7 +154,7 @@ class MobileDrawer extends StatelessWidget {
 
                   const SizedBox(height: 12),
 
-                  // Download Resume - gray/neutral button
+                  // View Resume - gray/neutral button
                   Padding(
                     padding:
                         const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
@@ -163,7 +164,7 @@ class MobileDrawer extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                         onTap: () {
                           Navigator.of(context).pop();
-                          _downloadResume(context);
+                          _openResume(context);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -178,13 +179,13 @@ class MobileDrawer extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                Icons.download_rounded,
+                                Icons.article_rounded,
                                 color: Colors.white,
                                 size: 20,
                               ),
                               SizedBox(width: 12),
                               Text(
-                                'Download Resume',
+                                'View Resume',
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w600,
@@ -263,9 +264,9 @@ class MobileDrawer extends StatelessWidget {
     return items;
   }
 
-  void _downloadResume(BuildContext context) {
+  void _openResume(BuildContext context) async {
     try {
-      html.window.open('assets/images/resume.pdf', '_blank');
+      await UrlHelper.openFile(PortfolioData.resumeUrl);
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
