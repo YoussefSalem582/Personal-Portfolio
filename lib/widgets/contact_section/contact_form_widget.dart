@@ -368,3 +368,8 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
             'Network error. Please check your internet connection.');
       }
 
+      // Re-throw to be caught by _submitForm method
+      rethrow;
+    }
+  }
+}
