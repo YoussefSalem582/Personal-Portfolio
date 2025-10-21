@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../theme/app_theme.dart';
-import '../widgets/app_navigation.dart';
+import '../widgets/navigation/app_navigation.dart';
 import '../utils/responsive_helper.dart';
 import '../controllers/portfolio_controller.dart';
 import 'sections/hero_section.dart';
@@ -12,7 +12,6 @@ import 'sections/certificates_section.dart';
 import 'sections/contact_section.dart';
 import '../widgets/footer.dart';
 import '../widgets/skeleton_loading.dart';
-import '../widgets/lazy_load_widget.dart';
 
 class PortfolioScreen extends StatefulWidget {
   const PortfolioScreen({super.key});
@@ -59,13 +58,46 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   }
 
   void _scrollToSection(int index) {
-    final context = _sectionKeys[index].currentContext;
-    if (context != null) {
-      Scrollable.ensureVisible(
-        context,
-        duration: const Duration(milliseconds: 800),
-        curve: Curves.easeInOut,
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final isMobile = ResponsiveHelper.isMobile(screenWidth);
+
+    // Calculate positions based on device type
+    final List<double> positions;
+
+    if (isMobile) {
+      // Mobile scroll positions (adjusted for mobile layout)
+      positions = [
+        0.0, // Home
+        screenHeight * 1.42, // About
+        screenHeight * 3.2, // Projects
+        screenHeight * 9.4, // Skills
+        screenHeight * 10.4, // Certificates
+        screenHeight * 11.5, // Contact
+      ];
+    } else {
+      // Desktop scroll positions
+      positions = [
+        0.0, // Home
+        screenHeight * 0.9, // About
+        screenHeight * 2.1, // Projects
+        screenHeight * 5.35, // Skills
+        screenHeight * 5.85, // Certificates
+        screenHeight * 8.3, // Contact
+      ];
+    }
+
+    if (index < positions.length) {
+      _scrollController.animateTo(
+        positions[index],
+        duration: const Duration(milliseconds: 600),
+        curve: Curves.easeInOutCubic,
       );
+
+      // Update current section
+      setState(() {
+        _currentSection = index;
+      });
     }
   }
 
@@ -80,10 +112,8 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       backgroundColor:
           isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
       drawer: isMobile
-          ? AppNavigation(
-              onItemSelected: _scrollToSection,
-              currentIndex: _currentSection,
-            ).buildMobileDrawer(context)
+          ? AppNavigation.buildDrawer(
+              context, _scrollToSection, _currentSection)
           : null,
       body: Obx(() {
         // Show loading state
@@ -100,63 +130,43 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               currentIndex: _currentSection,
             ),
 
-            // Scrollable Content with Optimized Slivers
+            // Scrollable Content - Removed lazy loading for better performance
             Expanded(
               child: CustomScrollView(
                 controller: _scrollController,
                 physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics(),
                 ),
-                cacheExtent: 500, // Reduced cache for better performance
+                cacheExtent: 1000, // Increased cache for smoother scrolling
                 slivers: [
-                  // Hero Section - Always visible, no lazy loading
+                  // Hero Section
                   SliverToBoxAdapter(
                     child: HeroSection(key: _sectionKeys[0]),
                   ),
 
-                  // About Section - Lazy loaded
+                  // About Section
                   SliverToBoxAdapter(
-                    child: LazyLoadWidget(
-                      placeholder: const SectionPlaceholder(height: 600),
-                      visibilityThreshold: 0.15,
-                      child: AboutSection(key: _sectionKeys[1]),
-                    ),
+                    child: AboutSection(key: _sectionKeys[1]),
                   ),
 
-                  // Projects Section - Lazy loaded with higher threshold
+                  // Projects Section
                   SliverToBoxAdapter(
-                    child: LazyLoadWidget(
-                      placeholder: const SectionPlaceholder(height: 800),
-                      visibilityThreshold: 0.1,
-                      child: ProjectsSection(key: _sectionKeys[2]),
-                    ),
+                    child: ProjectsSection(key: _sectionKeys[2]),
                   ),
 
-                  // Skills Section - Lazy loaded
+                  // Skills Section
                   SliverToBoxAdapter(
-                    child: LazyLoadWidget(
-                      placeholder: const SectionPlaceholder(height: 500),
-                      visibilityThreshold: 0.15,
-                      child: SkillsSection(key: _sectionKeys[3]),
-                    ),
+                    child: SkillsSection(key: _sectionKeys[3]),
                   ),
 
-                  // Certificates Section - Lazy loaded (image heavy)
+                  // Certificates Section
                   SliverToBoxAdapter(
-                    child: LazyLoadWidget(
-                      placeholder: const SectionPlaceholder(height: 700),
-                      visibilityThreshold: 0.1,
-                      child: CertificatesSection(key: _sectionKeys[4]),
-                    ),
+                    child: CertificatesSection(key: _sectionKeys[4]),
                   ),
 
-                  // Contact Section - Lazy loaded
+                  // Contact Section
                   SliverToBoxAdapter(
-                    child: LazyLoadWidget(
-                      placeholder: const SectionPlaceholder(height: 600),
-                      visibilityThreshold: 0.15,
-                      child: ContactSection(key: _sectionKeys[5]),
-                    ),
+                    child: ContactSection(key: _sectionKeys[5]),
                   ),
 
                   // Footer - Always load

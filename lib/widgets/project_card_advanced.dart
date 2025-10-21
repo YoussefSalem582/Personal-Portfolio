@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import '../theme/app_theme.dart';
 import '../models/project.dart';
@@ -325,11 +324,6 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
 
             const SizedBox(height: 8),
 
-            // Project Stats Bar
-            _buildStatsBar(isDark),
-
-            const SizedBox(height: 12),
-
             // Technology chips (simplified)
             Wrap(
               spacing: 6,
@@ -372,103 +366,6 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget _buildStatsBar(bool isDark) {
-    final techCount = widget.project.technologies.length;
-    final hasLiveDemo = widget.project.liveUrl?.isNotEmpty ?? false;
-    final hasGithub = widget.project.githubUrl?.isNotEmpty ?? false;
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: isDark
-            ? Colors.white.withOpacity(0.05)
-            : Colors.black.withOpacity(0.03),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: isDark
-              ? Colors.white.withOpacity(0.1)
-              : Colors.black.withOpacity(0.05),
-          width: 1,
-        ),
-      ),
-      child: Row(
-        children: [
-          _buildStatItem(
-            icon: Icons.code_rounded,
-            label: '$techCount Tech',
-            isDark: isDark,
-          ),
-          if (hasLiveDemo) ...[
-            const SizedBox(width: 12),
-            _buildStatItem(
-              icon: Icons.public_rounded,
-              label: 'Live',
-              isDark: isDark,
-              color: Colors.green,
-            ),
-          ],
-          if (hasGithub) ...[
-            const SizedBox(width: 12),
-            _buildStatItem(
-              svgAsset: 'assets/icons/github_icon.svg',
-              label: 'GitHub',
-              isDark: isDark,
-              color: Colors.purple,
-            ),
-          ],
-        ],
-      ),
-    );
-  }
-
-  Widget _buildStatItem({
-    IconData? icon,
-    String? svgAsset,
-    required String label,
-    required bool isDark,
-    Color? color,
-  }) {
-    final effectiveColor =
-        color ?? (isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary);
-
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
-      decoration: BoxDecoration(
-        color: effectiveColor.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(6),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (svgAsset != null)
-            SizedBox(
-              width: 12,
-              height: 12,
-              child: SvgPicture.asset(
-                svgAsset,
-                fit: BoxFit.contain,
-              ),
-            )
-          else if (icon != null)
-            Icon(
-              icon,
-              size: 12,
-              color: effectiveColor,
-            ),
-          const SizedBox(width: 3),
-          Text(
-            label,
-            style: AppTheme.bodySmall.copyWith(
-              color: effectiveColor,
-              fontSize: 10,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
       ),
     );
   }
