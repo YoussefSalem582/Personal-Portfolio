@@ -42,7 +42,7 @@ dependencies:
   
   # Fonts and UI
   google_fonts: ^6.1.0
-  flutter_svg: ^2.0.9
+  flutter_svg: 
   
   # URL and email handling
   url_launcher: ^6.2.2
@@ -119,6 +119,7 @@ flutter:
     - assets/icons/cv.gif
     - assets/images/certificates/
     - assets/images/certificates/photos/
+    - assets/images/certificates/pdf/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

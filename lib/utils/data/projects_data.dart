@@ -20,16 +20,56 @@ class ProjectsData {
       ],
       githubUrl: 'https://github.com/YoussefSalem582/Emosense-App',
       imageUrl:
-          'assets/images/projects/app_images/emosense_photos/employee/Screenshot_20250717_162654.png',
+          'assets/images/projects/app_images/emosense_photos/app_icon.png',
       galleryImages: [
-        'assets/images/projects/app_images/emosense_photos/employee/Screenshot_20250717_162654.png',
-        'assets/images/projects/app_images/emosense_photos/employee/Screenshot_20250717_162719.png',
-        'assets/images/projects/app_images/emosense_photos/employee/Screenshot_20250717_162750.png',
-        'assets/images/projects/app_images/emosense_photos/employee/Screenshot_20250717_162801.png',
-        'assets/images/projects/app_images/emosense_photos/employee/Screenshot_20250717_162813.png',
-        'assets/images/projects/app_images/emosense_photos/admin/Screenshot_20250717_163525.png',
-        'assets/images/projects/app_images/emosense_photos/admin/Screenshot_20250717_163542.png',
-        'assets/images/projects/app_images/emosense_photos/admin/Screenshot_20250717_163552.png',
+        // Onboarding & Authentication
+        'assets/images/projects/app_images/emosense_photos/employee/splash_screen.png',
+        'assets/images/projects/app_images/emosense_photos/employee/onboarding_1.png',
+        'assets/images/projects/app_images/emosense_photos/employee/onboarding_2.png',
+        'assets/images/projects/app_images/emosense_photos/employee/onboarding_3.png',
+        'assets/images/projects/app_images/emosense_photos/employee/onboarding_4.png',
+        'assets/images/projects/app_images/emosense_photos/employee/signin_and_login.png',
+        'assets/images/projects/app_images/emosense_photos/employee/signin_employee.png',
+        'assets/images/projects/app_images/emosense_photos/employee/login.png',
+        'assets/images/projects/app_images/emosense_photos/employee/signin_admin.png',
+
+        // Employee Home & Tools
+        'assets/images/projects/app_images/emosense_photos/employee/employee_home_screen.png',
+        'assets/images/projects/app_images/emosense_photos/employee/tools_screen.png',
+
+        // Video Analysis
+        'assets/images/projects/app_images/emosense_photos/employee/video_analysis_screen.png',
+        'assets/images/projects/app_images/emosense_photos/employee/video_analysis_screen_2.png',
+        'assets/images/projects/app_images/emosense_photos/employee/video_analysis_screen_3.png',
+        'assets/images/projects/app_images/emosense_photos/employee/video_analysis_screen_4.png',
+
+        // Voice Analysis
+        'assets/images/projects/app_images/emosense_photos/employee/voice_analysis_screen.png',
+        'assets/images/projects/app_images/emosense_photos/employee/voice_analysis_screen_2.png',
+        'assets/images/projects/app_images/emosense_photos/employee/voice_analysis_screen_3.png',
+
+        // Text Analysis
+        'assets/images/projects/app_images/emosense_photos/employee/text_analysis_screen.png',
+        'assets/images/projects/app_images/emosense_photos/employee/text_analysis_screen_2.png',
+
+        // Support Tickets
+        'assets/images/projects/app_images/emosense_photos/employee/tickets_screen.png',
+        'assets/images/projects/app_images/emosense_photos/employee/tickets_screen_2.png',
+        'assets/images/projects/app_images/emosense_photos/employee/tickets_screen_3.png',
+
+        // Employee Profile
+        'assets/images/projects/app_images/emosense_photos/employee/profiel_screen.png',
+        'assets/images/projects/app_images/emosense_photos/employee/profile_sceen_2.png',
+        'assets/images/projects/app_images/emosense_photos/employee/profile_screen_3.png',
+
+        // Admin Panel
+        'assets/images/projects/app_images/emosense_photos/admin/amin_home_screen.png',
+        'assets/images/projects/app_images/emosense_photos/admin/user_managment_screen.png',
+        'assets/images/projects/app_images/emosense_photos/admin/system_screen.png',
+        'assets/images/projects/app_images/emosense_photos/admin/system_screen._2.png',
+        'assets/images/projects/app_images/emosense_photos/admin/support_tickets_screen.png',
+        'assets/images/projects/app_images/emosense_photos/admin/profile_screen.png',
+        'assets/images/projects/app_images/emosense_photos/admin/profile_screen__2.png',
       ],
       createdAt: DateTime(2025, 7, 1),
       isFeatured: true,
