@@ -76,6 +76,10 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^6.0.0
+  
+  # Asset generation
+  flutter_gen_runner: ^5.3.2
+  flutter_launcher_icons: ^0.14.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -92,6 +96,7 @@ flutter:
   assets:
     - assets/
     - assets/images/
+    - assets/images/portfolio_logo.png
     - assets/images/projects/
     - assets/images/projects/app_images/
     - assets/images/projects/app_images/chargehub/
@@ -139,3 +144,29 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+# FlutterGen Configuration
+flutter_gen:
+  output: lib/core/utils/
+  line_length: 80
+  
+  integrations:
+    flutter_svg: true
+    
+  assets:
+    outputs:
+      class_name: AppImages
+      package_parameter_enabled: false
+
+# Flutter Launcher Icons Configuration
+flutter_launcher_icons:
+  android: true
+  ios: true
+  web:
+    generate: true
+    image_path: "assets/images/portfolio_logo.png"
+    background_color: "#0D1117"
+    theme_color: "#3498DB"
+  image_path: "assets/images/portfolio_logo.png"
+  adaptive_icon_background: "#0D1117"
+  adaptive_icon_foreground: "assets/images/portfolio_logo.png"

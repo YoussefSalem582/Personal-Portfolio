@@ -9,35 +9,13 @@
     "description": "Flutter Developer building fast cross-platform mobile and web apps. Expertise in Dart, Python, TensorFlow, Firebase, and machine learning integration.",
     "orientation": "any",
     "prefer_related_applications": false,
-    "categories": ["portfolio", "technology", "developer"],
+    "categories": [
+        "portfolio",
+        "technology",
+        "developer"
+    ],
     "lang": "en-US",
     "dir": "ltr",
-    "icons": [
-        {
-            "src": "icons/Icon-192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "icons/Icon-512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "icons/Icon-maskable-192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "maskable"
-        },
-        {
-            "src": "icons/Icon-maskable-512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-        }
-    ],
     "screenshots": [],
     "shortcuts": [
         {
@@ -65,6 +43,30 @@
                     "type": "image/png"
                 }
             ]
+        }
+    ],
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
         }
     ]
 }
