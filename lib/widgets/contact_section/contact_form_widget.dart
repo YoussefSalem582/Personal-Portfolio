@@ -266,6 +266,12 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       final templateId = ApiKeys.emailJsTemplateId;
       final publicKey = ApiKeys.emailJsPublicKey;
 
+      // Check if API keys are configured
+      if (serviceId.isEmpty || templateId.isEmpty || publicKey.isEmpty) {
+        throw Exception(
+            'EmailJS API keys are not configured. Please contact the administrator.');
+      }
+
       // Prepare email data
       final templateParams = {
         'from_name': form.name,
@@ -281,6 +287,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
         url,
         headers: {
           'Content-Type': 'application/json',
+          'Origin': 'https://youssefsalem582.github.io',
         },
         body: jsonEncode({
           'service_id': serviceId,
@@ -291,7 +298,16 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       );
 
       if (response.statusCode != 200) {
-        throw Exception('Failed to send email: ${response.body}');
+        // Parse error response if available
+        String errorMessage = 'Failed to send email';
+        try {
+          final errorBody = jsonDecode(response.body);
+          errorMessage = errorBody['message'] ?? errorBody.toString();
+        } catch (_) {
+          errorMessage = response.body;
+        }
+        throw Exception(
+            'EmailJS Error (${response.statusCode}): $errorMessage');
       }
     } catch (e) {
       // Re-throw to be caught by _submitForm method
