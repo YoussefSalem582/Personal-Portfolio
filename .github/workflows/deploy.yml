@@ -25,15 +25,19 @@ jobs:
           channel: 'stable'
       
       - name: Create API Keys config
+        env:
+          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
+          EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
         run: |
           mkdir -p lib/config
-          cat > lib/config/api_keys.dart << 'EOF'
+          cat > lib/config/api_keys.dart << EOF
           /// API Keys Configuration
           class ApiKeys {
             // EmailJS Configuration
-            static const String emailJsServiceId = 'service_bgf2wpr';
-            static const String emailJsTemplateId = 'template_bz5u3sw';
-            static const String emailJsPublicKey = 'cZy6Pq5CsNS33aWbj';
+            static const String emailJsServiceId = '$EMAILJS_SERVICE_ID';
+            static const String emailJsTemplateId = '$EMAILJS_TEMPLATE_ID';
+            static const String emailJsPublicKey = '$EMAILJS_PUBLIC_KEY';
             
             // Email recipient
             static const String recipientEmail = 'youssef.salem.hassan582@gmail.com';
