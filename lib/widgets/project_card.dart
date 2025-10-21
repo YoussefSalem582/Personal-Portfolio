@@ -279,7 +279,7 @@ class _ProjectCardState extends State<ProjectCard>
         padding: const EdgeInsets.all(8.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: MainAxisSize.max,
           children: [
             // Title with icon - Fixed height
             SizedBox(

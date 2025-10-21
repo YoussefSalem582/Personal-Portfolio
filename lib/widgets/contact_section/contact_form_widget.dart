@@ -240,9 +240,25 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       _messageController.clear();
     } catch (e) {
       // Show error message if submission fails
+      // Print error for debugging
+      debugPrint('Contact form error: $e');
+
+      // Provide more helpful error message
+      String errorMessage = 'Error sending message. ';
+      if (e.toString().contains('403')) {
+        errorMessage +=
+            'Email service configuration issue. Please contact me directly at youssef.salem.hassan582@gmail.com';
+      } else if (e.toString().contains('CORS') ||
+          e.toString().contains('XMLHttpRequest')) {
+        errorMessage +=
+            'Please try again or contact me directly at youssef.salem.hassan582@gmail.com';
+      } else {
+        errorMessage +=
+            'Please try again or contact me directly at youssef.salem.hassan582@gmail.com';
+      }
+
       setState(() {
-        _submitStatus =
-            'Error sending message. Please try again or contact me directly.';
+        _submitStatus = errorMessage;
         _isSubmitting = false;
       });
     }
@@ -266,6 +282,10 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       final templateId = ApiKeys.emailJsTemplateId;
       final publicKey = ApiKeys.emailJsPublicKey;
 
+      debugPrint('Attempting to send email with EmailJS...');
+      debugPrint('Service ID: $serviceId');
+      debugPrint('Template ID: $templateId');
+
       // Check if API keys are configured
       if (serviceId.isEmpty || templateId.isEmpty || publicKey.isEmpty) {
         throw Exception(
@@ -273,21 +293,25 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       }
 
       // Prepare email data
+      // Note: Don't send to_email as a template param - it should be configured in the EmailJS template
       final templateParams = {
         'from_name': form.name,
         'from_email': form.email,
         'subject': form.subject,
         'message': form.message,
-        'to_email': ApiKeys.recipientEmail,
+        'reply_to': form.email,
       };
+
+      debugPrint('Template params: $templateParams');
 
       // Send email via EmailJS API
       final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
+
+      debugPrint('Sending POST request to EmailJS...');
       final response = await http.post(
         url,
         headers: {
           'Content-Type': 'application/json',
-          'Origin': 'https://youssefsalem582.github.io',
         },
         body: jsonEncode({
           'service_id': serviceId,
@@ -296,6 +320,9 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
           'template_params': templateParams,
         }),
       );
+
+      debugPrint('EmailJS Response status: ${response.statusCode}');
+      debugPrint('EmailJS Response body: ${response.body}');
 
       if (response.statusCode != 200) {
         // Parse error response if available
@@ -309,9 +336,12 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
         throw Exception(
             'EmailJS Error (${response.statusCode}): $errorMessage');
       }
+
+      debugPrint('Email sent successfully!');
     } catch (e) {
+      debugPrint('Error in _submitContactForm: $e');
       // Re-throw to be caught by _submitForm method
-      throw Exception('Failed to send message: $e');
+      rethrow;
     }
   }
 }
