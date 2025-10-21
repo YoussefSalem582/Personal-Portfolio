@@ -50,9 +50,9 @@ class UrlHelper {
   static Future<void> openFile(String url) async {
     // For web, if it's an asset path, construct the proper URL
     if (kIsWeb && url.startsWith('assets/')) {
-      // On web, Flutter assets are served from the base URL
-      // Remove 'assets/' prefix as it's already included in the build output
-      final webUrl = url;
+      // On Flutter web, assets are served with an extra 'assets/' prefix
+      // So 'assets/images/file.pdf' becomes '/assets/assets/images/file.pdf'
+      final webUrl = 'assets/$url';
       html.window.open(webUrl, '_blank');
       return;
     }

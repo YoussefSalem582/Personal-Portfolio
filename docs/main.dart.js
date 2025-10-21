@@ -28220,7 +28220,7 @@ return A.R($async$anw,r)},
 mx(a){var s=0,r=A.S(t.H),q,p,o,n
 var $async$mx=A.O(function(b,c){if(b===1)return A.P(c,r)
 while(true)switch(s){case 0:n=B.d.cl(a,"assets/")
-if(n){p=window.open(a,"_blank")
+if(n){p=window.open("assets/"+a,"_blank")
 A.aUH(p)
 s=1
 break}o=A.iS(a,0,null)
