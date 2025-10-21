@@ -1,6 +1,5 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:emailjs/emailjs.dart' as emailjs;
 import '../../theme/app_theme.dart';
 import '../../models/contact_form.dart';
 import '../../config/api_keys.dart';
@@ -284,17 +283,17 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
     }
   }
 
-  /// Submits the contact form using EmailJS service.
+  /// Submits the contact form using the official EmailJS Flutter package.
   ///
   /// This method sends an email to youssef.salem.hassan582@gmail.com
-  /// using the EmailJS API. The form data includes name, email, subject, and message.
+  /// using the EmailJS service. The form data includes name, email, subject, and message.
   ///
   /// EmailJS Setup Instructions:
   /// 1. Create account at https://www.emailjs.com/
   /// 2. Add email service (Gmail recommended)
   /// 3. Create email template with variables: {{from_name}}, {{from_email}}, {{subject}}, {{message}}
   /// 4. Get your Service ID, Template ID, and Public Key
-  /// 5. Replace the placeholder values below with your actual credentials
+  /// 5. Update values in lib/config/api_keys.dart
   Future<void> _submitContactForm(ContactForm form) async {
     try {
       // EmailJS configuration from secure config file
@@ -312,78 +311,48 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
             'EmailJS API keys are not configured. Please contact the administrator.');
       }
 
-      // Prepare email data
-      // Note: Don't send to_email as a template param - it should be configured in the EmailJS template
-      final templateParams = {
-        'from_name': form.name,
-        'from_email': form.email,
-        'subject': form.subject,
-        'message': form.message,
-        'reply_to': form.email,
-      };
-
-      debugPrint('Template params: $templateParams');
-
-      // Send email via EmailJS API with proper CORS headers for web deployment
-      final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
-
-      debugPrint('Sending POST request to EmailJS...');
-      final response = await http
-          .post(
-        url,
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          // EmailJS doesn't require Origin header, it handles CORS automatically
+      // Send email using the official EmailJS package
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          'from_name': form.name,
+          'from_email': form.email,
+          'subject': form.subject,
+          'message': form.message,
+          'reply_to': form.email,
         },
-        body: jsonEncode({
-          'service_id': serviceId,
-          'template_id': templateId,
-          'user_id': publicKey,
-          'template_params': templateParams,
-        }),
-      )
-          .timeout(
-        const Duration(seconds: 10),
-        onTimeout: () {
-          throw Exception(
-              'Request timeout. Please check your internet connection and try again.');
-        },
+        emailjs.Options(
+          publicKey: publicKey,
+          // Optional: Add rate limiting to prevent abuse
+          limitRate: const emailjs.LimitRate(
+            id: 'portfolio_contact',
+            throttle: 10000, // 10 seconds between submissions
+          ),
+        ),
       );
 
-      debugPrint('EmailJS Response status: ${response.statusCode}');
-      debugPrint('EmailJS Response body: ${response.body}');
+      debugPrint('Email sent successfully!');
+    } on emailjs.EmailJSResponseStatus catch (error) {
+      // Handle EmailJS-specific errors
+      debugPrint('EmailJS Error: ${error.status} - ${error.text}');
 
-      if (response.statusCode == 200) {
-        debugPrint('Email sent successfully!');
-        return;
-      }
-
-      // Handle specific error codes
-      if (response.statusCode == 400) {
+      // Provide user-friendly error messages based on status code
+      if (error.status == 400) {
         throw Exception(
             'Invalid request. Please check your EmailJS configuration.');
-      } else if (response.statusCode == 403) {
+      } else if (error.status == 403) {
         throw Exception(
             'Access denied. Please verify your EmailJS API keys are correct.');
-      } else if (response.statusCode == 404) {
+      } else if (error.status == 404) {
         throw Exception(
             'Service or template not found. Please check your EmailJS IDs.');
-      } else if (response.statusCode >= 500) {
+      } else if (error.status >= 500) {
         throw Exception(
             'EmailJS server error. Please try again in a few moments.');
+      } else {
+        throw Exception('Failed to send email: ${error.text}');
       }
-
-      // Parse error response if available
-      String errorMessage = 'Failed to send email';
-      try {
-        final errorBody = jsonDecode(response.body);
-        errorMessage = errorBody['message'] ?? errorBody.toString();
-      } catch (_) {
-        errorMessage =
-            response.body.isNotEmpty ? response.body : 'Unknown error occurred';
-      }
-      throw Exception('EmailJS Error (${response.statusCode}): $errorMessage');
     } catch (e) {
       debugPrint('Error in _submitContactForm: $e');
       // Re-throw to be caught by _submitForm method
