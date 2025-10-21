@@ -1,0 +1,16 @@
+/// API Keys Configuration Template
+/// 
+/// This is a template file showing the structure of api_keys.dart
+/// Copy this file to lib/config/api_keys.dart and fill in your actual values.
+/// 
+/// IMPORTANT: lib/config/api_keys.dart is in .gitignore and will not be committed.
+class ApiKeys {
+  // EmailJS Configuration
+  // Get these from: https://dashboard.emailjs.com/
+  static const String emailJsServiceId = 'YOUR_SERVICE_ID'; // e.g., 'service_abc123'
+  static const String emailJsTemplateId = 'YOUR_TEMPLATE_ID'; // e.g., 'template_xyz789'
+  static const String emailJsPublicKey = 'YOUR_PUBLIC_KEY'; // e.g., 'cZy6Pq5CsNS33aWbj'
+  
+  // Email recipient
+  static const String recipientEmail = 'your-email@example.com';
+}
