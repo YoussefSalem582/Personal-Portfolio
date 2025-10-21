@@ -23,10 +23,23 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+      
+      - name: Create API Keys config
+        run: |
+          mkdir -p lib/config
+          cat > lib/config/api_keys.dart << 'EOF'
+          /// API Keys Configuration
+          class ApiKeys {
+            // EmailJS Configuration
+            static const String emailJsServiceId = 'service_bgf2wpr';
+            static const String emailJsTemplateId = 'template_bz5u3sw';
+            static const String emailJsPublicKey = 'cZy6Pq5CsNS33aWbj';
+            
+            // Email recipient
+            static const String recipientEmail = 'youssef.salem.hassan582@gmail.com';
+          }
+          EOF
           
-      - name: Setup environment file
-        run: cp .env.production .env
-        
       - name: Get dependencies
         run: flutter pub get
         
