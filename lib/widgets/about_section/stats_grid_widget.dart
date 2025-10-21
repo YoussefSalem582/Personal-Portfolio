@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/data/portfolio_data.dart';
 import 'stat_card_widget.dart';
 
-/// A 2x2 grid displaying key statistics.
+/// A 2x2 grid displaying key statistics with staggered animations.
+///
+/// Features:
+/// - Animated entrance with staggered delay
+/// - Icons for each statistic
+/// - Responsive grid layout
+/// - Dynamic stat calculations from portfolio data
 ///
 /// Shows four statistics:
 /// - Number of completed projects
@@ -11,49 +18,67 @@ import 'stat_card_widget.dart';
 /// - Number of technologies/skills
 /// - Client satisfaction percentage
 ///
-/// Each statistic is displayed in a StatCardWidget with gradient background.
+/// Each statistic is displayed in a StatCardWidget with gradient background,
+/// hover effects, and smooth animations.
 class StatsGridWidget extends StatelessWidget {
   const StatsGridWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // Define the statistics to display
+    // Define the statistics to display with icons
     final stats = [
       {
         'title': '${PortfolioData.projects.length}+',
         'subtitle': 'Projects Completed',
+        'icon': Icons.work_rounded,
       },
       {
         'title': '2+',
         'subtitle': 'Years Experience',
+        'icon': Icons.timeline_rounded,
       },
       {
         'title': '${PortfolioData.skills.expand((cat) => cat.skills).length}+',
         'subtitle': 'Technologies',
+        'icon': Icons.code_rounded,
       },
       {
         'title': '100%',
         'subtitle': 'Client Satisfaction',
+        'icon': Icons.star_rounded,
       },
     ];
 
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: AppTheme.spacingM,
-        mainAxisSpacing: AppTheme.spacingM,
-        childAspectRatio: 1.2,
+    return AnimationLimiter(
+      child: GridView.builder(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: AppTheme.spacingM,
+          mainAxisSpacing: AppTheme.spacingM,
+          childAspectRatio: 1.1,
+        ),
+        itemCount: stats.length,
+        itemBuilder: (context, index) {
+          final stat = stats[index];
+          return AnimationConfiguration.staggeredGrid(
+            position: index,
+            duration: const Duration(milliseconds: 600),
+            columnCount: 2,
+            child: SlideAnimation(
+              verticalOffset: 50.0,
+              child: FadeInAnimation(
+                child: StatCardWidget(
+                  title: stat['title']! as String,
+                  subtitle: stat['subtitle']! as String,
+                  icon: stat['icon'] as IconData?,
+                ),
+              ),
+            ),
+          );
+        },
       ),
-      itemCount: stats.length,
-      itemBuilder: (context, index) {
-        final stat = stats[index];
-        return StatCardWidget(
-          title: stat['title']!,
-          subtitle: stat['subtitle']!,
-        );
-      },
     );
   }
 }

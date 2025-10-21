@@ -243,15 +243,35 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       // Print error for debugging
       debugPrint('Contact form error: $e');
 
-      // Provide more helpful error message
+      // Provide more helpful error message based on error type
       String errorMessage = 'Error sending message. ';
-      if (e.toString().contains('403')) {
+
+      if (e.toString().contains('timeout')) {
         errorMessage +=
-            'Email service configuration issue. Please contact me directly at youssef.salem.hassan582@gmail.com';
+            'Request timeout. Please check your internet connection and try again.';
+      } else if (e.toString().contains('403') ||
+          e.toString().contains('Access denied')) {
+        errorMessage +=
+            'Email service authentication issue. Please contact me directly at youssef.salem.hassan582@gmail.com';
+      } else if (e.toString().contains('404')) {
+        errorMessage +=
+            'Email service configuration not found. Please contact me directly at youssef.salem.hassan582@gmail.com';
+      } else if (e.toString().contains('400') ||
+          e.toString().contains('Invalid')) {
+        errorMessage +=
+            'Invalid form data. Please check your inputs and try again.';
+      } else if (e.toString().contains('500') ||
+          e.toString().contains('server')) {
+        errorMessage +=
+            'Email service is temporarily unavailable. Please try again later or contact me directly at youssef.salem.hassan582@gmail.com';
       } else if (e.toString().contains('CORS') ||
           e.toString().contains('XMLHttpRequest')) {
         errorMessage +=
-            'Please try again or contact me directly at youssef.salem.hassan582@gmail.com';
+            'Browser security issue. Please try again or contact me directly at youssef.salem.hassan582@gmail.com';
+      } else if (e.toString().contains('SocketException') ||
+          e.toString().contains('network')) {
+        errorMessage +=
+            'Network connection issue. Please check your internet and try again.';
       } else {
         errorMessage +=
             'Please try again or contact me directly at youssef.salem.hassan582@gmail.com';
@@ -304,14 +324,17 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
 
       debugPrint('Template params: $templateParams');
 
-      // Send email via EmailJS API
+      // Send email via EmailJS API with proper CORS headers for web deployment
       final url = Uri.parse('https://api.emailjs.com/api/v1.0/email/send');
 
       debugPrint('Sending POST request to EmailJS...');
-      final response = await http.post(
+      final response = await http
+          .post(
         url,
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          // EmailJS doesn't require Origin header, it handles CORS automatically
         },
         body: jsonEncode({
           'service_id': serviceId,
@@ -319,25 +342,48 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
           'user_id': publicKey,
           'template_params': templateParams,
         }),
+      )
+          .timeout(
+        const Duration(seconds: 10),
+        onTimeout: () {
+          throw Exception(
+              'Request timeout. Please check your internet connection and try again.');
+        },
       );
 
       debugPrint('EmailJS Response status: ${response.statusCode}');
       debugPrint('EmailJS Response body: ${response.body}');
 
-      if (response.statusCode != 200) {
-        // Parse error response if available
-        String errorMessage = 'Failed to send email';
-        try {
-          final errorBody = jsonDecode(response.body);
-          errorMessage = errorBody['message'] ?? errorBody.toString();
-        } catch (_) {
-          errorMessage = response.body;
-        }
-        throw Exception(
-            'EmailJS Error (${response.statusCode}): $errorMessage');
+      if (response.statusCode == 200) {
+        debugPrint('Email sent successfully!');
+        return;
       }
 
-      debugPrint('Email sent successfully!');
+      // Handle specific error codes
+      if (response.statusCode == 400) {
+        throw Exception(
+            'Invalid request. Please check your EmailJS configuration.');
+      } else if (response.statusCode == 403) {
+        throw Exception(
+            'Access denied. Please verify your EmailJS API keys are correct.');
+      } else if (response.statusCode == 404) {
+        throw Exception(
+            'Service or template not found. Please check your EmailJS IDs.');
+      } else if (response.statusCode >= 500) {
+        throw Exception(
+            'EmailJS server error. Please try again in a few moments.');
+      }
+
+      // Parse error response if available
+      String errorMessage = 'Failed to send email';
+      try {
+        final errorBody = jsonDecode(response.body);
+        errorMessage = errorBody['message'] ?? errorBody.toString();
+      } catch (_) {
+        errorMessage =
+            response.body.isNotEmpty ? response.body : 'Unknown error occurred';
+      }
+      throw Exception('EmailJS Error (${response.statusCode}): $errorMessage');
     } catch (e) {
       debugPrint('Error in _submitContactForm: $e');
       // Re-throw to be caught by _submitForm method

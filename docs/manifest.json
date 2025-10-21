@@ -1,0 +1,72 @@
+{
+    "name": "Youssef Salem Hassan - Portfolio",
+    "short_name": "YSH Portfolio",
+    "start_url": "/Personal-Portfolio/",
+    "scope": "/Personal-Portfolio/",
+    "display": "standalone",
+    "background_color": "#0D1117",
+    "theme_color": "#3498DB",
+    "description": "Flutter Developer building fast cross-platform mobile and web apps. Expertise in Dart, Python, TensorFlow, Firebase, and machine learning integration.",
+    "orientation": "any",
+    "prefer_related_applications": false,
+    "categories": [
+        "portfolio",
+        "technology",
+        "developer"
+    ],
+    "lang": "en-US",
+    "dir": "ltr",
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "Projects",
+            "short_name": "Projects",
+            "description": "View all projects",
+            "url": "/Personal-Portfolio/#/projects",
+            "icons": [
+                {
+                    "src": "icons/Icon-192.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                }
+            ]
+        },
+        {
+            "name": "Contact",
+            "short_name": "Contact",
+            "description": "Get in touch",
+            "url": "/Personal-Portfolio/#/contact",
+            "icons": [
+                {
+                    "src": "icons/Icon-192.png",
+                    "sizes": "192x192",
+                    "type": "image/png"
+                }
+            ]
+        }
+    ],
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-maskable-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "icons/Icon-maskable-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        }
+    ]
+}
