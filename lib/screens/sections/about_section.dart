@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
-import '../../utils/data/portfolio_data.dart';
-import '../../utils/url_helper.dart';
+import '../../widgets/about_section/bio_section_widget.dart';
+import '../../widgets/about_section/stats_section_widget.dart';
 
+/// The about section of the portfolio displaying biographical information and statistics.
+///
+/// This section provides two main components:
+/// 1. BioSectionWidget - Shows bio text and contact information
+/// 2. StatsSectionWidget - Displays stats, resume download, and social links
+///
+/// The layout is responsive:
+/// - Desktop: Side-by-side layout (bio: 66%, stats: 33%)
+/// - Mobile: Stacked layout (bio above stats)
 class AboutSection extends StatelessWidget {
   const AboutSection({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Get screen dimensions and responsive settings
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -39,6 +49,7 @@ class AboutSection extends StatelessWidget {
 
             const SizedBox(height: AppTheme.spacingS),
 
+            // Decorative gradient underline
             Container(
               width: 60,
               height: 4,
@@ -52,339 +63,31 @@ class AboutSection extends StatelessWidget {
 
             const SizedBox(height: AppTheme.spacingXXL),
 
+            // Content - responsive layout
+            // Mobile: Stack vertically (bio above stats)
             if (isMobile)
-              _buildMobileLayout(context)
-            else
-              _buildDesktopLayout(context),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDesktopLayout(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Left side - Bio and info
-        Expanded(flex: 2, child: _buildBioSection()),
-
-        const SizedBox(width: AppTheme.spacingXXL),
-
-        // Right side - Stats and resume
-        Expanded(child: _buildStatsSection()),
-      ],
-    );
-  }
-
-  Widget _buildMobileLayout(BuildContext context) {
-    return Column(
-      children: [
-        _buildBioSection(),
-        const SizedBox(height: AppTheme.spacingXXL),
-        _buildStatsSection(),
-      ],
-    );
-  }
-
-  Widget _buildBioSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Who I Am', style: AppTheme.headingMedium),
-
-        const SizedBox(height: AppTheme.spacingL),
-
-        Text(PortfolioData.bio, style: AppTheme.bodyLarge),
-
-        const SizedBox(height: AppTheme.spacingL),
-
-        Text(
-          'I specialize in creating beautiful, performant applications that provide excellent user experiences. '
-          'My passion lies in solving complex problems through code and bringing innovative ideas to life.',
-          style: AppTheme.bodyLarge.copyWith(fontStyle: FontStyle.italic),
-        ),
-
-        const SizedBox(height: AppTheme.spacingXL),
-
-        // Contact info
-        _buildContactInfo(),
-      ],
-    );
-  }
-
-  Widget _buildContactInfo() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Get In Touch', style: AppTheme.headingSmall),
-        const SizedBox(height: AppTheme.spacingM),
-        _buildContactItem(
-          Icons.email_outlined,
-          'Email',
-          PortfolioData.email,
-          () => UrlHelper.launchEmail(email: PortfolioData.email),
-        ),
-        const SizedBox(height: AppTheme.spacingS),
-        _buildContactItem(
-          Icons.location_on_outlined,
-          'Location',
-          PortfolioData.location,
-          null,
-        ),
-        const SizedBox(height: AppTheme.spacingS),
-        _buildContactItem(
-          Icons.web_outlined,
-          'Portfolio',
-          'View Online',
-          () => UrlHelper.launchURL(PortfolioData.portfolioUrl),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildContactItem(
-    IconData icon,
-    String label,
-    String value,
-    VoidCallback? onTap,
-  ) {
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(AppTheme.radiusS),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: AppTheme.spacingXS),
-        child: Row(
-          children: [
-            Icon(icon, size: 20, color: AppTheme.accentColor),
-            const SizedBox(width: AppTheme.spacingM),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: AppTheme.bodySmall.copyWith(
-                    color: AppTheme.textSecondary,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                Text(
-                  value,
-                  style: AppTheme.bodyMedium.copyWith(
-                    color: onTap != null
-                        ? AppTheme.accentColor
-                        : AppTheme.textPrimary,
-                    decoration: onTap != null ? TextDecoration.underline : null,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildStatsSection() {
-    return Column(
-      children: [
-        // Stats cards
-        _buildStatsGrid(),
-
-        const SizedBox(height: AppTheme.spacingXL),
-
-        // Resume download
-        _buildResumeCard(),
-
-        const SizedBox(height: AppTheme.spacingXL),
-
-        // Social links
-        _buildSocialLinks(),
-      ],
-    );
-  }
-
-  Widget _buildStatsGrid() {
-    final stats = [
-      {
-        'title': '${PortfolioData.projects.length}+',
-        'subtitle': 'Projects Completed',
-      },
-      {'title': '2+', 'subtitle': 'Years Experience'},
-      {
-        'title': '${PortfolioData.skills.expand((cat) => cat.skills).length}+',
-        'subtitle': 'Technologies',
-      },
-      {'title': '100%', 'subtitle': 'Client Satisfaction'},
-    ];
-
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: AppTheme.spacingM,
-        mainAxisSpacing: AppTheme.spacingM,
-        childAspectRatio: 1.2,
-      ),
-      itemCount: stats.length,
-      itemBuilder: (context, index) {
-        final stat = stats[index];
-        return Card(
-          elevation: 2,
-          child: Container(
-            padding: const EdgeInsets.all(AppTheme.spacingM),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(AppTheme.radiusL),
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  AppTheme.accentColor.withValues(alpha: 0.1),
-                  AppTheme.primaryColor.withValues(alpha: 0.05),
-                ],
-              ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              const Column(
                 children: [
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      stat['title']!,
-                      style: AppTheme.headingMedium.copyWith(
-                        color: AppTheme.accentColor,
-                        fontSize: 22,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Flexible(
-                    child: Text(
-                      stat['subtitle']!,
-                      style: AppTheme.bodySmall.copyWith(
-                        color: AppTheme.textSecondary,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 11,
-                      ),
-                      textAlign: TextAlign.center,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
+                  BioSectionWidget(),
+                  SizedBox(height: AppTheme.spacingXXL),
+                  StatsSectionWidget(),
+                ],
+              )
+            // Desktop: Display side by side (bio 66% | stats 33%)
+            else
+              const Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Left side - Bio and contact info (2/3 width)
+                  Expanded(flex: 2, child: BioSectionWidget()),
+                  SizedBox(width: AppTheme.spacingXXL),
+                  // Right side - Stats and actions (1/3 width)
+                  Expanded(child: StatsSectionWidget()),
                 ],
               ),
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildResumeCard() {
-    return Card(
-      elevation: 4,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.all(AppTheme.spacingL),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppTheme.radiusL),
-          gradient: AppTheme.primaryGradient,
-        ),
-        child: Column(
-          children: [
-            const Icon(
-              Icons.download_rounded,
-              size: 40,
-              color: AppTheme.surfaceColor,
-            ),
-            const SizedBox(height: AppTheme.spacingM),
-            Text(
-              'Download Resume',
-              style: AppTheme.headingSmall.copyWith(
-                color: AppTheme.surfaceColor,
-              ),
-            ),
-            const SizedBox(height: AppTheme.spacingS),
-            Text(
-              'Get a copy of my detailed CV',
-              style: AppTheme.bodyMedium.copyWith(
-                color: AppTheme.surfaceColor.withValues(alpha: 0.9),
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: AppTheme.spacingL),
-            ElevatedButton(
-              onPressed: () => UrlHelper.downloadFile(PortfolioData.resumeUrl),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppTheme.surfaceColor,
-                foregroundColor: AppTheme.primaryColor,
-              ),
-              child: const Text('Download PDF'),
-            ),
           ],
         ),
       ),
     );
-  }
-
-  Widget _buildSocialLinks() {
-    return Column(
-      children: [
-        Text(
-          'Connect With Me',
-          style: AppTheme.headingSmall,
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: AppTheme.spacingL),
-        Wrap(
-          spacing: AppTheme.spacingM,
-          runSpacing: AppTheme.spacingM,
-          alignment: WrapAlignment.center,
-          children: PortfolioData.socialLinks
-              .map((social) => _buildSocialButton(social))
-              .toList(),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildSocialButton(social) {
-    return InkWell(
-      onTap: () => UrlHelper.launchURL(social.url),
-      borderRadius: BorderRadius.circular(AppTheme.radiusL),
-      child: Container(
-        width: 50,
-        height: 50,
-        decoration: BoxDecoration(
-          color: AppTheme.accentColor.withValues(alpha: 0.1),
-          borderRadius: BorderRadius.circular(AppTheme.radiusL),
-          border:
-              Border.all(color: AppTheme.accentColor.withValues(alpha: 0.2)),
-        ),
-        child: Icon(
-          _getIconForPlatform(social.name),
-          color: AppTheme.accentColor,
-          size: 24,
-        ),
-      ),
-    );
-  }
-
-  IconData _getIconForPlatform(String name) {
-    switch (name.toLowerCase()) {
-      case 'github':
-        return Icons.code; // GitHub icon
-      case 'linkedin':
-        return Icons.work; // LinkedIn icon
-      case 'youtube':
-        return Icons.play_arrow; // YouTube icon
-      case 'upwork':
-        return Icons.work_outline; // Upwork icon
-      default:
-        return Icons.link;
-    }
   }
 }

@@ -41,4 +41,16 @@ class UrlHelper {
   static Future<void> downloadFile(String url) async {
     await launchURL(url);
   }
+
+  /// Opens a file (like PDF) in a new tab or viewer
+  /// For web, this opens in a new browser tab
+  /// For mobile/desktop, uses the default file viewer
+  static Future<void> openFile(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.platformDefault);
+    } else {
+      throw 'Could not open $url';
+    }
+  }
 }
