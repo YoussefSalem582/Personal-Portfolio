@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:emailjs/emailjs.dart' as emailjs;
+import 'dart:async';
+import 'dart:js_interop' as js;
+import 'dart:js_interop_unsafe';
 import '../../theme/app_theme.dart';
 import '../../models/contact_form.dart';
 import '../../config/api_keys.dart';
@@ -283,7 +285,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
     }
   }
 
-  /// Submits the contact form using the official EmailJS Flutter package.
+  /// Submits the contact form using EmailJS via JavaScript interop.
   ///
   /// This method sends an email to youssef.salem.hassan582@gmail.com
   /// using the EmailJS service. The form data includes name, email, subject, and message.
@@ -311,52 +313,58 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
             'EmailJS API keys are not configured. Please contact the administrator.');
       }
 
-      // Send email using the official EmailJS package
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          'from_name': form.name,
-          'from_email': form.email,
-          'subject': form.subject,
-          'message': form.message,
-          'reply_to': form.email,
-        },
-        emailjs.Options(
-          publicKey: publicKey,
-          // Optional: Add rate limiting to prevent abuse
-          limitRate: const emailjs.LimitRate(
-            id: 'portfolio_contact',
-            throttle: 10000, // 10 seconds between submissions
-          ),
-        ),
-      );
+      // Create template parameters as a JavaScript object
+      final templateParams = <String, dynamic>{
+        'from_name': form.name,
+        'from_email': form.email,
+        'subject': form.subject,
+        'message': form.message,
+        'reply_to': form.email,
+      }.jsify();
+
+      // Get the emailjs object from global context
+      // Access emailjs from global context
+      final emailjsObj = js.globalContext.getProperty('emailjs'.toJS);
+      if (emailjsObj.typeofEquals('undefined')) {
+        throw Exception('EmailJS is not loaded. Please refresh the page.');
+      }
+
+      // Call emailjs.send() which returns a Promise
+      final emailjsContext = emailjsObj as js.JSObject;
+      final sendFunction =
+          emailjsContext.getProperty('send'.toJS) as js.JSFunction;
+      final promise = sendFunction.callAsFunction(
+        emailjsContext,
+        serviceId.toJS,
+        templateId.toJS,
+        templateParams,
+      ) as js.JSPromise;
+
+      // Convert Promise to Future
+      await promise.toDart;
 
       debugPrint('Email sent successfully!');
-    } on emailjs.EmailJSResponseStatus catch (error) {
-      // Handle EmailJS-specific errors
-      debugPrint('EmailJS Error: ${error.status} - ${error.text}');
-
-      // Provide user-friendly error messages based on status code
-      if (error.status == 400) {
-        throw Exception(
-            'Invalid request. Please check your EmailJS configuration.');
-      } else if (error.status == 403) {
-        throw Exception(
-            'Access denied. Please verify your EmailJS API keys are correct.');
-      } else if (error.status == 404) {
-        throw Exception(
-            'Service or template not found. Please check your EmailJS IDs.');
-      } else if (error.status >= 500) {
-        throw Exception(
-            'EmailJS server error. Please try again in a few moments.');
-      } else {
-        throw Exception('Failed to send email: ${error.text}');
-      }
     } catch (e) {
       debugPrint('Error in _submitContactForm: $e');
-      // Re-throw to be caught by _submitForm method
-      rethrow;
-    }
-  }
-}
+
+      // Parse error message for better user feedback
+      final errorString = e.toString().toLowerCase();
+      if (errorString.contains('403') || errorString.contains('forbidden')) {
+        throw Exception(
+            'Access denied. Please verify your EmailJS configuration.');
+      } else if (errorString.contains('404') ||
+          errorString.contains('not found')) {
+        throw Exception(
+            'Service or template not found. Please check your EmailJS IDs.');
+      } else if (errorString.contains('400') ||
+          errorString.contains('invalid')) {
+        throw Exception('Invalid request. Please check your form data.');
+      } else if (errorString.contains('500') ||
+          errorString.contains('server')) {
+        throw Exception('EmailJS server error. Please try again later.');
+      } else if (errorString.contains('network') ||
+          errorString.contains('timeout')) {
+        throw Exception(
+            'Network error. Please check your internet connection.');
+      }
+
