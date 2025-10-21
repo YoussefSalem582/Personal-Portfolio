@@ -1,4 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:html' as html show window;
 
 class UrlHelper {
   static Future<void> launchURL(String url) async {
@@ -46,7 +48,16 @@ class UrlHelper {
   /// For web, this opens in a new browser tab
   /// For mobile/desktop, uses the default file viewer
   static Future<void> openFile(String url) async {
-    final Uri uri = Uri.parse(url);
+    String finalUrl = url;
+    
+    // For web, if it's an asset path, open it directly using window.open
+    if (kIsWeb && url.startsWith('assets/')) {
+      // Get the base URL and append the asset path
+      html.window.open(url, '_blank');
+      return;
+    }
+    
+    final Uri uri = Uri.parse(finalUrl);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.platformDefault);
     } else {
