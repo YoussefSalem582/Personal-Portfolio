@@ -48,16 +48,16 @@ class UrlHelper {
   /// For web, this opens in a new browser tab
   /// For mobile/desktop, uses the default file viewer
   static Future<void> openFile(String url) async {
-    String finalUrl = url;
-    
-    // For web, if it's an asset path, open it directly using window.open
+    // For web, if it's an asset path, construct the proper URL
     if (kIsWeb && url.startsWith('assets/')) {
-      // Get the base URL and append the asset path
-      html.window.open(url, '_blank');
+      // On web, Flutter assets are served from /assets/assets/
+      // So we need to prepend 'assets/' to the path
+      final webUrl = 'assets/$url';
+      html.window.open(webUrl, '_blank');
       return;
     }
-    
-    final Uri uri = Uri.parse(finalUrl);
+
+    final Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.platformDefault);
     } else {
