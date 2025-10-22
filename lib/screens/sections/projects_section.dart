@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:get/get.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/data/portfolio_data.dart';
@@ -429,7 +430,12 @@ class _AllProjectsDialog extends StatelessWidget {
                         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                         onTap: () {
                           Navigator.of(context).pop();
-                          // Show project details
+                          // Navigate to case study for projects with images
+                          if (project.imageUrl != null ||
+                              (project.galleryImages != null &&
+                                  project.galleryImages!.isNotEmpty)) {
+                            Get.toNamed('/project/${project.id}');
+                          }
                         },
                       ),
                     ),

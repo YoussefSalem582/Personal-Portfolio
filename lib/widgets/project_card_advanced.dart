@@ -516,21 +516,17 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
   }
 
   void _showProjectDetails(BuildContext context) {
-    debugPrint('🎯 Project tapped: ${widget.project.title}');
-    debugPrint('📋 Project ID: ${widget.project.id}');
-    debugPrint('⭐ Is Featured: ${widget.project.isFeatured}');
-
-    // Navigate to case study page for featured projects
-    if (widget.project.isFeatured) {
+    // Navigate to case study page for projects with images
+    if (widget.project.imageUrl != null ||
+        (widget.project.galleryImages != null &&
+            widget.project.galleryImages!.isNotEmpty)) {
       // Use the helper method to construct the full route
       final route = AppRoutes.getProjectRoute(widget.project.id);
-      debugPrint('🚀 Navigating to: $route');
 
-      // Navigate directly to the constructed route (not using parameters)
+      // Navigate directly to the constructed route
       Get.toNamed(route);
     } else {
-      debugPrint('💬 Opening dialog for non-featured project');
-      // Show dialog for non-featured projects
+      // Show dialog for projects without images
       showDialog(
         context: context,
         builder: (context) => ProjectDetailsDialog(project: widget.project),

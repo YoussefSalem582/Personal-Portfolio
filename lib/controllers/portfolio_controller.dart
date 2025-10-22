@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../models/project.dart';
 import '../models/certificate.dart';
@@ -43,16 +42,9 @@ class PortfolioController extends GetxController {
         },
       ];
 
-  @override
-  void onInit() {
-    super.onInit();
-    // Static data is always available, no initialization needed
-    debugPrint('✅ Portfolio Controller initialized with static data');
-  }
-
   /// Refresh - no-op for static data (can be extended later)
   @override
   Future<void> refresh() async {
-    debugPrint('📊 Using static portfolio data');
+    // Using static portfolio data
   }
 }

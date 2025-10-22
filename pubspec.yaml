@@ -109,6 +109,7 @@ flutter:
     - assets/images/projects/app_images/music_app/
     - assets/images/projects/app_images/quiz_hub/
     - assets/images/projects/app_images/QuoteHub/
+    - assets/images/projects/app_images/sprints_shop/
     - assets/images/projects/app_pdf/
     - assets/icons/
     # Explicit SVG icons for better web compatibility

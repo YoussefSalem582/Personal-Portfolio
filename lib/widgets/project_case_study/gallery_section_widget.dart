@@ -65,6 +65,48 @@ class GallerySectionWidget extends StatelessWidget {
       };
     }
 
+    if (projectId == 'gogesh-marketplace') {
+      return {
+        'Onboarding & Authentication': galleryImages
+            .where((img) =>
+                img.contains('splash') ||
+                img.contains('onboard') ||
+                img.contains('login') ||
+                img.contains('signup') ||
+                img.contains('phone_login') ||
+                img.contains('create_account'))
+            .toList(),
+        'User Home & Shopping': galleryImages
+            .where((img) =>
+                img.contains('user_home') ||
+                img.contains('app_main_search') ||
+                img.contains('product_screen') ||
+                img.contains('filter'))
+            .toList(),
+        'Categories & Products': galleryImages
+            .where((img) =>
+                img.contains('category') ||
+                img.contains('product') && !img.contains('merchant'))
+            .toList(),
+        'Favorites & Offers': galleryImages
+            .where((img) =>
+                img.contains('favorite') ||
+                img.contains('offers') ||
+                img.contains('ads'))
+            .toList(),
+        'Chat & Notifications': galleryImages
+            .where(
+                (img) => img.contains('chat') || img.contains('notification'))
+            .toList(),
+        'Merchant Dashboard': galleryImages
+            .where((img) =>
+                img.contains('merchant') ||
+                img.contains('cta_button') ||
+                img.contains('report'))
+            .toList(),
+      };
+    }
+
     // For other projects, return all images in one category
     return {'Gallery': galleryImages};
   }
@@ -247,6 +289,16 @@ class GallerySectionWidget extends StatelessWidget {
         return Icons.login_rounded;
       case 'employee home & tools':
         return Icons.home_rounded;
+      case 'user home & shopping':
+        return Icons.shopping_bag_rounded;
+      case 'categories & products':
+        return Icons.category_rounded;
+      case 'favorites & offers':
+        return Icons.favorite_rounded;
+      case 'chat & notifications':
+        return Icons.chat_rounded;
+      case 'merchant dashboard':
+        return Icons.store_rounded;
       case 'video analysis':
         return Icons.videocam_rounded;
       case 'voice analysis':

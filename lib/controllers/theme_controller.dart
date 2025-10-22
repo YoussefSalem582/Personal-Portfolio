@@ -41,11 +41,8 @@ class ThemeController extends GetxController {
       try {
         // For now, we'll skip localStorage to avoid dart:html issues
         // This can be implemented later with proper conditional imports
-        debugPrint(
-            'Theme saved: ${_themeMode.value == ThemeMode.dark ? 'dark' : 'light'}');
       } catch (e) {
         // Handle localStorage not available
-        debugPrint('Could not save theme preference: $e');
       }
     }
   }

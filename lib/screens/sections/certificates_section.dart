@@ -1111,8 +1111,8 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
           elevation: 0,
           shadowColor: Colors.red.withOpacity(0.3),
         ).copyWith(
-          elevation: MaterialStateProperty.resolveWith<double>(
-            (states) => states.contains(MaterialState.hovered) ? 8 : 0,
+          elevation: WidgetStateProperty.resolveWith<double>(
+            (states) => states.contains(WidgetState.hovered) ? 8 : 0,
           ),
         ),
       ),
@@ -1142,8 +1142,8 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
             borderRadius: BorderRadius.circular(AppTheme.radiusM),
           ),
         ).copyWith(
-          backgroundColor: MaterialStateProperty.resolveWith<Color>(
-            (states) => states.contains(MaterialState.hovered)
+          backgroundColor: WidgetStateProperty.resolveWith<Color>(
+            (states) => states.contains(WidgetState.hovered)
                 ? accentColor.withOpacity(0.1)
                 : Colors.transparent,
           ),

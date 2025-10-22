@@ -241,9 +241,6 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       _messageController.clear();
     } catch (e) {
       // Show error message if submission fails
-      // Print error for debugging
-      debugPrint('Contact form error: $e');
-
       // Provide more helpful error message based on error type
       String errorMessage = 'Error sending message. ';
 
@@ -303,10 +300,6 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       final templateId = ApiKeys.emailJsTemplateId;
       final publicKey = ApiKeys.emailJsPublicKey;
 
-      debugPrint('Attempting to send email with EmailJS...');
-      debugPrint('Service ID: $serviceId');
-      debugPrint('Template ID: $templateId');
-
       // Check if API keys are configured
       if (serviceId.isEmpty || templateId.isEmpty || publicKey.isEmpty) {
         throw Exception(
@@ -342,11 +335,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
 
       // Convert Promise to Future
       await promise.toDart;
-
-      debugPrint('Email sent successfully!');
     } catch (e) {
-      debugPrint('Error in _submitContactForm: $e');
-
       // Parse error message for better user feedback
       final errorString = e.toString().toLowerCase();
       if (errorString.contains('403') || errorString.contains('forbidden')) {

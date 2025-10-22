@@ -10,8 +10,6 @@ import 'routes/app_pages.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  debugPrint('✅ Portfolio App starting with static data');
-
   runApp(const PortfolioApp());
 }
 

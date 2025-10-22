@@ -83,10 +83,7 @@ class NavigationItem extends StatelessWidget {
       return MouseRegion(
         cursor: SystemMouseCursors.click,
         child: InkWell(
-          onTap: () {
-            print('Navigation item tapped: $title');
-            onTap();
-          },
+          onTap: onTap,
           borderRadius: BorderRadius.circular(10),
           hoverColor: (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
               .withOpacity(0.1),
