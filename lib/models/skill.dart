@@ -2,7 +2,7 @@ class Skill {
   final String id;
   final String name;
   final String category;
-  final int proficiency; // 1-100 scale for Supabase
+  final int? proficiency; // 1-100 scale for Supabase (optional)
   final String? iconPath;
   final String? description;
 
@@ -10,7 +10,7 @@ class Skill {
     required this.id,
     required this.name,
     required this.category,
-    required this.proficiency,
+    this.proficiency,
     this.iconPath,
     this.description,
   });

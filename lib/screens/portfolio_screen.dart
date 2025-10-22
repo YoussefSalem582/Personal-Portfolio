@@ -7,6 +7,7 @@ import '../controllers/portfolio_controller.dart';
 import 'sections/hero_section.dart';
 import 'sections/about_section.dart';
 import 'sections/projects_section.dart';
+import 'sections/expertise_section.dart';
 import 'sections/skills_section.dart';
 import 'sections/certificates_section.dart';
 import 'sections/contact_section.dart';
@@ -22,7 +23,7 @@ class PortfolioScreen extends StatefulWidget {
 
 class _PortfolioScreenState extends State<PortfolioScreen> {
   final ScrollController _scrollController = ScrollController();
-  final List<GlobalKey> _sectionKeys = List.generate(6, (index) => GlobalKey());
+  final List<GlobalKey> _sectionKeys = List.generate(7, (index) => GlobalKey());
   int _currentSection = 0;
 
   @override
@@ -70,19 +71,21 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       positions = [
         0.0, // Home
         screenHeight * 1.42, // About
-        screenHeight * 3.2, // Projects
-        screenHeight * 9.4, // Skills
-        screenHeight * 10.4, // Certificates
-        screenHeight * 11.5, // Contact
+        screenHeight * 3.2, // Skills
+        screenHeight * 4.2, // Expertise
+        screenHeight * 5.5, // Projects
+        screenHeight * 11.5, // Certificates
+        screenHeight * 12.5, // Contact
       ];
     } else {
       // Desktop scroll positions
       positions = [
         0.0, // Home
         screenHeight * 0.9, // About
-        screenHeight * 2.1, // Projects
-        screenHeight * 5.35, // Skills
-        screenHeight * 5.85, // Certificates
+        screenHeight * 2.1, // Skills
+        screenHeight * 3.0, // Expertise
+        screenHeight * 4.0, // Projects
+        screenHeight * 7.0, // Certificates
         screenHeight * 8.3, // Contact
       ];
     }
@@ -149,24 +152,29 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                     child: AboutSection(key: _sectionKeys[1]),
                   ),
 
-                  // Projects Section
-                  SliverToBoxAdapter(
-                    child: ProjectsSection(key: _sectionKeys[2]),
-                  ),
-
                   // Skills Section
                   SliverToBoxAdapter(
-                    child: SkillsSection(key: _sectionKeys[3]),
+                    child: SkillsSection(key: _sectionKeys[2]),
+                  ),
+
+                  // Expertise Section
+                  SliverToBoxAdapter(
+                    child: ExpertiseSection(key: _sectionKeys[3]),
+                  ),
+
+                  // Projects Section
+                  SliverToBoxAdapter(
+                    child: ProjectsSection(key: _sectionKeys[4]),
                   ),
 
                   // Certificates Section
                   SliverToBoxAdapter(
-                    child: CertificatesSection(key: _sectionKeys[4]),
+                    child: CertificatesSection(key: _sectionKeys[5]),
                   ),
 
                   // Contact Section
                   SliverToBoxAdapter(
-                    child: ContactSection(key: _sectionKeys[5]),
+                    child: ContactSection(key: _sectionKeys[6]),
                   ),
 
                   // Footer - Always load
@@ -183,7 +191,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
       // Floating Action Button for mobile
       floatingActionButton: isMobile
           ? FloatingActionButton(
-              onPressed: () => _scrollToSection(5), // Go to contact
+              onPressed: () => _scrollToSection(6), // Go to contact
               backgroundColor:
                   isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
               child: Icon(
