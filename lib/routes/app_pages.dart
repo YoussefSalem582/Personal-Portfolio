@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../screens/portfolio_screen.dart';
 import '../screens/project_case_study.dart';
+import '../screens/splash_screen.dart';
 import '../bindings/initial_bindings.dart';
 import '../controllers/portfolio_controller.dart';
 import 'app_routes.dart';
@@ -16,13 +17,24 @@ class AppPages {
   AppPages._();
 
   /// Initial route for the app
-  static const initial = AppRoutes.home;
+  static const initial = AppRoutes.splash;
 
   /// Transition duration for all routes
   static const transitionDuration = Duration(milliseconds: 400);
 
   /// List of all application routes with enhanced transitions
   static final routes = [
+    // ==================== Splash Screen ====================
+
+    // Splash Screen
+    GetPage(
+      name: AppRoutes.splash,
+      page: () => const SplashScreen(),
+      transition: Transition.fadeIn,
+      transitionDuration: transitionDuration,
+      curve: Curves.easeInOut,
+    ),
+
     // ==================== Main Routes ====================
 
     // Home/Portfolio Screen

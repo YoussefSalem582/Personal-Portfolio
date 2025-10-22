@@ -5,6 +5,9 @@ abstract class AppRoutes {
   // Prevent instantiation
   AppRoutes._();
 
+  /// Splash screen route
+  static const splash = '/splash';
+
   /// Home/Portfolio screen route
   static const home = '/';
 
