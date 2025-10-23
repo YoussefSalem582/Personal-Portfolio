@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/url_helper.dart';
+
+import '../../theme/app_theme.dart';
 
 /// Action buttons section with modern design
 class ActionButtonsWidget extends StatelessWidget {
@@ -23,25 +25,25 @@ class ActionButtonsWidget extends StatelessWidget {
         gradient: isDark
             ? LinearGradient(
                 colors: [
-                  AppTheme.darkCardColor,
-                  AppTheme.darkCardColor.withValues(alpha: 0.5),
+                  AppColors.cardDark,
+                  AppColors.cardDark.withValues(alpha: 0.5),
                 ],
               )
             : LinearGradient(
                 colors: [
-                  Colors.grey.shade50,
-                  Colors.white,
+                  AppColors.gray50,
+                  AppColors.white,
                 ],
               ),
         borderRadius: BorderRadius.circular(AppTheme.radiusL),
         border: Border.all(
-          color: (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+          color: (isDark ? AppColors.accentDark : AppColors.accentLight)
               .withValues(alpha: 0.2),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
-            color: (isDark ? Colors.black : Colors.grey.shade300)
+            color: (isDark ? AppColors.black : AppColors.gray300)
                 .withValues(alpha: 0.1),
             blurRadius: 20,
             offset: const Offset(0, 8),
@@ -53,18 +55,22 @@ class ActionButtonsWidget extends StatelessWidget {
           // Call to action text
           Text(
             'Want to learn more?',
-            style: AppTheme.headingMedium.copyWith(
-              color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
-              fontWeight: FontWeight.w700,
+            style: AppFonts.h5(
+              color: isDark
+                  ? AppColors.textPrimaryDark
+                  : AppColors.textPrimaryLight,
+            ).copyWith(
+              fontWeight: AppFonts.bold,
             ),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: AppTheme.spacingM),
           Text(
             'Explore the full case study or check out the source code',
-            style: AppTheme.bodyMedium.copyWith(
-              color:
-                  isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary,
+            style: AppFonts.bodyMedium().copyWith(
+              color: isDark
+                  ? AppColors.textSecondaryDark
+                  : AppColors.textSecondaryLight,
             ),
             textAlign: TextAlign.center,
           ),
@@ -76,23 +82,22 @@ class ActionButtonsWidget extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () => UrlHelper.launchURL(liveUrl!),
-                icon: const Icon(Icons.description_rounded, size: 22),
+                icon: const Icon(AppIcons.blog, size: 22),
                 label: const Text('View Full Case Study'),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   backgroundColor:
-                      isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
-                  foregroundColor: Colors.white,
+                      isDark ? AppColors.accentDark : AppColors.accentLight,
+                  foregroundColor: AppColors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
                   elevation: 0,
                   shadowColor:
-                      (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+                      (isDark ? AppColors.accentDark : AppColors.accentLight)
                           .withValues(alpha: 0.5),
-                  textStyle: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
+                  textStyle: AppFonts.labelLarge().copyWith(
+                    fontWeight: AppFonts.bold,
                     letterSpacing: 0.3,
                   ),
                 ),
@@ -108,24 +113,22 @@ class ActionButtonsWidget extends StatelessWidget {
               width: double.infinity,
               child: OutlinedButton.icon(
                 onPressed: () => UrlHelper.launchURL(githubUrl!),
-                icon: const Icon(Icons.code_rounded, size: 22),
+                icon: const Icon(AppIcons.github, size: 22),
                 label: const Text('View Source Code'),
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 20),
                   side: BorderSide(
-                    color: isDark
-                        ? AppTheme.darkAccentColor
-                        : AppTheme.accentColor,
+                    color:
+                        isDark ? AppColors.accentDark : AppColors.accentLight,
                     width: 2,
                   ),
                   foregroundColor:
-                      isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
+                      isDark ? AppColors.accentDark : AppColors.accentLight,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  textStyle: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
+                  textStyle: AppFonts.labelLarge().copyWith(
+                    fontWeight: AppFonts.bold,
                     letterSpacing: 0.3,
                   ),
                 ),

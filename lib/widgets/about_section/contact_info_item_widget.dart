@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../utils/app_constants.dart';
+
 import '../../theme/app_theme.dart';
 
 /// A single contact information item widget.
@@ -46,7 +48,7 @@ class ContactInfoItemWidget extends StatelessWidget {
             Icon(
               icon,
               size: 20,
-              color: isDark ? AppTheme.primaryColor : AppTheme.accentColor,
+              color: isDark ? AppColors.primaryLight : AppColors.accentLight,
             ),
 
             const SizedBox(width: AppTheme.spacingM),
@@ -58,33 +60,26 @@ class ContactInfoItemWidget extends StatelessWidget {
                 // Label text (smaller, secondary color)
                 Text(
                   label,
-                  style: (isDark
-                          ? AppTheme.bodySmallForTheme(context)
-                          : AppTheme.bodySmall)
+                  style: (isDark ? AppFonts.bodySmall() : AppFonts.bodySmall())
                       .copyWith(
-                    color: isDark ? Colors.grey.shade400 : Colors.grey.shade600,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 13,
+                    color: isDark ? AppColors.gray400 : AppColors.gray600,
+                    fontWeight: AppFonts.semiBold,
                   ),
                 ),
 
                 // Value text (larger, clickable items get accent color and underline)
                 Text(
                   value,
-                  style: (isDark
-                          ? AppTheme.bodyMediumForTheme(context)
-                          : AppTheme.bodyMedium)
-                      .copyWith(
+                  style:
+                      (isDark ? AppFonts.bodyMedium() : AppFonts.bodyMedium())
+                          .copyWith(
                     color: onTap != null
                         ? (isDark
-                            ? AppTheme.primaryColor
-                            : AppTheme.accentColor)
-                        : (isDark
-                            ? Colors.grey.shade300
-                            : Colors.grey.shade800),
+                            ? AppColors.primaryLight
+                            : AppColors.accentLight)
+                        : (isDark ? AppColors.gray300 : AppColors.gray800),
                     decoration: onTap != null ? TextDecoration.underline : null,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15,
+                    fontWeight: AppFonts.medium,
                   ),
                 ),
               ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../utils/app_constants.dart';
 import '../controllers/theme_controller.dart';
-import '../theme/app_theme.dart';
 
 class ThemeToggle extends StatelessWidget {
   final bool isCompact;
@@ -22,20 +22,20 @@ class ThemeToggle extends StatelessWidget {
             padding: EdgeInsets.all(isCompact ? 8 : 12),
             decoration: BoxDecoration(
               color: themeController.isDarkMode
-                  ? AppTheme.darkSurfaceColor
-                  : AppTheme.surfaceColor,
+                  ? AppColors.surfaceDark
+                  : AppColors.surfaceLight,
               borderRadius: BorderRadius.circular(20),
               border: Border.all(
                 color: themeController.isDarkMode
-                    ? AppTheme.darkAccentColor.withValues(alpha: 0.3)
-                    : AppTheme.accentColor.withValues(alpha: 0.3),
+                    ? AppColors.accentDark.withValues(alpha: 0.3)
+                    : AppColors.accentLight.withValues(alpha: 0.3),
                 width: 1,
               ),
               boxShadow: [
                 BoxShadow(
                   color: themeController.isDarkMode
-                      ? Colors.black.withValues(alpha: 0.2)
-                      : Colors.black.withValues(alpha: 0.1),
+                      ? AppColors.black.withValues(alpha: 0.2)
+                      : AppColors.black.withValues(alpha: 0.1),
                   blurRadius: 4,
                   offset: const Offset(0, 2),
                 ),
@@ -48,11 +48,11 @@ class ThemeToggle extends StatelessWidget {
                   duration: const Duration(milliseconds: 200),
                   child: Icon(
                     themeController.isDarkMode
-                        ? Icons.dark_mode
-                        : Icons.light_mode,
+                        ? AppIcons.darkMode
+                        : AppIcons.lightMode,
                     color: themeController.isDarkMode
-                        ? AppTheme.darkAccentColor
-                        : AppTheme.accentColor,
+                        ? AppColors.accentDark
+                        : AppColors.accentLight,
                     size: isCompact ? 18 : 20,
                   ),
                 ),
@@ -63,13 +63,11 @@ class ThemeToggle extends StatelessWidget {
                     child: Text(
                       themeController.isDarkMode ? 'Dark' : 'Light',
                       key: ValueKey(themeController.isDarkMode),
-                      style: TextStyle(
+                      style: AppFonts.labelMedium(
                         color: themeController.isDarkMode
-                            ? AppTheme.darkTextPrimary
-                            : AppTheme.textPrimary,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight,
+                      ).copyWith(fontWeight: AppFonts.medium),
                     ),
                   ),
                 ],
@@ -96,8 +94,8 @@ class ThemeToggleSwitch extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14),
           color: themeController.isDarkMode
-              ? AppTheme.darkAccentColor
-              : AppTheme.accentColor.withValues(alpha: 0.3),
+              ? AppColors.accentDark
+              : AppColors.accentLight.withValues(alpha: 0.3),
         ),
         child: Stack(
           children: [
@@ -113,12 +111,12 @@ class ThemeToggleSwitch extends StatelessWidget {
                   height: 24,
                   decoration: BoxDecoration(
                     color: themeController.isDarkMode
-                        ? AppTheme.darkSurfaceColor
-                        : AppTheme.surfaceColor,
+                        ? AppColors.surfaceDark
+                        : AppColors.surfaceLight,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.2),
+                        color: AppColors.black.withValues(alpha: 0.2),
                         blurRadius: 2,
                         offset: const Offset(0, 1),
                       ),
@@ -126,12 +124,12 @@ class ThemeToggleSwitch extends StatelessWidget {
                   ),
                   child: Icon(
                     themeController.isDarkMode
-                        ? Icons.dark_mode
-                        : Icons.light_mode,
+                        ? AppIcons.darkMode
+                        : AppIcons.lightMode,
                     size: 14,
                     color: themeController.isDarkMode
-                        ? AppTheme.darkAccentColor
-                        : AppTheme.accentColor,
+                        ? AppColors.accentDark
+                        : AppColors.accentLight,
                   ),
                 ),
               ),

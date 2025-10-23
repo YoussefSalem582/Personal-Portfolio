@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import '../utils/app_constants.dart';
+
 import '../theme/app_theme.dart';
 
 /// A reusable skeleton loading widget for portfolio sections
@@ -14,11 +16,11 @@ class SkeletonLoading extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.3)
-            : AppTheme.surfaceColor.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withValues(alpha: 0.3)
+            : AppColors.surfaceLight.withValues(alpha: 0.3),
         highlightColor: isDark
-            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-            : AppTheme.accentColor.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withValues(alpha: 0.1)
+            : AppColors.accentLight.withValues(alpha: 0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: SingleChildScrollView(
@@ -36,7 +38,7 @@ class SkeletonLoading extends StatelessWidget {
                     width: 120,
                     height: 120,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.white,
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -45,7 +47,7 @@ class SkeletonLoading extends StatelessWidget {
                     width: 300,
                     height: 40,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.white,
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
@@ -54,7 +56,7 @@ class SkeletonLoading extends StatelessWidget {
                     width: 400,
                     height: 20,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.white,
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
@@ -69,7 +71,7 @@ class SkeletonLoading extends StatelessWidget {
                           width: 120,
                           height: 40,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: AppColors.white,
                             borderRadius: BorderRadius.circular(20),
                           ),
                         ),
@@ -89,7 +91,7 @@ class SkeletonLoading extends StatelessWidget {
                     width: 200,
                     height: 32,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppColors.white,
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
@@ -108,7 +110,7 @@ class SkeletonLoading extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Container(
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.white,
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: Column(
@@ -117,7 +119,9 @@ class SkeletonLoading extends StatelessWidget {
                               flex: 2,
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: Colors.grey.shade300,
+                                  color: isDark
+                                      ? AppColors.gray800
+                                      : AppColors.gray300,
                                   borderRadius: const BorderRadius.vertical(
                                     top: Radius.circular(12),
                                   ),
@@ -134,7 +138,7 @@ class SkeletonLoading extends StatelessWidget {
                                       width: double.infinity,
                                       height: 16,
                                       decoration: BoxDecoration(
-                                        color: Colors.white,
+                                        color: AppColors.white,
                                         borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
@@ -143,7 +147,7 @@ class SkeletonLoading extends StatelessWidget {
                                       width: 150,
                                       height: 12,
                                       decoration: BoxDecoration(
-                                        color: Colors.white,
+                                        color: AppColors.white,
                                         borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
@@ -183,17 +187,17 @@ class ProjectCardSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.3)
-            : AppTheme.surfaceColor.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withValues(alpha: 0.3)
+            : AppColors.surfaceLight.withValues(alpha: 0.3),
         highlightColor: isDark
-            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-            : AppTheme.accentColor.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withValues(alpha: 0.1)
+            : AppColors.accentLight.withValues(alpha: 0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Container(
         height: isCompact ? 260 : 360,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -202,7 +206,7 @@ class ProjectCardSkeleton extends StatelessWidget {
               flex: 2,
               child: Container(
                 decoration: BoxDecoration(
-                  color: isDark ? Colors.grey.shade800 : Colors.grey.shade300,
+                  color: isDark ? AppColors.gray800 : AppColors.gray300,
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(12),
                   ),
@@ -220,7 +224,7 @@ class ProjectCardSkeleton extends StatelessWidget {
                       width: double.infinity,
                       height: 18,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.white,
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
@@ -229,7 +233,7 @@ class ProjectCardSkeleton extends StatelessWidget {
                       width: 150,
                       height: 14,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.white,
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
@@ -243,7 +247,7 @@ class ProjectCardSkeleton extends StatelessWidget {
                             width: 60,
                             height: 24,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: AppColors.white,
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
@@ -273,18 +277,18 @@ class CertificateCardSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.3)
-            : AppTheme.surfaceColor.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withValues(alpha: 0.3)
+            : AppColors.surfaceLight.withValues(alpha: 0.3),
         highlightColor: isDark
-            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-            : AppTheme.accentColor.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withValues(alpha: 0.1)
+            : AppColors.accentLight.withValues(alpha: 0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Container(
         height: 200,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Column(
@@ -296,7 +300,7 @@ class CertificateCardSkeleton extends StatelessWidget {
                   width: 48,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: isDark ? Colors.grey.shade800 : Colors.grey.shade300,
+                    color: isDark ? AppColors.gray800 : AppColors.gray300,
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
@@ -309,7 +313,7 @@ class CertificateCardSkeleton extends StatelessWidget {
                         width: double.infinity,
                         height: 16,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.white,
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -318,7 +322,7 @@ class CertificateCardSkeleton extends StatelessWidget {
                         width: 120,
                         height: 14,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.white,
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -332,7 +336,7 @@ class CertificateCardSkeleton extends StatelessWidget {
               width: double.infinity,
               height: 12,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.white,
                 borderRadius: BorderRadius.circular(4),
               ),
             ),
@@ -341,7 +345,7 @@ class CertificateCardSkeleton extends StatelessWidget {
               width: 100,
               height: 12,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.white,
                 borderRadius: BorderRadius.circular(4),
               ),
             ),

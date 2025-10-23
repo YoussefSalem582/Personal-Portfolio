@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../models/project.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../lazy_image.dart';
+
+import '../../theme/app_theme.dart';
 
 /// Hero section widget for project case study
 ///
@@ -47,8 +49,8 @@ class HeroSectionWidget extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppTheme.primaryColor.withValues(alpha: 0.3),
-            AppTheme.accentColor.withValues(alpha: 0.3),
+            AppColors.primaryLight.withValues(alpha: 0.3),
+            AppColors.accentLight.withValues(alpha: 0.3),
           ],
         ),
       ),
@@ -75,8 +77,9 @@ class HeroSectionWidget extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.black.withValues(alpha: 0.2), // Subtle top overlay
-                    Colors.black
+                    AppColors.black
+                        .withValues(alpha: 0.2), // Subtle top overlay
+                    AppColors.black
                         .withValues(alpha: 0.8), // Darker bottom for text
                   ],
                   stops: const [0.5, 1.0], // Gradient transition point
@@ -98,16 +101,16 @@ class HeroSectionWidget extends StatelessWidget {
                   ),
                   // Glassmorphic pill-shaped badge
                   decoration: BoxDecoration(
-                    color: Colors.black
+                    color: AppColors.black
                         .withValues(alpha: 0.7), // Semi-transparent background
                     borderRadius: BorderRadius.circular(24), // Pill shape
                     border: Border.all(
-                      color: Colors.white.withValues(alpha: 0.3),
+                      color: AppColors.white.withValues(alpha: 0.3),
                       width: 1.5,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withValues(alpha: 0.3),
+                        color: AppColors.black.withValues(alpha: 0.3),
                         blurRadius: 12,
                         offset: const Offset(0, 4),
                       ),
@@ -115,10 +118,10 @@ class HeroSectionWidget extends StatelessWidget {
                   ),
                   child: Text(
                     '${currentPage + 1} / $totalPages',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
+                    style: AppFonts.labelMedium(
+                      color: AppColors.white,
+                    ).copyWith(
+                      fontWeight: AppFonts.bold,
                       letterSpacing: 0.5,
                     ),
                   ),
@@ -140,8 +143,8 @@ class HeroSectionWidget extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Colors.transparent,
-                      Colors.black.withValues(
+                      AppColors.transparent,
+                      AppColors.black.withValues(
                           alpha: 0.9), // Dark background for readability
                     ],
                   ),
@@ -153,17 +156,17 @@ class HeroSectionWidget extends StatelessWidget {
                     // Project Title - Large, bold, with text shadow
                     Text(
                       project.title,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 40, // Large and impactful
-                        fontWeight: FontWeight.w900, // Extra bold
+                      style: AppFonts.h2(
+                        color: AppColors.white,
+                      ).copyWith(
+                        fontWeight: AppFonts.black, // Extra bold
                         height: 1.1, // Tight line height
                         letterSpacing:
                             -0.5, // Slight negative spacing for modern look
                         // Text shadow for depth and readability
-                        shadows: [
+                        shadows: const [
                           Shadow(
-                            color: Colors.black54,
+                            color: AppColors.gray700,
                             blurRadius: 16,
                             offset: Offset(0, 4),
                           ),
@@ -175,16 +178,14 @@ class HeroSectionWidget extends StatelessWidget {
                     // Short Description - Medium weight with shadow
                     Text(
                       project.shortDescription,
-                      style: TextStyle(
-                        color: Colors.white
-                            .withValues(alpha: 0.95), // Slightly transparent
-                        fontSize: 17,
-                        fontWeight: FontWeight.w400, // Regular weight
+                      style: AppFonts.bodyMedium(
+                        color: AppColors.white,
+                      ).copyWith(
                         height: 1.5, // Comfortable line height for readability
                         // Text shadow for depth
                         shadows: [
                           Shadow(
-                            color: Colors.black.withValues(alpha: 0.6),
+                            color: AppColors.black.withValues(alpha: 0.6),
                             blurRadius: 10,
                             offset: const Offset(0, 2),
                           ),

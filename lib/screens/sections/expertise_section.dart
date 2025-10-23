@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/data/expertise_data.dart';
 import '../../models/expertise.dart';
 
@@ -17,7 +17,7 @@ class ExpertiseSection extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        vertical: isMobile ? 60 : 100,
+        vertical: isMobile ? 50 : 80,
         horizontal: isMobile ? 20 : 40,
       ),
       decoration: BoxDecoration(
@@ -26,16 +26,16 @@ class ExpertiseSection extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  AppTheme.darkSurfaceColor,
-                  AppTheme.darkCardColor.withOpacity(0.5),
+                  AppColors.surfaceDark,
+                  AppColors.cardDark.withOpacity(0.5),
                 ],
               )
             : LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  AppTheme.surfaceColor,
-                  Colors.grey.shade50,
+                  AppColors.surfaceLight,
+                  AppColors.gray50,
                 ],
               ),
       ),
@@ -43,7 +43,7 @@ class ExpertiseSection extends StatelessWidget {
         children: [
           // Section Header
           _buildSectionHeader(context, isDark, isMobile),
-          SizedBox(height: isMobile ? 40 : 60),
+          SizedBox(height: isMobile ? 32 : 48),
 
           // Expertise Cards
           _buildExpertiseGrid(context, isDark, isMobile, isTablet),
@@ -58,16 +58,16 @@ class ExpertiseSection extends StatelessWidget {
         ShaderMask(
           shaderCallback: (bounds) => LinearGradient(
             colors: isDark
-                ? [AppTheme.primaryColor, AppTheme.accentColor]
-                : [AppTheme.accentColor, AppTheme.primaryColor],
+                ? [AppColors.primaryLight, AppColors.accentLight]
+                : [AppColors.accentLight, AppColors.primaryLight],
           ).createShader(bounds),
           child: Text(
             'My Expertise',
             style: TextStyle(
               fontSize: isMobile ? 36 : 48,
-              fontWeight: FontWeight.w800,
+              fontWeight: AppFonts.extraBold,
               letterSpacing: -1,
-              color: Colors.white,
+              color: AppColors.white,
             ),
             textAlign: TextAlign.center,
           ),
@@ -79,8 +79,9 @@ class ExpertiseSection extends StatelessWidget {
             'Combining cutting-edge technology with innovative solutions',
             style: TextStyle(
               fontSize: isMobile ? 16 : 18,
-              color:
-                  isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary,
+              color: isDark
+                  ? AppColors.textSecondaryDark
+                  : AppColors.textSecondaryLight,
               height: 1.5,
             ),
             textAlign: TextAlign.center,
@@ -104,9 +105,9 @@ class ExpertiseSection extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: crossAxisCount,
-              crossAxisSpacing: 20,
-              mainAxisSpacing: 20,
-              childAspectRatio: isMobile ? 1.15 : (isTablet ? 0.95 : 0.85),
+              crossAxisSpacing: isMobile ? 16 : 20,
+              mainAxisSpacing: isMobile ? 16 : 20,
+              childAspectRatio: isMobile ? 1.8 : (isTablet ? 1.25 : 1.45),
             ),
             itemCount: ExpertiseData.expertiseList.length,
             itemBuilder: (context, index) {
@@ -134,81 +135,109 @@ class ExpertiseSection extends StatelessWidget {
 
   Widget _buildExpertiseCard(
       BuildContext context, Expertise expertise, bool isDark, bool isMobile) {
-    final accentColor = expertise.iconColor ?? AppTheme.accentColor;
+    final accentColor = expertise.iconColor ?? AppColors.accentLight;
 
     return Container(
       decoration: BoxDecoration(
-        color: isDark ? AppTheme.darkCardColor : Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        gradient: isDark
+            ? LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  AppColors.cardDark,
+                  AppColors.cardDark.withOpacity(0.8),
+                ],
+              )
+            : LinearGradient(
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                colors: [
+                  Colors.white,
+                  AppColors.gray50.withOpacity(0.5),
+                ],
+              ),
+        borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: isDark
-              ? Colors.white.withOpacity(0.1)
-              : Colors.black.withOpacity(0.1),
+              ? accentColor.withOpacity(0.2)
+              : accentColor.withOpacity(0.15),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
             color: isDark
                 ? Colors.black.withOpacity(0.3)
-                : Colors.black.withOpacity(0.08),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
+                : accentColor.withOpacity(0.1),
+            blurRadius: 15,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(16),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
             onTap: () {},
             hoverColor: accentColor.withOpacity(0.05),
             child: Padding(
-              padding: EdgeInsets.all(isMobile ? 20 : 24),
+              padding: EdgeInsets.all(isMobile ? 16 : 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // Icon
+                  // Icon with gradient background
                   Container(
-                    width: 60,
-                    height: 60,
+                    width: 48,
+                    height: 48,
                     decoration: BoxDecoration(
-                      color: accentColor.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(15),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: [
+                          accentColor.withOpacity(0.15),
+                          accentColor.withOpacity(0.05),
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: accentColor.withOpacity(0.3),
+                        width: 1.5,
+                      ),
                     ),
                     child: Icon(
                       expertise.icon,
-                      size: 32,
+                      size: 24,
                       color: accentColor,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 12),
 
                   // Title
                   Text(
                     expertise.title,
                     style: TextStyle(
-                      fontSize: isMobile ? 18 : 20,
+                      fontSize: isMobile ? 16 : 17,
                       fontWeight: FontWeight.bold,
                       color: isDark
-                          ? AppTheme.darkTextPrimary
-                          : AppTheme.textPrimary,
+                          ? AppColors.textPrimaryDark
+                          : AppColors.textPrimaryLight,
                       height: 1.3,
+                      letterSpacing: -0.3,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  const SizedBox(height: 8),
 
-                  // Description
-                  Expanded(
-                    child: Text(
-                      expertise.description,
-                      style: TextStyle(
-                        fontSize: isMobile ? 14 : 15,
-                        color: isDark
-                            ? AppTheme.darkTextSecondary
-                            : AppTheme.textSecondary,
-                        height: 1.6,
-                      ),
+                  // Description - Full text shown
+                  Text(
+                    expertise.description,
+                    style: TextStyle(
+                      fontSize: isMobile ? 13 : 13.5,
+                      color: isDark
+                          ? AppColors.textSecondaryDark.withOpacity(0.85)
+                          : AppColors.textSecondaryLight.withOpacity(0.85),
+                      height: 1.5,
                     ),
                   ),
                 ],

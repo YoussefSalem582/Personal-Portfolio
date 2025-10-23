@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import 'contact_info_list_widget.dart';
+
+import '../../theme/app_theme.dart';
 
 /// Widget displaying the biographical information section.
 ///
@@ -24,12 +26,8 @@ class BioSectionWidget extends StatelessWidget {
           children: [
             Text(
               'Who I Am',
-              style: (isDark
-                      ? AppTheme.headingMediumForTheme(context)
-                      : AppTheme.headingMedium)
-                  .copyWith(
-                fontSize: 28,
-                fontWeight: FontWeight.w700,
+              style: (isDark ? AppFonts.h2() : AppFonts.h2()).copyWith(
+                fontWeight: AppFonts.bold,
               ),
             ),
             const SizedBox(width: AppTheme.spacingM),
@@ -38,8 +36,8 @@ class BioSectionWidget extends StatelessWidget {
                 height: 3,
                 decoration: BoxDecoration(
                   gradient: isDark
-                      ? AppTheme.darkPrimaryGradient
-                      : AppTheme.primaryGradient,
+                      ? AppColors.primaryGradientDark
+                      : AppColors.primaryGradientLight,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -52,15 +50,12 @@ class BioSectionWidget extends StatelessWidget {
         // Main bio introduction
         Text(
           'As a dedicated Flutter Developer and Computer Science student at Nile University, I am passionate about crafting high-performance, cross-platform mobile applications using Dart and Flutter. With hands-on experience in building scalable apps like ChargeHub (EV station finder) and a carpooling platform, I excel in implementing robust state management with BLoC, integrating RESTful APIs, and leveraging Firebase for real-time backend services.',
-          style: (isDark
-                  ? AppTheme.bodyLargeForTheme(context)
-                  : AppTheme.bodyLarge)
-              .copyWith(
-            fontSize: 16,
+          style:
+              (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge()).copyWith(
             height: 1.8,
             letterSpacing: 0.2,
-            color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
-            fontWeight: FontWeight.w500,
+            color: isDark ? AppColors.gray300 : AppColors.gray800,
+            fontWeight: AppFonts.medium,
           ),
         ),
 
@@ -109,19 +104,19 @@ class BioSectionWidget extends StatelessWidget {
             gradient: isDark
                 ? LinearGradient(
                     colors: [
-                      AppTheme.primaryColor.withOpacity(0.1),
-                      AppTheme.accentColor.withOpacity(0.1),
+                      AppColors.primaryLight.withOpacity(0.1),
+                      AppColors.accentLight.withOpacity(0.1),
                     ],
                   )
                 : LinearGradient(
                     colors: [
-                      AppTheme.accentColor.withOpacity(0.08),
-                      AppTheme.primaryColor.withOpacity(0.08),
+                      AppColors.accentLight.withOpacity(0.08),
+                      AppColors.primaryLight.withOpacity(0.08),
                     ],
                   ),
             borderRadius: BorderRadius.circular(AppTheme.radiusM),
             border: Border.all(
-              color: (isDark ? AppTheme.primaryColor : AppTheme.accentColor)
+              color: (isDark ? AppColors.primaryLight : AppColors.accentLight)
                   .withOpacity(0.2),
               width: 1,
             ),
@@ -130,21 +125,18 @@ class BioSectionWidget extends StatelessWidget {
             children: [
               Icon(
                 Icons.rocket_launch_rounded,
-                color: isDark ? AppTheme.primaryColor : AppTheme.accentColor,
+                color: isDark ? AppColors.primaryLight : AppColors.accentLight,
                 size: 24,
               ),
               const SizedBox(width: AppTheme.spacingM),
               Expanded(
                 child: Text(
                   'I am eager to contribute my Flutter skills to innovate user-centric mobile solutions that drive engagement and scalability.',
-                  style: (isDark
-                          ? AppTheme.bodyLargeForTheme(context)
-                          : AppTheme.bodyLarge)
+                  style: (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge())
                       .copyWith(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: AppFonts.semiBold,
                     height: 1.6,
-                    color: isDark ? Colors.grey.shade200 : Colors.grey.shade900,
+                    color: isDark ? AppColors.gray200 : AppColors.gray900,
                   ),
                 ),
               ),
@@ -157,14 +149,11 @@ class BioSectionWidget extends StatelessWidget {
         // Call to action
         Text(
           'Feel free to connect if you\'re interested in discussing technology, design, machine learning, or collaborative opportunities!',
-          style: (isDark
-                  ? AppTheme.bodyLargeForTheme(context)
-                  : AppTheme.bodyLarge)
-              .copyWith(
+          style:
+              (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge()).copyWith(
             fontStyle: FontStyle.italic,
-            fontSize: 15,
-            color: isDark ? Colors.grey.shade400 : Colors.grey.shade700,
-            fontWeight: FontWeight.w500,
+            color: isDark ? AppColors.gray400 : AppColors.gray700,
+            fontWeight: AppFonts.medium,
           ),
         ),
 
@@ -191,12 +180,12 @@ class BioSectionWidget extends StatelessWidget {
           padding: const EdgeInsets.all(AppTheme.spacingS),
           decoration: BoxDecoration(
             gradient: isDark
-                ? AppTheme.darkPrimaryGradient
-                : AppTheme.primaryGradient,
+                ? AppColors.primaryGradientDark
+                : AppColors.primaryGradientLight,
             borderRadius: BorderRadius.circular(AppTheme.radiusS),
             boxShadow: [
               BoxShadow(
-                color: (isDark ? AppTheme.primaryColor : AppTheme.accentColor)
+                color: (isDark ? AppColors.primaryLight : AppColors.accentLight)
                     .withOpacity(0.3),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
@@ -205,7 +194,7 @@ class BioSectionWidget extends StatelessWidget {
           ),
           child: Icon(
             icon,
-            color: Colors.white,
+            color: AppColors.white,
             size: 20,
           ),
         ),
@@ -217,26 +206,19 @@ class BioSectionWidget extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: (isDark
-                        ? AppTheme.headingSmallForTheme(context)
-                        : AppTheme.headingSmall)
-                    .copyWith(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: isDark ? Colors.white : Colors.grey.shade900,
+                style: (isDark ? AppFonts.h3() : AppFonts.h3()).copyWith(
+                  fontWeight: AppFonts.bold,
+                  color: isDark ? AppColors.white : AppColors.gray900,
                 ),
               ),
               const SizedBox(height: AppTheme.spacingS),
               Text(
                 description,
-                style: (isDark
-                        ? AppTheme.bodyLargeForTheme(context)
-                        : AppTheme.bodyLarge)
+                style: (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge())
                     .copyWith(
-                  fontSize: 15,
                   height: 1.7,
-                  color: isDark ? Colors.grey.shade300 : Colors.grey.shade800,
-                  fontWeight: FontWeight.w500,
+                  color: isDark ? AppColors.gray300 : AppColors.gray800,
+                  fontWeight: AppFonts.medium,
                 ),
               ),
             ],

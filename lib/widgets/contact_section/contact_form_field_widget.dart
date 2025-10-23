@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 
+import '../../theme/app_theme.dart';
 /// A reusable, styled text form field widget for contact forms.
 ///
 /// This widget provides a consistent design for form inputs with:
@@ -48,11 +49,11 @@ class ContactFormFieldWidget extends StatelessWidget {
     // Get theme-specific colors for styling
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final accentColor =
-        isDark ? AppTheme.darkAccentColor : AppTheme.accentColor;
+        isDark ? AppColors.accentDark : AppColors.accentLight;
     final textSecondary =
-        isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary;
+        isDark ? AppColors.textSecondaryDark : AppColors.textSecondaryLight;
     final fillColor =
-        isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor;
+        isDark ? AppColors.surfaceDark : AppColors.surfaceLight;
 
     return TextFormField(
       controller: controller,
@@ -60,7 +61,7 @@ class ContactFormFieldWidget extends StatelessWidget {
       maxLines: maxLines,
       validator: validator,
       style: TextStyle(
-        color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
+        color: isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
       ),
       decoration: InputDecoration(
         labelText: label,
@@ -90,7 +91,7 @@ class ContactFormFieldWidget extends StatelessWidget {
         // Border when field has validation error
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusS),
-          borderSide: const BorderSide(color: AppTheme.errorColor),
+          borderSide: const BorderSide(color: AppColors.errorLight),
         ),
         filled: true,
         fillColor: fillColor,

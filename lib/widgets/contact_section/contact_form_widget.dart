@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:js_interop' as js;
 import 'dart:js_interop_unsafe';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../models/contact_form.dart';
 import '../../config/api_keys.dart';
 import 'contact_form_field_widget.dart';
 import 'submit_status_widget.dart';
+
+import '../../theme/app_theme.dart';
 
 /// A comprehensive contact form widget with validation and submission handling.
 ///
@@ -57,7 +59,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
         padding: const EdgeInsets.all(AppTheme.spacingXL),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
-          color: isDark ? AppTheme.darkCardColor : AppTheme.surfaceColor,
+          color: isDark ? AppColors.cardDark : AppColors.surfaceLight,
         ),
         child: Form(
           key: _formKey,
@@ -66,10 +68,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
             children: [
               Text(
                 'Send Me a Message',
-                style: (isDark
-                        ? AppTheme.headingMediumForTheme(context)
-                        : AppTheme.headingMedium)
-                    .copyWith(fontSize: 24),
+                style: (isDark ? AppFonts.h2() : AppFonts.h2()),
               ),
 
               const SizedBox(height: AppTheme.spacingL),
@@ -161,7 +160,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                 child: ElevatedButton(
                   onPressed: _isSubmitting ? null : _submitForm,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.primaryColor,
+                    backgroundColor: AppColors.primaryLight,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(
                       vertical: AppTheme.spacingL,
@@ -177,16 +176,13 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                           child: CircularProgressIndicator(
                             strokeWidth: 2,
                             valueColor: AlwaysStoppedAnimation<Color>(
-                              Colors.white,
+                              AppColors.white,
                             ),
                           ),
                         )
-                      : const Text(
+                      : Text(
                           'Send Message',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
+                          style: AppFonts.button(),
                         ),
                 ),
               ),

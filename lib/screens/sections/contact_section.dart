@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../widgets/contact_section/contact_info_widget.dart';
 import '../../widgets/contact_section/contact_form_widget.dart';
+
+import '../../theme/app_theme.dart';
 
 /// The contact section of the portfolio displaying contact information and form.
 ///
@@ -30,8 +32,8 @@ class ContactSection extends StatelessWidget {
       width: double.infinity,
       // Light background tint in light mode, dark background in dark mode
       color: isDark
-          ? AppTheme.darkBackgroundColor
-          : AppTheme.primaryColor.withValues(alpha: 0.02),
+          ? AppColors.backgroundDark
+          : AppColors.primaryLight.withValues(alpha: 0.02),
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
         vertical: AppTheme.spacingXXL,
@@ -55,10 +57,7 @@ class ContactSection extends StatelessWidget {
                 // Main section heading
                 Text(
                   'Get In Touch',
-                  style: (isDark
-                          ? AppTheme.headingLargeForTheme(context)
-                          : AppTheme.headingLarge)
-                      .copyWith(fontSize: 36),
+                  style: (isDark ? AppFonts.h1() : AppFonts.h1()),
                   textAlign: TextAlign.center,
                 ),
 
@@ -70,8 +69,8 @@ class ContactSection extends StatelessWidget {
                   height: 4,
                   decoration: BoxDecoration(
                     gradient: isDark
-                        ? AppTheme.darkPrimaryGradient
-                        : AppTheme.primaryGradient,
+                        ? AppColors.primaryGradientDark
+                        : AppColors.primaryGradientLight,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
@@ -81,9 +80,7 @@ class ContactSection extends StatelessWidget {
                 // Section subtitle/description
                 Text(
                   'Let\'s discuss your next project or collaboration opportunity',
-                  style: isDark
-                      ? AppTheme.bodyLargeForTheme(context)
-                      : AppTheme.bodyLarge,
+                  style: isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge(),
                   textAlign: TextAlign.center,
                 ),
 

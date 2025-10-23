@@ -1,15 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../models/certificate.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import '../../utils/responsive_helper.dart';
 
+import '../../theme/app_theme.dart';
+
 /// Certificates section displaying all professional certifications and achievements
 /// with modern card-based design and smooth animations
-class CertificatesSection extends StatelessWidget {
+class CertificatesSection extends StatefulWidget {
   const CertificatesSection({super.key});
+
+  @override
+  State<CertificatesSection> createState() => _CertificatesSectionState();
+}
+
+class _CertificatesSectionState extends State<CertificatesSection> {
+  int _displayCount = 3; // Initially show 3 certificates
+
+  void _showMore() {
+    setState(() {
+      _displayCount =
+          (_displayCount + 3).clamp(0, PortfolioData.certificates.length);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +36,13 @@ class CertificatesSection extends StatelessWidget {
 
     // Responsive grid columns
     final crossAxisCount = isMobile ? 1 : (isTablet ? 2 : 3);
+    final certificatesToShow =
+        PortfolioData.certificates.take(_displayCount).toList();
+    final hasMore = _displayCount < PortfolioData.certificates.length;
 
     return Container(
       width: double.infinity,
-      color: isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
+      color: isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
       padding: EdgeInsets.symmetric(
         vertical: AppTheme.spacingXXL,
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
@@ -51,7 +70,7 @@ class CertificatesSection extends StatelessWidget {
                   mainAxisSpacing: AppTheme.spacingL,
                   childAspectRatio: isMobile ? 0.9 : 0.75,
                 ),
-                itemCount: PortfolioData.certificates.length,
+                itemCount: certificatesToShow.length,
                 itemBuilder: (context, index) {
                   return AnimationConfiguration.staggeredGrid(
                     position: index,
@@ -61,7 +80,7 @@ class CertificatesSection extends StatelessWidget {
                       verticalOffset: 50,
                       child: FadeInAnimation(
                         child: CertificateCard(
-                          certificate: PortfolioData.certificates[index],
+                          certificate: certificatesToShow[index],
                         ),
                       ),
                     ),
@@ -69,7 +88,36 @@ class CertificatesSection extends StatelessWidget {
                 },
               ),
             ),
+
+            // Show More Button
+            if (hasMore) ...[
+              const SizedBox(height: AppTheme.spacingXL),
+              Center(
+                child: _buildShowMoreButton(isDark),
+              ),
+            ],
           ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildShowMoreButton(bool isDark) {
+    final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
+
+    return OutlinedButton.icon(
+      onPressed: _showMore,
+      icon: const Icon(Icons.expand_more, size: 20),
+      label: const Text('Show More'),
+      style: OutlinedButton.styleFrom(
+        foregroundColor: accentColor,
+        side: BorderSide(color: accentColor, width: 2),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 32,
+          vertical: 16,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
     );
@@ -82,12 +130,8 @@ class CertificatesSection extends StatelessWidget {
         // Section Title
         Text(
           'Certificates & Achievements',
-          style: (isDark
-                  ? AppTheme.headingLargeForTheme(context)
-                  : AppTheme.headingLarge)
-              .copyWith(
-            fontSize: 40,
-            fontWeight: FontWeight.w900,
+          style: AppFonts.h1().copyWith(
+            fontWeight: AppFonts.black,
             letterSpacing: -0.5,
           ),
           textAlign: TextAlign.center,
@@ -101,14 +145,13 @@ class CertificatesSection extends StatelessWidget {
           height: 5,
           decoration: BoxDecoration(
             gradient: isDark
-                ? AppTheme.darkPrimaryGradient
-                : AppTheme.primaryGradient,
+                ? AppColors.primaryGradientDark
+                : AppColors.primaryGradientLight,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(
-                color:
-                    (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                        .withOpacity(0.3),
+                color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+                    .withOpacity(0.3),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -121,12 +164,10 @@ class CertificatesSection extends StatelessWidget {
         // Subtitle
         Text(
           'Professional certifications showcasing continuous learning and expertise',
-          style: (isDark
-                  ? AppTheme.bodyLargeForTheme(context)
-                  : AppTheme.bodyLarge)
-              .copyWith(
-            color: isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary,
-            fontSize: 16,
+          style: AppFonts.bodyLarge().copyWith(
+            color: isDark
+                ? AppColors.textSecondaryDark
+                : AppColors.textSecondaryLight,
           ),
           textAlign: TextAlign.center,
         ),
@@ -172,8 +213,7 @@ class _CertificateCardState extends State<CertificateCard>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final accentColor =
-        isDark ? AppTheme.darkAccentColor : AppTheme.accentColor;
+    final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
 
     return MouseRegion(
       onEnter: (_) {
@@ -201,13 +241,13 @@ class _CertificateCardState extends State<CertificateCard>
           ),
           child: Card(
             elevation: 0,
-            shadowColor: Colors.transparent,
+            shadowColor: AppColors.transparent,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(AppTheme.radiusXL),
               side: BorderSide(
                 color: _isHovered
                     ? accentColor.withOpacity(0.3)
-                    : Colors.transparent,
+                    : AppColors.transparent,
                 width: 2,
               ),
             ),
@@ -222,12 +262,12 @@ class _CertificateCardState extends State<CertificateCard>
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            AppTheme.darkCardColor,
-                            AppTheme.darkCardColor.withOpacity(0.8),
+                            AppColors.cardDark,
+                            AppColors.cardDark.withOpacity(0.8),
                           ],
                         )
                       : null,
-                  color: isDark ? null : AppTheme.surfaceColor,
+                  color: isDark ? null : AppColors.surfaceLight,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -300,8 +340,8 @@ class _CertificateCardState extends State<CertificateCard>
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
               colors: [
-                Colors.transparent,
-                Colors.black.withOpacity(0.3),
+                AppColors.transparent,
+                AppColors.black.withOpacity(0.3),
               ],
             ),
           ),
@@ -315,11 +355,11 @@ class _CertificateCardState extends State<CertificateCard>
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                color: Colors.red.shade600,
+                color: AppColors.errorLight,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.red.withOpacity(0.3),
+                    color: AppColors.errorLight.withOpacity(0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -328,15 +368,13 @@ class _CertificateCardState extends State<CertificateCard>
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.picture_as_pdf,
-                      size: 14, color: Colors.white),
+                  Icon(AppIcons.pdf, size: 14, color: AppColors.white),
                   const SizedBox(width: 4),
                   Text(
                     'PDF',
-                    style: AppTheme.bodySmall.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 11,
+                    style: AppFonts.bodyXS().copyWith(
+                      color: AppColors.white,
+                      fontWeight: AppFonts.bold,
                     ),
                   ),
                 ],
@@ -352,11 +390,11 @@ class _CertificateCardState extends State<CertificateCard>
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                color: AppTheme.successColor,
+                color: AppColors.successLight,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: AppTheme.successColor.withOpacity(0.3),
+                    color: AppColors.successLight.withOpacity(0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -365,14 +403,13 @@ class _CertificateCardState extends State<CertificateCard>
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(Icons.verified, size: 14, color: Colors.white),
+                  Icon(AppIcons.badge, size: 14, color: AppColors.white),
                   const SizedBox(width: 4),
                   Text(
                     'Verified',
-                    style: AppTheme.bodySmall.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 11,
+                    style: AppFonts.bodyXS().copyWith(
+                      color: AppColors.white,
+                      fontWeight: AppFonts.bold,
                     ),
                   ),
                 ],
@@ -394,12 +431,8 @@ class _CertificateCardState extends State<CertificateCard>
           // Certificate Title
           Text(
             widget.certificate.title,
-            style: (isDark
-                    ? AppTheme.headingSmallForTheme(context)
-                    : AppTheme.headingSmall)
-                .copyWith(
-              fontSize: 17,
-              fontWeight: FontWeight.w700,
+            style: AppFonts.h4().copyWith(
+              fontWeight: AppFonts.bold,
               height: 1.3,
             ),
             maxLines: 2,
@@ -422,16 +455,15 @@ class _CertificateCardState extends State<CertificateCard>
                   ),
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Icon(Icons.business, size: 14, color: accentColor),
+                child: Icon(AppIcons.experience, size: 14, color: accentColor),
               ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   widget.certificate.issuer,
-                  style: AppTheme.bodySmall.copyWith(
+                  style: AppFonts.labelMedium().copyWith(
                     color: accentColor,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 13,
+                    fontWeight: AppFonts.bold,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -442,49 +474,56 @@ class _CertificateCardState extends State<CertificateCard>
 
           const Spacer(),
 
-          // Date and Action Row
+          // Duration and Action Row
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Date Badge
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                decoration: BoxDecoration(
-                  color:
-                      isDark ? AppTheme.darkSurfaceColor : Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    color: isDark
-                        ? AppTheme.darkTextSecondary.withOpacity(0.2)
-                        : Colors.grey.shade300,
-                  ),
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.calendar_today,
-                      size: 12,
-                      color: isDark
-                          ? AppTheme.darkTextSecondary
-                          : AppTheme.textSecondary,
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      _formatDate(widget.certificate.issueDate),
-                      style: AppTheme.bodySmall.copyWith(
+              // Duration Badge (if available)
+              if (_extractDuration() != null)
+                Flexible(
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: isDark ? AppColors.surfaceDark : AppColors.gray100,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
                         color: isDark
-                            ? AppTheme.darkTextSecondary
-                            : AppTheme.textSecondary,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
+                            ? AppColors.textSecondaryDark.withOpacity(0.2)
+                            : AppColors.gray300,
                       ),
                     ),
-                  ],
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.event_available,
+                          size: 12,
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
+                        ),
+                        const SizedBox(width: 6),
+                        Flexible(
+                          child: Text(
+                            _extractDuration()!,
+                            style: AppFonts.bodySmall().copyWith(
+                              color: isDark
+                                  ? AppColors.textSecondaryDark
+                                  : AppColors.textSecondaryLight,
+                              fontWeight: AppFonts.semiBold,
+                            ),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-              ),
+
+              if (_extractDuration() != null) const SizedBox(width: 8),
 
               // View Details Button
               Container(
@@ -502,10 +541,10 @@ class _CertificateCardState extends State<CertificateCard>
                     ),
                   ],
                 ),
-                child: const Icon(
-                  Icons.arrow_forward,
+                child: Icon(
+                  AppIcons.arrowRight,
                   size: 18,
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
             ],
@@ -544,7 +583,7 @@ class _CertificateCardState extends State<CertificateCard>
               shape: BoxShape.circle,
             ),
             child: Icon(
-              Icons.workspace_premium,
+              AppIcons.certificate,
               size: 48,
               color: accentColor,
             ),
@@ -552,9 +591,9 @@ class _CertificateCardState extends State<CertificateCard>
           const SizedBox(height: AppTheme.spacingS),
           Text(
             'Certificate',
-            style: AppTheme.bodyMedium.copyWith(
+            style: AppFonts.bodyMedium().copyWith(
               color: accentColor,
-              fontWeight: FontWeight.w700,
+              fontWeight: AppFonts.bold,
             ),
           ),
         ],
@@ -562,23 +601,19 @@ class _CertificateCardState extends State<CertificateCard>
     );
   }
 
-  /// Formats date to "MMM YYYY" format
-  String _formatDate(DateTime date) {
-    final months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    return '${months[date.month - 1]} ${date.year}';
+  /// Extracts duration information from certificate description
+  String? _extractDuration() {
+    final description = widget.certificate.description;
+
+    // Look for "Duration: " pattern in the description
+    final durationRegex = RegExp(r'Duration:\s*(.+?)(?:\n|$)', multiLine: true);
+    final match = durationRegex.firstMatch(description);
+
+    if (match != null && match.groupCount > 0) {
+      return match.group(1)?.trim();
+    }
+
+    return null;
   }
 
   /// Shows certificate details dialog
@@ -586,7 +621,7 @@ class _CertificateCardState extends State<CertificateCard>
     showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor: Colors.black.withOpacity(0.6),
+      barrierColor: AppColors.black.withOpacity(0.6),
       builder: (context) => CertificateDetailsDialog(
         certificate: widget.certificate,
       ),
@@ -638,8 +673,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final accentColor =
-        isDark ? AppTheme.darkAccentColor : AppTheme.accentColor;
+    final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
 
@@ -648,7 +682,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
       child: ScaleTransition(
         scale: _scaleAnimation,
         child: Dialog(
-          backgroundColor: Colors.transparent,
+          backgroundColor: AppColors.transparent,
           insetPadding:
               EdgeInsets.all(isMobile ? AppTheme.spacingM : AppTheme.spacingXL),
           child: Container(
@@ -657,7 +691,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
               maxHeight: MediaQuery.of(context).size.height * 0.85,
             ),
             decoration: BoxDecoration(
-              color: isDark ? AppTheme.darkCardColor : AppTheme.surfaceColor,
+              color: isDark ? AppColors.cardDark : AppColors.surfaceLight,
               borderRadius: BorderRadius.circular(AppTheme.radiusXL + 4),
               boxShadow: [
                 BoxShadow(
@@ -715,11 +749,11 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  AppTheme.darkAccentColor,
-                  AppTheme.darkAccentColor.withOpacity(0.8),
+                  AppColors.accentDark,
+                  AppColors.accentDark.withOpacity(0.8),
                 ],
               )
-            : AppTheme.primaryGradient,
+            : AppColors.primaryGradientLight,
         borderRadius: const BorderRadius.vertical(
           top: Radius.circular(AppTheme.radiusXL + 4),
         ),
@@ -737,16 +771,16 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: AppColors.white.withOpacity(0.2),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
-                color: Colors.white.withOpacity(0.3),
+                color: AppColors.white.withOpacity(0.3),
                 width: 2,
               ),
             ),
-            child: const Icon(
-              Icons.workspace_premium,
-              color: Colors.white,
+            child: Icon(
+              AppIcons.certificate,
+              color: AppColors.white,
               size: 32,
             ),
           ),
@@ -759,20 +793,18 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
               children: [
                 Text(
                   'Certificate Details',
-                  style: AppTheme.bodySmall.copyWith(
-                    color: Colors.white.withOpacity(0.9),
-                    fontSize: 13,
+                  style: AppFonts.labelMedium().copyWith(
+                    color: AppColors.white.withOpacity(0.9),
                     letterSpacing: 1,
-                    fontWeight: FontWeight.w600,
+                    fontWeight: AppFonts.semiBold,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   widget.certificate.title,
-                  style: AppTheme.headingMedium.copyWith(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w800,
+                  style: AppFonts.h3().copyWith(
+                    color: AppColors.white,
+                    fontWeight: AppFonts.extraBold,
                     height: 1.2,
                   ),
                   maxLines: 2,
@@ -785,10 +817,9 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
           // Close Button
           IconButton(
             onPressed: () => Navigator.of(context).pop(),
-            icon:
-                const Icon(Icons.close_rounded, color: Colors.white, size: 24),
+            icon: Icon(AppIcons.close, color: AppColors.white, size: 24),
             style: IconButton.styleFrom(
-              backgroundColor: Colors.white.withOpacity(0.2),
+              backgroundColor: AppColors.white.withOpacity(0.2),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -841,16 +872,16 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
-                    Icons.workspace_premium,
+                    AppIcons.certificate,
                     size: 80,
                     color: accentColor.withOpacity(0.5),
                   ),
                   const SizedBox(height: AppTheme.spacingM),
                   Text(
                     'Certificate Image',
-                    style: AppTheme.bodyLarge.copyWith(
+                    style: AppFonts.bodyLarge().copyWith(
                       color: accentColor,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: AppFonts.semiBold,
                     ),
                   ),
                 ],
@@ -870,7 +901,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
         // Issuer Card
         _buildInfoCard(
           context,
-          icon: Icons.business_rounded,
+          icon: AppIcons.experience,
           title: 'Issued by',
           content: widget.certificate.issuer,
           isDark: isDark,
@@ -881,7 +912,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
         // Date Card
         _buildInfoCard(
           context,
-          icon: Icons.calendar_today_rounded,
+          icon: AppIcons.date,
           title: 'Issue Date',
           content: _formatFullDate(widget.certificate.issueDate),
           isDark: isDark,
@@ -892,7 +923,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
         // Description Card
         _buildInfoCard(
           context,
-          icon: Icons.description_rounded,
+          icon: AppIcons.blog,
           title: 'Description',
           content: widget.certificate.description,
           isDark: isDark,
@@ -906,13 +937,13 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppTheme.successColor.withOpacity(0.15),
-                  AppTheme.successColor.withOpacity(0.05),
+                  AppColors.successLight.withOpacity(0.15),
+                  AppColors.successLight.withOpacity(0.05),
                 ],
               ),
               borderRadius: BorderRadius.circular(AppTheme.radiusM),
               border: Border.all(
-                color: AppTheme.successColor.withOpacity(0.3),
+                color: AppColors.successLight.withOpacity(0.3),
                 width: 2,
               ),
             ),
@@ -921,12 +952,12 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: AppTheme.successColor.withOpacity(0.2),
+                    color: AppColors.successLight.withOpacity(0.2),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
-                    Icons.verified_rounded,
-                    color: AppTheme.successColor,
+                  child: Icon(
+                    AppIcons.badge,
+                    color: AppColors.successLight,
                     size: 24,
                   ),
                 ),
@@ -937,18 +968,16 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
                     children: [
                       Text(
                         'Verified Certificate',
-                        style: AppTheme.bodyMedium.copyWith(
-                          color: AppTheme.successColor,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 15,
+                        style: AppFonts.labelLarge().copyWith(
+                          color: AppColors.successLight,
+                          fontWeight: AppFonts.bold,
                         ),
                       ),
                       const SizedBox(height: 2),
                       Text(
                         'This certificate can be validated online',
-                        style: AppTheme.bodySmall.copyWith(
-                          color: AppTheme.successColor.withOpacity(0.8),
-                          fontSize: 12,
+                        style: AppFonts.bodySmall().copyWith(
+                          color: AppColors.successLight.withOpacity(0.8),
                         ),
                       ),
                     ],
@@ -970,20 +999,18 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
     required String content,
     required bool isDark,
   }) {
-    final accentColor =
-        isDark ? AppTheme.darkAccentColor : AppTheme.accentColor;
+    final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
 
     return Container(
       padding: const EdgeInsets.all(AppTheme.spacingM),
       decoration: BoxDecoration(
-        color: isDark
-            ? AppTheme.darkSurfaceColor.withOpacity(0.5)
-            : Colors.grey.shade50,
+        color:
+            isDark ? AppColors.surfaceDark.withOpacity(0.5) : AppColors.gray50,
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         border: Border.all(
           color: isDark
-              ? AppTheme.darkTextSecondary.withOpacity(0.15)
-              : Colors.grey.shade200,
+              ? AppColors.textSecondaryDark.withOpacity(0.15)
+              : AppColors.gray200,
           width: 1.5,
         ),
       ),
@@ -1010,24 +1037,22 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
               children: [
                 Text(
                   title,
-                  style: AppTheme.bodySmall.copyWith(
+                  style: AppFonts.bodySmall().copyWith(
                     color: isDark
-                        ? AppTheme.darkTextSecondary
-                        : AppTheme.textSecondary,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 12,
+                        ? AppColors.textSecondaryDark
+                        : AppColors.textSecondaryLight,
+                    fontWeight: AppFonts.bold,
                     letterSpacing: 0.5,
                   ),
                 ),
                 const SizedBox(height: 6),
                 Text(
                   content,
-                  style: AppTheme.bodyMedium.copyWith(
+                  style: AppFonts.bodyMedium().copyWith(
                     color: isDark
-                        ? AppTheme.darkTextPrimary
-                        : AppTheme.textPrimary,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 14,
+                        ? AppColors.textPrimaryDark
+                        : AppColors.textPrimaryLight,
+                    fontWeight: AppFonts.regular,
                     height: 1.5,
                   ),
                 ),
@@ -1045,17 +1070,16 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
     return Container(
       padding: EdgeInsets.all(isMobile ? AppTheme.spacingM : AppTheme.spacingL),
       decoration: BoxDecoration(
-        color: isDark
-            ? AppTheme.darkSurfaceColor.withOpacity(0.3)
-            : Colors.grey.shade50,
+        color:
+            isDark ? AppColors.surfaceDark.withOpacity(0.3) : AppColors.gray50,
         borderRadius: const BorderRadius.vertical(
           bottom: Radius.circular(AppTheme.radiusXL + 4),
         ),
         border: Border(
           top: BorderSide(
             color: isDark
-                ? AppTheme.darkTextSecondary.withOpacity(0.1)
-                : Colors.grey.shade200,
+                ? AppColors.textSecondaryDark.withOpacity(0.1)
+                : AppColors.gray200,
             width: 1,
           ),
         ),
@@ -1096,11 +1120,11 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
             UrlHelper.openFile(widget.certificate.pdfUrl!);
           }
         },
-        icon: const Icon(Icons.picture_as_pdf_rounded, size: 22),
+        icon: Icon(AppIcons.pdf, size: 22),
         label: const Text('View PDF'),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.red.shade600,
-          foregroundColor: Colors.white,
+          backgroundColor: AppColors.errorLight,
+          foregroundColor: AppColors.white,
           padding: const EdgeInsets.symmetric(
             vertical: 16,
             horizontal: 24,
@@ -1109,7 +1133,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
             borderRadius: BorderRadius.circular(AppTheme.radiusM),
           ),
           elevation: 0,
-          shadowColor: Colors.red.withOpacity(0.3),
+          shadowColor: AppColors.errorLight.withOpacity(0.3),
         ).copyWith(
           elevation: WidgetStateProperty.resolveWith<double>(
             (states) => states.contains(WidgetState.hovered) ? 8 : 0,
@@ -1129,7 +1153,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
             UrlHelper.launchURL(widget.certificate.credentialUrl!);
           }
         },
-        icon: const Icon(Icons.verified_user_rounded, size: 22),
+        icon: Icon(AppIcons.badge, size: 22),
         label: const Text('Verify Certificate'),
         style: OutlinedButton.styleFrom(
           foregroundColor: accentColor,
@@ -1145,7 +1169,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
           backgroundColor: WidgetStateProperty.resolveWith<Color>(
             (states) => states.contains(WidgetState.hovered)
                 ? accentColor.withOpacity(0.1)
-                : Colors.transparent,
+                : AppColors.transparent,
           ),
         ),
       ),

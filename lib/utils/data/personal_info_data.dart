@@ -2,7 +2,7 @@ import '../../models/contact.dart';
 
 class PersonalInfoData {
   // Personal information
-  static const String fullName = 'Youssef Salem Hassan';
+  static const String fullName = 'Youssef Hassan';
   static const String title = 'Flutter Developer';
   static const String subtitle = 'Building fast cross-platform apps';
   static const String bio =

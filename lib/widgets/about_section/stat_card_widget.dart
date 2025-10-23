@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../utils/app_constants.dart';
+
 import '../../theme/app_theme.dart';
 
 /// A single statistic card widget with enhanced UI/UX.
@@ -80,8 +82,8 @@ class _StatCardWidgetState extends State<StatCardWidget>
             child: Card(
               elevation: _isHovered ? 8 : 3,
               shadowColor: isDark
-                  ? AppTheme.darkAccentColor.withValues(alpha: 0.3)
-                  : AppTheme.accentColor.withValues(alpha: 0.2),
+                  ? AppColors.accentDark.withValues(alpha: 0.3)
+                  : AppColors.accentLight.withValues(alpha: 0.2),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppTheme.radiusL),
               ),
@@ -95,29 +97,28 @@ class _StatCardWidgetState extends State<StatCardWidget>
                     colors: _isHovered
                         ? (isDark
                             ? [
-                                AppTheme.darkAccentColor.withValues(alpha: 0.2),
-                                AppTheme.darkPrimaryColor
-                                    .withValues(alpha: 0.15),
+                                AppColors.accentDark.withValues(alpha: 0.2),
+                                AppColors.primaryDark.withValues(alpha: 0.15),
                               ]
                             : [
-                                AppTheme.accentColor.withValues(alpha: 0.15),
-                                AppTheme.primaryColor.withValues(alpha: 0.1),
+                                AppColors.accentLight.withValues(alpha: 0.15),
+                                AppColors.primaryLight.withValues(alpha: 0.1),
                               ])
                         : (isDark
                             ? [
-                                AppTheme.darkCardColor,
-                                AppTheme.darkCardColor,
+                                AppColors.cardDark,
+                                AppColors.cardDark,
                               ]
                             : [
-                                AppTheme.surfaceColor,
-                                AppTheme.surfaceColor.withValues(alpha: 0.95),
+                                AppColors.surfaceLight,
+                                AppColors.surfaceLight.withValues(alpha: 0.95),
                               ]),
                   ),
                   border: Border.all(
                     color: _isHovered
                         ? (isDark
-                            ? AppTheme.darkAccentColor.withValues(alpha: 0.5)
-                            : AppTheme.accentColor.withValues(alpha: 0.3))
+                            ? AppColors.accentDark.withValues(alpha: 0.5)
+                            : AppColors.accentLight.withValues(alpha: 0.3))
                         : Colors.transparent,
                     width: 1.5,
                   ),
@@ -140,15 +141,15 @@ class _StatCardWidgetState extends State<StatCardWidget>
                             gradient: LinearGradient(
                               colors: isDark
                                   ? [
-                                      AppTheme.darkAccentColor
+                                      AppColors.accentDark
                                           .withValues(alpha: 0.2),
-                                      AppTheme.darkAccentColor
+                                      AppColors.accentDark
                                           .withValues(alpha: 0.1),
                                     ]
                                   : [
-                                      AppTheme.accentColor
+                                      AppColors.accentLight
                                           .withValues(alpha: 0.2),
-                                      AppTheme.primaryColor
+                                      AppColors.primaryLight
                                           .withValues(alpha: 0.1),
                                     ],
                             ),
@@ -157,8 +158,8 @@ class _StatCardWidgetState extends State<StatCardWidget>
                             widget.icon,
                             size: 24,
                             color: isDark
-                                ? AppTheme.darkAccentColor
-                                : AppTheme.accentColor,
+                                ? AppColors.accentDark
+                                : AppColors.accentLight,
                           ),
                         ),
                         const SizedBox(height: AppTheme.spacingM),
@@ -169,21 +170,19 @@ class _StatCardWidgetState extends State<StatCardWidget>
                         shaderCallback: (bounds) => LinearGradient(
                           colors: isDark
                               ? [
-                                  AppTheme.darkAccentColor,
-                                  AppTheme.darkAccentColor
-                                      .withValues(alpha: 0.8),
+                                  AppColors.accentDark,
+                                  AppColors.accentDark.withValues(alpha: 0.8),
                                 ]
                               : [
-                                  AppTheme.accentColor,
-                                  AppTheme.primaryColor,
+                                  AppColors.accentLight,
+                                  AppColors.primaryLight,
                                 ],
                         ).createShader(bounds),
                         child: Text(
                           widget.title,
-                          style: AppTheme.headingLarge.copyWith(
-                            color: Colors.white,
-                            fontSize: 32,
-                            fontWeight: FontWeight.w800,
+                          style: AppFonts.h1().copyWith(
+                            color: AppColors.white,
+                            fontWeight: AppFonts.extraBold,
                             letterSpacing: -0.5,
                           ),
                           textAlign: TextAlign.center,
@@ -201,12 +200,12 @@ class _StatCardWidgetState extends State<StatCardWidget>
                           gradient: LinearGradient(
                             colors: isDark
                                 ? [
-                                    AppTheme.darkAccentColor,
-                                    Colors.transparent,
+                                    AppColors.accentDark,
+                                    AppColors.transparent,
                                   ]
                                 : [
-                                    AppTheme.accentColor,
-                                    Colors.transparent,
+                                    AppColors.accentLight,
+                                    AppColors.transparent,
                                   ],
                           ),
                         ),
@@ -218,14 +217,11 @@ class _StatCardWidgetState extends State<StatCardWidget>
                       Text(
                         widget.subtitle,
                         style: (isDark
-                                ? AppTheme.bodyMediumForTheme(context)
-                                : AppTheme.bodyMedium)
+                                ? AppFonts.bodyMedium()
+                                : AppFonts.bodyMedium())
                             .copyWith(
-                          color: isDark
-                              ? Colors.grey.shade300
-                              : Colors.grey.shade700,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 13,
+                          color: isDark ? AppColors.gray300 : AppColors.gray700,
+                          fontWeight: AppFonts.semiBold,
                           letterSpacing: 0.5,
                         ),
                         textAlign: TextAlign.center,

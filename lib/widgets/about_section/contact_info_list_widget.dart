@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import 'contact_info_item_widget.dart';
+
+import '../../theme/app_theme.dart';
 
 /// Widget displaying a list of contact information items.
 ///
@@ -26,12 +28,9 @@ class ContactInfoListWidget extends StatelessWidget {
         // Section heading
         Text(
           'Get In Touch',
-          style: (isDark
-                  ? AppTheme.headingSmallForTheme(context)
-                  : AppTheme.headingSmall)
-              .copyWith(
-            color: isDark ? Colors.white : Colors.grey.shade900,
-            fontWeight: FontWeight.w700,
+          style: (isDark ? AppFonts.h3() : AppFonts.h3()).copyWith(
+            color: isDark ? AppColors.white : AppColors.gray900,
+            fontWeight: AppFonts.bold,
           ),
         ),
 

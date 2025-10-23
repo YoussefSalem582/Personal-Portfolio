@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../theme/app_theme.dart';
+import '../utils/app_constants.dart';
 import '../models/project.dart';
 import '../utils/url_helper.dart';
 import '../routes/app_routes.dart';
 import 'lazy_image.dart';
+
+import '../theme/app_theme.dart';
 
 class ProjectCard extends StatefulWidget {
   final Project project;
@@ -76,9 +78,9 @@ class _ProjectCardState extends State<ProjectCard>
                   BoxShadow(
                     color: _isHovered
                         ? (isDark
-                            ? AppTheme.darkAccentColor.withValues(alpha: 0.3)
-                            : AppTheme.accentColor.withValues(alpha: 0.3))
-                        : Colors.black.withValues(alpha: 0.1),
+                            ? AppColors.accentDark.withValues(alpha: 0.3)
+                            : AppColors.accentLight.withValues(alpha: 0.3))
+                        : AppColors.black.withValues(alpha: 0.1),
                     blurRadius: _elevationAnimation.value * 2,
                     offset: Offset(0, _elevationAnimation.value / 2),
                     spreadRadius: _isHovered ? 2 : 0,
@@ -94,9 +96,9 @@ class _ProjectCardState extends State<ProjectCard>
                   side: BorderSide(
                     color: _isHovered
                         ? (isDark
-                            ? AppTheme.darkAccentColor.withValues(alpha: 0.5)
-                            : AppTheme.accentColor.withValues(alpha: 0.5))
-                        : Colors.transparent,
+                            ? AppColors.accentDark.withValues(alpha: 0.5)
+                            : AppColors.accentLight.withValues(alpha: 0.5))
+                        : AppColors.transparent,
                     width: _isHovered ? 2 : 0,
                   ),
                 ),
@@ -107,8 +109,8 @@ class _ProjectCardState extends State<ProjectCard>
                     height: cardHeight,
                     decoration: BoxDecoration(
                       gradient: isDark
-                          ? AppTheme.darkCardGradient
-                          : AppTheme.cardGradient,
+                          ? AppColors.cardGradientDark
+                          : AppColors.cardGradientLight,
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
@@ -142,8 +144,8 @@ class _ProjectCardState extends State<ProjectCard>
           widget.project.imageUrl != null
               ? Container(
                   color: isDark
-                      ? AppTheme.darkCardColor.withValues(alpha: 0.5)
-                      : Colors.grey.shade100,
+                      ? AppColors.cardDark.withValues(alpha: 0.5)
+                      : AppColors.gray100,
                   child: LazyImage(
                     imageUrl: widget.project.imageUrl!,
                     fit: BoxFit.contain,
@@ -161,8 +163,8 @@ class _ProjectCardState extends State<ProjectCard>
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Colors.transparent,
-                  Colors.black.withValues(alpha: 0.3),
+                  AppColors.transparent,
+                  AppColors.black.withValues(alpha: 0.3),
                 ],
                 stops: const [0.7, 1.0],
               ),
@@ -182,14 +184,14 @@ class _ProjectCardState extends State<ProjectCard>
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      AppTheme.accentColor,
-                      AppTheme.primaryColor,
+                      AppColors.accentLight,
+                      AppColors.primaryLight,
                     ],
                   ),
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: AppTheme.accentColor.withValues(alpha: 0.5),
+                      color: AppColors.accentLight.withValues(alpha: 0.5),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -198,17 +200,17 @@ class _ProjectCardState extends State<ProjectCard>
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const Icon(
-                      Icons.star_rounded,
+                    Icon(
+                      AppIcons.featured,
                       size: 16,
-                      color: Colors.white,
+                      color: AppColors.white,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       'Featured',
-                      style: AppTheme.bodySmall.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                      style: AppFonts.bodySmall().copyWith(
+                        color: AppColors.white,
+                        fontWeight: AppFonts.bold,
                       ),
                     ),
                   ],
@@ -221,7 +223,7 @@ class _ProjectCardState extends State<ProjectCard>
             duration: const Duration(milliseconds: 200),
             opacity: _isHovered ? 1.0 : 0.0,
             child: Container(
-              color: Colors.black.withValues(alpha: 0.5),
+              color: AppColors.black.withValues(alpha: 0.5),
               child: Center(
                 child: Container(
                   padding: const EdgeInsets.symmetric(
@@ -231,14 +233,14 @@ class _ProjectCardState extends State<ProjectCard>
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        AppTheme.accentColor,
-                        AppTheme.primaryColor,
+                        AppColors.accentLight,
+                        AppColors.primaryLight,
                       ],
                     ),
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
-                        color: AppTheme.accentColor.withValues(alpha: 0.5),
+                        color: AppColors.accentLight.withValues(alpha: 0.5),
                         blurRadius: 12,
                         offset: const Offset(0, 4),
                       ),
@@ -247,17 +249,17 @@ class _ProjectCardState extends State<ProjectCard>
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Icon(
-                        Icons.visibility_rounded,
-                        color: Colors.white,
+                      Icon(
+                        AppIcons.view,
+                        color: AppColors.white,
                         size: 20,
                       ),
                       const SizedBox(width: 8),
                       Text(
                         'View Project',
-                        style: AppTheme.bodyMedium.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                        style: AppFonts.bodyMedium().copyWith(
+                          color: AppColors.white,
+                          fontWeight: AppFonts.bold,
                         ),
                       ),
                     ],
@@ -289,31 +291,30 @@ class _ProjectCardState extends State<ProjectCard>
                   Expanded(
                     child: Text(
                       widget.project.title,
-                      style: AppTheme.headingSmall.copyWith(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
+                      style: AppFonts.labelMedium().copyWith(
+                        fontWeight: AppFonts.bold,
                         color: _isHovered
                             ? (isDark
-                                ? AppTheme.darkAccentColor
-                                : AppTheme.accentColor)
+                                ? AppColors.accentDark
+                                : AppColors.accentLight)
                             : (isDark
-                                ? AppTheme.darkTextPrimary
-                                : AppTheme.textPrimary),
+                                ? AppColors.textPrimaryDark
+                                : AppColors.textPrimaryLight),
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   Icon(
-                    Icons.arrow_forward_rounded,
+                    AppIcons.arrowRight,
                     size: 11,
                     color: _isHovered
                         ? (isDark
-                            ? AppTheme.darkAccentColor
-                            : AppTheme.accentColor)
+                            ? AppColors.accentDark
+                            : AppColors.accentLight)
                         : (isDark
-                            ? AppTheme.darkTextSecondary
-                            : AppTheme.textSecondary),
+                            ? AppColors.textSecondaryDark
+                            : AppColors.textSecondaryLight),
                   ),
                 ],
               ),
@@ -326,12 +327,11 @@ class _ProjectCardState extends State<ProjectCard>
               height: 13.0,
               child: Text(
                 widget.project.shortDescription,
-                style: AppTheme.bodyMedium.copyWith(
+                style: AppFonts.bodyXS().copyWith(
                   color: isDark
-                      ? AppTheme.darkTextSecondary
-                      : AppTheme.textSecondary,
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
                   height: 1.2,
-                  fontSize: 9,
                 ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -358,32 +358,31 @@ class _ProjectCardState extends State<ProjectCard>
                           gradient: LinearGradient(
                             colors: [
                               (isDark
-                                      ? AppTheme.darkAccentColor
-                                      : AppTheme.accentColor)
+                                      ? AppColors.accentDark
+                                      : AppColors.accentLight)
                                   .withValues(alpha: 0.15),
                               (isDark
-                                      ? AppTheme.darkAccentColor
-                                      : AppTheme.accentColor)
+                                      ? AppColors.accentDark
+                                      : AppColors.accentLight)
                                   .withValues(alpha: 0.05),
                             ],
                           ),
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
                             color: (isDark
-                                    ? AppTheme.darkAccentColor
-                                    : AppTheme.accentColor)
+                                    ? AppColors.accentDark
+                                    : AppColors.accentLight)
                                 .withValues(alpha: 0.3),
                             width: 1,
                           ),
                         ),
                         child: Text(
                           tech,
-                          style: AppTheme.bodySmall.copyWith(
+                          style: AppFonts.bodyXS().copyWith(
                             color: isDark
-                                ? AppTheme.darkAccentColor
-                                : AppTheme.accentColor,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 8,
+                                ? AppColors.accentDark
+                                : AppColors.accentLight,
+                            fontWeight: AppFonts.semiBold,
                           ),
                         ),
                       ),
@@ -406,8 +405,8 @@ class _ProjectCardState extends State<ProjectCard>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppTheme.accentColor.withValues(alpha: 0.2),
-            AppTheme.primaryColor.withValues(alpha: 0.2),
+            AppColors.accentLight.withValues(alpha: 0.2),
+            AppColors.primaryLight.withValues(alpha: 0.2),
           ],
         ),
       ),
@@ -417,13 +416,13 @@ class _ProjectCardState extends State<ProjectCard>
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppTheme.accentColor.withValues(alpha: 0.2),
+              color: AppColors.accentLight.withValues(alpha: 0.2),
               shape: BoxShape.circle,
             ),
             child: Icon(
-              Icons.code_rounded,
+              AppIcons.github,
               size: 48,
-              color: AppTheme.accentColor,
+              color: AppColors.accentLight,
             ),
           ),
           const SizedBox(height: AppTheme.spacingM),
@@ -431,9 +430,9 @@ class _ProjectCardState extends State<ProjectCard>
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               widget.project.title,
-              style: AppTheme.bodyMedium.copyWith(
-                color: AppTheme.accentColor,
-                fontWeight: FontWeight.bold,
+              style: AppFonts.bodyMedium().copyWith(
+                color: AppColors.accentLight,
+                fontWeight: AppFonts.bold,
               ),
               textAlign: TextAlign.center,
               maxLines: 2,
@@ -463,12 +462,12 @@ class ProjectDetailsDialog extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Dialog(
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.transparent,
       insetPadding: const EdgeInsets.all(AppTheme.spacingM),
       child: Container(
         constraints: const BoxConstraints(maxWidth: 600, maxHeight: 700),
         decoration: BoxDecoration(
-          color: isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
+          color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
         ),
         child: Column(
@@ -483,20 +482,20 @@ class ProjectDetailsDialog extends StatelessWidget {
                   Expanded(
                     child: Text(
                       project.title,
-                      style: AppTheme.headingMedium.copyWith(
+                      style: AppFonts.h2().copyWith(
                         color: isDark
-                            ? AppTheme.darkTextPrimary
-                            : AppTheme.textPrimary,
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight,
                       ),
                     ),
                   ),
                   IconButton(
                     onPressed: () => Navigator.of(context).pop(),
                     icon: Icon(
-                      Icons.close,
+                      AppIcons.close,
                       color: isDark
-                          ? AppTheme.darkTextPrimary
-                          : AppTheme.textPrimary,
+                          ? AppColors.textPrimaryDark
+                          : AppColors.textPrimaryLight,
                     ),
                   ),
                 ],
@@ -523,19 +522,19 @@ class ProjectDetailsDialog extends StatelessWidget {
                     // Description
                     Text(
                       'Description',
-                      style: AppTheme.headingSmall.copyWith(
+                      style: AppFonts.h3().copyWith(
                         color: isDark
-                            ? AppTheme.darkTextPrimary
-                            : AppTheme.textPrimary,
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight,
                       ),
                     ),
                     const SizedBox(height: AppTheme.spacingS),
                     Text(
                       project.description,
-                      style: AppTheme.bodyMedium.copyWith(
+                      style: AppFonts.bodyMedium().copyWith(
                         color: isDark
-                            ? AppTheme.darkTextSecondary
-                            : AppTheme.textSecondary,
+                            ? AppColors.textSecondaryDark
+                            : AppColors.textSecondaryLight,
                       ),
                     ),
 
@@ -544,10 +543,10 @@ class ProjectDetailsDialog extends StatelessWidget {
                     // Technologies
                     Text(
                       'Technologies Used',
-                      style: AppTheme.headingSmall.copyWith(
+                      style: AppFonts.h3().copyWith(
                         color: isDark
-                            ? AppTheme.darkTextPrimary
-                            : AppTheme.textPrimary,
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight,
                       ),
                     ),
                     const SizedBox(height: AppTheme.spacingS),
@@ -559,15 +558,15 @@ class ProjectDetailsDialog extends StatelessWidget {
                             (tech) => Chip(
                               label: Text(
                                 tech,
-                                style: AppTheme.bodySmall.copyWith(
+                                style: AppFonts.bodySmall().copyWith(
                                   color: isDark
-                                      ? AppTheme.darkAccentColor
-                                      : AppTheme.accentColor,
+                                      ? AppColors.accentDark
+                                      : AppColors.accentLight,
                                 ),
                               ),
                               backgroundColor: (isDark
-                                      ? AppTheme.darkAccentColor
-                                      : AppTheme.accentColor)
+                                      ? AppColors.accentDark
+                                      : AppColors.accentLight)
                                   .withValues(alpha: 0.1),
                               side: BorderSide.none,
                             ),
@@ -596,13 +595,13 @@ class ProjectDetailsDialog extends StatelessWidget {
                           AppRoutes.project,
                           parameters: {'id': project.id},
                         ),
-                        icon: const Icon(Icons.article_outlined),
+                        icon: Icon(AppIcons.blog),
                         label: const Text('View Case Study'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: isDark
-                              ? AppTheme.darkAccentColor
-                              : AppTheme.primaryColor,
-                          foregroundColor: Colors.white,
+                              ? AppColors.accentDark
+                              : AppColors.primaryLight,
+                          foregroundColor: AppColors.white,
                         ),
                       ),
                     ),
@@ -615,7 +614,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                           child: OutlinedButton.icon(
                             onPressed: () =>
                                 UrlHelper.launchURL(project.githubUrl!),
-                            icon: const Icon(Icons.code),
+                            icon: Icon(AppIcons.github),
                             label: const Text('View Code'),
                           ),
                         ),
@@ -626,7 +625,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                           child: ElevatedButton.icon(
                             onPressed: () =>
                                 UrlHelper.launchURL(project.liveUrl!),
-                            icon: const Icon(Icons.launch),
+                            icon: Icon(AppIcons.demo),
                             label: const Text('Live Demo'),
                           ),
                         ),
@@ -656,7 +655,7 @@ class ProjectDetailsDialog extends StatelessWidget {
       height: 350,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
-        color: Colors.grey.shade100,
+        color: AppColors.gray100,
       ),
       child: images.length == 1
           ? ClipRRect(
@@ -702,13 +701,13 @@ class ProjectDetailsDialog extends StatelessWidget {
                                   vertical: 4,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: Colors.black.withValues(alpha: 0.7),
+                                  color: AppColors.black.withValues(alpha: 0.7),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
                                   '${index + 1}/${images.length}',
-                                  style: AppTheme.bodySmall.copyWith(
-                                    color: Colors.white,
+                                  style: AppFonts.bodySmall().copyWith(
+                                    color: AppColors.white,
                                   ),
                                 ),
                               ),
@@ -731,7 +730,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                       bottom: 0,
                       child: Center(
                         child: _buildNavigationButton(
-                          icon: Icons.arrow_back_ios_new,
+                          icon: AppIcons.back,
                           onPressed: () {
                             pageController.previousPage(
                               duration: const Duration(milliseconds: 300),
@@ -757,7 +756,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                       bottom: 0,
                       child: Center(
                         child: _buildNavigationButton(
-                          icon: Icons.arrow_forward_ios,
+                          icon: AppIcons.forward,
                           onPressed: () {
                             pageController.nextPage(
                               duration: const Duration(milliseconds: 300),
@@ -788,8 +787,8 @@ class ProjectDetailsDialog extends StatelessWidget {
                             height: 8,
                             decoration: BoxDecoration(
                               color: currentPage == index
-                                  ? AppTheme.accentColor
-                                  : Colors.white.withValues(alpha: 0.5),
+                                  ? AppColors.accentLight
+                                  : AppColors.white.withValues(alpha: 0.5),
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),
@@ -808,18 +807,18 @@ class ProjectDetailsDialog extends StatelessWidget {
     required VoidCallback onPressed,
   }) {
     return Material(
-      color: Colors.transparent,
+      color: AppColors.transparent,
       child: InkWell(
         onTap: onPressed,
         borderRadius: BorderRadius.circular(20),
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: Colors.black.withValues(alpha: 0.6),
+            color: AppColors.black.withValues(alpha: 0.6),
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.3),
+                color: AppColors.black.withValues(alpha: 0.3),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -827,7 +826,7 @@ class ProjectDetailsDialog extends StatelessWidget {
           ),
           child: Icon(
             icon,
-            color: Colors.white,
+            color: AppColors.white,
             size: 20,
           ),
         ),
@@ -838,11 +837,11 @@ class ProjectDetailsDialog extends StatelessWidget {
   Widget _buildImagePlaceholder() {
     return Container(
       decoration: BoxDecoration(
-        color: AppTheme.accentColor.withValues(alpha: 0.1),
+        color: AppColors.accentLight.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
       ),
       child: const Center(
-        child: Icon(Icons.image, size: 50, color: AppTheme.accentColor),
+        child: Icon(AppIcons.image, size: 50, color: AppColors.accentLight),
       ),
     );
   }

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../widgets/about_section/bio_section_widget.dart';
 import '../../widgets/about_section/stats_section_widget.dart';
+
+import '../../theme/app_theme.dart';
 
 /// The about section of the portfolio displaying biographical information and statistics.
 ///
@@ -30,16 +32,16 @@ class AboutSection extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  AppTheme.darkSurfaceColor,
-                  AppTheme.darkCardColor.withOpacity(0.5),
+                  AppColors.surfaceDark,
+                  AppColors.cardDark.withOpacity(0.5),
                 ],
               )
             : LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  AppTheme.surfaceColor,
-                  Colors.grey.shade50,
+                  AppColors.surfaceLight,
+                  AppColors.gray50,
                 ],
               ),
       ),
@@ -59,19 +61,16 @@ class AboutSection extends StatelessWidget {
             ShaderMask(
               shaderCallback: (bounds) => LinearGradient(
                 colors: isDark
-                    ? [AppTheme.primaryColor, AppTheme.accentColor]
-                    : [AppTheme.accentColor, AppTheme.primaryColor],
+                    ? [AppColors.primaryLight, AppColors.accentLight]
+                    : [AppColors.accentLight, AppColors.primaryLight],
               ).createShader(bounds),
               child: Text(
                 'About Me',
-                style: (isDark
-                        ? AppTheme.headingLargeForTheme(context)
-                        : AppTheme.headingLarge)
-                    .copyWith(
+                style: (isDark ? AppFonts.h1() : AppFonts.h1()).copyWith(
                   fontSize: isMobile ? 36 : 48,
-                  fontWeight: FontWeight.w800,
+                  fontWeight: AppFonts.extraBold,
                   letterSpacing: -1,
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -85,14 +84,15 @@ class AboutSection extends StatelessWidget {
               height: 5,
               decoration: BoxDecoration(
                 gradient: isDark
-                    ? AppTheme.darkPrimaryGradient
-                    : AppTheme.primaryGradient,
+                    ? AppColors.primaryGradientDark
+                    : AppColors.primaryGradientLight,
                 borderRadius: BorderRadius.circular(3),
                 boxShadow: [
                   BoxShadow(
-                    color:
-                        (isDark ? AppTheme.primaryColor : AppTheme.accentColor)
-                            .withOpacity(0.4),
+                    color: (isDark
+                            ? AppColors.primaryLight
+                            : AppColors.accentLight)
+                        .withOpacity(0.4),
                     blurRadius: 12,
                     spreadRadius: 2,
                   ),
@@ -105,14 +105,12 @@ class AboutSection extends StatelessWidget {
             // Subtitle description
             Text(
               'Discover my journey, skills, and passion for technology',
-              style: (isDark
-                      ? AppTheme.bodyLargeForTheme(context)
-                      : AppTheme.bodyLarge)
+              style: (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge())
                   .copyWith(
                 fontSize: isMobile ? 15 : 17,
                 color: isDark
-                    ? AppTheme.darkTextSecondary.withOpacity(0.9)
-                    : AppTheme.textSecondary,
+                    ? AppColors.textSecondaryDark.withOpacity(0.9)
+                    : AppColors.textSecondaryLight,
                 letterSpacing: 0.3,
               ),
               textAlign: TextAlign.center,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import 'contact_item_widget.dart';
 import 'social_button_widget.dart';
+
+import '../../theme/app_theme.dart';
 
 /// A widget that displays contact information including email, phone, location,
 /// and social media links.
@@ -25,10 +27,7 @@ class ContactInfoWidget extends StatelessWidget {
         // Section heading
         Text(
           'Contact Information',
-          style: (isDark
-                  ? AppTheme.headingMediumForTheme(context)
-                  : AppTheme.headingMedium)
-              .copyWith(fontSize: 24),
+          style: (isDark ? AppFonts.h2() : AppFonts.h2()),
         ),
 
         const SizedBox(height: AppTheme.spacingL),
@@ -67,10 +66,7 @@ class ContactInfoWidget extends StatelessWidget {
         // Social media section heading
         Text(
           'Connect With Me',
-          style: (isDark
-                  ? AppTheme.headingSmallForTheme(context)
-                  : AppTheme.headingSmall)
-              .copyWith(fontSize: 18),
+          style: (isDark ? AppFonts.h3() : AppFonts.h3()),
         ),
 
         const SizedBox(height: AppTheme.spacingL),

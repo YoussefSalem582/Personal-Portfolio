@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import '../../widgets/project_card_advanced.dart';
+
+import '../../theme/app_theme.dart';
 
 class ProjectsSection extends StatefulWidget {
   const ProjectsSection({super.key});
@@ -17,6 +19,9 @@ class ProjectsSection extends StatefulWidget {
 class _ProjectsSectionState extends State<ProjectsSection> {
   String _selectedFilter = 'All';
   List<String> _filters = ['All'];
+  int _displayedProjectCount = 6;
+  static const int _initialProjectCount = 6;
+  static const int _incrementCount = 3;
 
   @override
   void initState() {
@@ -41,6 +46,57 @@ class _ProjectsSectionState extends State<ProjectsSection> {
   }
 
   List<dynamic> get _filteredProjects {
+    List<dynamic> filtered;
+
+    if (_selectedFilter == 'All') {
+      filtered = PortfolioData.projects;
+    } else {
+      filtered = PortfolioData.projects.where((project) {
+        final projectTechs = project.technologies.join(' ').toLowerCase();
+
+        switch (_selectedFilter) {
+          case 'Flutter':
+            return projectTechs.contains('flutter') ||
+                projectTechs.contains('dart');
+          case 'Python':
+            return projectTechs.contains('python');
+          case 'API':
+            return projectTechs.contains('api') ||
+                projectTechs.contains('rest');
+          case 'AI/ML':
+            return projectTechs.contains('machine learning') ||
+                projectTechs.contains('tensorflow') ||
+                projectTechs.contains('ai') ||
+                projectTechs.contains('ml');
+          case 'Firebase':
+            return projectTechs.contains('firebase');
+          case 'Maps':
+            return projectTechs.contains('maps') ||
+                projectTechs.contains('location');
+          case 'Chat':
+            return projectTechs.contains('chat') ||
+                projectTechs.contains('messaging');
+          case 'TensorFlow':
+            return projectTechs.contains('tensorflow');
+          case 'Computer Vision':
+            return projectTechs.contains('computer vision') ||
+                projectTechs.contains('opencv') ||
+                projectTechs.contains('cv');
+          default:
+            return project.technologies.contains(_selectedFilter);
+        }
+      }).toList();
+    }
+
+    // Return limited projects based on displayed count
+    if (filtered.length > _displayedProjectCount) {
+      return filtered.take(_displayedProjectCount).toList();
+    }
+
+    return filtered;
+  }
+
+  List<dynamic> get _allFilteredProjects {
     if (_selectedFilter == 'All') {
       return PortfolioData.projects;
     }
@@ -89,7 +145,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
 
     return Container(
       width: double.infinity,
-      color: isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
+      color: isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
         vertical: AppTheme.spacingXXL,
@@ -104,10 +160,11 @@ class _ProjectsSectionState extends State<ProjectsSection> {
             // Section title
             Text(
               'My Projects',
-              style: (isDark
-                      ? AppTheme.headingLargeForTheme(context)
-                      : AppTheme.headingLarge)
-                  .copyWith(fontSize: 36),
+              style: AppFonts.h1(
+                color: isDark
+                    ? AppColors.textPrimaryDark
+                    : AppColors.textPrimaryLight,
+              ),
               textAlign: TextAlign.center,
             ),
 
@@ -118,8 +175,8 @@ class _ProjectsSectionState extends State<ProjectsSection> {
               height: 4,
               decoration: BoxDecoration(
                 gradient: isDark
-                    ? AppTheme.darkPrimaryGradient
-                    : AppTheme.primaryGradient,
+                    ? AppColors.primaryGradientDark
+                    : AppColors.primaryGradientLight,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
@@ -128,10 +185,10 @@ class _ProjectsSectionState extends State<ProjectsSection> {
 
             Text(
               'Here are some of the projects I\'ve worked on',
-              style: AppTheme.bodyLarge.copyWith(
+              style: AppFonts.bodyLarge().copyWith(
                 color: isDark
-                    ? AppTheme.darkTextSecondary
-                    : AppTheme.textSecondary,
+                    ? AppColors.textSecondaryDark
+                    : AppColors.textSecondaryLight,
               ),
               textAlign: TextAlign.center,
             ),
@@ -145,6 +202,12 @@ class _ProjectsSectionState extends State<ProjectsSection> {
 
             // Projects grid
             _buildProjectsGrid(screenWidth),
+
+            // Show More button (if there are more projects to show)
+            if (_allFilteredProjects.length > _displayedProjectCount) ...[
+              const SizedBox(height: AppTheme.spacingXL),
+              _buildShowMoreButton(),
+            ],
 
             const SizedBox(height: AppTheme.spacingXL),
 
@@ -192,26 +255,31 @@ class _ProjectsSectionState extends State<ProjectsSection> {
     return FilterChip(
       label: Text(
         filter,
-        style: AppTheme.bodyMedium.copyWith(
+        style: AppFonts.bodyMedium().copyWith(
           color: isSelected
-              ? Colors.white
-              : (isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary),
-          fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+              ? AppColors.white
+              : (isDark
+                  ? AppColors.textPrimaryDark
+                  : AppColors.textPrimaryLight),
+          fontWeight: isSelected ? AppFonts.semiBold : AppFonts.regular,
         ),
       ),
       selected: isSelected,
       onSelected: (selected) {
         setState(() {
           _selectedFilter = filter;
+          _displayedProjectCount =
+              _initialProjectCount; // Reset when changing filter
         });
       },
-      backgroundColor:
-          isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
-      selectedColor: isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
+      backgroundColor: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
+      selectedColor: isDark ? AppColors.accentDark : AppColors.accentLight,
       side: BorderSide(
         color: isSelected
-            ? (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-            : (isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary)
+            ? (isDark ? AppColors.accentDark : AppColors.accentLight)
+            : (isDark
+                    ? AppColors.textSecondaryDark
+                    : AppColors.textSecondaryLight)
                 .withValues(alpha: 0.3),
       ),
     );
@@ -229,19 +297,20 @@ class _ProjectsSectionState extends State<ProjectsSection> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.search_off_rounded,
+              AppIcons.search,
               size: 64,
-              color:
-                  (isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary)
-                      .withValues(alpha: 0.5),
+              color: (isDark
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight)
+                  .withValues(alpha: 0.5),
             ),
             const SizedBox(height: AppTheme.spacingM),
             Text(
               'No projects found for "$_selectedFilter"',
-              style: AppTheme.bodyLarge.copyWith(
+              style: AppFonts.bodyLarge().copyWith(
                 color: isDark
-                    ? AppTheme.darkTextSecondary
-                    : AppTheme.textSecondary,
+                    ? AppColors.textSecondaryDark
+                    : AppColors.textSecondaryLight,
               ),
             ),
           ],
@@ -278,12 +347,40 @@ class _ProjectsSectionState extends State<ProjectsSection> {
     );
   }
 
+  Widget _buildShowMoreButton() {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
+
+    return Center(
+      child: OutlinedButton.icon(
+        onPressed: () {
+          setState(() {
+            _displayedProjectCount += _incrementCount;
+          });
+        },
+        icon: const Icon(Icons.expand_more, size: 20),
+        label: const Text('Show More'),
+        style: OutlinedButton.styleFrom(
+          foregroundColor: accentColor,
+          side: BorderSide(color: accentColor, width: 2),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 32,
+            vertical: 16,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildViewAllButton() {
     return Column(
       children: [
         Text(
           'Interested in seeing more?',
-          style: AppTheme.bodyLarge,
+          style: AppFonts.bodyLarge(),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: AppTheme.spacingM),
@@ -291,14 +388,14 @@ class _ProjectsSectionState extends State<ProjectsSection> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             OutlinedButton.icon(
-              onPressed: () => _showAllProjects(),
-              icon: const Icon(Icons.grid_view_rounded),
+              onPressed: () => _showAllProjectsDialog(),
+              icon: const Icon(AppIcons.projects),
               label: const Text('View All Projects'),
             ),
             const SizedBox(width: AppTheme.spacingM),
             ElevatedButton.icon(
               onPressed: () => _navigateToGitHub(),
-              icon: const Icon(Icons.code_rounded),
+              icon: const Icon(AppIcons.github),
               label: const Text('Visit GitHub'),
             ),
           ],
@@ -307,7 +404,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
     );
   }
 
-  void _showAllProjects() {
+  void _showAllProjectsDialog() {
     showDialog(
       context: context,
       builder: (context) =>
@@ -332,102 +429,80 @@ class _AllProjectsDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Dialog(
-      backgroundColor: Colors.transparent,
-      insetPadding: const EdgeInsets.all(AppTheme.spacingM),
+      backgroundColor: AppColors.transparent,
+      insetPadding: const EdgeInsets.all(AppTheme.spacingL),
       child: Container(
         constraints: const BoxConstraints(maxWidth: 900, maxHeight: 700),
         decoration: BoxDecoration(
-          color: AppTheme.surfaceColor,
+          color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
+          border: Border.all(
+            color: isDark
+                ? AppColors.white.withOpacity(0.1)
+                : AppColors.black.withOpacity(0.1),
+            width: 1,
+          ),
         ),
         child: Column(
           children: [
             // Header
-            Padding(
+            Container(
               padding: const EdgeInsets.all(AppTheme.spacingL),
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: isDark
+                        ? AppColors.white.withOpacity(0.1)
+                        : AppColors.black.withOpacity(0.1),
+                    width: 1,
+                  ),
+                ),
+              ),
               child: Row(
                 children: [
                   Expanded(
                     child: Text(
                       'All Projects (${projects.length})',
-                      style: AppTheme.headingMedium,
+                      style: AppFonts.h2().copyWith(
+                        color: isDark
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight,
+                      ),
                     ),
                   ),
                   IconButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    icon: const Icon(Icons.close),
+                    icon: Icon(
+                      AppIcons.close,
+                      color: isDark
+                          ? AppColors.textPrimaryDark
+                          : AppColors.textPrimaryLight,
+                    ),
+                    style: IconButton.styleFrom(
+                      backgroundColor: isDark
+                          ? AppColors.white.withOpacity(0.05)
+                          : AppColors.black.withOpacity(0.05),
+                    ),
                   ),
                 ],
               ),
             ),
 
-            const Divider(height: 1),
-
             // Projects list
             Expanded(
               child: ListView.builder(
-                padding: const EdgeInsets.all(AppTheme.spacingM),
+                padding: const EdgeInsets.all(AppTheme.spacingL),
                 itemCount: projects.length,
                 itemBuilder: (context, index) {
                   final project = projects[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: AppTheme.spacingM),
-                    child: Card(
-                      child: ListTile(
-                        leading: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: AppTheme.accentColor.withValues(alpha: 0.1),
-                            borderRadius: BorderRadius.circular(
-                              AppTheme.radiusS,
-                            ),
-                          ),
-                          child: const Icon(
-                            Icons.code,
-                            color: AppTheme.accentColor,
-                          ),
-                        ),
-                        title: Text(
-                          project.title,
-                          style: AppTheme.headingSmall.copyWith(fontSize: 16),
-                        ),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(height: AppTheme.spacingXS),
-                            Text(
-                              project.shortDescription,
-                              style: AppTheme.bodySmall,
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: AppTheme.spacingS),
-                            Wrap(
-                              spacing: AppTheme.spacingXS,
-                              children: project.technologies
-                                  .take(3)
-                                  .map<Widget>(
-                                    (tech) => Chip(
-                                      label: Text(
-                                        tech,
-                                        style: AppTheme.bodySmall.copyWith(
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                      materialTapTargetSize:
-                                          MaterialTapTargetSize.shrinkWrap,
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 4,
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                            ),
-                          ],
-                        ),
-                        trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    child: Material(
+                      color: AppColors.transparent,
+                      child: InkWell(
                         onTap: () {
                           Navigator.of(context).pop();
                           // Navigate to case study for projects with images
@@ -437,6 +512,133 @@ class _AllProjectsDialog extends StatelessWidget {
                             Get.toNamed('/project/${project.id}');
                           }
                         },
+                        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                        child: Container(
+                          padding: const EdgeInsets.all(AppTheme.spacingL),
+                          decoration: BoxDecoration(
+                            color:
+                                isDark ? AppColors.cardDark : AppColors.white,
+                            borderRadius:
+                                BorderRadius.circular(AppTheme.radiusM),
+                            border: Border.all(
+                              color: isDark
+                                  ? AppColors.white.withOpacity(0.1)
+                                  : AppColors.black.withOpacity(0.1),
+                              width: 1,
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              // Project Image
+                              Container(
+                                width: 70,
+                                height: 70,
+                                decoration: BoxDecoration(
+                                  color: (isDark
+                                          ? AppColors.accentDark
+                                          : AppColors.accentLight)
+                                      .withOpacity(0.1),
+                                  borderRadius:
+                                      BorderRadius.circular(AppTheme.radiusS),
+                                  image: project.imageUrl != null
+                                      ? DecorationImage(
+                                          image:
+                                              NetworkImage(project.imageUrl!),
+                                          fit: BoxFit.cover,
+                                        )
+                                      : null,
+                                ),
+                                child: project.imageUrl == null
+                                    ? Icon(
+                                        AppIcons.technology,
+                                        color: isDark
+                                            ? AppColors.accentDark
+                                            : AppColors.accentLight,
+                                        size: 28,
+                                      )
+                                    : null,
+                              ),
+
+                              const SizedBox(width: AppTheme.spacingL),
+
+                              // Content
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      project.title,
+                                      style: AppFonts.h5().copyWith(
+                                        color: isDark
+                                            ? AppColors.textPrimaryDark
+                                            : AppColors.textPrimaryLight,
+                                        fontWeight: AppFonts.semiBold,
+                                      ),
+                                    ),
+                                    const SizedBox(height: AppTheme.spacingXS),
+                                    Text(
+                                      project.shortDescription,
+                                      style: AppFonts.bodySmall().copyWith(
+                                        color: isDark
+                                            ? AppColors.textSecondaryDark
+                                            : AppColors.textSecondaryLight,
+                                      ),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                    const SizedBox(height: AppTheme.spacingS),
+                                    Wrap(
+                                      spacing: AppTheme.spacingXS,
+                                      runSpacing: AppTheme.spacingXS,
+                                      children: project.technologies
+                                          .take(3)
+                                          .map<Widget>(
+                                            (tech) => Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                horizontal: 12,
+                                                vertical: 6,
+                                              ),
+                                              decoration: BoxDecoration(
+                                                color: isDark
+                                                    ? AppColors.white
+                                                        .withOpacity(0.1)
+                                                    : AppColors.black
+                                                        .withOpacity(0.05),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        AppTheme.radiusS),
+                                              ),
+                                              child: Text(
+                                                tech,
+                                                style: AppFonts.labelSmall()
+                                                    .copyWith(
+                                                  color: isDark
+                                                      ? AppColors
+                                                          .textPrimaryDark
+                                                      : AppColors
+                                                          .textPrimaryLight,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                          .toList(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              // Arrow
+                              Icon(
+                                AppIcons.arrowRight,
+                                size: 20,
+                                color: isDark
+                                    ? AppColors.textSecondaryDark
+                                    : AppColors.textSecondaryLight,
+                              ),
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   );

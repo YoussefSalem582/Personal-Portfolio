@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+import 'app_constants.dart';
 
 /// GetX Helper Utilities
 /// Provides convenient methods for common GetX operations
@@ -88,7 +89,7 @@ class GetXHelper {
                     ),
                     if (message != null) ...[
                       const SizedBox(height: 16),
-                      Text(message, style: const TextStyle(fontSize: 14)),
+                      Text(message, style: AppFonts.bodySmall()),
                     ],
                   ],
                 ),

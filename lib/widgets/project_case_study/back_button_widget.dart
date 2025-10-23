@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../utils/app_constants.dart';
 
 /// Modern glassmorphic back button widget
 ///
@@ -20,7 +21,7 @@ class BackButtonWidget extends StatelessWidget {
       child: SafeArea(
         // Respect device safe areas (notch, status bar, etc.)
         child: Material(
-          color: Colors.transparent, // Transparent background for Material
+          color: AppColors.transparent, // Transparent background for Material
           child: InkWell(
             onTap: () => Navigator.of(context).pop(), // Navigate back on tap
             borderRadius: BorderRadius.circular(16), // Rounded ripple effect
@@ -28,26 +29,26 @@ class BackButtonWidget extends StatelessWidget {
               padding: const EdgeInsets.all(14), // Internal padding for icon
               // Glassmorphic styling
               decoration: BoxDecoration(
-                color: Colors.black
+                color: AppColors.black
                     .withValues(alpha: 0.7), // Semi-transparent dark background
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
-                  color: Colors.white
+                  color: AppColors.white
                       .withValues(alpha: 0.3), // Subtle white border
                   width: 1.5,
                 ),
                 // Elevation shadow for depth
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.3),
+                    color: AppColors.black.withValues(alpha: 0.3),
                     blurRadius: 12,
                     offset: const Offset(0, 4), // Shadow offset downwards
                   ),
                 ],
               ),
               child: const Icon(
-                Icons.arrow_back_ios_new_rounded, // Modern iOS-style back arrow
-                color: Colors.white,
+                AppIcons.back, // Modern iOS-style back arrow
+                color: AppColors.white,
                 size: 22,
               ),
             ),

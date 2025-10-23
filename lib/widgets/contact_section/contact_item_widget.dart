@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../utils/app_constants.dart';
+
 import '../../theme/app_theme.dart';
 
 /// A reusable widget that displays a single contact information item.
@@ -32,8 +34,7 @@ class ContactItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // Get theme-specific colors
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final accentColor =
-        isDark ? AppTheme.darkAccentColor : AppTheme.accentColor;
+    final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
 
     return InkWell(
       onTap: onTap,
@@ -60,14 +61,13 @@ class ContactItemWidget extends StatelessWidget {
                   // Contact item title (e.g., "Email")
                   Text(
                     title,
-                    style: (isDark
-                            ? AppTheme.bodySmallForTheme(context)
-                            : AppTheme.bodySmall)
-                        .copyWith(
+                    style:
+                        (isDark ? AppFonts.bodySmall() : AppFonts.bodySmall())
+                            .copyWith(
                       color: isDark
-                          ? AppTheme.darkTextSecondary
-                          : AppTheme.textSecondary,
-                      fontWeight: FontWeight.w500,
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight,
+                      fontWeight: AppFonts.medium,
                     ),
                   ),
                   const SizedBox(height: 2),
@@ -75,16 +75,15 @@ class ContactItemWidget extends StatelessWidget {
                   // Color changes to accent if clickable
                   Text(
                     value,
-                    style: (isDark
-                            ? AppTheme.bodyMediumForTheme(context)
-                            : AppTheme.bodyMedium)
-                        .copyWith(
-                      fontWeight: FontWeight.w600,
+                    style:
+                        (isDark ? AppFonts.bodyMedium() : AppFonts.bodyMedium())
+                            .copyWith(
+                      fontWeight: AppFonts.semiBold,
                       color: onTap != null
                           ? accentColor // Accent color for clickable items
                           : (isDark
-                              ? AppTheme.darkTextPrimary
-                              : AppTheme.textPrimary),
+                              ? AppColors.textPrimaryDark
+                              : AppColors.textPrimaryLight),
                     ),
                   ),
                 ],

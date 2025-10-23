@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/data/skills_data.dart';
 import '../../models/skill.dart';
 
@@ -20,7 +20,7 @@ class SkillsSection extends StatelessWidget {
         horizontal: isMobile ? 20 : 40,
       ),
       decoration: BoxDecoration(
-        color: isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
+        color: AppColors.getBackground(isDark),
       ),
       child: Column(
         children: [
@@ -40,11 +40,9 @@ class SkillsSection extends StatelessWidget {
       children: [
         Text(
           'My Tech Stack',
-          style: TextStyle(
-            fontSize: isMobile ? 32 : 42,
-            fontWeight: FontWeight.bold,
-            color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
-          ),
+          style: isMobile
+              ? AppFonts.h3(color: AppColors.getTextPrimary(isDark))
+              : AppFonts.h2(color: AppColors.getTextPrimary(isDark)),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
@@ -52,12 +50,8 @@ class SkillsSection extends StatelessWidget {
           constraints: const BoxConstraints(maxWidth: 700),
           child: Text(
             'A collection of technologies I am proficient in and enjoy working with.',
-            style: TextStyle(
-              fontSize: isMobile ? 16 : 18,
-              color:
-                  isDark ? AppTheme.darkTextSecondary : AppTheme.textSecondary,
-              height: 1.5,
-            ),
+            style:
+                AppFonts.bodyLarge(color: AppColors.getTextSecondary(isDark)),
             textAlign: TextAlign.center,
           ),
         ),
@@ -124,11 +118,9 @@ class SkillsSection extends StatelessWidget {
           // Category Title
           Text(
             categoryName,
-            style: TextStyle(
-              fontSize: isMobile ? 22 : 24,
-              fontWeight: FontWeight.bold,
-              color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
-            ),
+            style: isMobile
+                ? AppFonts.h6(color: AppColors.getTextPrimary(isDark))
+                : AppFonts.h5(color: AppColors.getTextPrimary(isDark)),
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: 30),
@@ -167,25 +159,25 @@ class SkillsSection extends StatelessWidget {
       BuildContext context, Skill skill, bool isDark, bool isMobile) {
     final size = isMobile ? 100.0 : 120.0;
     final iconSize = isMobile ? 45.0 : 55.0;
-    final color = _getSkillColor(skill.id);
+    final color = AppColors.getSkillColor(skill.id);
 
     return Container(
       width: size,
       height: size,
       decoration: BoxDecoration(
-        color: isDark ? AppTheme.darkCardColor : Colors.white,
+        color: AppColors.getSurface(isDark),
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isDark
-              ? Colors.white.withOpacity(0.1)
-              : Colors.black.withOpacity(0.1),
+              ? AppColors.white.withOpacity(0.1)
+              : AppColors.black.withOpacity(0.1),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
             color: isDark
-                ? Colors.black.withOpacity(0.3)
-                : Colors.black.withOpacity(0.08),
+                ? AppColors.black.withOpacity(0.3)
+                : AppColors.black.withOpacity(0.08),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -208,7 +200,7 @@ class SkillsSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: isDark
-                        ? Colors.white.withOpacity(0.05)
+                        ? AppColors.white.withOpacity(0.05)
                         : color.withOpacity(0.05),
                   ),
                   child: Center(
@@ -223,13 +215,9 @@ class SkillsSection extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 6),
                   child: Text(
                     skill.name,
-                    style: TextStyle(
-                      fontSize: isMobile ? 12 : 13,
-                      fontWeight: FontWeight.w600,
-                      color: isDark
-                          ? AppTheme.darkTextPrimary
-                          : AppTheme.textPrimary,
-                    ),
+                    style: AppFonts.labelMedium(
+                      color: AppColors.getTextPrimary(isDark),
+                    ).copyWith(fontWeight: AppFonts.semiBold),
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -290,7 +278,7 @@ class SkillsSection extends StatelessWidget {
         errorBuilder: (context, error, stackTrace) {
           // Fallback to Material Icon if network fails
           return Icon(
-            _getSkillIcon(skillId),
+            AppIcons.getSkillIcon(skillId),
             size: size,
             color: color,
           );
@@ -313,121 +301,9 @@ class SkillsSection extends StatelessWidget {
 
     // Fallback to Material Icon
     return Icon(
-      _getSkillIcon(skillId),
+      AppIcons.getSkillIcon(skillId),
       size: size,
       color: color,
     );
-  }
-
-  IconData _getSkillIcon(String skillId) {
-    // Map skill IDs to Material Icons
-    switch (skillId.toLowerCase()) {
-      // Languages
-      case 'dart':
-        return Icons.flutter_dash;
-      case 'python':
-        return Icons.pets;
-      case 'java':
-        return Icons.coffee;
-      case 'cpp':
-        return Icons.code;
-      case 'javascript':
-        return Icons.javascript;
-      case 'sql':
-        return Icons.storage;
-
-      // Mobile Development & State Management
-      case 'flutter':
-        return Icons.flutter_dash;
-      case 'native-ui-ux':
-        return Icons.design_services;
-      case 'responsive-web':
-        return Icons.devices;
-      case 'getx':
-        return Icons.flutter_dash;
-      case 'bloc':
-        return Icons.flutter_dash;
-      case 'provider':
-        return Icons.flutter_dash;
-      case 'riverpod':
-        return Icons.flutter_dash;
-
-      // Backend, Cloud & Communication
-      case 'rest-api':
-        return Icons.api;
-      case 'firebase':
-        return Icons.local_fire_department;
-      case 'supabase':
-        return Icons.bolt;
-      case 'custom-backend':
-        return Icons.dns;
-      case 'github-pages':
-        return Icons.public;
-      case 'vercel':
-        return Icons.cloud_upload;
-      case 'emailjs':
-        return Icons.email;
-      case 'fcm':
-        return Icons.notifications;
-
-      default:
-        return Icons.code;
-    }
-  }
-
-  Color _getSkillColor(String skillId) {
-    // Assign colors based on skill
-    switch (skillId.toLowerCase()) {
-      // Languages
-      case 'dart':
-        return const Color(0xFF0175C2);
-      case 'python':
-        return const Color(0xFF3776AB);
-      case 'java':
-        return const Color(0xFFE76F00);
-      case 'cpp':
-        return const Color(0xFF00599C);
-      case 'javascript':
-        return const Color(0xFFF7DF1E);
-      case 'sql':
-        return const Color(0xFF4479A1);
-
-      // Mobile Development & State Management
-      case 'flutter':
-        return const Color(0xFF02569B);
-      case 'native-ui-ux':
-        return const Color(0xFFF24E1E);
-      case 'responsive-web':
-        return const Color(0xFFE34F26);
-      case 'getx':
-        return const Color(0xFF8A2BE2);
-      case 'bloc':
-        return const Color(0xFF02569B);
-      case 'provider':
-        return const Color(0xFF0175C2);
-      case 'riverpod':
-        return const Color(0xFF0175C2);
-
-      // Backend, Cloud & Communication
-      case 'rest-api':
-        return const Color(0xFFFF6C37);
-      case 'firebase':
-        return const Color(0xFFFFCA28);
-      case 'supabase':
-        return const Color(0xFF3ECF8E);
-      case 'custom-backend':
-        return const Color(0xFF339933);
-      case 'github-pages':
-        return const Color(0xFF222222);
-      case 'vercel':
-        return const Color(0xFF000000);
-      case 'emailjs':
-        return const Color(0xFF168DE2);
-      case 'fcm':
-        return const Color(0xFFFFCA28);
-
-      default:
-        return AppTheme.accentColor;
-    }
   }
 }

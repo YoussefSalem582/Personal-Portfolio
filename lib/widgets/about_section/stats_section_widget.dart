@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
 import 'stats_grid_widget.dart';
 import 'resume_card_widget.dart';
 import 'social_links_widget.dart';
+
+import '../../theme/app_theme.dart';
 
 /// Widget displaying the statistics and actions section.
 ///

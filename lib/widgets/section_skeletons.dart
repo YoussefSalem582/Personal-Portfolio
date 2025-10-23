@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../theme/app_theme.dart';
+import '../utils/app_constants.dart';
 import 'skeleton_loading.dart';
 
 /// Skeleton loader for Skills Section
@@ -21,11 +21,11 @@ class SkillsSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.3)
-            : AppTheme.surfaceColor.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withValues(alpha: 0.3)
+            : AppColors.surfaceLight.withValues(alpha: 0.3),
         highlightColor: isDark
-            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-            : AppTheme.accentColor.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withValues(alpha: 0.1)
+            : AppColors.accentLight.withValues(alpha: 0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: GridView.builder(
@@ -42,7 +42,7 @@ class SkillsSectionSkeleton extends StatelessWidget {
           return Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
@@ -54,9 +54,7 @@ class SkillsSectionSkeleton extends StatelessWidget {
                       width: 40,
                       height: 40,
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? Colors.grey.shade800
-                            : Colors.grey.shade300,
+                        color: isDark ? AppColors.gray800 : AppColors.gray300,
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
@@ -65,7 +63,7 @@ class SkillsSectionSkeleton extends StatelessWidget {
                       child: Container(
                         height: 18,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppColors.white,
                           borderRadius: BorderRadius.circular(4),
                         ),
                       ),
@@ -82,7 +80,7 @@ class SkillsSectionSkeleton extends StatelessWidget {
                         child: Container(
                           height: 14,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: AppColors.white,
                             borderRadius: BorderRadius.circular(4),
                           ),
                         ),
@@ -113,11 +111,11 @@ class AboutSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.3)
-            : AppTheme.surfaceColor.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withValues(alpha: 0.3)
+            : AppColors.surfaceLight.withValues(alpha: 0.3),
         highlightColor: isDark
-            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-            : AppTheme.accentColor.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withValues(alpha: 0.1)
+            : AppColors.accentLight.withValues(alpha: 0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Column(
@@ -127,7 +125,7 @@ class AboutSectionSkeleton extends StatelessWidget {
             height: 200,
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
@@ -137,7 +135,7 @@ class AboutSectionSkeleton extends StatelessWidget {
                   width: 150,
                   height: 24,
                   decoration: BoxDecoration(
-                    color: isDark ? Colors.grey.shade800 : Colors.grey.shade300,
+                    color: isDark ? AppColors.gray800 : AppColors.gray300,
                     borderRadius: BorderRadius.circular(4),
                   ),
                 ),
@@ -149,9 +147,7 @@ class AboutSectionSkeleton extends StatelessWidget {
                     child: Container(
                       height: 14,
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? Colors.grey.shade800
-                            : Colors.grey.shade300,
+                        color: isDark ? AppColors.gray800 : AppColors.gray300,
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
@@ -176,7 +172,7 @@ class AboutSectionSkeleton extends StatelessWidget {
               return Container(
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Column(
@@ -186,9 +182,7 @@ class AboutSectionSkeleton extends StatelessWidget {
                       width: 50,
                       height: 24,
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? Colors.grey.shade800
-                            : Colors.grey.shade300,
+                        color: isDark ? AppColors.gray800 : AppColors.gray300,
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
@@ -197,9 +191,7 @@ class AboutSectionSkeleton extends StatelessWidget {
                       width: 80,
                       height: 14,
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? Colors.grey.shade800
-                            : Colors.grey.shade300,
+                        color: isDark ? AppColors.gray800 : AppColors.gray300,
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
@@ -232,11 +224,11 @@ class ProjectsSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.3)
-            : AppTheme.surfaceColor.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withValues(alpha: 0.3)
+            : AppColors.surfaceLight.withValues(alpha: 0.3),
         highlightColor: isDark
-            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-            : AppTheme.accentColor.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withValues(alpha: 0.1)
+            : AppColors.accentLight.withValues(alpha: 0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Column(
@@ -251,7 +243,7 @@ class ProjectsSectionSkeleton extends StatelessWidget {
                 width: 80,
                 height: 36,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
@@ -297,11 +289,11 @@ class CertificatesSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.3)
-            : AppTheme.surfaceColor.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withValues(alpha: 0.3)
+            : AppColors.surfaceLight.withValues(alpha: 0.3),
         highlightColor: isDark
-            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-            : AppTheme.accentColor.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withValues(alpha: 0.1)
+            : AppColors.accentLight.withValues(alpha: 0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: GridView.builder(
@@ -336,11 +328,11 @@ class HeroSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.3)
-            : AppTheme.surfaceColor.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withValues(alpha: 0.3)
+            : AppColors.surfaceLight.withValues(alpha: 0.3),
         highlightColor: isDark
-            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-            : AppTheme.accentColor.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withValues(alpha: 0.1)
+            : AppColors.accentLight.withValues(alpha: 0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Container(
@@ -354,7 +346,7 @@ class HeroSectionSkeleton extends StatelessWidget {
               width: isMobile ? 100 : 120,
               height: isMobile ? 100 : 120,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.white,
                 shape: BoxShape.circle,
               ),
             ),
@@ -363,7 +355,7 @@ class HeroSectionSkeleton extends StatelessWidget {
               width: isMobile ? 250 : 300,
               height: isMobile ? 32 : 40,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.white,
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
@@ -372,7 +364,7 @@ class HeroSectionSkeleton extends StatelessWidget {
               width: isMobile ? 300 : 400,
               height: 20,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.white,
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
@@ -381,7 +373,7 @@ class HeroSectionSkeleton extends StatelessWidget {
               width: isMobile ? 280 : 350,
               height: 16,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.white,
                 borderRadius: BorderRadius.circular(8),
               ),
             ),
@@ -396,7 +388,7 @@ class HeroSectionSkeleton extends StatelessWidget {
                   width: isMobile ? 100 : 120,
                   height: 40,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
@@ -423,11 +415,11 @@ class ContactSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppTheme.darkSurfaceColor.withValues(alpha: 0.3)
-            : AppTheme.surfaceColor.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withValues(alpha: 0.3)
+            : AppColors.surfaceLight.withValues(alpha: 0.3),
         highlightColor: isDark
-            ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-            : AppTheme.accentColor.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withValues(alpha: 0.1)
+            : AppColors.accentLight.withValues(alpha: 0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Column(
@@ -447,7 +439,7 @@ class ContactSectionSkeleton extends StatelessWidget {
               return Container(
                 padding: const EdgeInsets.all(20),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: AppColors.white,
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Row(
@@ -456,9 +448,7 @@ class ContactSectionSkeleton extends StatelessWidget {
                       width: 48,
                       height: 48,
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? Colors.grey.shade800
-                            : Colors.grey.shade300,
+                        color: isDark ? AppColors.gray800 : AppColors.gray300,
                         borderRadius: BorderRadius.circular(24),
                       ),
                     ),
@@ -471,7 +461,7 @@ class ContactSectionSkeleton extends StatelessWidget {
                           Container(
                             height: 16,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: AppColors.white,
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),
@@ -480,7 +470,7 @@ class ContactSectionSkeleton extends StatelessWidget {
                             width: 120,
                             height: 14,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: AppColors.white,
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),
@@ -497,7 +487,7 @@ class ContactSectionSkeleton extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AppColors.white,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Column(
@@ -509,9 +499,7 @@ class ContactSectionSkeleton extends StatelessWidget {
                     child: Container(
                       height: index == 3 ? 120 : 48,
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? Colors.grey.shade800
-                            : Colors.grey.shade300,
+                        color: isDark ? AppColors.gray800 : AppColors.gray300,
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
@@ -521,7 +509,7 @@ class ContactSectionSkeleton extends StatelessWidget {
                   width: double.infinity,
                   height: 48,
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.white,
                     borderRadius: BorderRadius.circular(24),
                   ),
                 ),

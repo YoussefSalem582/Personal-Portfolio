@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../models/project.dart';
+import '../../utils/app_constants.dart';
+
 import '../../theme/app_theme.dart';
 
 /// Project overview section with modern card design
@@ -27,23 +29,22 @@ class ProjectOverviewWidget extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 gradient: isDark
-                    ? AppTheme.darkPrimaryGradient
-                    : AppTheme.primaryGradient,
+                    ? AppColors.primaryGradientDark
+                    : AppColors.primaryGradientLight,
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: (isDark
-                            ? AppTheme.darkAccentColor
-                            : AppTheme.accentColor)
-                        .withValues(alpha: 0.3),
+                    color:
+                        (isDark ? AppColors.accentDark : AppColors.accentLight)
+                            .withValues(alpha: 0.3),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
                 ],
               ),
               child: const Icon(
-                Icons.article_rounded,
-                color: Colors.white,
+                AppIcons.blog,
+                color: AppColors.white,
                 size: 24,
               ),
             ),
@@ -54,12 +55,12 @@ class ProjectOverviewWidget extends StatelessWidget {
                 children: [
                   Text(
                     'Project Overview',
-                    style: AppTheme.headingLarge.copyWith(
+                    style: AppFonts.h4(
                       color: isDark
-                          ? AppTheme.darkTextPrimary
-                          : AppTheme.textPrimary,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 28,
+                          ? AppColors.textPrimaryDark
+                          : AppColors.textPrimaryLight,
+                    ).copyWith(
+                      fontWeight: AppFonts.extraBold,
                     ),
                   ),
                   Container(
@@ -68,8 +69,8 @@ class ProjectOverviewWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 8),
                     decoration: BoxDecoration(
                       gradient: isDark
-                          ? AppTheme.darkPrimaryGradient
-                          : AppTheme.primaryGradient,
+                          ? AppColors.primaryGradientDark
+                          : AppColors.primaryGradientLight,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -85,16 +86,16 @@ class ProjectOverviewWidget extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(AppTheme.spacingXL),
           decoration: BoxDecoration(
-            color: isDark ? AppTheme.darkCardColor : Colors.white,
+            color: isDark ? AppColors.cardDark : AppColors.white,
             borderRadius: BorderRadius.circular(AppTheme.radiusL),
             border: Border.all(
-              color: (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+              color: (isDark ? AppColors.accentDark : AppColors.accentLight)
                   .withValues(alpha: 0.2),
               width: 1.5,
             ),
             boxShadow: [
               BoxShadow(
-                color: (isDark ? Colors.black : Colors.grey.shade300)
+                color: (isDark ? AppColors.black : AppColors.gray300)
                     .withValues(alpha: 0.1),
                 blurRadius: 20,
                 offset: const Offset(0, 8),
@@ -106,13 +107,12 @@ class ProjectOverviewWidget extends StatelessWidget {
             children: [
               Text(
                 overviewText,
-                style: AppTheme.bodyLarge.copyWith(
+                style: AppFonts.bodyLarge().copyWith(
                   height: 1.8,
-                  fontSize: 16,
                   color: isDark
-                      ? AppTheme.darkTextSecondary
-                      : AppTheme.textSecondary,
-                  fontWeight: FontWeight.w400,
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
+                  fontWeight: AppFonts.regular,
                   letterSpacing: 0.2,
                 ),
               ),
@@ -129,25 +129,25 @@ class ProjectOverviewWidget extends StatelessWidget {
   Widget _buildEmosenseFeatures(bool isDark) {
     final features = [
       {
-        'icon': Icons.psychology_rounded,
+        'icon': AppIcons.flutter,
         'title': 'Real-time Emotion Detection',
         'description':
             'Advanced ML models analyze facial expressions and vocal patterns for accurate emotion recognition'
       },
       {
-        'icon': Icons.security_rounded,
+        'icon': AppIcons.badge,
         'title': 'Privacy-First Architecture',
         'description':
             'Built with privacy by design principles, ensuring user data protection and compliance'
       },
       {
-        'icon': Icons.multitrack_audio_rounded,
+        'icon': AppIcons.technology,
         'title': 'Multimodal Analysis',
         'description':
             'Combines audio and video processing for comprehensive emotion understanding'
       },
       {
-        'icon': Icons.analytics_rounded,
+        'icon': AppIcons.dashboard,
         'title': 'Advanced Analytics',
         'description':
             'Comprehensive emotion analytics dashboard with insights and reporting capabilities'
@@ -162,10 +162,11 @@ class ProjectOverviewWidget extends StatelessWidget {
         const SizedBox(height: AppTheme.spacingXL),
         Text(
           'Key Features',
-          style: AppTheme.headingMedium.copyWith(
-            color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
-            fontWeight: FontWeight.w700,
-            fontSize: 22,
+          style: AppFonts.h5(
+            color:
+                isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
+          ).copyWith(
+            fontWeight: AppFonts.bold,
           ),
         ),
         const SizedBox(height: AppTheme.spacingL),
@@ -178,14 +179,14 @@ class ProjectOverviewWidget extends StatelessWidget {
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
                       gradient: isDark
-                          ? AppTheme.darkPrimaryGradient
-                          : AppTheme.primaryGradient,
+                          ? AppColors.primaryGradientDark
+                          : AppColors.primaryGradientLight,
                       borderRadius: BorderRadius.circular(12),
                       boxShadow: [
                         BoxShadow(
                           color: (isDark
-                                  ? AppTheme.darkAccentColor
-                                  : AppTheme.accentColor)
+                                  ? AppColors.accentDark
+                                  : AppColors.accentLight)
                               .withValues(alpha: 0.3),
                           blurRadius: 8,
                           offset: const Offset(0, 2),
@@ -194,7 +195,7 @@ class ProjectOverviewWidget extends StatelessWidget {
                     ),
                     child: Icon(
                       feature['icon'] as IconData,
-                      color: Colors.white,
+                      color: AppColors.white,
                       size: 24,
                     ),
                   ),
@@ -205,20 +206,20 @@ class ProjectOverviewWidget extends StatelessWidget {
                       children: [
                         Text(
                           feature['title'] as String,
-                          style: AppTheme.headingSmall.copyWith(
+                          style: AppFonts.h3().copyWith(
                             color: isDark
-                                ? AppTheme.darkTextPrimary
-                                : AppTheme.textPrimary,
-                            fontWeight: FontWeight.w700,
+                                ? AppColors.textPrimaryDark
+                                : AppColors.textPrimaryLight,
+                            fontWeight: AppFonts.bold,
                           ),
                         ),
                         const SizedBox(height: AppTheme.spacingS),
                         Text(
                           feature['description'] as String,
-                          style: AppTheme.bodyMedium.copyWith(
+                          style: AppFonts.bodyMedium().copyWith(
                             color: isDark
-                                ? AppTheme.darkTextSecondary
-                                : AppTheme.textSecondary,
+                                ? AppColors.textSecondaryDark
+                                : AppColors.textSecondaryLight,
                             height: 1.6,
                           ),
                         ),

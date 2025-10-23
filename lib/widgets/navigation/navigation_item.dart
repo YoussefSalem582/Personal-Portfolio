@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 
 class NavigationItem extends StatelessWidget {
   final String title;
@@ -25,7 +25,7 @@ class NavigationItem extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
         child: Material(
-          color: Colors.transparent,
+          color: AppColors.transparent,
           child: InkWell(
             onTap: () {
               onTap();
@@ -36,15 +36,15 @@ class NavigationItem extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isSelected
                     ? (isDark
-                        ? Colors.white.withOpacity(0.08)
-                        : Colors.black.withOpacity(0.06))
-                    : Colors.transparent,
+                        ? AppColors.white.withOpacity(0.08)
+                        : AppColors.black.withOpacity(0.06))
+                    : AppColors.transparent,
                 borderRadius: BorderRadius.circular(12),
                 border: isSelected
                     ? Border.all(
                         color: isDark
-                            ? Colors.white.withOpacity(0.3)
-                            : Colors.black.withOpacity(0.2),
+                            ? AppColors.white.withOpacity(0.3)
+                            : AppColors.black.withOpacity(0.2),
                         width: 2,
                       )
                     : null,
@@ -58,19 +58,20 @@ class NavigationItem extends StatelessWidget {
                       height: 18,
                       margin: const EdgeInsets.only(right: 12),
                       decoration: BoxDecoration(
-                        color: isDark ? Colors.white : Colors.black87,
+                        color: isDark ? AppColors.white : AppColors.black,
                         borderRadius: BorderRadius.circular(2),
                       ),
                     ),
                   Text(
                     title,
-                    style: TextStyle(
+                    style: AppFonts.labelLarge().copyWith(
                       color: isSelected
-                          ? (isDark ? Colors.white : Colors.black87)
-                          : (isDark ? Colors.white60 : Colors.black54),
+                          ? (isDark ? AppColors.white : AppColors.black)
+                          : (isDark
+                              ? AppColors.white.withOpacity(0.6)
+                              : AppColors.black.withOpacity(0.54)),
                       fontWeight:
-                          isSelected ? FontWeight.w600 : FontWeight.w400,
-                      fontSize: 15,
+                          isSelected ? AppFonts.semiBold : AppFonts.regular,
                     ),
                   ),
                 ],
@@ -85,7 +86,7 @@ class NavigationItem extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(10),
-          hoverColor: (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+          hoverColor: (isDark ? AppColors.accentDark : AppColors.accentLight)
               .withOpacity(0.1),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
@@ -96,20 +97,20 @@ class NavigationItem extends StatelessWidget {
                   ? LinearGradient(
                       colors: isDark
                           ? [
-                              AppTheme.darkAccentColor.withOpacity(0.2),
-                              AppTheme.darkAccentColor.withOpacity(0.1),
+                              AppColors.accentDark.withOpacity(0.2),
+                              AppColors.accentDark.withOpacity(0.1),
                             ]
                           : [
-                              AppTheme.accentColor.withOpacity(0.15),
-                              AppTheme.accentColor.withOpacity(0.08),
+                              AppColors.accentLight.withOpacity(0.15),
+                              AppColors.accentLight.withOpacity(0.08),
                             ],
                     )
                   : null,
               border: isSelected
                   ? Border.all(
                       color: (isDark
-                              ? AppTheme.darkAccentColor
-                              : AppTheme.accentColor)
+                              ? AppColors.accentDark
+                              : AppColors.accentLight)
                           .withOpacity(0.4),
                       width: 1.5,
                     )
@@ -118,8 +119,8 @@ class NavigationItem extends StatelessWidget {
                   ? [
                       BoxShadow(
                         color: (isDark
-                                ? AppTheme.darkAccentColor
-                                : AppTheme.accentColor)
+                                ? AppColors.accentDark
+                                : AppColors.accentLight)
                             .withOpacity(0.2),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
@@ -129,14 +130,13 @@ class NavigationItem extends StatelessWidget {
             ),
             child: Text(
               title,
-              style: AppTheme.bodyMedium.copyWith(
+              style: AppFonts.labelLarge().copyWith(
                 color: isSelected
-                    ? (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+                    ? (isDark ? AppColors.accentDark : AppColors.accentLight)
                     : (isDark
-                        ? AppTheme.darkTextPrimary
-                        : AppTheme.textPrimary),
-                fontWeight: isSelected ? FontWeight.w700 : FontWeight.w500,
-                fontSize: 15,
+                        ? AppColors.textPrimaryDark
+                        : AppColors.textPrimaryLight),
+                fontWeight: isSelected ? AppFonts.bold : AppFonts.regular,
                 letterSpacing: 0.3,
               ),
             ),

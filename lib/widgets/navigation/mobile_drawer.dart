@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/url_helper.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../theme_toggle.dart';
@@ -19,9 +20,9 @@ class MobileDrawer extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Drawer(
-      backgroundColor: isDark ? const Color(0xFF1A1F3A) : Colors.white,
+      backgroundColor: AppColors.getBackground(isDark),
       child: Container(
-        color: isDark ? const Color(0xFF1A1F3A) : Colors.white,
+        color: AppColors.getBackground(isDark),
         child: Column(
           children: [
             // Simple Header with Dark Gradient
@@ -29,19 +30,7 @@ class MobileDrawer extends StatelessWidget {
               height: 160,
               width: double.infinity,
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: isDark
-                      ? [
-                          const Color(0xFF2A2F45),
-                          const Color(0xFF1F2437),
-                        ]
-                      : [
-                          const Color(0xFF424242),
-                          const Color(0xFF616161),
-                        ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
+                gradient: AppColors.getPrimaryGradient(isDark),
               ),
               child: SafeArea(
                 child: Padding(
@@ -63,26 +52,22 @@ class MobileDrawer extends StatelessWidget {
                               width: 64,
                               height: 64,
                               decoration: BoxDecoration(
-                                color: Colors.white24,
+                                color: AppColors.white.withOpacity(0.24),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.code_rounded,
                                 size: 32,
-                                color: Colors.white,
+                                color: AppColors.white,
                               ),
                             );
                           },
                         ),
                       ),
                       const SizedBox(height: 12),
-                      const Text(
-                        'Youssef Salem',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 20,
-                        ),
+                      Text(
+                        PortfolioData.fullName,
+                        style: AppFonts.h4(color: AppColors.white),
                       ),
                     ],
                   ),
@@ -102,9 +87,7 @@ class MobileDrawer extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Divider(
-                      color: isDark
-                          ? Colors.white.withOpacity(0.1)
-                          : Colors.black.withOpacity(0.08),
+                      color: isDark ? AppColors.gray800 : AppColors.gray200,
                       thickness: 1,
                     ),
                   ),
@@ -116,9 +99,7 @@ class MobileDrawer extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: isDark
-                            ? Colors.white.withOpacity(0.05)
-                            : const Color(0xFFF5F5F5),
+                        color: isDark ? AppColors.gray800 : AppColors.gray100,
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: ListTile(
@@ -127,23 +108,20 @@ class MobileDrawer extends StatelessWidget {
                         leading: Container(
                           padding: const EdgeInsets.all(8),
                           decoration: BoxDecoration(
-                            color: isDark
-                                ? Colors.white.withOpacity(0.1)
-                                : Colors.black.withOpacity(0.08),
+                            color:
+                                isDark ? AppColors.gray700 : AppColors.gray200,
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Icon(
                             Icons.brightness_6_rounded,
-                            color: isDark ? Colors.white70 : Colors.black54,
+                            color: AppColors.getTextSecondary(isDark),
                             size: 20,
                           ),
                         ),
                         title: Text(
                           'Theme',
-                          style: TextStyle(
-                            color: isDark ? Colors.white : Colors.black87,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15,
+                          style: AppFonts.bodyMedium(
+                            color: AppColors.getTextPrimary(isDark),
                           ),
                         ),
                         trailing: const ThemeToggleSwitch(),
@@ -168,34 +146,30 @@ class MobileDrawer extends StatelessWidget {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: isDark
-                                ? const Color(0xFF3A4052)
-                                : const Color(0xFF757575),
+                            gradient: AppColors.getAccentGradient(isDark),
                             borderRadius: BorderRadius.circular(12),
                           ),
                           padding: const EdgeInsets.symmetric(
                               horizontal: 16, vertical: 14),
-                          child: const Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
                                 Icons.article_rounded,
-                                color: Colors.white,
+                                color: AppColors.white,
                                 size: 20,
                               ),
-                              SizedBox(width: 12),
+                              const SizedBox(width: 12),
                               Text(
                                 'View Resume',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 15,
+                                style: AppFonts.button(
+                                  color: AppColors.white,
                                 ),
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                               Icon(
                                 Icons.arrow_forward_ios_rounded,
-                                color: Colors.white,
+                                color: AppColors.white,
                                 size: 14,
                               ),
                             ],
@@ -277,19 +251,19 @@ class MobileDrawer extends StatelessWidget {
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Opening resume...'),
-            backgroundColor: Colors.green,
-            duration: Duration(seconds: 2),
+          SnackBar(
+            content: const Text('Opening resume...'),
+            backgroundColor: AppColors.successLight,
+            duration: const Duration(seconds: 2),
           ),
         );
       }
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error opening resume. Please try again.'),
-            backgroundColor: Colors.red,
+          SnackBar(
+            content: const Text('Error opening resume. Please try again.'),
+            backgroundColor: AppColors.errorLight,
           ),
         );
       }

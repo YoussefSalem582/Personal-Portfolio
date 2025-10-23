@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
+
+import '../../theme/app_theme.dart';
 
 /// Widget displaying social media profile links as icon buttons.
 ///
@@ -24,12 +26,9 @@ class SocialLinksWidget extends StatelessWidget {
         // Section heading
         Text(
           'Connect With Me',
-          style: (isDark
-                  ? AppTheme.headingSmallForTheme(context)
-                  : AppTheme.headingSmall)
-              .copyWith(
-            color: isDark ? Colors.white : Colors.grey.shade900,
-            fontWeight: FontWeight.w700,
+          style: (isDark ? AppFonts.h3() : AppFonts.h3()).copyWith(
+            color: isDark ? AppColors.white : AppColors.gray900,
+            fontWeight: AppFonts.bold,
           ),
           textAlign: TextAlign.center,
         ),
@@ -61,15 +60,15 @@ class SocialLinksWidget extends StatelessWidget {
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-          color: AppTheme.accentColor.withValues(alpha: 0.1),
+          color: AppColors.accentLight.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
           border: Border.all(
-            color: AppTheme.accentColor.withValues(alpha: 0.2),
+            color: AppColors.accentLight.withValues(alpha: 0.2),
           ),
         ),
         child: Icon(
           _getIconForPlatform(social.name),
-          color: AppTheme.accentColor,
+          color: AppColors.accentLight,
           size: 24,
         ),
       ),

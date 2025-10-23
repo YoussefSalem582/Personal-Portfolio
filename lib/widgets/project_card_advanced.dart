@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../theme/app_theme.dart';
+import '../utils/app_constants.dart';
 import '../models/project.dart';
 import '../routes/app_routes.dart';
 import 'lazy_image.dart';
@@ -96,9 +96,9 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
           boxShadow: [
             BoxShadow(
               color: _isHovered
-                  ? (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+                  ? (isDark ? AppColors.accentDark : AppColors.accentLight)
                       .withOpacity(0.25)
-                  : Colors.black.withOpacity(0.08),
+                  : AppColors.black.withOpacity(0.08),
               blurRadius: _isHovered ? 20 : 10,
               offset: Offset(0, _isHovered ? 8 : 4),
             ),
@@ -111,14 +111,16 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
               // Simple background
               Container(
                 decoration: BoxDecoration(
-                  color: isDark ? AppTheme.darkCardColor : Colors.white,
+                  color: isDark ? AppColors.cardDark : AppColors.white,
                   border: Border.all(
                     color: _isHovered
                         ? (isDark
-                                ? AppTheme.darkAccentColor
-                                : AppTheme.accentColor)
+                                ? AppColors.accentDark
+                                : AppColors.accentLight)
                             .withOpacity(0.5)
-                        : (isDark ? Colors.white24 : Colors.black12),
+                        : (isDark
+                            ? AppColors.white.withOpacity(0.24)
+                            : AppColors.black.withOpacity(0.12)),
                     width: 1,
                   ),
                 ),
@@ -159,8 +161,8 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                   child: Container(
                     decoration: BoxDecoration(
                       color: isDark
-                          ? AppTheme.darkCardColor.withOpacity(0.3)
-                          : Colors.grey.shade50,
+                          ? AppColors.cardDark.withOpacity(0.3)
+                          : AppColors.gray50,
                     ),
                     child: LazyImage(
                       imageUrl: widget.project.imageUrl!,
@@ -180,10 +182,12 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Colors.transparent,
-                    Colors.transparent,
-                    (isDark ? Colors.black : Colors.white).withOpacity(0.5),
-                    (isDark ? Colors.black : Colors.white).withOpacity(0.85),
+                    AppColors.transparent,
+                    AppColors.transparent,
+                    (isDark ? AppColors.black : AppColors.white)
+                        .withOpacity(0.5),
+                    (isDark ? AppColors.black : AppColors.white)
+                        .withOpacity(0.85),
                   ],
                   stops: const [0.0, 0.5, 0.8, 1.0],
                 ),
@@ -218,38 +222,37 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                             return LinearGradient(
                               colors: [
                                 isDark
-                                    ? AppTheme.darkTextPrimary
-                                    : AppTheme.textPrimary,
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimaryLight,
                                 isDark
-                                    ? AppTheme.darkTextPrimary
-                                    : AppTheme.textPrimary,
+                                    ? AppColors.textPrimaryDark
+                                    : AppColors.textPrimaryLight,
                               ],
                             ).createShader(bounds);
                           }
                           return LinearGradient(
                             colors: [
                               isDark
-                                  ? AppTheme.darkAccentColor
-                                  : AppTheme.accentColor,
+                                  ? AppColors.accentDark
+                                  : AppColors.accentLight,
                               isDark
-                                  ? AppTheme.darkPrimaryColor
-                                  : AppTheme.primaryColor,
+                                  ? AppColors.primaryDark
+                                  : AppColors.primaryLight,
                             ],
                           ).createShader(bounds);
                         },
                         child: AnimatedDefaultTextStyle(
                           duration: const Duration(milliseconds: 200),
-                          style: AppTheme.headingSmall.copyWith(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                          style: AppFonts.labelLarge().copyWith(
+                            fontWeight: AppFonts.bold,
+                            color: AppColors.white,
                             height: 1.2,
                             shadows: _isHovered
                                 ? [
                                     Shadow(
                                       color: (isDark
-                                              ? AppTheme.darkAccentColor
-                                              : AppTheme.accentColor)
+                                              ? AppColors.accentDark
+                                              : AppColors.accentLight)
                                           .withOpacity(0.5),
                                       blurRadius: 8,
                                     ),
@@ -278,26 +281,26 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                         colors: _isHovered
                             ? [
                                 isDark
-                                    ? AppTheme.darkAccentColor
-                                    : AppTheme.accentColor,
+                                    ? AppColors.accentDark
+                                    : AppColors.accentLight,
                                 isDark
-                                    ? AppTheme.darkPrimaryColor
-                                    : AppTheme.primaryColor,
+                                    ? AppColors.primaryDark
+                                    : AppColors.primaryLight,
                               ]
                             : [
-                                Colors.transparent,
-                                Colors.transparent,
+                                AppColors.transparent,
+                                AppColors.transparent,
                               ],
                       ),
                     ),
                     child: Icon(
-                      Icons.arrow_forward_rounded,
+                      AppIcons.arrowRight,
                       size: 16,
                       color: _isHovered
-                          ? Colors.white
+                          ? AppColors.white
                           : (isDark
-                              ? AppTheme.darkTextSecondary
-                              : AppTheme.textSecondary),
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight),
                     ),
                   ),
                 ),
@@ -310,12 +313,11 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
             Expanded(
               child: Text(
                 widget.project.shortDescription,
-                style: AppTheme.bodyMedium.copyWith(
+                style: AppFonts.bodySmall().copyWith(
                   color: isDark
-                      ? AppTheme.darkTextSecondary
-                      : AppTheme.textSecondary,
+                      ? AppColors.textSecondaryDark
+                      : AppColors.textSecondaryLight,
                   height: 1.4,
-                  fontSize: 12,
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -338,26 +340,25 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                       ),
                       decoration: BoxDecoration(
                         color: (isDark
-                                ? AppTheme.darkAccentColor
-                                : AppTheme.accentColor)
+                                ? AppColors.accentDark
+                                : AppColors.accentLight)
                             .withOpacity(0.15),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: (isDark
-                                  ? AppTheme.darkAccentColor
-                                  : AppTheme.accentColor)
+                                  ? AppColors.accentDark
+                                  : AppColors.accentLight)
                               .withOpacity(0.4),
                           width: 1,
                         ),
                       ),
                       child: Text(
                         tech,
-                        style: AppTheme.bodySmall.copyWith(
+                        style: AppFonts.bodyXS().copyWith(
                           color: isDark
-                              ? AppTheme.darkAccentColor
-                              : AppTheme.accentColor,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 10,
+                              ? AppColors.accentDark
+                              : AppColors.accentLight,
+                          fontWeight: AppFonts.semiBold,
                         ),
                       ),
                     ),
@@ -380,13 +381,11 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
           vertical: 5,
         ),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(
-            colors: [Color(0xFFFFD700), Color(0xFFFFA500)],
-          ),
+          gradient: AppColors.goldGradient,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: const Color(0xFFFFD700).withOpacity(0.3),
+              color: AppColors.warningLight.withOpacity(0.3),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -395,18 +394,17 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(
-              Icons.star_rounded,
+            Icon(
+              AppIcons.featured,
               size: 14,
-              color: Colors.white,
+              color: AppColors.white,
             ),
             const SizedBox(width: 4),
             Text(
               'Featured',
-              style: AppTheme.bodySmall.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 10,
+              style: AppFonts.bodyXS().copyWith(
+                color: AppColors.white,
+                fontWeight: AppFonts.bold,
               ),
             ),
           ],
@@ -423,7 +421,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
           opacity: _isHovered ? 1.0 : 0.0,
           child: Container(
             decoration: BoxDecoration(
-              color: (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+              color: (isDark ? AppColors.accentDark : AppColors.accentLight)
                   .withOpacity(0.1),
             ),
             child: Center(
@@ -433,16 +431,15 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                   vertical: 12,
                 ),
                 decoration: BoxDecoration(
-                  color: (isDark
-                          ? AppTheme.darkPrimaryColor
-                          : AppTheme.primaryColor)
-                      .withOpacity(0.95),
+                  color:
+                      (isDark ? AppColors.primaryDark : AppColors.primaryLight)
+                          .withOpacity(0.95),
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
                       color: (isDark
-                              ? AppTheme.darkAccentColor
-                              : AppTheme.accentColor)
+                              ? AppColors.accentDark
+                              : AppColors.accentLight)
                           .withOpacity(0.4),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
@@ -451,19 +448,18 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                 ),
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     Icon(
-                      Icons.visibility_rounded,
-                      color: Colors.white,
+                      AppIcons.view,
+                      color: AppColors.white,
                       size: 18,
                     ),
-                    SizedBox(width: 8),
+                    const SizedBox(width: 8),
                     Text(
                       'View Project',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+                      style: AppFonts.labelMedium().copyWith(
+                        color: AppColors.white,
+                        fontWeight: AppFonts.semiBold,
                       ),
                     ),
                   ],
@@ -483,9 +479,9 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+            (isDark ? AppColors.accentDark : AppColors.accentLight)
                 .withOpacity(0.3),
-            (isDark ? AppTheme.darkPrimaryColor : AppTheme.primaryColor)
+            (isDark ? AppColors.primaryDark : AppColors.primaryLight)
                 .withOpacity(0.2),
           ],
         ),
@@ -495,17 +491,17 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.code_rounded,
+              AppIcons.github,
               size: 64,
-              color: (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+              color: (isDark ? AppColors.accentDark : AppColors.accentLight)
                   .withOpacity(0.7),
             ),
             const SizedBox(height: 16),
             Text(
               widget.project.title,
-              style: AppTheme.bodyLarge.copyWith(
-                color: isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
-                fontWeight: FontWeight.bold,
+              style: AppFonts.bodyLarge().copyWith(
+                color: isDark ? AppColors.accentDark : AppColors.accentLight,
+                fontWeight: AppFonts.bold,
               ),
               textAlign: TextAlign.center,
             ),

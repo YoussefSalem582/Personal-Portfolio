@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../theme/app_theme.dart';
 import '../../utils/data/portfolio_data.dart';
 import 'stat_card_widget.dart';
+
+import '../../theme/app_theme.dart';
 
 /// A 2x2 grid displaying key statistics with staggered animations.
 ///

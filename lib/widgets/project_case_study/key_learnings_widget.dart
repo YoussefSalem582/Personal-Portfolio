@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../utils/app_constants.dart';
+
 import '../../theme/app_theme.dart';
 
 /// Key learnings section with modern list design
@@ -24,23 +26,22 @@ class KeyLearningsWidget extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 gradient: isDark
-                    ? AppTheme.darkPrimaryGradient
-                    : AppTheme.primaryGradient,
+                    ? AppColors.primaryGradientDark
+                    : AppColors.primaryGradientLight,
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: (isDark
-                            ? AppTheme.darkAccentColor
-                            : AppTheme.accentColor)
-                        .withValues(alpha: 0.3),
+                    color:
+                        (isDark ? AppColors.accentDark : AppColors.accentLight)
+                            .withValues(alpha: 0.3),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
                 ],
               ),
               child: const Icon(
-                Icons.school_rounded,
-                color: Colors.white,
+                AppIcons.education,
+                color: AppColors.white,
                 size: 24,
               ),
             ),
@@ -51,12 +52,12 @@ class KeyLearningsWidget extends StatelessWidget {
                 children: [
                   Text(
                     'Key Learnings',
-                    style: AppTheme.headingLarge.copyWith(
+                    style: AppFonts.h4(
                       color: isDark
-                          ? AppTheme.darkTextPrimary
-                          : AppTheme.textPrimary,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 28,
+                          ? AppColors.textPrimaryDark
+                          : AppColors.textPrimaryLight,
+                    ).copyWith(
+                      fontWeight: AppFonts.extraBold,
                     ),
                   ),
                   Container(
@@ -65,8 +66,8 @@ class KeyLearningsWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 8),
                     decoration: BoxDecoration(
                       gradient: isDark
-                          ? AppTheme.darkPrimaryGradient
-                          : AppTheme.primaryGradient,
+                          ? AppColors.primaryGradientDark
+                          : AppColors.primaryGradientLight,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -82,16 +83,16 @@ class KeyLearningsWidget extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(AppTheme.spacingXL),
           decoration: BoxDecoration(
-            color: isDark ? AppTheme.darkCardColor : Colors.white,
+            color: isDark ? AppColors.cardDark : AppColors.white,
             borderRadius: BorderRadius.circular(AppTheme.radiusL),
             border: Border.all(
-              color: (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
+              color: (isDark ? AppColors.accentDark : AppColors.accentLight)
                   .withValues(alpha: 0.2),
               width: 1.5,
             ),
             boxShadow: [
               BoxShadow(
-                color: (isDark ? Colors.black : Colors.grey.shade300)
+                color: (isDark ? AppColors.black : AppColors.gray300)
                     .withValues(alpha: 0.1),
                 blurRadius: 20,
                 offset: const Offset(0, 8),
@@ -117,14 +118,14 @@ class KeyLearningsWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(6),
                       decoration: BoxDecoration(
                         gradient: isDark
-                            ? AppTheme.darkPrimaryGradient
-                            : AppTheme.primaryGradient,
+                            ? AppColors.primaryGradientDark
+                            : AppColors.primaryGradientLight,
                         shape: BoxShape.circle,
                         boxShadow: [
                           BoxShadow(
                             color: (isDark
-                                    ? AppTheme.darkAccentColor
-                                    : AppTheme.accentColor)
+                                    ? AppColors.accentDark
+                                    : AppColors.accentLight)
                                 .withValues(alpha: 0.3),
                             blurRadius: 6,
                             offset: const Offset(0, 2),
@@ -132,8 +133,8 @@ class KeyLearningsWidget extends StatelessWidget {
                         ],
                       ),
                       child: const Icon(
-                        Icons.check_rounded,
-                        color: Colors.white,
+                        AppIcons.success,
+                        color: AppColors.white,
                         size: 16,
                       ),
                     ),
@@ -143,13 +144,12 @@ class KeyLearningsWidget extends StatelessWidget {
                     Expanded(
                       child: Text(
                         lesson,
-                        style: AppTheme.bodyMedium.copyWith(
+                        style: AppFonts.bodyMedium().copyWith(
                           height: 1.7,
-                          fontSize: 15,
                           color: isDark
-                              ? AppTheme.darkTextSecondary
-                              : AppTheme.textSecondary,
-                          fontWeight: FontWeight.w400,
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
+                          fontWeight: AppFonts.regular,
                         ),
                       ),
                     ),

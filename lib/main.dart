@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:get/get.dart';
-import 'theme/app_theme.dart';
 import 'bindings/initial_bindings.dart';
 import 'routes/app_pages.dart';
+import 'theme/app_theme.dart';
 
 /// Main entry point - Static Portfolio App
 /// No backend dependencies - uses only local assets and data

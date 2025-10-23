@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../utils/app_constants.dart';
+
 import '../../theme/app_theme.dart';
 
 /// Challenges and solutions section widget
@@ -36,23 +38,22 @@ class ChallengesSolutionsWidget extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 gradient: isDark
-                    ? AppTheme.darkPrimaryGradient
-                    : AppTheme.primaryGradient,
+                    ? AppColors.primaryGradientDark
+                    : AppColors.primaryGradientLight,
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: (isDark
-                            ? AppTheme.darkAccentColor
-                            : AppTheme.accentColor)
-                        .withValues(alpha: 0.3),
+                    color:
+                        (isDark ? AppColors.accentDark : AppColors.accentLight)
+                            .withValues(alpha: 0.3),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
                 ],
               ),
               child: const Icon(
-                Icons.lightbulb_rounded,
-                color: Colors.white,
+                AppIcons.help,
+                color: AppColors.white,
                 size: 24,
               ),
             ),
@@ -63,12 +64,12 @@ class ChallengesSolutionsWidget extends StatelessWidget {
                 children: [
                   Text(
                     'Challenges & Solutions',
-                    style: AppTheme.headingLarge.copyWith(
+                    style: AppFonts.h4(
                       color: isDark
-                          ? AppTheme.darkTextPrimary
-                          : AppTheme.textPrimary,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 28,
+                          ? AppColors.textPrimaryDark
+                          : AppColors.textPrimaryLight,
+                    ).copyWith(
+                      fontWeight: AppFonts.extraBold,
                     ),
                   ),
                   Container(
@@ -77,8 +78,8 @@ class ChallengesSolutionsWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 8),
                     decoration: BoxDecoration(
                       gradient: isDark
-                          ? AppTheme.darkPrimaryGradient
-                          : AppTheme.primaryGradient,
+                          ? AppColors.primaryGradientDark
+                          : AppColors.primaryGradientLight,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -102,18 +103,17 @@ class ChallengesSolutionsWidget extends StatelessWidget {
                 const EdgeInsets.all(AppTheme.spacingXL), // Internal padding
             // Card styling with theme-aware colors
             decoration: BoxDecoration(
-              color: isDark ? AppTheme.darkCardColor : Colors.white,
+              color: isDark ? AppColors.cardDark : AppColors.white,
               borderRadius: BorderRadius.circular(AppTheme.radiusL),
               border: Border.all(
-                color:
-                    (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                        .withValues(alpha: 0.2),
+                color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+                    .withValues(alpha: 0.2),
                 width: 1.5,
               ),
               // Card elevation shadow
               boxShadow: [
                 BoxShadow(
-                  color: (isDark ? Colors.black : Colors.grey.shade300)
+                  color: (isDark ? AppColors.black : AppColors.gray300)
                       .withValues(alpha: 0.1),
                   blurRadius: 20,
                   offset: const Offset(0, 8), // Shadow offset downwards
@@ -130,14 +130,14 @@ class ChallengesSolutionsWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     // Gradient background for visual appeal
                     gradient: isDark
-                        ? AppTheme.darkPrimaryGradient
-                        : AppTheme.primaryGradient,
+                        ? AppColors.primaryGradientDark
+                        : AppColors.primaryGradientLight,
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
                         color: (isDark
-                                ? AppTheme.darkAccentColor
-                                : AppTheme.accentColor)
+                                ? AppColors.accentDark
+                                : AppColors.accentLight)
                             .withValues(alpha: 0.3),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
@@ -147,10 +147,10 @@ class ChallengesSolutionsWidget extends StatelessWidget {
                   child: Center(
                     child: Text(
                       '${index + 1}', // Display 1-indexed number
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w900, // Extra bold
+                      style: AppFonts.h5(
+                        color: AppColors.white,
+                      ).copyWith(
+                        fontWeight: AppFonts.black, // Extra bold
                       ),
                     ),
                   ),
@@ -165,12 +165,12 @@ class ChallengesSolutionsWidget extends StatelessWidget {
                       // Challenge title
                       Text(
                         challenge['title']!, // Get title from map
-                        style: AppTheme.headingMedium.copyWith(
+                        style: AppFonts.h5(
                           color: isDark
-                              ? AppTheme.darkAccentColor
-                              : AppTheme.accentColor,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
+                              ? AppColors.accentDark
+                              : AppColors.accentLight,
+                        ).copyWith(
+                          fontWeight: AppFonts.bold,
                         ),
                       ),
                       const SizedBox(height: AppTheme.spacingM),
@@ -178,13 +178,13 @@ class ChallengesSolutionsWidget extends StatelessWidget {
                       // Challenge description/solution
                       Text(
                         challenge['description']!, // Get description from map
-                        style: AppTheme.bodyMedium.copyWith(
+                        style: AppFonts.bodyMedium(
+                          color: isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.textSecondaryLight,
+                        ).copyWith(
                           height:
                               1.7, // Comfortable line height for readability
-                          fontSize: 15,
-                          color: isDark
-                              ? AppTheme.darkTextSecondary
-                              : AppTheme.textSecondary,
                         ),
                       ),
                     ],

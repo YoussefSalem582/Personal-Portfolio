@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../theme/app_theme.dart';
+import '../utils/app_constants.dart';
 import '../widgets/navigation/app_navigation.dart';
 import '../utils/responsive_helper.dart';
 import '../controllers/portfolio_controller.dart';
@@ -113,7 +113,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
     return Scaffold(
       backgroundColor:
-          isDark ? AppTheme.darkBackgroundColor : AppTheme.backgroundColor,
+          isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
       drawer: isMobile
           ? AppNavigation.buildDrawer(
               context, _scrollToSection, _currentSection)
@@ -144,7 +144,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                 slivers: [
                   // Hero Section
                   SliverToBoxAdapter(
-                    child: HeroSection(key: _sectionKeys[0]),
+                    child: HeroSection(
+                      key: _sectionKeys[0],
+                      onNavigateToSection: _scrollToSection,
+                    ),
                   ),
 
                   // About Section
@@ -193,11 +196,11 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           ? FloatingActionButton(
               onPressed: () => _scrollToSection(6), // Go to contact
               backgroundColor:
-                  isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
+                  isDark ? AppColors.accentDark : AppColors.accentLight,
               child: Icon(
                 Icons.message,
                 color:
-                    isDark ? AppTheme.darkTextPrimary : AppTheme.surfaceColor,
+                    isDark ? AppColors.textPrimaryDark : AppColors.surfaceLight,
               ),
             )
           : null,

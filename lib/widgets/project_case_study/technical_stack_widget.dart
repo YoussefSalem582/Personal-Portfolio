@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../utils/app_constants.dart';
+
 import '../../theme/app_theme.dart';
 
 /// Technical stack section widget
@@ -35,23 +37,22 @@ class TechnicalStackWidget extends StatelessWidget {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 gradient: isDark
-                    ? AppTheme.darkPrimaryGradient
-                    : AppTheme.primaryGradient,
+                    ? AppColors.primaryGradientDark
+                    : AppColors.primaryGradientLight,
                 borderRadius: BorderRadius.circular(12),
                 boxShadow: [
                   BoxShadow(
-                    color: (isDark
-                            ? AppTheme.darkAccentColor
-                            : AppTheme.accentColor)
-                        .withValues(alpha: 0.3),
+                    color:
+                        (isDark ? AppColors.accentDark : AppColors.accentLight)
+                            .withValues(alpha: 0.3),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
                 ],
               ),
               child: const Icon(
-                Icons.code_rounded,
-                color: Colors.white,
+                AppIcons.technology,
+                color: AppColors.white,
                 size: 24,
               ),
             ),
@@ -62,12 +63,12 @@ class TechnicalStackWidget extends StatelessWidget {
                 children: [
                   Text(
                     'Technical Stack',
-                    style: AppTheme.headingLarge.copyWith(
+                    style: AppFonts.h4(
                       color: isDark
-                          ? AppTheme.darkTextPrimary
-                          : AppTheme.textPrimary,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 28,
+                          ? AppColors.textPrimaryDark
+                          : AppColors.textPrimaryLight,
+                    ).copyWith(
+                      fontWeight: AppFonts.extraBold,
                     ),
                   ),
                   Container(
@@ -76,8 +77,8 @@ class TechnicalStackWidget extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 8),
                     decoration: BoxDecoration(
                       gradient: isDark
-                          ? AppTheme.darkPrimaryGradient
-                          : AppTheme.primaryGradient,
+                          ? AppColors.primaryGradientDark
+                          : AppColors.primaryGradientLight,
                       borderRadius: BorderRadius.circular(2),
                     ),
                   ),
@@ -105,29 +106,27 @@ class TechnicalStackWidget extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: isDark
                       ? [
-                          AppTheme.darkAccentColor.withValues(alpha: 0.2),
-                          AppTheme.darkPrimaryColor.withValues(alpha: 0.2),
+                          AppColors.accentDark.withValues(alpha: 0.2),
+                          AppColors.primaryDark.withValues(alpha: 0.2),
                         ]
                       : [
-                          AppTheme.accentColor.withValues(alpha: 0.15),
-                          AppTheme.primaryColor.withValues(alpha: 0.15),
+                          AppColors.accentLight.withValues(alpha: 0.15),
+                          AppColors.primaryLight.withValues(alpha: 0.15),
                         ],
                 ),
                 borderRadius: BorderRadius.circular(AppTheme.radiusM),
                 // Colored border for accent
                 border: Border.all(
-                  color:
-                      (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                          .withValues(alpha: 0.4),
+                  color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+                      .withValues(alpha: 0.4),
                   width: 1.5,
                 ),
                 // Subtle shadow for depth
                 boxShadow: [
                   BoxShadow(
-                    color: (isDark
-                            ? AppTheme.darkAccentColor
-                            : AppTheme.accentColor)
-                        .withValues(alpha: 0.1),
+                    color:
+                        (isDark ? AppColors.accentDark : AppColors.accentLight)
+                            .withValues(alpha: 0.1),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -136,11 +135,10 @@ class TechnicalStackWidget extends StatelessWidget {
               // Technology name text
               child: Text(
                 tech,
-                style: AppTheme.bodyMedium.copyWith(
-                  color:
-                      isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 15,
+                style: AppFonts.labelMedium(
+                  color: isDark ? AppColors.accentDark : AppColors.accentLight,
+                ).copyWith(
+                  fontWeight: AppFonts.bold,
                   letterSpacing: 0.3,
                 ),
               ),

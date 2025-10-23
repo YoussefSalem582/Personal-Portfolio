@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../lazy_image.dart';
+
+import '../../theme/app_theme.dart';
 
 /// Gallery section widget for project case study with categorized images
 ///
@@ -159,22 +161,21 @@ class GallerySectionWidget extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             gradient: isDark
-                ? AppTheme.darkPrimaryGradient
-                : AppTheme.primaryGradient,
+                ? AppColors.primaryGradientDark
+                : AppColors.primaryGradientLight,
             borderRadius: BorderRadius.circular(12),
             boxShadow: [
               BoxShadow(
-                color:
-                    (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                        .withValues(alpha: 0.3),
+                color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+                    .withValues(alpha: 0.3),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
             ],
           ),
           child: const Icon(
-            Icons.photo_library_rounded,
-            color: Colors.white,
+            AppIcons.gallery,
+            color: AppColors.white,
             size: 24,
           ),
         ),
@@ -187,11 +188,12 @@ class GallerySectionWidget extends StatelessWidget {
             children: [
               Text(
                 'Screenshots & Gallery',
-                style: AppTheme.headingLarge.copyWith(
-                  color:
-                      isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
-                  fontWeight: FontWeight.w800,
-                  fontSize: 28,
+                style: AppFonts.h4(
+                  color: isDark
+                      ? AppColors.textPrimaryDark
+                      : AppColors.textPrimaryLight,
+                ).copyWith(
+                  fontWeight: AppFonts.extraBold,
                 ),
               ),
               Container(
@@ -200,8 +202,8 @@ class GallerySectionWidget extends StatelessWidget {
                 margin: const EdgeInsets.only(top: 8),
                 decoration: BoxDecoration(
                   gradient: isDark
-                      ? AppTheme.darkPrimaryGradient
-                      : AppTheme.primaryGradient,
+                      ? AppColors.primaryGradientDark
+                      : AppColors.primaryGradientLight,
                   borderRadius: BorderRadius.circular(2),
                 ),
               ),
@@ -214,8 +216,7 @@ class GallerySectionWidget extends StatelessWidget {
 
   /// Builds a category header with icon and title
   Widget _buildCategoryHeader(String title, bool isDark) {
-    final accentColor =
-        isDark ? AppTheme.darkAccentColor : AppTheme.accentColor;
+    final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
 
     return Container(
       padding: const EdgeInsets.symmetric(
@@ -252,10 +253,12 @@ class GallerySectionWidget extends StatelessWidget {
           const SizedBox(width: AppTheme.spacingM),
           Text(
             title,
-            style: AppTheme.headingSmall.copyWith(
-              color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
-              fontWeight: FontWeight.w700,
-              fontSize: 18,
+            style: AppFonts.h6(
+              color: isDark
+                  ? AppColors.textPrimaryDark
+                  : AppColors.textPrimaryLight,
+            ).copyWith(
+              fontWeight: AppFonts.bold,
             ),
           ),
           const Spacer(),
@@ -270,10 +273,10 @@ class GallerySectionWidget extends StatelessWidget {
             ),
             child: Text(
               '${_getCategoryImageCount(title)} ${_getCategoryImageCount(title) == 1 ? 'image' : 'images'}',
-              style: AppTheme.bodySmall.copyWith(
+              style: AppFonts.labelSmall(
                 color: accentColor,
-                fontWeight: FontWeight.w600,
-                fontSize: 12,
+              ).copyWith(
+                fontWeight: AppFonts.semiBold,
               ),
             ),
           ),
@@ -286,33 +289,33 @@ class GallerySectionWidget extends StatelessWidget {
   IconData _getCategoryIcon(String category) {
     switch (category.toLowerCase()) {
       case 'onboarding & authentication':
-        return Icons.login_rounded;
+        return AppIcons.user;
       case 'employee home & tools':
-        return Icons.home_rounded;
+        return AppIcons.home;
       case 'user home & shopping':
-        return Icons.shopping_bag_rounded;
+        return AppIcons.projects;
       case 'categories & products':
-        return Icons.category_rounded;
+        return AppIcons.folder;
       case 'favorites & offers':
-        return Icons.favorite_rounded;
+        return AppIcons.starOutline;
       case 'chat & notifications':
-        return Icons.chat_rounded;
+        return AppIcons.message;
       case 'merchant dashboard':
-        return Icons.store_rounded;
+        return AppIcons.dashboard;
       case 'video analysis':
-        return Icons.videocam_rounded;
+        return AppIcons.play;
       case 'voice analysis':
-        return Icons.mic_rounded;
+        return AppIcons.notification;
       case 'text analysis':
-        return Icons.text_fields_rounded;
+        return AppIcons.file;
       case 'support tickets':
-        return Icons.support_agent_rounded;
+        return AppIcons.help;
       case 'employee profile':
-        return Icons.person_rounded;
+        return AppIcons.user;
       case 'admin panel':
-        return Icons.admin_panel_settings_rounded;
+        return AppIcons.settings;
       default:
-        return Icons.photo_library_rounded;
+        return AppIcons.gallery;
     }
   }
 
@@ -342,14 +345,13 @@ class GallerySectionWidget extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppTheme.radiusL),
               border: Border.all(
-                color:
-                    (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                        .withValues(alpha: 0.2),
+                color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+                    .withValues(alpha: 0.2),
                 width: 1.5,
               ),
               boxShadow: [
                 BoxShadow(
-                  color: (isDark ? Colors.black : Colors.grey.shade300)
+                  color: (isDark ? AppColors.black : AppColors.gray300)
                       .withValues(alpha: 0.2),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
@@ -376,7 +378,7 @@ class GallerySectionWidget extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => Dialog(
-        backgroundColor: Colors.black87,
+        backgroundColor: AppColors.black.withValues(alpha: 0.87),
         child: Container(
           constraints: const BoxConstraints(maxWidth: 800),
           child: Stack(
@@ -390,9 +392,9 @@ class GallerySectionWidget extends StatelessWidget {
                 right: 16,
                 child: IconButton(
                   onPressed: () => Navigator.pop(context),
-                  icon: const Icon(Icons.close, color: Colors.white),
+                  icon: const Icon(AppIcons.close, color: AppColors.white),
                   style: IconButton.styleFrom(
-                    backgroundColor: Colors.black54,
+                    backgroundColor: AppColors.black.withValues(alpha: 0.54),
                   ),
                 ),
               ),

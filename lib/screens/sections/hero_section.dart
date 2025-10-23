@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/responsive_helper.dart';
-import '../../utils/data/portfolio_data.dart';
-import '../../utils/url_helper.dart';
-import '../../widgets/project_card.dart';
+import '../../theme/app_theme.dart';
+import '../../widgets/hero_section/hero_text_widget.dart';
+import '../../widgets/hero_section/profile_image_widget.dart';
+import '../../widgets/hero_section/hero_action_buttons_widget.dart';
 
 class HeroSection extends StatelessWidget {
-  const HeroSection({super.key});
+  final Function(int)? onNavigateToSection;
+
+  const HeroSection({
+    super.key,
+    this.onNavigateToSection,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +32,8 @@ class HeroSection extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: isDark
-              ? [AppTheme.darkBackgroundColor, const Color(0xFF0A0E13)]
-              : [AppTheme.backgroundColor, const Color(0xFFF0F2F5)],
+              ? [AppColors.backgroundDark, AppColors.gray900]
+              : [AppColors.backgroundLight, AppColors.gray50],
         ),
       ),
       child: Padding(
@@ -55,19 +60,22 @@ class HeroSection extends StatelessWidget {
         children: [
           // Left side - Text content
           Expanded(
+            flex: 6,
             child: AnimationConfiguration.staggeredList(
               position: 0,
               duration: const Duration(milliseconds: 1000),
               child: SlideAnimation(
-                verticalOffset: 50.0,
+                horizontalOffset: -50.0,
                 child: FadeInAnimation(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _buildHeroText(),
-                      const SizedBox(height: AppTheme.spacingXL),
-                      _buildActionButtons(context),
+                      const HeroTextWidget(),
+                      const SizedBox(height: AppTheme.spacingXXL),
+                      HeroActionButtonsWidget(
+                        onNavigateToSection: onNavigateToSection,
+                      ),
                     ],
                   ),
                 ),
@@ -75,23 +83,18 @@ class HeroSection extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(width: AppTheme.spacingXXL),
+          const SizedBox(width: AppTheme.spacingXXL * 1.5),
 
-          // Right side - Profile image and featured projects
+          // Right side - Profile image with decorative elements
           Expanded(
+            flex: 5,
             child: AnimationConfiguration.staggeredList(
               position: 1,
               duration: const Duration(milliseconds: 1000),
               child: SlideAnimation(
-                verticalOffset: 50.0,
+                horizontalOffset: 50.0,
                 child: FadeInAnimation(
-                  child: Column(
-                    children: [
-                      _buildProfileImage(),
-                      const SizedBox(height: AppTheme.spacingXL),
-                      _buildFeaturedProjects(context),
-                    ],
-                  ),
+                  child: _buildProfileImageWithDecoration(context),
                 ),
               ),
             ),
@@ -112,258 +115,132 @@ class HeroSection extends StatelessWidget {
             child: FadeInAnimation(child: widget),
           ),
           children: [
-            const SizedBox(height: AppTheme.spacingXL),
-            _buildProfileImage(),
-            const SizedBox(height: AppTheme.spacingXL),
-            _buildHeroText(),
-            const SizedBox(height: AppTheme.spacingXL),
-            _buildActionButtons(context),
+            const SizedBox(height: AppTheme.spacingL),
+            _buildProfileImageWithDecoration(context),
             const SizedBox(height: AppTheme.spacingXXL),
-            _buildFeaturedProjects(context),
+            const HeroTextWidget(),
+            const SizedBox(height: AppTheme.spacingXL),
+            HeroActionButtonsWidget(
+              onNavigateToSection: onNavigateToSection,
+            ),
+            const SizedBox(height: AppTheme.spacingL),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildHeroText() {
-    return Builder(
-      builder: (context) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
+  Widget _buildProfileImageWithDecoration(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = ResponsiveHelper.isMobile(screenWidth);
 
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Greeting
-            Text(
-              'Hello, I\'m',
-              style: AppTheme.bodyLarge.copyWith(
-                color: isDark ? AppTheme.darkAccentColor : AppTheme.accentColor,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-
-            const SizedBox(height: AppTheme.spacingS),
-
-            // Name
-            Text(
-              PortfolioData.fullName,
-              style: (isDark
-                      ? AppTheme.headingLargeForTheme(context)
-                      : AppTheme.headingLarge)
-                  .copyWith(fontSize: 42),
-            ),
-
-            const SizedBox(height: AppTheme.spacingM),
-
-            // Animated role text
-            Row(
-              children: [
-                Text(
-                  'A ',
-                  style: AppTheme.headingMedium.copyWith(
-                    color: isDark
-                        ? AppTheme.darkTextSecondary
-                        : AppTheme.textSecondary,
-                    fontSize: 28,
-                  ),
-                ),
-                AnimatedTextKit(
-                  animatedTexts: [
-                    TypewriterAnimatedText(
-                      'Flutter Developer',
-                      textStyle: AppTheme.headingMedium.copyWith(
-                        color: isDark
-                            ? AppTheme.darkAccentColor
-                            : AppTheme.accentColor,
-                        fontSize: 28,
-                      ),
-                      speed: const Duration(milliseconds: 100),
-                    ),
-                    TypewriterAnimatedText(
-                      'Mobile App Developer',
-                      textStyle: AppTheme.headingMedium.copyWith(
-                        color: isDark
-                            ? AppTheme.darkAccentColor
-                            : AppTheme.accentColor,
-                        fontSize: 28,
-                      ),
-                      speed: const Duration(milliseconds: 100),
-                    ),
-                    TypewriterAnimatedText(
-                      'AI Enthusiast',
-                      textStyle: AppTheme.headingMedium.copyWith(
-                        color: isDark
-                            ? AppTheme.darkAccentColor
-                            : AppTheme.accentColor,
-                        fontSize: 28,
-                      ),
-                      speed: const Duration(milliseconds: 100),
-                    ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        // Decorative background circles
+        if (!isMobile) ...[
+          Positioned(
+            top: -30,
+            right: -30,
+            child: Container(
+              width: 180,
+              height: 180,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    (isDark ? AppColors.accentDark : AppColors.accentLight)
+                        .withOpacity(0.1),
+                    (isDark ? AppColors.accentDark : AppColors.accentLight)
+                        .withOpacity(0.05),
                   ],
-                  repeatForever: true,
-                  pause: const Duration(milliseconds: 2000),
                 ),
-              ],
-            ),
-
-            const SizedBox(height: AppTheme.spacingL),
-
-            // Bio
-            Text(
-              PortfolioData.bio,
-              style: AppTheme.bodyLarge.copyWith(
-                color: isDark
-                    ? AppTheme.darkTextSecondary
-                    : AppTheme.textSecondary,
               ),
-              maxLines: 4,
-              overflow: TextOverflow.ellipsis,
             ),
-          ],
-        );
-      },
+          ),
+          Positioned(
+            bottom: -40,
+            left: -40,
+            child: Container(
+              width: 220,
+              height: 220,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: [
+                    (isDark ? AppColors.primaryDark : AppColors.primaryLight)
+                        .withOpacity(0.1),
+                    (isDark ? AppColors.primaryDark : AppColors.primaryLight)
+                        .withOpacity(0.05),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
+
+        // Animated floating dots
+        if (!isMobile) ...[
+          Positioned(
+            top: 50,
+            left: 20,
+            child: _buildFloatingDot(isDark, delay: 0),
+          ),
+          Positioned(
+            bottom: 80,
+            right: 40,
+            child: _buildFloatingDot(isDark, delay: 1000),
+          ),
+          Positioned(
+            top: 180,
+            right: 10,
+            child: _buildFloatingDot(isDark, delay: 2000, size: 12),
+          ),
+        ],
+
+        // Main profile image
+        Container(
+          padding: const EdgeInsets.all(20),
+          child: const ProfileImageWidget(),
+        ),
+      ],
     );
   }
 
-  Widget _buildProfileImage() {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isDark = Theme.of(context).brightness == Brightness.dark;
-        final size = constraints.maxWidth > 600 ? 300.0 : 200.0;
-
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          width: size,
-          height: size,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            gradient: isDark
-                ? AppTheme.darkPrimaryGradient
-                : AppTheme.primaryGradient,
-            boxShadow: [
-              BoxShadow(
-                color: isDark
-                    ? AppTheme.darkAccentColor.withValues(alpha: 0.4)
-                    : AppTheme.accentColor.withValues(alpha: 0.3),
-                blurRadius: 20,
-                spreadRadius: 5,
-              ),
+  Widget _buildFloatingDot(bool isDark, {int delay = 0, double size = 16}) {
+    return TweenAnimationBuilder(
+      duration: const Duration(seconds: 3),
+      tween: Tween<double>(begin: 0, end: 20),
+      builder: (context, double value, child) {
+        return Transform.translate(
+          offset: Offset(0, value),
+          child: child,
+        );
+      },
+      onEnd: () {},
+      child: Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          gradient: LinearGradient(
+            colors: [
+              isDark ? AppColors.accentDark : AppColors.accentLight,
+              (isDark ? AppColors.primaryDark : AppColors.primaryLight)
+                  .withOpacity(0.8),
             ],
           ),
-          child: Container(
-            margin: const EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: isDark ? AppTheme.darkSurfaceColor : AppTheme.surfaceColor,
+          boxShadow: [
+            BoxShadow(
+              color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+                  .withOpacity(0.4),
+              blurRadius: 12,
+              spreadRadius: 2,
             ),
-            child: ClipOval(
-              child: Image.asset(
-                'assets/images/profile.jpeg',
-                width: size - 8,
-                height: size - 8,
-                fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    width: size - 8,
-                    height: size - 8,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isDark
-                          ? AppTheme.darkAccentColor.withValues(alpha: 0.1)
-                          : AppTheme.accentColor.withValues(alpha: 0.1),
-                    ),
-                    child: Icon(
-                      Icons.person,
-                      size: size * 0.3,
-                      color: isDark
-                          ? AppTheme.darkAccentColor
-                          : AppTheme.accentColor,
-                    ),
-                  );
-                },
-              ),
-            ),
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
-  }
-
-  Widget _buildActionButtons(BuildContext context) {
-    return Wrap(
-      spacing: AppTheme.spacingM,
-      runSpacing: AppTheme.spacingM,
-      children: [
-        ElevatedButton(
-          onPressed: () => _scrollToSection(context, 4), // Contact section
-          child: const Text('Get In Touch'),
-        ),
-        OutlinedButton(
-          onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
-          child: const Text('View Resume'),
-        ),
-        OutlinedButton(
-          onPressed: () => _scrollToSection(context, 2), // Projects section
-          child: const Text('View Projects'),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildFeaturedProjects(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final featuredProjects = PortfolioData.featuredProjects;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Featured Projects',
-          style: AppTheme.headingSmall.copyWith(
-            color: isDark ? AppTheme.darkTextPrimary : AppTheme.textPrimary,
-          ),
-        ),
-        const SizedBox(height: AppTheme.spacingL),
-        if (ResponsiveHelper.isMobile(screenWidth))
-          // Mobile: Single column
-          Column(
-            children: featuredProjects
-                .take(2)
-                .map(
-                  (project) => Padding(
-                    padding: const EdgeInsets.only(bottom: AppTheme.spacingM),
-                    child: ProjectCard(project: project, isCompact: true),
-                  ),
-                )
-                .toList(),
-          )
-        else
-          // Desktop/Tablet: Row layout
-          Row(
-            children: featuredProjects
-                .take(2)
-                .map(
-                  (project) => Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: AppTheme.spacingM),
-                      child: ProjectCard(project: project, isCompact: true),
-                    ),
-                  ),
-                )
-                .toList(),
-          ),
-      ],
-    );
-  }
-
-  void _scrollToSection(BuildContext context, int sectionIndex) {
-    // This would need to be implemented with a scroll controller
-    // For now, we'll use a simple scroll behavior
-    final portfolioScreen = context.findAncestorStateOfType<State>();
-    if (portfolioScreen != null) {
-      // Implementation would go here to scroll to specific section
-    }
   }
 }

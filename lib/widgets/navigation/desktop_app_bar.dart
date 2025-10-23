@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
+import '../../utils/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/url_helper.dart';
 import '../../utils/data/portfolio_data.dart';
@@ -32,12 +32,12 @@ class DesktopAppBar extends StatelessWidget {
         gradient: LinearGradient(
           colors: isDark
               ? [
-                  AppTheme.darkSurfaceColor,
-                  AppTheme.darkSurfaceColor.withOpacity(0.95),
+                  AppColors.surfaceDark,
+                  AppColors.surfaceDark.withOpacity(0.95),
                 ]
               : [
-                  AppTheme.surfaceColor,
-                  AppTheme.surfaceColor.withOpacity(0.98),
+                  AppColors.surfaceLight,
+                  AppColors.surfaceLight.withOpacity(0.98),
                 ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -45,16 +45,16 @@ class DesktopAppBar extends StatelessWidget {
         border: Border(
           bottom: BorderSide(
             color: isDark
-                ? AppTheme.darkAccentColor.withOpacity(0.2)
-                : AppTheme.accentColor.withOpacity(0.1),
+                ? AppColors.accentDark.withOpacity(0.2)
+                : AppColors.accentLight.withOpacity(0.1),
             width: 1,
           ),
         ),
         boxShadow: [
           BoxShadow(
             color: isDark
-                ? Colors.black.withOpacity(0.3)
-                : Colors.black.withOpacity(0.08),
+                ? AppColors.black.withOpacity(0.3)
+                : AppColors.black.withOpacity(0.08),
             blurRadius: 12,
             offset: const Offset(0, 4),
             spreadRadius: 0,
@@ -83,12 +83,12 @@ class DesktopAppBar extends StatelessWidget {
                           gradient: LinearGradient(
                             colors: isDark
                                 ? [
-                                    AppTheme.darkAccentColor,
-                                    AppTheme.darkAccentColor.withOpacity(0.7)
+                                    AppColors.accentDark,
+                                    AppColors.accentDark.withOpacity(0.7)
                                   ]
                                 : [
-                                    AppTheme.accentColor,
-                                    AppTheme.accentColor.withOpacity(0.8)
+                                    AppColors.accentLight,
+                                    AppColors.accentLight.withOpacity(0.8)
                                   ],
                           ),
                           borderRadius: BorderRadius.circular(8),
@@ -96,7 +96,7 @@ class DesktopAppBar extends StatelessWidget {
                         child: const Icon(
                           Icons.code_rounded,
                           size: 20,
-                          color: Colors.white,
+                          color: AppColors.white,
                         ),
                       );
                     },
@@ -107,18 +107,18 @@ class DesktopAppBar extends StatelessWidget {
                   child: ShaderMask(
                     shaderCallback: (bounds) => LinearGradient(
                       colors: isDark
-                          ? [AppTheme.darkAccentColor, Colors.white]
-                          : [AppTheme.primaryColor, AppTheme.accentColor],
+                          ? [AppColors.accentDark, AppColors.white]
+                          : [AppColors.primaryLight, AppColors.accentLight],
                     ).createShader(bounds),
                     child: Text(
-                      'Youssef Hassan',
-                      style: AppTheme.headingSmall.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 22,
-                        letterSpacing: -0.5,
+                      PortfolioData.fullName,
+                      style: AppFonts.h4().copyWith(
+                        color: AppColors.white,
+                        fontWeight: AppFonts.bold,
+                        letterSpacing: -0.3,
                       ),
-                      overflow: TextOverflow.ellipsis,
+                      overflow: TextOverflow.visible,
+                      maxLines: 1,
                     ),
                   ),
                 ),
@@ -144,13 +144,13 @@ class DesktopAppBar extends StatelessWidget {
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
               color: isDark
-                  ? Colors.white.withOpacity(0.1)
-                  : Colors.black.withOpacity(0.05),
+                  ? AppColors.white.withOpacity(0.1)
+                  : AppColors.black.withOpacity(0.05),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: isDark
-                    ? Colors.white.withOpacity(0.15)
-                    : Colors.black.withOpacity(0.1),
+                    ? AppColors.white.withOpacity(0.15)
+                    : AppColors.black.withOpacity(0.1),
                 width: 1,
               ),
             ),
@@ -165,20 +165,19 @@ class DesktopAppBar extends StatelessWidget {
               gradient: LinearGradient(
                 colors: isDark
                     ? [
-                        AppTheme.darkAccentColor,
-                        AppTheme.darkAccentColor.withOpacity(0.8)
+                        AppColors.accentDark,
+                        AppColors.accentDark.withOpacity(0.8)
                       ]
                     : [
-                        AppTheme.accentColor,
-                        AppTheme.accentColor.withOpacity(0.9)
+                        AppColors.accentLight,
+                        AppColors.accentLight.withOpacity(0.9)
                       ],
               ),
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
-                  color:
-                      (isDark ? AppTheme.darkAccentColor : AppTheme.accentColor)
-                          .withOpacity(0.4),
+                  color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+                      .withOpacity(0.4),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                   spreadRadius: 0,
@@ -188,17 +187,16 @@ class DesktopAppBar extends StatelessWidget {
             child: ElevatedButton.icon(
               onPressed: () => _openResume(context),
               icon: const Icon(Icons.article_rounded, size: 18),
-              label: const Text(
+              label: Text(
                 'View Resume',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
+                style: AppFonts.button().copyWith(
                   letterSpacing: 0.5,
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.transparent,
-                foregroundColor: Colors.white,
-                shadowColor: Colors.transparent,
+                backgroundColor: AppColors.transparent,
+                foregroundColor: AppColors.white,
+                shadowColor: AppColors.transparent,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                 shape: RoundedRectangleBorder(
@@ -284,7 +282,7 @@ class DesktopAppBar extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text('Opening resume...'),
-            backgroundColor: Colors.green,
+            backgroundColor: AppColors.successLight,
             duration: const Duration(seconds: 2),
           ),
         );
@@ -292,9 +290,9 @@ class DesktopAppBar extends StatelessWidget {
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Error opening resume. Please try again.'),
-            backgroundColor: Colors.red,
+          SnackBar(
+            content: const Text('Error opening resume. Please try again.'),
+            backgroundColor: AppColors.errorLight,
           ),
         );
       }
