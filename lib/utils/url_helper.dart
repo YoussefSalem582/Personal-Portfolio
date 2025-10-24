@@ -1,6 +1,7 @@
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart' show kIsWeb, kDebugMode;
 import 'package:web/web.dart' as web show window;
+import '../config/app_config.dart';
 
 class UrlHelper {
   static Future<void> launchURL(String url) async {
@@ -48,22 +49,44 @@ class UrlHelper {
   /// For web, this opens in a new browser tab
   /// For mobile/desktop, uses the default file viewer
   static Future<void> openFile(String url) async {
-    // For web, if it's an asset path, construct the proper URL
+    // For web, if it's an asset path, use GitHub raw content URL
     if (kIsWeb) {
       if (url.startsWith('assets/')) {
-        // On Flutter web, assets are served from the root with /assets/ prefix
-        // So 'assets/documents/file.pdf' becomes '/assets/documents/file.pdf'
+        // Strategy 1: Use GitHub raw content URL (works for all file types including PDFs)
+        final githubRawUrl = AppConfig.getGithubRawUrl(url);
+
+        // Strategy 2: Try GitHub Pages URL as fallback
+        final githubPagesUrl = AppConfig.getGithubPagesAssetUrl(url);
+
+        // Strategy 3: Try relative asset path
         final webUrl = '/$url';
+
+        // Try each strategy in order
         try {
-          web.window.open(webUrl, '_blank');
+          web.window.open(githubRawUrl, '_blank');
           return;
         } catch (e) {
-          // If that fails, try without the leading slash
+          if (kDebugMode) {
+            print('Failed to open via GitHub raw: $e');
+          }
+
           try {
-            web.window.open(url, '_blank');
+            web.window.open(githubPagesUrl, '_blank');
             return;
           } catch (e2) {
-            throw 'Could not open $url';
+            if (kDebugMode) {
+              print('Failed to open via GitHub Pages: $e2');
+            }
+
+            try {
+              web.window.open(webUrl, '_blank');
+              return;
+            } catch (e3) {
+              if (kDebugMode) {
+                print('Failed to open via relative path: $e3');
+              }
+              throw 'Could not open $url - tried all strategies';
+            }
           }
         }
       } else {
