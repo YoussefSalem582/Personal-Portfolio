@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../lazy_image.dart';
 
 import '../../theme/app_theme.dart';
@@ -106,6 +106,89 @@ class GallerySectionWidget extends StatelessWidget {
                 img.contains('cta_button') ||
                 img.contains('report'))
             .toList(),
+      };
+    }
+
+    if (projectId == 'gopooling-carpool') {
+      return {
+        'Onboarding':
+            galleryImages.where((img) => img.contains('onboarding')).toList(),
+        'User Authentication': galleryImages
+            .where((img) =>
+                img.contains('user_login') || img.contains('user_signup'))
+            .toList(),
+        'Driver Authentication': galleryImages
+            .where((img) =>
+                img.contains('driver_login') || img.contains('driver_signup'))
+            .toList(),
+        'Ride Booking Flow': galleryImages
+            .where((img) =>
+                img.contains('home_screen') ||
+                img.contains('pickup_place') ||
+                img.contains('select_your_ride') ||
+                img.contains('selected_ride_detail'))
+            .toList(),
+        'Trip Management': galleryImages
+            .where((img) => img.contains('my_trips_screen'))
+            .toList(),
+        'Navigation & Features': galleryImages
+            .where((img) =>
+                img.contains('notification_screen') ||
+                img.contains('side_drawer_navigation'))
+            .toList(),
+        'UML Diagrams': galleryImages
+            .where((img) =>
+                img.contains('use_case_diagram') ||
+                img.contains('class_diagram'))
+            .toList(),
+      };
+    }
+
+    if (projectId == 'pothole-detection') {
+      return {
+        'Dataset Overview': galleryImages
+            .where((img) =>
+                img.contains('samples') ||
+                img.contains('image_counts') ||
+                img.contains('image_dimensions'))
+            .toList(),
+        'Model Training & Validation': galleryImages
+            .where((img) => img.contains('training_and_validation'))
+            .toList(),
+        'Results & Analysis': galleryImages
+            .where((img) =>
+                img.contains('results_and_analysis') ||
+                img.contains('confusion_matrix') ||
+                img.contains('decision_tree'))
+            .toList(),
+      };
+    }
+
+    if (projectId == 'sign-language-translator') {
+      return {
+        'System Architecture': galleryImages
+            .where((img) =>
+                img.contains('block_diagram') || img.contains('flowchart'))
+            .toList(),
+        'Dataset & Training': galleryImages
+            .where((img) =>
+                img.contains('collected_samples') ||
+                img.contains('creatig_datasets'))
+            .toList(),
+        'Results':
+            galleryImages.where((img) => img.contains('results')).toList(),
+      };
+    }
+
+    if (projectId == 'interactive-learning-assistant') {
+      return {
+        'Application Screenshots': galleryImages,
+      };
+    }
+
+    if (projectId == 'facial-recognition') {
+      return {
+        'System Interface': galleryImages,
       };
     }
 
@@ -314,6 +397,21 @@ class GallerySectionWidget extends StatelessWidget {
         return AppIcons.user;
       case 'admin panel':
         return AppIcons.settings;
+
+      case 'onboarding':
+        return AppIcons.starOutline;
+      case 'user authentication':
+        return AppIcons.user;
+      case 'driver authentication':
+        return AppIcons.user;
+      case 'ride booking flow':
+        return AppIcons.location;
+      case 'trip management':
+        return AppIcons.folder;
+      case 'navigation & features':
+        return AppIcons.menu;
+      case 'uml diagrams':
+        return AppIcons.dashboard;
       default:
         return AppIcons.gallery;
     }
@@ -325,9 +423,252 @@ class GallerySectionWidget extends StatelessWidget {
     return categorizedImages[category]?.length ?? 0;
   }
 
+  /// Returns the diagram type based on the image URL
+  String _getDiagramType(String imageUrl) {
+    if (imageUrl.contains('use_case_diagram') ||
+        imageUrl.toLowerCase().contains('use case')) {
+      return 'USE CASE DIAGRAM';
+    } else if (imageUrl.contains('class_diagram') ||
+        imageUrl.toLowerCase().contains('class')) {
+      return 'CLASS DIAGRAM';
+    } else if (imageUrl.contains('sequence_diagram') ||
+        imageUrl.toLowerCase().contains('sequence')) {
+      return 'SEQUENCE DIAGRAM';
+    } else if (imageUrl.contains('activity_diagram') ||
+        imageUrl.toLowerCase().contains('activity')) {
+      return 'ACTIVITY DIAGRAM';
+    } else if (imageUrl.contains('state_diagram') ||
+        imageUrl.toLowerCase().contains('state')) {
+      return 'STATE DIAGRAM';
+    } else if (imageUrl.contains('er_diagram') ||
+        imageUrl.toLowerCase().contains('entity') ||
+        imageUrl.toLowerCase().contains('relationship')) {
+      return 'ER DIAGRAM';
+    } else if (imageUrl.contains('block_diagram') ||
+        imageUrl.toLowerCase().contains('block')) {
+      return 'BLOCK DIAGRAM';
+    } else if (imageUrl.contains('flowchart') ||
+        imageUrl.toLowerCase().contains('flow')) {
+      return 'FLOWCHART';
+    } else {
+      return 'DIAGRAM';
+    }
+  }
+
   /// Builds the image grid for a category
   Widget _buildImageGrid(
       BuildContext context, List<String> images, bool isDark) {
+    // Check if this category contains diagrams (they need special handling)
+    final isDiagramCategory = images.any((img) =>
+        img.contains('diagram') ||
+        img.contains('flowchart') ||
+        img.contains('use_case') ||
+        img.contains('class_diagram') ||
+        img.contains('block_diagram'));
+
+    // Check if this is a dataset/training category or specific project (full-size images)
+    final isFullSizeCategory = images.any((img) =>
+        img.contains('collected_samples') ||
+        img.contains('creatig_datasets') ||
+        img.contains('results') ||
+        img.contains('samples') ||
+        img.contains('image_counts') ||
+        img.contains('image_dimensions') ||
+        img.contains('training_and_validation') ||
+        img.contains('results_and_analysis') ||
+        img.contains('confusion_matrix') ||
+        img.contains('decision_tree') ||
+        img.contains('homepage') ||
+        img.contains('facial_recognition') ||
+        img.contains('threejs') ||
+        img.contains('image1') ||
+        img.contains('image2') ||
+        img.contains('image3'));
+
+    // For diagrams in System Architecture (2 diagrams side by side)
+    if (isDiagramCategory && images.length == 2) {
+      return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: images.map((imageUrl) {
+          return Expanded(
+            child: Padding(
+              padding: EdgeInsets.only(
+                right: images.indexOf(imageUrl) == 0 ? 8 : 0,
+                left: images.indexOf(imageUrl) == 1 ? 8 : 0,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Diagram type label
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: AppTheme.spacingS,
+                      bottom: AppTheme.spacingS,
+                    ),
+                    child: Text(
+                      _getDiagramType(imageUrl),
+                      style: AppFonts.labelSmall(
+                        color: isDark
+                            ? AppColors.textSecondaryDark
+                            : AppColors.textSecondaryLight,
+                      ).copyWith(
+                        fontWeight: AppFonts.semiBold,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                  ),
+                  // Diagram image
+                  GestureDetector(
+                    onTap: () => _showImageDialog(
+                        context, images, images.indexOf(imageUrl)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                        border: Border.all(
+                          color: (isDark
+                                  ? AppColors.accentDark
+                                  : AppColors.accentLight)
+                              .withValues(alpha: 0.2),
+                          width: 1.5,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color:
+                                (isDark ? AppColors.black : AppColors.gray300)
+                                    .withValues(alpha: 0.2),
+                            blurRadius: 12,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                        child: LazyImage(
+                          imageUrl: imageUrl,
+                          fit: BoxFit.contain,
+                          borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        }).toList(),
+      );
+    }
+
+    // For full-size categories (Dataset & Training, Results), use full width
+    if (isFullSizeCategory) {
+      return Column(
+        children: images.map((imageUrl) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: GestureDetector(
+              onTap: () =>
+                  _showImageDialog(context, images, images.indexOf(imageUrl)),
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                  border: Border.all(
+                    color:
+                        (isDark ? AppColors.accentDark : AppColors.accentLight)
+                            .withValues(alpha: 0.2),
+                    width: 1.5,
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: (isDark ? AppColors.black : AppColors.gray300)
+                          .withValues(alpha: 0.2),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                  child: LazyImage(
+                    imageUrl: imageUrl,
+                    fit: BoxFit.contain,
+                    borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                  ),
+                ),
+              ),
+            ),
+          );
+        }).toList(),
+      );
+    }
+
+    // For single diagrams or more than 2, use full width single column
+    if (isDiagramCategory) {
+      return Column(
+        children: images.map((imageUrl) {
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Diagram type label
+                Padding(
+                  padding: const EdgeInsets.only(
+                    left: AppTheme.spacingS,
+                    bottom: AppTheme.spacingS,
+                  ),
+                  child: Text(
+                    _getDiagramType(imageUrl),
+                    style: AppFonts.labelSmall(
+                      color: isDark
+                          ? AppColors.textSecondaryDark
+                          : AppColors.textSecondaryLight,
+                    ).copyWith(
+                      fontWeight: AppFonts.semiBold,
+                      letterSpacing: 0.5,
+                    ),
+                  ),
+                ),
+                // Diagram image
+                GestureDetector(
+                  onTap: () => _showImageDialog(
+                      context, images, images.indexOf(imageUrl)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                      border: Border.all(
+                        color: (isDark
+                                ? AppColors.accentDark
+                                : AppColors.accentLight)
+                            .withValues(alpha: 0.2),
+                        width: 1.5,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: (isDark ? AppColors.black : AppColors.gray300)
+                              .withValues(alpha: 0.2),
+                          blurRadius: 12,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                      child: LazyImage(
+                        imageUrl: imageUrl,
+                        fit: BoxFit.contain,
+                        borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        }).toList(),
+      );
+    }
+
+    // For regular screenshots, use grid layout
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),

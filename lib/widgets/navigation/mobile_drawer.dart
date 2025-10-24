@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/url_helper.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../theme_toggle.dart';
@@ -43,7 +44,7 @@ class MobileDrawer extends StatelessWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.asset(
-                          'assets/images/portfolio_logo.png',
+                          AppImages.portfolioLogo,
                           width: 64,
                           height: 64,
                           fit: BoxFit.cover,
@@ -52,13 +53,17 @@ class MobileDrawer extends StatelessWidget {
                               width: 64,
                               height: 64,
                               decoration: BoxDecoration(
-                                color: AppColors.white.withOpacity(0.24),
+                                color: AppColors.white.withValues(alpha: 0.24),
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              child: Icon(
-                                Icons.code_rounded,
-                                size: 32,
-                                color: AppColors.white,
+                              child: SvgPicture.asset(
+                                AppIcons.flutterIconSvg,
+                                width: 32,
+                                height: 32,
+                                colorFilter: const ColorFilter.mode(
+                                  AppColors.white,
+                                  BlendMode.srcIn,
+                                ),
                               ),
                             );
                           },
@@ -137,7 +142,7 @@ class MobileDrawer extends StatelessWidget {
                     padding:
                         const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                     child: Material(
-                      color: Colors.transparent,
+                      color: AppColors.transparent,
                       child: InkWell(
                         borderRadius: BorderRadius.circular(12),
                         onTap: () {
@@ -155,7 +160,7 @@ class MobileDrawer extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Icon(
-                                Icons.article_rounded,
+                                AppIcons.blog,
                                 color: AppColors.white,
                                 size: 20,
                               ),
@@ -168,7 +173,7 @@ class MobileDrawer extends StatelessWidget {
                               ),
                               const SizedBox(width: 8),
                               Icon(
-                                Icons.arrow_forward_ios_rounded,
+                                AppIcons.arrowRight,
                                 color: AppColors.white,
                                 size: 14,
                               ),

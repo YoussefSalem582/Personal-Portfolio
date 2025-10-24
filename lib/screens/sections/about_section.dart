@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../widgets/about_section/bio_section_widget.dart';
 import '../../widgets/about_section/stats_section_widget.dart';
@@ -33,7 +33,7 @@ class AboutSection extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
                   AppColors.surfaceDark,
-                  AppColors.cardDark.withOpacity(0.5),
+                  AppColors.cardDark.withValues(alpha: 0.5),
                 ],
               )
             : LinearGradient(
@@ -92,7 +92,7 @@ class AboutSection extends StatelessWidget {
                     color: (isDark
                             ? AppColors.primaryLight
                             : AppColors.accentLight)
-                        .withOpacity(0.4),
+                        .withValues(alpha: 0.4),
                     blurRadius: 12,
                     spreadRadius: 2,
                   ),
@@ -109,7 +109,7 @@ class AboutSection extends StatelessWidget {
                   .copyWith(
                 fontSize: isMobile ? 15 : 17,
                 color: isDark
-                    ? AppColors.textSecondaryDark.withOpacity(0.9)
+                    ? AppColors.textSecondaryDark.withValues(alpha: 0.9)
                     : AppColors.textSecondaryLight,
                 letterSpacing: 0.3,
               ),

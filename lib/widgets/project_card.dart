@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../utils/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 import '../models/project.dart';
 import '../utils/url_helper.dart';
 import '../routes/app_routes.dart';
@@ -420,7 +420,7 @@ class _ProjectCardState extends State<ProjectCard>
               shape: BoxShape.circle,
             ),
             child: Icon(
-              AppIcons.github,
+              Icons.code,
               size: 48,
               color: AppColors.accentLight,
             ),
@@ -614,7 +614,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                           child: OutlinedButton.icon(
                             onPressed: () =>
                                 UrlHelper.launchURL(project.githubUrl!),
-                            icon: Icon(AppIcons.github),
+                            icon: Icon(Icons.code),
                             label: const Text('View Code'),
                           ),
                         ),

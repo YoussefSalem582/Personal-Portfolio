@@ -1,10 +1,76 @@
 import 'package:flutter/material.dart';
 
-/// App Icons - Centralized icon definitions
+/// App Icons - Centralized icon definitions and asset paths
 /// Used throughout the app for consistent iconography
+///
+/// Usage:
+/// ```dart
+/// import '../utils/assets/app_icons.dart';
+///
+/// // Material Icons
+/// Icon(AppIcons.home)
+/// Icon(AppIcons.download)
+///
+/// // SVG Icons
+/// SvgPicture.asset(AppIcons.githubIconSvg)
+/// SvgPicture.asset(AppIcons.linkedinIconSvg)
+/// ```
 class AppIcons {
   // Prevent instantiation
   AppIcons._();
+
+  // ==================== Icon Asset Paths ====================
+
+  static const String _iconsPath = 'assets/icons/social';
+  static const String _skillIconsPath = 'assets/icons/skills';
+
+  // ==================== Social Media Icon Assets (SVG) ====================
+
+  /// GitHub icon (SVG)
+  static const String githubIconSvg = '$_iconsPath/github_icon.svg';
+
+  /// LinkedIn icon (SVG)
+  static const String linkedinIconSvg = '$_iconsPath/linkedin_icon.svg';
+
+  /// YouTube icon (SVG)
+  static const String youtubeIconSvg = '$_iconsPath/youtube_icon.svg';
+
+  /// Upwork icon (SVG)
+  static const String upworkIconSvg = '$_iconsPath/upwork_icon.svg';
+
+  // ==================== Other Icon Assets ====================
+
+  /// CV icon (GIF)
+  static const String cvIconGif = 'assets/icons/cv.gif';
+
+  // ==================== Skill Icon Assets (SVG) ====================
+
+  /// Dart icon (SVG)
+  static const String dartIconSvg = '$_skillIconsPath/dart.svg';
+
+  /// Python icon (SVG)
+  static const String pythonIconSvg = '$_skillIconsPath/python.svg';
+
+  /// Java icon (SVG)
+  static const String javaIconSvg = '$_skillIconsPath/java.svg';
+
+  /// Flutter icon (SVG)
+  static const String flutterIconSvg = '$_skillIconsPath/flutter.svg';
+
+  /// Firebase icon (SVG)
+  static const String firebaseIconSvg = '$_skillIconsPath/firebase.svg';
+
+  /// PostgreSQL icon (SVG)
+  static const String pgsqlIconSvg = '$_skillIconsPath/pgsql.svg';
+
+  /// REST API icon (SVG)
+  static const String restApiIconSvg = '$_skillIconsPath/rest-api.svg';
+
+  /// Vercel icon (SVG)
+  static const String vercelIconSvg = '$_skillIconsPath/vercel.svg';
+
+  /// GitHub icon (SVG) - for skills
+  static const String githubSkillIconSvg = '$_iconsPath/github_icon.svg';
 
   // ==================== Navigation Icons ====================
 
@@ -104,12 +170,6 @@ class AppIcons {
 
   // ==================== Social Icons ====================
 
-  /// GitHub icon (using code icon as fallback)
-  static const IconData github = Icons.code;
-
-  /// LinkedIn icon (using work icon as fallback)
-  static const IconData linkedin = Icons.work;
-
   /// Email icon
   static const IconData email = Icons.email_outlined;
 
@@ -122,12 +182,6 @@ class AppIcons {
   /// Website icon
   static const IconData website = Icons.language;
 
-  /// YouTube icon
-  static const IconData youtube = Icons.play_circle_outline;
-
-  /// Twitter icon
-  static const IconData twitter = Icons.public;
-
   // ==================== Project Icons ====================
 
   /// Featured icon (star)
@@ -135,9 +189,6 @@ class AppIcons {
 
   /// Star outline
   static const IconData starOutline = Icons.star_outline;
-
-  /// GitHub repository
-  static const IconData githubRepo = Icons.code;
 
   /// Demo/Live icon
   static const IconData demo = Icons.launch;
@@ -187,50 +238,6 @@ class AppIcons {
 
   /// Loading icon
   static const IconData loading = Icons.hourglass_empty;
-
-  // ==================== Skill Icons ====================
-
-  /// Dart icon
-  static const IconData dart = Icons.flutter_dash;
-
-  /// Python icon
-  static const IconData python = Icons.pets;
-
-  /// Java icon
-  static const IconData java = Icons.coffee;
-
-  /// C++ icon
-  static const IconData cpp = Icons.code;
-
-  /// JavaScript icon
-  static const IconData javascript = Icons.javascript;
-
-  /// SQL/Database icon
-  static const IconData sql = Icons.storage;
-
-  /// Flutter icon
-  static const IconData flutter = Icons.flutter_dash;
-
-  /// Mobile icon
-  static const IconData mobile = Icons.phone_android;
-
-  /// Web icon
-  static const IconData web = Icons.language;
-
-  /// Design icon
-  static const IconData design = Icons.design_services;
-
-  /// API icon
-  static const IconData api = Icons.api;
-
-  /// Firebase icon
-  static const IconData firebase = Icons.local_fire_department;
-
-  /// Cloud icon
-  static const IconData cloud = Icons.cloud;
-
-  /// Server icon
-  static const IconData server = Icons.dns;
 
   // ==================== UI Icons ====================
 
@@ -297,58 +304,58 @@ class AppIcons {
 
   // ==================== Helper Methods ====================
 
-  /// Get skill icon by skill ID
-  static IconData getSkillIcon(String skillId) {
+  /// Get skill icon SVG path by skill ID
+  static String? getSkillIconSvg(String skillId) {
     switch (skillId.toLowerCase()) {
       case 'dart':
-        return dart;
+        return dartIconSvg;
       case 'python':
-        return python;
+        return pythonIconSvg;
       case 'java':
-        return java;
-      case 'cpp':
-      case 'c++':
-        return cpp;
-      case 'javascript':
-      case 'js':
-        return javascript;
-      case 'sql':
-        return sql;
+        return javaIconSvg;
       case 'flutter':
-        return flutter;
-      case 'native-ui-ux':
-      case 'ui-ux':
-        return design;
-      case 'responsive-web':
-      case 'web':
-        return web;
       case 'getx':
       case 'bloc':
       case 'provider':
       case 'riverpod':
-        return flutter;
-      case 'rest-api':
-      case 'api':
-        return api;
+        return flutterIconSvg;
       case 'firebase':
-        return firebase;
-      case 'supabase':
-        return cloud;
-      case 'custom-backend':
-      case 'backend':
-        return server;
-      case 'github-pages':
-      case 'github':
-        return github;
-      case 'vercel':
-        return cloud;
-      case 'emailjs':
-      case 'email':
-        return email;
       case 'fcm':
-        return notification;
+        return firebaseIconSvg;
+      case 'postgresql':
+      case 'pgsql':
+      case 'postgres':
+      case 'sql':
+        return pgsqlIconSvg;
+      case 'rest-api':
+      case 'restful-api':
+      case 'restful api':
+      case 'api':
+      case 'rest':
+        return restApiIconSvg;
+      case 'vercel':
+        return vercelIconSvg;
+      case 'github':
+      case 'github-pages':
+        return githubSkillIconSvg;
       default:
-        return technology;
+        return null; // Return null if no SVG icon available
+    }
+  }
+
+  /// Get social icon SVG path by platform name
+  static String? getSocialIconSvg(String platform) {
+    switch (platform.toLowerCase()) {
+      case 'github':
+        return githubIconSvg;
+      case 'linkedin':
+        return linkedinIconSvg;
+      case 'youtube':
+        return youtubeIconSvg;
+      case 'upwork':
+        return upworkIconSvg;
+      default:
+        return null; // Return null if no SVG icon available
     }
   }
 
@@ -378,29 +385,6 @@ class AppIcons {
         return blog;
       default:
         return home;
-    }
-  }
-
-  /// Get social icon by platform name
-  static IconData getSocialIcon(String platform) {
-    switch (platform.toLowerCase()) {
-      case 'github':
-        return github;
-      case 'linkedin':
-        return linkedin;
-      case 'email':
-        return email;
-      case 'phone':
-        return phone;
-      case 'website':
-      case 'portfolio':
-        return website;
-      case 'youtube':
-        return youtube;
-      case 'twitter':
-        return twitter;
-      default:
-        return website;
     }
   }
 }

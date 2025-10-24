@@ -1,4 +1,5 @@
 import '../../models/contact.dart';
+import '../assets/app_constants.dart';
 
 class PersonalInfoData {
   // Personal information
@@ -15,31 +16,31 @@ class PersonalInfoData {
   static const String portfolioUrl =
       'https://v0-youssef-salem-hassan.vercel.app/';
 
-  // Resume download URL
-  static const String resumeUrl = 'assets/images/resume.pdf';
-  static const String profileImageUrl = 'assets/images/profile.jpeg';
+  // Resume download URL - Using centralized asset management
+  static const String resumeUrl = AppDocuments.resume;
+  static const String profileImageUrl = AppImages.profileImage;
 
-  // Social links
+  // Social links - Using centralized asset management
   static const List<SocialLink> socialLinks = [
     SocialLink(
       name: 'GitHub',
       url: 'https://github.com/YoussefSalem582',
-      iconPath: 'assets/icons/github_icon.svg',
+      iconPath: AppIcons.githubIconSvg,
     ),
     SocialLink(
       name: 'LinkedIn',
       url: 'https://www.linkedin.com/in/youssef-hassan-8529372b7/',
-      iconPath: 'assets/icons/linkedin_icon.svg',
+      iconPath: AppIcons.linkedinIconSvg,
     ),
     SocialLink(
       name: 'YouTube',
       url: 'https://www.youtube.com/@JoeCodezFlutter',
-      iconPath: 'assets/icons/youtube_icon.svg',
+      iconPath: AppIcons.youtubeIconSvg,
     ),
     SocialLink(
       name: 'Upwork',
       url: 'https://www.upwork.com/freelancers/~0124b005ef2bb3f524',
-      iconPath: 'assets/icons/upwork_icon.svg',
+      iconPath: AppIcons.upworkIconSvg,
     ),
   ];
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/url_helper.dart';
 import '../../utils/data/portfolio_data.dart';
@@ -33,11 +34,11 @@ class DesktopAppBar extends StatelessWidget {
           colors: isDark
               ? [
                   AppColors.surfaceDark,
-                  AppColors.surfaceDark.withOpacity(0.95),
+                  AppColors.surfaceDark.withValues(alpha: 0.95),
                 ]
               : [
                   AppColors.surfaceLight,
-                  AppColors.surfaceLight.withOpacity(0.98),
+                  AppColors.surfaceLight.withValues(alpha: 0.98),
                 ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -45,16 +46,16 @@ class DesktopAppBar extends StatelessWidget {
         border: Border(
           bottom: BorderSide(
             color: isDark
-                ? AppColors.accentDark.withOpacity(0.2)
-                : AppColors.accentLight.withOpacity(0.1),
+                ? AppColors.accentDark.withValues(alpha: 0.2)
+                : AppColors.accentLight.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
         boxShadow: [
           BoxShadow(
             color: isDark
-                ? AppColors.black.withOpacity(0.3)
-                : AppColors.black.withOpacity(0.08),
+                ? AppColors.black.withValues(alpha: 0.3)
+                : AppColors.black.withValues(alpha: 0.08),
             blurRadius: 12,
             offset: const Offset(0, 4),
             spreadRadius: 0,
@@ -71,7 +72,7 @@ class DesktopAppBar extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.asset(
-                    'assets/images/portfolio_logo.png',
+                    AppImages.portfolioLogo,
                     width: 40,
                     height: 40,
                     fit: BoxFit.cover,
@@ -84,19 +85,23 @@ class DesktopAppBar extends StatelessWidget {
                             colors: isDark
                                 ? [
                                     AppColors.accentDark,
-                                    AppColors.accentDark.withOpacity(0.7)
+                                    AppColors.accentDark.withValues(alpha: 0.7)
                                   ]
                                 : [
                                     AppColors.accentLight,
-                                    AppColors.accentLight.withOpacity(0.8)
+                                    AppColors.accentLight.withValues(alpha: 0.8)
                                   ],
                           ),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Icon(
-                          Icons.code_rounded,
-                          size: 20,
-                          color: AppColors.white,
+                        child: SvgPicture.asset(
+                          AppIcons.flutterIconSvg,
+                          width: 20,
+                          height: 20,
+                          colorFilter: const ColorFilter.mode(
+                            AppColors.white,
+                            BlendMode.srcIn,
+                          ),
                         ),
                       );
                     },
@@ -144,13 +149,13 @@ class DesktopAppBar extends StatelessWidget {
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
               color: isDark
-                  ? AppColors.white.withOpacity(0.1)
-                  : AppColors.black.withOpacity(0.05),
+                  ? AppColors.white.withValues(alpha: 0.1)
+                  : AppColors.black.withValues(alpha: 0.05),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: isDark
-                    ? AppColors.white.withOpacity(0.15)
-                    : AppColors.black.withOpacity(0.1),
+                    ? AppColors.white.withValues(alpha: 0.15)
+                    : AppColors.black.withValues(alpha: 0.1),
                 width: 1,
               ),
             ),
@@ -166,18 +171,18 @@ class DesktopAppBar extends StatelessWidget {
                 colors: isDark
                     ? [
                         AppColors.accentDark,
-                        AppColors.accentDark.withOpacity(0.8)
+                        AppColors.accentDark.withValues(alpha: 0.8)
                       ]
                     : [
                         AppColors.accentLight,
-                        AppColors.accentLight.withOpacity(0.9)
+                        AppColors.accentLight.withValues(alpha: 0.9)
                       ],
               ),
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
                 BoxShadow(
                   color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                      .withOpacity(0.4),
+                      .withValues(alpha: 0.4),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                   spreadRadius: 0,
@@ -186,7 +191,7 @@ class DesktopAppBar extends StatelessWidget {
             ),
             child: ElevatedButton.icon(
               onPressed: () => _openResume(context),
-              icon: const Icon(Icons.article_rounded, size: 18),
+              icon: const Icon(AppIcons.blog, size: 18),
               label: Text(
                 'View Resume',
                 style: AppFonts.button().copyWith(

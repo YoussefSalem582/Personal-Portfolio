@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utils/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 
 class AppTheme {
   // Re-export colors from AppColors for backward compatibility
@@ -80,7 +80,7 @@ class AppTheme {
       ),
       scaffoldBackgroundColor: backgroundColor,
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: textPrimary),
         titleTextStyle: headingSmall,
@@ -144,7 +144,7 @@ class AppTheme {
       ),
       scaffoldBackgroundColor: darkBackgroundColor,
       appBarTheme: AppBarTheme(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.transparent,
         elevation: 0,
         iconTheme: const IconThemeData(color: darkTextPrimary),
         titleTextStyle: AppFonts.h5(color: darkTextPrimary),

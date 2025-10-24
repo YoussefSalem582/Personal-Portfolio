@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/url_helper.dart';
 
 import '../../theme/app_theme.dart';
@@ -113,7 +113,7 @@ class ActionButtonsWidget extends StatelessWidget {
               width: double.infinity,
               child: OutlinedButton.icon(
                 onPressed: () => UrlHelper.launchURL(githubUrl!),
-                icon: const Icon(AppIcons.github, size: 22),
+                icon: const Icon(Icons.code, size: 22),
                 label: const Text('View Source Code'),
                 style: OutlinedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 20),

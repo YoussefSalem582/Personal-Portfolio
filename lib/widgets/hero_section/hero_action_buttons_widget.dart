@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import '../../utils/responsive_helper.dart';
@@ -28,7 +28,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
         _buildPrimaryButton(
           context,
           label: 'Get In Touch',
-          icon: Icons.send_rounded,
+          icon: AppIcons.send,
           onPressed: () => _navigateToSection(6),
           isDark: isDark,
         ),
@@ -36,7 +36,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
         _buildSecondaryButton(
           context,
           label: 'View Resume',
-          icon: Icons.description_outlined,
+          icon: AppIcons.download,
           onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
           isDark: isDark,
         ),
@@ -44,7 +44,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
         _buildSecondaryButton(
           context,
           label: 'View Projects',
-          icon: Icons.work_outline_rounded,
+          icon: AppIcons.projects,
           onPressed: () => _navigateToSection(4),
           isDark: isDark,
         ),
@@ -68,7 +68,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                .withOpacity(0.3),
+                .withValues(alpha: 0.3),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -84,9 +84,9 @@ class HeroActionButtonsWidget extends StatelessWidget {
           ),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
-          foregroundColor: Colors.white,
-          shadowColor: Colors.transparent,
+          backgroundColor: AppColors.transparent,
+          foregroundColor: AppColors.white,
+          shadowColor: AppColors.transparent,
           padding: const EdgeInsets.symmetric(
             horizontal: 24,
             vertical: 16,
@@ -120,7 +120,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
         foregroundColor: isDark ? AppColors.accentDark : AppColors.accentLight,
         side: BorderSide(
           color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-              .withOpacity(0.5),
+              .withValues(alpha: 0.5),
           width: 1.5,
         ),
         padding: const EdgeInsets.symmetric(

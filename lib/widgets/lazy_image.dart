@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../utils/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 
 class LazyImage extends StatefulWidget {
   final String imageUrl;
@@ -112,7 +112,7 @@ class _LazyImageState extends State<LazyImage>
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              Icons.broken_image_outlined,
+              AppIcons.error,
               size: 32,
               color: AppColors.textSecondaryLight.withValues(alpha: 0.5),
             ),

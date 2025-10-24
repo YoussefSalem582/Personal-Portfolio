@@ -1,4 +1,4 @@
-﻿// Export all data files for easy access
+// Export all data files for easy access
 export 'personal_info_data.dart';
 export 'skills_data.dart';
 export 'projects_data.dart';
@@ -33,8 +33,8 @@ class PortfolioData {
   // Skills - delegated to SkillsData
   static final List<SkillCategory> skills = SkillsData.skills;
 
-  // Projects - delegated to ProjectsData
-  static final List<Project> projects = ProjectsData.projects;
+  // Projects - delegated to ProjectsData (sorted by date, latest first)
+  static final List<Project> projects = ProjectsData.projectsSortedByDate;
   static List<Project> get featuredProjects => ProjectsData.featuredProjects;
 
   // Certificates - delegated to CertificatesData

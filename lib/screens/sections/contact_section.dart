@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../widgets/contact_section/contact_info_widget.dart';
 import '../../widgets/contact_section/contact_form_widget.dart';

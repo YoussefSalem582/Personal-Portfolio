@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../utils/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 import '../utils/responsive_helper.dart';
 import '../utils/data/portfolio_data.dart';
 import '../utils/url_helper.dart';
@@ -7,7 +7,9 @@ import '../utils/url_helper.dart';
 import '../theme/app_theme.dart';
 
 class Footer extends StatelessWidget {
-  const Footer({super.key});
+  final Function(int)? onNavigateToSection;
+
+  const Footer({super.key, this.onNavigateToSection});
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +53,42 @@ class Footer extends StatelessWidget {
                   color: AppColors.white.withValues(alpha: 0.6)),
               textAlign: TextAlign.center,
             ),
+
+            const SizedBox(height: AppTheme.spacingM),
+
+            // Visitor counter badge
+            _buildVisitorCounter(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _buildVisitorCounter() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // Visitor count icon
+        Icon(
+          AppIcons.view,
+          size: 16,
+          color: AppColors.white.withValues(alpha: 0.6),
+        ),
+        const SizedBox(width: AppTheme.spacingS),
+        // Visitor counter using hits.sh
+        Image.network(
+          'https://hits.sh/youssefsalem582.github.io/Personal-Portfolio.svg?style=flat-square&label=Visitors&color=3498db&labelColor=2c3e50',
+          height: 20,
+          errorBuilder: (context, error, stackTrace) {
+            return Text(
+              'Visitors',
+              style: AppFonts.bodySmall(
+                color: AppColors.white.withValues(alpha: 0.6),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 
@@ -104,10 +139,10 @@ class Footer extends StatelessWidget {
                 style: AppFonts.h5(color: AppColors.white),
               ),
               const SizedBox(height: AppTheme.spacingM),
-              _buildFooterLink('About', () => _scrollToSection('about')),
-              _buildFooterLink('Projects', () => _scrollToSection('projects')),
-              _buildFooterLink('Skills', () => _scrollToSection('skills')),
-              _buildFooterLink('Contact', () => _scrollToSection('contact')),
+              _buildFooterLink('About', () => _scrollToSection(1)),
+              _buildFooterLink('Projects', () => _scrollToSection(4)),
+              _buildFooterLink('Skills', () => _scrollToSection(2)),
+              _buildFooterLink('Contact', () => _scrollToSection(6)),
               _buildFooterLink('Resume PDF', () => _downloadResume()),
             ],
           ),
@@ -129,7 +164,7 @@ class Footer extends StatelessWidget {
               const SizedBox(height: AppTheme.spacingM),
 
               _buildContactLink(
-                Icons.email_outlined,
+                AppIcons.email,
                 PortfolioData.contactInfo.email,
                 () => UrlHelper.launchEmail(
                   email: PortfolioData.contactInfo.email,
@@ -137,7 +172,7 @@ class Footer extends StatelessWidget {
               ),
 
               _buildContactLink(
-                Icons.location_on_outlined,
+                AppIcons.location,
                 PortfolioData.contactInfo.location,
                 null,
               ),
@@ -246,7 +281,7 @@ class Footer extends StatelessWidget {
         // Resume download button
         ElevatedButton.icon(
           onPressed: () => _downloadResume(),
-          icon: const Icon(Icons.download, size: 18),
+          icon: const Icon(AppIcons.download, size: 18),
           label: const Text('Download Resume'),
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColors.accentLight,
@@ -304,17 +339,18 @@ class Footer extends StatelessWidget {
       case 'linkedin':
         return Icons.work; // LinkedIn icon
       case 'youtube':
-        return Icons.play_arrow; // YouTube icon
+        return Icons.play_circle_outline; // YouTube icon
       case 'upwork':
-        return Icons.work_outline; // Upwork icon
+        return Icons.work; // Upwork icon
       default:
-        return Icons.link;
+        return AppIcons.website;
     }
   }
 
-  void _scrollToSection(String section) {
-    // TODO: Implement scrolling to sections
-    // This would require passing a scroll controller or using a named route
+  void _scrollToSection(int sectionIndex) {
+    if (onNavigateToSection != null) {
+      onNavigateToSection!(sectionIndex);
+    }
   }
 
   void _downloadResume() async {

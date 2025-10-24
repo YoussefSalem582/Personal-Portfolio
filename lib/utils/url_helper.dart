@@ -1,6 +1,6 @@
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'dart:html' as html show window;
+import 'package:web/web.dart' as web show window;
 
 class UrlHelper {
   static Future<void> launchURL(String url) async {
@@ -49,14 +49,31 @@ class UrlHelper {
   /// For mobile/desktop, uses the default file viewer
   static Future<void> openFile(String url) async {
     // For web, if it's an asset path, construct the proper URL
-    if (kIsWeb && url.startsWith('assets/')) {
-      // On Flutter web, assets are served with an extra 'assets/' prefix
-      // So 'assets/images/file.pdf' becomes '/assets/assets/images/file.pdf'
-      final webUrl = 'assets/$url';
-      html.window.open(webUrl, '_blank');
-      return;
+    if (kIsWeb) {
+      if (url.startsWith('assets/')) {
+        // On Flutter web, assets are served from the root with /assets/ prefix
+        // So 'assets/documents/file.pdf' becomes '/assets/documents/file.pdf'
+        final webUrl = '/$url';
+        try {
+          web.window.open(webUrl, '_blank');
+          return;
+        } catch (e) {
+          // If that fails, try without the leading slash
+          try {
+            web.window.open(url, '_blank');
+            return;
+          } catch (e2) {
+            throw 'Could not open $url';
+          }
+        }
+      } else {
+        // For absolute URLs, open directly
+        web.window.open(url, '_blank');
+        return;
+      }
     }
 
+    // For mobile/desktop platforms
     final Uri uri = Uri.parse(url);
     if (await canLaunchUrl(uri)) {
       await launchUrl(uri, mode: LaunchMode.platformDefault);

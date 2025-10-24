@@ -1,4 +1,5 @@
 import '../../models/certificate.dart';
+import '../assets/app_constants.dart';
 
 class CertificatesData {
   static final List<Certificate> certificates = [
@@ -10,10 +11,8 @@ class CertificatesData {
           'Comprehensive Flutter development certification covering mobile app development, state management, and UI/UX design.\n\n'
           'Duration: February 2025 – June 2025 (4 months)',
       issueDate: DateTime(2025, 2, 1),
-      pdfUrl:
-          'assets/images/certificates/pdf/route_flutter_diploma_certificate.pdf',
-      imageUrl:
-          'assets/images/certificates/photos/Route Flutter Diploma Certificate.png',
+      pdfUrl: CertificateImages.routeFlutterDiplomaPdf,
+      imageUrl: CertificateImages.routeFlutterDiploma,
     ),
     Certificate(
       id: 'ml-depi',
@@ -35,8 +34,8 @@ class CertificatesData {
           '• Prompt Engineering\n\n'
           'Hands-on experience with Microsoft Azure AI services and cloud-based machine learning deployment.',
       issueDate: DateTime(2024, 10, 1),
-      pdfUrl: 'assets/images/certificates/pdf/ml_depi_certificate.pdf',
-      imageUrl: 'assets/images/certificates/photos/ml_depi_certificate.png',
+      pdfUrl: CertificateImages.mlDepiCertificatePdf,
+      imageUrl: CertificateImages.mlDepiCertificate,
     ),
     Certificate(
       id: 'codealpha-certificate',
@@ -46,8 +45,8 @@ class CertificatesData {
           'Mobile application development internship focusing on Flutter app development and practical programming skills.\n\n'
           'Duration: 1 March 2025 – 30 March 2025 (1 month)',
       issueDate: DateTime(2025, 3, 1),
-      pdfUrl: 'assets/images/certificates/pdf/CodeAlpha_Certificate.pdf',
-      imageUrl: 'assets/images/certificates/photos/CodeAlpha Certificate.png',
+      pdfUrl: CertificateImages.codeAlphaCertificatePdf,
+      imageUrl: CertificateImages.codeAlphaCertificate,
     ),
     Certificate(
       id: 'codealpha-lor',
@@ -57,8 +56,8 @@ class CertificatesData {
           'Letter of recommendation recognizing outstanding performance and contributions during the mobile app development internship period.\n\n'
           'Duration: 1 March 2025 – 30 March 2025 (1 month)',
       issueDate: DateTime(2025, 3, 1),
-      pdfUrl: 'assets/images/certificates/pdf/CodeAlpha_LOR.pdf',
-      imageUrl: 'assets/images/certificates/photos/CodeAlpha Certificate.png',
+      pdfUrl: CertificateImages.codeAlphaLorPdf,
+      imageUrl: CertificateImages.codeAlphaCertificate,
     ),
     Certificate(
       id: 'uneeq-internship',
@@ -68,9 +67,8 @@ class CertificatesData {
           'Flutter app development internship focusing on mobile application development.\n\n'
           'Duration: 1 March 2025 – 25 March 2025 (1 month)',
       issueDate: DateTime(2025, 3, 1),
-      pdfUrl: 'assets/images/certificates/pdf/uneeq_intern_certificate.pdf',
-      imageUrl:
-          'assets/images/certificates/photos/uneeq_intern_certificate.png',
+      pdfUrl: CertificateImages.uneeqInternCertificatePdf,
+      imageUrl: CertificateImages.uneeqInternCertificate,
     ),
     Certificate(
       id: 'ecpc',
@@ -79,8 +77,8 @@ class CertificatesData {
       description:
           'Participation certificate in the Egyptian Collegiate Programming Contest demonstrating problem-solving skills.',
       issueDate: DateTime(2024, 10, 1),
-      pdfUrl: 'assets/images/certificates/pdf/ECPC.pdf',
-      imageUrl: 'assets/images/certificates/photos/ECPC.jpg',
+      pdfUrl: CertificateImages.ecpcCertificatePdf,
+      imageUrl: CertificateImages.ecpcCertificate,
     ),
     Certificate(
       id: 'intro-jupyter',
@@ -89,8 +87,8 @@ class CertificatesData {
       description:
           'Certificate of completion for Introduction to Jupyter Notebook course, covering data science fundamentals and notebook usage.',
       issueDate: DateTime(2024, 9, 15),
-      pdfUrl: 'assets/images/certificates/pdf/Intro_to_jupyter.pdf',
-      imageUrl: 'assets/images/certificates/photos/ml_depi_certificate.png',
+      pdfUrl: CertificateImages.introJupyterPdf,
+      imageUrl: CertificateImages.mlDepiCertificate,
     ),
     Certificate(
       id: 'intro-python',
@@ -99,8 +97,8 @@ class CertificatesData {
       description:
           'Certificate of completion for Introduction to Python programming course, covering fundamental programming concepts and Python syntax.',
       issueDate: DateTime(2024, 9, 10),
-      pdfUrl: 'assets/images/certificates/pdf/Intro_to_python.pdf',
-      imageUrl: 'assets/images/certificates/photos/ml_depi_certificate.png',
+      pdfUrl: CertificateImages.introPythonPdf,
+      imageUrl: CertificateImages.mlDepiCertificate,
     ),
     Certificate(
       id: 'ugrf-1',
@@ -109,7 +107,7 @@ class CertificatesData {
       description:
           'Undergraduate research participation certificate recognizing academic contribution.',
       issueDate: DateTime(2024, 9, 1),
-      imageUrl: 'assets/images/certificates/photos/UGRF 1.jpg',
+      imageUrl: CertificateImages.ugrfCertificate1,
     ),
     Certificate(
       id: 'ugrf-2',
@@ -118,7 +116,7 @@ class CertificatesData {
       description:
           'Additional recognition certificate for outstanding undergraduate research work.',
       issueDate: DateTime(2024, 9, 1),
-      imageUrl: 'assets/images/certificates/photos/UGRF .jpg',
+      imageUrl: CertificateImages.ugrfCertificate2,
     ),
     Certificate(
       id: 'we-certificate',
@@ -128,8 +126,8 @@ class CertificatesData {
           'Flutter mobile application development internship at Telecom Egypt, focused on mobile app development using Flutter framework.\n\n'
           'Duration: July 2024 – September 2024 (3 months)',
       issueDate: DateTime(2024, 7, 1),
-      pdfUrl: 'assets/images/certificates/pdf/we_certificate.pdf',
-      imageUrl: 'assets/images/certificates/photos/we_certificate.png',
+      pdfUrl: CertificateImages.weCertificatePdf,
+      imageUrl: CertificateImages.weCertificate,
     ),
   ];
 }

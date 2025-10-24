@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import 'contact_item_widget.dart';
@@ -34,7 +34,7 @@ class ContactInfoWidget extends StatelessWidget {
 
         // Email contact item (clickable - launches email client)
         ContactItemWidget(
-          icon: Icons.email_outlined,
+          icon: AppIcons.email,
           title: 'Email',
           value: PortfolioData.contactInfo.email,
           onTap: () =>
@@ -45,7 +45,7 @@ class ContactInfoWidget extends StatelessWidget {
 
         // Phone contact item (clickable - launches phone dialer)
         ContactItemWidget(
-          icon: Icons.phone_outlined,
+          icon: AppIcons.phone,
           title: 'Phone',
           value: PortfolioData.contactInfo.phone,
           onTap: () => UrlHelper.launchPhone(PortfolioData.contactInfo.phone),
@@ -55,7 +55,7 @@ class ContactInfoWidget extends StatelessWidget {
 
         // Location contact item (non-clickable - just displays location)
         ContactItemWidget(
-          icon: Icons.location_on_outlined,
+          icon: AppIcons.location,
           title: 'Location',
           value: PortfolioData.contactInfo.location,
           onTap: null, // No action for location

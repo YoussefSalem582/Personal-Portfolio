@@ -38,11 +38,12 @@ dependencies:
   # Web and responsive design
   flutter_web_plugins:
     sdk: flutter
+  web: ^1.1.0
   responsive_framework: ^1.4.0
   
   # Fonts and UI
   google_fonts: ^6.1.0
-  flutter_svg: 
+  flutter_svg: ^2.0.10+1
   
   # URL and email handling
   url_launcher: ^6.2.2
@@ -94,33 +95,33 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+  # Note: Specifying 'assets/' includes all files and subdirectories automatically
   assets:
     - assets/
-    - assets/images/
-    - assets/images/portfolio_logo.png
-    - assets/images/projects/
-    - assets/images/projects/app_images/
-    - assets/images/projects/app_images/chargehub/
-    - assets/images/projects/app_images/chat_app/
-    - assets/images/projects/app_images/emosense_photos/
-    - assets/images/projects/app_images/emosense_photos/employee/
-    - assets/images/projects/app_images/emosense_photos/admin/
-    - assets/images/projects/app_images/gogesh/
-    - assets/images/projects/app_images/music_app/
-    - assets/images/projects/app_images/quiz_hub/
-    - assets/images/projects/app_images/QuoteHub/
-    - assets/images/projects/app_images/sprints_shop/
-    - assets/images/projects/app_pdf/
     - assets/icons/
-    # Explicit SVG icons for better web compatibility
-    - assets/icons/github_icon.svg
-    - assets/icons/linkedin_icon.svg
-    - assets/icons/youtube_icon.svg
-    - assets/icons/upwork_icon.svg
-    - assets/icons/cv.gif
+    - assets/icons/skills/
+    - assets/icons/social/
+    - assets/images/
     - assets/images/certificates/
-    - assets/images/certificates/photos/
-    - assets/images/certificates/pdf/
+    - assets/images/projects/
+    - assets/images/projects/emosense_photos/
+    - assets/images/projects/emosense_photos/admin/
+    - assets/images/projects/emosense_photos/employee/
+    - assets/images/projects/music_app/
+    - assets/images/projects/chat_app/
+    - assets/images/projects/sprints_shop/
+    - assets/images/projects/quiz_hub/
+    - assets/images/projects/QuoteHub/
+    - assets/images/projects/chargehub/
+    - assets/images/projects/gogesh/
+    - assets/images/projects/carpool_ride_sharing_app/
+    - assets/images/projects/pothole_detection_project/
+    - assets/images/projects/sign_language_translator/
+    - assets/images/projects/threejs_project/
+    - assets/images/projects/facial_recognition_system/
+    - assets/documents/
+    - assets/documents/projects/
+    - assets/fonts/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

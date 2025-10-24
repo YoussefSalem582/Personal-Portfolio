@@ -1,4 +1,5 @@
 import '../../models/project.dart';
+import '../assets/app_constants.dart';
 
 class ProjectsData {
   static final List<Project> projects = [
@@ -19,57 +20,56 @@ class ProjectsData {
         'Machine Learning',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/Emosense-App',
-      imageUrl:
-          'assets/images/projects/app_images/emosense_photos/app_icon.png',
+      imageUrl: EmosenseImages.appIcon,
       galleryImages: [
         // Onboarding & Authentication
-        'assets/images/projects/app_images/emosense_photos/employee/splash_screen.png',
-        'assets/images/projects/app_images/emosense_photos/employee/onboarding_1.png',
-        'assets/images/projects/app_images/emosense_photos/employee/onboarding_2.png',
-        'assets/images/projects/app_images/emosense_photos/employee/onboarding_3.png',
-        'assets/images/projects/app_images/emosense_photos/employee/onboarding_4.png',
-        'assets/images/projects/app_images/emosense_photos/employee/signin_and_login.png',
-        'assets/images/projects/app_images/emosense_photos/employee/signin_employee.png',
-        'assets/images/projects/app_images/emosense_photos/employee/login.png',
-        'assets/images/projects/app_images/emosense_photos/employee/signin_admin.png',
+        EmosenseEmployeeImages.splashScreen,
+        EmosenseEmployeeImages.onboarding1,
+        EmosenseEmployeeImages.onboarding2,
+        EmosenseEmployeeImages.onboarding3,
+        EmosenseEmployeeImages.onboarding4,
+        EmosenseEmployeeImages.signinAndLogin,
+        EmosenseEmployeeImages.signinEmployee,
+        EmosenseEmployeeImages.login,
+        EmosenseEmployeeImages.signinAdmin,
 
         // Employee Home & Tools
-        'assets/images/projects/app_images/emosense_photos/employee/employee_home_screen.png',
-        'assets/images/projects/app_images/emosense_photos/employee/tools_screen.png',
+        EmosenseEmployeeImages.homeScreen,
+        EmosenseEmployeeImages.toolsScreen,
 
         // Video Analysis
-        'assets/images/projects/app_images/emosense_photos/employee/video_analysis_screen.png',
-        'assets/images/projects/app_images/emosense_photos/employee/video_analysis_screen_2.png',
-        'assets/images/projects/app_images/emosense_photos/employee/video_analysis_screen_3.png',
-        'assets/images/projects/app_images/emosense_photos/employee/video_analysis_screen_4.png',
+        EmosenseEmployeeImages.videoAnalysis,
+        EmosenseEmployeeImages.videoAnalysis2,
+        EmosenseEmployeeImages.videoAnalysis3,
+        EmosenseEmployeeImages.videoAnalysis4,
 
         // Voice Analysis
-        'assets/images/projects/app_images/emosense_photos/employee/voice_analysis_screen.png',
-        'assets/images/projects/app_images/emosense_photos/employee/voice_analysis_screen_2.png',
-        'assets/images/projects/app_images/emosense_photos/employee/voice_analysis_screen_3.png',
+        EmosenseEmployeeImages.voiceAnalysis,
+        EmosenseEmployeeImages.voiceAnalysis2,
+        EmosenseEmployeeImages.voiceAnalysis3,
 
         // Text Analysis
-        'assets/images/projects/app_images/emosense_photos/employee/text_analysis_screen.png',
-        'assets/images/projects/app_images/emosense_photos/employee/text_analysis_screen_2.png',
+        EmosenseEmployeeImages.textAnalysis,
+        EmosenseEmployeeImages.textAnalysis2,
 
         // Support Tickets
-        'assets/images/projects/app_images/emosense_photos/employee/tickets_screen.png',
-        'assets/images/projects/app_images/emosense_photos/employee/tickets_screen_2.png',
-        'assets/images/projects/app_images/emosense_photos/employee/tickets_screen_3.png',
+        EmosenseEmployeeImages.tickets,
+        EmosenseEmployeeImages.tickets2,
+        EmosenseEmployeeImages.tickets3,
 
         // Employee Profile
-        'assets/images/projects/app_images/emosense_photos/employee/profiel_screen.png',
-        'assets/images/projects/app_images/emosense_photos/employee/profile_sceen_2.png',
-        'assets/images/projects/app_images/emosense_photos/employee/profile_screen_3.png',
+        EmosenseEmployeeImages.profile,
+        EmosenseEmployeeImages.profile2,
+        EmosenseEmployeeImages.profile3,
 
         // Admin Panel
-        'assets/images/projects/app_images/emosense_photos/admin/amin_home_screen.png',
-        'assets/images/projects/app_images/emosense_photos/admin/user_managment_screen.png',
-        'assets/images/projects/app_images/emosense_photos/admin/system_screen.png',
-        'assets/images/projects/app_images/emosense_photos/admin/system_screen._2.png',
-        'assets/images/projects/app_images/emosense_photos/admin/support_tickets_screen.png',
-        'assets/images/projects/app_images/emosense_photos/admin/profile_screen.png',
-        'assets/images/projects/app_images/emosense_photos/admin/profile_screen__2.png',
+        EmosenseAdminImages.homeScreen,
+        EmosenseAdminImages.userManagement,
+        EmosenseAdminImages.system,
+        EmosenseAdminImages.system2,
+        EmosenseAdminImages.supportTickets,
+        EmosenseAdminImages.profile,
+        EmosenseAdminImages.profile2,
       ],
       createdAt: DateTime(2025, 7, 1),
       isFeatured: true,
@@ -84,18 +84,17 @@ class ProjectsData {
           'Features include audio visualization, background playback, and seamless user experience.',
       technologies: ['Flutter', 'Dart', 'Audio Processing', 'State Management'],
       githubUrl: 'https://github.com/YoussefSalem582/Music-Player-App',
-      imageUrl:
-          'assets/images/projects/app_images/music_app/music_app_logo.jpg',
+      imageUrl: MusicAppImages.appLogo,
       galleryImages: [
-        'assets/images/projects/app_images/music_app/home_page.png',
-        'assets/images/projects/app_images/music_app/Home Screen 1.png',
-        'assets/images/projects/app_images/music_app/Home Screen 2.png',
-        'assets/images/projects/app_images/music_app/Music player screen.png',
-        'assets/images/projects/app_images/music_app/playlist screen.png',
-        'assets/images/projects/app_images/music_app/liked songs page.png',
+        MusicAppImages.homePage,
+        MusicAppImages.homeScreen1,
+        MusicAppImages.homeScreen2,
+        MusicAppImages.musicPlayerScreen,
+        MusicAppImages.playlistScreen,
+        MusicAppImages.likedSongsPage,
       ],
       createdAt: DateTime(2025, 3, 1),
-      isFeatured: true,
+      isFeatured: false,
     ),
     Project(
       id: 'chat-app',
@@ -114,18 +113,18 @@ class ProjectsData {
         'BLoC',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/chat-app',
-      imageUrl: 'assets/images/projects/app_images/chat_app/app_logo.png',
+      imageUrl: ChatAppImages.appLogo,
       galleryImages: [
-        'assets/images/projects/app_images/chat_app/home_page.png',
-        'assets/images/projects/app_images/chat_app/chat.png',
-        'assets/images/projects/app_images/chat_app/login.png',
-        'assets/images/projects/app_images/chat_app/register.png',
-        'assets/images/projects/app_images/chat_app/lightmode.png',
-        'assets/images/projects/app_images/chat_app/settings_page.png',
-        'assets/images/projects/app_images/chat_app/drawer.png',
+        ChatAppImages.homePage,
+        ChatAppImages.chat,
+        ChatAppImages.login,
+        ChatAppImages.register,
+        ChatAppImages.lightmode,
+        ChatAppImages.settingsPage,
+        ChatAppImages.drawer,
       ],
       createdAt: DateTime(2025, 3, 1),
-      isFeatured: true,
+      isFeatured: false,
     ),
     Project(
       id: 'personal-portfolio',
@@ -151,7 +150,7 @@ class ProjectsData {
       ],
       githubUrl: 'https://github.com/YoussefSalem582/Personal-Portfolio',
       liveUrl: 'https://youssefsalem582.github.io/Personal-Portfolio/',
-      imageUrl: 'assets/images/portfolio_logo.png',
+      imageUrl: AppImages.portfolioLogo,
       createdAt: DateTime(2025, 10, 1),
       isFeatured: true,
     ),
@@ -177,18 +176,26 @@ class ProjectsData {
         'Animations',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/sprints_shop',
-      imageUrl: 'assets/images/projects/app_images/sprints_shop/app_logo.png',
+      imageUrl: SprintsShopImages.appLogo,
       galleryImages: [
-        'assets/images/projects/app_images/sprints_shop/home_screen.png',
-        'assets/images/projects/app_images/sprints_shop/login_and_signin.png',
-        'assets/images/projects/app_images/sprints_shop/login.png',
-        'assets/images/projects/app_images/sprints_shop/sign_up.png',
-        'assets/images/projects/app_images/sprints_shop/products_screen.png',
-        'assets/images/projects/app_images/sprints_shop/product_detail_screen.png',
-        'assets/images/projects/app_images/sprints_shop/cart_screen.png',
-        'assets/images/projects/app_images/sprints_shop/order_screen.png',
-        'assets/images/projects/app_images/sprints_shop/payment_screen.png',
-        'assets/images/projects/app_images/sprints_shop/login_and_sign_up_2.png',
+        // Authentication
+        SprintsShopImages.loginAndSignin,
+        SprintsShopImages.login,
+        SprintsShopImages.login2,
+        SprintsShopImages.signUp,
+        SprintsShopImages.loginAndSignUp2,
+
+        // Shopping Experience
+        SprintsShopImages.homeScreen,
+        SprintsShopImages.productsScreen,
+        SprintsShopImages.productDetailScreen,
+        SprintsShopImages.cartScreen,
+
+        // Order & Payment
+        SprintsShopImages.orderScreen,
+        SprintsShopImages.orderScreen2,
+        SprintsShopImages.paymentScreen,
+        SprintsShopImages.paymentScreen2,
       ],
       createdAt: DateTime(2025, 1, 15),
     ),
@@ -201,16 +208,74 @@ class ProjectsData {
           'progress tracking, review functionality, and comprehensive exam management.',
       technologies: ['Flutter', 'Dart', 'SQLite', 'State Management'],
       githubUrl: 'https://github.com/YoussefSalem582/QuizHub-App',
-      imageUrl: 'assets/images/projects/app_images/quiz_hub/quiz_app_logo.jpg',
+      imageUrl: QuizHubImages.quizAppLogo,
       galleryImages: [
-        'assets/images/projects/app_images/quiz_hub/home_screen.png',
-        'assets/images/projects/app_images/quiz_hub/quiz.png',
-        'assets/images/projects/app_images/quiz_hub/correct_answer.png',
-        'assets/images/projects/app_images/quiz_hub/incorrect_answer.png',
-        'assets/images/projects/app_images/quiz_hub/qui_completed.png',
-        'assets/images/projects/app_images/quiz_hub/review_page.png',
+        QuizHubImages.homeScreen,
+        QuizHubImages.quiz,
+        QuizHubImages.correctAnswer,
+        QuizHubImages.incorrectAnswer,
+        QuizHubImages.quiCompleted,
+        QuizHubImages.reviewPage,
       ],
-      createdAt: DateTime(2024, 1, 1),
+      createdAt: DateTime(2025, 3, 1),
+    ),
+    Project(
+      id: 'gopooling-carpool',
+      title: 'GoPooling Carpool Ride Sharing App',
+      shortDescription:
+          'University carpool platform connecting students for ride-sharing',
+      description:
+          'GoPooling is a comprehensive carpool ride-sharing application designed specifically for university students, faculty, and staff. '
+          'The app facilitates convenient ride-sharing coordination within the campus community, featuring real-time GPS tracking, '
+          'driver-passenger matching, rating system, ride history, and secure payment integration. Developed as a CSCI313 project '
+          'with a complete software requirements specification, use cases, sequence diagrams, and comprehensive testing. '
+          'Built with Flutter and Firebase, the app provides seamless booking, navigation, notifications, and emergency assistance features.',
+      technologies: [
+        'Flutter',
+        'Dart',
+        'Firebase',
+        'Google Maps API',
+        'Figma',
+        'Software Engineering',
+        'UML Diagrams',
+        'System Design',
+      ],
+      githubUrl: null,
+      imageUrl: GoPoolingImages.appLogo,
+      galleryImages: [
+        // UML Diagrams
+        GoPoolingImages.useCaseDiagram,
+        GoPoolingImages.classDiagram,
+
+        // Onboarding
+        GoPoolingImages.onboarding1,
+        GoPoolingImages.onboarding2,
+        GoPoolingImages.onboarding3,
+
+        // User Authentication
+        GoPoolingImages.userLogin,
+        GoPoolingImages.userSignup,
+
+        // Driver Authentication
+        GoPoolingImages.driverLogin,
+        GoPoolingImages.driverSignup,
+
+        // Ride Booking Flow
+        GoPoolingImages.homeScreen,
+        GoPoolingImages.pickupPlaceScreen,
+        GoPoolingImages.selectYourRideScreen,
+        GoPoolingImages.selectedRideDetailScreen,
+
+        // Trip Management
+        GoPoolingImages.myTripsScreen1,
+        GoPoolingImages.myTripsScreen2,
+
+        // Navigation & Other Features
+        GoPoolingImages.notificationScreen,
+        GoPoolingImages.sideDrawerNavigation,
+      ],
+      createdAt: DateTime(2023, 12, 30),
+      isFeatured: false,
     ),
     Project(
       id: 'chargehub',
@@ -227,19 +292,27 @@ class ProjectsData {
         'BLoC',
         'GPS',
         'flutter_map',
-        'Firebase'
+        'Firebase',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/ChargeHub-App',
-      imageUrl: 'assets/images/projects/app_images/chargehub/chargeHub.png',
+      imageUrl: ChargeHubImages.chargeHub,
       galleryImages: [
-        'assets/images/projects/app_images/chargehub/homescreen.png',
-        'assets/images/projects/app_images/chargehub/Map.png',
-        'assets/images/projects/app_images/chargehub/login.png',
-        'assets/images/projects/app_images/chargehub/signup.png',
-        'assets/images/projects/app_images/chargehub/EV car.png',
-        'assets/images/projects/app_images/chargehub/gas car.png',
+        // Authentication
+        ChargeHubImages.login,
+        ChargeHubImages.signup,
+
+        // Main Features
+        ChargeHubImages.homescreen,
+        ChargeHubImages.map,
+        ChargeHubImages.cars,
+
+        // Vehicle Types
+        ChargeHubImages.evCar,
+        ChargeHubImages.evCar1,
+        ChargeHubImages.gasCar,
+        ChargeHubImages.gasCar1,
       ],
-      createdAt: DateTime(2024, 9, 1),
+      createdAt: DateTime(2024, 9, 15),
     ),
     Project(
       id: 'gogesh-marketplace',
@@ -267,39 +340,68 @@ class ProjectsData {
         'State Management',
       ],
       //githubUrl: 'https://github.com/YoussefSalem582/Gogesh-App',
-      imageUrl: 'assets/images/projects/app_images/gogesh/gogesh_app_logo.png',
+      imageUrl: GogeshImages.gogeshAppLogo,
       galleryImages: [
-        'assets/images/projects/app_images/gogesh/splash.png',
-        'assets/images/projects/app_images/gogesh/onboard_1.png',
-        'assets/images/projects/app_images/gogesh/onboard_2.png',
-        'assets/images/projects/app_images/gogesh/onboard_3.png',
-        'assets/images/projects/app_images/gogesh/login_or_signup.png',
-        'assets/images/projects/app_images/gogesh/phone_login.png',
-        'assets/images/projects/app_images/gogesh/phone_login_2.png',
-        'assets/images/projects/app_images/gogesh/create_account_screen.png',
-        'assets/images/projects/app_images/gogesh/signup_screen.png',
-        'assets/images/projects/app_images/gogesh/user_home_screen.png',
-        'assets/images/projects/app_images/gogesh/user_home_screen_2.png',
-        'assets/images/projects/app_images/gogesh/app_main_search.png',
-        'assets/images/projects/app_images/gogesh/category_screen.png',
-        'assets/images/projects/app_images/gogesh/category_detail_screen.png',
-        'assets/images/projects/app_images/gogesh/category_result_screen.png',
-        'assets/images/projects/app_images/gogesh/product_screen.png',
-        'assets/images/projects/app_images/gogesh/filter.png',
-        'assets/images/projects/app_images/gogesh/product filter.png',
-        'assets/images/projects/app_images/gogesh/favorite_screen.png',
-        'assets/images/projects/app_images/gogesh/offers_screen.png',
-        'assets/images/projects/app_images/gogesh/ads_screen.png',
-        'assets/images/projects/app_images/gogesh/chat_screen.png',
-        'assets/images/projects/app_images/gogesh/chat_screen_2.png',
-        'assets/images/projects/app_images/gogesh/notification_screen.png',
-        'assets/images/projects/app_images/gogesh/merchant_home_screen.png',
-        'assets/images/projects/app_images/gogesh/merchant_product_detail_screen.png',
-        'assets/images/projects/app_images/gogesh/merchant_profile_screen.png',
-        'assets/images/projects/app_images/gogesh/cta_button_screen.png',
-        'assets/images/projects/app_images/gogesh/report.png',
+        // Onboarding & Splash
+        GogeshImages.splash,
+        GogeshImages.onboard1,
+        GogeshImages.onboard2,
+        GogeshImages.onboard3,
+
+        // Authentication Flow
+        GogeshImages.loginOrSignup,
+        GogeshImages.phoneLogin,
+        GogeshImages.phoneLogin2,
+        GogeshImages.createAccountScreen,
+        GogeshImages.signupScreen,
+        GogeshImages.signupScreen2,
+        GogeshImages.signupScreen3,
+        GogeshImages.signupScreen4,
+        GogeshImages.signupScreen5,
+        GogeshImages.signupScreen6,
+        GogeshImages.signupScreen7,
+        GogeshImages.signupScreen8,
+        GogeshImages.signupScreen9,
+        GogeshImages.signupScreen10,
+        GogeshImages.signupScreen11,
+        GogeshImages.signupScreen12,
+        GogeshImages.signupScreen13,
+        GogeshImages.signupScreen14,
+
+        // User Home & Shopping
+        GogeshImages.userHomeScreen,
+        GogeshImages.userHomeScreen2,
+        GogeshImages.appMainSearch,
+
+        // Categories & Products
+        GogeshImages.categoryScreen,
+        GogeshImages.categoryDetailScreen,
+        GogeshImages.categoryResultScreen,
+        GogeshImages.productScreen,
+        GogeshImages.filter,
+        GogeshImages.productFilter,
+
+        // Favorites & Offers
+        GogeshImages.favoriteScreen,
+        GogeshImages.offersScreen,
+        GogeshImages.adsScreen,
+
+        // Communication
+        GogeshImages.chatScreen,
+        GogeshImages.chatScreen2,
+        GogeshImages.notificationScreen,
+
+        // Merchant Dashboard
+        GogeshImages.merchantHomeScreen,
+        GogeshImages.merchantProductDetailScreen,
+        GogeshImages.merchantProfileScreen,
+        GogeshImages.ctaButtonScreen,
+        GogeshImages.ctaButtonScreen2,
+        GogeshImages.ctaButtonScreen3,
+        GogeshImages.report,
+        GogeshImages.report2,
       ],
-      createdAt: DateTime(2024, 8, 29),
+      createdAt: DateTime(2025, 8, 29),
       isFeatured: true,
     ),
     Project(
@@ -312,15 +414,14 @@ class ProjectsData {
       technologies: ['Flutter', 'Dart', 'REST API', 'Local Storage'],
       githubUrl:
           'https://github.com/YoussefSalem582/Random-Quote-Generator-App',
-      imageUrl:
-          'assets/images/projects/app_images/QuoteHub/qoutehub_app_logo.jpg',
+      imageUrl: QuoteHubImages.qoutehubAppLogo,
       galleryImages: [
-        'assets/images/projects/app_images/QuoteHub/Home Screen with Quotes.png',
-        'assets/images/projects/app_images/QuoteHub/Home Screen.png',
-        'assets/images/projects/app_images/QuoteHub/Select Category.png',
-        'assets/images/projects/app_images/QuoteHub/Favorite Page.png',
+        QuoteHubImages.homeScreenWithQuotes,
+        QuoteHubImages.homeScreen,
+        QuoteHubImages.selectCategory,
+        QuoteHubImages.favoritePage,
       ],
-      createdAt: DateTime(2024, 2, 10),
+      createdAt: DateTime(2025, 3, 1),
     ),
     Project(
       id: 'facial-recognition',
@@ -337,7 +438,11 @@ class ProjectsData {
         'Machine Learning',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/Facial-Recognition-System',
-      imageUrl: null, // No specific image available
+      imageUrl: FacialRecognitionImages.homepage,
+      galleryImages: [
+        FacialRecognitionImages.homepage,
+        FacialRecognitionImages.homepageExample,
+      ],
       createdAt: DateTime(2024, 12, 5),
     ),
     Project(
@@ -356,7 +461,14 @@ class ProjectsData {
         'Machine Learning',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/Sign-Language-Translator',
-      imageUrl: null, // No specific image available
+      imageUrl: SignLanguageTranslatorImages.appLogo,
+      galleryImages: [
+        SignLanguageTranslatorImages.blockDiagram,
+        SignLanguageTranslatorImages.flowchart,
+        SignLanguageTranslatorImages.collectedSamples,
+        SignLanguageTranslatorImages.creatingDatasets,
+        SignLanguageTranslatorImages.results,
+      ],
       createdAt: DateTime(2024, 10, 20),
     ),
     Project(
@@ -376,10 +488,59 @@ class ProjectsData {
       ],
       githubUrl:
           'https://github.com/YoussefSalem582/Street-Pothole-Detection-Research',
-      imageUrl: null, // No specific image available
+      imageUrl: PotholeDetectionImages.samples,
+      galleryImages: [
+        PotholeDetectionImages.samples,
+        PotholeDetectionImages.imageCounts,
+        PotholeDetectionImages.potholeImageDimensions,
+        PotholeDetectionImages.noPotholeImageDimensions,
+        PotholeDetectionImages.trainingAndValidation,
+        PotholeDetectionImages.resultsAndAnalysis,
+        PotholeDetectionImages.confusionMatrix,
+        PotholeDetectionImages.decisionTreeVisualization,
+      ],
       createdAt: DateTime(2024, 8, 15),
     ),
+    Project(
+      id: 'interactive-learning-assistant',
+      title: 'Interactive Learning Assistant with Customizable 3D Avatars',
+      shortDescription:
+          'Immersive learning experience with customizable 3D avatars and emotional interaction',
+      description:
+          'An Interactive Learning Assistant designed to enhance engagement and motivation in online education through customizable 3D avatars. '
+          'Built using Three.js and React, the assistant provides students with an immersive learning experience by adding emotional interaction and feedback to digital lessons. '
+          'Users can customize their avatars to represent themselves and receive real-time emotional cues and encouragement throughout their study sessions.\n\n'
+          'This tool addresses the challenge of sustaining student focus and motivation during remote learning, offering features such as text-to-speech reading for accessibility, '
+          'guided study prompts, and avatar expressions that respond to user performance (e.g., smiling for correct answers or showing encouragement during challenging moments).\n\n'
+          'By integrating seamlessly with existing learning management systems (LMS) or as a standalone web app, the Interactive Learning Assistant helps bridge the gap '
+          'between traditional classroom dynamics and online education, making learning more engaging and personalized.',
+      technologies: [
+        'React',
+        'Three.js',
+        'JavaScript',
+        '3D Graphics',
+        'Text-to-Speech',
+        'Web Development',
+        'Educational Technology',
+        'UI/UX',
+      ],
+      imageUrl: ThreeJsProjectImages.image1,
+      galleryImages: [
+        ThreeJsProjectImages.image1,
+        ThreeJsProjectImages.image2,
+        ThreeJsProjectImages.image3,
+      ],
+      createdAt: DateTime(2024, 12, 30),
+      isFeatured: false,
+    ),
   ];
+
+  // Get all projects sorted by date (latest first)
+  static List<Project> get projectsSortedByDate {
+    final sortedProjects = List<Project>.from(projects);
+    sortedProjects.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    return sortedProjects;
+  }
 
   // Featured projects (first 3)
   static List<Project> get featuredProjects =>

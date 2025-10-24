@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../utils/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 
 import '../theme/app_theme.dart';
 

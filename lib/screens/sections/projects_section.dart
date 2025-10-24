@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:get/get.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
@@ -358,7 +358,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
             _displayedProjectCount += _incrementCount;
           });
         },
-        icon: const Icon(Icons.expand_more, size: 20),
+        icon: const Icon(AppIcons.arrowDown, size: 20),
         label: const Text('Show More'),
         style: OutlinedButton.styleFrom(
           foregroundColor: accentColor,
@@ -395,7 +395,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
             const SizedBox(width: AppTheme.spacingM),
             ElevatedButton.icon(
               onPressed: () => _navigateToGitHub(),
-              icon: const Icon(AppIcons.github),
+              icon: const Icon(Icons.code),
               label: const Text('Visit GitHub'),
             ),
           ],
@@ -441,8 +441,8 @@ class _AllProjectsDialog extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
           border: Border.all(
             color: isDark
-                ? AppColors.white.withOpacity(0.1)
-                : AppColors.black.withOpacity(0.1),
+                ? AppColors.white.withValues(alpha: 0.1)
+                : AppColors.black.withValues(alpha: 0.1),
             width: 1,
           ),
         ),
@@ -455,8 +455,8 @@ class _AllProjectsDialog extends StatelessWidget {
                 border: Border(
                   bottom: BorderSide(
                     color: isDark
-                        ? AppColors.white.withOpacity(0.1)
-                        : AppColors.black.withOpacity(0.1),
+                        ? AppColors.white.withValues(alpha: 0.1)
+                        : AppColors.black.withValues(alpha: 0.1),
                     width: 1,
                   ),
                 ),
@@ -483,8 +483,8 @@ class _AllProjectsDialog extends StatelessWidget {
                     ),
                     style: IconButton.styleFrom(
                       backgroundColor: isDark
-                          ? AppColors.white.withOpacity(0.05)
-                          : AppColors.black.withOpacity(0.05),
+                          ? AppColors.white.withValues(alpha: 0.05)
+                          : AppColors.black.withValues(alpha: 0.05),
                     ),
                   ),
                 ],
@@ -522,8 +522,8 @@ class _AllProjectsDialog extends StatelessWidget {
                                 BorderRadius.circular(AppTheme.radiusM),
                             border: Border.all(
                               color: isDark
-                                  ? AppColors.white.withOpacity(0.1)
-                                  : AppColors.black.withOpacity(0.1),
+                                  ? AppColors.white.withValues(alpha: 0.1)
+                                  : AppColors.black.withValues(alpha: 0.1),
                               width: 1,
                             ),
                           ),
@@ -537,7 +537,7 @@ class _AllProjectsDialog extends StatelessWidget {
                                   color: (isDark
                                           ? AppColors.accentDark
                                           : AppColors.accentLight)
-                                      .withOpacity(0.1),
+                                      .withValues(alpha: 0.1),
                                   borderRadius:
                                       BorderRadius.circular(AppTheme.radiusS),
                                   image: project.imageUrl != null
@@ -602,9 +602,10 @@ class _AllProjectsDialog extends StatelessWidget {
                                               decoration: BoxDecoration(
                                                 color: isDark
                                                     ? AppColors.white
-                                                        .withOpacity(0.1)
+                                                        .withValues(alpha: 0.1)
                                                     : AppColors.black
-                                                        .withOpacity(0.05),
+                                                        .withValues(
+                                                            alpha: 0.05),
                                                 borderRadius:
                                                     BorderRadius.circular(
                                                         AppTheme.radiusS),

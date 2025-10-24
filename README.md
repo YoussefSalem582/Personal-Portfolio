@@ -1,5 +1,9 @@
 # Youssef Salem Hassan - Flutter Developer Portfolio
 
+![Visitor Count](https://hits.sh/youssefsalem582.github.io/Personal-Portfolio.svg?style=flat-square&label=Visitors&color=3498db&labelColor=2c3e50)
+![GitHub Pages](https://img.shields.io/badge/Deployed-GitHub%20Pages-success?style=flat-square)
+![Flutter](https://img.shields.io/badge/Built%20with-Flutter-02569B?style=flat-square&logo=flutter)
+
 A modern, responsive portfolio website showcasing Flutter development skills, machine learning projects, and professional achievements. Built with Flutter Web and optimized for performance and accessibility.
 
 ## 🚀 Live Demo

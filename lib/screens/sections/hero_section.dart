@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../theme/app_theme.dart';
 import '../../widgets/hero_section/hero_text_widget.dart';
@@ -151,9 +151,9 @@ class HeroSection extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     (isDark ? AppColors.accentDark : AppColors.accentLight)
-                        .withOpacity(0.1),
+                        .withValues(alpha: 0.1),
                     (isDark ? AppColors.accentDark : AppColors.accentLight)
-                        .withOpacity(0.05),
+                        .withValues(alpha: 0.05),
                   ],
                 ),
               ),
@@ -170,9 +170,9 @@ class HeroSection extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: [
                     (isDark ? AppColors.primaryDark : AppColors.primaryLight)
-                        .withOpacity(0.1),
+                        .withValues(alpha: 0.1),
                     (isDark ? AppColors.primaryDark : AppColors.primaryLight)
-                        .withOpacity(0.05),
+                        .withValues(alpha: 0.05),
                   ],
                 ),
               ),
@@ -228,13 +228,13 @@ class HeroSection extends StatelessWidget {
             colors: [
               isDark ? AppColors.accentDark : AppColors.accentLight,
               (isDark ? AppColors.primaryDark : AppColors.primaryLight)
-                  .withOpacity(0.8),
+                  .withValues(alpha: 0.8),
             ],
           ),
           boxShadow: [
             BoxShadow(
               color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                  .withOpacity(0.4),
+                  .withValues(alpha: 0.4),
               blurRadius: 12,
               spreadRadius: 2,
             ),

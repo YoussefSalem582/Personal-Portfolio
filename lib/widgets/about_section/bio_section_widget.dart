@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../utils/assets/app_constants.dart';
 import 'contact_info_list_widget.dart';
 
 import '../../theme/app_theme.dart';
@@ -64,7 +65,7 @@ class BioSectionWidget extends StatelessWidget {
         // Mobile App Development section
         _buildHighlightSection(
           context,
-          icon: Icons.phone_android_rounded,
+          icon: Icons.phone_android,
           title: 'Mobile App Development',
           description:
               'My projects emphasize clean architecture, modern UI/UX design, and seamless user experiences across Android and iOS platforms.',
@@ -76,7 +77,7 @@ class BioSectionWidget extends StatelessWidget {
         // Technical Interests section
         _buildHighlightSection(
           context,
-          icon: Icons.psychology_rounded,
+          icon: AppIcons.technology,
           title: 'Technical Interests',
           description:
               'Passionate about advancing in Natural Language Processing, Machine Learning, and Computer Vision, with a keen interest in leveraging these fields to drive innovative tech solutions.',
@@ -88,7 +89,7 @@ class BioSectionWidget extends StatelessWidget {
         // Skills & Communication section
         _buildHighlightSection(
           context,
-          icon: Icons.code_rounded,
+          icon: AppIcons.flutterIconSvg,
           title: 'Skills & Communication',
           description:
               'Proficient in developing feature-rich applications from music players to e-commerce marketplaces. I combine technical expertise with a focus on maintainable code and agile practices.',
@@ -104,27 +105,27 @@ class BioSectionWidget extends StatelessWidget {
             gradient: isDark
                 ? LinearGradient(
                     colors: [
-                      AppColors.primaryLight.withOpacity(0.1),
-                      AppColors.accentLight.withOpacity(0.1),
+                      AppColors.primaryLight.withValues(alpha: 0.1),
+                      AppColors.accentLight.withValues(alpha: 0.1),
                     ],
                   )
                 : LinearGradient(
                     colors: [
-                      AppColors.accentLight.withOpacity(0.08),
-                      AppColors.primaryLight.withOpacity(0.08),
+                      AppColors.accentLight.withValues(alpha: 0.08),
+                      AppColors.primaryLight.withValues(alpha: 0.08),
                     ],
                   ),
             borderRadius: BorderRadius.circular(AppTheme.radiusM),
             border: Border.all(
               color: (isDark ? AppColors.primaryLight : AppColors.accentLight)
-                  .withOpacity(0.2),
+                  .withValues(alpha: 0.2),
               width: 1,
             ),
           ),
           child: Row(
             children: [
               Icon(
-                Icons.rocket_launch_rounded,
+                AppIcons.featured,
                 color: isDark ? AppColors.primaryLight : AppColors.accentLight,
                 size: 24,
               ),
@@ -167,7 +168,7 @@ class BioSectionWidget extends StatelessWidget {
 
   Widget _buildHighlightSection(
     BuildContext context, {
-    required IconData icon,
+    required dynamic icon,
     required String title,
     required String description,
     required bool isDark,
@@ -186,17 +187,27 @@ class BioSectionWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: (isDark ? AppColors.primaryLight : AppColors.accentLight)
-                    .withOpacity(0.3),
+                    .withValues(alpha: 0.3),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
             ],
           ),
-          child: Icon(
-            icon,
-            color: AppColors.white,
-            size: 20,
-          ),
+          child: icon is String
+              ? SvgPicture.asset(
+                  icon,
+                  width: 20,
+                  height: 20,
+                  colorFilter: const ColorFilter.mode(
+                    AppColors.white,
+                    BlendMode.srcIn,
+                  ),
+                )
+              : Icon(
+                  icon,
+                  color: AppColors.white,
+                  size: 20,
+                ),
         ),
         const SizedBox(width: AppTheme.spacingM),
         // Content

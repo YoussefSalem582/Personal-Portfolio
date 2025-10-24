@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 
 import '../../theme/app_theme.dart';
+
 /// A custom button widget for displaying social media platform links.
 ///
 /// This widget creates an outlined button with an icon and platform name.
@@ -29,8 +30,7 @@ class SocialButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // Get theme-specific accent color
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final accentColor =
-        isDark ? AppColors.accentDark : AppColors.accentLight;
+    final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
 
     return OutlinedButton(
       onPressed: onTap,
@@ -74,11 +74,11 @@ class SocialButtonWidget extends StatelessWidget {
       case 'linkedin':
         return Icons.work;
       case 'youtube':
-        return Icons.play_arrow;
+        return Icons.play_circle_outline;
       case 'upwork':
-        return Icons.work_outline;
+        return Icons.work;
       default:
-        return Icons.link;
+        return AppIcons.website;
     }
   }
 }

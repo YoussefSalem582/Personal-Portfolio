@@ -243,7 +243,7 @@ class AppColors {
 
   /// Get color with opacity
   static Color withOpacity(Color color, double opacity) =>
-      color.withOpacity(opacity);
+      color.withValues(alpha: opacity);
 
   /// Get skill color by skill ID
   static Color getSkillColor(String skillId) {

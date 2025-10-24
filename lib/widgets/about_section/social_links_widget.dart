@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 
@@ -10,10 +11,10 @@ import '../../theme/app_theme.dart';
 /// Shows:
 /// - "Connect With Me" heading
 /// - Wrapped row of social media icon buttons
-/// - Icons for GitHub, LinkedIn, YouTube, Upwork, etc.
+/// - SVG icons for GitHub, LinkedIn, YouTube, Upwork, etc.
 ///
 /// Each icon is clickable and opens the corresponding social profile in a browser.
-/// Icons are determined by platform name using the _getIconForPlatform method.
+/// Icons are determined by platform name using SVG assets from AppIcons.
 class SocialLinksWidget extends StatelessWidget {
   const SocialLinksWidget({super.key});
 
@@ -50,9 +51,9 @@ class SocialLinksWidget extends StatelessWidget {
 
   /// Builds a single social media icon button.
   ///
-  /// Creates a rounded square container with an icon that represents
+  /// Creates a rounded square container with an SVG icon that represents
   /// the social platform. Clicking the button opens the social profile URL.
-  Widget _buildSocialButton(social) {
+  Widget _buildSocialButton(dynamic social) {
     return InkWell(
       onTap: () => UrlHelper.launchURL(social.url),
       borderRadius: BorderRadius.circular(AppTheme.radiusL),
@@ -66,35 +67,53 @@ class SocialLinksWidget extends StatelessWidget {
             color: AppColors.accentLight.withValues(alpha: 0.2),
           ),
         ),
-        child: Icon(
-          _getIconForPlatform(social.name),
-          color: AppColors.accentLight,
-          size: 24,
+        child: Center(
+          child: _getIconForPlatform(social.name),
         ),
       ),
     );
   }
 
-  /// Maps social media platform names to Material Icons.
+  /// Gets the appropriate icon widget for a social media platform.
   ///
-  /// Returns an appropriate icon based on the platform name:
-  /// - GitHub: code icon
-  /// - LinkedIn: work icon
-  /// - YouTube: play_arrow icon
-  /// - Upwork: work_outline icon
-  /// - Default: generic link icon
-  IconData _getIconForPlatform(String name) {
+  /// Returns an SVG icon for platforms with SVG assets (GitHub, LinkedIn, YouTube, Upwork)
+  /// or a Material Icon as fallback for other platforms.
+  Widget _getIconForPlatform(String name) {
+    // Try to get SVG icon first
+    final svgPath = AppIcons.getSocialIconSvg(name);
+
+    if (svgPath != null) {
+      return SvgPicture.asset(
+        svgPath,
+        width: 32,
+        height: 32,
+        fit: BoxFit.contain,
+      );
+    }
+
+    // Fallback to Material Icons
+    IconData fallbackIcon;
     switch (name.toLowerCase()) {
       case 'github':
-        return Icons.code;
+        fallbackIcon = Icons.code;
+        break;
       case 'linkedin':
-        return Icons.work;
+        fallbackIcon = Icons.work;
+        break;
       case 'youtube':
-        return Icons.play_arrow;
+        fallbackIcon = Icons.play_circle_outline;
+        break;
       case 'upwork':
-        return Icons.work_outline;
+        fallbackIcon = Icons.work;
+        break;
       default:
-        return Icons.link;
+        fallbackIcon = AppIcons.website;
     }
+
+    return Icon(
+      fallbackIcon,
+      color: AppColors.accentLight,
+      size: 24,
+    );
   }
 }

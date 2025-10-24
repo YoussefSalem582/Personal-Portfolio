@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 
 import '../../theme/app_theme.dart';
 
@@ -119,7 +119,7 @@ class _StatCardWidgetState extends State<StatCardWidget>
                         ? (isDark
                             ? AppColors.accentDark.withValues(alpha: 0.5)
                             : AppColors.accentLight.withValues(alpha: 0.3))
-                        : Colors.transparent,
+                        : AppColors.transparent,
                     width: 1.5,
                   ),
                 ),

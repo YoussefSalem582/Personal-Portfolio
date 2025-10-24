@@ -52,10 +52,7 @@ class SkillsData {
             id: 'custom-backend',
             name: 'Custom Backend',
             category: 'backend-cloud'),
-        Skill(
-            id: 'github-pages',
-            name: 'GitHub Pages',
-            category: 'backend-cloud'),
+        Skill(id: 'github', name: 'GitHub', category: 'backend-cloud'),
         Skill(id: 'vercel', name: 'Vercel', category: 'backend-cloud'),
         Skill(id: 'emailjs', name: 'EmailJS', category: 'backend-cloud'),
         Skill(id: 'fcm', name: 'Firebase Messaging', category: 'backend-cloud'),

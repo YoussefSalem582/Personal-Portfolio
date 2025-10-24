@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../utils/data/portfolio_data.dart';
+import '../../utils/assets/app_constants.dart';
 import 'stat_card_widget.dart';
 
 import '../../theme/app_theme.dart';
@@ -31,22 +32,22 @@ class StatsGridWidget extends StatelessWidget {
       {
         'title': '${PortfolioData.projects.length}+',
         'subtitle': 'Projects Completed',
-        'icon': Icons.work_rounded,
+        'icon': AppIcons.projects,
       },
       {
         'title': '2+',
         'subtitle': 'Years Experience',
-        'icon': Icons.timeline_rounded,
+        'icon': AppIcons.experience,
       },
       {
         'title': '${PortfolioData.skills.expand((cat) => cat.skills).length}+',
         'subtitle': 'Technologies',
-        'icon': Icons.code_rounded,
+        'icon': AppIcons.technology,
       },
       {
         'title': '100%',
         'subtitle': 'Client Satisfaction',
-        'icon': Icons.star_rounded,
+        'icon': AppIcons.featured,
       },
     ];
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../models/project.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 
 import '../../theme/app_theme.dart';
 
@@ -129,7 +130,7 @@ class ProjectOverviewWidget extends StatelessWidget {
   Widget _buildEmosenseFeatures(bool isDark) {
     final features = [
       {
-        'icon': AppIcons.flutter,
+        'icon': AppIcons.flutterIconSvg,
         'title': 'Real-time Emotion Detection',
         'description':
             'Advanced ML models analyze facial expressions and vocal patterns for accurate emotion recognition'
@@ -193,11 +194,21 @@ class ProjectOverviewWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: Icon(
-                      feature['icon'] as IconData,
-                      color: AppColors.white,
-                      size: 24,
-                    ),
+                    child: feature['icon'] is String
+                        ? SvgPicture.asset(
+                            feature['icon'] as String,
+                            width: 24,
+                            height: 24,
+                            colorFilter: const ColorFilter.mode(
+                              AppColors.white,
+                              BlendMode.srcIn,
+                            ),
+                          )
+                        : Icon(
+                            feature['icon'] as IconData,
+                            color: AppColors.white,
+                            size: 24,
+                          ),
                   ),
                   const SizedBox(width: AppTheme.spacingM),
                   Expanded(

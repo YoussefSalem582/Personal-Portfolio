@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 
@@ -36,7 +36,7 @@ class ResumeCardWidget extends StatelessWidget {
           children: [
             // Download icon
             const Icon(
-              Icons.download_rounded,
+              AppIcons.download,
               size: 40,
               color: AppColors.white,
             ),
@@ -59,7 +59,7 @@ class ResumeCardWidget extends StatelessWidget {
               'Get a copy of my detailed CV',
               style: (isDark ? AppFonts.bodyMedium() : AppFonts.bodyMedium())
                   .copyWith(
-                color: AppColors.white.withOpacity(0.95),
+                color: AppColors.white.withValues(alpha: 0.95),
                 fontWeight: AppFonts.medium,
               ),
               textAlign: TextAlign.center,

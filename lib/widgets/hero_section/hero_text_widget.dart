@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import '../../utils/app_constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
@@ -30,7 +31,7 @@ class HeroTextWidget extends StatelessWidget {
                   colors: [
                     isDark ? AppColors.accentDark : AppColors.accentLight,
                     (isDark ? AppColors.accentDark : AppColors.accentLight)
-                        .withOpacity(0.3),
+                        .withValues(alpha: 0.3),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(2),
@@ -61,7 +62,7 @@ class HeroTextWidget extends StatelessWidget {
           child: Text(
             PortfolioData.fullName,
             style: AppFonts.h1(
-              color: Colors.white,
+              color: AppColors.white,
             ).copyWith(
               fontWeight: AppFonts.bold,
               height: 1.2,
@@ -81,21 +82,25 @@ class HeroTextWidget extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                .withOpacity(0.1),
+                .withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                  .withOpacity(0.3),
+                  .withValues(alpha: 0.3),
               width: 1,
             ),
           ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                Icons.code,
-                size: 20,
-                color: isDark ? AppColors.accentDark : AppColors.accentLight,
+              SvgPicture.asset(
+                AppIcons.flutterIconSvg,
+                width: 20,
+                height: 20,
+                colorFilter: ColorFilter.mode(
+                  isDark ? AppColors.accentDark : AppColors.accentLight,
+                  BlendMode.srcIn,
+                ),
               ),
               const SizedBox(width: AppTheme.spacingS),
               Text(

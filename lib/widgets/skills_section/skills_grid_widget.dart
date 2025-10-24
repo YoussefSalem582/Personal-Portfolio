@@ -1,0 +1,64 @@
+import 'package:flutter/material.dart';
+import '../../utils/data/skills_data.dart';
+import 'skill_category_widget.dart';
+
+/// Skills Grid Widget
+/// Displays all skill categories in a responsive grid layout
+class SkillsGridWidget extends StatelessWidget {
+  final bool isDark;
+  final bool isMobile;
+
+  const SkillsGridWidget({
+    super.key,
+    required this.isDark,
+    required this.isMobile,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final maxWidth = isMobile ? double.infinity : 1400.0;
+    final categories = SkillsData.skills;
+
+    return Center(
+      child: Container(
+        constraints: BoxConstraints(maxWidth: maxWidth),
+        child: isMobile
+            ? _buildMobileLayout(categories)
+            : _buildDesktopLayout(categories),
+      ),
+    );
+  }
+
+  /// Mobile Layout - Vertical Column
+  Widget _buildMobileLayout(List<dynamic> categories) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: categories.map((category) {
+        return SkillCategoryWidget(
+          categoryName: category.name,
+          skills: category.skills,
+          isDark: isDark,
+          isMobile: isMobile,
+        );
+      }).toList(),
+    );
+  }
+
+  /// Desktop Layout - Horizontal Row
+  Widget _buildDesktopLayout(List<dynamic> categories) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: categories.map((category) {
+        return Expanded(
+          child: SkillCategoryWidget(
+            categoryName: category.name,
+            skills: category.skills,
+            isDark: isDark,
+            isMobile: isMobile,
+          ),
+        );
+      }).toList(),
+    );
+  }
+}

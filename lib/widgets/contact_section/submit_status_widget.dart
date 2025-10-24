@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 
 import '../../theme/app_theme.dart';
+
 /// A widget that displays form submission status messages.
 ///
 /// This widget shows either a success or error message after form submission.
@@ -35,7 +36,7 @@ class SubmitStatusWidget extends StatelessWidget {
         children: [
           // Icon: error icon for errors, check circle for success
           Icon(
-            isError ? Icons.error_outline : Icons.check_circle_outline,
+            isError ? AppIcons.error : AppIcons.success,
             color: isError ? AppColors.errorLight : AppColors.successLight,
           ),
           const SizedBox(width: AppTheme.spacingM),

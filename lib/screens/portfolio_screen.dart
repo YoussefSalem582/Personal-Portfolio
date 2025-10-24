@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../utils/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 import '../widgets/navigation/app_navigation.dart';
 import '../utils/responsive_helper.dart';
 import '../controllers/portfolio_controller.dart';
@@ -181,8 +181,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   ),
 
                   // Footer - Always load
-                  const SliverToBoxAdapter(
-                    child: Footer(),
+                  SliverToBoxAdapter(
+                    child: Footer(
+                      onNavigateToSection: _scrollToSection,
+                    ),
                   ),
                 ],
               ),
@@ -198,7 +200,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               backgroundColor:
                   isDark ? AppColors.accentDark : AppColors.accentLight,
               child: Icon(
-                Icons.message,
+                AppIcons.message,
                 color:
                     isDark ? AppColors.textPrimaryDark : AppColors.surfaceLight,
               ),

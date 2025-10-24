@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../theme_toggle.dart';
 
@@ -22,11 +23,11 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
             colors: isDark
                 ? [
                     AppColors.surfaceDark,
-                    AppColors.surfaceDark.withOpacity(0.95),
+                    AppColors.surfaceDark.withValues(alpha: 0.95),
                   ]
                 : [
                     AppColors.surfaceLight,
-                    AppColors.surfaceLight.withOpacity(0.98),
+                    AppColors.surfaceLight.withValues(alpha: 0.98),
                   ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -34,16 +35,16 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
           border: Border(
             bottom: BorderSide(
               color: isDark
-                  ? AppColors.accentDark.withOpacity(0.2)
-                  : AppColors.accentLight.withOpacity(0.1),
+                  ? AppColors.accentDark.withValues(alpha: 0.2)
+                  : AppColors.accentLight.withValues(alpha: 0.1),
               width: 1,
             ),
           ),
           boxShadow: [
             BoxShadow(
               color: isDark
-                  ? AppColors.black.withOpacity(0.3)
-                  : AppColors.black.withOpacity(0.08),
+                  ? AppColors.black.withValues(alpha: 0.3)
+                  : AppColors.black.withValues(alpha: 0.08),
               blurRadius: 12,
               offset: const Offset(0, 4),
             ),
@@ -57,25 +58,25 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
             gradient: LinearGradient(
               colors: isDark
                   ? [
-                      AppColors.accentDark.withOpacity(0.2),
-                      AppColors.accentDark.withOpacity(0.1),
+                      AppColors.accentDark.withValues(alpha: 0.2),
+                      AppColors.accentDark.withValues(alpha: 0.1),
                     ]
                   : [
-                      AppColors.accentLight.withOpacity(0.15),
-                      AppColors.accentLight.withOpacity(0.05),
+                      AppColors.accentLight.withValues(alpha: 0.15),
+                      AppColors.accentLight.withValues(alpha: 0.05),
                     ],
             ),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: isDark
-                  ? AppColors.accentDark.withOpacity(0.3)
-                  : AppColors.accentLight.withOpacity(0.2),
+                  ? AppColors.accentDark.withValues(alpha: 0.3)
+                  : AppColors.accentLight.withValues(alpha: 0.2),
               width: 1,
             ),
           ),
           child: IconButton(
             icon: Icon(
-              Icons.menu_rounded,
+              AppIcons.menu,
               color: isDark ? AppColors.accentDark : AppColors.accentLight,
             ),
             onPressed: () => Scaffold.of(context).openDrawer(),
@@ -88,7 +89,7 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(6),
             child: Image.asset(
-              'assets/images/portfolio_logo.png',
+              AppImages.portfolioLogo,
               width: 28,
               height: 28,
               fit: BoxFit.cover,
@@ -101,19 +102,23 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
                       colors: isDark
                           ? [
                               AppColors.accentDark,
-                              AppColors.accentDark.withOpacity(0.7)
+                              AppColors.accentDark.withValues(alpha: 0.7)
                             ]
                           : [
                               AppColors.accentLight,
-                              AppColors.accentLight.withOpacity(0.8)
+                              AppColors.accentLight.withValues(alpha: 0.8)
                             ],
                     ),
                     borderRadius: BorderRadius.circular(6),
                   ),
-                  child: const Icon(
-                    Icons.code_rounded,
-                    size: 16,
-                    color: AppColors.white,
+                  child: SvgPicture.asset(
+                    AppIcons.flutterIconSvg,
+                    width: 16,
+                    height: 16,
+                    colorFilter: const ColorFilter.mode(
+                      AppColors.white,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 );
               },
@@ -148,13 +153,13 @@ class MobileAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
             color: isDark
-                ? AppColors.white.withOpacity(0.1)
-                : AppColors.black.withOpacity(0.05),
+                ? AppColors.white.withValues(alpha: 0.1)
+                : AppColors.black.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: isDark
-                  ? AppColors.white.withOpacity(0.15)
-                  : AppColors.black.withOpacity(0.1),
+                  ? AppColors.white.withValues(alpha: 0.15)
+                  : AppColors.black.withValues(alpha: 0.1),
               width: 1,
             ),
           ),

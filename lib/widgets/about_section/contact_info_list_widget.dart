@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import 'contact_info_item_widget.dart';
@@ -38,7 +38,7 @@ class ContactInfoListWidget extends StatelessWidget {
 
         // Email contact item (clickable)
         ContactInfoItemWidget(
-          icon: Icons.email_outlined,
+          icon: AppIcons.email,
           label: 'Email',
           value: PortfolioData.email,
           onTap: () => UrlHelper.launchEmail(email: PortfolioData.email),
@@ -48,7 +48,7 @@ class ContactInfoListWidget extends StatelessWidget {
 
         // Location item (non-clickable)
         ContactInfoItemWidget(
-          icon: Icons.location_on_outlined,
+          icon: AppIcons.location,
           label: 'Location',
           value: PortfolioData.location,
           onTap: null,
@@ -58,7 +58,7 @@ class ContactInfoListWidget extends StatelessWidget {
 
         // Portfolio website link (clickable)
         ContactInfoItemWidget(
-          icon: Icons.web_outlined,
+          icon: AppIcons.website,
           label: 'Portfolio',
           value: 'View Online',
           onTap: () => UrlHelper.launchURL(PortfolioData.portfolioUrl),

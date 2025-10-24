@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'app_constants.dart';
+import 'assets/app_constants.dart';
 
 /// GetX Helper Utilities
 /// Provides convenient methods for common GetX operations
@@ -83,7 +83,7 @@ class GetXHelper {
                       width: 48,
                       height: 48,
                       decoration: const BoxDecoration(
-                        color: Colors.white,
+                        color: AppColors.white,
                         shape: BoxShape.circle,
                       ),
                     ),

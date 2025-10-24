@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:js_interop' as js;
 import 'dart:js_interop_unsafe';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../models/contact_form.dart';
 import '../../config/api_keys.dart';
 import 'contact_form_field_widget.dart';
@@ -78,7 +78,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                 controller: _nameController,
                 label: 'Your Name',
                 hint: 'Enter your full name',
-                icon: Icons.person_outline,
+                icon: AppIcons.user,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Please enter your name';
@@ -94,7 +94,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                 controller: _emailController,
                 label: 'Your Email',
                 hint: 'Enter your email address',
-                icon: Icons.email_outlined,
+                icon: AppIcons.email,
                 keyboardType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -116,7 +116,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                 controller: _subjectController,
                 label: 'Subject',
                 hint: 'What is this about?',
-                icon: Icons.subject_outlined,
+                icon: AppIcons.subject,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
                     return 'Please enter a subject';
@@ -133,7 +133,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                 controller: _messageController,
                 label: 'Message',
                 hint: 'Tell me about your project or inquiry...',
-                icon: Icons.message_outlined,
+                icon: AppIcons.message,
                 maxLines: 5,
                 validator: (value) {
                   if (value == null || value.trim().isEmpty) {
@@ -161,7 +161,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                   onPressed: _isSubmitting ? null : _submitForm,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primaryLight,
-                    foregroundColor: Colors.white,
+                    foregroundColor: AppColors.white,
                     padding: const EdgeInsets.symmetric(
                       vertical: AppTheme.spacingL,
                     ),

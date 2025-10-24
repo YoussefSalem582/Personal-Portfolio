@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../models/project.dart';
-import '../utils/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 import '../utils/responsive_helper.dart';
 import '../widgets/project_case_study/hero_section_widget.dart';
 import '../widgets/project_case_study/back_button_widget.dart';
 import '../widgets/project_case_study/project_overview_widget.dart';
 import '../widgets/project_case_study/technical_stack_widget.dart';
 import '../widgets/project_case_study/gallery_section_widget.dart';
+import '../widgets/project_case_study/documents_section_widget.dart';
 import '../widgets/project_case_study/challenges_solutions_widget.dart';
 import '../widgets/project_case_study/key_learnings_widget.dart';
 import '../widgets/project_case_study/action_buttons_widget.dart';
 import '../widgets/project_case_study/project_content_helper.dart';
 
 import '../theme/app_theme.dart';
+
 /// Project Case Study Screen
 ///
 /// Full-screen view displaying detailed information about a project.
@@ -165,6 +167,12 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
                             // Technology stack chips
                             TechnicalStackWidget(
                               technologies: widget.project.technologies,
+                            ),
+                            const SizedBox(height: AppTheme.spacingXXL),
+
+                            // Documents section
+                            DocumentsSectionWidget(
+                              projectId: widget.project.id,
                             ),
                             const SizedBox(height: AppTheme.spacingXXL),
 

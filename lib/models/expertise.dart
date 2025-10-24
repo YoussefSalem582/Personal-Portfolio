@@ -5,7 +5,7 @@ class Expertise {
   final String id;
   final String title;
   final String description;
-  final IconData icon;
+  final dynamic icon; // Can be IconData or String (SVG path)
   final Color? iconColor;
 
   const Expertise({

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 
 import '../../theme/app_theme.dart';
 
@@ -91,7 +91,7 @@ class ContactItemWidget extends StatelessWidget {
             ),
             // Show arrow indicator only for clickable items
             if (onTap != null)
-              Icon(Icons.arrow_outward, size: 16, color: accentColor),
+              Icon(AppIcons.openExternal, size: 16, color: accentColor),
           ],
         ),
       ),

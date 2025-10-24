@@ -1,5 +1,6 @@
 import '../../models/expertise.dart';
 import 'package:flutter/material.dart';
+import '../assets/app_constants.dart';
 
 class ExpertiseData {
   static final List<Expertise> expertiseList = [
@@ -16,7 +17,7 @@ class ExpertiseData {
       title: 'Flutter Architecture & Best Practices',
       description:
           'Expert in Flutter development with clean architecture, implementing SOLID principles, design patterns, and state management solutions (GetX, BLoC, Riverpod) for maintainable codebases.',
-      icon: Icons.flutter_dash,
+      icon: AppIcons.flutterIconSvg,
       iconColor: const Color(0xFF02569B),
     ),
     Expertise(
@@ -24,7 +25,7 @@ class ExpertiseData {
       title: 'AI & Machine Learning Integration',
       description:
           'I develop innovative AI applications using Python, TensorFlow, and PyTorch, specializing in computer vision, facial recognition, and seamless ML model integration into mobile apps.',
-      icon: Icons.psychology,
+      icon: AppIcons.technology,
       iconColor: const Color(0xFFE91E63),
     ),
     Expertise(
@@ -32,7 +33,7 @@ class ExpertiseData {
       title: 'Performance Optimization & Testing',
       description:
           'Expert in app optimization, memory management, and comprehensive testing strategies. I ensure smooth 60fps animations, efficient API integration, and robust error handling.',
-      icon: Icons.bolt,
+      icon: AppIcons.featured,
       iconColor: const Color(0xFFFF9800),
     ),
     Expertise(
@@ -40,7 +41,7 @@ class ExpertiseData {
       title: 'Full-Stack Development Solutions',
       description:
           'Experienced in building complete solutions from backend APIs to frontend mobile apps, utilizing Firebase, Supabase, and REST APIs with secure authentication and real-time data sync.',
-      icon: Icons.cloud_done,
+      icon: Icons.cloud,
       iconColor: const Color(0xFF00BCD4),
     ),
     Expertise(
@@ -48,7 +49,7 @@ class ExpertiseData {
       title: 'Agile Development & CI/CD',
       description:
           'From concept to production, I follow agile methodologies with Git workflows, automated testing, continuous integration, and deployment to Play Store, App Store, and web platforms.',
-      icon: Icons.rocket_launch,
+      icon: AppIcons.featured,
       iconColor: const Color(0xFF9C27B0),
     ),
   ];

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/project.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../lazy_image.dart';
 
 import '../../theme/app_theme.dart';

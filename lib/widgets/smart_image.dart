@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../utils/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 
 /// SmartImage widget - Simplified for static asset-only deployment
 /// Now only handles local asset images (no network/Supabase images)

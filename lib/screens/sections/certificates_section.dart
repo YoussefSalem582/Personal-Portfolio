@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../models/certificate.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
@@ -107,7 +107,7 @@ class _CertificatesSectionState extends State<CertificatesSection> {
 
     return OutlinedButton.icon(
       onPressed: _showMore,
-      icon: const Icon(Icons.expand_more, size: 20),
+      icon: const Icon(AppIcons.arrowDown, size: 20),
       label: const Text('Show More'),
       style: OutlinedButton.styleFrom(
         foregroundColor: accentColor,
@@ -151,7 +151,7 @@ class _CertificatesSectionState extends State<CertificatesSection> {
             boxShadow: [
               BoxShadow(
                 color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                    .withOpacity(0.3),
+                    .withValues(alpha: 0.3),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -232,7 +232,7 @@ class _CertificateCardState extends State<CertificateCard>
             boxShadow: [
               BoxShadow(
                 color: _isHovered
-                    ? accentColor.withOpacity(0.2)
+                    ? accentColor.withValues(alpha: 0.2)
                     : (isDark ? Colors.black38 : Colors.black12),
                 blurRadius: _isHovered ? 24 : 12,
                 offset: Offset(0, _isHovered ? 12 : 6),
@@ -246,7 +246,7 @@ class _CertificateCardState extends State<CertificateCard>
               borderRadius: BorderRadius.circular(AppTheme.radiusXL),
               side: BorderSide(
                 color: _isHovered
-                    ? accentColor.withOpacity(0.3)
+                    ? accentColor.withValues(alpha: 0.3)
                     : AppColors.transparent,
                 width: 2,
               ),
@@ -263,7 +263,7 @@ class _CertificateCardState extends State<CertificateCard>
                           end: Alignment.bottomRight,
                           colors: [
                             AppColors.cardDark,
-                            AppColors.cardDark.withOpacity(0.8),
+                            AppColors.cardDark.withValues(alpha: 0.8),
                           ],
                         )
                       : null,
@@ -309,8 +309,8 @@ class _CertificateCardState extends State<CertificateCard>
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                accentColor.withOpacity(0.15),
-                accentColor.withOpacity(0.05),
+                accentColor.withValues(alpha: 0.15),
+                accentColor.withValues(alpha: 0.05),
               ],
             ),
           ),
@@ -341,7 +341,7 @@ class _CertificateCardState extends State<CertificateCard>
               end: Alignment.bottomCenter,
               colors: [
                 AppColors.transparent,
-                AppColors.black.withOpacity(0.3),
+                AppColors.black.withValues(alpha: 0.3),
               ],
             ),
           ),
@@ -359,7 +359,7 @@ class _CertificateCardState extends State<CertificateCard>
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.errorLight.withOpacity(0.3),
+                    color: AppColors.errorLight.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -394,7 +394,7 @@ class _CertificateCardState extends State<CertificateCard>
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.successLight.withOpacity(0.3),
+                    color: AppColors.successLight.withValues(alpha: 0.3),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -449,8 +449,8 @@ class _CertificateCardState extends State<CertificateCard>
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      accentColor.withOpacity(0.15),
-                      accentColor.withOpacity(0.05),
+                      accentColor.withValues(alpha: 0.15),
+                      accentColor.withValues(alpha: 0.05),
                     ],
                   ),
                   borderRadius: BorderRadius.circular(8),
@@ -490,7 +490,7 @@ class _CertificateCardState extends State<CertificateCard>
                       borderRadius: BorderRadius.circular(10),
                       border: Border.all(
                         color: isDark
-                            ? AppColors.textSecondaryDark.withOpacity(0.2)
+                            ? AppColors.textSecondaryDark.withValues(alpha: 0.2)
                             : AppColors.gray300,
                       ),
                     ),
@@ -498,7 +498,7 @@ class _CertificateCardState extends State<CertificateCard>
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(
-                          Icons.event_available,
+                          AppIcons.date,
                           size: 12,
                           color: isDark
                               ? AppColors.textSecondaryDark
@@ -530,12 +530,12 @@ class _CertificateCardState extends State<CertificateCard>
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [accentColor, accentColor.withOpacity(0.8)],
+                    colors: [accentColor, accentColor.withValues(alpha: 0.8)],
                   ),
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color: accentColor.withOpacity(0.3),
+                      color: accentColor.withValues(alpha: 0.3),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -563,8 +563,8 @@ class _CertificateCardState extends State<CertificateCard>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            accentColor.withOpacity(0.15),
-            accentColor.withOpacity(0.05),
+            accentColor.withValues(alpha: 0.15),
+            accentColor.withValues(alpha: 0.05),
           ],
         ),
       ),
@@ -576,8 +576,8 @@ class _CertificateCardState extends State<CertificateCard>
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  accentColor.withOpacity(0.2),
-                  accentColor.withOpacity(0.1),
+                  accentColor.withValues(alpha: 0.2),
+                  accentColor.withValues(alpha: 0.1),
                 ],
               ),
               shape: BoxShape.circle,
@@ -621,7 +621,7 @@ class _CertificateCardState extends State<CertificateCard>
     showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor: AppColors.black.withOpacity(0.6),
+      barrierColor: AppColors.black.withValues(alpha: 0.6),
       builder: (context) => CertificateDetailsDialog(
         certificate: widget.certificate,
       ),
@@ -695,7 +695,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
               borderRadius: BorderRadius.circular(AppTheme.radiusXL + 4),
               boxShadow: [
                 BoxShadow(
-                  color: accentColor.withOpacity(0.2),
+                  color: accentColor.withValues(alpha: 0.2),
                   blurRadius: 40,
                   offset: const Offset(0, 20),
                 ),
@@ -750,7 +750,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
                 end: Alignment.bottomRight,
                 colors: [
                   AppColors.accentDark,
-                  AppColors.accentDark.withOpacity(0.8),
+                  AppColors.accentDark.withValues(alpha: 0.8),
                 ],
               )
             : AppColors.primaryGradientLight,
@@ -759,7 +759,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
         ),
         boxShadow: [
           BoxShadow(
-            color: accentColor.withOpacity(0.3),
+            color: accentColor.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -771,10 +771,10 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: AppColors.white.withOpacity(0.2),
+              color: AppColors.white.withValues(alpha: 0.2),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
-                color: AppColors.white.withOpacity(0.3),
+                color: AppColors.white.withValues(alpha: 0.3),
                 width: 2,
               ),
             ),
@@ -794,7 +794,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
                 Text(
                   'Certificate Details',
                   style: AppFonts.labelMedium().copyWith(
-                    color: AppColors.white.withOpacity(0.9),
+                    color: AppColors.white.withValues(alpha: 0.9),
                     letterSpacing: 1,
                     fontWeight: AppFonts.semiBold,
                   ),
@@ -819,7 +819,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
             onPressed: () => Navigator.of(context).pop(),
             icon: Icon(AppIcons.close, color: AppColors.white, size: 24),
             style: IconButton.styleFrom(
-              backgroundColor: AppColors.white.withOpacity(0.2),
+              backgroundColor: AppColors.white.withValues(alpha: 0.2),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),
@@ -845,17 +845,17 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            accentColor.withOpacity(0.1),
-            accentColor.withOpacity(0.05),
+            accentColor.withValues(alpha: 0.1),
+            accentColor.withValues(alpha: 0.05),
           ],
         ),
         border: Border.all(
-          color: accentColor.withOpacity(0.2),
+          color: accentColor.withValues(alpha: 0.2),
           width: 2,
         ),
         boxShadow: [
           BoxShadow(
-            color: accentColor.withOpacity(0.1),
+            color: accentColor.withValues(alpha: 0.1),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -874,7 +874,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
                   Icon(
                     AppIcons.certificate,
                     size: 80,
-                    color: accentColor.withOpacity(0.5),
+                    color: accentColor.withValues(alpha: 0.5),
                   ),
                   const SizedBox(height: AppTheme.spacingM),
                   Text(
@@ -937,13 +937,13 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  AppColors.successLight.withOpacity(0.15),
-                  AppColors.successLight.withOpacity(0.05),
+                  AppColors.successLight.withValues(alpha: 0.15),
+                  AppColors.successLight.withValues(alpha: 0.05),
                 ],
               ),
               borderRadius: BorderRadius.circular(AppTheme.radiusM),
               border: Border.all(
-                color: AppColors.successLight.withOpacity(0.3),
+                color: AppColors.successLight.withValues(alpha: 0.3),
                 width: 2,
               ),
             ),
@@ -952,7 +952,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
                 Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: AppColors.successLight.withOpacity(0.2),
+                    color: AppColors.successLight.withValues(alpha: 0.2),
                     shape: BoxShape.circle,
                   ),
                   child: Icon(
@@ -977,7 +977,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
                       Text(
                         'This certificate can be validated online',
                         style: AppFonts.bodySmall().copyWith(
-                          color: AppColors.successLight.withOpacity(0.8),
+                          color: AppColors.successLight.withValues(alpha: 0.8),
                         ),
                       ),
                     ],
@@ -1004,12 +1004,13 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
     return Container(
       padding: const EdgeInsets.all(AppTheme.spacingM),
       decoration: BoxDecoration(
-        color:
-            isDark ? AppColors.surfaceDark.withOpacity(0.5) : AppColors.gray50,
+        color: isDark
+            ? AppColors.surfaceDark.withValues(alpha: 0.5)
+            : AppColors.gray50,
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         border: Border.all(
           color: isDark
-              ? AppColors.textSecondaryDark.withOpacity(0.15)
+              ? AppColors.textSecondaryDark.withValues(alpha: 0.15)
               : AppColors.gray200,
           width: 1.5,
         ),
@@ -1022,8 +1023,8 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  accentColor.withOpacity(0.15),
-                  accentColor.withOpacity(0.05),
+                  accentColor.withValues(alpha: 0.15),
+                  accentColor.withValues(alpha: 0.05),
                 ],
               ),
               borderRadius: BorderRadius.circular(10),
@@ -1070,15 +1071,16 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
     return Container(
       padding: EdgeInsets.all(isMobile ? AppTheme.spacingM : AppTheme.spacingL),
       decoration: BoxDecoration(
-        color:
-            isDark ? AppColors.surfaceDark.withOpacity(0.3) : AppColors.gray50,
+        color: isDark
+            ? AppColors.surfaceDark.withValues(alpha: 0.3)
+            : AppColors.gray50,
         borderRadius: const BorderRadius.vertical(
           bottom: Radius.circular(AppTheme.radiusXL + 4),
         ),
         border: Border(
           top: BorderSide(
             color: isDark
-                ? AppColors.textSecondaryDark.withOpacity(0.1)
+                ? AppColors.textSecondaryDark.withValues(alpha: 0.1)
                 : AppColors.gray200,
             width: 1,
           ),
@@ -1133,7 +1135,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
             borderRadius: BorderRadius.circular(AppTheme.radiusM),
           ),
           elevation: 0,
-          shadowColor: AppColors.errorLight.withOpacity(0.3),
+          shadowColor: AppColors.errorLight.withValues(alpha: 0.3),
         ).copyWith(
           elevation: WidgetStateProperty.resolveWith<double>(
             (states) => states.contains(WidgetState.hovered) ? 8 : 0,
@@ -1168,7 +1170,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
         ).copyWith(
           backgroundColor: WidgetStateProperty.resolveWith<Color>(
             (states) => states.contains(WidgetState.hovered)
-                ? accentColor.withOpacity(0.1)
+                ? accentColor.withValues(alpha: 0.1)
                 : AppColors.transparent,
           ),
         ),

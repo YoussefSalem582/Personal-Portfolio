@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 
 class ProfileImageWidget extends StatefulWidget {
   const ProfileImageWidget({super.key});
@@ -76,7 +76,7 @@ class _ProfileImageWidgetState extends State<ProfileImageWidget>
               ),
               child: ClipOval(
                 child: Image.asset(
-                  'assets/images/profile.jpeg',
+                  AppImages.profileImage,
                   width: size - 10,
                   height: size - 10,
                   fit: BoxFit.cover,

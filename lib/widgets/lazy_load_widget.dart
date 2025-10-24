@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
+import '../utils/assets/app_constants.dart';
 
 /// Lazy loading wrapper that only builds its child when visible
 /// Improves performance by deferring heavy widget builds
@@ -80,8 +81,8 @@ class OptimizedImage extends StatelessWidget {
               Container(
                 width: width,
                 height: height,
-                color: Colors.grey.shade300,
-                child: const Icon(Icons.broken_image, color: Colors.grey),
+                color: AppColors.gray300,
+                child: Icon(AppIcons.error, color: AppColors.gray500),
               );
         },
       );
@@ -101,7 +102,7 @@ class OptimizedImage extends StatelessWidget {
             Container(
               width: width,
               height: height,
-              color: Colors.grey.shade200,
+              color: AppColors.gray200,
               child: Center(
                 child: CircularProgressIndicator(
                   value: loadingProgress.expectedTotalBytes != null
@@ -117,8 +118,8 @@ class OptimizedImage extends StatelessWidget {
             Container(
               width: width,
               height: height,
-              color: Colors.grey.shade300,
-              child: const Icon(Icons.broken_image, color: Colors.grey),
+              color: AppColors.gray300,
+              child: Icon(AppIcons.error, color: AppColors.gray500),
             );
       },
     );
@@ -148,7 +149,7 @@ class SectionPlaceholder extends StatelessWidget {
           child: CircularProgressIndicator(
             strokeWidth: 2,
             valueColor: AlwaysStoppedAnimation<Color>(
-              isDark ? Colors.blue.shade400 : Colors.blue.shade600,
+              isDark ? AppColors.accentDark : AppColors.accentLight,
             ),
           ),
         ),
