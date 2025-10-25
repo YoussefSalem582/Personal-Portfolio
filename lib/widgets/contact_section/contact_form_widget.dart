@@ -410,9 +410,6 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
             'Formspree endpoint not configured. Please contact the administrator.');
       }
 
-      debugPrint('📧 Sending email via Formspree...');
-      debugPrint('📍 Endpoint: $formspreeEndpoint');
-
       // Create form data
       final formData = {
         'name': form.name,
@@ -440,13 +437,9 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
         },
       );
 
-      debugPrint('📥 Response status: ${response.statusCode}');
-      debugPrint('📥 Response body: ${response.body}');
-
       // Check response status
       if (response.statusCode == 200 || response.statusCode == 201) {
         // Success!
-        debugPrint('✅ Email sent successfully via Formspree');
       } else if (response.statusCode == 422) {
         // Validation error
         final responseData = json.decode(response.body);
@@ -466,9 +459,6 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
             'Failed to send message (Error ${response.statusCode}). Please try again or contact me directly at ${ApiKeys.recipientEmail}');
       }
     } catch (e) {
-      debugPrint('❌ Formspree Error: $e');
-      debugPrint('Error type: ${e.runtimeType}');
-
       // Parse error message for better user feedback
       final errorString = e.toString().toLowerCase();
 
