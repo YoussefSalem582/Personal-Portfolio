@@ -52,141 +52,245 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
     // Determine theme mode for styling
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Card(
-      elevation: 8,
-      shadowColor: isDark ? Colors.black26 : Colors.black12,
-      child: Container(
-        padding: const EdgeInsets.all(AppTheme.spacingXL),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppTheme.radiusL),
-          color: isDark ? AppColors.cardDark : AppColors.surfaceLight,
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(AppTheme.radiusXL),
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: isDark
+              ? [
+                  AppColors.cardDark,
+                  AppColors.surfaceDark,
+                ]
+              : [
+                  AppColors.white,
+                  AppColors.surfaceLight,
+                ],
         ),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Send Me a Message',
-                style: (isDark ? AppFonts.h2() : AppFonts.h2()),
-              ),
-
-              const SizedBox(height: AppTheme.spacingL),
-
-              // Name field - Required, basic validation
-              ContactFormFieldWidget(
-                controller: _nameController,
-                label: 'Your Name',
-                hint: 'Enter your full name',
-                icon: AppIcons.user,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: AppTheme.spacingL),
-
-              // Email field - Required, validates email format with regex
-              ContactFormFieldWidget(
-                controller: _emailController,
-                label: 'Your Email',
-                hint: 'Enter your email address',
-                icon: AppIcons.email,
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please enter your email';
-                  }
-                  if (!RegExp(
-                    r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-                  ).hasMatch(value)) {
-                    return 'Please enter a valid email';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: AppTheme.spacingL),
-
-              // Subject field - Required, basic validation
-              ContactFormFieldWidget(
-                controller: _subjectController,
-                label: 'Subject',
-                hint: 'What is this about?',
-                icon: AppIcons.subject,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please enter a subject';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: AppTheme.spacingL),
-
-              // Message field - Required, validates minimum length (10 chars)
-              // Multi-line text area (5 lines)
-              ContactFormFieldWidget(
-                controller: _messageController,
-                label: 'Message',
-                hint: 'Tell me about your project or inquiry...',
-                icon: AppIcons.message,
-                maxLines: 5,
-                validator: (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return 'Please enter your message';
-                  }
-                  if (value.trim().length < 10) {
-                    return 'Message must be at least 10 characters';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: AppTheme.spacingXL),
-
-              // Show success or error message after form submission
-              if (_submitStatus != null) ...[
-                SubmitStatusWidget(statusMessage: _submitStatus!),
-                const SizedBox(height: AppTheme.spacingL),
-              ],
-
-              // Submit button - Shows loading indicator when submitting
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _isSubmitting ? null : _submitForm,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryLight,
-                    foregroundColor: AppColors.white,
-                    padding: const EdgeInsets.symmetric(
-                      vertical: AppTheme.spacingL,
+        boxShadow: [
+          BoxShadow(
+            color: isDark
+                ? AppColors.black.withValues(alpha: 0.3)
+                : AppColors.black.withValues(alpha: 0.08),
+            blurRadius: 24,
+            offset: const Offset(0, 8),
+            spreadRadius: 0,
+          ),
+        ],
+        border: Border.all(
+          color: isDark
+              ? AppColors.accentDark.withValues(alpha: 0.2)
+              : AppColors.accentLight.withValues(alpha: 0.1),
+          width: 1,
+        ),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppTheme.radiusXL),
+        child: Container(
+          padding: const EdgeInsets.all(AppTheme.spacingXXL),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Header with icon
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(AppTheme.spacingM),
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: isDark
+                              ? [
+                                  AppColors.accentDark,
+                                  AppColors.accentDark.withValues(alpha: 0.8)
+                                ]
+                              : [
+                                  AppColors.accentLight,
+                                  AppColors.accentLight.withValues(alpha: 0.8)
+                                ],
+                        ),
+                        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                        boxShadow: [
+                          BoxShadow(
+                            color: (isDark
+                                    ? AppColors.accentDark
+                                    : AppColors.accentLight)
+                                .withValues(alpha: 0.3),
+                            blurRadius: 12,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        AppIcons.send,
+                        color: AppColors.white,
+                        size: 28,
+                      ),
                     ),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(AppTheme.radiusS),
-                    ),
-                  ),
-                  child: _isSubmitting
-                      ? const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              AppColors.white,
+                    const SizedBox(width: AppTheme.spacingL),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Send Me a Message',
+                            style: AppFonts.h2().copyWith(
+                              color: isDark
+                                  ? AppColors.textPrimaryDark
+                                  : AppColors.textPrimaryLight,
+                              fontWeight: AppFonts.bold,
                             ),
                           ),
-                        )
-                      : Text(
-                          'Send Message',
-                          style: AppFonts.button(),
-                        ),
+                          const SizedBox(height: 4),
+                          Text(
+                            'I\'ll get back to you within 24 hours',
+                            style: AppFonts.bodySmall().copyWith(
+                              color: isDark
+                                  ? AppColors.textSecondaryDark
+                                  : AppColors.textSecondaryLight,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
+
+                const SizedBox(height: AppTheme.spacingXXL),
+
+                // Name field - Required, basic validation
+                ContactFormFieldWidget(
+                  controller: _nameController,
+                  label: 'Your Name',
+                  hint: 'Enter your full name',
+                  icon: AppIcons.user,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Please enter your name';
+                    }
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: AppTheme.spacingL),
+
+                // Email field - Required, validates email format with regex
+                ContactFormFieldWidget(
+                  controller: _emailController,
+                  label: 'Your Email',
+                  hint: 'Enter your email address',
+                  icon: AppIcons.email,
+                  keyboardType: TextInputType.emailAddress,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Please enter your email';
+                    }
+                    if (!RegExp(
+                      r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                    ).hasMatch(value)) {
+                      return 'Please enter a valid email';
+                    }
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: AppTheme.spacingL),
+
+                // Subject field - Required, basic validation
+                ContactFormFieldWidget(
+                  controller: _subjectController,
+                  label: 'Subject',
+                  hint: 'What is this about?',
+                  icon: AppIcons.subject,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Please enter a subject';
+                    }
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: AppTheme.spacingL),
+
+                // Message field - Required, validates minimum length (10 chars)
+                // Multi-line text area (5 lines)
+                ContactFormFieldWidget(
+                  controller: _messageController,
+                  label: 'Message',
+                  hint: 'Tell me about your project or inquiry...',
+                  icon: AppIcons.message,
+                  maxLines: 5,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Please enter your message';
+                    }
+                    if (value.trim().length < 10) {
+                      return 'Message must be at least 10 characters';
+                    }
+                    return null;
+                  },
+                ),
+
+                const SizedBox(height: AppTheme.spacingXXL),
+
+                // Show success or error message after form submission
+                if (_submitStatus != null) ...[
+                  SubmitStatusWidget(statusMessage: _submitStatus!),
+                  const SizedBox(height: AppTheme.spacingL),
+                ],
+
+                // Submit button - Shows loading indicator when submitting
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: _isSubmitting ? null : _submitForm,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          isDark ? AppColors.accentDark : AppColors.accentLight,
+                      foregroundColor: AppColors.white,
+                      padding: const EdgeInsets.symmetric(
+                        vertical: AppTheme.spacingL + 4,
+                      ),
+                      elevation: 0,
+                      shadowColor: (isDark
+                              ? AppColors.accentDark
+                              : AppColors.accentLight)
+                          .withValues(alpha: 0.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                      ),
+                    ),
+                    child: _isSubmitting
+                        ? const SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 3,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                AppColors.white,
+                              ),
+                            ),
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(AppIcons.send, size: 20),
+                              const SizedBox(width: AppTheme.spacingS),
+                              Text(
+                                'Send Message',
+                                style: AppFonts.button().copyWith(
+                                  fontSize: 16,
+                                  fontWeight: AppFonts.semiBold,
+                                ),
+                              ),
+                            ],
+                          ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -303,35 +407,44 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       }
 
       // Create template parameters as a JavaScript object
-      final templateParams = <String, dynamic>{
+      final templateParams = {
         'from_name': form.name,
         'from_email': form.email,
         'subject': form.subject,
         'message': form.message,
         'reply_to': form.email,
-      }.jsify();
+        'to_email': ApiKeys.recipientEmail,
+      };
 
-      // Get the emailjs object from global context
-      // Access emailjs from global context
+      // Convert to JS object
+      final jsParams = templateParams.jsify() as js.JSObject;
+
+      // Get the emailjs object from window
       final emailjsObj = js.globalContext.getProperty('emailjs'.toJS);
+
       if (emailjsObj.typeofEquals('undefined')) {
-        throw Exception('EmailJS is not loaded. Please refresh the page.');
+        throw Exception('EmailJS library not loaded. Please refresh the page.');
       }
 
-      // Call emailjs.send() which returns a Promise
-      final emailjsContext = emailjsObj as js.JSObject;
-      final sendFunction =
-          emailjsContext.getProperty('send'.toJS) as js.JSFunction;
-      final promise = sendFunction.callAsFunction(
-        emailjsContext,
+      // Call emailjs.send()
+      final emailjs = emailjsObj as js.JSObject;
+      final sendMethod = emailjs.getProperty('send'.toJS) as js.JSFunction;
+      final promise = sendMethod.callAsFunction(
+        emailjs,
         serviceId.toJS,
         templateId.toJS,
-        templateParams,
-      ) as js.JSPromise;
+        jsParams,
+        publicKey.toJS, // Pass public key as 4th parameter
+      );
 
-      // Convert Promise to Future
-      await promise.toDart;
+      // Wait for the promise to resolve
+      await (promise as js.JSPromise).toDart;
+
+      // Success - message sent
+      debugPrint('Email sent successfully via EmailJS');
     } catch (e) {
+      debugPrint('EmailJS Error: $e');
+
       // Parse error message for better user feedback
       final errorString = e.toString().toLowerCase();
       if (errorString.contains('403') || errorString.contains('forbidden')) {
@@ -351,6 +464,9 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
           errorString.contains('timeout')) {
         throw Exception(
             'Network error. Please check your internet connection.');
+      } else if (errorString.contains('undefined') ||
+          errorString.contains('not loaded')) {
+        throw Exception('EmailJS not initialized. Please refresh the page.');
       }
 
       // Re-throw to be caught by _submitForm method
