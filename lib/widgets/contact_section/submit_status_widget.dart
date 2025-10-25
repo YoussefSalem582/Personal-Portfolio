@@ -23,21 +23,65 @@ class SubmitStatusWidget extends StatelessWidget {
     // Determine if this is an error message by checking for "Error" keyword
     final isError = statusMessage.contains('Error');
 
-    return Container(
-      padding: const EdgeInsets.all(AppTheme.spacingM),
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      padding: const EdgeInsets.all(AppTheme.spacingL),
       decoration: BoxDecoration(
-        // Background color: light red for errors, light green for success
-        color: isError
-            ? AppColors.errorLight.withValues(alpha: 0.1)
-            : AppColors.successLight.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(AppTheme.radiusS),
+        gradient: LinearGradient(
+          colors: isError
+              ? [
+                  AppColors.errorLight.withValues(alpha: 0.15),
+                  AppColors.errorLight.withValues(alpha: 0.08),
+                ]
+              : [
+                  AppColors.successLight.withValues(alpha: 0.15),
+                  AppColors.successLight.withValues(alpha: 0.08),
+                ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+        border: Border.all(
+          color: isError
+              ? AppColors.errorLight.withValues(alpha: 0.3)
+              : AppColors.successLight.withValues(alpha: 0.3),
+          width: 1.5,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: isError
+                ? AppColors.errorLight.withValues(alpha: 0.1)
+                : AppColors.successLight.withValues(alpha: 0.1),
+            blurRadius: 12,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Row(
         children: [
-          // Icon: error icon for errors, check circle for success
-          Icon(
-            isError ? AppIcons.error : AppIcons.success,
-            color: isError ? AppColors.errorLight : AppColors.successLight,
+          // Icon container with background
+          Container(
+            padding: const EdgeInsets.all(AppTheme.spacingS),
+            decoration: BoxDecoration(
+              color: isError
+                  ? AppColors.errorLight.withValues(alpha: 0.2)
+                  : AppColors.successLight.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(AppTheme.radiusS),
+              boxShadow: [
+                BoxShadow(
+                  color: isError
+                      ? AppColors.errorLight.withValues(alpha: 0.2)
+                      : AppColors.successLight.withValues(alpha: 0.2),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
+            ),
+            child: Icon(
+              isError ? AppIcons.error : AppIcons.success,
+              color: isError ? AppColors.errorLight : AppColors.successLight,
+              size: 24,
+            ),
           ),
           const SizedBox(width: AppTheme.spacingM),
           // Status message text
@@ -46,6 +90,8 @@ class SubmitStatusWidget extends StatelessWidget {
               statusMessage,
               style: AppFonts.bodyMedium().copyWith(
                 color: isError ? AppColors.errorLight : AppColors.successLight,
+                fontWeight: AppFonts.semiBold,
+                height: 1.5,
               ),
             ),
           ),

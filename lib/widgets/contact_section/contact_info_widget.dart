@@ -21,69 +21,201 @@ class ContactInfoWidget extends StatelessWidget {
     // Determine theme mode for styling
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Section heading
-        Text(
-          'Contact Information',
-          style: (isDark ? AppFonts.h2() : AppFonts.h2()),
+    return Container(
+      padding: const EdgeInsets.all(AppTheme.spacingXL),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: isDark
+              ? [
+                  AppColors.cardDark.withValues(alpha: 0.3),
+                  AppColors.surfaceDark.withValues(alpha: 0.2),
+                ]
+              : [
+                  AppColors.surfaceLight.withValues(alpha: 0.3),
+                  AppColors.white.withValues(alpha: 0.5),
+                ],
         ),
-
-        const SizedBox(height: AppTheme.spacingL),
-
-        // Email contact item (clickable - launches email client)
-        ContactItemWidget(
-          icon: AppIcons.email,
-          title: 'Email',
-          value: PortfolioData.contactInfo.email,
-          onTap: () =>
-              UrlHelper.launchEmail(email: PortfolioData.contactInfo.email),
+        borderRadius: BorderRadius.circular(AppTheme.radiusXL),
+        border: Border.all(
+          color: isDark
+              ? AppColors.white.withValues(alpha: 0.05)
+              : AppColors.black.withValues(alpha: 0.05),
+          width: 1,
         ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Section heading with icon
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(AppTheme.spacingM),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: isDark
+                        ? [
+                            AppColors.accentDark,
+                            AppColors.accentDark.withValues(alpha: 0.8)
+                          ]
+                        : [
+                            AppColors.accentLight,
+                            AppColors.accentLight.withValues(alpha: 0.8)
+                          ],
+                  ),
+                  borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                  boxShadow: [
+                    BoxShadow(
+                      color: (isDark
+                              ? AppColors.accentDark
+                              : AppColors.accentLight)
+                          .withValues(alpha: 0.3),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: Icon(
+                  AppIcons.contact,
+                  color: AppColors.white,
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: AppTheme.spacingM),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Contact Information',
+                      style: AppFonts.h3().copyWith(
+                        color: isDark
+                            ? AppColors.textPrimaryDark
+                            : AppColors.textPrimaryLight,
+                        fontWeight: AppFonts.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Get in touch with me',
+                      style: AppFonts.bodySmall().copyWith(
+                        color: isDark
+                            ? AppColors.textSecondaryDark
+                            : AppColors.textSecondaryLight,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
 
-        const SizedBox(height: AppTheme.spacingL),
+          const SizedBox(height: AppTheme.spacingXL),
 
-        // Phone contact item (clickable - launches phone dialer)
-        ContactItemWidget(
-          icon: AppIcons.phone,
-          title: 'Phone',
-          value: PortfolioData.contactInfo.phone,
-          onTap: () => UrlHelper.launchPhone(PortfolioData.contactInfo.phone),
-        ),
+          // Email contact item (clickable - launches email client)
+          ContactItemWidget(
+            icon: AppIcons.email,
+            title: 'Email',
+            value: PortfolioData.contactInfo.email,
+            onTap: () =>
+                UrlHelper.launchEmail(email: PortfolioData.contactInfo.email),
+          ),
 
-        const SizedBox(height: AppTheme.spacingL),
+          const SizedBox(height: AppTheme.spacingM),
 
-        // Location contact item (non-clickable - just displays location)
-        ContactItemWidget(
-          icon: AppIcons.location,
-          title: 'Location',
-          value: PortfolioData.contactInfo.location,
-          onTap: null, // No action for location
-        ),
+          // Phone contact item (clickable - launches phone dialer)
+          ContactItemWidget(
+            icon: AppIcons.phone,
+            title: 'Phone',
+            value: PortfolioData.contactInfo.phone,
+            onTap: () => UrlHelper.launchPhone(PortfolioData.contactInfo.phone),
+          ),
 
-        const SizedBox(height: AppTheme.spacingXL),
+          const SizedBox(height: AppTheme.spacingM),
 
-        // Social media section heading
-        Text(
-          'Connect With Me',
-          style: (isDark ? AppFonts.h3() : AppFonts.h3()),
-        ),
+          // Location contact item (non-clickable - just displays location)
+          ContactItemWidget(
+            icon: AppIcons.location,
+            title: 'Location',
+            value: PortfolioData.contactInfo.location,
+            onTap: null, // No action for location
+          ),
 
-        const SizedBox(height: AppTheme.spacingL),
+          const SizedBox(height: AppTheme.spacingXXL),
 
-        // Social media buttons (wrap for responsive layout)
-        // Maps through all social links from portfolio data and creates buttons
-        Wrap(
-          spacing: AppTheme.spacingL,
-          children: PortfolioData.socialLinks.map((social) {
-            return SocialButtonWidget(
-              title: social.name,
-              iconPath: social.iconPath,
-              onTap: () => UrlHelper.launchURL(social.url),
-            );
-          }).toList(),
-        ),
-      ],
+          // Divider
+          Container(
+            height: 1,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.transparent,
+                  (isDark ? AppColors.white : AppColors.black)
+                      .withValues(alpha: 0.1),
+                  Colors.transparent,
+                ],
+              ),
+            ),
+          ),
+
+          const SizedBox(height: AppTheme.spacingXL),
+
+          // Social media section heading
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: isDark
+                        ? [
+                            AppColors.accentDark.withValues(alpha: 0.2),
+                            AppColors.accentDark.withValues(alpha: 0.1),
+                          ]
+                        : [
+                            AppColors.accentLight.withValues(alpha: 0.2),
+                            AppColors.accentLight.withValues(alpha: 0.1),
+                          ],
+                  ),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Icon(
+                  Icons.link,
+                  color: isDark ? AppColors.accentDark : AppColors.accentLight,
+                  size: 20,
+                ),
+              ),
+              const SizedBox(width: AppTheme.spacingM),
+              Text(
+                'Connect With Me',
+                style: AppFonts.h4().copyWith(
+                  color: isDark
+                      ? AppColors.textPrimaryDark
+                      : AppColors.textPrimaryLight,
+                  fontWeight: AppFonts.bold,
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: AppTheme.spacingL),
+
+          // Social media buttons (wrap for responsive layout)
+          Wrap(
+            spacing: AppTheme.spacingM,
+            runSpacing: AppTheme.spacingM,
+            children: PortfolioData.socialLinks.map((social) {
+              return SocialButtonWidget(
+                title: social.name,
+                iconPath: social.iconPath,
+                onTap: () => UrlHelper.launchURL(social.url),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
     );
   }
 }

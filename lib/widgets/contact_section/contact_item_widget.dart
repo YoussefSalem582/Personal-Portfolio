@@ -36,63 +36,125 @@ class ContactItemWidget extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
 
-    return InkWell(
-      onTap: onTap,
-      borderRadius: BorderRadius.circular(AppTheme.radiusS),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: AppTheme.spacingS),
-        child: Row(
-          children: [
-            // Icon container with accent color background
-            Container(
-              padding: const EdgeInsets.all(AppTheme.spacingS),
-              decoration: BoxDecoration(
-                color: accentColor.withValues(alpha: 0.1),
-                borderRadius: BorderRadius.circular(AppTheme.radiusS),
-              ),
-              child: Icon(icon, size: 20, color: accentColor),
+    return MouseRegion(
+      cursor:
+          onTap != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+        hoverColor: accentColor.withValues(alpha: 0.05),
+        splashColor: accentColor.withValues(alpha: 0.1),
+        child: Container(
+          padding: const EdgeInsets.all(AppTheme.spacingM),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: isDark
+                  ? [
+                      AppColors.cardDark.withValues(alpha: 0.5),
+                      AppColors.surfaceDark.withValues(alpha: 0.3),
+                    ]
+                  : [
+                      AppColors.white,
+                      AppColors.surfaceLight.withValues(alpha: 0.5),
+                    ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-            const SizedBox(width: AppTheme.spacingM),
-            // Title and value column
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Contact item title (e.g., "Email")
-                  Text(
-                    title,
-                    style:
-                        (isDark ? AppFonts.bodySmall() : AppFonts.bodySmall())
-                            .copyWith(
-                      color: isDark
-                          ? AppColors.textSecondaryDark
-                          : AppColors.textSecondaryLight,
-                      fontWeight: AppFonts.medium,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  // Contact item value (e.g., "john@example.com")
-                  // Color changes to accent if clickable
-                  Text(
-                    value,
-                    style:
-                        (isDark ? AppFonts.bodyMedium() : AppFonts.bodyMedium())
-                            .copyWith(
-                      fontWeight: AppFonts.semiBold,
-                      color: onTap != null
-                          ? accentColor // Accent color for clickable items
-                          : (isDark
-                              ? AppColors.textPrimaryDark
-                              : AppColors.textPrimaryLight),
-                    ),
-                  ),
-                ],
-              ),
+            borderRadius: BorderRadius.circular(AppTheme.radiusM),
+            border: Border.all(
+              color: isDark
+                  ? AppColors.white.withValues(alpha: 0.05)
+                  : AppColors.black.withValues(alpha: 0.05),
+              width: 1,
             ),
-            // Show arrow indicator only for clickable items
-            if (onTap != null)
-              Icon(AppIcons.openExternal, size: 16, color: accentColor),
-          ],
+            boxShadow: [
+              BoxShadow(
+                color: isDark
+                    ? AppColors.black.withValues(alpha: 0.2)
+                    : AppColors.black.withValues(alpha: 0.03),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Row(
+            children: [
+              // Icon container with gradient and glow effect
+              Container(
+                padding: const EdgeInsets.all(AppTheme.spacingM),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      accentColor,
+                      accentColor.withValues(alpha: 0.8),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                  borderRadius: BorderRadius.circular(AppTheme.radiusS),
+                  boxShadow: [
+                    BoxShadow(
+                      color: accentColor.withValues(alpha: 0.3),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: Icon(
+                  icon,
+                  size: 20,
+                  color: AppColors.white,
+                ),
+              ),
+              const SizedBox(width: AppTheme.spacingM),
+              // Title and value column
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Contact item title (e.g., "Email")
+                    Text(
+                      title,
+                      style: AppFonts.labelMedium().copyWith(
+                        color: isDark
+                            ? AppColors.textSecondaryDark
+                            : AppColors.textSecondaryLight,
+                        fontWeight: AppFonts.semiBold,
+                        letterSpacing: 0.5,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    // Contact item value (e.g., "john@example.com")
+                    Text(
+                      value,
+                      style: AppFonts.bodyMedium().copyWith(
+                        fontWeight: AppFonts.bold,
+                        color: onTap != null
+                            ? accentColor
+                            : (isDark
+                                ? AppColors.textPrimaryDark
+                                : AppColors.textPrimaryLight),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              // Show arrow indicator only for clickable items
+              if (onTap != null)
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: accentColor.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    AppIcons.openExternal,
+                    size: 18,
+                    color: accentColor,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );

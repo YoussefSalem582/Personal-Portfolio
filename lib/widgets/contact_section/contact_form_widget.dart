@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'dart:js_interop' as js;
-import 'dart:js_interop_unsafe';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import '../../utils/assets/app_constants.dart';
 import '../../models/contact_form.dart';
 import '../../config/api_keys.dart';
@@ -382,94 +382,110 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
     }
   }
 
-  /// Submits the contact form using EmailJS via JavaScript interop.
+  /// Submits the contact form using Formspree (100% FREE, no domain restrictions!)
   ///
   /// This method sends an email to youssef.salem.hassan582@gmail.com
-  /// using the EmailJS service. The form data includes name, email, subject, and message.
+  /// using the Formspree service. Works on ANY domain without configuration.
   ///
-  /// EmailJS Setup Instructions:
-  /// 1. Create account at https://www.emailjs.com/
-  /// 2. Add email service (Gmail recommended)
-  /// 3. Create email template with variables: {{from_name}}, {{from_email}}, {{subject}}, {{message}}
-  /// 4. Get your Service ID, Template ID, and Public Key
-  /// 5. Update values in lib/config/api_keys.dart
+  /// Formspree Setup Instructions:
+  /// 1. Go to https://formspree.io/
+  /// 2. Sign up for FREE account (no credit card needed)
+  /// 3. Create a new form and get your Form ID (format: https://formspree.io/f/YOUR_FORM_ID)
+  /// 4. Update the formspreeEndpoint in lib/config/api_keys.dart with your Form ID
+  /// 5. That's it! No domain whitelisting needed - works everywhere!
+  ///
+  /// Free tier includes:
+  /// - 50 submissions per month
+  /// - No domain restrictions
+  /// - Email notifications
+  /// - File uploads
   Future<void> _submitContactForm(ContactForm form) async {
     try {
-      // EmailJS configuration from secure config file
-      final serviceId = ApiKeys.emailJsServiceId;
-      final templateId = ApiKeys.emailJsTemplateId;
-      final publicKey = ApiKeys.emailJsPublicKey;
+      // Formspree endpoint - FREE and works on any domain!
+      final formspreeEndpoint = ApiKeys.formspreeEndpoint;
 
-      // Check if API keys are configured
-      if (serviceId.isEmpty || templateId.isEmpty || publicKey.isEmpty) {
+      // Check if endpoint is configured
+      if (formspreeEndpoint.isEmpty) {
         throw Exception(
-            'EmailJS API keys are not configured. Please contact the administrator.');
+            'Formspree endpoint not configured. Please contact the administrator.');
       }
 
-      // Create template parameters as a JavaScript object
-      final templateParams = {
-        'from_name': form.name,
-        'from_email': form.email,
+      debugPrint('📧 Sending email via Formspree...');
+      debugPrint('📍 Endpoint: $formspreeEndpoint');
+
+      // Create form data
+      final formData = {
+        'name': form.name,
+        'email': form.email,
         'subject': form.subject,
         'message': form.message,
-        'reply_to': form.email,
-        'to_email': ApiKeys.recipientEmail,
+        '_replyto': form.email, // Formspree will use this as reply-to
+        '_subject': '${form.subject} - Portfolio Contact Form',
       };
 
-      // Convert to JS object
-      final jsParams = templateParams.jsify() as js.JSObject;
-
-      // Get the emailjs object from window
-      final emailjsObj = js.globalContext.getProperty('emailjs'.toJS);
-
-      if (emailjsObj.typeofEquals('undefined')) {
-        throw Exception('EmailJS library not loaded. Please refresh the page.');
-      }
-
-      // Call emailjs.send()
-      final emailjs = emailjsObj as js.JSObject;
-      final sendMethod = emailjs.getProperty('send'.toJS) as js.JSFunction;
-      final promise = sendMethod.callAsFunction(
-        emailjs,
-        serviceId.toJS,
-        templateId.toJS,
-        jsParams,
-        publicKey.toJS, // Pass public key as 4th parameter
+      // Send POST request to Formspree
+      final response = await http
+          .post(
+        Uri.parse(formspreeEndpoint),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: json.encode(formData),
+      )
+          .timeout(
+        const Duration(seconds: 15),
+        onTimeout: () {
+          throw Exception('Request timeout. Please try again.');
+        },
       );
 
-      // Wait for the promise to resolve
-      await (promise as js.JSPromise).toDart;
+      debugPrint('📥 Response status: ${response.statusCode}');
+      debugPrint('📥 Response body: ${response.body}');
 
-      // Success - message sent
-      debugPrint('Email sent successfully via EmailJS');
+      // Check response status
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        // Success!
+        debugPrint('✅ Email sent successfully via Formspree');
+      } else if (response.statusCode == 422) {
+        // Validation error
+        final responseData = json.decode(response.body);
+        final errors = responseData['errors'] as List?;
+        final errorMessage = errors?.isNotEmpty == true
+            ? errors!.first['message']
+            : 'Invalid form data';
+        throw Exception(errorMessage);
+      } else if (response.statusCode == 403) {
+        throw Exception(
+            'Form is disabled or spam detected. Please contact me directly at ${ApiKeys.recipientEmail}');
+      } else if (response.statusCode == 429) {
+        throw Exception(
+            'Too many requests. Please wait a moment and try again.');
+      } else {
+        throw Exception(
+            'Failed to send message (Error ${response.statusCode}). Please try again or contact me directly at ${ApiKeys.recipientEmail}');
+      }
     } catch (e) {
-      debugPrint('EmailJS Error: $e');
+      debugPrint('❌ Formspree Error: $e');
+      debugPrint('Error type: ${e.runtimeType}');
 
       // Parse error message for better user feedback
       final errorString = e.toString().toLowerCase();
-      if (errorString.contains('403') || errorString.contains('forbidden')) {
+
+      // Check for specific error types
+      if (errorString.contains('timeout')) {
         throw Exception(
-            'Access denied. Please verify your EmailJS configuration.');
-      } else if (errorString.contains('404') ||
-          errorString.contains('not found')) {
+            'Request timeout. Please check your internet connection and try again.');
+      } else if (errorString.contains('socketexception') ||
+          errorString.contains('network')) {
         throw Exception(
-            'Service or template not found. Please check your EmailJS IDs.');
-      } else if (errorString.contains('400') ||
-          errorString.contains('invalid')) {
-        throw Exception('Invalid request. Please check your form data.');
-      } else if (errorString.contains('500') ||
-          errorString.contains('server')) {
-        throw Exception('EmailJS server error. Please try again later.');
-      } else if (errorString.contains('network') ||
-          errorString.contains('timeout')) {
+            'Network error. Please check your internet connection and try again.');
+      } else if (errorString.contains('format')) {
         throw Exception(
-            'Network error. Please check your internet connection.');
-      } else if (errorString.contains('undefined') ||
-          errorString.contains('not loaded')) {
-        throw Exception('EmailJS not initialized. Please refresh the page.');
+            'Invalid form data. Please check your inputs and try again.');
       }
 
-      // Re-throw to be caught by _submitForm method
+      // Re-throw the exception to be caught by _submitForm
       rethrow;
     }
   }
