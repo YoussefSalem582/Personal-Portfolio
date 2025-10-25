@@ -6,6 +6,8 @@ class Project {
   final List<String> technologies;
   final String? githubUrl;
   final String? liveUrl;
+  final String? videoUrl;
+  final String? shortVideoUrl;
   final String? imageUrl;
   final List<String>? galleryImages;
   final DateTime createdAt;
@@ -19,6 +21,8 @@ class Project {
     required this.technologies,
     this.githubUrl,
     this.liveUrl,
+    this.videoUrl,
+    this.shortVideoUrl,
     this.imageUrl,
     this.galleryImages,
     required this.createdAt,
@@ -34,6 +38,8 @@ class Project {
       technologies: List<String>.from(json['technologies']),
       githubUrl: json['githubUrl'],
       liveUrl: json['liveUrl'],
+      videoUrl: json['videoUrl'],
+      shortVideoUrl: json['shortVideoUrl'],
       imageUrl: json['imageUrl'],
       galleryImages: json['galleryImages'] != null
           ? List<String>.from(json['galleryImages'])
@@ -52,6 +58,8 @@ class Project {
       'technologies': technologies,
       'githubUrl': githubUrl,
       'liveUrl': liveUrl,
+      'videoUrl': videoUrl,
+      'shortVideoUrl': shortVideoUrl,
       'imageUrl': imageUrl,
       'galleryImages': galleryImages,
       'createdAt': createdAt.toIso8601String(),

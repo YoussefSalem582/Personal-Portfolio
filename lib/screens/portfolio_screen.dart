@@ -152,7 +152,10 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
 
                   // About Section
                   SliverToBoxAdapter(
-                    child: AboutSection(key: _sectionKeys[1]),
+                    child: AboutSection(
+                      key: _sectionKeys[1],
+                      onNavigateToContact: () => _scrollToSection(6),
+                    ),
                   ),
 
                   // Skills Section
@@ -184,6 +187,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
                   SliverToBoxAdapter(
                     child: Footer(
                       onNavigateToSection: _scrollToSection,
+                      onScrollToTop: () => _scrollToSection(0),
                     ),
                   ),
                 ],

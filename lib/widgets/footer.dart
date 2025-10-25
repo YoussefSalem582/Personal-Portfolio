@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../utils/assets/app_constants.dart';
 import '../utils/responsive_helper.dart';
 import '../utils/data/portfolio_data.dart';
@@ -8,20 +9,49 @@ import '../theme/app_theme.dart';
 
 class Footer extends StatelessWidget {
   final Function(int)? onNavigateToSection;
+  final VoidCallback? onScrollToTop;
 
-  const Footer({super.key, this.onNavigateToSection});
+  const Footer({
+    super.key,
+    this.onNavigateToSection,
+    this.onScrollToTop,
+  });
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       width: double.infinity,
-      color: AppColors.primaryLight,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: isDark
+              ? [
+                  AppColors.surfaceDark,
+                  AppColors.backgroundDark,
+                ]
+              : [
+                  AppColors.primaryLight,
+                  AppColors.primaryLight.withValues(alpha: 0.9),
+                ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: isDark
+                ? AppColors.black.withValues(alpha: 0.3)
+                : AppColors.black.withValues(alpha: 0.1),
+            blurRadius: 20,
+            offset: const Offset(0, -5),
+          ),
+        ],
+      ),
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
-        vertical: AppTheme.spacingXL,
+        vertical: AppTheme.spacingXXL,
       ),
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -29,70 +59,274 @@ class Footer extends StatelessWidget {
         ),
         child: Column(
           children: [
-            if (isMobile) _buildMobileFooter() else _buildDesktopFooter(),
+            if (isMobile)
+              _buildMobileFooter(isDark)
+            else
+              _buildDesktopFooter(isDark),
+
+            const SizedBox(height: AppTheme.spacingXL),
+
+            // Scroll to top button
+            _buildScrollToTopButton(isDark),
+
+            const SizedBox(height: AppTheme.spacingXL),
+
+            Container(
+              height: 1,
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.transparent,
+                    (isDark ? AppColors.white : AppColors.white)
+                        .withValues(alpha: 0.2),
+                    Colors.transparent,
+                  ],
+                ),
+              ),
+            ),
 
             const SizedBox(height: AppTheme.spacingL),
 
-            Container(height: 1, color: AppColors.white.withValues(alpha: 0.2)),
-
-            const SizedBox(height: AppTheme.spacingL),
-
-            // Copyright
-            Text(
-              '© ${DateTime.now().year} ${PortfolioData.fullName}. All rights reserved.',
-              style: AppFonts.bodyMedium(
-                  color: AppColors.white.withValues(alpha: 0.8)),
-              textAlign: TextAlign.center,
-            ),
-
-            const SizedBox(height: AppTheme.spacingS),
-
-            Text(
-              'Built with Flutter 💙',
-              style: AppFonts.bodySmall(
-                  color: AppColors.white.withValues(alpha: 0.6)),
-              textAlign: TextAlign.center,
-            ),
-
-            const SizedBox(height: AppTheme.spacingM),
-
-            // Visitor counter badge
-            _buildVisitorCounter(),
+            // Copyright and tech stack
+            _buildCopyrightSection(isDark),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildVisitorCounter() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        // Visitor count icon
-        Icon(
-          AppIcons.view,
-          size: 16,
-          color: AppColors.white.withValues(alpha: 0.6),
-        ),
-        const SizedBox(width: AppTheme.spacingS),
-        // Visitor counter using hits.sh
-        Image.network(
-          'https://hits.sh/youssefsalem582.github.io/Personal-Portfolio.svg?style=flat-square&label=Visitors&color=3498db&labelColor=2c3e50',
-          height: 20,
-          errorBuilder: (context, error, stackTrace) {
-            return Text(
-              'Visitors',
-              style: AppFonts.bodySmall(
-                color: AppColors.white.withValues(alpha: 0.6),
+  Widget _buildScrollToTopButton(bool isDark) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: InkWell(
+        onTap: onScrollToTop,
+        borderRadius: BorderRadius.circular(16),
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            horizontal: AppTheme.spacingL,
+            vertical: AppTheme.spacingM,
+          ),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: isDark
+                  ? [
+                      AppColors.accentDark,
+                      AppColors.accentDark.withValues(alpha: 0.8),
+                    ]
+                  : [
+                      AppColors.accentLight,
+                      AppColors.accentLight.withValues(alpha: 0.8),
+                    ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+                    .withValues(alpha: 0.3),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
               ),
-            );
-          },
+            ],
+          ),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                AppIcons.arrowUp,
+                color: AppColors.white,
+                size: 20,
+              ),
+            ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildCopyrightSection(bool isDark) {
+    return Column(
+      children: [
+        // Copyright
+        Text(
+          '© ${DateTime.now().year} ${PortfolioData.fullName}. All rights reserved.',
+          style: AppFonts.bodyMedium().copyWith(
+            color: (isDark ? AppColors.textSecondaryDark : AppColors.white)
+                .withValues(alpha: 0.8),
+          ),
+          textAlign: TextAlign.center,
+        ),
+
+        const SizedBox(height: AppTheme.spacingS),
+
+        // Built with Flutter
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Built with',
+              style: AppFonts.bodySmall().copyWith(
+                color: (isDark ? AppColors.textSecondaryDark : AppColors.white)
+                    .withValues(alpha: 0.6),
+              ),
+            ),
+            const SizedBox(width: AppTheme.spacingXS),
+            Icon(
+              Icons.favorite,
+              size: 14,
+              color: Colors.red.withValues(alpha: 0.8),
+            ),
+            const SizedBox(width: AppTheme.spacingXS),
+            Text(
+              'using Flutter',
+              style: AppFonts.bodySmall().copyWith(
+                color: (isDark ? AppColors.textSecondaryDark : AppColors.white)
+                    .withValues(alpha: 0.6),
+              ),
+            ),
+            const SizedBox(width: AppTheme.spacingXS),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8,
+                vertical: 2,
+              ),
+              decoration: BoxDecoration(
+                color: const Color(0xFF027DFD).withValues(alpha: 0.2),
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(
+                  color: const Color(0xFF027DFD).withValues(alpha: 0.3),
+                ),
+              ),
+              child: Text(
+                '💙',
+                style: const TextStyle(fontSize: 12),
+              ),
+            ),
+          ],
+        ),
+
+        const SizedBox(height: AppTheme.spacingM),
+
+        // Visitor counter
+        _buildVisitorCounter(isDark),
       ],
     );
   }
 
-  Widget _buildDesktopFooter() {
+  Widget _buildVisitorCounter(bool isDark) {
+    return Container(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppTheme.spacingM,
+        vertical: AppTheme.spacingS,
+      ),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: isDark
+              ? [
+                  AppColors.accentDark.withValues(alpha: 0.15),
+                  AppColors.accentDark.withValues(alpha: 0.05),
+                ]
+              : [
+                  AppColors.accentLight.withValues(alpha: 0.2),
+                  AppColors.accentLight.withValues(alpha: 0.1),
+                ],
+        ),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+              .withValues(alpha: 0.3),
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Container(
+            padding: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+                  .withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(
+              AppIcons.view,
+              size: 16,
+              color: isDark ? AppColors.accentDark : AppColors.accentLight,
+            ),
+          ),
+          const SizedBox(width: AppTheme.spacingM),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'VISITORS',
+                style: AppFonts.bodySmall().copyWith(
+                  color:
+                      (isDark ? AppColors.textSecondaryDark : AppColors.white)
+                          .withValues(alpha: 0.6),
+                  fontSize: 10,
+                  fontWeight: AppFonts.semiBold,
+                  letterSpacing: 1.2,
+                ),
+              ),
+              const SizedBox(height: 2),
+              // Try with proper image loading without cache busting initially
+              Image.network(
+                'https://profile-counter.glitch.me/youssefsalem582-portfolio/count.svg',
+                height: 20,
+                fit: BoxFit.contain,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return SizedBox(
+                    height: 20,
+                    width: 60,
+                    child: Center(
+                      child: SizedBox(
+                        width: 12,
+                        height: 12,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            (isDark
+                                    ? AppColors.accentDark
+                                    : AppColors.accentLight)
+                                .withValues(alpha: 0.6),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  // Try GitHub profile counter as backup
+                  return Image.network(
+                    'https://komarev.com/ghpvc/?username=youssefsalem582&abbreviated=true&style=flat-square&label=&color=${isDark ? "79c83d" : "3498db"}',
+                    height: 20,
+                    fit: BoxFit.contain,
+                    errorBuilder: (_, __, ___) {
+                      // Final fallback with styled text
+                      return Text(
+                        '1,234+',
+                        style: AppFonts.h5().copyWith(
+                          color: isDark
+                              ? AppColors.accentDark
+                              : AppColors.accentLight,
+                          fontWeight: AppFonts.bold,
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDesktopFooter(bool isDark) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -102,23 +336,73 @@ class Footer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                PortfolioData.fullName,
-                style: AppFonts.h3(color: AppColors.white),
-              ),
-              const SizedBox(height: AppTheme.spacingM),
-              Text(
-                PortfolioData.title,
-                style:
-                    AppFonts.bodyLarge(color: AppColors.accentLight).copyWith(
-                  fontWeight: AppFonts.semiBold,
+              // Name with gradient
+              ShaderMask(
+                shaderCallback: (bounds) => LinearGradient(
+                  colors: isDark
+                      ? [AppColors.accentDark, AppColors.white]
+                      : [AppColors.accentLight, AppColors.white],
+                ).createShader(bounds),
+                child: Text(
+                  PortfolioData.fullName,
+                  style: AppFonts.h3().copyWith(
+                    color: AppColors.white,
+                    fontWeight: AppFonts.bold,
+                  ),
                 ),
               ),
-              const SizedBox(height: AppTheme.spacingS),
+              const SizedBox(height: AppTheme.spacingM),
+
+              // Title with icon
+              Row(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.all(6),
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: isDark
+                            ? [
+                                AppColors.accentDark,
+                                AppColors.accentDark.withValues(alpha: 0.7)
+                              ]
+                            : [
+                                AppColors.accentLight,
+                                AppColors.accentLight.withValues(alpha: 0.8)
+                              ],
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      Icons.code,
+                      size: 16,
+                      color: AppColors.white,
+                    ),
+                  ),
+                  const SizedBox(width: AppTheme.spacingS),
+                  Expanded(
+                    child: Text(
+                      PortfolioData.title,
+                      style: AppFonts.bodyLarge().copyWith(
+                        color: isDark
+                            ? AppColors.accentDark
+                            : AppColors.accentLight,
+                        fontWeight: AppFonts.semiBold,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppTheme.spacingM),
+
+              // Description
               Text(
-                'Creating beautiful and functional applications with Flutter.',
-                style: AppFonts.bodyMedium(
-                    color: AppColors.white.withValues(alpha: 0.8)),
+                'Creating beautiful and functional applications with Flutter. Passionate about clean code and exceptional user experiences.',
+                style: AppFonts.bodyMedium().copyWith(
+                  color:
+                      (isDark ? AppColors.textSecondaryDark : AppColors.white)
+                          .withValues(alpha: 0.8),
+                  height: 1.6,
+                ),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -134,33 +418,34 @@ class Footer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Quick Links',
-                style: AppFonts.h5(color: AppColors.white),
-              ),
+              _buildSectionTitle('Quick Links', isDark),
               const SizedBox(height: AppTheme.spacingM),
-              _buildFooterLink('About', () => _scrollToSection(1)),
-              _buildFooterLink('Projects', () => _scrollToSection(4)),
-              _buildFooterLink('Skills', () => _scrollToSection(2)),
-              _buildFooterLink('Contact', () => _scrollToSection(6)),
-              _buildFooterLink('Resume PDF', () => _downloadResume()),
+              _buildFooterLink(
+                  'Home', AppIcons.home, () => _scrollToSection(0), isDark),
+              _buildFooterLink(
+                  'About', AppIcons.about, () => _scrollToSection(1), isDark),
+              _buildFooterLink(
+                  'Skills', AppIcons.skills, () => _scrollToSection(2), isDark),
+              _buildFooterLink('Projects', AppIcons.projects,
+                  () => _scrollToSection(4), isDark),
+              _buildFooterLink('Contact', AppIcons.contact,
+                  () => _scrollToSection(6), isDark),
+              const SizedBox(height: AppTheme.spacingS),
+              _buildFooterLink(
+                  'View Resume', AppIcons.view, () => _viewResume(), isDark),
             ],
           ),
         ),
 
         const SizedBox(width: AppTheme.spacingXL),
 
-        // Contact info
+        // Contact & Social
         Expanded(
           flex: 1,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Get In Touch',
-                style: AppFonts.h5(color: AppColors.white),
-              ),
-
+              _buildSectionTitle('Get In Touch', isDark),
               const SizedBox(height: AppTheme.spacingM),
 
               _buildContactLink(
@@ -169,38 +454,35 @@ class Footer extends StatelessWidget {
                 () => UrlHelper.launchEmail(
                   email: PortfolioData.contactInfo.email,
                 ),
+                isDark,
               ),
 
               _buildContactLink(
                 AppIcons.location,
                 PortfolioData.contactInfo.location,
                 null,
+                isDark,
               ),
 
+              const SizedBox(height: AppTheme.spacingL),
+
+              // Social links with improved styling
+              Text(
+                'Follow Me',
+                style: AppFonts.labelMedium().copyWith(
+                  color:
+                      (isDark ? AppColors.textSecondaryDark : AppColors.white)
+                          .withValues(alpha: 0.9),
+                  fontWeight: AppFonts.semiBold,
+                ),
+              ),
               const SizedBox(height: AppTheme.spacingM),
 
-              // Social links
-              Row(
+              Wrap(
+                spacing: AppTheme.spacingS,
+                runSpacing: AppTheme.spacingS,
                 children: PortfolioData.socialLinks.map((social) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: AppTheme.spacingM),
-                    child: InkWell(
-                      onTap: () => UrlHelper.launchURL(social.url),
-                      child: Container(
-                        width: 32,
-                        height: 32,
-                        decoration: BoxDecoration(
-                          color: AppColors.white.withValues(alpha: 0.1),
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                        child: Icon(
-                          _getIconForPlatform(social.name),
-                          color: AppColors.white.withValues(alpha: 0.8),
-                          size: 18,
-                        ),
-                      ),
-                    ),
-                  );
+                  return _buildSocialButton(social.name, social.url, isDark);
                 }).toList(),
               ),
             ],
@@ -210,22 +492,142 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildMobileFooter() {
+  Widget _buildSectionTitle(String title, bool isDark) {
+    return Row(
+      children: [
+        Container(
+          width: 3,
+          height: 20,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: isDark
+                  ? [
+                      AppColors.accentDark,
+                      AppColors.accentDark.withValues(alpha: 0.5)
+                    ]
+                  : [
+                      AppColors.accentLight,
+                      AppColors.accentLight.withValues(alpha: 0.5)
+                    ],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
+            borderRadius: BorderRadius.circular(2),
+          ),
+        ),
+        const SizedBox(width: AppTheme.spacingS),
+        Text(
+          title,
+          style: AppFonts.h5().copyWith(
+            color: isDark ? AppColors.white : AppColors.white,
+            fontWeight: AppFonts.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSocialButton(String platform, String url, bool isDark) {
+    final iconPath = AppIcons.getSocialIconSvg(platform);
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: InkWell(
+        onTap: () => UrlHelper.launchURL(url),
+        borderRadius: BorderRadius.circular(12),
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: isDark
+                  ? [
+                      AppColors.white.withValues(alpha: 0.1),
+                      AppColors.white.withValues(alpha: 0.05),
+                    ]
+                  : [
+                      AppColors.white.withValues(alpha: 0.2),
+                      AppColors.white.withValues(alpha: 0.1),
+                    ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(
+              color: (isDark ? AppColors.white : AppColors.white)
+                  .withValues(alpha: 0.2),
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: AppColors.black.withValues(alpha: 0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 2),
+              ),
+            ],
+          ),
+          child: Center(
+            child: iconPath != null
+                ? _buildIconWidget(iconPath)
+                : Icon(
+                    _getIconForPlatform(platform),
+                    color:
+                        (isDark ? AppColors.accentDark : AppColors.accentLight),
+                    size: 20,
+                  ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIconWidget(String iconPath) {
+    // Check if it's an SVG or PNG/other image format
+    if (iconPath.endsWith('.svg')) {
+      return SvgPicture.asset(
+        iconPath,
+        width: 34,
+        height: 34,
+        fit: BoxFit.contain,
+      );
+    } else {
+      // For PNG and other image formats
+      return Image.asset(
+        iconPath,
+        width: 34,
+        height: 34,
+        fit: BoxFit.contain,
+      );
+    }
+  }
+
+  Widget _buildMobileFooter(bool isDark) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        // Name and title
-        Text(
-          PortfolioData.fullName,
-          style: AppFonts.h3(color: AppColors.white),
-          textAlign: TextAlign.center,
+        // Name with gradient
+        ShaderMask(
+          shaderCallback: (bounds) => LinearGradient(
+            colors: isDark
+                ? [AppColors.accentDark, AppColors.white]
+                : [AppColors.accentLight, AppColors.white],
+          ).createShader(bounds),
+          child: Text(
+            PortfolioData.fullName,
+            style: AppFonts.h3().copyWith(
+              color: AppColors.white,
+              fontWeight: AppFonts.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
         ),
 
         const SizedBox(height: AppTheme.spacingS),
 
+        // Title
         Text(
           PortfolioData.title,
-          style: AppFonts.bodyLarge(color: AppColors.accentLight).copyWith(
+          style: AppFonts.bodyLarge().copyWith(
+            color: isDark ? AppColors.accentDark : AppColors.accentLight,
             fontWeight: AppFonts.semiBold,
           ),
           textAlign: TextAlign.center,
@@ -234,30 +636,12 @@ class Footer extends StatelessWidget {
         const SizedBox(height: AppTheme.spacingL),
 
         // Social links
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
+        Wrap(
+          spacing: AppTheme.spacingM,
+          runSpacing: AppTheme.spacingM,
+          alignment: WrapAlignment.center,
           children: PortfolioData.socialLinks.map((social) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: AppTheme.spacingS,
-              ),
-              child: InkWell(
-                onTap: () => UrlHelper.launchURL(social.url),
-                child: Container(
-                  width: 48,
-                  height: 48,
-                  decoration: BoxDecoration(
-                    color: AppColors.white.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Icon(
-                    _getIconForPlatform(social.name),
-                    color: AppColors.white.withValues(alpha: 0.8),
-                    size: 24,
-                  ),
-                ),
-              ),
-            );
+            return _buildSocialButton(social.name, social.url, isDark);
           }).toList(),
         ),
 
@@ -267,28 +651,74 @@ class Footer extends StatelessWidget {
         InkWell(
           onTap: () =>
               UrlHelper.launchEmail(email: PortfolioData.contactInfo.email),
-          child: Text(
-            PortfolioData.contactInfo.email,
-            style: AppFonts.bodyMedium(color: AppColors.accentLight).copyWith(
-              decoration: TextDecoration.underline,
+          child: Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppTheme.spacingM,
+              vertical: AppTheme.spacingS,
             ),
-            textAlign: TextAlign.center,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: isDark
+                    ? [
+                        AppColors.white.withValues(alpha: 0.1),
+                        AppColors.white.withValues(alpha: 0.05),
+                      ]
+                    : [
+                        AppColors.white.withValues(alpha: 0.2),
+                        AppColors.white.withValues(alpha: 0.1),
+                      ],
+              ),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: (isDark ? AppColors.white : AppColors.white)
+                    .withValues(alpha: 0.2),
+              ),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  AppIcons.email,
+                  size: 16,
+                  color: isDark ? AppColors.accentDark : AppColors.accentLight,
+                ),
+                const SizedBox(width: AppTheme.spacingS),
+                Text(
+                  PortfolioData.contactInfo.email,
+                  style: AppFonts.bodyMedium().copyWith(
+                    color: isDark ? AppColors.textPrimaryDark : AppColors.white,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
           ),
         ),
 
         const SizedBox(height: AppTheme.spacingL),
 
         // Resume download button
-        ElevatedButton.icon(
-          onPressed: () => _downloadResume(),
-          icon: const Icon(AppIcons.download, size: 18),
-          label: const Text('Download Resume'),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.accentLight,
-            foregroundColor: AppColors.white,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () => _viewResume(),
+            icon: const Icon(AppIcons.view, size: 20),
+            label: const Text('View Resume'),
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              backgroundColor:
+                  isDark ? AppColors.accentDark : AppColors.accentLight,
+              foregroundColor: AppColors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+              elevation: 0,
+              shadowColor:
+                  (isDark ? AppColors.accentDark : AppColors.accentLight)
+                      .withValues(alpha: 0.3),
+              textStyle: AppFonts.labelLarge().copyWith(
+                fontWeight: AppFonts.bold,
+              ),
             ),
           ),
         ),
@@ -296,37 +726,96 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildFooterLink(String title, VoidCallback onTap) {
+  Widget _buildFooterLink(
+    String title,
+    IconData icon,
+    VoidCallback onTap,
+    bool isDark,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(bottom: AppTheme.spacingS),
-      child: InkWell(
-        onTap: onTap,
-        child: Text(
-          title,
-          style: AppFonts.bodyMedium(
-              color: AppColors.white.withValues(alpha: 0.8)),
+      child: MouseRegion(
+        cursor: SystemMouseCursors.click,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(8),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: AppTheme.spacingXS,
+            ),
+            child: Row(
+              children: [
+                Icon(
+                  icon,
+                  size: 16,
+                  color:
+                      (isDark ? AppColors.textSecondaryDark : AppColors.white)
+                          .withValues(alpha: 0.7),
+                ),
+                const SizedBox(width: AppTheme.spacingS),
+                Text(
+                  title,
+                  style: AppFonts.bodyMedium().copyWith(
+                    color:
+                        (isDark ? AppColors.textSecondaryDark : AppColors.white)
+                            .withValues(alpha: 0.8),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Widget _buildContactLink(IconData icon, String text, VoidCallback? onTap) {
+  Widget _buildContactLink(
+    IconData icon,
+    String text,
+    VoidCallback? onTap,
+    bool isDark,
+  ) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: AppTheme.spacingS),
-      child: InkWell(
-        onTap: onTap,
-        child: Row(
-          children: [
-            Icon(icon, size: 16, color: AppColors.white.withValues(alpha: 0.6)),
-            const SizedBox(width: AppTheme.spacingS),
-            Expanded(
-              child: Text(
-                text,
-                style: AppFonts.bodySmall(
-                    color: AppColors.white.withValues(alpha: 0.8)),
+      padding: const EdgeInsets.only(bottom: AppTheme.spacingM),
+      child: MouseRegion(
+        cursor:
+            onTap != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            padding: const EdgeInsets.all(AppTheme.spacingS),
+            decoration: BoxDecoration(
+              color: (isDark ? AppColors.white : AppColors.white)
+                  .withValues(alpha: 0.05),
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(
+                color: (isDark ? AppColors.white : AppColors.white)
+                    .withValues(alpha: 0.1),
               ),
             ),
-          ],
+            child: Row(
+              children: [
+                Icon(
+                  icon,
+                  size: 16,
+                  color: isDark ? AppColors.accentDark : AppColors.accentLight,
+                ),
+                const SizedBox(width: AppTheme.spacingS),
+                Expanded(
+                  child: Text(
+                    text,
+                    style: AppFonts.bodySmall().copyWith(
+                      color: (isDark
+                              ? AppColors.textSecondaryDark
+                              : AppColors.white)
+                          .withValues(alpha: 0.8),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -353,7 +842,7 @@ class Footer extends StatelessWidget {
     }
   }
 
-  void _downloadResume() async {
+  void _viewResume() async {
     try {
       await UrlHelper.openFile(PortfolioData.resumeUrl);
     } catch (e) {

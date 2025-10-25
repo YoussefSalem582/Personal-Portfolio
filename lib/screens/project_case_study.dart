@@ -4,7 +4,6 @@ import '../models/project.dart';
 import '../utils/assets/app_constants.dart';
 import '../utils/responsive_helper.dart';
 import '../widgets/project_case_study/hero_section_widget.dart';
-import '../widgets/project_case_study/back_button_widget.dart';
 import '../widgets/project_case_study/project_overview_widget.dart';
 import '../widgets/project_case_study/technical_stack_widget.dart';
 import '../widgets/project_case_study/gallery_section_widget.dart';
@@ -13,6 +12,7 @@ import '../widgets/project_case_study/challenges_solutions_widget.dart';
 import '../widgets/project_case_study/key_learnings_widget.dart';
 import '../widgets/project_case_study/action_buttons_widget.dart';
 import '../widgets/project_case_study/project_content_helper.dart';
+import '../widgets/project_case_study/project_case_study_app_bar.dart';
 
 import '../theme/app_theme.dart';
 
@@ -48,6 +48,20 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
   /// Current page index in the hero PageView
   int _currentPage = 0;
 
+  /// Current section index for navigation
+  int _currentSection = 0;
+
+  /// GlobalKeys for section scrolling
+  final GlobalKey _overviewKey = GlobalKey();
+  final GlobalKey _techStackKey = GlobalKey();
+  final GlobalKey _documentsKey = GlobalKey();
+  final GlobalKey _galleryKey = GlobalKey();
+  final GlobalKey _challengesKey = GlobalKey();
+  final GlobalKey _learningsKey = GlobalKey();
+
+  /// Scroll controller for detecting scroll position
+  final ScrollController _scrollController = ScrollController();
+
   @override
   void initState() {
     super.initState();
@@ -60,12 +74,51 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
         });
       }
     });
+
+    // Listen to scroll changes to update current section
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    // Get positions of all sections
+    final sections = [
+      _overviewKey,
+      _techStackKey,
+      _documentsKey,
+      _galleryKey,
+      _challengesKey,
+      _learningsKey,
+    ];
+
+    // Find which section is currently visible
+    for (int i = 0; i < sections.length; i++) {
+      final key = sections[i];
+      final context = key.currentContext;
+      if (context != null) {
+        final renderBox = context.findRenderObject() as RenderBox?;
+        if (renderBox != null) {
+          final position = renderBox.localToGlobal(Offset.zero);
+          final size = renderBox.size;
+
+          // Check if section is in viewport (considering app bar height)
+          if (position.dy <= 100 && position.dy + size.height > 100) {
+            if (_currentSection != i) {
+              setState(() {
+                _currentSection = i;
+              });
+            }
+            break;
+          }
+        }
+      }
+    }
   }
 
   @override
   void dispose() {
-    // Clean up controller to prevent memory leaks
+    // Clean up controllers to prevent memory leaks
     _pageController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -93,10 +146,26 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
     return Scaffold(
       backgroundColor:
           isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
+      appBar: ProjectCaseStudyAppBar(
+        projectTitle: widget.project.title,
+        currentSection: _currentSection,
+        onSectionSelected: (index) {
+          setState(() {
+            _currentSection = index;
+          });
+        },
+        overviewKey: _overviewKey,
+        techStackKey: _techStackKey,
+        documentsKey: _documentsKey,
+        galleryKey: _galleryKey,
+        challengesKey: _challengesKey,
+        learningsKey: _learningsKey,
+      ),
       body: Stack(
         children: [
           // Main scrollable content
           SingleChildScrollView(
+            controller: _scrollController,
             child: Column(
               children: [
                 // Hero section with swipeable image gallery (PageView)
@@ -159,6 +228,7 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
                           children: [
                             // Project overview with custom content
                             ProjectOverviewWidget(
+                              key: _overviewKey,
                               project: widget.project,
                               overviewText: overviewText,
                             ),
@@ -166,12 +236,14 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
 
                             // Technology stack chips
                             TechnicalStackWidget(
+                              key: _techStackKey,
                               technologies: widget.project.technologies,
                             ),
                             const SizedBox(height: AppTheme.spacingXXL),
 
                             // Documents section
                             DocumentsSectionWidget(
+                              key: _documentsKey,
                               projectId: widget.project.id,
                             ),
                             const SizedBox(height: AppTheme.spacingXXL),
@@ -180,6 +252,7 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
                             if (widget.project.galleryImages != null &&
                                 widget.project.galleryImages!.isNotEmpty) ...[
                               GallerySectionWidget(
+                                key: _galleryKey,
                                 galleryImages: widget.project.galleryImages!,
                                 isMobile: isMobile,
                                 projectId: widget.project.id,
@@ -189,18 +262,22 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
 
                             // Challenges and solutions cards
                             ChallengesSolutionsWidget(
+                              key: _challengesKey,
                               challenges: challenges,
                             ),
                             const SizedBox(height: AppTheme.spacingXXL),
 
                             // Key learnings bullet list
                             KeyLearningsWidget(
+                              key: _learningsKey,
                               lessons: lessons,
                             ),
                             const SizedBox(height: AppTheme.spacingXXL),
 
-                            // Call-to-action buttons (View Case Study / View Code)
+                            // Call-to-action buttons (Watch Demo / Watch Short / View Case Study / View Code)
                             ActionButtonsWidget(
+                              videoUrl: widget.project.videoUrl,
+                              shortVideoUrl: widget.project.shortVideoUrl,
                               liveUrl: widget.project.liveUrl,
                               githubUrl: widget.project.githubUrl,
                             ),
@@ -214,9 +291,6 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
               ],
             ),
           ),
-
-          // Floating back button overlay (top-left corner)
-          const BackButtonWidget(),
         ],
       ),
     );

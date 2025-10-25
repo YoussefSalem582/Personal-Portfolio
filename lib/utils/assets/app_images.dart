@@ -24,7 +24,7 @@ class AppImages {
   static const String portfolioLogo = '$_basePath/portfolio_logo.png';
 
   /// Profile image
-  static const String profileImage = '$_basePath/profile.jpeg';
+  static const String profileImage = '$_basePath/profile.jpg';
 
   // ==================== Project Images ====================
 

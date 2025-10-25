@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../theme/app_theme.dart';
@@ -24,8 +23,8 @@ class HeroTextWidget extends StatelessWidget {
           mainAxisSize: isMobile ? MainAxisSize.min : MainAxisSize.max,
           children: [
             Container(
-              width: 40,
-              height: 3,
+              width: 60,
+              height: 5,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [
@@ -44,12 +43,13 @@ class HeroTextWidget extends StatelessWidget {
                 color: isDark ? AppColors.accentDark : AppColors.accentLight,
                 fontWeight: AppFonts.semiBold,
                 letterSpacing: 1.2,
+                fontSize: isMobile ? 20 : 26,
               ),
             ),
           ],
         ),
 
-        const SizedBox(height: AppTheme.spacingM),
+        const SizedBox(height: AppTheme.spacingL),
 
         // Name with gradient effect
         ShaderMask(
@@ -67,6 +67,7 @@ class HeroTextWidget extends StatelessWidget {
               fontWeight: AppFonts.bold,
               height: 1.2,
               letterSpacing: -0.5,
+              fontSize: isMobile ? 52 : 84,
             ),
             textAlign: isMobile ? TextAlign.center : TextAlign.start,
           ),
@@ -80,38 +81,19 @@ class HeroTextWidget extends StatelessWidget {
             horizontal: AppTheme.spacingM,
             vertical: AppTheme.spacingS,
           ),
-          decoration: BoxDecoration(
-            color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                .withValues(alpha: 0.1),
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                  .withValues(alpha: 0.3),
-              width: 1,
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+          //       .withValues(alpha: 0.1),
+          //   borderRadius: BorderRadius.circular(12),
+          //   border: Border.all(
+          //     color: (isDark ? AppColors.accentDark : AppColors.accentLight)
+          //         .withValues(alpha: 0.3),
+          //     width: 1,
+          //   ),
+          // ),
           child: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              SvgPicture.asset(
-                AppIcons.flutterIconSvg,
-                width: 20,
-                height: 20,
-                colorFilter: ColorFilter.mode(
-                  isDark ? AppColors.accentDark : AppColors.accentLight,
-                  BlendMode.srcIn,
-                ),
-              ),
-              const SizedBox(width: AppTheme.spacingS),
-              Text(
-                'A ',
-                style: AppFonts.h4().copyWith(
-                  color: isDark
-                      ? AppColors.textSecondaryDark
-                      : AppColors.textSecondaryLight,
-                  fontWeight: AppFonts.medium,
-                ),
-              ),
               AnimatedTextKit(
                 animatedTexts: [
                   TypewriterAnimatedText(
@@ -120,6 +102,7 @@ class HeroTextWidget extends StatelessWidget {
                       color:
                           isDark ? AppColors.accentDark : AppColors.accentLight,
                       fontWeight: AppFonts.semiBold,
+                      fontSize: isMobile ? 24 : 36,
                     ),
                     speed: const Duration(milliseconds: 100),
                   ),
@@ -129,15 +112,17 @@ class HeroTextWidget extends StatelessWidget {
                       color:
                           isDark ? AppColors.accentDark : AppColors.accentLight,
                       fontWeight: AppFonts.semiBold,
+                      fontSize: isMobile ? 24 : 36,
                     ),
                     speed: const Duration(milliseconds: 100),
                   ),
                   TypewriterAnimatedText(
-                    'AI Enthusiast',
+                    'Software Engineer',
                     textStyle: AppFonts.h4().copyWith(
                       color:
                           isDark ? AppColors.accentDark : AppColors.accentLight,
                       fontWeight: AppFonts.semiBold,
+                      fontSize: isMobile ? 24 : 36,
                     ),
                     speed: const Duration(milliseconds: 100),
                   ),
@@ -163,7 +148,7 @@ class HeroTextWidget extends StatelessWidget {
                   ? AppColors.textSecondaryDark
                   : AppColors.textSecondaryLight,
               height: 1.8,
-              fontSize: 17,
+              fontSize: isMobile ? 19 : 22,
             ),
             maxLines: 5,
             overflow: TextOverflow.ellipsis,

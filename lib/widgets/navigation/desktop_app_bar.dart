@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
-import '../../utils/url_helper.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../theme_toggle.dart';
 import 'navigation_item.dart';
+import 'links_dropdown_button.dart';
 
 class DesktopAppBar extends StatelessWidget {
   final Function(int) onItemSelected;
@@ -144,6 +144,11 @@ class DesktopAppBar extends StatelessWidget {
 
           const SizedBox(width: 20),
 
+          // Links dropdown button
+          LinksDropdownButton(isDark: isDark),
+
+          const SizedBox(width: 16),
+
           // Theme toggle with better styling
           Container(
             padding: const EdgeInsets.all(4),
@@ -160,56 +165,6 @@ class DesktopAppBar extends StatelessWidget {
               ),
             ),
             child: const ThemeToggle(isCompact: true),
-          ),
-
-          const SizedBox(width: 16),
-
-          // Resume view button with enhanced styling
-          Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: isDark
-                    ? [
-                        AppColors.accentDark,
-                        AppColors.accentDark.withValues(alpha: 0.8)
-                      ]
-                    : [
-                        AppColors.accentLight,
-                        AppColors.accentLight.withValues(alpha: 0.9)
-                      ],
-              ),
-              borderRadius: BorderRadius.circular(12),
-              boxShadow: [
-                BoxShadow(
-                  color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                      .withValues(alpha: 0.4),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
-                  spreadRadius: 0,
-                ),
-              ],
-            ),
-            child: ElevatedButton.icon(
-              onPressed: () => _openResume(context),
-              icon: const Icon(AppIcons.blog, size: 18),
-              label: Text(
-                'View Resume',
-                style: AppFonts.button().copyWith(
-                  letterSpacing: 0.5,
-                ),
-              ),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.transparent,
-                foregroundColor: AppColors.white,
-                shadowColor: AppColors.transparent,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                elevation: 0,
-              ),
-            ),
           ),
         ],
       ),
@@ -276,31 +231,6 @@ class DesktopAppBar extends StatelessWidget {
           .expand((item) => [item, const SizedBox(width: 32)])
           .take(items.length * 2 - 1)
           .toList();
-    }
-  }
-
-  void _openResume(BuildContext context) async {
-    try {
-      await UrlHelper.openFile(PortfolioData.resumeUrl);
-
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Opening resume...'),
-            backgroundColor: AppColors.successLight,
-            duration: const Duration(seconds: 2),
-          ),
-        );
-      }
-    } catch (e) {
-      if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Error opening resume. Please try again.'),
-            backgroundColor: AppColors.errorLight,
-          ),
-        );
-      }
     }
   }
 }

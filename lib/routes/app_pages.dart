@@ -63,11 +63,12 @@ class AppPages {
           return const PortfolioScreen();
         }
       },
-      transition: Transition.rightToLeftWithFade,
-      transitionDuration: transitionDuration,
-      curve: Curves.easeInOutCubic,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 600),
+      curve: Curves.easeInOutCubicEmphasized,
+      customTransition: ProjectPageTransition(),
       opaque: true,
-      showCupertinoParallax: true,
+      fullscreenDialog: false,
     ),
 
     // Project Case Study Screen (by Slug - SEO friendly)
@@ -89,9 +90,12 @@ class AppPages {
 
         return ProjectCaseStudy(project: project);
       },
-      transition: Transition.rightToLeftWithFade,
-      transitionDuration: transitionDuration,
-      curve: Curves.easeInOutCubic,
+      transition: Transition.fadeIn,
+      transitionDuration: const Duration(milliseconds: 600),
+      curve: Curves.easeInOutCubicEmphasized,
+      customTransition: ProjectPageTransition(),
+      opaque: true,
+      fullscreenDialog: false,
     ),
 
     // ==================== Section Routes (Deep Linking) ====================
@@ -260,5 +264,51 @@ class AppPages {
       };
     }
     return null;
+  }
+}
+
+/// Custom page transition for Project Case Study screen
+///
+/// Entrance: Slide from right to left with fade
+/// Exit: Slide from left to right without fade
+class ProjectPageTransition extends CustomTransition {
+  @override
+  Widget buildTransition(
+    BuildContext context,
+    Curve? curve,
+    Alignment? alignment,
+    Animation<double> animation,
+    Animation<double> secondaryAnimation,
+    Widget child,
+  ) {
+    final curvedAnimation = CurvedAnimation(
+      parent: animation,
+      curve: curve ?? Curves.easeInOutCubicEmphasized,
+      reverseCurve: Curves.easeInOutCubic,
+    );
+
+    // Fade animation: opacity from 0 to 1 on enter, stays 1 on exit
+    final fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(CurvedAnimation(
+      parent: animation,
+      curve: const Interval(0.0, 0.5, curve: Curves.easeIn),
+    ));
+
+    // Slide animation: right to left on enter, reverses on exit
+    final slideAnimation = Tween<Offset>(
+      begin: const Offset(1.0, 0.0), // Start from right
+      end: Offset.zero, // End at center
+    ).animate(curvedAnimation);
+
+    // Only apply fade on forward animation (entering)
+    return SlideTransition(
+      position: slideAnimation,
+      child: FadeTransition(
+        opacity: fadeAnimation,
+        child: child,
+      ),
+    );
   }
 }

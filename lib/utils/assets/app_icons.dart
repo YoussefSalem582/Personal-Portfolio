@@ -38,6 +38,9 @@ class AppIcons {
   /// Upwork icon (SVG)
   static const String upworkIconSvg = '$_iconsPath/upwork_icon.svg';
 
+  /// Mostaql icon (PNG)
+  static const String mostaqlIconPng = '$_iconsPath/mostaql_Logo.png';
+
   // ==================== Other Icon Assets ====================
 
   /// CV icon (GIF)
@@ -354,6 +357,8 @@ class AppIcons {
         return youtubeIconSvg;
       case 'upwork':
         return upworkIconSvg;
+      case 'mostaql':
+        return mostaqlIconPng; // PNG format but treated as asset
       default:
         return null; // Return null if no SVG icon available
     }

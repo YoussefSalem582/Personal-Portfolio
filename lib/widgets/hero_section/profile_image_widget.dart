@@ -1,106 +1,59 @@
 import 'package:flutter/material.dart';
 import '../../utils/assets/app_constants.dart';
 
-class ProfileImageWidget extends StatefulWidget {
+class ProfileImageWidget extends StatelessWidget {
   const ProfileImageWidget({super.key});
-
-  @override
-  State<ProfileImageWidget> createState() => _ProfileImageWidgetState();
-}
-
-class _ProfileImageWidgetState extends State<ProfileImageWidget>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _scaleAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      duration: const Duration(seconds: 3),
-      vsync: this,
-    )..repeat(reverse: true);
-
-    _scaleAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isDark = Theme.of(context).brightness == Brightness.dark;
-        // Increased sizes: 400px for desktop (was 300), 280px for mobile (was 200)
-        final size = constraints.maxWidth > 600 ? 400.0 : 280.0;
+        // Image sizes for desktop and mobile
+        final width = constraints.maxWidth > 540 ? 500.0 : 320.0;
 
-        return ScaleTransition(
-          scale: _scaleAnimation,
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
-            width: size,
-            height: size,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              gradient: isDark
-                  ? AppColors.primaryGradientDark
-                  : AppColors.primaryGradientLight,
-              boxShadow: [
-                BoxShadow(
-                  color: isDark
-                      ? AppColors.accentDark.withValues(alpha: 0.4)
-                      : AppColors.accentLight.withValues(alpha: 0.3),
-                  blurRadius: 30,
-                  spreadRadius: 8,
-                ),
-                BoxShadow(
-                  color: isDark
-                      ? AppColors.primaryDark.withValues(alpha: 0.3)
-                      : AppColors.primaryLight.withValues(alpha: 0.2),
-                  blurRadius: 60,
-                  spreadRadius: 15,
-                ),
-              ],
+        return Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: isDark ? AppColors.accentDark : AppColors.accentLight,
+              width: 3,
             ),
-            child: Container(
-              margin: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: isDark
+                    ? AppColors.accentDark.withValues(alpha: 0.3)
+                    : AppColors.accentLight.withValues(alpha: 0.2),
+                blurRadius: 20,
+                spreadRadius: 2,
               ),
-              child: ClipOval(
-                child: Image.asset(
-                  AppImages.profileImage,
-                  width: size - 10,
-                  height: size - 10,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: size - 10,
-                      height: size - 10,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: isDark
-                            ? AppColors.accentDark.withValues(alpha: 0.1)
-                            : AppColors.accentLight.withValues(alpha: 0.1),
-                      ),
-                      child: Icon(
-                        AppIcons.user,
-                        size: size * 0.3,
-                        color: isDark
-                            ? AppColors.accentDark
-                            : AppColors.accentLight,
-                      ),
-                    );
-                  },
-                ),
-              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(17),
+            child: Image.asset(
+              AppImages.profileImage,
+              width: width,
+              fit: BoxFit.contain,
+              alignment: Alignment.center,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  width: width,
+                  height: width * 1.2,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(17),
+                    color: isDark
+                        ? AppColors.accentDark.withValues(alpha: 0.1)
+                        : AppColors.accentLight.withValues(alpha: 0.1),
+                  ),
+                  child: Icon(
+                    AppIcons.user,
+                    size: width * 0.3,
+                    color:
+                        isDark ? AppColors.accentDark : AppColors.accentLight,
+                  ),
+                );
+              },
             ),
           ),
         );

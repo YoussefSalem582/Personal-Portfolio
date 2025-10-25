@@ -15,7 +15,9 @@ import '../../theme/app_theme.dart';
 /// - Improved spacing and visual hierarchy
 /// - Glassmorphism effect
 class AboutSection extends StatelessWidget {
-  const AboutSection({super.key});
+  final VoidCallback? onNavigateToContact;
+
+  const AboutSection({super.key, this.onNavigateToContact});
 
   @override
   Widget build(BuildContext context) {
@@ -124,23 +126,30 @@ class AboutSection extends StatelessWidget {
             // Content - responsive layout
             // Mobile: Stack vertically (bio above stats)
             if (isMobile)
-              const Column(
+              Column(
                 children: [
-                  BioSectionWidget(),
-                  SizedBox(height: AppTheme.spacingXXL),
-                  StatsSectionWidget(),
+                  BioSectionWidget(
+                    onNavigateToContact: onNavigateToContact,
+                  ),
+                  const SizedBox(height: AppTheme.spacingXXL),
+                  const StatsSectionWidget(),
                 ],
               )
             // Desktop: Display side by side (bio 66% | stats 33%)
             else
-              const Row(
+              Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Left side - Bio and contact info (2/3 width)
-                  Expanded(flex: 2, child: BioSectionWidget()),
-                  SizedBox(width: AppTheme.spacingXXL),
+                  Expanded(
+                    flex: 2,
+                    child: BioSectionWidget(
+                      onNavigateToContact: onNavigateToContact,
+                    ),
+                  ),
+                  const SizedBox(width: AppTheme.spacingXXL),
                   // Right side - Stats and actions (1/3 width)
-                  Expanded(child: StatsSectionWidget()),
+                  const Expanded(child: StatsSectionWidget()),
                 ],
               ),
           ],

@@ -8,11 +8,15 @@ import '../../theme/app_theme.dart';
 class ActionButtonsWidget extends StatelessWidget {
   final String? liveUrl;
   final String? githubUrl;
+  final String? videoUrl;
+  final String? shortVideoUrl;
 
   const ActionButtonsWidget({
     super.key,
     this.liveUrl,
     this.githubUrl,
+    this.videoUrl,
+    this.shortVideoUrl,
   });
 
   @override
@@ -75,6 +79,66 @@ class ActionButtonsWidget extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           const SizedBox(height: AppTheme.spacingXL),
+
+          // Watch Demo Video button
+          if (videoUrl != null)
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () => UrlHelper.launchURL(videoUrl!),
+                icon: const Icon(Icons.play_circle_outline, size: 24),
+                label: const Text('Watch Demo Video'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  backgroundColor:
+                      isDark ? AppColors.accentDark : AppColors.accentLight,
+                  foregroundColor: AppColors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  elevation: 0,
+                  shadowColor:
+                      (isDark ? AppColors.accentDark : AppColors.accentLight)
+                          .withValues(alpha: 0.5),
+                  textStyle: AppFonts.labelLarge().copyWith(
+                    fontWeight: AppFonts.bold,
+                    letterSpacing: 0.3,
+                  ),
+                ),
+              ),
+            ),
+
+          if (videoUrl != null && (liveUrl != null || githubUrl != null))
+            const SizedBox(height: AppTheme.spacingM),
+
+          // Watch Short Video button
+          if (shortVideoUrl != null)
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton.icon(
+                onPressed: () => UrlHelper.launchURL(shortVideoUrl!),
+                icon: const Icon(Icons.video_library_outlined, size: 24),
+                label: const Text('Watch Short Video'),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  backgroundColor: isDark
+                      ? AppColors.accentDark.withValues(alpha: 0.8)
+                      : AppColors.accentLight.withValues(alpha: 0.8),
+                  foregroundColor: AppColors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  elevation: 0,
+                  textStyle: AppFonts.labelLarge().copyWith(
+                    fontWeight: AppFonts.bold,
+                    letterSpacing: 0.3,
+                  ),
+                ),
+              ),
+            ),
+
+          if (shortVideoUrl != null && (liveUrl != null || githubUrl != null))
+            const SizedBox(height: AppTheme.spacingM),
 
           // View Case Study button
           if (liveUrl != null)

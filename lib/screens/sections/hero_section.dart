@@ -7,13 +7,42 @@ import '../../widgets/hero_section/hero_text_widget.dart';
 import '../../widgets/hero_section/profile_image_widget.dart';
 import '../../widgets/hero_section/hero_action_buttons_widget.dart';
 
-class HeroSection extends StatelessWidget {
+class HeroSection extends StatefulWidget {
   final Function(int)? onNavigateToSection;
 
   const HeroSection({
     super.key,
     this.onNavigateToSection,
   });
+
+  @override
+  State<HeroSection> createState() => _HeroSectionState();
+}
+
+class _HeroSectionState extends State<HeroSection>
+    with TickerProviderStateMixin {
+  late List<AnimationController> _dotControllers;
+
+  @override
+  void initState() {
+    super.initState();
+    // Create 8 animation controllers for the floating dots
+    _dotControllers = List.generate(
+      8,
+      (index) => AnimationController(
+        vsync: this,
+        duration: Duration(milliseconds: 2500 + (index * 200)),
+      )..repeat(reverse: true),
+    );
+  }
+
+  @override
+  void dispose() {
+    for (var controller in _dotControllers) {
+      controller.dispose();
+    }
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,20 +65,165 @@ class HeroSection extends StatelessWidget {
               : [AppColors.backgroundLight, AppColors.gray50],
         ),
       ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
-          vertical: AppTheme.spacingXL,
-        ),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            maxWidth: ResponsiveHelper.getMaxWidth(screenWidth),
+      child: Stack(
+        children: [
+          // Background decorative circles throughout the section
+          Positioned.fill(
+            child: _buildBackgroundDecoration(isDark, isMobile, screenHeight),
           ),
-          child: isMobile
-              ? _buildMobileLayout(context)
-              : _buildDesktopLayout(context),
-        ),
+
+          // Main content
+          Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
+                vertical: AppTheme.spacingXL,
+              ),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: ResponsiveHelper.getMaxWidth(screenWidth),
+                ),
+                child: isMobile
+                    ? _buildMobileLayout(context)
+                    : _buildDesktopLayout(context),
+              ),
+            ),
+          ),
+        ],
       ),
+    );
+  }
+
+  Widget _buildBackgroundDecoration(
+      bool isDark, bool isMobile, double screenHeight) {
+    return Stack(
+      children: [
+        // Large decorative circles
+        Positioned(
+          top: -100,
+          right: -100,
+          child: Container(
+            width: 400,
+            height: 400,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [
+                  (isDark ? AppColors.accentDark : AppColors.accentLight)
+                      .withValues(alpha: 0.15),
+                  (isDark ? AppColors.accentDark : AppColors.accentLight)
+                      .withValues(alpha: 0.05),
+                  AppColors.transparent,
+                ],
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: -150,
+          left: -150,
+          child: Container(
+            width: 500,
+            height: 500,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [
+                  (isDark ? AppColors.primaryLight : AppColors.primaryLight)
+                      .withValues(alpha: 0.12),
+                  (isDark ? AppColors.primaryLight : AppColors.primaryLight)
+                      .withValues(alpha: 0.06),
+                  AppColors.transparent,
+                ],
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: screenHeight * 0.3,
+          left: -80,
+          child: Container(
+            width: 300,
+            height: 300,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [
+                  (isDark ? AppColors.accentDark : AppColors.accentLight)
+                      .withValues(alpha: 0.1),
+                  (isDark ? AppColors.accentDark : AppColors.accentLight)
+                      .withValues(alpha: 0.03),
+                  AppColors.transparent,
+                ],
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: screenHeight * 0.2,
+          right: isMobile ? -50 : 100,
+          child: Container(
+            width: 250,
+            height: 250,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              gradient: RadialGradient(
+                colors: [
+                  (isDark ? AppColors.primaryDark : AppColors.primaryLight)
+                      .withValues(alpha: 0.08),
+                  (isDark ? AppColors.primaryDark : AppColors.primaryLight)
+                      .withValues(alpha: 0.02),
+                  AppColors.transparent,
+                ],
+              ),
+            ),
+          ),
+        ),
+
+        // Animated floating dots scattered throughout
+        if (!isMobile) ...[
+          Positioned(
+            top: 80,
+            left: 60,
+            child: _buildFloatingDot(isDark, controllerIndex: 0),
+          ),
+          Positioned(
+            top: 200,
+            right: 150,
+            child: _buildFloatingDot(isDark, controllerIndex: 1, size: 14),
+          ),
+          Positioned(
+            bottom: 150,
+            left: 200,
+            child: _buildFloatingDot(isDark, controllerIndex: 2, size: 12),
+          ),
+          Positioned(
+            bottom: 100,
+            right: 80,
+            child: _buildFloatingDot(isDark, controllerIndex: 3),
+          ),
+          Positioned(
+            top: screenHeight * 0.4,
+            left: 100,
+            child: _buildFloatingDot(isDark, controllerIndex: 4, size: 10),
+          ),
+          Positioned(
+            top: screenHeight * 0.5,
+            right: 200,
+            child: _buildFloatingDot(isDark, controllerIndex: 5, size: 18),
+          ),
+          Positioned(
+            top: 140,
+            right: 300,
+            child: _buildFloatingDot(isDark, controllerIndex: 6, size: 8),
+          ),
+          Positioned(
+            bottom: 250,
+            left: 150,
+            child: _buildFloatingDot(isDark, controllerIndex: 7, size: 15),
+          ),
+        ],
+      ],
     );
   }
 
@@ -74,7 +248,7 @@ class HeroSection extends StatelessWidget {
                       const HeroTextWidget(),
                       const SizedBox(height: AppTheme.spacingXXL),
                       HeroActionButtonsWidget(
-                        onNavigateToSection: onNavigateToSection,
+                        onNavigateToSection: widget.onNavigateToSection,
                       ),
                     ],
                   ),
@@ -121,7 +295,7 @@ class HeroSection extends StatelessWidget {
             const HeroTextWidget(),
             const SizedBox(height: AppTheme.spacingXL),
             HeroActionButtonsWidget(
-              onNavigateToSection: onNavigateToSection,
+              onNavigateToSection: widget.onNavigateToSection,
             ),
             const SizedBox(height: AppTheme.spacingL),
           ],
@@ -131,100 +305,28 @@ class HeroSection extends StatelessWidget {
   }
 
   Widget _buildProfileImageWithDecoration(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = ResponsiveHelper.isMobile(screenWidth);
-
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        // Decorative background circles
-        if (!isMobile) ...[
-          Positioned(
-            top: -30,
-            right: -30,
-            child: Container(
-              width: 180,
-              height: 180,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [
-                    (isDark ? AppColors.accentDark : AppColors.accentLight)
-                        .withValues(alpha: 0.1),
-                    (isDark ? AppColors.accentDark : AppColors.accentLight)
-                        .withValues(alpha: 0.05),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: -40,
-            left: -40,
-            child: Container(
-              width: 220,
-              height: 220,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                gradient: LinearGradient(
-                  colors: [
-                    (isDark ? AppColors.primaryDark : AppColors.primaryLight)
-                        .withValues(alpha: 0.1),
-                    (isDark ? AppColors.primaryDark : AppColors.primaryLight)
-                        .withValues(alpha: 0.05),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-
-        // Animated floating dots
-        if (!isMobile) ...[
-          Positioned(
-            top: 50,
-            left: 20,
-            child: _buildFloatingDot(isDark, delay: 0),
-          ),
-          Positioned(
-            bottom: 80,
-            right: 40,
-            child: _buildFloatingDot(isDark, delay: 1000),
-          ),
-          Positioned(
-            top: 180,
-            right: 10,
-            child: _buildFloatingDot(isDark, delay: 2000, size: 12),
-          ),
-        ],
-
-        // Main profile image
-        Container(
-          padding: const EdgeInsets.all(20),
-          child: const ProfileImageWidget(),
-        ),
-      ],
-    );
+    return const ProfileImageWidget();
   }
 
-  Widget _buildFloatingDot(bool isDark, {int delay = 0, double size = 16}) {
-    return TweenAnimationBuilder(
-      duration: const Duration(seconds: 3),
-      tween: Tween<double>(begin: 0, end: 20),
-      builder: (context, double value, child) {
+  Widget _buildFloatingDot(bool isDark,
+      {required int controllerIndex, double size = 16}) {
+    return AnimatedBuilder(
+      animation: _dotControllers[controllerIndex],
+      builder: (context, child) {
         return Transform.translate(
-          offset: Offset(0, value),
+          offset: Offset(
+            0,
+            _dotControllers[controllerIndex].value * 20 - 10,
+          ),
           child: child,
         );
       },
-      onEnd: () {},
       child: Container(
         width: size,
         height: size,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          gradient: LinearGradient(
+          gradient: RadialGradient(
             colors: [
               isDark ? AppColors.accentDark : AppColors.accentLight,
               (isDark ? AppColors.primaryDark : AppColors.primaryLight)
@@ -234,9 +336,9 @@ class HeroSection extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                  .withValues(alpha: 0.4),
-              blurRadius: 12,
-              spreadRadius: 2,
+                  .withValues(alpha: 0.5),
+              blurRadius: 15,
+              spreadRadius: 3,
             ),
           ],
         ),

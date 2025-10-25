@@ -42,5 +42,10 @@ class PersonalInfoData {
       url: 'https://www.upwork.com/freelancers/~0124b005ef2bb3f524',
       iconPath: AppIcons.upworkIconSvg,
     ),
+    SocialLink(
+      name: 'Mostaql',
+      url: 'https://mostaql.com/u/Youssef_Salem17',
+      iconPath: AppIcons.mostaqlIconPng,
+    ),
   ];
 }

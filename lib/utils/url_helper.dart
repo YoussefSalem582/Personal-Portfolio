@@ -59,15 +59,17 @@ class UrlHelper {
         String viewerUrl;
 
         if (isPdf) {
-          // Use Google Docs Viewer for PDFs (opens inline, no download)
+          // Use Mozilla's PDF.js viewer (handles large files better)
           final githubRawUrl = AppConfig.getGithubRawUrl(url);
+          // Mozilla's PDF.js viewer is reliable and works with large files
           viewerUrl =
-              'https://docs.google.com/viewer?url=${Uri.encodeComponent(githubRawUrl)}&embedded=true';
+              'https://mozilla.github.io/pdf.js/web/viewer.html?file=${Uri.encodeComponent(githubRawUrl)}';
         } else if (isHtml) {
-          // For HTML files, use GitHub Pages URL directly
-          viewerUrl = AppConfig.getGithubPagesAssetUrl(url);
+          // For HTML files, use GitHub raw URL directly
+          final githubRawUrl = AppConfig.getGithubRawUrl(url);
+          viewerUrl = githubRawUrl;
         } else {
-          // For other files, try GitHub Pages first
+          // For other files, try GitHub Pages first, then raw
           viewerUrl = AppConfig.getGithubPagesAssetUrl(url);
         }
 
@@ -79,16 +81,27 @@ class UrlHelper {
             print('Failed to open via primary strategy: $e');
           }
 
-          // Fallback: try relative asset path
+          // Fallback: try direct GitHub raw URL
           try {
-            final webUrl = '/$url';
-            web.window.open(webUrl, '_blank');
+            final githubRawUrl = AppConfig.getGithubRawUrl(url);
+            web.window.open(githubRawUrl, '_blank');
             return;
           } catch (e2) {
             if (kDebugMode) {
-              print('Failed to open via relative path: $e2');
+              print('Failed to open via GitHub raw: $e2');
             }
-            throw 'Could not open $url - tried all strategies';
+
+            // Last resort: try relative asset path
+            try {
+              final webUrl = '/$url';
+              web.window.open(webUrl, '_blank');
+              return;
+            } catch (e3) {
+              if (kDebugMode) {
+                print('Failed to open via relative path: $e3');
+              }
+              throw 'Could not open $url - tried all strategies';
+            }
           }
         }
       } else {

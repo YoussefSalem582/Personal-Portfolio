@@ -13,67 +13,20 @@ class ThemeToggle extends StatelessWidget {
     final themeController = Get.find<ThemeController>();
 
     return Obx(() {
-      return AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        child: InkWell(
-          onTap: themeController.toggleTheme,
-          borderRadius: BorderRadius.circular(20),
-          child: Container(
-            padding: EdgeInsets.all(isCompact ? 8 : 12),
-            decoration: BoxDecoration(
-              color: themeController.isDarkMode
-                  ? AppColors.surfaceDark
-                  : AppColors.surfaceLight,
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: themeController.isDarkMode
-                    ? AppColors.accentDark.withValues(alpha: 0.3)
-                    : AppColors.accentLight.withValues(alpha: 0.3),
-                width: 1,
-              ),
-              boxShadow: [
-                BoxShadow(
-                  color: themeController.isDarkMode
-                      ? AppColors.black.withValues(alpha: 0.2)
-                      : AppColors.black.withValues(alpha: 0.1),
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  child: Icon(
-                    themeController.isDarkMode
-                        ? AppIcons.darkMode
-                        : AppIcons.lightMode,
-                    color: themeController.isDarkMode
-                        ? AppColors.accentDark
-                        : AppColors.accentLight,
-                    size: isCompact ? 18 : 20,
-                  ),
-                ),
-                if (!isCompact) ...[
-                  const SizedBox(width: 8),
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 200),
-                    child: Text(
-                      themeController.isDarkMode ? 'Dark' : 'Light',
-                      key: ValueKey(themeController.isDarkMode),
-                      style: AppFonts.labelMedium(
-                        color: themeController.isDarkMode
-                            ? AppColors.textPrimaryDark
-                            : AppColors.textPrimaryLight,
-                      ).copyWith(fontWeight: AppFonts.medium),
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ),
+      final isDark = themeController.isDarkMode;
+
+      return IconButton(
+        icon: Icon(
+          isDark ? Icons.light_mode_rounded : Icons.dark_mode_rounded,
+          size: isCompact ? 20 : 22,
+        ),
+        color: isDark ? AppColors.accentDark : AppColors.accentLight,
+        onPressed: themeController.toggleTheme,
+        tooltip: isDark ? 'Light Mode' : 'Dark Mode',
+        padding: EdgeInsets.zero,
+        constraints: BoxConstraints(
+          minWidth: isCompact ? 32 : 40,
+          minHeight: isCompact ? 32 : 40,
         ),
       );
     });

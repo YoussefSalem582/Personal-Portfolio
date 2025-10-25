@@ -13,7 +13,9 @@ import '../../theme/app_theme.dart';
 /// - Better typography hierarchy
 /// - Icon-based visual elements
 class BioSectionWidget extends StatelessWidget {
-  const BioSectionWidget({super.key});
+  final VoidCallback? onNavigateToContact;
+
+  const BioSectionWidget({super.key, this.onNavigateToContact});
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +163,9 @@ class BioSectionWidget extends StatelessWidget {
         const SizedBox(height: AppTheme.spacingXXL),
 
         // Contact information list
-        const ContactInfoListWidget(),
+        ContactInfoListWidget(
+          onNavigateToContact: onNavigateToContact,
+        ),
       ],
     );
   }

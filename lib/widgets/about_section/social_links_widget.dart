@@ -76,19 +76,14 @@ class SocialLinksWidget extends StatelessWidget {
 
   /// Gets the appropriate icon widget for a social media platform.
   ///
-  /// Returns an SVG icon for platforms with SVG assets (GitHub, LinkedIn, YouTube, Upwork)
+  /// Returns an SVG or PNG icon for platforms with assets (GitHub, LinkedIn, YouTube, Upwork, Mostaql)
   /// or a Material Icon as fallback for other platforms.
   Widget _getIconForPlatform(String name) {
-    // Try to get SVG icon first
-    final svgPath = AppIcons.getSocialIconSvg(name);
+    // Try to get icon path first
+    final iconPath = AppIcons.getSocialIconSvg(name);
 
-    if (svgPath != null) {
-      return SvgPicture.asset(
-        svgPath,
-        width: 32,
-        height: 32,
-        fit: BoxFit.contain,
-      );
+    if (iconPath != null) {
+      return _buildIconWidget(iconPath);
     }
 
     // Fallback to Material Icons
@@ -106,6 +101,9 @@ class SocialLinksWidget extends StatelessWidget {
       case 'upwork':
         fallbackIcon = Icons.work;
         break;
+      case 'mostaql':
+        fallbackIcon = Icons.work;
+        break;
       default:
         fallbackIcon = AppIcons.website;
     }
@@ -115,5 +113,26 @@ class SocialLinksWidget extends StatelessWidget {
       color: AppColors.accentLight,
       size: 24,
     );
+  }
+
+  /// Builds icon widget based on file format (SVG or PNG).
+  Widget _buildIconWidget(String iconPath) {
+    // Check if it's an SVG or PNG/other image format
+    if (iconPath.endsWith('.svg')) {
+      return SvgPicture.asset(
+        iconPath,
+        width: 40,
+        height: 40,
+        fit: BoxFit.contain,
+      );
+    } else {
+      // For PNG and other image formats
+      return Image.asset(
+        iconPath,
+        width: 40,
+        height: 40,
+        fit: BoxFit.contain,
+      );
+    }
   }
 }

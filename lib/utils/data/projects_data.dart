@@ -5,21 +5,34 @@ class ProjectsData {
   static final List<Project> projects = [
     Project(
       id: 'emosense-app',
-      title: 'Emosense App',
+      title: 'EmoSense - Enterprise Emotion Recognition Platform',
       shortDescription:
-          'AI-powered emotion recognition app for mental health and customer service',
+          'Enterprise-grade emotion recognition platform for customer service optimization and sentiment analytics',
       description:
-          'Emosense is an innovative AI-powered mobile application that analyzes audio and video to detect emotions in real-time. '
-          'Designed for mental health monitoring and customer service enhancement, it features multimodal ML models, '
-          'privacy-first architecture, and comprehensive emotion analytics. My graduation project completed in July 2025.',
+          'EmoSense is a cutting-edge enterprise-grade emotion recognition platform built with Clean Architecture and Flutter. '
+          'Features multi-modal AI analysis (text, voice, video), role-based access control (Admin/Employee portals), '
+          'real-time sentiment monitoring, and comprehensive analytics. Graduate-level research project from Nile University '
+          'demonstrating advanced emotion detection with 10-15 second processing, 20+ professional screens, and production-ready features.',
       technologies: [
+        'Flutter 3.32.1',
+        'Dart 3.0+',
+        'Clean Architecture',
+        'BLoC/Cubit',
         'Python',
         'TensorFlow',
         'Computer Vision',
         'Audio Processing',
         'Machine Learning',
+        'REST API',
+        'Repository Pattern',
+        'Material Design 3',
+        'GetIt DI',
+        'Animation System',
+        'State Management',
+        'Enterprise Security'
       ],
       githubUrl: 'https://github.com/YoussefSalem582/Emosense-App',
+      videoUrl: 'https://youtu.be/dENKfUHi_dg?si=qGTGXdMrMFc08uVB',
       imageUrl: EmosenseImages.appIcon,
       galleryImages: [
         // Onboarding & Authentication
@@ -84,6 +97,9 @@ class ProjectsData {
           'Features include audio visualization, background playback, and seamless user experience.',
       technologies: ['Flutter', 'Dart', 'Audio Processing', 'State Management'],
       githubUrl: 'https://github.com/YoussefSalem582/Music-Player-App',
+      videoUrl: 'https://youtu.be/l9mvtCu3DTk?si=7emI--sdnxEFwK4X',
+      shortVideoUrl:
+          'https://youtube.com/shorts/AhamfMRMiNo?si=HwZOLhlWWglxZMDM',
       imageUrl: MusicAppImages.appLogo,
       galleryImages: [
         MusicAppImages.homePage,
@@ -113,6 +129,7 @@ class ProjectsData {
         'BLoC',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/chat-app',
+      videoUrl: 'https://youtu.be/3Ku8HG4AtEM?si=_wH3ErCMbEZGvJEB',
       imageUrl: ChatAppImages.appLogo,
       galleryImages: [
         ChatAppImages.homePage,
@@ -208,6 +225,9 @@ class ProjectsData {
           'progress tracking, review functionality, and comprehensive exam management.',
       technologies: ['Flutter', 'Dart', 'SQLite', 'State Management'],
       githubUrl: 'https://github.com/YoussefSalem582/QuizHub-App',
+      videoUrl: 'https://youtu.be/Q5koHfQddy8?si=MDzNcbonIxnq-sq_',
+      shortVideoUrl:
+          'https://youtube.com/shorts/yEkSYYxftA8?si=zzjFzFsX9COxErOM',
       imageUrl: QuizHubImages.quizAppLogo,
       galleryImages: [
         QuizHubImages.homeScreen,
@@ -316,27 +336,27 @@ class ProjectsData {
     ),
     Project(
       id: 'gogesh-marketplace',
-      title: 'Gogesh Marketplace App',
+      title: 'Gogesh - Comprehensive Commercial Directory',
       shortDescription:
-          'Full-stack e-commerce marketplace connecting buyers and sellers with dual-interface support',
+          '🌍 Your comprehensive marketplace connecting merchants and customers across the Gulf and Arab world',
       description:
-          'Gogesh is a comprehensive Flutter-based mobile marketplace platform connecting buyers and sellers with secure payment processing and real-time functionality. '
-          'Built with cross-platform support for Android and iOS, the app features dual interfaces: a User Interface for browsing and purchasing products, and a Merchant Interface for sellers to manage inventory, track orders, and analyze sales. '
-          'Integrated custom REST API backend for data management, Firebase for authentication and cloud storage, and Stripe for payment gateway. '
-          'Implements BLoC state management pattern for efficient state handling across complex user flows. '
-          'Key features include: onboarding screens, phone and email authentication, advanced product search with filtering and categories, product detail views with image galleries, '
-          'shopping cart with persistent state, favorites/wishlist system, real-time chat support between buyers and sellers, push notifications for order updates, '
-          'merchant dashboard with sales analytics, product listing management, order tracking system, advertisement placement, and user profile management. '
-          'Applied lazy loading, pagination, and API caching strategies for optimized performance with large datasets. '
-          'This project was developed during my WE Internship in September 2024, demonstrating professional e-commerce platform development skills.',
+          'Gogesh is a comprehensive commercial marketplace platform connecting merchants and customers across the Gulf and Arab world. '
+          'Built with Flutter and BLoC Pattern, it features dual-role architecture, Google Maps integration, live chat, secure payments, '
+          'subscription tiers, and full Arabic/English localization. My first freelance project showcasing enterprise e-commerce development.',
       technologies: [
-        'Flutter',
+        'Flutter 3.3.0+',
         'Dart',
-        'BLoC',
+        'BLoC Pattern',
+        'Google Maps',
+        'Geolocator',
         'Firebase',
         'REST API',
-        'Stripe',
+        'JWT Auth',
+        'OAuth2',
+        'Payment Gateway',
         'Push Notifications',
+        'Material Design 3',
+        'RTL Support',
         'State Management',
       ],
       //githubUrl: 'https://github.com/YoussefSalem582/Gogesh-App',
