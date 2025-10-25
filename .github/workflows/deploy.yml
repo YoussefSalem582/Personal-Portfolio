@@ -24,25 +24,16 @@ jobs:
         with:
           channel: 'stable'
       
-      - name: Create API Keys config
-        env:
-          EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
-          EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
-          EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
+      # API Keys file is now committed to the repository (Formspree endpoint is public)
+      # No need to create it dynamically anymore
+      - name: Verify API Keys exist
         run: |
-          mkdir -p lib/config
-          cat > lib/config/api_keys.dart << EOF
-          /// API Keys Configuration
-          class ApiKeys {
-            // EmailJS Configuration
-            static const String emailJsServiceId = '$EMAILJS_SERVICE_ID';
-            static const String emailJsTemplateId = '$EMAILJS_TEMPLATE_ID';
-            static const String emailJsPublicKey = '$EMAILJS_PUBLIC_KEY';
-            
-            // Email recipient
-            static const String recipientEmail = 'youssef.salem.hassan582@gmail.com';
-          }
-          EOF
+          if [ ! -f lib/config/api_keys.dart ]; then
+            echo "Error: lib/config/api_keys.dart not found!"
+            exit 1
+          fi
+          echo "✅ API Keys file found"
+          cat lib/config/api_keys.dart
           
       - name: Get dependencies
         run: flutter pub get
