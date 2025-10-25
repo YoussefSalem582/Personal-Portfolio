@@ -49,44 +49,46 @@ class UrlHelper {
   /// For web, this opens in a new browser tab
   /// For mobile/desktop, uses the default file viewer
   static Future<void> openFile(String url) async {
-    // For web, if it's an asset path, use GitHub raw content URL
+    // For web, if it's an asset path, use appropriate viewer
     if (kIsWeb) {
       if (url.startsWith('assets/')) {
-        // Strategy 1: Use GitHub raw content URL (works for all file types including PDFs)
-        final githubRawUrl = AppConfig.getGithubRawUrl(url);
+        // Determine file type
+        final isHtml = url.toLowerCase().endsWith('.html');
+        final isPdf = url.toLowerCase().endsWith('.pdf');
 
-        // Strategy 2: Try GitHub Pages URL as fallback
-        final githubPagesUrl = AppConfig.getGithubPagesAssetUrl(url);
+        String viewerUrl;
 
-        // Strategy 3: Try relative asset path
-        final webUrl = '/$url';
+        if (isPdf) {
+          // Use Google Docs Viewer for PDFs (opens inline, no download)
+          final githubRawUrl = AppConfig.getGithubRawUrl(url);
+          viewerUrl =
+              'https://docs.google.com/viewer?url=${Uri.encodeComponent(githubRawUrl)}&embedded=true';
+        } else if (isHtml) {
+          // For HTML files, use GitHub Pages URL directly
+          viewerUrl = AppConfig.getGithubPagesAssetUrl(url);
+        } else {
+          // For other files, try GitHub Pages first
+          viewerUrl = AppConfig.getGithubPagesAssetUrl(url);
+        }
 
-        // Try each strategy in order
         try {
-          web.window.open(githubRawUrl, '_blank');
+          web.window.open(viewerUrl, '_blank');
           return;
         } catch (e) {
           if (kDebugMode) {
-            print('Failed to open via GitHub raw: $e');
+            print('Failed to open via primary strategy: $e');
           }
 
+          // Fallback: try relative asset path
           try {
-            web.window.open(githubPagesUrl, '_blank');
+            final webUrl = '/$url';
+            web.window.open(webUrl, '_blank');
             return;
           } catch (e2) {
             if (kDebugMode) {
-              print('Failed to open via GitHub Pages: $e2');
+              print('Failed to open via relative path: $e2');
             }
-
-            try {
-              web.window.open(webUrl, '_blank');
-              return;
-            } catch (e3) {
-              if (kDebugMode) {
-                print('Failed to open via relative path: $e3');
-              }
-              throw 'Could not open $url - tried all strategies';
-            }
+            throw 'Could not open $url - tried all strategies';
           }
         }
       } else {
