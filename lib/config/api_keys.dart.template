@@ -1,0 +1,18 @@
+/// API Keys Configuration Template
+///
+/// Copy this file to api_keys.dart and fill in your actual API keys.
+/// DO NOT commit api_keys.dart to version control.
+class ApiKeys {
+  // OLD EmailJS Configuration (has domain restrictions)
+  static const String emailJsServiceId = '';
+  static const String emailJsTemplateId = '';
+  static const String emailJsPublicKey = '';
+
+  // NEW Formspree Configuration (FREE, no domain restrictions!)
+  // Sign up at https://formspree.io/ and get your form endpoint
+  // Format: https://formspree.io/f/YOUR_FORM_ID
+  static const String formspreeEndpoint = 'https://formspree.io/f/YOUR_FORM_ID';
+
+  // Email recipient
+  static const String recipientEmail = 'your.email@gmail.com';
+}
