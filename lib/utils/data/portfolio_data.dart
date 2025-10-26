@@ -23,7 +23,6 @@ class PortfolioData {
   static const String subtitle = PersonalInfoData.subtitle;
   static const String bio = PersonalInfoData.bio;
   static const String email = PersonalInfoData.email;
-  static const String phone = PersonalInfoData.phone;
   static const String location = PersonalInfoData.location;
   static const String portfolioUrl = PersonalInfoData.portfolioUrl;
   static const String resumeUrl = PersonalInfoData.resumeUrl;

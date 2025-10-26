@@ -23,7 +23,6 @@ class PortfolioController extends GetxController {
   String get subtitle => PortfolioData.subtitle;
   String get bio => PortfolioData.bio;
   String get email => PortfolioData.email;
-  String get phone => PortfolioData.phone;
   String get location => PortfolioData.location;
   String get portfolioUrl => PortfolioData.portfolioUrl;
   String get resumeUrl => PortfolioData.resumeUrl;

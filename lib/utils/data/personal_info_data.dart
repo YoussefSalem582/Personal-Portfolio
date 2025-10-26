@@ -11,7 +11,6 @@ class PersonalInfoData {
       'and integrate machine learning into real-world applications (facial recognition, emotion analysis).';
 
   static const String email = 'youssef.salem.hassan582@gmail.com';
-  static const String phone = '+20 1026855881'; // Replace with actual phone
   static const String location = 'Egypt';
   static const String portfolioUrl =
       'https://v0-youssef-salem-hassan.vercel.app/';

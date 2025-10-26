@@ -33,6 +33,13 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Platform folders (web-only project - not needed)
+windows/
+linux/
+macos/
+android/
+ios/
+
 # Symbolication related
 app.*.symbols
 

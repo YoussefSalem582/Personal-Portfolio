@@ -81,8 +81,11 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
-  <!-- Resource Hints -->
+  <!-- Resource Hints for Faster Loading -->
   <link rel="preload" href="flutter_bootstrap.js" as="script">
+  <link rel="preload" href="main.dart.js" as="script">
+  <link rel="preload" href="assets/images/portfolio_logo.png" as="image">
+  <link rel="preload" href="assets/images/profile.jpg" as="image">
   
   <!-- EmailJS SDK for web -->
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
@@ -566,5 +569,20 @@
   </script>
 
   <script src="flutter_bootstrap.js" async></script>
+  
+  <!-- Service Worker Registration for Caching and Performance -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/Personal-Portfolio/service-worker.js')
+          .then(function(registration) {
+            console.log('ServiceWorker registered with scope:', registration.scope);
+          })
+          .catch(function(error) {
+            console.log('ServiceWorker registration failed:', error);
+          });
+      });
+    }
+  </script>
 </body>
 </html>
