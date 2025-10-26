@@ -42,10 +42,9 @@ jobs:
         run: |
           flutter build web \
             --release \
-            --web-renderer html \
+            --wasm \
             --base-href "/Personal-Portfolio/" \
-            --no-source-maps \
-            --dart-define=FLUTTER_WEB_USE_SKIA=false
+            --no-source-maps
       
       - name: Copy service worker
         run: |
