@@ -34,6 +34,9 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
       
+      - name: Clean build cache
+        run: flutter clean
+      
       - name: Build optimized web app
         run: |
           flutter build web \
@@ -62,9 +65,16 @@ jobs:
           du -sh build/web
           echo "✅ Build completed successfully!"
       
+      - name: Check for changes
+        id: check_changes
+        run: |
+          git diff --quiet docs/ || echo "has_changes=true" >> $GITHUB_OUTPUT
+      
       - name: Commit and push to docs
+        if: steps.check_changes.outputs.has_changes == 'true'
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add docs
-          git diff --quiet && git diff --staged --quiet || (git commit -m "🚀 Deploy optimized build - Auto deployment" && git push)
+          git commit -m "🚀 Deploy optimized build - Auto deployment [skip ci]"
+          git push
