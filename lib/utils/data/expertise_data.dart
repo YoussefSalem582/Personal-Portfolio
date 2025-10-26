@@ -5,52 +5,52 @@ import '../assets/app_constants.dart';
 class ExpertiseData {
   static final List<Expertise> expertiseList = [
     Expertise(
-      id: 'mobile-dev',
-      title: 'Professional Mobile App Development',
+      id: 'ui-ux-design',
+      title: 'UI/UX Design & Implementation',
       description:
-          'I create high-performance, cross-platform apps with Flutter and Dart, delivering clean code, modern UI/UX, and seamless user experiences across Android & iOS platforms.',
-      icon: Icons.phone_android,
-      iconColor: const Color(0xFF3498DB),
+          'Creating beautiful, user-friendly interfaces with Flutter widgets, custom animations, and responsive layouts that work seamlessly across different screen sizes.',
+      icon: Icons.palette,
+      iconColor: const Color(0xFF9C27B0),
     ),
     Expertise(
-      id: 'flutter-expert',
-      title: 'Flutter Architecture & Best Practices',
+      id: 'app-design',
+      title: 'Mobile App Design',
       description:
-          'Expert in Flutter development with clean architecture, implementing SOLID principles, design patterns, and state management solutions (GetX, BLoC, Riverpod) for maintainable codebases.',
+          'Building modern mobile applications with clean design principles, Material Design, and iOS-style interfaces using Flutter\'s rich widget library.',
+      icon: Icons.phone_android,
+      iconColor: const Color(0xFF0D47A1),
+    ),
+    Expertise(
+      id: 'flutter-basics',
+      title: 'Flutter Development',
+      description:
+          'Developing cross-platform mobile apps using Flutter and Dart, focusing on clean code structure and following best practices for maintainable applications.',
       icon: AppIcons.flutterIconSvg,
       iconColor: const Color(0xFF02569B),
     ),
     Expertise(
-      id: 'ai-ml',
-      title: 'AI & Machine Learning Integration',
+      id: 'state-management',
+      title: 'State Management',
       description:
-          'I develop innovative AI applications using Python, TensorFlow, and PyTorch, specializing in computer vision, facial recognition, and seamless ML model integration into mobile apps.',
-      icon: AppIcons.technology,
-      iconColor: const Color(0xFFE91E63),
-    ),
-    Expertise(
-      id: 'performance',
-      title: 'Performance Optimization & Testing',
-      description:
-          'Expert in app optimization, memory management, and comprehensive testing strategies. I ensure smooth 60fps animations, efficient API integration, and robust error handling.',
-      icon: AppIcons.featured,
-      iconColor: const Color(0xFFFF9800),
-    ),
-    Expertise(
-      id: 'custom-solutions',
-      title: 'Full-Stack Development Solutions',
-      description:
-          'Experienced in building complete solutions from backend APIs to frontend mobile apps, utilizing Firebase, Supabase, and REST APIs with secure authentication and real-time data sync.',
-      icon: Icons.cloud,
+          'Managing app state efficiently using GetX, Provider, and other state management solutions to keep apps responsive and data synchronized across screens.',
+      icon: Icons.sync,
       iconColor: const Color(0xFF00BCD4),
     ),
     Expertise(
-      id: 'full-lifecycle',
-      title: 'Agile Development & CI/CD',
+      id: 'firebase-integration',
+      title: 'Firebase Integration',
       description:
-          'From concept to production, I follow agile methodologies with Git workflows, automated testing, continuous integration, and deployment to Play Store, App Store, and web platforms.',
-      icon: AppIcons.featured,
-      iconColor: const Color(0xFF9C27B0),
+          'Integrating Firebase services including Authentication, Firestore database, Cloud Storage, and Push Notifications to build feature-rich mobile applications.',
+      icon: Icons.cloud,
+      iconColor: const Color(0xFFFF9800),
+    ),
+    Expertise(
+      id: 'api-integration',
+      title: 'API Integration',
+      description:
+          'Connecting apps to REST APIs, handling HTTP requests, parsing JSON data, and displaying dynamic content from backend services in the app.',
+      icon: Icons.api,
+      iconColor: const Color(0xFF4CAF50),
     ),
   ];
 }
