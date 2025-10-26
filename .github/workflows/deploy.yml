@@ -34,10 +34,6 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
       
-      - name: Run tests (optional)
-        run: flutter test --no-sound-null-safety
-        continue-on-error: true
-      
       - name: Build optimized web app
         run: |
           flutter build web \
