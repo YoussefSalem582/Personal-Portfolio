@@ -46,10 +46,11 @@ jobs:
             --base-href "/Personal-Portfolio/" \
             --no-source-maps
       
-      - name: Copy service worker
+      - name: Copy service worker and headers
         run: |
           cp web/service-worker.js build/web/
           cp web/.htaccess build/web/ || true
+          cp web/_headers build/web/ || true
       
       - name: Create .nojekyll
         run: touch build/web/.nojekyll

@@ -1,0 +1,21 @@
+/*
+  Cross-Origin-Embedder-Policy: credentialless
+  Cross-Origin-Opener-Policy: same-origin
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.html
+  Cross-Origin-Embedder-Policy: credentialless
+  Cross-Origin-Opener-Policy: same-origin
+  Cache-Control: no-cache, no-store, must-revalidate
+
+/*.wasm
+  Cross-Origin-Embedder-Policy: credentialless
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Type: application/wasm
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.mjs
+  Cross-Origin-Embedder-Policy: credentialless
+  Cross-Origin-Opener-Policy: same-origin
+  Content-Type: application/javascript
+  Cache-Control: public, max-age=31536000, immutable
