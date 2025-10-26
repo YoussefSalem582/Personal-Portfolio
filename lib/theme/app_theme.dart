@@ -103,14 +103,6 @@ class AppTheme {
           textStyle: button.copyWith(color: primaryColor),
         ),
       ),
-      cardTheme: CardThemeData(
-        elevation: 4,
-        shadowColor: Colors.black12,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-        color: surfaceColor,
-      ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -166,14 +158,6 @@ class AppTheme {
           side: const BorderSide(color: darkPrimaryColor, width: 2),
           textStyle: AppFonts.button(color: darkPrimaryColor),
         ),
-      ),
-      cardTheme: CardThemeData(
-        elevation: 4,
-        shadowColor: Colors.black26,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-        color: darkCardColor,
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
