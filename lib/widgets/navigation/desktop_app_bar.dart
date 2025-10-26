@@ -34,11 +34,11 @@ class DesktopAppBar extends StatelessWidget {
           colors: isDark
               ? [
                   AppColors.surfaceDark,
-                  AppColors.surfaceDark.withValues(alpha: 0.95),
+                  AppColors.surfaceDark.withOpacity(0.95),
                 ]
               : [
                   AppColors.surfaceLight,
-                  AppColors.surfaceLight.withValues(alpha: 0.98),
+                  AppColors.surfaceLight.withOpacity(0.98),
                 ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -46,16 +46,16 @@ class DesktopAppBar extends StatelessWidget {
         border: Border(
           bottom: BorderSide(
             color: isDark
-                ? AppColors.accentDark.withValues(alpha: 0.2)
-                : AppColors.accentLight.withValues(alpha: 0.1),
+                ? AppColors.accentDark.withOpacity(0.2)
+                : AppColors.accentLight.withOpacity(0.1),
             width: 1,
           ),
         ),
         boxShadow: [
           BoxShadow(
             color: isDark
-                ? AppColors.black.withValues(alpha: 0.3)
-                : AppColors.black.withValues(alpha: 0.08),
+                ? AppColors.black.withOpacity(0.3)
+                : AppColors.black.withOpacity(0.08),
             blurRadius: 12,
             offset: const Offset(0, 4),
             spreadRadius: 0,
@@ -85,11 +85,11 @@ class DesktopAppBar extends StatelessWidget {
                             colors: isDark
                                 ? [
                                     AppColors.accentDark,
-                                    AppColors.accentDark.withValues(alpha: 0.7)
+                                    AppColors.accentDark.withOpacity(0.7)
                                   ]
                                 : [
                                     AppColors.accentLight,
-                                    AppColors.accentLight.withValues(alpha: 0.8)
+                                    AppColors.accentLight.withOpacity(0.8)
                                   ],
                           ),
                           borderRadius: BorderRadius.circular(8),
@@ -154,13 +154,13 @@ class DesktopAppBar extends StatelessWidget {
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
               color: isDark
-                  ? AppColors.white.withValues(alpha: 0.1)
-                  : AppColors.black.withValues(alpha: 0.05),
+                  ? AppColors.white.withOpacity(0.1)
+                  : AppColors.black.withOpacity(0.05),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: isDark
-                    ? AppColors.white.withValues(alpha: 0.15)
-                    : AppColors.black.withValues(alpha: 0.1),
+                    ? AppColors.white.withOpacity(0.15)
+                    : AppColors.black.withOpacity(0.1),
                 width: 1,
               ),
             ),

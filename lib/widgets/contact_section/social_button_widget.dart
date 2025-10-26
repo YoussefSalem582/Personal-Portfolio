@@ -41,8 +41,8 @@ class SocialButtonWidget extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           borderRadius: BorderRadius.circular(AppTheme.radiusM),
-          hoverColor: accentColor.withValues(alpha: 0.1),
-          splashColor: accentColor.withValues(alpha: 0.2),
+          hoverColor: accentColor.withOpacity(0.1),
+          splashColor: accentColor.withOpacity(0.2),
           child: Container(
             padding: const EdgeInsets.symmetric(
               horizontal: AppTheme.spacingM,
@@ -52,8 +52,8 @@ class SocialButtonWidget extends StatelessWidget {
               gradient: LinearGradient(
                 colors: isDark
                     ? [
-                        AppColors.cardDark.withValues(alpha: 0.8),
-                        AppColors.surfaceDark.withValues(alpha: 0.8),
+                        AppColors.cardDark.withOpacity(0.8),
+                        AppColors.surfaceDark.withOpacity(0.8),
                       ]
                     : [
                         AppColors.white,
@@ -64,14 +64,14 @@ class SocialButtonWidget extends StatelessWidget {
               ),
               borderRadius: BorderRadius.circular(AppTheme.radiusM),
               border: Border.all(
-                color: accentColor.withValues(alpha: 0.3),
+                color: accentColor.withOpacity(0.3),
                 width: 1.5,
               ),
               boxShadow: [
                 BoxShadow(
                   color: isDark
-                      ? AppColors.black.withValues(alpha: 0.2)
-                      : accentColor.withValues(alpha: 0.08),
+                      ? AppColors.black.withOpacity(0.2)
+                      : accentColor.withOpacity(0.08),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),

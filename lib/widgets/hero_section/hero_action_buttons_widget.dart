@@ -68,7 +68,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                .withValues(alpha: 0.3),
+                .withOpacity(0.3),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -120,7 +120,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
         foregroundColor: isDark ? AppColors.accentDark : AppColors.accentLight,
         side: BorderSide(
           color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-              .withValues(alpha: 0.5),
+              .withOpacity(0.5),
           width: 1.5,
         ),
         padding: const EdgeInsets.symmetric(

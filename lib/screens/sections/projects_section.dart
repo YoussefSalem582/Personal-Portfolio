@@ -280,7 +280,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
             : (isDark
                     ? AppColors.textSecondaryDark
                     : AppColors.textSecondaryLight)
-                .withValues(alpha: 0.3),
+                .withOpacity(0.3),
       ),
     );
   }
@@ -302,7 +302,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
               color: (isDark
                       ? AppColors.textSecondaryDark
                       : AppColors.textSecondaryLight)
-                  .withValues(alpha: 0.5),
+                  .withOpacity(0.5),
             ),
             const SizedBox(height: AppTheme.spacingM),
             Text(
@@ -441,8 +441,8 @@ class _AllProjectsDialog extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
           border: Border.all(
             color: isDark
-                ? AppColors.white.withValues(alpha: 0.1)
-                : AppColors.black.withValues(alpha: 0.1),
+                ? AppColors.white.withOpacity(0.1)
+                : AppColors.black.withOpacity(0.1),
             width: 1,
           ),
         ),
@@ -455,8 +455,8 @@ class _AllProjectsDialog extends StatelessWidget {
                 border: Border(
                   bottom: BorderSide(
                     color: isDark
-                        ? AppColors.white.withValues(alpha: 0.1)
-                        : AppColors.black.withValues(alpha: 0.1),
+                        ? AppColors.white.withOpacity(0.1)
+                        : AppColors.black.withOpacity(0.1),
                     width: 1,
                   ),
                 ),
@@ -483,8 +483,8 @@ class _AllProjectsDialog extends StatelessWidget {
                     ),
                     style: IconButton.styleFrom(
                       backgroundColor: isDark
-                          ? AppColors.white.withValues(alpha: 0.05)
-                          : AppColors.black.withValues(alpha: 0.05),
+                          ? AppColors.white.withOpacity(0.05)
+                          : AppColors.black.withOpacity(0.05),
                     ),
                   ),
                 ],
@@ -522,8 +522,8 @@ class _AllProjectsDialog extends StatelessWidget {
                                 BorderRadius.circular(AppTheme.radiusM),
                             border: Border.all(
                               color: isDark
-                                  ? AppColors.white.withValues(alpha: 0.1)
-                                  : AppColors.black.withValues(alpha: 0.1),
+                                  ? AppColors.white.withOpacity(0.1)
+                                  : AppColors.black.withOpacity(0.1),
                               width: 1,
                             ),
                           ),
@@ -537,7 +537,7 @@ class _AllProjectsDialog extends StatelessWidget {
                                   color: (isDark
                                           ? AppColors.accentDark
                                           : AppColors.accentLight)
-                                      .withValues(alpha: 0.1),
+                                      .withOpacity(0.1),
                                   borderRadius:
                                       BorderRadius.circular(AppTheme.radiusS),
                                   image: project.imageUrl != null
@@ -602,10 +602,9 @@ class _AllProjectsDialog extends StatelessWidget {
                                               decoration: BoxDecoration(
                                                 color: isDark
                                                     ? AppColors.white
-                                                        .withValues(alpha: 0.1)
+                                                        .withOpacity(0.1)
                                                     : AppColors.black
-                                                        .withValues(
-                                                            alpha: 0.05),
+                                                        .withOpacity(0.05),
                                                 borderRadius:
                                                     BorderRadius.circular(
                                                         AppTheme.radiusS),

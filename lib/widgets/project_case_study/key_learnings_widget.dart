@@ -33,7 +33,7 @@ class KeyLearningsWidget extends StatelessWidget {
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withValues(alpha: 0.3),
+                            .withOpacity(0.3),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
@@ -87,13 +87,13 @@ class KeyLearningsWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppTheme.radiusL),
             border: Border.all(
               color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                  .withValues(alpha: 0.2),
+                  .withOpacity(0.2),
               width: 1.5,
             ),
             boxShadow: [
               BoxShadow(
                 color: (isDark ? AppColors.black : AppColors.gray300)
-                    .withValues(alpha: 0.1),
+                    .withOpacity(0.1),
                 blurRadius: 20,
                 offset: const Offset(0, 8),
               ),
@@ -126,7 +126,7 @@ class KeyLearningsWidget extends StatelessWidget {
                             color: (isDark
                                     ? AppColors.accentDark
                                     : AppColors.accentLight)
-                                .withValues(alpha: 0.3),
+                                .withOpacity(0.3),
                             blurRadius: 6,
                             offset: const Offset(0, 2),
                           ),

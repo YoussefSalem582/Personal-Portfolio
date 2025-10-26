@@ -82,8 +82,8 @@ class _StatCardWidgetState extends State<StatCardWidget>
             child: Card(
               elevation: _isHovered ? 8 : 3,
               shadowColor: isDark
-                  ? AppColors.accentDark.withValues(alpha: 0.3)
-                  : AppColors.accentLight.withValues(alpha: 0.2),
+                  ? AppColors.accentDark.withOpacity(0.3)
+                  : AppColors.accentLight.withOpacity(0.2),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(AppTheme.radiusL),
               ),
@@ -97,12 +97,12 @@ class _StatCardWidgetState extends State<StatCardWidget>
                     colors: _isHovered
                         ? (isDark
                             ? [
-                                AppColors.accentDark.withValues(alpha: 0.2),
-                                AppColors.primaryDark.withValues(alpha: 0.15),
+                                AppColors.accentDark.withOpacity(0.2),
+                                AppColors.primaryDark.withOpacity(0.15),
                               ]
                             : [
-                                AppColors.accentLight.withValues(alpha: 0.15),
-                                AppColors.primaryLight.withValues(alpha: 0.1),
+                                AppColors.accentLight.withOpacity(0.15),
+                                AppColors.primaryLight.withOpacity(0.1),
                               ])
                         : (isDark
                             ? [
@@ -111,14 +111,14 @@ class _StatCardWidgetState extends State<StatCardWidget>
                               ]
                             : [
                                 AppColors.surfaceLight,
-                                AppColors.surfaceLight.withValues(alpha: 0.95),
+                                AppColors.surfaceLight.withOpacity(0.95),
                               ]),
                   ),
                   border: Border.all(
                     color: _isHovered
                         ? (isDark
-                            ? AppColors.accentDark.withValues(alpha: 0.5)
-                            : AppColors.accentLight.withValues(alpha: 0.3))
+                            ? AppColors.accentDark.withOpacity(0.5)
+                            : AppColors.accentLight.withOpacity(0.3))
                         : AppColors.transparent,
                     width: 1.5,
                   ),
@@ -142,15 +142,15 @@ class _StatCardWidgetState extends State<StatCardWidget>
                               colors: isDark
                                   ? [
                                       AppColors.accentDark
-                                          .withValues(alpha: 0.2),
+                                          .withOpacity(0.2),
                                       AppColors.accentDark
-                                          .withValues(alpha: 0.1),
+                                          .withOpacity(0.1),
                                     ]
                                   : [
                                       AppColors.accentLight
-                                          .withValues(alpha: 0.2),
+                                          .withOpacity(0.2),
                                       AppColors.primaryLight
-                                          .withValues(alpha: 0.1),
+                                          .withOpacity(0.1),
                                     ],
                             ),
                           ),
@@ -171,7 +171,7 @@ class _StatCardWidgetState extends State<StatCardWidget>
                           colors: isDark
                               ? [
                                   AppColors.accentDark,
-                                  AppColors.accentDark.withValues(alpha: 0.8),
+                                  AppColors.accentDark.withOpacity(0.8),
                                 ]
                               : [
                                   AppColors.accentLight,

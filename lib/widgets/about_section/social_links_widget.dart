@@ -61,10 +61,10 @@ class SocialLinksWidget extends StatelessWidget {
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-          color: AppColors.accentLight.withValues(alpha: 0.1),
+          color: AppColors.accentLight.withOpacity(0.1),
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
           border: Border.all(
-            color: AppColors.accentLight.withValues(alpha: 0.2),
+            color: AppColors.accentLight.withOpacity(0.2),
           ),
         ),
         child: Center(

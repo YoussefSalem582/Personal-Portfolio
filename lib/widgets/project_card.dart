@@ -78,9 +78,9 @@ class _ProjectCardState extends State<ProjectCard>
                   BoxShadow(
                     color: _isHovered
                         ? (isDark
-                            ? AppColors.accentDark.withValues(alpha: 0.3)
-                            : AppColors.accentLight.withValues(alpha: 0.3))
-                        : AppColors.black.withValues(alpha: 0.1),
+                            ? AppColors.accentDark.withOpacity(0.3)
+                            : AppColors.accentLight.withOpacity(0.3))
+                        : AppColors.black.withOpacity(0.1),
                     blurRadius: _elevationAnimation.value * 2,
                     offset: Offset(0, _elevationAnimation.value / 2),
                     spreadRadius: _isHovered ? 2 : 0,
@@ -96,8 +96,8 @@ class _ProjectCardState extends State<ProjectCard>
                   side: BorderSide(
                     color: _isHovered
                         ? (isDark
-                            ? AppColors.accentDark.withValues(alpha: 0.5)
-                            : AppColors.accentLight.withValues(alpha: 0.5))
+                            ? AppColors.accentDark.withOpacity(0.5)
+                            : AppColors.accentLight.withOpacity(0.5))
                         : AppColors.transparent,
                     width: _isHovered ? 2 : 0,
                   ),
@@ -144,7 +144,7 @@ class _ProjectCardState extends State<ProjectCard>
           widget.project.imageUrl != null
               ? Container(
                   color: isDark
-                      ? AppColors.cardDark.withValues(alpha: 0.5)
+                      ? AppColors.cardDark.withOpacity(0.5)
                       : AppColors.gray100,
                   child: LazyImage(
                     imageUrl: widget.project.imageUrl!,
@@ -164,7 +164,7 @@ class _ProjectCardState extends State<ProjectCard>
                 end: Alignment.bottomCenter,
                 colors: [
                   AppColors.transparent,
-                  AppColors.black.withValues(alpha: 0.3),
+                  AppColors.black.withOpacity(0.3),
                 ],
                 stops: const [0.7, 1.0],
               ),
@@ -191,7 +191,7 @@ class _ProjectCardState extends State<ProjectCard>
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.accentLight.withValues(alpha: 0.5),
+                      color: AppColors.accentLight.withOpacity(0.5),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -223,7 +223,7 @@ class _ProjectCardState extends State<ProjectCard>
             duration: const Duration(milliseconds: 200),
             opacity: _isHovered ? 1.0 : 0.0,
             child: Container(
-              color: AppColors.black.withValues(alpha: 0.5),
+              color: AppColors.black.withOpacity(0.5),
               child: Center(
                 child: Container(
                   padding: const EdgeInsets.symmetric(
@@ -240,7 +240,7 @@ class _ProjectCardState extends State<ProjectCard>
                     borderRadius: BorderRadius.circular(30),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.accentLight.withValues(alpha: 0.5),
+                        color: AppColors.accentLight.withOpacity(0.5),
                         blurRadius: 12,
                         offset: const Offset(0, 4),
                       ),
@@ -360,11 +360,11 @@ class _ProjectCardState extends State<ProjectCard>
                               (isDark
                                       ? AppColors.accentDark
                                       : AppColors.accentLight)
-                                  .withValues(alpha: 0.15),
+                                  .withOpacity(0.15),
                               (isDark
                                       ? AppColors.accentDark
                                       : AppColors.accentLight)
-                                  .withValues(alpha: 0.05),
+                                  .withOpacity(0.05),
                             ],
                           ),
                           borderRadius: BorderRadius.circular(20),
@@ -372,7 +372,7 @@ class _ProjectCardState extends State<ProjectCard>
                             color: (isDark
                                     ? AppColors.accentDark
                                     : AppColors.accentLight)
-                                .withValues(alpha: 0.3),
+                                .withOpacity(0.3),
                             width: 1,
                           ),
                         ),
@@ -405,8 +405,8 @@ class _ProjectCardState extends State<ProjectCard>
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppColors.accentLight.withValues(alpha: 0.2),
-            AppColors.primaryLight.withValues(alpha: 0.2),
+            AppColors.accentLight.withOpacity(0.2),
+            AppColors.primaryLight.withOpacity(0.2),
           ],
         ),
       ),
@@ -416,7 +416,7 @@ class _ProjectCardState extends State<ProjectCard>
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
-              color: AppColors.accentLight.withValues(alpha: 0.2),
+              color: AppColors.accentLight.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
             child: Icon(
@@ -567,7 +567,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                               backgroundColor: (isDark
                                       ? AppColors.accentDark
                                       : AppColors.accentLight)
-                                  .withValues(alpha: 0.1),
+                                  .withOpacity(0.1),
                               side: BorderSide.none,
                             ),
                           )
@@ -701,7 +701,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                                   vertical: 4,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: AppColors.black.withValues(alpha: 0.7),
+                                  color: AppColors.black.withOpacity(0.7),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: Text(
@@ -788,7 +788,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: currentPage == index
                                   ? AppColors.accentLight
-                                  : AppColors.white.withValues(alpha: 0.5),
+                                  : AppColors.white.withOpacity(0.5),
                               borderRadius: BorderRadius.circular(4),
                             ),
                           ),
@@ -814,11 +814,11 @@ class ProjectDetailsDialog extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: AppColors.black.withValues(alpha: 0.6),
+            color: AppColors.black.withOpacity(0.6),
             shape: BoxShape.circle,
             boxShadow: [
               BoxShadow(
-                color: AppColors.black.withValues(alpha: 0.3),
+                color: AppColors.black.withOpacity(0.3),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -837,7 +837,7 @@ class ProjectDetailsDialog extends StatelessWidget {
   Widget _buildImagePlaceholder() {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.accentLight.withValues(alpha: 0.1),
+        color: AppColors.accentLight.withOpacity(0.1),
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
       ),
       child: const Center(

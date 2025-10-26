@@ -61,11 +61,11 @@ class ProjectCaseStudyAppBar extends StatelessWidget
             colors: isDark
                 ? [
                     AppColors.surfaceDark,
-                    AppColors.surfaceDark.withValues(alpha: 0.95),
+                    AppColors.surfaceDark.withOpacity(0.95),
                   ]
                 : [
                     AppColors.surfaceLight,
-                    AppColors.surfaceLight.withValues(alpha: 0.98),
+                    AppColors.surfaceLight.withOpacity(0.98),
                   ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -73,16 +73,16 @@ class ProjectCaseStudyAppBar extends StatelessWidget
           border: Border(
             bottom: BorderSide(
               color: isDark
-                  ? AppColors.accentDark.withValues(alpha: 0.2)
-                  : AppColors.accentLight.withValues(alpha: 0.1),
+                  ? AppColors.accentDark.withOpacity(0.2)
+                  : AppColors.accentLight.withOpacity(0.1),
               width: 1,
             ),
           ),
           boxShadow: [
             BoxShadow(
               color: isDark
-                  ? AppColors.black.withValues(alpha: 0.3)
-                  : AppColors.black.withValues(alpha: 0.08),
+                  ? AppColors.black.withOpacity(0.3)
+                  : AppColors.black.withOpacity(0.08),
               blurRadius: 12,
               offset: const Offset(0, 4),
               spreadRadius: 0,
@@ -108,8 +108,8 @@ class ProjectCaseStudyAppBar extends StatelessWidget
                     tooltip: 'Back to Projects',
                     style: IconButton.styleFrom(
                       backgroundColor: isDark
-                          ? AppColors.white.withValues(alpha: 0.1)
-                          : AppColors.black.withValues(alpha: 0.05),
+                          ? AppColors.white.withOpacity(0.1)
+                          : AppColors.black.withOpacity(0.05),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -129,12 +129,12 @@ class ProjectCaseStudyAppBar extends StatelessWidget
                                   ? [
                                       AppColors.accentDark,
                                       AppColors.accentDark
-                                          .withValues(alpha: 0.7)
+                                          .withOpacity(0.7)
                                     ]
                                   : [
                                       AppColors.accentLight,
                                       AppColors.accentLight
-                                          .withValues(alpha: 0.8)
+                                          .withOpacity(0.8)
                                     ],
                             ),
                             borderRadius: BorderRadius.circular(8),
@@ -199,13 +199,13 @@ class ProjectCaseStudyAppBar extends StatelessWidget
               padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
                 color: isDark
-                    ? AppColors.white.withValues(alpha: 0.1)
-                    : AppColors.black.withValues(alpha: 0.05),
+                    ? AppColors.white.withOpacity(0.1)
+                    : AppColors.black.withOpacity(0.05),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
                   color: isDark
-                      ? AppColors.white.withValues(alpha: 0.15)
-                      : AppColors.black.withValues(alpha: 0.1),
+                      ? AppColors.white.withOpacity(0.15)
+                      : AppColors.black.withOpacity(0.1),
                   width: 1,
                 ),
               ),
@@ -288,7 +288,7 @@ class _ProjectSectionItem extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(10),
         hoverColor: (isDark ? AppColors.accentDark : AppColors.accentLight)
-            .withValues(alpha: 0.1),
+            .withOpacity(0.1),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 200),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -298,12 +298,12 @@ class _ProjectSectionItem extends StatelessWidget {
                 ? LinearGradient(
                     colors: isDark
                         ? [
-                            AppColors.accentDark.withValues(alpha: 0.2),
-                            AppColors.accentDark.withValues(alpha: 0.1),
+                            AppColors.accentDark.withOpacity(0.2),
+                            AppColors.accentDark.withOpacity(0.1),
                           ]
                         : [
-                            AppColors.accentLight.withValues(alpha: 0.15),
-                            AppColors.accentLight.withValues(alpha: 0.08),
+                            AppColors.accentLight.withOpacity(0.15),
+                            AppColors.accentLight.withOpacity(0.08),
                           ],
                   )
                 : null,
@@ -311,7 +311,7 @@ class _ProjectSectionItem extends StatelessWidget {
                 ? Border.all(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withValues(alpha: 0.4),
+                            .withOpacity(0.4),
                     width: 1.5,
                   )
                 : null,
@@ -321,7 +321,7 @@ class _ProjectSectionItem extends StatelessWidget {
                       color: (isDark
                               ? AppColors.accentDark
                               : AppColors.accentLight)
-                          .withValues(alpha: 0.2),
+                          .withOpacity(0.2),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),

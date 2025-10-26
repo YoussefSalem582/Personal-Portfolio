@@ -58,14 +58,14 @@ class _ContactInfoItemWidgetState extends State<ContactInfoItemWidget> {
           decoration: BoxDecoration(
             color: _isHovered && isClickable
                 ? (isDark
-                    ? AppColors.primaryLight.withValues(alpha: 0.1)
-                    : AppColors.accentLight.withValues(alpha: 0.05))
+                    ? AppColors.primaryLight.withOpacity(0.1)
+                    : AppColors.accentLight.withOpacity(0.05))
                 : AppColors.transparent,
             borderRadius: BorderRadius.circular(AppTheme.radiusM),
             border: Border.all(
               color: _isHovered && isClickable
                   ? (isDark ? AppColors.primaryLight : AppColors.accentLight)
-                      .withValues(alpha: 0.3)
+                      .withOpacity(0.3)
                   : AppColors.transparent,
             ),
           ),
@@ -78,12 +78,12 @@ class _ContactInfoItemWidgetState extends State<ContactInfoItemWidget> {
                   gradient: LinearGradient(
                     colors: isDark
                         ? [
-                            AppColors.primaryLight.withValues(alpha: 0.2),
-                            AppColors.accentDark.withValues(alpha: 0.1),
+                            AppColors.primaryLight.withOpacity(0.2),
+                            AppColors.accentDark.withOpacity(0.1),
                           ]
                         : [
-                            AppColors.primaryLight.withValues(alpha: 0.15),
-                            AppColors.accentLight.withValues(alpha: 0.1),
+                            AppColors.primaryLight.withOpacity(0.15),
+                            AppColors.accentLight.withOpacity(0.1),
                           ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -91,8 +91,8 @@ class _ContactInfoItemWidgetState extends State<ContactInfoItemWidget> {
                   borderRadius: BorderRadius.circular(AppTheme.radiusS),
                   border: Border.all(
                     color: isDark
-                        ? AppColors.primaryLight.withValues(alpha: 0.3)
-                        : AppColors.accentLight.withValues(alpha: 0.2),
+                        ? AppColors.primaryLight.withOpacity(0.3)
+                        : AppColors.accentLight.withOpacity(0.2),
                   ),
                 ),
                 child: Icon(
@@ -160,8 +160,8 @@ class _ContactInfoItemWidgetState extends State<ContactInfoItemWidget> {
                     Icons.arrow_forward_rounded,
                     size: 18,
                     color: isDark
-                        ? AppColors.primaryLight.withValues(alpha: 0.7)
-                        : AppColors.accentLight.withValues(alpha: 0.7),
+                        ? AppColors.primaryLight.withOpacity(0.7)
+                        : AppColors.accentLight.withOpacity(0.7),
                   ),
                 ),
             ],

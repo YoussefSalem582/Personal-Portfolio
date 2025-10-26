@@ -30,12 +30,12 @@ class SubmitStatusWidget extends StatelessWidget {
         gradient: LinearGradient(
           colors: isError
               ? [
-                  AppColors.errorLight.withValues(alpha: 0.15),
-                  AppColors.errorLight.withValues(alpha: 0.08),
+                  AppColors.errorLight.withOpacity(0.15),
+                  AppColors.errorLight.withOpacity(0.08),
                 ]
               : [
-                  AppColors.successLight.withValues(alpha: 0.15),
-                  AppColors.successLight.withValues(alpha: 0.08),
+                  AppColors.successLight.withOpacity(0.15),
+                  AppColors.successLight.withOpacity(0.08),
                 ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -43,15 +43,15 @@ class SubmitStatusWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         border: Border.all(
           color: isError
-              ? AppColors.errorLight.withValues(alpha: 0.3)
-              : AppColors.successLight.withValues(alpha: 0.3),
+              ? AppColors.errorLight.withOpacity(0.3)
+              : AppColors.successLight.withOpacity(0.3),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
             color: isError
-                ? AppColors.errorLight.withValues(alpha: 0.1)
-                : AppColors.successLight.withValues(alpha: 0.1),
+                ? AppColors.errorLight.withOpacity(0.1)
+                : AppColors.successLight.withOpacity(0.1),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -64,14 +64,14 @@ class SubmitStatusWidget extends StatelessWidget {
             padding: const EdgeInsets.all(AppTheme.spacingS),
             decoration: BoxDecoration(
               color: isError
-                  ? AppColors.errorLight.withValues(alpha: 0.2)
-                  : AppColors.successLight.withValues(alpha: 0.2),
+                  ? AppColors.errorLight.withOpacity(0.2)
+                  : AppColors.successLight.withOpacity(0.2),
               borderRadius: BorderRadius.circular(AppTheme.radiusS),
               boxShadow: [
                 BoxShadow(
                   color: isError
-                      ? AppColors.errorLight.withValues(alpha: 0.2)
-                      : AppColors.successLight.withValues(alpha: 0.2),
+                      ? AppColors.errorLight.withOpacity(0.2)
+                      : AppColors.successLight.withOpacity(0.2),
                   blurRadius: 8,
                   offset: const Offset(0, 2),
                 ),

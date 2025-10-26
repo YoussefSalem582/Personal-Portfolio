@@ -77,11 +77,11 @@ class _SmartImageState extends State<SmartImage>
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppColors.surfaceDark.withValues(alpha: 0.3)
-            : AppColors.surfaceLight.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withOpacity(0.3)
+            : AppColors.surfaceLight.withOpacity(0.3),
         highlightColor: isDark
-            ? AppColors.accentDark.withValues(alpha: 0.1)
-            : AppColors.accentLight.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withOpacity(0.1)
+            : AppColors.accentLight.withOpacity(0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Container(
@@ -89,8 +89,8 @@ class _SmartImageState extends State<SmartImage>
         height: widget.height,
         decoration: BoxDecoration(
           color: isDark
-              ? AppColors.surfaceDark.withValues(alpha: 0.2)
-              : AppColors.surfaceLight.withValues(alpha: 0.2),
+              ? AppColors.surfaceDark.withOpacity(0.2)
+              : AppColors.surfaceLight.withOpacity(0.2),
           borderRadius: widget.borderRadius,
         ),
       ),
@@ -109,8 +109,8 @@ class _SmartImageState extends State<SmartImage>
       height: widget.height,
       decoration: BoxDecoration(
         color: isDark
-            ? AppColors.surfaceDark.withValues(alpha: 0.1)
-            : AppColors.surfaceLight.withValues(alpha: 0.1),
+            ? AppColors.surfaceDark.withOpacity(0.1)
+            : AppColors.surfaceLight.withOpacity(0.1),
         borderRadius: widget.borderRadius,
       ),
       child: Center(
@@ -121,16 +121,16 @@ class _SmartImageState extends State<SmartImage>
               AppIcons.image,
               size: 32,
               color: isDark
-                  ? AppColors.textSecondaryDark.withValues(alpha: 0.5)
-                  : AppColors.textSecondaryLight.withValues(alpha: 0.5),
+                  ? AppColors.textSecondaryDark.withOpacity(0.5)
+                  : AppColors.textSecondaryLight.withOpacity(0.5),
             ),
             const SizedBox(height: 8),
             Text(
               'Image not found',
               style: AppFonts.bodySmall().copyWith(
                 color: isDark
-                    ? AppColors.textSecondaryDark.withValues(alpha: 0.5)
-                    : AppColors.textSecondaryLight.withValues(alpha: 0.5),
+                    ? AppColors.textSecondaryDark.withOpacity(0.5)
+                    : AppColors.textSecondaryLight.withOpacity(0.5),
               ),
             ),
           ],

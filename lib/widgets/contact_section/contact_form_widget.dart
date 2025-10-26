@@ -71,8 +71,8 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
         boxShadow: [
           BoxShadow(
             color: isDark
-                ? AppColors.black.withValues(alpha: 0.3)
-                : AppColors.black.withValues(alpha: 0.08),
+                ? AppColors.black.withOpacity(0.3)
+                : AppColors.black.withOpacity(0.08),
             blurRadius: 24,
             offset: const Offset(0, 8),
             spreadRadius: 0,
@@ -80,8 +80,8 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
         ],
         border: Border.all(
           color: isDark
-              ? AppColors.accentDark.withValues(alpha: 0.2)
-              : AppColors.accentLight.withValues(alpha: 0.1),
+              ? AppColors.accentDark.withOpacity(0.2)
+              : AppColors.accentLight.withOpacity(0.1),
           width: 1,
         ),
       ),
@@ -104,11 +104,11 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                           colors: isDark
                               ? [
                                   AppColors.accentDark,
-                                  AppColors.accentDark.withValues(alpha: 0.8)
+                                  AppColors.accentDark.withOpacity(0.8)
                                 ]
                               : [
                                   AppColors.accentLight,
-                                  AppColors.accentLight.withValues(alpha: 0.8)
+                                  AppColors.accentLight.withOpacity(0.8)
                                 ],
                         ),
                         borderRadius: BorderRadius.circular(AppTheme.radiusM),
@@ -117,7 +117,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                             color: (isDark
                                     ? AppColors.accentDark
                                     : AppColors.accentLight)
-                                .withValues(alpha: 0.3),
+                                .withOpacity(0.3),
                             blurRadius: 12,
                             offset: const Offset(0, 4),
                           ),
@@ -257,7 +257,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                       shadowColor: (isDark
                               ? AppColors.accentDark
                               : AppColors.accentLight)
-                          .withValues(alpha: 0.5),
+                          .withOpacity(0.5),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(AppTheme.radiusM),
                       ),

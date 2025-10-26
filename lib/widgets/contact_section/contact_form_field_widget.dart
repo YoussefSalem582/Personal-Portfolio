@@ -66,13 +66,13 @@ class ContactFormFieldWidget extends StatelessWidget {
         labelText: label,
         hintText: hint,
         labelStyle: TextStyle(color: textSecondary),
-        hintStyle: TextStyle(color: textSecondary.withValues(alpha: 0.6)),
+        hintStyle: TextStyle(color: textSecondary.withOpacity(0.6)),
         prefixIcon: Icon(icon, color: accentColor),
         // Default border style
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusS),
           borderSide: BorderSide(
-            color: textSecondary.withValues(alpha: 0.3),
+            color: textSecondary.withOpacity(0.3),
           ),
         ),
         // Border when field is focused
@@ -84,7 +84,7 @@ class ContactFormFieldWidget extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusS),
           borderSide: BorderSide(
-            color: textSecondary.withValues(alpha: 0.3),
+            color: textSecondary.withOpacity(0.3),
           ),
         ),
         // Border when field has validation error

@@ -110,9 +110,9 @@ class _HeroSectionState extends State<HeroSection>
               gradient: RadialGradient(
                 colors: [
                   (isDark ? AppColors.accentDark : AppColors.accentLight)
-                      .withValues(alpha: 0.15),
+                      .withOpacity(0.15),
                   (isDark ? AppColors.accentDark : AppColors.accentLight)
-                      .withValues(alpha: 0.05),
+                      .withOpacity(0.05),
                   AppColors.transparent,
                 ],
               ),
@@ -130,9 +130,9 @@ class _HeroSectionState extends State<HeroSection>
               gradient: RadialGradient(
                 colors: [
                   (isDark ? AppColors.primaryLight : AppColors.primaryLight)
-                      .withValues(alpha: 0.12),
+                      .withOpacity(0.12),
                   (isDark ? AppColors.primaryLight : AppColors.primaryLight)
-                      .withValues(alpha: 0.06),
+                      .withOpacity(0.06),
                   AppColors.transparent,
                 ],
               ),
@@ -150,9 +150,9 @@ class _HeroSectionState extends State<HeroSection>
               gradient: RadialGradient(
                 colors: [
                   (isDark ? AppColors.accentDark : AppColors.accentLight)
-                      .withValues(alpha: 0.1),
+                      .withOpacity(0.1),
                   (isDark ? AppColors.accentDark : AppColors.accentLight)
-                      .withValues(alpha: 0.03),
+                      .withOpacity(0.03),
                   AppColors.transparent,
                 ],
               ),
@@ -170,9 +170,9 @@ class _HeroSectionState extends State<HeroSection>
               gradient: RadialGradient(
                 colors: [
                   (isDark ? AppColors.primaryDark : AppColors.primaryLight)
-                      .withValues(alpha: 0.08),
+                      .withOpacity(0.08),
                   (isDark ? AppColors.primaryDark : AppColors.primaryLight)
-                      .withValues(alpha: 0.02),
+                      .withOpacity(0.02),
                   AppColors.transparent,
                 ],
               ),
@@ -330,13 +330,13 @@ class _HeroSectionState extends State<HeroSection>
             colors: [
               isDark ? AppColors.accentDark : AppColors.accentLight,
               (isDark ? AppColors.primaryDark : AppColors.primaryLight)
-                  .withValues(alpha: 0.8),
+                  .withOpacity(0.8),
             ],
           ),
           boxShadow: [
             BoxShadow(
               color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                  .withValues(alpha: 0.5),
+                  .withOpacity(0.5),
               blurRadius: 15,
               spreadRadius: 3,
             ),

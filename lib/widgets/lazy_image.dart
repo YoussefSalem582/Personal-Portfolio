@@ -75,11 +75,11 @@ class _LazyImageState extends State<LazyImage>
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppColors.surfaceDark.withValues(alpha: 0.3)
-            : AppColors.surfaceLight.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withOpacity(0.3)
+            : AppColors.surfaceLight.withOpacity(0.3),
         highlightColor: isDark
-            ? AppColors.accentDark.withValues(alpha: 0.1)
-            : AppColors.accentLight.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withOpacity(0.1)
+            : AppColors.accentLight.withOpacity(0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Container(
@@ -87,8 +87,8 @@ class _LazyImageState extends State<LazyImage>
         height: widget.height,
         decoration: BoxDecoration(
           color: isDark
-              ? AppColors.surfaceDark.withValues(alpha: 0.2)
-              : AppColors.surfaceLight.withValues(alpha: 0.2),
+              ? AppColors.surfaceDark.withOpacity(0.2)
+              : AppColors.surfaceLight.withOpacity(0.2),
           borderRadius: widget.borderRadius,
         ),
       ),
@@ -104,7 +104,7 @@ class _LazyImageState extends State<LazyImage>
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
-        color: AppColors.surfaceLight.withValues(alpha: 0.1),
+        color: AppColors.surfaceLight.withOpacity(0.1),
         borderRadius: widget.borderRadius,
       ),
       child: Center(
@@ -114,13 +114,13 @@ class _LazyImageState extends State<LazyImage>
             Icon(
               AppIcons.error,
               size: 32,
-              color: AppColors.textSecondaryLight.withValues(alpha: 0.5),
+              color: AppColors.textSecondaryLight.withOpacity(0.5),
             ),
             const SizedBox(height: 8),
             Text(
               'Image not found',
               style: AppFonts.bodySmall().copyWith(
-                color: AppColors.textSecondaryLight.withValues(alpha: 0.5),
+                color: AppColors.textSecondaryLight.withOpacity(0.5),
               ),
             ),
           ],

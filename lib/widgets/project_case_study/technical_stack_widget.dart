@@ -44,7 +44,7 @@ class TechnicalStackWidget extends StatelessWidget {
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withValues(alpha: 0.3),
+                            .withOpacity(0.3),
                     blurRadius: 12,
                     offset: const Offset(0, 4),
                   ),
@@ -106,19 +106,19 @@ class TechnicalStackWidget extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: isDark
                       ? [
-                          AppColors.accentDark.withValues(alpha: 0.2),
-                          AppColors.primaryDark.withValues(alpha: 0.2),
+                          AppColors.accentDark.withOpacity(0.2),
+                          AppColors.primaryDark.withOpacity(0.2),
                         ]
                       : [
-                          AppColors.accentLight.withValues(alpha: 0.15),
-                          AppColors.primaryLight.withValues(alpha: 0.15),
+                          AppColors.accentLight.withOpacity(0.15),
+                          AppColors.primaryLight.withOpacity(0.15),
                         ],
                 ),
                 borderRadius: BorderRadius.circular(AppTheme.radiusM),
                 // Colored border for accent
                 border: Border.all(
                   color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                      .withValues(alpha: 0.4),
+                      .withOpacity(0.4),
                   width: 1.5,
                 ),
                 // Subtle shadow for depth
@@ -126,7 +126,7 @@ class TechnicalStackWidget extends StatelessWidget {
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withValues(alpha: 0.1),
+                            .withOpacity(0.1),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),

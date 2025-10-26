@@ -107,20 +107,20 @@ class BioSectionWidget extends StatelessWidget {
             gradient: isDark
                 ? LinearGradient(
                     colors: [
-                      AppColors.primaryLight.withValues(alpha: 0.1),
-                      AppColors.accentLight.withValues(alpha: 0.1),
+                      AppColors.primaryLight.withOpacity(0.1),
+                      AppColors.accentLight.withOpacity(0.1),
                     ],
                   )
                 : LinearGradient(
                     colors: [
-                      AppColors.accentLight.withValues(alpha: 0.08),
-                      AppColors.primaryLight.withValues(alpha: 0.08),
+                      AppColors.accentLight.withOpacity(0.08),
+                      AppColors.primaryLight.withOpacity(0.08),
                     ],
                   ),
             borderRadius: BorderRadius.circular(AppTheme.radiusM),
             border: Border.all(
               color: (isDark ? AppColors.primaryLight : AppColors.accentLight)
-                  .withValues(alpha: 0.2),
+                  .withOpacity(0.2),
               width: 1,
             ),
           ),
@@ -191,7 +191,7 @@ class BioSectionWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: (isDark ? AppColors.primaryLight : AppColors.accentLight)
-                    .withValues(alpha: 0.3),
+                    .withOpacity(0.3),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),

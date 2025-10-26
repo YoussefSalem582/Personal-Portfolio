@@ -31,15 +31,15 @@ class SkillItemWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         border: Border.all(
           color: isDark
-              ? AppColors.white.withValues(alpha: 0.1)
-              : AppColors.black.withValues(alpha: 0.1),
+              ? AppColors.white.withOpacity(0.1)
+              : AppColors.black.withOpacity(0.1),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
             color: isDark
-                ? AppColors.black.withValues(alpha: 0.3)
-                : AppColors.black.withValues(alpha: 0.08),
+                ? AppColors.black.withOpacity(0.3)
+                : AppColors.black.withOpacity(0.08),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -53,7 +53,7 @@ class SkillItemWidget extends StatelessWidget {
             onTap: () {
               // TODO: Add skill detail dialog or navigation
             },
-            hoverColor: color.withValues(alpha: 0.05),
+            hoverColor: color.withOpacity(0.05),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -64,8 +64,8 @@ class SkillItemWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: isDark
-                        ? AppColors.white.withValues(alpha: 0.05)
-                        : color.withValues(alpha: 0.05),
+                        ? AppColors.white.withOpacity(0.05)
+                        : color.withOpacity(0.05),
                   ),
                   child: Center(
                     child: SkillIconWidget(

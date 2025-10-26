@@ -21,11 +21,11 @@ class SkillsSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppColors.surfaceDark.withValues(alpha: 0.3)
-            : AppColors.surfaceLight.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withOpacity(0.3)
+            : AppColors.surfaceLight.withOpacity(0.3),
         highlightColor: isDark
-            ? AppColors.accentDark.withValues(alpha: 0.1)
-            : AppColors.accentLight.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withOpacity(0.1)
+            : AppColors.accentLight.withOpacity(0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: GridView.builder(
@@ -111,11 +111,11 @@ class AboutSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppColors.surfaceDark.withValues(alpha: 0.3)
-            : AppColors.surfaceLight.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withOpacity(0.3)
+            : AppColors.surfaceLight.withOpacity(0.3),
         highlightColor: isDark
-            ? AppColors.accentDark.withValues(alpha: 0.1)
-            : AppColors.accentLight.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withOpacity(0.1)
+            : AppColors.accentLight.withOpacity(0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Column(
@@ -224,11 +224,11 @@ class ProjectsSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppColors.surfaceDark.withValues(alpha: 0.3)
-            : AppColors.surfaceLight.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withOpacity(0.3)
+            : AppColors.surfaceLight.withOpacity(0.3),
         highlightColor: isDark
-            ? AppColors.accentDark.withValues(alpha: 0.1)
-            : AppColors.accentLight.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withOpacity(0.1)
+            : AppColors.accentLight.withOpacity(0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Column(
@@ -289,11 +289,11 @@ class CertificatesSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppColors.surfaceDark.withValues(alpha: 0.3)
-            : AppColors.surfaceLight.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withOpacity(0.3)
+            : AppColors.surfaceLight.withOpacity(0.3),
         highlightColor: isDark
-            ? AppColors.accentDark.withValues(alpha: 0.1)
-            : AppColors.accentLight.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withOpacity(0.1)
+            : AppColors.accentLight.withOpacity(0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: GridView.builder(
@@ -328,11 +328,11 @@ class HeroSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppColors.surfaceDark.withValues(alpha: 0.3)
-            : AppColors.surfaceLight.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withOpacity(0.3)
+            : AppColors.surfaceLight.withOpacity(0.3),
         highlightColor: isDark
-            ? AppColors.accentDark.withValues(alpha: 0.1)
-            : AppColors.accentLight.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withOpacity(0.1)
+            : AppColors.accentLight.withOpacity(0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Container(
@@ -415,11 +415,11 @@ class ContactSectionSkeleton extends StatelessWidget {
       enabled: true,
       effect: ShimmerEffect(
         baseColor: isDark
-            ? AppColors.surfaceDark.withValues(alpha: 0.3)
-            : AppColors.surfaceLight.withValues(alpha: 0.3),
+            ? AppColors.surfaceDark.withOpacity(0.3)
+            : AppColors.surfaceLight.withOpacity(0.3),
         highlightColor: isDark
-            ? AppColors.accentDark.withValues(alpha: 0.1)
-            : AppColors.accentLight.withValues(alpha: 0.1),
+            ? AppColors.accentDark.withOpacity(0.1)
+            : AppColors.accentLight.withOpacity(0.1),
         duration: const Duration(milliseconds: 1500),
       ),
       child: Column(

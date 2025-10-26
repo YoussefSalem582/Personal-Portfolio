@@ -29,19 +29,19 @@ class ContactInfoWidget extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: isDark
               ? [
-                  AppColors.cardDark.withValues(alpha: 0.3),
-                  AppColors.surfaceDark.withValues(alpha: 0.2),
+                  AppColors.cardDark.withOpacity(0.3),
+                  AppColors.surfaceDark.withOpacity(0.2),
                 ]
               : [
-                  AppColors.surfaceLight.withValues(alpha: 0.3),
-                  AppColors.white.withValues(alpha: 0.5),
+                  AppColors.surfaceLight.withOpacity(0.3),
+                  AppColors.white.withOpacity(0.5),
                 ],
         ),
         borderRadius: BorderRadius.circular(AppTheme.radiusXL),
         border: Border.all(
           color: isDark
-              ? AppColors.white.withValues(alpha: 0.05)
-              : AppColors.black.withValues(alpha: 0.05),
+              ? AppColors.white.withOpacity(0.05)
+              : AppColors.black.withOpacity(0.05),
           width: 1,
         ),
       ),
@@ -58,11 +58,11 @@ class ContactInfoWidget extends StatelessWidget {
                     colors: isDark
                         ? [
                             AppColors.accentDark,
-                            AppColors.accentDark.withValues(alpha: 0.8)
+                            AppColors.accentDark.withOpacity(0.8)
                           ]
                         : [
                             AppColors.accentLight,
-                            AppColors.accentLight.withValues(alpha: 0.8)
+                            AppColors.accentLight.withOpacity(0.8)
                           ],
                   ),
                   borderRadius: BorderRadius.circular(AppTheme.radiusM),
@@ -71,7 +71,7 @@ class ContactInfoWidget extends StatelessWidget {
                       color: (isDark
                               ? AppColors.accentDark
                               : AppColors.accentLight)
-                          .withValues(alpha: 0.3),
+                          .withOpacity(0.3),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),
@@ -153,7 +153,7 @@ class ContactInfoWidget extends StatelessWidget {
                 colors: [
                   Colors.transparent,
                   (isDark ? AppColors.white : AppColors.black)
-                      .withValues(alpha: 0.1),
+                      .withOpacity(0.1),
                   Colors.transparent,
                 ],
               ),
@@ -171,12 +171,12 @@ class ContactInfoWidget extends StatelessWidget {
                   gradient: LinearGradient(
                     colors: isDark
                         ? [
-                            AppColors.accentDark.withValues(alpha: 0.2),
-                            AppColors.accentDark.withValues(alpha: 0.1),
+                            AppColors.accentDark.withOpacity(0.2),
+                            AppColors.accentDark.withOpacity(0.1),
                           ]
                         : [
-                            AppColors.accentLight.withValues(alpha: 0.2),
-                            AppColors.accentLight.withValues(alpha: 0.1),
+                            AppColors.accentLight.withOpacity(0.2),
+                            AppColors.accentLight.withOpacity(0.1),
                           ],
                   ),
                   borderRadius: BorderRadius.circular(8),

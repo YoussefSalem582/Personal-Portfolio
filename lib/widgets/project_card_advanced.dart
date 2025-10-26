@@ -98,8 +98,8 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
             BoxShadow(
               color: _isHovered
                   ? (isDark ? AppColors.accentDark : AppColors.accentLight)
-                      .withValues(alpha: 0.25)
-                  : AppColors.black.withValues(alpha: 0.08),
+                      .withOpacity(0.25)
+                  : AppColors.black.withOpacity(0.08),
               blurRadius: _isHovered ? 20 : 10,
               offset: Offset(0, _isHovered ? 8 : 4),
             ),
@@ -118,10 +118,10 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                         ? (isDark
                                 ? AppColors.accentDark
                                 : AppColors.accentLight)
-                            .withValues(alpha: 0.5)
+                            .withOpacity(0.5)
                         : (isDark
-                            ? AppColors.white.withValues(alpha: 0.24)
-                            : AppColors.black.withValues(alpha: 0.12)),
+                            ? AppColors.white.withOpacity(0.24)
+                            : AppColors.black.withOpacity(0.12)),
                     width: 1,
                   ),
                 ),
@@ -162,7 +162,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                   child: Container(
                     decoration: BoxDecoration(
                       color: isDark
-                          ? AppColors.cardDark.withValues(alpha: 0.3)
+                          ? AppColors.cardDark.withOpacity(0.3)
                           : AppColors.gray50,
                     ),
                     child: LazyImage(
@@ -186,9 +186,9 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                     AppColors.transparent,
                     AppColors.transparent,
                     (isDark ? AppColors.black : AppColors.white)
-                        .withValues(alpha: 0.5),
+                        .withOpacity(0.5),
                     (isDark ? AppColors.black : AppColors.white)
-                        .withValues(alpha: 0.85),
+                        .withOpacity(0.85),
                   ],
                   stops: const [0.0, 0.5, 0.8, 1.0],
                 ),
@@ -254,7 +254,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                                       color: (isDark
                                               ? AppColors.accentDark
                                               : AppColors.accentLight)
-                                          .withValues(alpha: 0.5),
+                                          .withOpacity(0.5),
                                       blurRadius: 8,
                                     ),
                                   ]
@@ -317,7 +317,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                 color: (isDark
                         ? AppColors.textSecondaryDark
                         : AppColors.textSecondaryLight)
-                    .withValues(alpha: 0.7),
+                    .withOpacity(0.7),
                 fontSize: 12,
                 fontWeight: FontWeight.w500,
               ),
@@ -358,13 +358,13 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                         color: (isDark
                                 ? AppColors.accentDark
                                 : AppColors.accentLight)
-                            .withValues(alpha: 0.15),
+                            .withOpacity(0.15),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: (isDark
                                   ? AppColors.accentDark
                                   : AppColors.accentLight)
-                              .withValues(alpha: 0.4),
+                              .withOpacity(0.4),
                           width: 1,
                         ),
                       ),
@@ -401,7 +401,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: AppColors.warningLight.withValues(alpha: 0.3),
+              color: AppColors.warningLight.withOpacity(0.3),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -438,7 +438,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
           child: Container(
             decoration: BoxDecoration(
               color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                  .withValues(alpha: 0.1),
+                  .withOpacity(0.1),
             ),
             child: Center(
               child: Container(
@@ -449,14 +449,14 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                 decoration: BoxDecoration(
                   color:
                       (isDark ? AppColors.primaryDark : AppColors.primaryLight)
-                          .withValues(alpha: 0.95),
+                          .withOpacity(0.95),
                   borderRadius: BorderRadius.circular(30),
                   boxShadow: [
                     BoxShadow(
                       color: (isDark
                               ? AppColors.accentDark
                               : AppColors.accentLight)
-                          .withValues(alpha: 0.4),
+                          .withOpacity(0.4),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),
@@ -496,9 +496,9 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
           end: Alignment.bottomRight,
           colors: [
             (isDark ? AppColors.accentDark : AppColors.accentLight)
-                .withValues(alpha: 0.3),
+                .withOpacity(0.3),
             (isDark ? AppColors.primaryDark : AppColors.primaryLight)
-                .withValues(alpha: 0.2),
+                .withOpacity(0.2),
           ],
         ),
       ),
@@ -510,7 +510,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
               Icons.code,
               size: 64,
               color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                  .withValues(alpha: 0.7),
+                  .withOpacity(0.7),
             ),
             const SizedBox(height: 16),
             Text(
