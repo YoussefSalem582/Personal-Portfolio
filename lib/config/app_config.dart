@@ -64,9 +64,6 @@ class AppConfig {
   /// Contact email
   static const String contactEmail = 'youssef.salem.hassan582@gmail.com';
 
-  /// Phone number
-  static const String phoneNumber = '+201090449682';
-
   // ==================== Social Media Links ====================
 
   /// LinkedIn profile URL
