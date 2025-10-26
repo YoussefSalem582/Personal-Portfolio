@@ -14,7 +14,6 @@ class ContactForm {
 
 class ContactInfo {
   final String email;
-  final String phone;
   final String location;
   final String github;
   final String linkedin;
@@ -22,7 +21,6 @@ class ContactInfo {
 
   ContactInfo({
     required this.email,
-    required this.phone,
     required this.location,
     required this.github,
     required this.linkedin,

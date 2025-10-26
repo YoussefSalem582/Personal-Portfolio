@@ -125,16 +125,6 @@ class ContactInfoWidget extends StatelessWidget {
 
           const SizedBox(height: AppTheme.spacingM),
 
-          // Phone contact item (clickable - launches phone dialer)
-          ContactItemWidget(
-            icon: AppIcons.phone,
-            title: 'Phone',
-            value: PortfolioData.contactInfo.phone,
-            onTap: () => UrlHelper.launchPhone(PortfolioData.contactInfo.phone),
-          ),
-
-          const SizedBox(height: AppTheme.spacingM),
-
           // Location contact item (non-clickable - just displays location)
           ContactItemWidget(
             icon: AppIcons.location,
@@ -152,8 +142,7 @@ class ContactInfoWidget extends StatelessWidget {
               gradient: LinearGradient(
                 colors: [
                   Colors.transparent,
-                  (isDark ? AppColors.white : AppColors.black)
-                      .withOpacity(0.1),
+                  (isDark ? AppColors.white : AppColors.black).withOpacity(0.1),
                   Colors.transparent,
                 ],
               ),
