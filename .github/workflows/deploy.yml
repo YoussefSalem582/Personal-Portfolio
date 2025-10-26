@@ -19,6 +19,9 @@ concurrency:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     
     steps:
       - name: Checkout code
@@ -54,27 +57,19 @@ jobs:
       - name: Create .nojekyll
         run: touch build/web/.nojekyll
       
-      - name: Copy to docs folder
-        run: |
-          rm -rf docs
-          cp -r build/web docs
-      
       - name: Display build info
         run: |
-          echo "📊 Build Statistics:"
+          echo "Build folder contents:"
           du -sh build/web
-          echo "✅ Build completed successfully!"
       
-      - name: Check for changes
-        id: check_changes
-        run: |
-          git diff --quiet docs/ || echo "has_changes=true" >> $GITHUB_OUTPUT
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
       
-      - name: Commit and push to docs
-        if: steps.check_changes.outputs.has_changes == 'true'
-        run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git add docs
-          git commit -m "🚀 Deploy optimized build - Auto deployment [skip ci]"
-          git push
+      - name: Upload build
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

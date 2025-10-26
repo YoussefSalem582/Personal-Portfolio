@@ -1,5 +1,6 @@
 // Service Worker for caching and faster loads
-const CACHE_NAME = 'ysh-portfolio-v1.0.0';
+const CACHE_PREFIX = 'ysh-portfolio';
+const VERSION_URL = '/Personal-Portfolio/version.json';
 const CRITICAL_ASSETS = [
   '/Personal-Portfolio/',
   '/Personal-Portfolio/index.html',
@@ -11,16 +12,40 @@ const CRITICAL_ASSETS = [
   '/Personal-Portfolio/manifest.json'
 ];
 
+// Resolve cache name dynamically so each deployment invalidates the old cache
+async function resolveCacheName() {
+  try {
+    const response = await fetch(VERSION_URL, { cache: 'no-store' });
+    if (response && response.ok) {
+      const versionData = await response.json();
+      const version = versionData?.appVersion || versionData?.flutterVersion || versionData?.frameworkVersion;
+      if (version) {
+        return `${CACHE_PREFIX}-v${version}`;
+      }
+    }
+  } catch (error) {
+    console.warn('[ServiceWorker] Unable to fetch version.json, falling back to timestamp:', error);
+  }
+
+  return `${CACHE_PREFIX}-${Date.now()}`;
+}
+
+const cacheNamePromise = resolveCacheName();
+
 // Install event - cache critical assets
 self.addEventListener('install', (event) => {
   console.log('[ServiceWorker] Installing...');
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => {
-      console.log('[ServiceWorker] Caching critical assets');
-      return cache.addAll(CRITICAL_ASSETS).catch((error) => {
-        console.error('[ServiceWorker] Failed to cache:', error);
-      });
-    })
+    (async () => {
+      try {
+        const cacheName = await cacheNamePromise;
+        const cache = await caches.open(cacheName);
+        console.log('[ServiceWorker] Caching critical assets');
+        await cache.addAll(CRITICAL_ASSETS);
+      } catch (error) {
+        console.error('[ServiceWorker] Failed to cache critical assets:', error);
+      }
+    })()
   );
   self.skipWaiting();
 });
@@ -29,16 +54,18 @@ self.addEventListener('install', (event) => {
 self.addEventListener('activate', (event) => {
   console.log('[ServiceWorker] Activating...');
   event.waitUntil(
-    caches.keys().then((cacheNames) => {
-      return Promise.all(
-        cacheNames.map((cache) => {
-          if (cache !== CACHE_NAME) {
+    (async () => {
+      const cacheName = await cacheNamePromise;
+      const cacheKeys = await caches.keys();
+      await Promise.all(
+        cacheKeys
+          .filter((cache) => cache !== cacheName && cache.startsWith(CACHE_PREFIX))
+          .map((cache) => {
             console.log('[ServiceWorker] Deleting old cache:', cache);
             return caches.delete(cache);
-          }
-        })
+          })
       );
-    })
+    })()
   );
   return self.clients.claim();
 });
@@ -52,33 +79,26 @@ self.addEventListener('fetch', (event) => {
   if (!event.request.url.startsWith(self.location.origin)) return;
 
   event.respondWith(
-    caches.match(event.request).then((response) => {
-      // Return cached response if found
-      if (response) {
+    (async () => {
+      const cacheName = await cacheNamePromise;
+      const cache = await caches.open(cacheName);
+      const cachedResponse = await cache.match(event.request);
+
+      if (cachedResponse) {
         console.log('[ServiceWorker] Serving from cache:', event.request.url);
-        return response;
+        return cachedResponse;
       }
 
-      // Otherwise fetch from network and cache it
-      return fetch(event.request).then((response) => {
-        // Don't cache non-successful responses
-        if (!response || response.status !== 200 || response.type === 'error') {
-          return response;
+      try {
+        const networkResponse = await fetch(event.request);
+        if (networkResponse && networkResponse.ok && networkResponse.type !== 'error') {
+          await cache.put(event.request, networkResponse.clone());
         }
-
-        // Clone the response
-        const responseToCache = response.clone();
-
-        // Cache the response
-        caches.open(CACHE_NAME).then((cache) => {
-          cache.put(event.request, responseToCache);
-        });
-
-        return response;
-      }).catch((error) => {
+        return networkResponse;
+      } catch (error) {
         console.error('[ServiceWorker] Fetch failed:', error);
-        // You could return a custom offline page here
-      });
-    })
+        throw error;
+      }
+    })()
   );
 });
