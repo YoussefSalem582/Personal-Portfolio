@@ -22,12 +22,21 @@
   AddOutputFilterByType DEFLATE text/javascript
   AddOutputFilterByType DEFLATE text/plain
   AddOutputFilterByType DEFLATE text/xml
+  # Compress WebAssembly files
+  AddOutputFilterByType DEFLATE application/wasm
 
   # Remove browser bugs (only needed for really old browsers)
   BrowserMatch ^Mozilla/4 gzip-only-text/html
   BrowserMatch ^Mozilla/4\.0[678] no-gzip
   BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
   Header append Vary User-Agent
+</IfModule>
+
+# WebAssembly Support - Required for multi-threaded rendering
+<IfModule mod_headers.c>
+  # Set COOP and COEP headers for WebAssembly multi-threading support
+  Header set Cross-Origin-Embedder-Policy "credentialless"
+  Header set Cross-Origin-Opener-Policy "same-origin"
 </IfModule>
 
 # Browser Caching
