@@ -9,7 +9,7 @@ Write-Host "`n📦 Getting dependencies..." -ForegroundColor Cyan
 flutter pub get
 
 Write-Host "`n🔨 Building optimized web app..." -ForegroundColor Cyan
-flutter build web --release --wasm --base-href "/Personal-Portfolio/" --no-source-maps --output=docs
+flutter build web --release --base-href "/Personal-Portfolio/" --no-source-maps --output=docs
 
 Write-Host "`n📋 Copying additional files..." -ForegroundColor Cyan
 Copy-Item "web/service-worker.js" "docs/" -Force -ErrorAction SilentlyContinue

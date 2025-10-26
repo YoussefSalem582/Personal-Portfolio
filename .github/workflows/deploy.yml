@@ -44,7 +44,6 @@ jobs:
         run: |
           flutter build web \
             --release \
-            --wasm \
             --base-href "/Personal-Portfolio/" \
             --no-source-maps
       
