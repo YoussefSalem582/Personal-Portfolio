@@ -103,10 +103,10 @@ class AppTheme {
           textStyle: button.copyWith(color: primaryColor),
         ),
       ),
-      cardTheme: const CardThemeData(
+      cardTheme: CardThemeData(
         elevation: 4,
         shadowColor: Colors.black12,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         color: surfaceColor,
@@ -167,10 +167,10 @@ class AppTheme {
           textStyle: AppFonts.button(color: darkPrimaryColor),
         ),
       ),
-      cardTheme: const CardThemeData(
+      cardTheme: CardThemeData(
         elevation: 4,
         shadowColor: Colors.black26,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
         color: darkCardColor,
