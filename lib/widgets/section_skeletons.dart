@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:shimmer/shimmer.dart';
 import '../utils/assets/app_constants.dart';
 import 'skeleton_loading.dart';
 
@@ -17,17 +17,14 @@ class SkillsSectionSkeleton extends StatelessWidget {
             ? 3
             : 2;
 
-    return Skeletonizer(
-      enabled: true,
-      effect: ShimmerEffect(
-        baseColor: isDark
-            ? AppColors.surfaceDark.withOpacity(0.3)
-            : AppColors.surfaceLight.withOpacity(0.3),
-        highlightColor: isDark
-            ? AppColors.accentDark.withOpacity(0.1)
-            : AppColors.accentLight.withOpacity(0.1),
-        duration: const Duration(milliseconds: 1500),
-      ),
+    return Shimmer.fromColors(
+      baseColor: isDark
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
+      highlightColor: isDark
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
+      period: const Duration(milliseconds: 1500),
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -107,17 +104,14 @@ class AboutSectionSkeleton extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 768;
 
-    return Skeletonizer(
-      enabled: true,
-      effect: ShimmerEffect(
-        baseColor: isDark
-            ? AppColors.surfaceDark.withOpacity(0.3)
-            : AppColors.surfaceLight.withOpacity(0.3),
-        highlightColor: isDark
-            ? AppColors.accentDark.withOpacity(0.1)
-            : AppColors.accentLight.withOpacity(0.1),
-        duration: const Duration(milliseconds: 1500),
-      ),
+    return Shimmer.fromColors(
+      baseColor: isDark
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
+      highlightColor: isDark
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
+      period: const Duration(milliseconds: 1500),
       child: Column(
         children: [
           // Bio skeleton
@@ -220,17 +214,14 @@ class ProjectsSectionSkeleton extends StatelessWidget {
             ? 2
             : 1;
 
-    return Skeletonizer(
-      enabled: true,
-      effect: ShimmerEffect(
-        baseColor: isDark
-            ? AppColors.surfaceDark.withOpacity(0.3)
-            : AppColors.surfaceLight.withOpacity(0.3),
-        highlightColor: isDark
-            ? AppColors.accentDark.withOpacity(0.1)
-            : AppColors.accentLight.withOpacity(0.1),
-        duration: const Duration(milliseconds: 1500),
-      ),
+    return Shimmer.fromColors(
+      baseColor: isDark
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
+      highlightColor: isDark
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
+      period: const Duration(milliseconds: 1500),
       child: Column(
         children: [
           // Filter chips skeleton
@@ -285,17 +276,14 @@ class CertificatesSectionSkeleton extends StatelessWidget {
             ? 2
             : 1;
 
-    return Skeletonizer(
-      enabled: true,
-      effect: ShimmerEffect(
-        baseColor: isDark
-            ? AppColors.surfaceDark.withOpacity(0.3)
-            : AppColors.surfaceLight.withOpacity(0.3),
-        highlightColor: isDark
-            ? AppColors.accentDark.withOpacity(0.1)
-            : AppColors.accentLight.withOpacity(0.1),
-        duration: const Duration(milliseconds: 1500),
-      ),
+    return Shimmer.fromColors(
+      baseColor: isDark
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
+      highlightColor: isDark
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
+      period: const Duration(milliseconds: 1500),
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
@@ -324,17 +312,14 @@ class HeroSectionSkeleton extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 768;
 
-    return Skeletonizer(
-      enabled: true,
-      effect: ShimmerEffect(
-        baseColor: isDark
-            ? AppColors.surfaceDark.withOpacity(0.3)
-            : AppColors.surfaceLight.withOpacity(0.3),
-        highlightColor: isDark
-            ? AppColors.accentDark.withOpacity(0.1)
-            : AppColors.accentLight.withOpacity(0.1),
-        duration: const Duration(milliseconds: 1500),
-      ),
+    return Shimmer.fromColors(
+      baseColor: isDark
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
+      highlightColor: isDark
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
+      period: const Duration(milliseconds: 1500),
       child: Container(
         height: isMobile ? 500 : 600,
         width: double.infinity,
@@ -411,17 +396,14 @@ class ContactSectionSkeleton extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 768;
 
-    return Skeletonizer(
-      enabled: true,
-      effect: ShimmerEffect(
-        baseColor: isDark
-            ? AppColors.surfaceDark.withOpacity(0.3)
-            : AppColors.surfaceLight.withOpacity(0.3),
-        highlightColor: isDark
-            ? AppColors.accentDark.withOpacity(0.1)
-            : AppColors.accentLight.withOpacity(0.1),
-        duration: const Duration(milliseconds: 1500),
-      ),
+    return Shimmer.fromColors(
+      baseColor: isDark
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
+      highlightColor: isDark
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
+      period: const Duration(milliseconds: 1500),
       child: Column(
         children: [
           // Contact info cards

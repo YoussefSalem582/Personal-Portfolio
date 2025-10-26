@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:shimmer/shimmer.dart';
 import 'assets/app_constants.dart';
 
 /// GetX Helper Utilities
@@ -71,11 +71,10 @@ class GetXHelper {
           child: Card(
             child: Padding(
               padding: const EdgeInsets.all(24.0),
-              child: Skeletonizer(
-                enabled: true,
-                effect: const ShimmerEffect(
-                  duration: Duration(milliseconds: 1500),
-                ),
+              child: Shimmer.fromColors(
+                baseColor: AppColors.surfaceDark.withOpacity(0.3),
+                highlightColor: AppColors.accentDark.withOpacity(0.1),
+                period: const Duration(milliseconds: 1500),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

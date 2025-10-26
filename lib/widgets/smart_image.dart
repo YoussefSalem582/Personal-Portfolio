@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:shimmer/shimmer.dart';
 import '../utils/assets/app_constants.dart';
 
 /// SmartImage widget - Simplified for static asset-only deployment
@@ -73,17 +73,14 @@ class _SmartImageState extends State<SmartImage>
 
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Skeletonizer(
-      enabled: true,
-      effect: ShimmerEffect(
-        baseColor: isDark
-            ? AppColors.surfaceDark.withOpacity(0.3)
-            : AppColors.surfaceLight.withOpacity(0.3),
-        highlightColor: isDark
-            ? AppColors.accentDark.withOpacity(0.1)
-            : AppColors.accentLight.withOpacity(0.1),
-        duration: const Duration(milliseconds: 1500),
-      ),
+    return Shimmer.fromColors(
+      baseColor: isDark
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
+      highlightColor: isDark
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
+      period: const Duration(milliseconds: 1500),
       child: Container(
         width: widget.width,
         height: widget.height,

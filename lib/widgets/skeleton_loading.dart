@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:shimmer/shimmer.dart';
 import '../utils/assets/app_constants.dart';
 
 import '../theme/app_theme.dart';
@@ -12,17 +12,14 @@ class SkeletonLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Skeletonizer(
-      enabled: true,
-      effect: ShimmerEffect(
-        baseColor: isDark
-            ? AppColors.surfaceDark.withOpacity(0.3)
-            : AppColors.surfaceLight.withOpacity(0.3),
-        highlightColor: isDark
-            ? AppColors.accentDark.withOpacity(0.1)
-            : AppColors.accentLight.withOpacity(0.1),
-        duration: const Duration(milliseconds: 1500),
-      ),
+    return Shimmer.fromColors(
+      baseColor: isDark
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
+      highlightColor: isDark
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
+      period: const Duration(milliseconds: 1500),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -183,17 +180,14 @@ class ProjectCardSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Skeletonizer(
-      enabled: true,
-      effect: ShimmerEffect(
-        baseColor: isDark
-            ? AppColors.surfaceDark.withOpacity(0.3)
-            : AppColors.surfaceLight.withOpacity(0.3),
-        highlightColor: isDark
-            ? AppColors.accentDark.withOpacity(0.1)
-            : AppColors.accentLight.withOpacity(0.1),
-        duration: const Duration(milliseconds: 1500),
-      ),
+    return Shimmer.fromColors(
+      baseColor: isDark
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
+      highlightColor: isDark
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
+      period: const Duration(milliseconds: 1500),
       child: Container(
         height: isCompact ? 260 : 360,
         decoration: BoxDecoration(
@@ -273,17 +267,14 @@ class CertificateCardSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
-    return Skeletonizer(
-      enabled: true,
-      effect: ShimmerEffect(
-        baseColor: isDark
-            ? AppColors.surfaceDark.withOpacity(0.3)
-            : AppColors.surfaceLight.withOpacity(0.3),
-        highlightColor: isDark
-            ? AppColors.accentDark.withOpacity(0.1)
-            : AppColors.accentLight.withOpacity(0.1),
-        duration: const Duration(milliseconds: 1500),
-      ),
+    return Shimmer.fromColors(
+      baseColor: isDark
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
+      highlightColor: isDark
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
+      period: const Duration(milliseconds: 1500),
       child: Container(
         height: 200,
         padding: const EdgeInsets.all(16),
