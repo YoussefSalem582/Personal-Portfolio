@@ -20,6 +20,17 @@ Write-Host "`n📊 Build Statistics:" -ForegroundColor Yellow
 $size = (Get-ChildItem docs -Recurse | Measure-Object -Property Length -Sum).Sum / 1MB
 Write-Host "Total size: $([math]::Round($size, 2)) MB" -ForegroundColor Green
 
+# Check for large images
+$largeImages = Get-ChildItem assets/images -Recurse -File -Include *.png,*.jpg,*.jpeg | Where-Object { $_.Length -gt 500KB }
+if ($largeImages.Count -gt 0) {
+    Write-Host "`n⚠️  Found $($largeImages.Count) large images (>500KB):" -ForegroundColor Yellow
+    $largeImages | Select-Object -First 5 | ForEach-Object {
+        $sizeKB = [math]::Round($_.Length/1KB, 0)
+        Write-Host "   - $($_.Name) ($sizeKB KB)" -ForegroundColor Gray
+    }
+    Write-Host "`n💡 Run .\optimize_images.ps1 for compression tips" -ForegroundColor Cyan
+}
+
 Write-Host "`n✅ Build completed successfully!" -ForegroundColor Green
 Write-Host "`nNext steps:" -ForegroundColor Cyan
 Write-Host "  1. git add ." -ForegroundColor White

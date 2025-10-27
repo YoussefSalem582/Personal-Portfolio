@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 import 'package:get/get.dart';
 import 'bindings/initial_bindings.dart';
@@ -9,6 +10,13 @@ import 'theme/app_theme.dart';
 /// No backend dependencies - uses only local assets and data
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
+  // Mobile performance optimizations
+  if (kIsWeb) {
+    // Reduce unnecessary repaints on mobile
+    PaintingBinding.instance.imageCache.maximumSize = 50;
+    PaintingBinding.instance.imageCache.maximumSizeBytes = 50 * 1024 * 1024; // 50MB
+  }
 
   runApp(const PortfolioApp());
 }

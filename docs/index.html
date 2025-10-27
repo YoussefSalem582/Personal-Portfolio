@@ -1,112 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <!--
-    If you are serving your web app in a path other than the root, change the
-    href value below to reflect the base path you are serving from.
-
-    The path provided below has to start and end with a slash "/" in order for
-    it to work correctly.
-
-    For more details:
-    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
-
-    This is a placeholder for base href that will be replaced by the value of
-    the `--base-href` argument provided to `flutter build`.
-  -->
-  <base href="/Personal-Portfolio/">
+  <base href="$FLUTTER_BASE_HREF">
 
   <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- DNS Prefetch for performance -->
-  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="Youssef Hassan - Flutter Developer building fast cross-platform mobile and web apps. Expertise in Dart, Python, TensorFlow, Firebase, and machine learning integration.">
-  <meta name="keywords" content="Flutter Developer, Mobile App Development, Cross-platform Apps, Dart, Python, TensorFlow, Firebase, Machine Learning, Web Development, Youssef Hassan">
+  <!-- Essential Meta Tags -->
+  <meta name="description" content="Youssef Hassan - Flutter Developer Portfolio">
   <meta name="author" content="Youssef Hassan">
-  <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://youssefsalem582.github.io/Personal-Portfolio/">
-  
-  <!-- Language and Localization -->
-  <meta http-equiv="content-language" content="en">
-  <meta name="language" content="English">
-  <meta name="geo.region" content="GLOBAL">
-  <meta name="geo.placename" content="Worldwide"
-  
-  <!-- Open Graph Meta Tags -->
-  <meta property="og:title" content="Youssef Hassan - Flutter Developer Portfolio">
-  <meta property="og:description" content="Flutter Developer building fast cross-platform mobile and web apps. Expertise in Dart, Python, TensorFlow, Firebase, and machine learning integration.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://youssefsalem582.github.io/Personal-Portfolio/">
-  <meta property="og:image" content="https://youssefsalem582.github.io/Personal-Portfolio/assets/profile.jpeg">
-  <meta property="og:site_name" content="Youssef Hassan Portfolio">
-  <meta property="og:locale" content="en_US">
-  
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Youssef Hassan - Flutter Developer Portfolio">
-  <meta name="twitter:description" content="Flutter Developer building fast cross-platform mobile and web apps. Expertise in Dart, Python, TensorFlow, Firebase, and machine learning integration.">
-  <meta name="twitter:image" content="https://youssefsalem582.github.io/Personal-Portfolio/assets/profile.jpeg">
-  <meta name="twitter:creator" content="@YoussefSalem582">
-  
-  <!-- Additional Meta Tags -->
   <meta name="theme-color" content="#0D1117">
-  <meta name="msapplication-TileColor" content="#0D1117">
-  <meta name="msapplication-TileImage" content="icons/Icon-144.png">
-
-  <!-- iOS meta tags & icons -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Youssef Salem Hassan Portfolio">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
-  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-  <title>Youssef Salem Hassan - Portfolio</title>
+  <title>Youssef Hassan - Portfolio</title>
   <link rel="manifest" href="manifest.json">
-  
-  <!-- Performance Optimization -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="format-detection" content="telephone=no">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  
-  <!-- Resource Hints for Faster Loading -->
-  <link rel="preload" href="flutter_bootstrap.js" as="script">
-  <link rel="preload" href="main.dart.js" as="script">
-  <link rel="preload" href="assets/images/portfolio_logo.png" as="image">
-  <link rel="preload" href="assets/images/profile.jpg" as="image">
-  
-  <!-- EmailJS SDK for web -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function(){
-      emailjs.init({
-        publicKey: "cZy6Pq5CsNS33aWbj",
-      });
-    })();
-  </script>
-
-  <!-- Google Analytics (Optional - Replace G-XXXXXXXXXX with your tracking ID) -->
-  <!-- Uncomment to enable Google Analytics tracking
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
-  -->
 
   <style>
     body {
@@ -114,7 +23,6 @@
       padding: 0;
       background: #0D1117;
       overflow: hidden;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
     }
 
     #loading {
@@ -125,47 +33,18 @@
       height: 100%;
       background: #0D1117;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      transition: opacity 0.5s ease;
     }
 
     #loading.fade-out {
       opacity: 0;
-      pointer-events: none;
-    }
-
-    .logo-container {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      margin-bottom: 32px;
-      animation: fadeIn 0.6s ease;
-    }
-
-    .logo-circle {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #3498DB 0%, #5DADE2 100%);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      box-shadow: 0 8px 32px rgba(52, 152, 219, 0.3);
-    }
-
-    .logo-image {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
+      transition: opacity 0.3s;
     }
 
     .content-wrapper {
       text-align: center;
-      animation: fadeIn 0.6s ease 0.2s both;
     }
 
     .name {
@@ -173,176 +52,127 @@
       font-size: 28px;
       font-weight: 600;
       margin-bottom: 8px;
-      letter-spacing: 0.3px;
     }
 
     .title {
       color: #8B949E;
       font-size: 16px;
-      font-weight: 400;
-      margin-bottom: 40px;
-      letter-spacing: 0.5px;
     }
 
-    .progress-container {
-      width: 200px;
-      height: 2px;
-      background: rgba(139, 148, 158, 0.2);
-      border-radius: 2px;
-      overflow: hidden;
-      margin-bottom: 16px;
-    }
-
-    .progress-bar {
-      height: 100%;
-      background: #3498DB;
-      border-radius: 2px;
-      animation: progressLoad 1.5s ease-in-out infinite;
-    }
-
-    .loading-text {
-      color: #8B949E;
-      font-size: 12px;
-      font-weight: 400;
-      letter-spacing: 1px;
-    }
-
-    .loading-dots::after {
-      content: '';
-      animation: dots 1.5s steps(4, end) infinite;
-    }
-
-    @keyframes dots {
-      0%, 20% { content: ''; }
-      40% { content: '.'; }
-      60% { content: '..'; }
-      80%, 100% { content: '...'; }
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes progressLoad {
-      0% { width: 0%; }
-      50% { width: 70%; }
-      100% { width: 100%; }
-    }
-
-    /* Light theme */
-    @media (prefers-color-scheme: light) {
-      body {
-        background: #FFFFFF;
-      }
-      #loading {
-        background: #FFFFFF;
-      }
-      .name {
-        color: #24292F;
-      }
-      .title {
-        color: #57606A;
-      }
-      .logo-circle {
-        box-shadow: 0 8px 32px rgba(52, 152, 219, 0.2);
-      }
-      .progress-container {
-        background: rgba(208, 215, 222, 0.3);
-      }
-      .loading-text {
-        color: #57606A;
-      }
-    }
-
-    /* Responsive */
     @media (max-width: 600px) {
-      .logo-container {
-        width: 100px;
-        height: 100px;
-      }
-      .logo-circle {
-        width: 100px;
-        height: 100px;
-      }
-      .logo-image {
-        width: 80px;
-        height: 80px;
-      }
-      .name {
-        font-size: 24px;
-      }
-      .title {
-        font-size: 14px;
-      }
-      .progress-container {
-        width: 160px;
-      }
+      .name { font-size: 24px; }
+      .title { font-size: 14px; }
     }
   </style>
 </head>
 <body>
   <!-- Loading Screen -->
   <div id="loading">
-    <div class="logo-container">
-      <div class="logo-circle">
-        <img src="assets/images/portfolio_logo.png" alt="Portfolio Logo" class="logo-image" />
-      </div>
-    </div>
-
     <div class="content-wrapper">
-      <div class="name">Youssef Salem Hassan</div>
+      <div class="name">Youssef Hassan</div>
       <div class="title">Flutter Developer</div>
-      
-      <div class="progress-container">
-        <div class="progress-bar"></div>
-      </div>
-      
-      <div class="loading-text">
-        Loading<span class="loading-dots"></span>
-      </div>
     </div>
   </div>
 
   <script>
     window.addEventListener('flutter-first-frame', function() {
-      const loading = document.getElementById('loading');
+      var loading = document.getElementById('loading');
       if (loading) {
         loading.classList.add('fade-out');
-        setTimeout(() => loading.remove(), 500);
+        setTimeout(function() { loading.remove(); }, 300);
       }
     });
-
-    setTimeout(function() {
-      const loading = document.getElementById('loading');
-      if (loading && !loading.classList.contains('fade-out')) {
-        loading.classList.add('fade-out');
-        setTimeout(() => loading.remove(), 500);
-      }
-    }, 10000);
   </script>
 
   <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <!-- Service Worker Registration for Caching and Performance -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/Personal-Portfolio/service-worker.js')
-          .then(function(registration) {
-            console.log('ServiceWorker registered with scope:', registration.scope);
-          })
-          .catch(function(error) {
-            console.log('ServiceWorker registration failed:', error);
-          });
-      });
+  <!-- Essential Meta Tags -->
+  <meta name="description" content="Youssef Hassan - Flutter Developer Portfolio">
+  <meta name="author" content="Youssef Hassan">
+  <meta name="theme-color" content="#0D1117">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>Youssef Hassan - Portfolio</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0D1117;
+      overflow: hidden;
     }
+
+    #loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #0D1117;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    #loading.fade-out {
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .content-wrapper {
+      text-align: center;
+    }
+
+    .name {
+      color: #F0F6FC;
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .title {
+      color: #8B949E;
+      font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .name { font-size: 24px; }
+      .title { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading Screen -->
+  <div id="loading">
+    <div class="content-wrapper">
+      <div class="name">Youssef Hassan</div>
+      <div class="title">Flutter Developer</div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('flutter-first-frame', function() {
+      var loading = document.getElementById('loading');
+      if (loading) {
+        loading.classList.add('fade-out');
+        setTimeout(function() { loading.remove(); }, 300);
+      }
+    });
   </script>
+
+  <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
