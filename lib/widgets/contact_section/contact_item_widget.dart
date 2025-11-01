@@ -35,17 +35,22 @@ class ContactItemWidget extends StatelessWidget {
     // Get theme-specific colors
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 768;
+    final isSmallMobile = screenWidth < 375;
 
     return MouseRegion(
       cursor:
           onTap != null ? SystemMouseCursors.click : SystemMouseCursors.basic,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+        borderRadius: BorderRadius.circular(
+            isMobile ? AppTheme.radiusS : AppTheme.radiusM),
         hoverColor: accentColor.withOpacity(0.05),
         splashColor: accentColor.withOpacity(0.1),
         child: Container(
-          padding: const EdgeInsets.all(AppTheme.spacingM),
+          padding:
+              EdgeInsets.all(isMobile ? AppTheme.spacingS : AppTheme.spacingM),
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: isDark
@@ -60,7 +65,8 @@ class ContactItemWidget extends StatelessWidget {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
-            borderRadius: BorderRadius.circular(AppTheme.radiusM),
+            borderRadius: BorderRadius.circular(
+                isMobile ? AppTheme.radiusS : AppTheme.radiusM),
             border: Border.all(
               color: isDark
                   ? AppColors.white.withOpacity(0.05)
@@ -81,7 +87,8 @@ class ContactItemWidget extends StatelessWidget {
             children: [
               // Icon container with gradient and glow effect
               Container(
-                padding: const EdgeInsets.all(AppTheme.spacingM),
+                padding: EdgeInsets.all(
+                    isMobile ? AppTheme.spacingS : AppTheme.spacingM),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -91,7 +98,8 @@ class ContactItemWidget extends StatelessWidget {
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
-                  borderRadius: BorderRadius.circular(AppTheme.radiusS),
+                  borderRadius:
+                      BorderRadius.circular(isMobile ? 6 : AppTheme.radiusS),
                   boxShadow: [
                     BoxShadow(
                       color: accentColor.withOpacity(0.3),
@@ -102,11 +110,11 @@ class ContactItemWidget extends StatelessWidget {
                 ),
                 child: Icon(
                   icon,
-                  size: 20,
+                  size: isMobile ? (isSmallMobile ? 16 : 18) : 20,
                   color: AppColors.white,
                 ),
               ),
-              const SizedBox(width: AppTheme.spacingM),
+              SizedBox(width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
               // Title and value column
               Expanded(
                 child: Column(
@@ -116,6 +124,7 @@ class ContactItemWidget extends StatelessWidget {
                     Text(
                       title,
                       style: AppFonts.labelMedium().copyWith(
+                        fontSize: isMobile ? (isSmallMobile ? 10 : 11) : null,
                         color: isDark
                             ? AppColors.textSecondaryDark
                             : AppColors.textSecondaryLight,
@@ -128,6 +137,7 @@ class ContactItemWidget extends StatelessWidget {
                     Text(
                       value,
                       style: AppFonts.bodyMedium().copyWith(
+                        fontSize: isMobile ? (isSmallMobile ? 12 : 13) : null,
                         fontWeight: AppFonts.bold,
                         color: onTap != null
                             ? accentColor
@@ -135,6 +145,8 @@ class ContactItemWidget extends StatelessWidget {
                                 ? AppColors.textPrimaryDark
                                 : AppColors.textPrimaryLight),
                       ),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ],
                 ),
@@ -142,14 +154,14 @@ class ContactItemWidget extends StatelessWidget {
               // Show arrow indicator only for clickable items
               if (onTap != null)
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(isMobile ? 6 : 8),
                   decoration: BoxDecoration(
                     color: accentColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(isMobile ? 6 : 8),
                   ),
                   child: Icon(
                     AppIcons.openExternal,
-                    size: 18,
+                    size: isMobile ? (isSmallMobile ? 14 : 16) : 18,
                     color: accentColor,
                   ),
                 ),

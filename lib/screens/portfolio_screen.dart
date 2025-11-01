@@ -59,47 +59,49 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   }
 
   void _scrollToSection(int index) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final isMobile = ResponsiveHelper.isMobile(screenWidth);
-
-    // Calculate positions based on device type
-    final List<double> positions;
-
-    if (isMobile) {
-      // Mobile scroll positions (adjusted for mobile layout)
-      positions = [
-        0.0, // Home
-        screenHeight * 1.42, // About
-        screenHeight * 3.2, // Skills
-        screenHeight * 4.2, // Expertise
-        screenHeight * 5.5, // Projects
-        screenHeight * 11.5, // Certificates
-        screenHeight * 12.5, // Contact
-      ];
-    } else {
-      // Desktop scroll positions
-      positions = [
-        0.0, // Home
-        screenHeight * 0.9, // About
-        screenHeight * 2.1, // Skills
-        screenHeight * 3.0, // Expertise
-        screenHeight * 4.0, // Projects
-        screenHeight * 7.0, // Certificates
-        screenHeight * 8.3, // Contact
-      ];
+    // Validate index
+    if (index < 0 || index >= _sectionKeys.length) {
+      return;
     }
 
-    if (index < positions.length) {
+    // Special handling for section 0 (home) - always scroll to top
+    if (index == 0) {
       _scrollController.animateTo(
-        positions[index],
+        0.0,
         duration: const Duration(milliseconds: 600),
         curve: Curves.easeInOutCubic,
+      );
+      setState(() {
+        _currentSection = 0;
+      });
+      return;
+    }
+
+    // Get the section's GlobalKey
+    final key = _sectionKeys[index];
+    final context = key.currentContext;
+
+    if (context != null) {
+      // Use Scrollable.ensureVisible for precise, automatic scrolling
+      // This method calculates the exact position needed
+      Scrollable.ensureVisible(
+        context,
+        duration: const Duration(milliseconds: 600),
+        curve: Curves.easeInOutCubic,
+        alignment: 0.0, // Align to top of viewport
+        alignmentPolicy: ScrollPositionAlignmentPolicy.explicit,
       );
 
       // Update current section
       setState(() {
         _currentSection = index;
+      });
+    } else {
+      // Fallback: If context is not available, try after a short delay
+      Future.delayed(const Duration(milliseconds: 100), () {
+        if (mounted) {
+          _scrollToSection(index);
+        }
       });
     }
   }

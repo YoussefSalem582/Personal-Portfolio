@@ -26,6 +26,7 @@ class ContactSection extends StatelessWidget {
     // Get screen dimensions and responsive settings
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isSmallMobile = ResponsiveHelper.isSmallMobile(screenWidth);
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
@@ -36,7 +37,7 @@ class ContactSection extends StatelessWidget {
           : AppColors.primaryLight.withOpacity(0.02),
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
-        vertical: AppTheme.spacingXXL,
+        vertical: ResponsiveHelper.getSectionSpacing(screenWidth) * 0.8,
       ),
       child: ConstrainedBox(
         // Constrain max width for better readability on large screens
@@ -57,16 +58,21 @@ class ContactSection extends StatelessWidget {
                 // Main section heading
                 Text(
                   'Get In Touch',
-                  style: (isDark ? AppFonts.h1() : AppFonts.h1()),
+                  style: (isDark ? AppFonts.h1() : AppFonts.h1()).copyWith(
+                    fontSize: isMobile
+                        ? (isSmallMobile ? 28 : 32)
+                        : ResponsiveHelper.getHeadingSize(screenWidth,
+                            isLarge: false),
+                  ),
                   textAlign: TextAlign.center,
                 ),
 
-                const SizedBox(height: AppTheme.spacingS),
+                SizedBox(height: isMobile ? 8 : AppTheme.spacingS),
 
                 // Decorative gradient underline
                 Container(
-                  width: 60,
-                  height: 4,
+                  width: isSmallMobile ? 45 : (isMobile ? 55 : 80),
+                  height: isSmallMobile ? 3 : 4,
                   decoration: BoxDecoration(
                     gradient: isDark
                         ? AppColors.primaryGradientDark
@@ -75,16 +81,31 @@ class ContactSection extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(height: AppTheme.spacingM),
+                SizedBox(height: isMobile ? 10 : AppTheme.spacingM),
 
                 // Section subtitle/description
-                Text(
-                  'Let\'s discuss your next project or collaboration opportunity',
-                  style: isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge(),
-                  textAlign: TextAlign.center,
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isMobile ? 16 : 0,
+                  ),
+                  child: Text(
+                    'Let\'s discuss your next project or collaboration opportunity',
+                    style:
+                        (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge())
+                            .copyWith(
+                      fontSize: isMobile
+                          ? (isSmallMobile ? 13 : 14)
+                          : ResponsiveHelper.getBodySize(screenWidth,
+                              isLarge: true),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
 
-                const SizedBox(height: AppTheme.spacingXL),
+                SizedBox(
+                    height: isMobile
+                        ? AppTheme.spacingL
+                        : AppTheme.spacingXL * 1.5),
 
                 // Contact content - responsive layout
                 // Mobile: Stack vertically (info above form)

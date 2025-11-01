@@ -27,6 +27,9 @@ class StatsGridWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 768;
+
     // Define the statistics to display with icons
     final stats = [
       {
@@ -55,11 +58,11 @@ class StatsGridWidget extends StatelessWidget {
       child: GridView.builder(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: AppTheme.spacingM,
-          mainAxisSpacing: AppTheme.spacingM,
-          childAspectRatio: 1.1,
+          crossAxisSpacing: isMobile ? AppTheme.spacingS : AppTheme.spacingM,
+          mainAxisSpacing: isMobile ? AppTheme.spacingS : AppTheme.spacingM,
+          childAspectRatio: isMobile ? 0.85 : 1.1,
         ),
         itemCount: stats.length,
         itemBuilder: (context, index) {

@@ -24,6 +24,7 @@ class AboutSection extends StatelessWidget {
     // Get screen dimensions and responsive settings
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isSmallMobile = ResponsiveHelper.isSmallMobile(screenWidth);
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
@@ -49,8 +50,7 @@ class AboutSection extends StatelessWidget {
       ),
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
-        vertical:
-            isMobile ? AppTheme.spacingXXL * 1.5 : AppTheme.spacingXXL * 2,
+        vertical: ResponsiveHelper.getVerticalPadding(screenWidth),
       ),
       child: ConstrainedBox(
         constraints: BoxConstraints(
@@ -69,21 +69,24 @@ class AboutSection extends StatelessWidget {
               child: Text(
                 'About Me',
                 style: (isDark ? AppFonts.h1() : AppFonts.h1()).copyWith(
-                  fontSize: isMobile ? 36 : 48,
+                  fontSize: isMobile
+                      ? (isSmallMobile ? 32 : 38)
+                      : ResponsiveHelper.getHeadingSize(screenWidth,
+                          isLarge: false),
                   fontWeight: AppFonts.extraBold,
-                  letterSpacing: -1,
+                  letterSpacing: isMobile ? -0.5 : -1,
                   color: AppColors.white,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
 
-            const SizedBox(height: AppTheme.spacingM),
+            SizedBox(height: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
 
             // Decorative gradient underline with glow
             Container(
-              width: isMobile ? 70 : 90,
-              height: 5,
+              width: isSmallMobile ? 50 : (isMobile ? 70 : 90),
+              height: isSmallMobile ? 4 : 5,
               decoration: BoxDecoration(
                 gradient: isDark
                     ? AppColors.primaryGradientDark
@@ -105,23 +108,31 @@ class AboutSection extends StatelessWidget {
             const SizedBox(height: AppTheme.spacingL),
 
             // Subtitle description
-            Text(
-              'Discover my journey, skills, and passion for technology',
-              style: (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge())
-                  .copyWith(
-                fontSize: isMobile ? 15 : 17,
-                color: isDark
-                    ? AppColors.textSecondaryDark.withOpacity(0.9)
-                    : AppColors.textSecondaryLight,
-                letterSpacing: 0.3,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile ? AppTheme.spacingM : 0,
               ),
-              textAlign: TextAlign.center,
+              child: Text(
+                'Discover my journey, skills, and passion for technology',
+                style: (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge())
+                    .copyWith(
+                  fontSize: isMobile
+                      ? (isSmallMobile ? 14 : 15)
+                      : ResponsiveHelper.getBodySize(screenWidth,
+                          isLarge: true),
+                  color: isDark
+                      ? AppColors.textSecondaryDark.withOpacity(0.9)
+                      : AppColors.textSecondaryLight,
+                  letterSpacing: 0.3,
+                  height: 1.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
 
             SizedBox(
-                height: isMobile
-                    ? AppTheme.spacingXXL * 1.5
-                    : AppTheme.spacingXXL * 2),
+                height:
+                    isMobile ? AppTheme.spacingXL : AppTheme.spacingXXL * 2),
 
             // Content - responsive layout
             // Mobile: Stack vertically (bio above stats)

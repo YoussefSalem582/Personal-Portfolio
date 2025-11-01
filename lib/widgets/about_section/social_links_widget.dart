@@ -24,14 +24,44 @@ class SocialLinksWidget extends StatelessWidget {
 
     return Column(
       children: [
-        // Section heading
-        Text(
-          'Connect With Me',
-          style: (isDark ? AppFonts.h3() : AppFonts.h3()).copyWith(
-            color: isDark ? AppColors.white : AppColors.gray900,
-            fontWeight: AppFonts.bold,
+        // Section heading with gradient effect
+        ShaderMask(
+          shaderCallback: (bounds) => LinearGradient(
+            colors: isDark
+                ? [AppColors.primaryLight, AppColors.accentLight]
+                : [AppColors.accentLight, AppColors.primaryLight],
+          ).createShader(bounds),
+          child: Text(
+            'Connect With Me',
+            style: (isDark ? AppFonts.h3() : AppFonts.h3()).copyWith(
+              color: AppColors.white,
+              fontWeight: AppFonts.extraBold,
+              letterSpacing: -0.5,
+            ),
+            textAlign: TextAlign.center,
           ),
-          textAlign: TextAlign.center,
+        ),
+
+        const SizedBox(height: AppTheme.spacingM),
+
+        // Decorative gradient underline
+        Container(
+          width: 60,
+          height: 4,
+          decoration: BoxDecoration(
+            gradient: isDark
+                ? AppColors.primaryGradientDark
+                : AppColors.primaryGradientLight,
+            borderRadius: BorderRadius.circular(3),
+            boxShadow: [
+              BoxShadow(
+                color: (isDark ? AppColors.primaryLight : AppColors.accentLight)
+                    .withOpacity(0.4),
+                blurRadius: 12,
+                spreadRadius: 2,
+              ),
+            ],
+          ),
         ),
 
         const SizedBox(height: AppTheme.spacingL),

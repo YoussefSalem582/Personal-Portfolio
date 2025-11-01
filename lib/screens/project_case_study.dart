@@ -90,27 +90,58 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
       _learningsKey,
     ];
 
-    // Find which section is currently visible
+    // Calculate app bar height dynamically
+    final appBarHeight =
+        AppBar().preferredSize.height + MediaQuery.of(context).padding.top;
+
+    // Define the detection zone (area where we check for active section)
+    // Using top 30% of viewport after app bar for more stable detection
+    final detectionThreshold = appBarHeight + 150;
+
+    int? closestSection;
+    double closestDistance = double.infinity;
+
+    // Find the section closest to the detection threshold
     for (int i = 0; i < sections.length; i++) {
       final key = sections[i];
       final context = key.currentContext;
+
       if (context != null) {
         final renderBox = context.findRenderObject() as RenderBox?;
         if (renderBox != null) {
           final position = renderBox.localToGlobal(Offset.zero);
           final size = renderBox.size;
 
-          // Check if section is in viewport (considering app bar height)
-          if (position.dy <= 100 && position.dy + size.height > 100) {
-            if (_currentSection != i) {
-              setState(() {
-                _currentSection = i;
-              });
+          // Check if section is in viewport
+          final isInViewport =
+              position.dy < MediaQuery.of(context).size.height &&
+                  position.dy + size.height > appBarHeight;
+
+          if (isInViewport) {
+            // Calculate distance from detection threshold to section top
+            final distance = (position.dy - detectionThreshold).abs();
+
+            // Prioritize sections that have passed the threshold
+            // or are close to it
+            if (position.dy <= detectionThreshold &&
+                distance < closestDistance) {
+              closestDistance = distance;
+              closestSection = i;
+            } else if (closestSection == null &&
+                position.dy > detectionThreshold) {
+              // If no section has passed threshold, use the first visible one
+              closestSection = i;
             }
-            break;
           }
         }
       }
+    }
+
+    // Update current section if changed (prevents unnecessary rebuilds)
+    if (closestSection != null && _currentSection != closestSection) {
+      setState(() {
+        _currentSection = closestSection!;
+      });
     }
   }
 
@@ -148,6 +179,7 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
           isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
       appBar: ProjectCaseStudyAppBar(
         projectTitle: widget.project.title,
+        projectImageUrl: widget.project.imageUrl,
         currentSection: _currentSection,
         onSectionSelected: (index) {
           setState(() {

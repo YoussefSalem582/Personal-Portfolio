@@ -205,7 +205,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
       flex: 4,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(widget.isCompact ? 12.0 : 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -245,6 +245,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                         child: AnimatedDefaultTextStyle(
                           duration: const Duration(milliseconds: 200),
                           style: AppFonts.labelLarge().copyWith(
+                            fontSize: widget.isCompact ? 14 : null,
                             fontWeight: AppFonts.bold,
                             color: AppColors.white,
                             height: 1.2,
@@ -270,45 +271,47 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                     },
                   ),
                 ),
-                const SizedBox(width: 8),
-                AnimatedRotation(
-                  turns: _isHovered ? 0.125 : 0,
-                  duration: const Duration(milliseconds: 300),
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      gradient: LinearGradient(
-                        colors: _isHovered
-                            ? [
-                                isDark
-                                    ? AppColors.accentDark
-                                    : AppColors.accentLight,
-                                isDark
-                                    ? AppColors.primaryDark
-                                    : AppColors.primaryLight,
-                              ]
-                            : [
-                                AppColors.transparent,
-                                AppColors.transparent,
-                              ],
+                if (!widget.isCompact) ...[
+                  const SizedBox(width: 8),
+                  AnimatedRotation(
+                    turns: _isHovered ? 0.125 : 0,
+                    duration: const Duration(milliseconds: 300),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(
+                          colors: _isHovered
+                              ? [
+                                  isDark
+                                      ? AppColors.accentDark
+                                      : AppColors.accentLight,
+                                  isDark
+                                      ? AppColors.primaryDark
+                                      : AppColors.primaryLight,
+                                ]
+                              : [
+                                  AppColors.transparent,
+                                  AppColors.transparent,
+                                ],
+                        ),
+                      ),
+                      child: Icon(
+                        AppIcons.arrowRight,
+                        size: 16,
+                        color: _isHovered
+                            ? AppColors.white
+                            : (isDark
+                                ? AppColors.textSecondaryDark
+                                : AppColors.textSecondaryLight),
                       ),
                     ),
-                    child: Icon(
-                      AppIcons.arrowRight,
-                      size: 16,
-                      color: _isHovered
-                          ? AppColors.white
-                          : (isDark
-                              ? AppColors.textSecondaryDark
-                              : AppColors.textSecondaryLight),
-                    ),
                   ),
-                ),
+                ],
               ],
             ),
 
-            const SizedBox(height: 8),
+            SizedBox(height: widget.isCompact ? 6 : 8),
 
             // Project Date
             Text(
@@ -318,69 +321,71 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                         ? AppColors.textSecondaryDark
                         : AppColors.textSecondaryLight)
                     .withOpacity(0.7),
-                fontSize: 12,
+                fontSize: widget.isCompact ? 11 : 12,
                 fontWeight: FontWeight.w500,
               ),
             ),
 
-            const SizedBox(height: 8),
+            SizedBox(height: widget.isCompact ? 6 : 8),
 
             // Description
             Expanded(
               child: Text(
                 widget.project.shortDescription,
                 style: AppFonts.bodySmall().copyWith(
+                  fontSize: widget.isCompact ? 12 : null,
                   color: isDark
                       ? AppColors.textSecondaryDark
                       : AppColors.textSecondaryLight,
                   height: 1.4,
                 ),
-                maxLines: 2,
+                maxLines: widget.isCompact ? 3 : 2,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
 
-            const SizedBox(height: 8),
-
-            // Technology chips (simplified)
-            Wrap(
-              spacing: 6,
-              runSpacing: 6,
-              children: widget.project.technologies
-                  .take(4)
-                  .map(
-                    (tech) => Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: (isDark
-                                ? AppColors.accentDark
-                                : AppColors.accentLight)
-                            .withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(
+            // Technology chips (hide on mobile)
+            if (!widget.isCompact) ...[
+              const SizedBox(height: 8),
+              Wrap(
+                spacing: 6,
+                runSpacing: 6,
+                children: widget.project.technologies
+                    .take(4)
+                    .map(
+                      (tech) => Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
                           color: (isDark
                                   ? AppColors.accentDark
                                   : AppColors.accentLight)
-                              .withOpacity(0.4),
-                          width: 1,
+                              .withOpacity(0.15),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: (isDark
+                                    ? AppColors.accentDark
+                                    : AppColors.accentLight)
+                                .withOpacity(0.4),
+                            width: 1,
+                          ),
+                        ),
+                        child: Text(
+                          tech,
+                          style: AppFonts.bodyXS().copyWith(
+                            color: isDark
+                                ? AppColors.accentDark
+                                : AppColors.accentLight,
+                            fontWeight: AppFonts.semiBold,
+                          ),
                         ),
                       ),
-                      child: Text(
-                        tech,
-                        style: AppFonts.bodyXS().copyWith(
-                          color: isDark
-                              ? AppColors.accentDark
-                              : AppColors.accentLight,
-                          fontWeight: AppFonts.semiBold,
-                        ),
-                      ),
-                    ),
-                  )
-                  .toList(),
-            ),
+                    )
+                    .toList(),
+              ),
+            ],
           ],
         ),
       ),

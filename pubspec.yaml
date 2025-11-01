@@ -163,13 +163,11 @@ flutter_gen:
 
 # Flutter Launcher Icons Configuration
 flutter_launcher_icons:
-  android: true
-  ios: true
+  android: false
+  ios: false
   web:
     generate: true
-    image_path: "assets/images/portfolio_logo.png"
+    image_path: "assets/images/portfolio_logo.jpg"
     background_color: "#0D1117"
     theme_color: "#3498DB"
-  image_path: "assets/images/portfolio_logo.png"
-  adaptive_icon_background: "#0D1117"
-  adaptive_icon_foreground: "assets/images/portfolio_logo.png"
+

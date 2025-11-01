@@ -286,7 +286,8 @@ class _ProjectsSectionState extends State<ProjectsSection> {
   }
 
   Widget _buildProjectsGrid(double screenWidth) {
-    final columns = ResponsiveHelper.getGridColumns(screenWidth);
+    final columns = ResponsiveHelper.getProjectGridColumns(screenWidth);
+    final isMobile = ResponsiveHelper.isMobile(screenWidth);
     final filteredProjects = _filteredProjects;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
@@ -324,9 +325,9 @@ class _ProjectsSectionState extends State<ProjectsSection> {
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: columns,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          childAspectRatio: 0.9,
+          crossAxisSpacing: isMobile ? 12 : 16,
+          mainAxisSpacing: isMobile ? 12 : 16,
+          childAspectRatio: isMobile ? 0.70 : 0.9,
         ),
         itemCount: filteredProjects.length,
         itemBuilder: (context, index) {
@@ -337,7 +338,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
             child: FadeInAnimation(
               child: ProjectCardAdvanced(
                 project: filteredProjects[index],
-                isCompact: false,
+                isCompact: isMobile,
                 index: index,
               ),
             ),

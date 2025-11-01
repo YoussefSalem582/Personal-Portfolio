@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../utils/assets/app_constants.dart';
+import '../../utils/responsive_helper.dart';
 import '../../widgets/skills_section/skills_section_header.dart';
 import '../../widgets/skills_section/skills_grid_widget.dart';
 
@@ -12,13 +13,15 @@ class SkillsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 768;
+    final isMobile = ResponsiveHelper.isMobile(screenWidth);
 
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(
-        vertical: isMobile ? 60 : 100,
-        horizontal: isMobile ? 20 : 40,
+        vertical: isMobile
+            ? ResponsiveHelper.getVerticalPadding(screenWidth) * 0.8
+            : ResponsiveHelper.getVerticalPadding(screenWidth),
+        horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
       ),
       decoration: BoxDecoration(
         color: AppColors.getBackground(isDark),
@@ -30,7 +33,10 @@ class SkillsSection extends StatelessWidget {
             isDark: isDark,
             isMobile: isMobile,
           ),
-          SizedBox(height: isMobile ? 40 : 60),
+          SizedBox(
+              height: isMobile
+                  ? ResponsiveHelper.getSectionSpacing(screenWidth) * 0.4
+                  : ResponsiveHelper.getSectionSpacing(screenWidth) * 0.5),
 
           // Skills Grid
           SkillsGridWidget(

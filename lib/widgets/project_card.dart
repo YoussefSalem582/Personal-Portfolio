@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../utils/assets/app_constants.dart';
 import '../models/project.dart';
 import '../utils/url_helper.dart';
+import '../utils/responsive_helper.dart';
 import '../routes/app_routes.dart';
 import 'lazy_image.dart';
 
@@ -49,9 +50,14 @@ class _ProjectCardState extends State<ProjectCard>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    // Fixed dimensions - no flex!
-    final double cardHeight = widget.isCompact ? 190.0 : 220.0;
-    final double imageHeight = widget.isCompact ? 145.0 : 165.0;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = ResponsiveHelper.isMobile(screenWidth);
+
+    // Responsive dimensions
+    final double cardHeight = ResponsiveHelper.getCardHeight(screenWidth,
+        isCompact: widget.isCompact);
+    final double imageHeight = ResponsiveHelper.getImageHeight(screenWidth,
+        isCompact: widget.isCompact);
     final double contentHeight = cardHeight - imageHeight;
 
     return MouseRegion(

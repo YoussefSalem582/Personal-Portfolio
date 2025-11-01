@@ -51,10 +51,14 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
   Widget build(BuildContext context) {
     // Determine theme mode for styling
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 768;
+    final isSmallMobile = screenWidth < 375;
 
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppTheme.radiusXL),
+        borderRadius: BorderRadius.circular(
+            isMobile ? AppTheme.radiusL : AppTheme.radiusXL),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -86,9 +90,11 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
         ),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppTheme.radiusXL),
+        borderRadius: BorderRadius.circular(
+            isMobile ? AppTheme.radiusL : AppTheme.radiusXL),
         child: Container(
-          padding: const EdgeInsets.all(AppTheme.spacingXXL),
+          padding: EdgeInsets.all(
+              isMobile ? AppTheme.spacingL : AppTheme.spacingXXL),
           child: Form(
             key: _formKey,
             child: Column(
@@ -98,7 +104,8 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                 Row(
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(AppTheme.spacingM),
+                      padding: EdgeInsets.all(
+                          isMobile ? AppTheme.spacingS : AppTheme.spacingM),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: isDark
@@ -111,7 +118,8 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                                   AppColors.accentLight.withOpacity(0.8)
                                 ],
                         ),
-                        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                        borderRadius: BorderRadius.circular(
+                            isMobile ? AppTheme.radiusS : AppTheme.radiusM),
                         boxShadow: [
                           BoxShadow(
                             color: (isDark
@@ -126,10 +134,12 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                       child: Icon(
                         AppIcons.send,
                         color: AppColors.white,
-                        size: 28,
+                        size: isMobile ? (isSmallMobile ? 22 : 24) : 28,
                       ),
                     ),
-                    const SizedBox(width: AppTheme.spacingL),
+                    SizedBox(
+                        width:
+                            isMobile ? AppTheme.spacingM : AppTheme.spacingL),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,6 +147,8 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                           Text(
                             'Send Me a Message',
                             style: AppFonts.h2().copyWith(
+                              fontSize:
+                                  isMobile ? (isSmallMobile ? 18 : 20) : null,
                               color: isDark
                                   ? AppColors.textPrimaryDark
                                   : AppColors.textPrimaryLight,
@@ -147,6 +159,8 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                           Text(
                             'I\'ll get back to you within 24 hours',
                             style: AppFonts.bodySmall().copyWith(
+                              fontSize:
+                                  isMobile ? (isSmallMobile ? 10 : 11) : null,
                               color: isDark
                                   ? AppColors.textSecondaryDark
                                   : AppColors.textSecondaryLight,
@@ -158,7 +172,8 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                   ],
                 ),
 
-                const SizedBox(height: AppTheme.spacingXXL),
+                SizedBox(
+                    height: isMobile ? AppTheme.spacingL : AppTheme.spacingXXL),
 
                 // Name field - Required, basic validation
                 ContactFormFieldWidget(
@@ -233,7 +248,8 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                   },
                 ),
 
-                const SizedBox(height: AppTheme.spacingXXL),
+                SizedBox(
+                    height: isMobile ? AppTheme.spacingL : AppTheme.spacingXXL),
 
                 // Show success or error message after form submission
                 if (_submitStatus != null) ...[
@@ -250,8 +266,10 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                       backgroundColor:
                           isDark ? AppColors.accentDark : AppColors.accentLight,
                       foregroundColor: AppColors.white,
-                      padding: const EdgeInsets.symmetric(
-                        vertical: AppTheme.spacingL + 4,
+                      padding: EdgeInsets.symmetric(
+                        vertical: isMobile
+                            ? AppTheme.spacingM
+                            : (AppTheme.spacingL + 4),
                       ),
                       elevation: 0,
                       shadowColor: (isDark
@@ -259,14 +277,15 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                               : AppColors.accentLight)
                           .withOpacity(0.5),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                        borderRadius: BorderRadius.circular(
+                            isMobile ? AppTheme.radiusS : AppTheme.radiusM),
                       ),
                     ),
                     child: _isSubmitting
-                        ? const SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: CircularProgressIndicator(
+                        ? SizedBox(
+                            height: isMobile ? 20 : 24,
+                            width: isMobile ? 20 : 24,
+                            child: const CircularProgressIndicator(
                               strokeWidth: 3,
                               valueColor: AlwaysStoppedAnimation<Color>(
                                 AppColors.white,
@@ -276,12 +295,16 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                         : Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(AppIcons.send, size: 20),
-                              const SizedBox(width: AppTheme.spacingS),
+                              Icon(AppIcons.send,
+                                  size: isMobile
+                                      ? (isSmallMobile ? 16 : 18)
+                                      : 20),
+                              SizedBox(width: isMobile ? 6 : AppTheme.spacingS),
                               Text(
                                 'Send Message',
                                 style: AppFonts.button().copyWith(
-                                  fontSize: 16,
+                                  fontSize:
+                                      isMobile ? (isSmallMobile ? 14 : 15) : 16,
                                   fontWeight: AppFonts.semiBold,
                                 ),
                               ),

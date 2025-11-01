@@ -64,6 +64,9 @@ class _StatCardWidgetState extends State<StatCardWidget>
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 768;
+    final isSmallMobile = screenWidth < 375;
 
     return MouseRegion(
       onEnter: (_) {
@@ -124,111 +127,124 @@ class _StatCardWidgetState extends State<StatCardWidget>
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: AppTheme.spacingM,
-                    vertical: AppTheme.spacingL,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: isMobile ? 4.0 : AppTheme.spacingM,
+                    vertical: isMobile ? 4.0 : AppTheme.spacingL,
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // Optional icon
-                      if (widget.icon != null) ...[
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            gradient: LinearGradient(
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Optional icon
+                          if (widget.icon != null) ...[
+                            Container(
+                              padding: EdgeInsets.all(isMobile ? 4 : 12),
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                gradient: LinearGradient(
+                                  colors: isDark
+                                      ? [
+                                          AppColors.accentDark.withOpacity(0.2),
+                                          AppColors.accentDark.withOpacity(0.1),
+                                        ]
+                                      : [
+                                          AppColors.accentLight
+                                              .withOpacity(0.2),
+                                          AppColors.primaryLight
+                                              .withOpacity(0.1),
+                                        ],
+                                ),
+                              ),
+                              child: Icon(
+                                widget.icon,
+                                size: isMobile ? (isSmallMobile ? 10 : 14) : 22,
+                                color: isDark
+                                    ? AppColors.accentDark
+                                    : AppColors.accentLight,
+                              ),
+                            ),
+                            SizedBox(height: isMobile ? 3 : AppTheme.spacingS),
+                          ],
+
+                          // Large title with accent color (stat value)
+                          ShaderMask(
+                            shaderCallback: (bounds) => LinearGradient(
                               colors: isDark
                                   ? [
-                                      AppColors.accentDark
-                                          .withOpacity(0.2),
-                                      AppColors.accentDark
-                                          .withOpacity(0.1),
+                                      AppColors.accentDark,
+                                      AppColors.accentDark.withOpacity(0.8),
                                     ]
                                   : [
-                                      AppColors.accentLight
-                                          .withOpacity(0.2),
-                                      AppColors.primaryLight
-                                          .withOpacity(0.1),
+                                      AppColors.accentLight,
+                                      AppColors.primaryLight,
                                     ],
+                            ).createShader(bounds),
+                            child: Text(
+                              widget.title,
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallMobile ? 18 : 22) : 34,
+                                color: AppColors.white,
+                                fontWeight: AppFonts.extraBold,
+                                letterSpacing: -0.5,
+                                fontFamily: AppFonts.primaryFont,
+                                height: 1.0,
+                              ),
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                          child: Icon(
-                            widget.icon,
-                            size: 24,
-                            color: isDark
-                                ? AppColors.accentDark
-                                : AppColors.accentLight,
+
+                          SizedBox(height: isMobile ? 2 : 6),
+
+                          // Divider line
+                          Container(
+                            width: isMobile ? 18 : 35,
+                            height: 2,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(2),
+                              gradient: LinearGradient(
+                                colors: isDark
+                                    ? [
+                                        AppColors.accentDark,
+                                        AppColors.transparent,
+                                      ]
+                                    : [
+                                        AppColors.accentLight,
+                                        AppColors.transparent,
+                                      ],
+                              ),
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: AppTheme.spacingM),
-                      ],
 
-                      // Large title with accent color (stat value)
-                      ShaderMask(
-                        shaderCallback: (bounds) => LinearGradient(
-                          colors: isDark
-                              ? [
-                                  AppColors.accentDark,
-                                  AppColors.accentDark.withOpacity(0.8),
-                                ]
-                              : [
-                                  AppColors.accentLight,
-                                  AppColors.primaryLight,
-                                ],
-                        ).createShader(bounds),
-                        child: Text(
-                          widget.title,
-                          style: AppFonts.h1().copyWith(
-                            color: AppColors.white,
-                            fontWeight: AppFonts.extraBold,
-                            letterSpacing: -0.5,
+                          SizedBox(height: isMobile ? 2 : 6),
+
+                          // Subtitle (stat description)
+                          Text(
+                            widget.subtitle,
+                            style: (isDark
+                                    ? AppFonts.bodyMedium()
+                                    : AppFonts.bodyMedium())
+                                .copyWith(
+                              fontSize: isMobile ? (isSmallMobile ? 8 : 9) : 13,
+                              color: isDark
+                                  ? AppColors.gray300
+                                  : AppColors.gray700,
+                              fontWeight: AppFonts.semiBold,
+                              letterSpacing: 0.1,
+                              height: 1.1,
+                            ),
+                            textAlign: TextAlign.center,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-
-                      const SizedBox(height: AppTheme.spacingS),
-
-                      // Divider line
-                      Container(
-                        width: 40,
-                        height: 3,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(2),
-                          gradient: LinearGradient(
-                            colors: isDark
-                                ? [
-                                    AppColors.accentDark,
-                                    AppColors.transparent,
-                                  ]
-                                : [
-                                    AppColors.accentLight,
-                                    AppColors.transparent,
-                                  ],
-                          ),
-                        ),
-                      ),
-
-                      const SizedBox(height: AppTheme.spacingS),
-
-                      // Subtitle (stat description)
-                      Text(
-                        widget.subtitle,
-                        style: (isDark
-                                ? AppFonts.bodyMedium()
-                                : AppFonts.bodyMedium())
-                            .copyWith(
-                          color: isDark ? AppColors.gray300 : AppColors.gray700,
-                          fontWeight: AppFonts.semiBold,
-                          letterSpacing: 0.5,
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
+                        ],
+                      );
+                    },
                   ),
                 ),
               ),

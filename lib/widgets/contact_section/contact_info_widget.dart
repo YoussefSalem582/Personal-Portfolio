@@ -20,9 +20,13 @@ class ContactInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // Determine theme mode for styling
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 768;
+    final isSmallMobile = screenWidth < 375;
 
     return Container(
-      padding: const EdgeInsets.all(AppTheme.spacingXL),
+      padding:
+          EdgeInsets.all(isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
@@ -37,7 +41,8 @@ class ContactInfoWidget extends StatelessWidget {
                   AppColors.white.withOpacity(0.5),
                 ],
         ),
-        borderRadius: BorderRadius.circular(AppTheme.radiusXL),
+        borderRadius: BorderRadius.circular(
+            isMobile ? AppTheme.radiusL : AppTheme.radiusXL),
         border: Border.all(
           color: isDark
               ? AppColors.white.withOpacity(0.05)
@@ -52,7 +57,8 @@ class ContactInfoWidget extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(AppTheme.spacingM),
+                padding: EdgeInsets.all(
+                    isMobile ? AppTheme.spacingS : AppTheme.spacingM),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: isDark
@@ -65,7 +71,8 @@ class ContactInfoWidget extends StatelessWidget {
                             AppColors.accentLight.withOpacity(0.8)
                           ],
                   ),
-                  borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                  borderRadius: BorderRadius.circular(
+                      isMobile ? AppTheme.radiusS : AppTheme.radiusM),
                   boxShadow: [
                     BoxShadow(
                       color: (isDark
@@ -80,10 +87,10 @@ class ContactInfoWidget extends StatelessWidget {
                 child: Icon(
                   AppIcons.contact,
                   color: AppColors.white,
-                  size: 24,
+                  size: isMobile ? 20 : 24,
                 ),
               ),
-              const SizedBox(width: AppTheme.spacingM),
+              SizedBox(width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -91,6 +98,7 @@ class ContactInfoWidget extends StatelessWidget {
                     Text(
                       'Contact Information',
                       style: AppFonts.h3().copyWith(
+                        fontSize: isMobile ? (isSmallMobile ? 15 : 16) : null,
                         color: isDark
                             ? AppColors.textPrimaryDark
                             : AppColors.textPrimaryLight,
@@ -101,6 +109,7 @@ class ContactInfoWidget extends StatelessWidget {
                     Text(
                       'Get in touch with me',
                       style: AppFonts.bodySmall().copyWith(
+                        fontSize: isMobile ? (isSmallMobile ? 10 : 11) : null,
                         color: isDark
                             ? AppColors.textSecondaryDark
                             : AppColors.textSecondaryLight,
@@ -112,7 +121,7 @@ class ContactInfoWidget extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: AppTheme.spacingXL),
+          SizedBox(height: isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
 
           // Email contact item (clickable - launches email client)
           ContactItemWidget(
@@ -123,7 +132,7 @@ class ContactInfoWidget extends StatelessWidget {
                 UrlHelper.launchEmail(email: PortfolioData.contactInfo.email),
           ),
 
-          const SizedBox(height: AppTheme.spacingM),
+          SizedBox(height: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
 
           // Location contact item (non-clickable - just displays location)
           ContactItemWidget(
@@ -133,7 +142,7 @@ class ContactInfoWidget extends StatelessWidget {
             onTap: null, // No action for location
           ),
 
-          const SizedBox(height: AppTheme.spacingXXL),
+          SizedBox(height: isMobile ? AppTheme.spacingL : AppTheme.spacingXXL),
 
           // Divider
           Container(
@@ -149,13 +158,13 @@ class ContactInfoWidget extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: AppTheme.spacingXL),
+          SizedBox(height: isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
 
           // Social media section heading
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(isMobile ? 6 : 8),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: isDark
@@ -173,13 +182,14 @@ class ContactInfoWidget extends StatelessWidget {
                 child: Icon(
                   Icons.link,
                   color: isDark ? AppColors.accentDark : AppColors.accentLight,
-                  size: 20,
+                  size: isMobile ? 16 : 20,
                 ),
               ),
-              const SizedBox(width: AppTheme.spacingM),
+              SizedBox(width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
               Text(
                 'Connect With Me',
                 style: AppFonts.h4().copyWith(
+                  fontSize: isMobile ? (isSmallMobile ? 13 : 14) : null,
                   color: isDark
                       ? AppColors.textPrimaryDark
                       : AppColors.textPrimaryLight,
@@ -189,12 +199,12 @@ class ContactInfoWidget extends StatelessWidget {
             ],
           ),
 
-          const SizedBox(height: AppTheme.spacingL),
+          SizedBox(height: isMobile ? AppTheme.spacingM : AppTheme.spacingL),
 
           // Social media buttons (wrap for responsive layout)
           Wrap(
-            spacing: AppTheme.spacingM,
-            runSpacing: AppTheme.spacingM,
+            spacing: isMobile ? AppTheme.spacingS : AppTheme.spacingM,
+            runSpacing: isMobile ? AppTheme.spacingS : AppTheme.spacingM,
             children: PortfolioData.socialLinks.map((social) {
               return SocialButtonWidget(
                 title: social.name,

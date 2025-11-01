@@ -33,6 +33,9 @@ class SocialButtonWidget extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
     final svgIconPath = AppIcons.getSocialIconSvg(title);
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 768;
+    final isSmallMobile = screenWidth < 375;
 
     return MouseRegion(
       cursor: SystemMouseCursors.click,
@@ -40,13 +43,14 @@ class SocialButtonWidget extends StatelessWidget {
         duration: const Duration(milliseconds: 200),
         child: InkWell(
           onTap: onTap,
-          borderRadius: BorderRadius.circular(AppTheme.radiusM),
+          borderRadius: BorderRadius.circular(
+              isMobile ? AppTheme.radiusS : AppTheme.radiusM),
           hoverColor: accentColor.withOpacity(0.1),
           splashColor: accentColor.withOpacity(0.2),
           child: Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: AppTheme.spacingM,
-              vertical: AppTheme.spacingS,
+            padding: EdgeInsets.symmetric(
+              horizontal: isMobile ? AppTheme.spacingS : AppTheme.spacingM,
+              vertical: isMobile ? 8 : AppTheme.spacingS,
             ),
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -62,7 +66,8 @@ class SocialButtonWidget extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
-              borderRadius: BorderRadius.circular(AppTheme.radiusM),
+              borderRadius: BorderRadius.circular(
+                  isMobile ? AppTheme.radiusS : AppTheme.radiusM),
               border: Border.all(
                 color: accentColor.withOpacity(0.3),
                 width: 1.5,
@@ -82,14 +87,15 @@ class SocialButtonWidget extends StatelessWidget {
               children: [
                 // Platform-specific SVG icon
                 if (svgIconPath != null)
-                  _buildIconWidget(svgIconPath, accentColor)
+                  _buildIconWidget(
+                      svgIconPath, accentColor, isMobile, isSmallMobile)
                 else
                   Icon(
                     _getIconForPlatform(title),
                     color: accentColor,
-                    size: 20,
+                    size: isMobile ? (isSmallMobile ? 16 : 18) : 20,
                   ),
-                const SizedBox(width: AppTheme.spacingS),
+                SizedBox(width: isMobile ? 6 : AppTheme.spacingS),
                 // Platform name
                 Text(
                   title,
@@ -98,7 +104,7 @@ class SocialButtonWidget extends StatelessWidget {
                         ? AppColors.textPrimaryDark
                         : AppColors.textPrimaryLight,
                     fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                    fontSize: isMobile ? (isSmallMobile ? 12 : 13) : 14,
                   ),
                 ),
               ],
@@ -110,12 +116,15 @@ class SocialButtonWidget extends StatelessWidget {
   }
 
   /// Builds the icon widget (SVG or PNG)
-  Widget _buildIconWidget(String iconPath, Color color) {
+  Widget _buildIconWidget(
+      String iconPath, Color color, bool isMobile, bool isSmallMobile) {
+    final iconSize = isMobile ? (isSmallMobile ? 18.0 : 20.0) : 24.0;
+
     if (iconPath.endsWith('.svg')) {
       return SvgPicture.asset(
         iconPath,
-        width: 24,
-        height: 24,
+        width: iconSize,
+        height: iconSize,
         fit: BoxFit.contain,
         //colorFilter: ColorFilter.mode(color, BlendMode.srcIn),
       );
@@ -123,8 +132,8 @@ class SocialButtonWidget extends StatelessWidget {
       // For PNG and other image formats
       return Image.asset(
         iconPath,
-        width: 24,
-        height: 24,
+        width: iconSize,
+        height: iconSize,
         fit: BoxFit.contain,
         color: color,
       );

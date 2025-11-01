@@ -32,10 +32,12 @@ class _CertificatesSectionState extends State<CertificatesSection> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
-    final isTablet = ResponsiveHelper.isTablet(screenWidth);
+    final isSmallMobile = ResponsiveHelper.isSmallMobile(screenWidth);
 
-    // Responsive grid columns
-    final crossAxisCount = isMobile ? 1 : (isTablet ? 2 : 3);
+    // Enhanced responsive grid columns using the new helper
+    final crossAxisCount =
+        ResponsiveHelper.getCertificateGridColumns(screenWidth);
+    final spacing = ResponsiveHelper.getSpacing(screenWidth);
     final certificatesToShow =
         PortfolioData.certificates.take(_displayCount).toList();
     final hasMore = _displayCount < PortfolioData.certificates.length;
@@ -44,7 +46,7 @@ class _CertificatesSectionState extends State<CertificatesSection> {
       width: double.infinity,
       color: isDark ? AppColors.backgroundDark : AppColors.backgroundLight,
       padding: EdgeInsets.symmetric(
-        vertical: AppTheme.spacingXXL,
+        vertical: ResponsiveHelper.getSectionSpacing(screenWidth) * 0.8,
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
       ),
       child: ConstrainedBox(
@@ -57,7 +59,8 @@ class _CertificatesSectionState extends State<CertificatesSection> {
             // Section Header
             _buildSectionHeader(context, isDark),
 
-            const SizedBox(height: AppTheme.spacingXXL),
+            SizedBox(
+                height: isMobile ? AppTheme.spacingXL : AppTheme.spacingXXL),
 
             // Certificates Grid with Staggered Animation
             AnimationLimiter(
@@ -66,9 +69,10 @@ class _CertificatesSectionState extends State<CertificatesSection> {
                 physics: const NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: crossAxisCount,
-                  crossAxisSpacing: AppTheme.spacingL,
-                  mainAxisSpacing: AppTheme.spacingL,
-                  childAspectRatio: isMobile ? 0.9 : 0.75,
+                  crossAxisSpacing: spacing,
+                  mainAxisSpacing: spacing,
+                  childAspectRatio:
+                      isSmallMobile ? 0.65 : (isMobile ? 0.80 : 0.85),
                 ),
                 itemCount: certificatesToShow.length,
                 itemBuilder: (context, index) {
@@ -423,8 +427,12 @@ class _CertificateCardState extends State<CertificateCard>
   /// Builds the certificate information section
   Widget _buildCertificateInfo(
       BuildContext context, Color accentColor, bool isDark) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isSmallMobile = ResponsiveHelper.isSmallMobile(screenWidth);
+
     return Padding(
-      padding: const EdgeInsets.all(AppTheme.spacingM),
+      padding: EdgeInsets.all(isMobile ? AppTheme.spacingS : AppTheme.spacingM),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -432,20 +440,21 @@ class _CertificateCardState extends State<CertificateCard>
           Text(
             widget.certificate.title,
             style: AppFonts.h4().copyWith(
+              fontSize: isSmallMobile ? 13 : (isMobile ? 14 : null),
               fontWeight: AppFonts.bold,
-              height: 1.3,
+              height: 1.2,
             ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),
 
-          const SizedBox(height: AppTheme.spacingS),
+          SizedBox(height: isMobile ? 4 : AppTheme.spacingS),
 
           // Issuer with Icon
           Row(
             children: [
               Container(
-                padding: const EdgeInsets.all(6),
+                padding: EdgeInsets.all(isMobile ? 4 : 6),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
@@ -453,15 +462,17 @@ class _CertificateCardState extends State<CertificateCard>
                       accentColor.withOpacity(0.05),
                     ],
                   ),
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(isMobile ? 6 : 8),
                 ),
-                child: Icon(AppIcons.experience, size: 14, color: accentColor),
+                child: Icon(AppIcons.experience,
+                    size: isMobile ? 12 : 14, color: accentColor),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 6),
               Expanded(
                 child: Text(
                   widget.certificate.issuer,
                   style: AppFonts.labelMedium().copyWith(
+                    fontSize: isSmallMobile ? 11 : (isMobile ? 12 : null),
                     color: accentColor,
                     fontWeight: AppFonts.bold,
                   ),
@@ -483,11 +494,13 @@ class _CertificateCardState extends State<CertificateCard>
               if (_extractDuration() != null)
                 Flexible(
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: isMobile ? 6 : 10,
+                      vertical: isMobile ? 4 : 6,
+                    ),
                     decoration: BoxDecoration(
                       color: isDark ? AppColors.surfaceDark : AppColors.gray100,
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(isMobile ? 8 : 10),
                       border: Border.all(
                         color: isDark
                             ? AppColors.textSecondaryDark.withOpacity(0.2)
@@ -499,16 +512,18 @@ class _CertificateCardState extends State<CertificateCard>
                       children: [
                         Icon(
                           AppIcons.date,
-                          size: 12,
+                          size: isMobile ? 10 : 12,
                           color: isDark
                               ? AppColors.textSecondaryDark
                               : AppColors.textSecondaryLight,
                         ),
-                        const SizedBox(width: 6),
+                        SizedBox(width: isMobile ? 4 : 6),
                         Flexible(
                           child: Text(
                             _extractDuration()!,
                             style: AppFonts.bodySmall().copyWith(
+                              fontSize:
+                                  isSmallMobile ? 9 : (isMobile ? 10 : null),
                               color: isDark
                                   ? AppColors.textSecondaryDark
                                   : AppColors.textSecondaryLight,
@@ -523,16 +538,17 @@ class _CertificateCardState extends State<CertificateCard>
                   ),
                 ),
 
-              if (_extractDuration() != null) const SizedBox(width: 8),
+              if (!isMobile && _extractDuration() != null)
+                const SizedBox(width: 8),
 
               // View Details Button
               Container(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(isMobile ? 6 : 8),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [accentColor, accentColor.withOpacity(0.8)],
                   ),
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(isMobile ? 8 : 10),
                   boxShadow: [
                     BoxShadow(
                       color: accentColor.withOpacity(0.3),
@@ -543,7 +559,7 @@ class _CertificateCardState extends State<CertificateCard>
                 ),
                 child: Icon(
                   AppIcons.arrowRight,
-                  size: 18,
+                  size: isMobile ? 14 : 18,
                   color: AppColors.white,
                 ),
               ),
@@ -1004,9 +1020,8 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
     return Container(
       padding: const EdgeInsets.all(AppTheme.spacingM),
       decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.surfaceDark.withOpacity(0.5)
-            : AppColors.gray50,
+        color:
+            isDark ? AppColors.surfaceDark.withOpacity(0.5) : AppColors.gray50,
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         border: Border.all(
           color: isDark
@@ -1071,9 +1086,8 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
     return Container(
       padding: EdgeInsets.all(isMobile ? AppTheme.spacingM : AppTheme.spacingL),
       decoration: BoxDecoration(
-        color: isDark
-            ? AppColors.surfaceDark.withOpacity(0.3)
-            : AppColors.gray50,
+        color:
+            isDark ? AppColors.surfaceDark.withOpacity(0.3) : AppColors.gray50,
         borderRadius: const BorderRadius.vertical(
           bottom: Radius.circular(AppTheme.radiusXL + 4),
         ),

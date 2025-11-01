@@ -94,7 +94,7 @@ class ExpertiseSection extends StatelessWidget {
 
   Widget _buildExpertiseGrid(
       BuildContext context, bool isDark, bool isMobile, bool isTablet) {
-    final crossAxisCount = isMobile ? 1 : (isTablet ? 2 : 3);
+    final crossAxisCount = isMobile ? 2 : (isTablet ? 2 : 3);
     final maxWidth = isMobile ? double.infinity : 1200.0;
 
     return Center(
@@ -106,9 +106,9 @@ class ExpertiseSection extends StatelessWidget {
             physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: crossAxisCount,
-              crossAxisSpacing: isMobile ? 16 : 20,
-              mainAxisSpacing: isMobile ? 16 : 20,
-              childAspectRatio: isMobile ? 1.8 : (isTablet ? 1.25 : 1.45),
+              crossAxisSpacing: isMobile ? 12 : 20,
+              mainAxisSpacing: isMobile ? 12 : 20,
+              childAspectRatio: isMobile ? 0.85 : (isTablet ? 1.25 : 1.45),
             ),
             itemCount: ExpertiseData.expertiseList.length,
             itemBuilder: (context, index) {
@@ -182,74 +182,87 @@ class ExpertiseSection extends StatelessWidget {
             onTap: () {},
             hoverColor: accentColor.withOpacity(0.05),
             child: Padding(
-              padding: EdgeInsets.all(isMobile ? 16 : 20),
+              padding: EdgeInsets.all(isMobile ? 12 : 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  // Icon with gradient background
-                  Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          accentColor.withOpacity(0.15),
-                          accentColor.withOpacity(0.05),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: accentColor.withOpacity(0.3),
-                        width: 1.5,
-                      ),
-                    ),
-                    child: expertise.icon is String
-                        ? SvgPicture.asset(
-                            expertise.icon,
-                            width: 24,
-                            height: 24,
-                            colorFilter: ColorFilter.mode(
-                              accentColor,
-                              BlendMode.srcIn,
-                            ),
-                          )
-                        : Icon(
-                            expertise.icon,
-                            size: 24,
-                            color: accentColor,
+                  // Icon and Title in same row
+                  Row(
+                    children: [
+                      // Icon with gradient background
+                      Container(
+                        width: isMobile ? 40 : 48,
+                        height: isMobile ? 40 : 48,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                            colors: [
+                              accentColor.withOpacity(0.15),
+                              accentColor.withOpacity(0.05),
+                            ],
                           ),
-                  ),
-                  const SizedBox(height: 12),
+                          borderRadius:
+                              BorderRadius.circular(isMobile ? 10 : 12),
+                          border: Border.all(
+                            color: accentColor.withOpacity(0.3),
+                            width: 1.5,
+                          ),
+                        ),
+                        child: expertise.icon is String
+                            ? SvgPicture.asset(
+                                expertise.icon,
+                                width: isMobile ? 20 : 24,
+                                height: isMobile ? 20 : 24,
+                                colorFilter: ColorFilter.mode(
+                                  accentColor,
+                                  BlendMode.srcIn,
+                                ),
+                              )
+                            : Icon(
+                                expertise.icon,
+                                size: isMobile ? 20 : 24,
+                                color: accentColor,
+                              ),
+                      ),
+                      SizedBox(width: isMobile ? 10 : 12),
 
-                  // Title
-                  Text(
-                    expertise.title,
-                    style: TextStyle(
-                      fontSize: isMobile ? 16 : 17,
-                      fontWeight: FontWeight.bold,
-                      color: isDark
-                          ? AppColors.textPrimaryDark
-                          : AppColors.textPrimaryLight,
-                      height: 1.3,
-                      letterSpacing: -0.3,
-                    ),
+                      // Title
+                      Expanded(
+                        child: Text(
+                          expertise.title,
+                          style: TextStyle(
+                            fontSize: isMobile ? 14 : 17,
+                            fontWeight: FontWeight.bold,
+                            color: isDark
+                                ? AppColors.textPrimaryDark
+                                : AppColors.textPrimaryLight,
+                            height: 1.2,
+                            letterSpacing: -0.3,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: isMobile ? 8 : 12),
 
-                  // Description - Full text shown
-                  Text(
-                    expertise.description,
-                    style: TextStyle(
-                      fontSize: isMobile ? 13 : 13.5,
-                      color: isDark
-                          ? AppColors.textSecondaryDark.withOpacity(0.85)
-                          : AppColors.textSecondaryLight
-                              .withOpacity(0.85),
-                      height: 1.5,
+                  // Description
+                  Expanded(
+                    child: Text(
+                      expertise.description,
+                      style: TextStyle(
+                        fontSize: isMobile ? 14 : 14.5,
+                        color: isDark
+                            ? AppColors.textSecondaryDark.withOpacity(0.85)
+                            : AppColors.textSecondaryLight.withOpacity(0.85),
+                        height: 1.4,
+                      ),
+                      maxLines: isMobile ? 15 : null,
+                      overflow: isMobile ? TextOverflow.ellipsis : null,
                     ),
                   ),
                 ],

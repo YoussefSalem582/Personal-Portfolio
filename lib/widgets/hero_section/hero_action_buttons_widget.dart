@@ -18,10 +18,11 @@ class HeroActionButtonsWidget extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isSmallMobile = ResponsiveHelper.isSmallMobile(screenWidth);
 
     return Wrap(
-      spacing: AppTheme.spacingM,
-      runSpacing: AppTheme.spacingM,
+      spacing: isSmallMobile ? AppTheme.spacingS : AppTheme.spacingM,
+      runSpacing: isSmallMobile ? AppTheme.spacingS : AppTheme.spacingM,
       alignment: isMobile ? WrapAlignment.center : WrapAlignment.start,
       children: [
         // Primary CTA - Get In Touch
@@ -31,6 +32,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
           icon: AppIcons.send,
           onPressed: () => _navigateToSection(6),
           isDark: isDark,
+          isMobile: isMobile,
         ),
         // Secondary CTA - View Resume
         _buildSecondaryButton(
@@ -39,6 +41,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
           icon: AppIcons.download,
           onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
           isDark: isDark,
+          isMobile: isMobile,
         ),
         // Tertiary CTA - View Projects
         _buildSecondaryButton(
@@ -47,6 +50,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
           icon: AppIcons.projects,
           onPressed: () => _navigateToSection(4),
           isDark: isDark,
+          isMobile: isMobile,
         ),
       ],
     );
@@ -58,6 +62,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
     required IconData icon,
     required VoidCallback onPressed,
     required bool isDark,
+    required bool isMobile,
   }) {
     return Container(
       decoration: BoxDecoration(
@@ -76,21 +81,23 @@ class HeroActionButtonsWidget extends StatelessWidget {
       ),
       child: ElevatedButton.icon(
         onPressed: onPressed,
-        icon: Icon(icon, size: 20),
+        icon: Icon(icon, size: isMobile ? 18 : 20),
         label: Text(
           label,
           style: AppFonts.button().copyWith(
             fontWeight: AppFonts.semiBold,
+            fontSize: isMobile ? 14 : 15,
           ),
         ),
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.transparent,
           foregroundColor: AppColors.white,
           shadowColor: AppColors.transparent,
-          padding: const EdgeInsets.symmetric(
-            horizontal: 24,
-            vertical: 16,
+          padding: EdgeInsets.symmetric(
+            horizontal: isMobile ? 20 : 24,
+            vertical: isMobile ? 14 : 16,
           ),
+          minimumSize: Size(isMobile ? 140 : 160, isMobile ? 48 : 52),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
@@ -105,15 +112,17 @@ class HeroActionButtonsWidget extends StatelessWidget {
     required IconData icon,
     required VoidCallback onPressed,
     required bool isDark,
+    required bool isMobile,
   }) {
     return OutlinedButton.icon(
       onPressed: onPressed,
-      icon: Icon(icon, size: 20),
+      icon: Icon(icon, size: isMobile ? 18 : 20),
       label: Text(
         label,
         style: AppFonts.button().copyWith(
           color: isDark ? AppColors.accentDark : AppColors.accentLight,
           fontWeight: AppFonts.medium,
+          fontSize: isMobile ? 14 : 15,
         ),
       ),
       style: OutlinedButton.styleFrom(
@@ -123,10 +132,11 @@ class HeroActionButtonsWidget extends StatelessWidget {
               .withOpacity(0.5),
           width: 1.5,
         ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24,
-          vertical: 16,
+        padding: EdgeInsets.symmetric(
+          horizontal: isMobile ? 20 : 24,
+          vertical: isMobile ? 14 : 16,
         ),
+        minimumSize: Size(isMobile ? 140 : 160, isMobile ? 48 : 52),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
