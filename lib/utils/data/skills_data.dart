@@ -10,8 +10,6 @@ class SkillsData {
       skills: [
         Skill(id: 'dart', name: 'Dart', category: 'languages'),
         Skill(id: 'python', name: 'Python', category: 'languages'),
-        Skill(id: 'java', name: 'Java', category: 'languages'),
-        Skill(id: 'cpp', name: 'C++', category: 'languages'),
         Skill(id: 'javascript', name: 'JavaScript', category: 'languages'),
         Skill(id: 'sql', name: 'SQL', category: 'languages'),
       ],
@@ -34,8 +32,6 @@ class SkillsData {
             category: 'mobile-development'),
         Skill(id: 'getx', name: 'GetX', category: 'mobile-development'),
         Skill(id: 'bloc', name: 'BLoC Pattern', category: 'mobile-development'),
-        Skill(id: 'provider', name: 'Provider', category: 'mobile-development'),
-        Skill(id: 'riverpod', name: 'Riverpod', category: 'mobile-development'),
       ],
     ),
 
@@ -54,7 +50,6 @@ class SkillsData {
             category: 'backend-cloud'),
         Skill(id: 'github', name: 'GitHub', category: 'backend-cloud'),
         Skill(id: 'vercel', name: 'Vercel', category: 'backend-cloud'),
-        Skill(id: 'emailjs', name: 'EmailJS', category: 'backend-cloud'),
         Skill(id: 'fcm', name: 'Firebase Messaging', category: 'backend-cloud'),
       ],
     ),

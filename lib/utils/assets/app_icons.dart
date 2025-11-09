@@ -75,6 +75,27 @@ class AppIcons {
   /// GitHub icon (SVG) - for skills
   static const String githubSkillIconSvg = '$_iconsPath/github_icon.svg';
 
+  /// Supabase icon (SVG)
+  static const String supabaseIconSvg = '$_skillIconsPath/supabase_logo.svg';
+
+  // ==================== Skill Icon Assets (PNG) ====================
+
+  /// BLoC icon (PNG)
+  static const String blocIconPng = '$_skillIconsPath/bloc_logo.png';
+
+  /// GetX icon (PNG)
+  static const String getxIconPng = '$_skillIconsPath/getx_logo.png';
+
+  /// Figma icon (PNG)
+  static const String figmaIconPng = '$_skillIconsPath/figma_logo.png';
+
+  /// JavaScript icon (PNG)
+  static const String javascriptIconPng =
+      '$_skillIconsPath/javascript_logo.png';
+
+  /// Firebase icon (PNG) - alternative
+  static const String firebaseIconPng = '$_skillIconsPath/firebase_logo.png';
+
   // ==================== Navigation Icons ====================
 
   /// Home icon
@@ -316,15 +337,23 @@ class AppIcons {
         return pythonIconSvg;
       case 'java':
         return javaIconSvg;
+      case 'javascript':
+      case 'js':
+        return javascriptIconPng;
       case 'flutter':
+        return flutterIconSvg;
       case 'getx':
+        return getxIconPng;
       case 'bloc':
+        return blocIconPng;
       case 'provider':
       case 'riverpod':
-        return flutterIconSvg;
+        return flutterIconSvg; // Use Flutter icon for state management packages
       case 'firebase':
       case 'fcm':
         return firebaseIconSvg;
+      case 'supabase':
+        return supabaseIconSvg;
       case 'postgresql':
       case 'pgsql':
       case 'postgres':
@@ -341,6 +370,9 @@ class AppIcons {
       case 'github':
       case 'github-pages':
         return githubSkillIconSvg;
+      case 'figma':
+      case 'native-ui-ux':
+        return figmaIconPng;
       default:
         return null; // Return null if no SVG icon available
     }

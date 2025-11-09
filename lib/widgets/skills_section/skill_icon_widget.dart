@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../../utils/assets/app_constants.dart';
 
 /// Skill Icon Widget
-/// Handles displaying skill icons with network URLs and SVG fallback
+/// Handles displaying skill icons from local assets (SVG/PNG) and network URLs with fallback
 class SkillIconWidget extends StatelessWidget {
   final String skillId;
   final double size;
@@ -19,18 +19,37 @@ class SkillIconWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Try to get SVG icon from centralized AppIcons first
-    final svgPath = AppIcons.getSkillIconSvg(skillId);
+    // Try to get icon asset from centralized AppIcons first
+    final iconPath = AppIcons.getSkillIconSvg(skillId);
 
-    if (svgPath != null) {
-      // Use local SVG asset
-      return SvgPicture.asset(
-        svgPath,
-        width: size,
-        height: size,
-        fit: BoxFit.contain,
-        allowDrawingOutsideViewBox: true,
-      );
+    if (iconPath != null) {
+      // Check if it's a PNG or SVG file
+      if (iconPath.toLowerCase().endsWith('.png')) {
+        // Use local PNG asset
+        return Image.asset(
+          iconPath,
+          width: size,
+          height: size,
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) {
+            debugPrint('Failed to load PNG icon for $skillId: $error');
+            return Icon(
+              AppIcons.technology,
+              size: size,
+              color: color,
+            );
+          },
+        );
+      } else {
+        // Use local SVG asset
+        return SvgPicture.asset(
+          iconPath,
+          width: size,
+          height: size,
+          fit: BoxFit.contain,
+          allowDrawingOutsideViewBox: true,
+        );
+      }
     }
 
     // Try network icon URL

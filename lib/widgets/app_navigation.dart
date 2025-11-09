@@ -20,7 +20,9 @@ class AppNavigation extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
 
     if (ResponsiveHelper.isMobile(screenWidth)) {
-      return const MobileAppBar();
+      return MobileAppBar(
+        onItemSelected: onItemSelected,
+      );
     } else {
       return DesktopAppBar(
         onItemSelected: onItemSelected,
