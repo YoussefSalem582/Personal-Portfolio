@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/responsive_helper.dart';
-import '../theme_toggle.dart';
+import '../common/theme_toggle_button_container.dart';
 
 class MobileAppBar extends StatefulWidget implements PreferredSizeWidget {
   final Function(int) onItemSelected;
@@ -105,9 +105,14 @@ class _MobileAppBarState extends State<MobileAppBar>
         ),
         centerTitle: true,
         actions: [
-          _ThemeToggleButton(
+          ThemeToggleButtonContainer(
             isDark: isDark,
-            isSmallMobile: isSmallMobile,
+            margin: EdgeInsets.only(
+              right: isSmallMobile ? 6 : 8,
+              top: isSmallMobile ? 6 : 8,
+              bottom: isSmallMobile ? 6 : 8,
+            ),
+            padding: EdgeInsets.all(isSmallMobile ? 3 : 4),
           ),
         ],
       ),
@@ -317,59 +322,6 @@ class _AppBarTitle extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-// Theme Toggle Button Widget
-class _ThemeToggleButton extends StatelessWidget {
-  final bool isDark;
-  final bool isSmallMobile;
-
-  const _ThemeToggleButton({
-    required this.isDark,
-    required this.isSmallMobile,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        right: isSmallMobile ? 6 : 8,
-        top: isSmallMobile ? 6 : 8,
-        bottom: isSmallMobile ? 6 : 8,
-      ),
-      padding: EdgeInsets.all(isSmallMobile ? 3 : 4),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: isDark
-              ? [
-                  AppColors.white.withOpacity(0.08),
-                  AppColors.white.withOpacity(0.04),
-                ]
-              : [
-                  AppColors.black.withOpacity(0.04),
-                  AppColors.black.withOpacity(0.02),
-                ],
-        ),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: isDark
-              ? AppColors.white.withOpacity(0.12)
-              : AppColors.black.withOpacity(0.08),
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: isDark
-                ? AppColors.black.withOpacity(0.2)
-                : AppColors.black.withOpacity(0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: const ThemeToggle(isCompact: true),
     );
   }
 }

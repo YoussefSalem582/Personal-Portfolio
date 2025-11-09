@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:get/get.dart';
-import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
-import '../../widgets/project_card_advanced.dart';
-
+import '../../utils/assets/app_constants.dart';
 import '../../theme/app_theme.dart';
+import '../../widgets/projects_section/projects_section_header.dart';
+import '../../widgets/projects_section/projects_filter_tabs.dart';
+import '../../widgets/projects_section/projects_empty_state.dart';
+import '../../widgets/projects_section/projects_grid.dart';
+import '../../widgets/custom_show_more_button.dart';
+import '../../widgets/projects_section/projects_view_all_section.dart';
+import '../../widgets/projects_section/all_projects_dialog.dart';
 
 class ProjectsSection extends StatefulWidget {
   const ProjectsSection({super.key});
@@ -30,18 +33,20 @@ class _ProjectsSectionState extends State<ProjectsSection> {
   }
 
   void _initializeFilters() {
-    // Simplified filter tags for better UX
+    // Flutter-focused filter tags with state management and app categories
     _filters = [
       'All',
       'Flutter',
-      'Python',
-      'API',
-      'AI/ML',
+      'GetX',
+      'BLoC/Cubit',
+      'E-commerce',
+      'Chat Apps',
+      'Education',
       'Firebase',
-      'Maps',
-      'Chat',
-      'TensorFlow',
-      'Computer Vision',
+      'Maps & GPS',
+      'AI/ML',
+      'Clean Architecture',
+      'Enterprise',
     ];
   }
 
@@ -53,35 +58,96 @@ class _ProjectsSectionState extends State<ProjectsSection> {
     } else {
       filtered = PortfolioData.projects.where((project) {
         final projectTechs = project.technologies.join(' ').toLowerCase();
+        final projectTitle = project.title.toLowerCase();
+        final projectDesc = project.description.toLowerCase();
 
         switch (_selectedFilter) {
+          // Flutter Core
           case 'Flutter':
             return projectTechs.contains('flutter') ||
                 projectTechs.contains('dart');
-          case 'Python':
-            return projectTechs.contains('python');
-          case 'API':
-            return projectTechs.contains('api') ||
-                projectTechs.contains('rest');
+
+          // State Management Patterns
+          case 'GetX':
+            return projectTechs.contains('getx') ||
+                projectTechs.contains('get');
+
+          case 'BLoC/Cubit':
+            return projectTechs.contains('bloc') ||
+                projectTechs.contains('cubit');
+
+          // App Categories
+          case 'E-commerce':
+            return projectTitle.contains('shop') ||
+                projectTitle.contains('gogesh') ||
+                projectTitle.contains('marketplace') ||
+                projectDesc.contains('shopping') ||
+                projectDesc.contains('e-commerce') ||
+                projectDesc.contains('commercial') ||
+                projectDesc.contains('payment') ||
+                projectTechs.contains('payment');
+
+          case 'Chat Apps':
+            return projectTitle.contains('chat') ||
+                projectDesc.contains('messaging') ||
+                projectDesc.contains('chat') ||
+                projectTechs.contains('chat') ||
+                projectTechs.contains('messaging') ||
+                projectTechs.contains('real-time database');
+
+          case 'Education':
+            return projectTitle.contains('quiz') ||
+                projectTitle.contains('learning') ||
+                projectDesc.contains('education') ||
+                projectDesc.contains('quiz') ||
+                projectDesc.contains('exam') ||
+                projectDesc.contains('learning');
+
+          // Backend & Integration
+          case 'Firebase':
+            return projectTechs.contains('firebase') ||
+                projectTechs.contains('firestore') ||
+                projectTechs.contains('real-time database') ||
+                projectTechs.contains('cloud functions') ||
+                projectTechs.contains('authentication') ||
+                projectTechs.contains('fcm');
+
+          case 'Maps & GPS':
+            return projectTechs.contains('maps') ||
+                projectTechs.contains('location') ||
+                projectTechs.contains('google maps') ||
+                projectTechs.contains('gps') ||
+                projectTechs.contains('geolocator') ||
+                projectTechs.contains('flutter_map') ||
+                projectDesc.contains('carpool') ||
+                projectDesc.contains('navigation');
+
+          // AI & Machine Learning
           case 'AI/ML':
             return projectTechs.contains('machine learning') ||
                 projectTechs.contains('tensorflow') ||
                 projectTechs.contains('ai') ||
-                projectTechs.contains('ml');
-          case 'Firebase':
-            return projectTechs.contains('firebase');
-          case 'Maps':
-            return projectTechs.contains('maps') ||
-                projectTechs.contains('location');
-          case 'Chat':
-            return projectTechs.contains('chat') ||
-                projectTechs.contains('messaging');
-          case 'TensorFlow':
-            return projectTechs.contains('tensorflow');
-          case 'Computer Vision':
-            return projectTechs.contains('computer vision') ||
+                projectTechs.contains('ml') ||
+                projectTechs.contains('computer vision') ||
                 projectTechs.contains('opencv') ||
-                projectTechs.contains('cv');
+                projectDesc.contains('emotion recognition') ||
+                projectDesc.contains('facial recognition') ||
+                projectDesc.contains('sign language');
+
+          // Architecture & Patterns
+          case 'Clean Architecture':
+            return projectTechs.contains('clean architecture') ||
+                projectTechs.contains('repository pattern') ||
+                projectDesc.contains('clean architecture');
+
+          case 'Enterprise':
+            return projectDesc.contains('enterprise') ||
+                projectTitle.contains('emosense') ||
+                projectTitle.contains('gogesh') ||
+                projectTechs.contains('enterprise') ||
+                projectTechs.contains('jwt') ||
+                projectTechs.contains('oauth');
+
           default:
             return project.technologies.contains(_selectedFilter);
         }
@@ -103,34 +169,95 @@ class _ProjectsSectionState extends State<ProjectsSection> {
 
     return PortfolioData.projects.where((project) {
       final projectTechs = project.technologies.join(' ').toLowerCase();
+      final projectTitle = project.title.toLowerCase();
+      final projectDesc = project.description.toLowerCase();
 
       switch (_selectedFilter) {
+        // Flutter Core
         case 'Flutter':
           return projectTechs.contains('flutter') ||
               projectTechs.contains('dart');
-        case 'Python':
-          return projectTechs.contains('python');
-        case 'API':
-          return projectTechs.contains('api') || projectTechs.contains('rest');
+
+        // State Management Patterns
+        case 'GetX':
+          return projectTechs.contains('getx') || projectTechs.contains('get');
+
+        case 'BLoC/Cubit':
+          return projectTechs.contains('bloc') ||
+              projectTechs.contains('cubit');
+
+        // App Categories
+        case 'E-commerce':
+          return projectTitle.contains('shop') ||
+              projectTitle.contains('gogesh') ||
+              projectTitle.contains('marketplace') ||
+              projectDesc.contains('shopping') ||
+              projectDesc.contains('e-commerce') ||
+              projectDesc.contains('commercial') ||
+              projectDesc.contains('payment') ||
+              projectTechs.contains('payment');
+
+        case 'Chat Apps':
+          return projectTitle.contains('chat') ||
+              projectDesc.contains('messaging') ||
+              projectDesc.contains('chat') ||
+              projectTechs.contains('chat') ||
+              projectTechs.contains('messaging') ||
+              projectTechs.contains('real-time database');
+
+        case 'Education':
+          return projectTitle.contains('quiz') ||
+              projectTitle.contains('learning') ||
+              projectDesc.contains('education') ||
+              projectDesc.contains('quiz') ||
+              projectDesc.contains('exam') ||
+              projectDesc.contains('learning');
+
+        // Backend & Integration
+        case 'Firebase':
+          return projectTechs.contains('firebase') ||
+              projectTechs.contains('firestore') ||
+              projectTechs.contains('real-time database') ||
+              projectTechs.contains('cloud functions') ||
+              projectTechs.contains('authentication') ||
+              projectTechs.contains('fcm');
+
+        case 'Maps & GPS':
+          return projectTechs.contains('maps') ||
+              projectTechs.contains('location') ||
+              projectTechs.contains('google maps') ||
+              projectTechs.contains('gps') ||
+              projectTechs.contains('geolocator') ||
+              projectTechs.contains('flutter_map') ||
+              projectDesc.contains('carpool') ||
+              projectDesc.contains('navigation');
+
+        // AI & Machine Learning
         case 'AI/ML':
           return projectTechs.contains('machine learning') ||
               projectTechs.contains('tensorflow') ||
               projectTechs.contains('ai') ||
-              projectTechs.contains('ml');
-        case 'Firebase':
-          return projectTechs.contains('firebase');
-        case 'Maps':
-          return projectTechs.contains('maps') ||
-              projectTechs.contains('location');
-        case 'Chat':
-          return projectTechs.contains('chat') ||
-              projectTechs.contains('messaging');
-        case 'TensorFlow':
-          return projectTechs.contains('tensorflow');
-        case 'Computer Vision':
-          return projectTechs.contains('computer vision') ||
+              projectTechs.contains('ml') ||
+              projectTechs.contains('computer vision') ||
               projectTechs.contains('opencv') ||
-              projectTechs.contains('cv');
+              projectDesc.contains('emotion recognition') ||
+              projectDesc.contains('facial recognition') ||
+              projectDesc.contains('sign language');
+
+        // Architecture & Patterns
+        case 'Clean Architecture':
+          return projectTechs.contains('clean architecture') ||
+              projectTechs.contains('repository pattern') ||
+              projectDesc.contains('clean architecture');
+
+        case 'Enterprise':
+          return projectDesc.contains('enterprise') ||
+              projectTitle.contains('emosense') ||
+              projectTitle.contains('gogesh') ||
+              projectTechs.contains('enterprise') ||
+              projectTechs.contains('jwt') ||
+              projectTechs.contains('oauth');
+
         default:
           return project.technologies.contains(_selectedFilter);
       }
@@ -142,6 +269,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final filteredProjects = _filteredProjects;
 
     return Container(
       width: double.infinity,
@@ -157,259 +285,66 @@ class _ProjectsSectionState extends State<ProjectsSection> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Section title
-            Text(
-              'My Projects',
-              style: AppFonts.h1(
-                color: isDark
-                    ? AppColors.textPrimaryDark
-                    : AppColors.textPrimaryLight,
-              ),
-              textAlign: TextAlign.center,
-            ),
-
-            const SizedBox(height: AppTheme.spacingS),
-
-            Container(
-              width: 60,
-              height: 4,
-              decoration: BoxDecoration(
-                gradient: isDark
-                    ? AppColors.primaryGradientDark
-                    : AppColors.primaryGradientLight,
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-
-            const SizedBox(height: AppTheme.spacingM),
-
-            Text(
-              'Here are some of the projects I\'ve worked on',
-              style: AppFonts.bodyLarge().copyWith(
-                color: isDark
-                    ? AppColors.textSecondaryDark
-                    : AppColors.textSecondaryLight,
-              ),
-              textAlign: TextAlign.center,
-            ),
+            // Section header
+            const ProjectsSectionHeader(),
 
             const SizedBox(height: AppTheme.spacingXL),
 
             // Filter tabs
-            _buildFilterTabs(isMobile),
+            ProjectsFilterTabs(
+              filters: _filters,
+              selectedFilter: _selectedFilter,
+              isMobile: isMobile,
+              onFilterSelected: (filter) {
+                setState(() {
+                  _selectedFilter = filter;
+                  _displayedProjectCount = _initialProjectCount;
+                });
+              },
+            ),
 
             const SizedBox(height: AppTheme.spacingXL),
 
-            // Projects grid
-            _buildProjectsGrid(screenWidth),
+            // Projects grid or empty state
+            if (filteredProjects.isEmpty)
+              ProjectsEmptyState(filterName: _selectedFilter)
+            else
+              ProjectsGrid(
+                projects: filteredProjects,
+                screenWidth: screenWidth,
+              ),
 
             // Show More button (if there are more projects to show)
             if (_allFilteredProjects.length > _displayedProjectCount) ...[
               const SizedBox(height: AppTheme.spacingXL),
-              _buildShowMoreButton(),
+              CustomShowMoreButton(
+                onPressed: () {
+                  setState(() {
+                    _displayedProjectCount += _incrementCount;
+                  });
+                },
+              ),
             ],
 
             const SizedBox(height: AppTheme.spacingXL),
 
-            // View all button
-            _buildViewAllButton(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildFilterTabs(bool isMobile) {
-    if (isMobile) {
-      return SizedBox(
-        height: 50,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: _filters.length,
-          itemBuilder: (context, index) {
-            final filter = _filters[index];
-            return Padding(
-              padding: EdgeInsets.only(
-                left: index == 0 ? 0 : AppTheme.spacingS,
-                right: index == _filters.length - 1 ? 0 : AppTheme.spacingS,
-              ),
-              child: _buildFilterChip(filter),
-            );
-          },
-        ),
-      );
-    } else {
-      return Wrap(
-        spacing: AppTheme.spacingM,
-        runSpacing: AppTheme.spacingM,
-        alignment: WrapAlignment.center,
-        children: _filters.map((filter) => _buildFilterChip(filter)).toList(),
-      );
-    }
-  }
-
-  Widget _buildFilterChip(String filter) {
-    final isSelected = _selectedFilter == filter;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return FilterChip(
-      label: Text(
-        filter,
-        style: AppFonts.bodyMedium().copyWith(
-          color: isSelected
-              ? AppColors.white
-              : (isDark
-                  ? AppColors.textPrimaryDark
-                  : AppColors.textPrimaryLight),
-          fontWeight: isSelected ? AppFonts.semiBold : AppFonts.regular,
-        ),
-      ),
-      selected: isSelected,
-      onSelected: (selected) {
-        setState(() {
-          _selectedFilter = filter;
-          _displayedProjectCount =
-              _initialProjectCount; // Reset when changing filter
-        });
-      },
-      backgroundColor: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
-      selectedColor: isDark ? AppColors.accentDark : AppColors.accentLight,
-      side: BorderSide(
-        color: isSelected
-            ? (isDark ? AppColors.accentDark : AppColors.accentLight)
-            : (isDark
-                    ? AppColors.textSecondaryDark
-                    : AppColors.textSecondaryLight)
-                .withOpacity(0.3),
-      ),
-    );
-  }
-
-  Widget _buildProjectsGrid(double screenWidth) {
-    final columns = ResponsiveHelper.getProjectGridColumns(screenWidth);
-    final isMobile = ResponsiveHelper.isMobile(screenWidth);
-    final filteredProjects = _filteredProjects;
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    if (filteredProjects.isEmpty) {
-      return SizedBox(
-        height: 200,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              AppIcons.search,
-              size: 64,
-              color: (isDark
-                      ? AppColors.textSecondaryDark
-                      : AppColors.textSecondaryLight)
-                  .withOpacity(0.5),
-            ),
-            const SizedBox(height: AppTheme.spacingM),
-            Text(
-              'No projects found for "$_selectedFilter"',
-              style: AppFonts.bodyLarge().copyWith(
-                color: isDark
-                    ? AppColors.textSecondaryDark
-                    : AppColors.textSecondaryLight,
-              ),
+            // View all section
+            ProjectsViewAllSection(
+              onViewAllProjects: _showAllProjectsDialog,
+              onVisitGitHub: _navigateToGitHub,
             ),
           ],
         ),
-      );
-    }
-
-    return AnimationLimiter(
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: columns,
-          crossAxisSpacing: isMobile ? 12 : 16,
-          mainAxisSpacing: isMobile ? 12 : 16,
-          childAspectRatio: isMobile ? 0.70 : 0.9,
-        ),
-        itemCount: filteredProjects.length,
-        itemBuilder: (context, index) {
-          return AnimationConfiguration.staggeredGrid(
-            position: index,
-            duration: const Duration(milliseconds: 300),
-            columnCount: columns,
-            child: FadeInAnimation(
-              child: ProjectCardAdvanced(
-                project: filteredProjects[index],
-                isCompact: isMobile,
-                index: index,
-              ),
-            ),
-          );
-        },
       ),
-    );
-  }
-
-  Widget _buildShowMoreButton() {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-    final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
-
-    return Center(
-      child: OutlinedButton.icon(
-        onPressed: () {
-          setState(() {
-            _displayedProjectCount += _incrementCount;
-          });
-        },
-        icon: const Icon(AppIcons.arrowDown, size: 20),
-        label: const Text('Show More'),
-        style: OutlinedButton.styleFrom(
-          foregroundColor: accentColor,
-          side: BorderSide(color: accentColor, width: 2),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 32,
-            vertical: 16,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildViewAllButton() {
-    return Column(
-      children: [
-        Text(
-          'Interested in seeing more?',
-          style: AppFonts.bodyLarge(),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: AppTheme.spacingM),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            OutlinedButton.icon(
-              onPressed: () => _showAllProjectsDialog(),
-              icon: const Icon(AppIcons.projects),
-              label: const Text('View All Projects'),
-            ),
-            const SizedBox(width: AppTheme.spacingM),
-            ElevatedButton.icon(
-              onPressed: () => _navigateToGitHub(),
-              icon: const Icon(Icons.code),
-              label: const Text('Visit GitHub'),
-            ),
-          ],
-        ),
-      ],
     );
   }
 
   void _showAllProjectsDialog() {
     showDialog(
       context: context,
-      builder: (context) =>
-          _AllProjectsDialog(projects: PortfolioData.projects),
+      builder: (context) => AllProjectsDialog(
+        projects: PortfolioData.projects,
+      ),
     );
   }
 
@@ -420,235 +355,5 @@ class _ProjectsSectionState extends State<ProjectsSection> {
     );
     // Launch GitHub URL
     UrlHelper.launchURL(githubLink.url);
-  }
-}
-
-class _AllProjectsDialog extends StatelessWidget {
-  final List<dynamic> projects;
-
-  const _AllProjectsDialog({required this.projects});
-
-  @override
-  Widget build(BuildContext context) {
-    final isDark = Theme.of(context).brightness == Brightness.dark;
-
-    return Dialog(
-      backgroundColor: AppColors.transparent,
-      insetPadding: const EdgeInsets.all(AppTheme.spacingL),
-      child: Container(
-        constraints: const BoxConstraints(maxWidth: 900, maxHeight: 700),
-        decoration: BoxDecoration(
-          color: isDark ? AppColors.surfaceDark : AppColors.surfaceLight,
-          borderRadius: BorderRadius.circular(AppTheme.radiusL),
-          border: Border.all(
-            color: isDark
-                ? AppColors.white.withOpacity(0.1)
-                : AppColors.black.withOpacity(0.1),
-            width: 1,
-          ),
-        ),
-        child: Column(
-          children: [
-            // Header
-            Container(
-              padding: const EdgeInsets.all(AppTheme.spacingL),
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: isDark
-                        ? AppColors.white.withOpacity(0.1)
-                        : AppColors.black.withOpacity(0.1),
-                    width: 1,
-                  ),
-                ),
-              ),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      'All Projects (${projects.length})',
-                      style: AppFonts.h2().copyWith(
-                        color: isDark
-                            ? AppColors.textPrimaryDark
-                            : AppColors.textPrimaryLight,
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: Icon(
-                      AppIcons.close,
-                      color: isDark
-                          ? AppColors.textPrimaryDark
-                          : AppColors.textPrimaryLight,
-                    ),
-                    style: IconButton.styleFrom(
-                      backgroundColor: isDark
-                          ? AppColors.white.withOpacity(0.05)
-                          : AppColors.black.withOpacity(0.05),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Projects list
-            Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.all(AppTheme.spacingL),
-                itemCount: projects.length,
-                itemBuilder: (context, index) {
-                  final project = projects[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: AppTheme.spacingM),
-                    child: Material(
-                      color: AppColors.transparent,
-                      child: InkWell(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                          // Navigate to case study for projects with images
-                          if (project.imageUrl != null ||
-                              (project.galleryImages != null &&
-                                  project.galleryImages!.isNotEmpty)) {
-                            Get.toNamed('/project/${project.id}');
-                          }
-                        },
-                        borderRadius: BorderRadius.circular(AppTheme.radiusM),
-                        child: Container(
-                          padding: const EdgeInsets.all(AppTheme.spacingL),
-                          decoration: BoxDecoration(
-                            color:
-                                isDark ? AppColors.cardDark : AppColors.white,
-                            borderRadius:
-                                BorderRadius.circular(AppTheme.radiusM),
-                            border: Border.all(
-                              color: isDark
-                                  ? AppColors.white.withOpacity(0.1)
-                                  : AppColors.black.withOpacity(0.1),
-                              width: 1,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              // Project Image
-                              Container(
-                                width: 70,
-                                height: 70,
-                                decoration: BoxDecoration(
-                                  color: (isDark
-                                          ? AppColors.accentDark
-                                          : AppColors.accentLight)
-                                      .withOpacity(0.1),
-                                  borderRadius:
-                                      BorderRadius.circular(AppTheme.radiusS),
-                                  image: project.imageUrl != null
-                                      ? DecorationImage(
-                                          image:
-                                              NetworkImage(project.imageUrl!),
-                                          fit: BoxFit.cover,
-                                        )
-                                      : null,
-                                ),
-                                child: project.imageUrl == null
-                                    ? Icon(
-                                        AppIcons.technology,
-                                        color: isDark
-                                            ? AppColors.accentDark
-                                            : AppColors.accentLight,
-                                        size: 28,
-                                      )
-                                    : null,
-                              ),
-
-                              const SizedBox(width: AppTheme.spacingL),
-
-                              // Content
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      project.title,
-                                      style: AppFonts.h5().copyWith(
-                                        color: isDark
-                                            ? AppColors.textPrimaryDark
-                                            : AppColors.textPrimaryLight,
-                                        fontWeight: AppFonts.semiBold,
-                                      ),
-                                    ),
-                                    const SizedBox(height: AppTheme.spacingXS),
-                                    Text(
-                                      project.shortDescription,
-                                      style: AppFonts.bodySmall().copyWith(
-                                        color: isDark
-                                            ? AppColors.textSecondaryDark
-                                            : AppColors.textSecondaryLight,
-                                      ),
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                    const SizedBox(height: AppTheme.spacingS),
-                                    Wrap(
-                                      spacing: AppTheme.spacingXS,
-                                      runSpacing: AppTheme.spacingXS,
-                                      children: project.technologies
-                                          .take(3)
-                                          .map<Widget>(
-                                            (tech) => Container(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                horizontal: 12,
-                                                vertical: 6,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: isDark
-                                                    ? AppColors.white
-                                                        .withOpacity(0.1)
-                                                    : AppColors.black
-                                                        .withOpacity(0.05),
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        AppTheme.radiusS),
-                                              ),
-                                              child: Text(
-                                                tech,
-                                                style: AppFonts.labelSmall()
-                                                    .copyWith(
-                                                  color: isDark
-                                                      ? AppColors
-                                                          .textPrimaryDark
-                                                      : AppColors
-                                                          .textPrimaryLight,
-                                                ),
-                                              ),
-                                            ),
-                                          )
-                                          .toList(),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              // Arrow
-                              Icon(
-                                AppIcons.arrowRight,
-                                size: 20,
-                                color: isDark
-                                    ? AppColors.textSecondaryDark
-                                    : AppColors.textSecondaryLight,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

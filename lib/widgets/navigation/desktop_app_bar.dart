@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/data/portfolio_data.dart';
-import '../theme_toggle.dart';
+import '../common/theme_toggle_button_container.dart';
 import 'navigation_item.dart';
 import 'links_dropdown_button.dart';
 
@@ -115,7 +115,7 @@ class _DesktopAppBarState extends State<DesktopAppBar>
             const SizedBox(width: 16),
 
             // Theme toggle with better styling
-            _ThemeToggleButton(isDark: isDark),
+            ThemeToggleButtonContainer(isDark: isDark),
           ],
         ),
       ),
@@ -329,50 +329,6 @@ class _AppBarLogoState extends State<_AppBarLogo> {
           ),
         ),
       ),
-    );
-  }
-}
-
-// Theme Toggle Button Widget
-class _ThemeToggleButton extends StatelessWidget {
-  final bool isDark;
-
-  const _ThemeToggleButton({required this.isDark});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(4),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: isDark
-              ? [
-                  AppColors.white.withOpacity(0.08),
-                  AppColors.white.withOpacity(0.04),
-                ]
-              : [
-                  AppColors.black.withOpacity(0.04),
-                  AppColors.black.withOpacity(0.02),
-                ],
-        ),
-        borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: isDark
-              ? AppColors.white.withOpacity(0.12)
-              : AppColors.black.withOpacity(0.08),
-          width: 1,
-        ),
-        boxShadow: [
-          BoxShadow(
-            color: isDark
-                ? AppColors.black.withOpacity(0.2)
-                : AppColors.black.withOpacity(0.04),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
-      ),
-      child: const ThemeToggle(isCompact: true),
     );
   }
 }
