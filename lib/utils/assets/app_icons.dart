@@ -351,7 +351,7 @@ class AppIcons {
         return flutterIconSvg; // Use Flutter icon for state management packages
       case 'firebase':
       case 'fcm':
-        return firebaseIconSvg;
+        return firebaseIconPng;
       case 'supabase':
         return supabaseIconSvg;
       case 'postgresql':
