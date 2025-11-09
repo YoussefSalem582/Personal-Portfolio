@@ -31,7 +31,7 @@ class ExpertiseSection extends StatelessWidget {
                   AppColors.cardDark.withOpacity(0.5),
                 ],
               )
-            : LinearGradient(
+            : const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [

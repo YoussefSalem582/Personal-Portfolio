@@ -330,7 +330,7 @@ class HeroSectionSkeleton extends StatelessWidget {
             Container(
               width: isMobile ? 100 : 120,
               height: isMobile ? 100 : 120,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: AppColors.white,
                 shape: BoxShape.circle,
               ),

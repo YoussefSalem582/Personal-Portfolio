@@ -18,20 +18,20 @@ class StatsSectionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         // Statistics grid (2x2 cards)
-        const StatsGridWidget(),
+        StatsGridWidget(),
 
-        const SizedBox(height: AppTheme.spacingXL),
+        SizedBox(height: AppTheme.spacingXL),
 
         // Resume download card
-        const ResumeCardWidget(),
+        ResumeCardWidget(),
 
-        const SizedBox(height: AppTheme.spacingXL),
+        SizedBox(height: AppTheme.spacingXL),
 
         // Social media links
-        const SocialLinksWidget(),
+        SocialLinksWidget(),
       ],
     );
   }

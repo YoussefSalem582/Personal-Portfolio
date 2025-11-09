@@ -10,6 +10,8 @@ class ActionButtonsWidget extends StatelessWidget {
   final String? githubUrl;
   final String? videoUrl;
   final String? shortVideoUrl;
+  final bool isMobile;
+  final bool isSmallMobile;
 
   const ActionButtonsWidget({
     super.key,
@@ -17,6 +19,8 @@ class ActionButtonsWidget extends StatelessWidget {
     this.githubUrl,
     this.videoUrl,
     this.shortVideoUrl,
+    this.isMobile = false,
+    this.isSmallMobile = false,
   });
 
   @override
@@ -24,7 +28,8 @@ class ActionButtonsWidget extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
-      padding: const EdgeInsets.all(AppTheme.spacingXL),
+      padding:
+          EdgeInsets.all(isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
       decoration: BoxDecoration(
         gradient: isDark
             ? LinearGradient(
@@ -33,13 +38,14 @@ class ActionButtonsWidget extends StatelessWidget {
                   AppColors.cardDark.withOpacity(0.5),
                 ],
               )
-            : LinearGradient(
+            : const LinearGradient(
                 colors: [
                   AppColors.gray50,
                   AppColors.white,
                 ],
               ),
-        borderRadius: BorderRadius.circular(AppTheme.radiusL),
+        borderRadius: BorderRadius.circular(
+            isMobile ? AppTheme.radiusM : AppTheme.radiusL),
         border: Border.all(
           color: (isDark ? AppColors.accentDark : AppColors.accentLight)
               .withOpacity(0.2),
@@ -47,10 +53,10 @@ class ActionButtonsWidget extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: (isDark ? AppColors.black : AppColors.gray300)
-                .withOpacity(0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 8),
+            color:
+                (isDark ? AppColors.black : AppColors.gray300).withOpacity(0.1),
+            blurRadius: isMobile ? 12 : 20,
+            offset: Offset(0, isMobile ? 4 : 8),
           ),
         ],
       ),
@@ -65,20 +71,22 @@ class ActionButtonsWidget extends StatelessWidget {
                   : AppColors.textPrimaryLight,
             ).copyWith(
               fontWeight: AppFonts.bold,
+              fontSize: isMobile ? (isSmallMobile ? 18 : 20) : 24,
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: AppTheme.spacingM),
+          SizedBox(height: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
           Text(
             'Explore the full case study or check out the source code',
             style: AppFonts.bodyMedium().copyWith(
               color: isDark
                   ? AppColors.textSecondaryDark
                   : AppColors.textSecondaryLight,
+              fontSize: isMobile ? (isSmallMobile ? 13 : 14) : 15,
             ),
             textAlign: TextAlign.center,
           ),
-          const SizedBox(height: AppTheme.spacingXL),
+          SizedBox(height: isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
 
           // Watch Demo Video button
           if (videoUrl != null)
@@ -86,15 +94,17 @@ class ActionButtonsWidget extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () => UrlHelper.launchURL(videoUrl!),
-                icon: const Icon(Icons.play_circle_outline, size: 24),
+                icon: Icon(Icons.play_circle_outline, size: isMobile ? 20 : 24),
                 label: const Text('Watch Demo Video'),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding: EdgeInsets.symmetric(
+                    vertical: isMobile ? (isSmallMobile ? 14 : 16) : 20,
+                  ),
                   backgroundColor:
                       isDark ? AppColors.accentDark : AppColors.accentLight,
                   foregroundColor: AppColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(isMobile ? 10 : 14),
                   ),
                   elevation: 0,
                   shadowColor:
@@ -103,13 +113,14 @@ class ActionButtonsWidget extends StatelessWidget {
                   textStyle: AppFonts.labelLarge().copyWith(
                     fontWeight: AppFonts.bold,
                     letterSpacing: 0.3,
+                    fontSize: isMobile ? (isSmallMobile ? 14 : 15) : 16,
                   ),
                 ),
               ),
             ),
 
           if (videoUrl != null && (liveUrl != null || githubUrl != null))
-            const SizedBox(height: AppTheme.spacingM),
+            SizedBox(height: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
 
           // Watch Short Video button
           if (shortVideoUrl != null)
@@ -117,28 +128,32 @@ class ActionButtonsWidget extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () => UrlHelper.launchURL(shortVideoUrl!),
-                icon: const Icon(Icons.video_library_outlined, size: 24),
+                icon: Icon(Icons.video_library_outlined,
+                    size: isMobile ? 20 : 24),
                 label: const Text('Watch Short Video'),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding: EdgeInsets.symmetric(
+                    vertical: isMobile ? (isSmallMobile ? 14 : 16) : 20,
+                  ),
                   backgroundColor: isDark
                       ? AppColors.accentDark.withOpacity(0.8)
                       : AppColors.accentLight.withOpacity(0.8),
                   foregroundColor: AppColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(isMobile ? 10 : 14),
                   ),
                   elevation: 0,
                   textStyle: AppFonts.labelLarge().copyWith(
                     fontWeight: AppFonts.bold,
                     letterSpacing: 0.3,
+                    fontSize: isMobile ? (isSmallMobile ? 14 : 15) : 16,
                   ),
                 ),
               ),
             ),
 
           if (shortVideoUrl != null && (liveUrl != null || githubUrl != null))
-            const SizedBox(height: AppTheme.spacingM),
+            SizedBox(height: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
 
           // View Case Study button
           if (liveUrl != null)
@@ -146,15 +161,17 @@ class ActionButtonsWidget extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () => UrlHelper.launchURL(liveUrl!),
-                icon: const Icon(AppIcons.blog, size: 22),
+                icon: Icon(AppIcons.blog, size: isMobile ? 18 : 22),
                 label: const Text('View Full Case Study'),
                 style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding: EdgeInsets.symmetric(
+                    vertical: isMobile ? (isSmallMobile ? 14 : 16) : 20,
+                  ),
                   backgroundColor:
                       isDark ? AppColors.accentDark : AppColors.accentLight,
                   foregroundColor: AppColors.white,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(isMobile ? 10 : 14),
                   ),
                   elevation: 0,
                   shadowColor:
@@ -163,13 +180,14 @@ class ActionButtonsWidget extends StatelessWidget {
                   textStyle: AppFonts.labelLarge().copyWith(
                     fontWeight: AppFonts.bold,
                     letterSpacing: 0.3,
+                    fontSize: isMobile ? (isSmallMobile ? 14 : 15) : 16,
                   ),
                 ),
               ),
             ),
 
           if (liveUrl != null && githubUrl != null)
-            const SizedBox(height: AppTheme.spacingM),
+            SizedBox(height: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
 
           // View Code button
           if (githubUrl != null)
@@ -177,10 +195,12 @@ class ActionButtonsWidget extends StatelessWidget {
               width: double.infinity,
               child: OutlinedButton.icon(
                 onPressed: () => UrlHelper.launchURL(githubUrl!),
-                icon: const Icon(Icons.code, size: 22),
+                icon: Icon(Icons.code, size: isMobile ? 18 : 22),
                 label: const Text('View Source Code'),
                 style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  padding: EdgeInsets.symmetric(
+                    vertical: isMobile ? (isSmallMobile ? 14 : 16) : 20,
+                  ),
                   side: BorderSide(
                     color:
                         isDark ? AppColors.accentDark : AppColors.accentLight,
@@ -189,11 +209,12 @@ class ActionButtonsWidget extends StatelessWidget {
                   foregroundColor:
                       isDark ? AppColors.accentDark : AppColors.accentLight,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(isMobile ? 10 : 14),
                   ),
                   textStyle: AppFonts.labelLarge().copyWith(
                     fontWeight: AppFonts.bold,
                     letterSpacing: 0.3,
+                    fontSize: isMobile ? (isSmallMobile ? 14 : 15) : 16,
                   ),
                 ),
               ),

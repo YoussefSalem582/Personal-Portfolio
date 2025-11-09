@@ -15,10 +15,14 @@ import '../../theme/app_theme.dart';
 class TechnicalStackWidget extends StatelessWidget {
   /// List of technology names to display
   final List<String> technologies;
+  final bool isMobile;
+  final bool isSmallMobile;
 
   const TechnicalStackWidget({
     super.key,
     required this.technologies,
+    this.isMobile = false,
+    this.isSmallMobile = false,
   });
 
   @override
@@ -34,47 +38,47 @@ class TechnicalStackWidget extends StatelessWidget {
           children: [
             // Gradient icon container with code icon
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(isMobile ? 10 : 12),
               decoration: BoxDecoration(
                 gradient: isDark
                     ? AppColors.primaryGradientDark
                     : AppColors.primaryGradientLight,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(isMobile ? 10 : 12),
                 boxShadow: [
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
                             .withOpacity(0.3),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
+                    blurRadius: isMobile ? 8 : 12,
+                    offset: Offset(0, isMobile ? 2 : 4),
                   ),
                 ],
               ),
-              child: const Icon(
+              child: Icon(
                 AppIcons.technology,
                 color: AppColors.white,
-                size: 24,
+                size: isMobile ? 20 : 24,
               ),
             ),
-            const SizedBox(width: AppTheme.spacingM),
+            SizedBox(width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Technical Stack',
-                    style: AppFonts.h4(
+                    style: TextStyle(
+                      fontSize: isMobile ? (isSmallMobile ? 20 : 22) : 28,
+                      fontWeight: AppFonts.extraBold,
                       color: isDark
                           ? AppColors.textPrimaryDark
                           : AppColors.textPrimaryLight,
-                    ).copyWith(
-                      fontWeight: AppFonts.extraBold,
                     ),
                   ),
                   Container(
-                    height: 3,
-                    width: 60,
-                    margin: const EdgeInsets.only(top: 8),
+                    height: isMobile ? 2 : 3,
+                    width: isMobile ? 45 : 60,
+                    margin: EdgeInsets.only(top: isMobile ? 6 : 8),
                     decoration: BoxDecoration(
                       gradient: isDark
                           ? AppColors.primaryGradientDark
@@ -88,17 +92,17 @@ class TechnicalStackWidget extends StatelessWidget {
           ],
         ),
 
-        const SizedBox(height: AppTheme.spacingXL),
+        SizedBox(height: isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
 
         // Technology Chips - Responsive wrap layout
         Wrap(
-          spacing: 12, // Horizontal spacing between chips
-          runSpacing: 12, // Vertical spacing between rows
+          spacing: isMobile ? 8 : 12, // Horizontal spacing between chips
+          runSpacing: isMobile ? 8 : 12, // Vertical spacing between rows
           children: technologies.map((tech) {
             return Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20, // Horizontal padding inside chip
-                vertical: 12, // Vertical padding inside chip
+              padding: EdgeInsets.symmetric(
+                horizontal: isMobile ? (isSmallMobile ? 14 : 16) : 20,
+                vertical: isMobile ? (isSmallMobile ? 8 : 10) : 12,
               ),
               // Gradient-enhanced chip styling
               decoration: BoxDecoration(
@@ -114,7 +118,8 @@ class TechnicalStackWidget extends StatelessWidget {
                           AppColors.primaryLight.withOpacity(0.15),
                         ],
                 ),
-                borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                borderRadius: BorderRadius.circular(
+                    isMobile ? AppTheme.radiusS : AppTheme.radiusM),
                 // Colored border for accent
                 border: Border.all(
                   color: (isDark ? AppColors.accentDark : AppColors.accentLight)
@@ -127,18 +132,18 @@ class TechnicalStackWidget extends StatelessWidget {
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
                             .withOpacity(0.1),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
+                    blurRadius: isMobile ? 6 : 8,
+                    offset: Offset(0, isMobile ? 1 : 2),
                   ),
                 ],
               ),
               // Technology name text
               child: Text(
                 tech,
-                style: AppFonts.labelMedium(
-                  color: isDark ? AppColors.accentDark : AppColors.accentLight,
-                ).copyWith(
+                style: TextStyle(
+                  fontSize: isMobile ? (isSmallMobile ? 12 : 13) : 14,
                   fontWeight: AppFonts.bold,
+                  color: isDark ? AppColors.accentDark : AppColors.accentLight,
                   letterSpacing: 0.3,
                 ),
               ),

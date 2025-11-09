@@ -415,7 +415,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
+            const Icon(
               AppIcons.featured,
               size: 14,
               color: AppColors.white,
@@ -470,7 +470,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
+                    const Icon(
                       AppIcons.view,
                       color: AppColors.white,
                       size: 18,

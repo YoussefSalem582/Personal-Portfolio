@@ -188,7 +188,7 @@ class _ProjectCardState extends State<ProjectCard>
                   vertical: 6,
                 ),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
+                  gradient: const LinearGradient(
                     colors: [
                       AppColors.accentLight,
                       AppColors.primaryLight,
@@ -206,7 +206,7 @@ class _ProjectCardState extends State<ProjectCard>
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Icon(
+                    const Icon(
                       AppIcons.featured,
                       size: 16,
                       color: AppColors.white,
@@ -237,7 +237,7 @@ class _ProjectCardState extends State<ProjectCard>
                     vertical: 12,
                   ),
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                       colors: [
                         AppColors.accentLight,
                         AppColors.primaryLight,
@@ -255,7 +255,7 @@ class _ProjectCardState extends State<ProjectCard>
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(
+                      const Icon(
                         AppIcons.view,
                         color: AppColors.white,
                         size: 20,
@@ -425,7 +425,7 @@ class _ProjectCardState extends State<ProjectCard>
               color: AppColors.accentLight.withOpacity(0.2),
               shape: BoxShape.circle,
             ),
-            child: Icon(
+            child: const Icon(
               Icons.code,
               size: 48,
               color: AppColors.accentLight,
@@ -601,7 +601,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                           AppRoutes.project,
                           parameters: {'id': project.id},
                         ),
-                        icon: Icon(AppIcons.blog),
+                        icon: const Icon(AppIcons.blog),
                         label: const Text('View Case Study'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: isDark
@@ -620,7 +620,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                           child: OutlinedButton.icon(
                             onPressed: () =>
                                 UrlHelper.launchURL(project.githubUrl!),
-                            icon: Icon(Icons.code),
+                            icon: const Icon(Icons.code),
                             label: const Text('View Code'),
                           ),
                         ),
@@ -631,7 +631,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                           child: ElevatedButton.icon(
                             onPressed: () =>
                                 UrlHelper.launchURL(project.liveUrl!),
-                            icon: Icon(AppIcons.demo),
+                            icon: const Icon(AppIcons.demo),
                             label: const Text('Live Demo'),
                           ),
                         ),

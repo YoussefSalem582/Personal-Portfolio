@@ -16,10 +16,14 @@ class ChallengesSolutionsWidget extends StatelessWidget {
   /// List of challenges with title and description
   /// Each map should contain 'title' and 'description' keys
   final List<Map<String, String>> challenges;
+  final bool isMobile;
+  final bool isSmallMobile;
 
   const ChallengesSolutionsWidget({
     super.key,
     required this.challenges,
+    this.isMobile = false,
+    this.isSmallMobile = false,
   });
 
   @override
@@ -35,47 +39,47 @@ class ChallengesSolutionsWidget extends StatelessWidget {
           children: [
             // Gradient icon container with lightbulb icon (represents problem-solving)
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(isMobile ? 10 : 12),
               decoration: BoxDecoration(
                 gradient: isDark
                     ? AppColors.primaryGradientDark
                     : AppColors.primaryGradientLight,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(isMobile ? 10 : 12),
                 boxShadow: [
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
                             .withOpacity(0.3),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
+                    blurRadius: isMobile ? 8 : 12,
+                    offset: Offset(0, isMobile ? 2 : 4),
                   ),
                 ],
               ),
-              child: const Icon(
+              child: Icon(
                 AppIcons.help,
                 color: AppColors.white,
-                size: 24,
+                size: isMobile ? 20 : 24,
               ),
             ),
-            const SizedBox(width: AppTheme.spacingM),
+            SizedBox(width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Challenges & Solutions',
-                    style: AppFonts.h4(
+                    style: TextStyle(
+                      fontSize: isMobile ? (isSmallMobile ? 20 : 22) : 28,
+                      fontWeight: AppFonts.extraBold,
                       color: isDark
                           ? AppColors.textPrimaryDark
                           : AppColors.textPrimaryLight,
-                    ).copyWith(
-                      fontWeight: AppFonts.extraBold,
                     ),
                   ),
                   Container(
-                    height: 3,
-                    width: 60,
-                    margin: const EdgeInsets.only(top: 8),
+                    height: isMobile ? 2 : 3,
+                    width: isMobile ? 45 : 60,
+                    margin: EdgeInsets.only(top: isMobile ? 6 : 8),
                     decoration: BoxDecoration(
                       gradient: isDark
                           ? AppColors.primaryGradientDark
@@ -89,7 +93,7 @@ class ChallengesSolutionsWidget extends StatelessWidget {
           ],
         ),
 
-        const SizedBox(height: AppTheme.spacingXL),
+        SizedBox(height: isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
 
         // Challenge Cards - Map through challenges with index
         ...challenges.asMap().entries.map((entry) {
@@ -97,14 +101,18 @@ class ChallengesSolutionsWidget extends StatelessWidget {
           final challenge = entry.value; // Challenge data
 
           return Container(
-            margin: const EdgeInsets.only(
-                bottom: AppTheme.spacingL), // Space between cards
-            padding:
-                const EdgeInsets.all(AppTheme.spacingXL), // Internal padding
+            margin: EdgeInsets.only(
+                bottom: isMobile
+                    ? AppTheme.spacingM
+                    : AppTheme.spacingL), // Space between cards
+            padding: EdgeInsets.all(isMobile
+                ? AppTheme.spacingL
+                : AppTheme.spacingXL), // Internal padding
             // Card styling with theme-aware colors
             decoration: BoxDecoration(
               color: isDark ? AppColors.cardDark : AppColors.white,
-              borderRadius: BorderRadius.circular(AppTheme.radiusL),
+              borderRadius: BorderRadius.circular(
+                  isMobile ? AppTheme.radiusM : AppTheme.radiusL),
               border: Border.all(
                 color: (isDark ? AppColors.accentDark : AppColors.accentLight)
                     .withOpacity(0.2),
@@ -115,8 +123,9 @@ class ChallengesSolutionsWidget extends StatelessWidget {
                 BoxShadow(
                   color: (isDark ? AppColors.black : AppColors.gray300)
                       .withOpacity(0.1),
-                  blurRadius: 20,
-                  offset: const Offset(0, 8), // Shadow offset downwards
+                  blurRadius: isMobile ? 12 : 20,
+                  offset:
+                      Offset(0, isMobile ? 4 : 8), // Shadow offset downwards
                 ),
               ],
             ),
@@ -125,37 +134,38 @@ class ChallengesSolutionsWidget extends StatelessWidget {
               children: [
                 // Number Badge - Shows challenge number (1, 2, 3, etc.)
                 Container(
-                  width: 48,
-                  height: 48,
+                  width: isMobile ? (isSmallMobile ? 40 : 44) : 48,
+                  height: isMobile ? (isSmallMobile ? 40 : 44) : 48,
                   decoration: BoxDecoration(
                     // Gradient background for visual appeal
                     gradient: isDark
                         ? AppColors.primaryGradientDark
                         : AppColors.primaryGradientLight,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(isMobile ? 10 : 12),
                     boxShadow: [
                       BoxShadow(
                         color: (isDark
                                 ? AppColors.accentDark
                                 : AppColors.accentLight)
                             .withOpacity(0.3),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
+                        blurRadius: isMobile ? 6 : 8,
+                        offset: Offset(0, isMobile ? 1 : 2),
                       ),
                     ],
                   ),
                   child: Center(
                     child: Text(
                       '${index + 1}', // Display 1-indexed number
-                      style: AppFonts.h5(
+                      style: TextStyle(
+                        fontSize: isMobile ? (isSmallMobile ? 18 : 20) : 22,
+                        fontWeight: AppFonts.black,
                         color: AppColors.white,
-                      ).copyWith(
-                        fontWeight: AppFonts.black, // Extra bold
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(width: AppTheme.spacingL),
+                SizedBox(
+                    width: isMobile ? AppTheme.spacingM : AppTheme.spacingL),
 
                 // Content - Challenge title and description
                 Expanded(
@@ -165,26 +175,28 @@ class ChallengesSolutionsWidget extends StatelessWidget {
                       // Challenge title
                       Text(
                         challenge['title']!, // Get title from map
-                        style: AppFonts.h5(
+                        style: TextStyle(
+                          fontSize: isMobile ? (isSmallMobile ? 16 : 17) : 20,
+                          fontWeight: AppFonts.bold,
                           color: isDark
                               ? AppColors.accentDark
                               : AppColors.accentLight,
-                        ).copyWith(
-                          fontWeight: AppFonts.bold,
                         ),
                       ),
-                      const SizedBox(height: AppTheme.spacingM),
+                      SizedBox(
+                          height:
+                              isMobile ? AppTheme.spacingS : AppTheme.spacingM),
 
                       // Challenge description/solution
                       Text(
                         challenge['description']!, // Get description from map
-                        style: AppFonts.bodyMedium(
+                        style: TextStyle(
+                          fontSize: isMobile ? (isSmallMobile ? 13 : 14) : 15,
+                          height:
+                              1.7, // Comfortable line height for readability
                           color: isDark
                               ? AppColors.textSecondaryDark
                               : AppColors.textSecondaryLight,
-                        ).copyWith(
-                          height:
-                              1.7, // Comfortable line height for readability
                         ),
                       ),
                     ],

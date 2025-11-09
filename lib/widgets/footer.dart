@@ -130,7 +130,7 @@ class Footer extends StatelessWidget {
               ),
             ],
           ),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
             children: [
               Icon(
@@ -198,9 +198,9 @@ class Footer extends StatelessWidget {
                   color: const Color(0xFF027DFD).withOpacity(0.3),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 '💙',
-                style: const TextStyle(fontSize: 12),
+                style: TextStyle(fontSize: 12),
               ),
             ),
           ],
@@ -372,7 +372,7 @@ class Footer extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.code,
                       size: 16,
                       color: AppColors.white,
@@ -554,8 +554,8 @@ class Footer extends StatelessWidget {
             ),
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: (isDark ? AppColors.white : AppColors.white)
-                  .withOpacity(0.2),
+              color:
+                  (isDark ? AppColors.white : AppColors.white).withOpacity(0.2),
             ),
             boxShadow: [
               BoxShadow(

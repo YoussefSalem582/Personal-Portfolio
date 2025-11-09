@@ -372,7 +372,7 @@ class _CertificateCardState extends State<CertificateCard>
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(AppIcons.pdf, size: 14, color: AppColors.white),
+                  const Icon(AppIcons.pdf, size: 14, color: AppColors.white),
                   const SizedBox(width: 4),
                   Text(
                     'PDF',
@@ -407,7 +407,7 @@ class _CertificateCardState extends State<CertificateCard>
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(AppIcons.badge, size: 14, color: AppColors.white),
+                  const Icon(AppIcons.badge, size: 14, color: AppColors.white),
                   const SizedBox(width: 4),
                   Text(
                     'Verified',
@@ -794,7 +794,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
                 width: 2,
               ),
             ),
-            child: Icon(
+            child: const Icon(
               AppIcons.certificate,
               color: AppColors.white,
               size: 32,
@@ -833,7 +833,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
           // Close Button
           IconButton(
             onPressed: () => Navigator.of(context).pop(),
-            icon: Icon(AppIcons.close, color: AppColors.white, size: 24),
+            icon: const Icon(AppIcons.close, color: AppColors.white, size: 24),
             style: IconButton.styleFrom(
               backgroundColor: AppColors.white.withOpacity(0.2),
               shape: RoundedRectangleBorder(
@@ -971,7 +971,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
                     color: AppColors.successLight.withOpacity(0.2),
                     shape: BoxShape.circle,
                   ),
-                  child: Icon(
+                  child: const Icon(
                     AppIcons.badge,
                     color: AppColors.successLight,
                     size: 24,
@@ -1136,7 +1136,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
             UrlHelper.openFile(widget.certificate.pdfUrl!);
           }
         },
-        icon: Icon(AppIcons.pdf, size: 22),
+        icon: const Icon(AppIcons.pdf, size: 22),
         label: const Text('View PDF'),
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.errorLight,
@@ -1169,7 +1169,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
             UrlHelper.launchURL(widget.certificate.credentialUrl!);
           }
         },
-        icon: Icon(AppIcons.badge, size: 22),
+        icon: const Icon(AppIcons.badge, size: 22),
         label: const Text('Verify Certificate'),
         style: OutlinedButton.styleFrom(
           foregroundColor: accentColor,

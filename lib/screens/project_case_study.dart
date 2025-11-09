@@ -164,6 +164,7 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
 
     // Determine if mobile layout should be used
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final isSmallMobile = screenWidth < 375;
 
     // Get project-specific custom content from helper
     final overviewText = ProjectContentHelper.getProjectOverviewText(
@@ -202,8 +203,10 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
               children: [
                 // Hero section with swipeable image gallery (PageView)
                 SizedBox(
-                  // Responsive height: 60% of screen, clamped between 400-600px
-                  height: (screenHeight * 0.6).clamp(400.0, 600.0),
+                  // Responsive height: mobile 400-500px, desktop 400-600px
+                  height: isMobile
+                      ? (screenHeight * 0.5).clamp(350.0, 450.0)
+                      : (screenHeight * 0.6).clamp(400.0, 600.0),
                   child: PageView(
                     controller: _pageController,
                     children: [
@@ -244,7 +247,8 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
                     padding: EdgeInsets.symmetric(
                       horizontal:
                           ResponsiveHelper.getHorizontalPadding(screenWidth),
-                      vertical: AppTheme.spacingXL,
+                      vertical:
+                          isMobile ? AppTheme.spacingL : AppTheme.spacingXL,
                     ),
                     // Staggered animations for smooth entrance
                     child: AnimationLimiter(
@@ -263,22 +267,37 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
                               key: _overviewKey,
                               project: widget.project,
                               overviewText: overviewText,
+                              isMobile: isMobile,
+                              isSmallMobile: isSmallMobile,
                             ),
-                            const SizedBox(height: AppTheme.spacingXXL),
+                            SizedBox(
+                                height: isMobile
+                                    ? AppTheme.spacingXL
+                                    : AppTheme.spacingXXL),
 
                             // Technology stack chips
                             TechnicalStackWidget(
                               key: _techStackKey,
                               technologies: widget.project.technologies,
+                              isMobile: isMobile,
+                              isSmallMobile: isSmallMobile,
                             ),
-                            const SizedBox(height: AppTheme.spacingXXL),
+                            SizedBox(
+                                height: isMobile
+                                    ? AppTheme.spacingXL
+                                    : AppTheme.spacingXXL),
 
                             // Documents section
                             DocumentsSectionWidget(
                               key: _documentsKey,
                               projectId: widget.project.id,
+                              isMobile: isMobile,
+                              isSmallMobile: isSmallMobile,
                             ),
-                            const SizedBox(height: AppTheme.spacingXXL),
+                            SizedBox(
+                                height: isMobile
+                                    ? AppTheme.spacingXL
+                                    : AppTheme.spacingXXL),
 
                             // Gallery section (only if images exist)
                             if (widget.project.galleryImages != null &&
@@ -289,22 +308,35 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
                                 isMobile: isMobile,
                                 projectId: widget.project.id,
                               ),
-                              const SizedBox(height: AppTheme.spacingXXL),
+                              SizedBox(
+                                  height: isMobile
+                                      ? AppTheme.spacingXL
+                                      : AppTheme.spacingXXL),
                             ],
 
                             // Challenges and solutions cards
                             ChallengesSolutionsWidget(
                               key: _challengesKey,
                               challenges: challenges,
+                              isMobile: isMobile,
+                              isSmallMobile: isSmallMobile,
                             ),
-                            const SizedBox(height: AppTheme.spacingXXL),
+                            SizedBox(
+                                height: isMobile
+                                    ? AppTheme.spacingXL
+                                    : AppTheme.spacingXXL),
 
                             // Key learnings bullet list
                             KeyLearningsWidget(
                               key: _learningsKey,
                               lessons: lessons,
+                              isMobile: isMobile,
+                              isSmallMobile: isSmallMobile,
                             ),
-                            const SizedBox(height: AppTheme.spacingXXL),
+                            SizedBox(
+                                height: isMobile
+                                    ? AppTheme.spacingXL
+                                    : AppTheme.spacingXXL),
 
                             // Call-to-action buttons (Watch Demo / Watch Short / View Case Study / View Code)
                             ActionButtonsWidget(
@@ -312,8 +344,13 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
                               shortVideoUrl: widget.project.shortVideoUrl,
                               liveUrl: widget.project.liveUrl,
                               githubUrl: widget.project.githubUrl,
+                              isMobile: isMobile,
+                              isSmallMobile: isSmallMobile,
                             ),
-                            const SizedBox(height: AppTheme.spacingXXL),
+                            SizedBox(
+                                height: isMobile
+                                    ? AppTheme.spacingXL
+                                    : AppTheme.spacingXXL),
                           ],
                         ),
                       ),

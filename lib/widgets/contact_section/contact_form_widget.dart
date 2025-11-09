@@ -425,7 +425,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
   Future<void> _submitContactForm(ContactForm form) async {
     try {
       // Formspree endpoint - FREE and works on any domain!
-      final formspreeEndpoint = ApiKeys.formspreeEndpoint;
+      const formspreeEndpoint = ApiKeys.formspreeEndpoint;
 
       // Check if endpoint is configured
       if (formspreeEndpoint.isEmpty) {

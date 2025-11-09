@@ -6,10 +6,14 @@ import '../../theme/app_theme.dart';
 /// Key learnings section with modern list design
 class KeyLearningsWidget extends StatelessWidget {
   final List<String> lessons;
+  final bool isMobile;
+  final bool isSmallMobile;
 
   const KeyLearningsWidget({
     super.key,
     required this.lessons,
+    this.isMobile = false,
+    this.isSmallMobile = false,
   });
 
   @override
@@ -23,47 +27,47 @@ class KeyLearningsWidget extends StatelessWidget {
         Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(isMobile ? 10 : 12),
               decoration: BoxDecoration(
                 gradient: isDark
                     ? AppColors.primaryGradientDark
                     : AppColors.primaryGradientLight,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(isMobile ? 10 : 12),
                 boxShadow: [
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
                             .withOpacity(0.3),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
+                    blurRadius: isMobile ? 8 : 12,
+                    offset: Offset(0, isMobile ? 2 : 4),
                   ),
                 ],
               ),
-              child: const Icon(
+              child: Icon(
                 AppIcons.education,
                 color: AppColors.white,
-                size: 24,
+                size: isMobile ? 20 : 24,
               ),
             ),
-            const SizedBox(width: AppTheme.spacingM),
+            SizedBox(width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Key Learnings',
-                    style: AppFonts.h4(
+                    style: TextStyle(
+                      fontSize: isMobile ? (isSmallMobile ? 20 : 22) : 28,
+                      fontWeight: AppFonts.extraBold,
                       color: isDark
                           ? AppColors.textPrimaryDark
                           : AppColors.textPrimaryLight,
-                    ).copyWith(
-                      fontWeight: AppFonts.extraBold,
                     ),
                   ),
                   Container(
-                    height: 3,
-                    width: 60,
-                    margin: const EdgeInsets.only(top: 8),
+                    height: isMobile ? 2 : 3,
+                    width: isMobile ? 45 : 60,
+                    margin: EdgeInsets.only(top: isMobile ? 6 : 8),
                     decoration: BoxDecoration(
                       gradient: isDark
                           ? AppColors.primaryGradientDark
@@ -77,14 +81,16 @@ class KeyLearningsWidget extends StatelessWidget {
           ],
         ),
 
-        const SizedBox(height: AppTheme.spacingXL),
+        SizedBox(height: isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
 
         // Learning Items
         Container(
-          padding: const EdgeInsets.all(AppTheme.spacingXL),
+          padding:
+              EdgeInsets.all(isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
           decoration: BoxDecoration(
             color: isDark ? AppColors.cardDark : AppColors.white,
-            borderRadius: BorderRadius.circular(AppTheme.radiusL),
+            borderRadius: BorderRadius.circular(
+                isMobile ? AppTheme.radiusM : AppTheme.radiusL),
             border: Border.all(
               color: (isDark ? AppColors.accentDark : AppColors.accentLight)
                   .withOpacity(0.2),
@@ -94,8 +100,8 @@ class KeyLearningsWidget extends StatelessWidget {
               BoxShadow(
                 color: (isDark ? AppColors.black : AppColors.gray300)
                     .withOpacity(0.1),
-                blurRadius: 20,
-                offset: const Offset(0, 8),
+                blurRadius: isMobile ? 12 : 20,
+                offset: Offset(0, isMobile ? 4 : 8),
               ),
             ],
           ),
@@ -107,15 +113,17 @@ class KeyLearningsWidget extends StatelessWidget {
 
               return Padding(
                 padding: EdgeInsets.only(
-                  bottom: isLast ? 0 : AppTheme.spacingL,
+                  bottom: isLast
+                      ? 0
+                      : (isMobile ? AppTheme.spacingM : AppTheme.spacingL),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Check icon
                     Container(
-                      margin: const EdgeInsets.only(top: 2),
-                      padding: const EdgeInsets.all(6),
+                      margin: EdgeInsets.only(top: isMobile ? 1 : 2),
+                      padding: EdgeInsets.all(isMobile ? 5 : 6),
                       decoration: BoxDecoration(
                         gradient: isDark
                             ? AppColors.primaryGradientDark
@@ -127,24 +135,27 @@ class KeyLearningsWidget extends StatelessWidget {
                                     ? AppColors.accentDark
                                     : AppColors.accentLight)
                                 .withOpacity(0.3),
-                            blurRadius: 6,
-                            offset: const Offset(0, 2),
+                            blurRadius: isMobile ? 4 : 6,
+                            offset: Offset(0, isMobile ? 1 : 2),
                           ),
                         ],
                       ),
-                      child: const Icon(
+                      child: Icon(
                         AppIcons.success,
                         color: AppColors.white,
-                        size: 16,
+                        size: isMobile ? (isSmallMobile ? 14 : 15) : 16,
                       ),
                     ),
-                    const SizedBox(width: AppTheme.spacingM),
+                    SizedBox(
+                        width:
+                            isMobile ? AppTheme.spacingS : AppTheme.spacingM),
 
                     // Text
                     Expanded(
                       child: Text(
                         lesson,
-                        style: AppFonts.bodyMedium().copyWith(
+                        style: TextStyle(
+                          fontSize: isMobile ? (isSmallMobile ? 13 : 14) : 15,
                           height: 1.7,
                           color: isDark
                               ? AppColors.textSecondaryDark

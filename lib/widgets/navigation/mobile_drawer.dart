@@ -193,7 +193,7 @@ class MobileDrawer extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
+                              const Icon(
                                 AppIcons.blog,
                                 color: AppColors.white,
                                 size: 20,
@@ -206,7 +206,7 @@ class MobileDrawer extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Icon(
+                              const Icon(
                                 AppIcons.arrowRight,
                                 color: AppColors.white,
                                 size: 14,
@@ -290,18 +290,18 @@ class MobileDrawer extends StatelessWidget {
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Opening resume...'),
+          const SnackBar(
+            content: Text('Opening resume...'),
             backgroundColor: AppColors.successLight,
-            duration: const Duration(seconds: 2),
+            duration: Duration(seconds: 2),
           ),
         );
       }
     } catch (e) {
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: const Text('Error opening resume. Please try again.'),
+          const SnackBar(
+            content: Text('Error opening resume. Please try again.'),
             backgroundColor: AppColors.errorLight,
           ),
         );

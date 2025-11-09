@@ -3,7 +3,7 @@ import '../../models/skill.dart';
 class SkillsData {
   static final List<SkillCategory> skills = [
     // Column 1: Languages & Core Technologies
-    SkillCategory(
+    const SkillCategory(
       id: 'languages',
       name: 'Languages',
       icon: 'code',
@@ -18,7 +18,7 @@ class SkillsData {
     ),
 
     // Column 2: Mobile Development & State Management
-    SkillCategory(
+    const SkillCategory(
       id: 'mobile-development',
       name: 'Frameworks & Libraries',
       icon: 'phone_android',
@@ -40,7 +40,7 @@ class SkillsData {
     ),
 
     // Column 3: Backend, Cloud & Communication
-    SkillCategory(
+    const SkillCategory(
       id: 'backend-cloud',
       name: 'Miscellaneous',
       icon: 'cloud',

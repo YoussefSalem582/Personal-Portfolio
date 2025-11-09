@@ -8,10 +8,14 @@ import '../../theme/app_theme.dart';
 /// Displays available project documentation and reports
 class DocumentsSectionWidget extends StatelessWidget {
   final String projectId;
+  final bool isMobile;
+  final bool isSmallMobile;
 
   const DocumentsSectionWidget({
     super.key,
     required this.projectId,
+    this.isMobile = false,
+    this.isSmallMobile = false,
   });
 
   /// Get documents for the current project
@@ -21,13 +25,13 @@ class DocumentsSectionWidget extends StatelessWidget {
     switch (projectId) {
       case 'emosense-app':
         docs.addAll([
-          DocumentInfo(
+          const DocumentInfo(
             title: 'Project Documentation',
             description: 'Complete project documentation and features',
             path: ProjectDocuments.emosenseApp,
             icon: Icons.description,
           ),
-          DocumentInfo(
+          const DocumentInfo(
             title: 'Technical Report',
             description: 'Detailed technical implementation report',
             path: ProjectDocuments.emosenseAppReport,
@@ -37,7 +41,7 @@ class DocumentsSectionWidget extends StatelessWidget {
         break;
 
       case 'chat-app':
-        docs.add(DocumentInfo(
+        docs.add(const DocumentInfo(
           title: 'Project Documentation',
           description: 'Chat application features and architecture',
           path: ProjectDocuments.chatApp,
@@ -46,7 +50,7 @@ class DocumentsSectionWidget extends StatelessWidget {
         break;
 
       case 'music-player':
-        docs.add(DocumentInfo(
+        docs.add(const DocumentInfo(
           title: 'Project Documentation',
           description: 'Music player app documentation',
           path: ProjectDocuments.musicApp,
@@ -55,7 +59,7 @@ class DocumentsSectionWidget extends StatelessWidget {
         break;
 
       case 'chargehub':
-        docs.add(DocumentInfo(
+        docs.add(const DocumentInfo(
           title: 'Project Documentation',
           description: 'EV station finder app documentation',
           path: ProjectDocuments.chargeHubApp,
@@ -64,7 +68,7 @@ class DocumentsSectionWidget extends StatelessWidget {
         break;
 
       case 'gogesh-marketplace':
-        docs.add(DocumentInfo(
+        docs.add(const DocumentInfo(
           title: 'Project Documentation',
           description: 'E-commerce marketplace documentation',
           path: ProjectDocuments.gogeshApp,
@@ -73,7 +77,7 @@ class DocumentsSectionWidget extends StatelessWidget {
         break;
 
       case 'gopooling-carpool':
-        docs.add(DocumentInfo(
+        docs.add(const DocumentInfo(
           title: 'Project Report',
           description: 'Comprehensive carpool app project report',
           path: ProjectDocuments.carpoolRideSharingApp,
@@ -83,14 +87,14 @@ class DocumentsSectionWidget extends StatelessWidget {
 
       case 'pothole-detection':
         docs.addAll([
-          DocumentInfo(
+          const DocumentInfo(
             title: 'Research Report',
             description:
                 'Comparative analysis of ML models for pothole detection',
             path: ProjectDocuments.potholeDetectionReport,
             icon: Icons.science,
           ),
-          DocumentInfo(
+          const DocumentInfo(
             title: 'Source Code',
             description: 'Complete implementation code and notebooks',
             path: ProjectDocuments.potholeDetectionCode,
@@ -101,7 +105,7 @@ class DocumentsSectionWidget extends StatelessWidget {
         break;
 
       case 'sign-language-translator':
-        docs.add(DocumentInfo(
+        docs.add(const DocumentInfo(
           title: 'Project Report',
           description: 'Sign language recognition system documentation',
           path: ProjectDocuments.signLanguageTranslatorReport,
@@ -110,7 +114,7 @@ class DocumentsSectionWidget extends StatelessWidget {
         break;
 
       case 'interactive-learning-assistant':
-        docs.add(DocumentInfo(
+        docs.add(const DocumentInfo(
           title: 'Project Documentation',
           description: '3D avatar learning assistant documentation',
           path: ProjectDocuments.threejsProject,
@@ -119,7 +123,7 @@ class DocumentsSectionWidget extends StatelessWidget {
         break;
 
       case 'facial-recognition':
-        docs.add(DocumentInfo(
+        docs.add(const DocumentInfo(
           title: 'Project Report',
           description: 'Facial recognition system documentation and analysis',
           path: ProjectDocuments.facialRecognitionSystem,
@@ -148,47 +152,47 @@ class DocumentsSectionWidget extends StatelessWidget {
           children: [
             // Gradient icon container with folder icon
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(isMobile ? 10 : 12),
               decoration: BoxDecoration(
                 gradient: isDark
                     ? AppColors.primaryGradientDark
                     : AppColors.primaryGradientLight,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(isMobile ? 10 : 12),
                 boxShadow: [
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
                             .withOpacity(0.3),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
+                    blurRadius: isMobile ? 8 : 12,
+                    offset: Offset(0, isMobile ? 2 : 4),
                   ),
                 ],
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.folder_open,
                 color: AppColors.white,
-                size: 24,
+                size: isMobile ? 20 : 24,
               ),
             ),
-            const SizedBox(width: AppTheme.spacingM),
+            SizedBox(width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Project Documents',
-                    style: AppFonts.h4(
+                    style: TextStyle(
+                      fontSize: isMobile ? (isSmallMobile ? 20 : 22) : 28,
+                      fontWeight: AppFonts.extraBold,
                       color: isDark
                           ? AppColors.textPrimaryDark
                           : AppColors.textPrimaryLight,
-                    ).copyWith(
-                      fontWeight: AppFonts.extraBold,
                     ),
                   ),
                   Container(
-                    height: 3,
-                    width: 60,
-                    margin: const EdgeInsets.only(top: 8),
+                    height: isMobile ? 2 : 3,
+                    width: isMobile ? 45 : 60,
+                    margin: EdgeInsets.only(top: isMobile ? 6 : 8),
                     decoration: BoxDecoration(
                       gradient: isDark
                           ? AppColors.primaryGradientDark
@@ -202,7 +206,7 @@ class DocumentsSectionWidget extends StatelessWidget {
           ],
         ),
 
-        const SizedBox(height: AppTheme.spacingXL),
+        SizedBox(height: isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
 
         // Documents Grid/List
         ...documents.map((doc) => _buildDocumentCard(context, doc, isDark)),
@@ -216,14 +220,17 @@ class DocumentsSectionWidget extends StatelessWidget {
     bool isDark,
   ) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: AppTheme.spacingM),
+      padding: EdgeInsets.only(
+          bottom: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: () => _openDocument(doc.path),
-          borderRadius: BorderRadius.circular(AppTheme.radiusL),
+          borderRadius: BorderRadius.circular(
+              isMobile ? AppTheme.radiusM : AppTheme.radiusL),
           child: Container(
-            padding: const EdgeInsets.all(AppTheme.spacingL),
+            padding: EdgeInsets.all(
+                isMobile ? AppTheme.spacingM : AppTheme.spacingL),
             decoration: BoxDecoration(
               // Gradient background matching other cards
               gradient: LinearGradient(
@@ -237,7 +244,8 @@ class DocumentsSectionWidget extends StatelessWidget {
                         AppColors.surfaceLight.withOpacity(0.8),
                       ],
               ),
-              borderRadius: BorderRadius.circular(AppTheme.radiusL),
+              borderRadius: BorderRadius.circular(
+                  isMobile ? AppTheme.radiusM : AppTheme.radiusL),
               // Enhanced border matching gallery style
               border: Border.all(
                 color: (isDark ? AppColors.accentDark : AppColors.accentLight)
@@ -249,8 +257,8 @@ class DocumentsSectionWidget extends StatelessWidget {
                 BoxShadow(
                   color: (isDark ? AppColors.black : AppColors.gray300)
                       .withOpacity(0.2),
-                  blurRadius: 12,
-                  offset: const Offset(0, 4),
+                  blurRadius: isMobile ? 8 : 12,
+                  offset: Offset(0, isMobile ? 2 : 4),
                 ),
               ],
             ),
@@ -258,8 +266,8 @@ class DocumentsSectionWidget extends StatelessWidget {
               children: [
                 // Icon with gradient background
                 Container(
-                  width: 60,
-                  height: 60,
+                  width: isMobile ? (isSmallMobile ? 50 : 55) : 60,
+                  height: isMobile ? (isSmallMobile ? 50 : 55) : 60,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: isDark
@@ -272,7 +280,8 @@ class DocumentsSectionWidget extends StatelessWidget {
                               AppColors.primaryLight.withOpacity(0.2),
                             ],
                     ),
-                    borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                    borderRadius: BorderRadius.circular(
+                        isMobile ? AppTheme.radiusS : AppTheme.radiusM),
                     border: Border.all(
                       color: (isDark
                               ? AppColors.accentDark
@@ -285,11 +294,12 @@ class DocumentsSectionWidget extends StatelessWidget {
                     doc.icon,
                     color:
                         isDark ? AppColors.accentDark : AppColors.accentLight,
-                    size: 28,
+                    size: isMobile ? (isSmallMobile ? 24 : 26) : 28,
                   ),
                 ),
 
-                const SizedBox(width: AppTheme.spacingL),
+                SizedBox(
+                    width: isMobile ? AppTheme.spacingM : AppTheme.spacingL),
 
                 // Content
                 Expanded(
@@ -298,35 +308,38 @@ class DocumentsSectionWidget extends StatelessWidget {
                     children: [
                       Text(
                         doc.title,
-                        style: AppFonts.h5().copyWith(
+                        style: TextStyle(
+                          fontSize: isMobile ? (isSmallMobile ? 15 : 16) : 18,
+                          fontWeight: AppFonts.bold,
                           color: isDark
                               ? AppColors.textPrimaryDark
                               : AppColors.textPrimaryLight,
-                          fontWeight: AppFonts.bold,
                         ),
                       ),
-                      const SizedBox(height: 6),
+                      SizedBox(height: isMobile ? 4 : 6),
                       Text(
                         doc.description,
-                        style: AppFonts.bodySmall().copyWith(
+                        style: TextStyle(
+                          fontSize: isMobile ? (isSmallMobile ? 12 : 13) : 14,
                           color: isDark
                               ? AppColors.textSecondaryDark
                               : AppColors.textSecondaryLight,
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: isMobile ? 8 : 10),
                       // Document type badge
                       Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 4,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isMobile ? 10 : 12,
+                          vertical: isMobile ? 3 : 4,
                         ),
                         decoration: BoxDecoration(
                           color: (isDark
                                   ? AppColors.accentDark
                                   : AppColors.accentLight)
                               .withOpacity(0.15),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius:
+                              BorderRadius.circular(isMobile ? 10 : 12),
                           border: Border.all(
                             color: (isDark
                                     ? AppColors.accentDark
@@ -340,20 +353,21 @@ class DocumentsSectionWidget extends StatelessWidget {
                           children: [
                             Icon(
                               doc.isHtml ? Icons.code : Icons.picture_as_pdf,
-                              size: 14,
+                              size: isMobile ? 12 : 14,
                               color: isDark
                                   ? AppColors.accentDark
                                   : AppColors.accentLight,
                             ),
-                            const SizedBox(width: 6),
+                            SizedBox(width: isMobile ? 4 : 6),
                             Text(
                               doc.isHtml ? 'HTML' : 'PDF',
-                              style: AppFonts.labelSmall().copyWith(
+                              style: TextStyle(
+                                fontSize:
+                                    isMobile ? (isSmallMobile ? 10 : 11) : 12,
+                                fontWeight: AppFonts.semiBold,
                                 color: isDark
                                     ? AppColors.accentDark
                                     : AppColors.accentLight,
-                                fontWeight: AppFonts.semiBold,
-                                fontSize: 12,
                               ),
                             ),
                           ],
@@ -363,20 +377,21 @@ class DocumentsSectionWidget extends StatelessWidget {
                   ),
                 ),
 
-                const SizedBox(width: AppTheme.spacingM),
+                SizedBox(
+                    width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
 
                 // Arrow Icon with gradient background
                 Container(
-                  padding: const EdgeInsets.all(8),
+                  padding: EdgeInsets.all(isMobile ? 6 : 8),
                   decoration: BoxDecoration(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
                             .withOpacity(0.15),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(isMobile ? 6 : 8),
                   ),
                   child: Icon(
                     Icons.arrow_forward_ios,
-                    size: 16,
+                    size: isMobile ? 14 : 16,
                     color:
                         isDark ? AppColors.accentDark : AppColors.accentLight,
                   ),

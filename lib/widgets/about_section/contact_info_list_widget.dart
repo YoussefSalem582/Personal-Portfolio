@@ -116,7 +116,7 @@ class ContactInfoListWidget extends StatelessWidget {
               const SizedBox(height: AppTheme.spacingM),
 
               // Location item (non-clickable)
-              ContactInfoItemWidget(
+              const ContactInfoItemWidget(
                 icon: AppIcons.location,
                 label: 'Location',
                 value: PortfolioData.location,
@@ -167,7 +167,7 @@ class ContactInfoListWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 AppIcons.message,
                 color: AppColors.white,
                 size: 20,
@@ -182,7 +182,7 @@ class ContactInfoListWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: AppTheme.spacingS),
-              Icon(
+              const Icon(
                 Icons.arrow_forward_rounded,
                 color: AppColors.white,
                 size: 20,

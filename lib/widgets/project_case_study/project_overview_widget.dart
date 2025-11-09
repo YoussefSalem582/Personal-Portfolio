@@ -9,11 +9,15 @@ import '../../theme/app_theme.dart';
 class ProjectOverviewWidget extends StatelessWidget {
   final Project project;
   final String overviewText;
+  final bool isMobile;
+  final bool isSmallMobile;
 
   const ProjectOverviewWidget({
     super.key,
     required this.project,
     required this.overviewText,
+    this.isMobile = false,
+    this.isSmallMobile = false,
   });
 
   @override
@@ -27,47 +31,47 @@ class ProjectOverviewWidget extends StatelessWidget {
         Row(
           children: [
             Container(
-              padding: const EdgeInsets.all(12),
+              padding: EdgeInsets.all(isMobile ? 10 : 12),
               decoration: BoxDecoration(
                 gradient: isDark
                     ? AppColors.primaryGradientDark
                     : AppColors.primaryGradientLight,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(isMobile ? 10 : 12),
                 boxShadow: [
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
                             .withOpacity(0.3),
-                    blurRadius: 12,
-                    offset: const Offset(0, 4),
+                    blurRadius: isMobile ? 8 : 12,
+                    offset: Offset(0, isMobile ? 2 : 4),
                   ),
                 ],
               ),
-              child: const Icon(
+              child: Icon(
                 AppIcons.blog,
                 color: AppColors.white,
-                size: 24,
+                size: isMobile ? 20 : 24,
               ),
             ),
-            const SizedBox(width: AppTheme.spacingM),
+            SizedBox(width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     'Project Overview',
-                    style: AppFonts.h4(
+                    style: TextStyle(
+                      fontSize: isMobile ? (isSmallMobile ? 20 : 22) : 28,
+                      fontWeight: AppFonts.extraBold,
                       color: isDark
                           ? AppColors.textPrimaryDark
                           : AppColors.textPrimaryLight,
-                    ).copyWith(
-                      fontWeight: AppFonts.extraBold,
                     ),
                   ),
                   Container(
-                    height: 3,
-                    width: 60,
-                    margin: const EdgeInsets.only(top: 8),
+                    height: isMobile ? 2 : 3,
+                    width: isMobile ? 45 : 60,
+                    margin: EdgeInsets.only(top: isMobile ? 6 : 8),
                     decoration: BoxDecoration(
                       gradient: isDark
                           ? AppColors.primaryGradientDark
@@ -81,14 +85,16 @@ class ProjectOverviewWidget extends StatelessWidget {
           ],
         ),
 
-        const SizedBox(height: AppTheme.spacingXL),
+        SizedBox(height: isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
 
         // Overview Content Card
         Container(
-          padding: const EdgeInsets.all(AppTheme.spacingXL),
+          padding:
+              EdgeInsets.all(isMobile ? AppTheme.spacingL : AppTheme.spacingXL),
           decoration: BoxDecoration(
             color: isDark ? AppColors.cardDark : AppColors.white,
-            borderRadius: BorderRadius.circular(AppTheme.radiusL),
+            borderRadius: BorderRadius.circular(
+                isMobile ? AppTheme.radiusM : AppTheme.radiusL),
             border: Border.all(
               color: (isDark ? AppColors.accentDark : AppColors.accentLight)
                   .withOpacity(0.2),
@@ -98,8 +104,8 @@ class ProjectOverviewWidget extends StatelessWidget {
               BoxShadow(
                 color: (isDark ? AppColors.black : AppColors.gray300)
                     .withOpacity(0.1),
-                blurRadius: 20,
-                offset: const Offset(0, 8),
+                blurRadius: isMobile ? 12 : 20,
+                offset: Offset(0, isMobile ? 4 : 8),
               ),
             ],
           ),
@@ -108,7 +114,8 @@ class ProjectOverviewWidget extends StatelessWidget {
             children: [
               Text(
                 overviewText,
-                style: AppFonts.bodyLarge().copyWith(
+                style: TextStyle(
+                  fontSize: isMobile ? (isSmallMobile ? 14 : 15) : 16,
                   height: 1.8,
                   color: isDark
                       ? AppColors.textSecondaryDark
@@ -158,47 +165,48 @@ class ProjectOverviewWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: AppTheme.spacingXXL),
+        SizedBox(height: isMobile ? AppTheme.spacingL : AppTheme.spacingXXL),
         const Divider(),
-        const SizedBox(height: AppTheme.spacingXL),
+        SizedBox(height: isMobile ? AppTheme.spacingM : AppTheme.spacingXL),
         Text(
           'Key Features',
-          style: AppFonts.h5(
+          style: TextStyle(
+            fontSize: isMobile ? (isSmallMobile ? 18 : 20) : 22,
+            fontWeight: AppFonts.bold,
             color:
                 isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
-          ).copyWith(
-            fontWeight: AppFonts.bold,
           ),
         ),
-        const SizedBox(height: AppTheme.spacingL),
+        SizedBox(height: isMobile ? AppTheme.spacingM : AppTheme.spacingL),
         ...features.map((feature) => Padding(
-              padding: const EdgeInsets.only(bottom: AppTheme.spacingL),
+              padding: EdgeInsets.only(
+                  bottom: isMobile ? AppTheme.spacingM : AppTheme.spacingL),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: const EdgeInsets.all(12),
+                    padding: EdgeInsets.all(isMobile ? 10 : 12),
                     decoration: BoxDecoration(
                       gradient: isDark
                           ? AppColors.primaryGradientDark
                           : AppColors.primaryGradientLight,
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(isMobile ? 10 : 12),
                       boxShadow: [
                         BoxShadow(
                           color: (isDark
                                   ? AppColors.accentDark
                                   : AppColors.accentLight)
                               .withOpacity(0.3),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
+                          blurRadius: isMobile ? 6 : 8,
+                          offset: Offset(0, isMobile ? 1 : 2),
                         ),
                       ],
                     ),
                     child: feature['icon'] is String
                         ? SvgPicture.asset(
                             feature['icon'] as String,
-                            width: 24,
-                            height: 24,
+                            width: isMobile ? 20 : 24,
+                            height: isMobile ? 20 : 24,
                             colorFilter: const ColorFilter.mode(
                               AppColors.white,
                               BlendMode.srcIn,
@@ -207,31 +215,37 @@ class ProjectOverviewWidget extends StatelessWidget {
                         : Icon(
                             feature['icon'] as IconData,
                             color: AppColors.white,
-                            size: 24,
+                            size: isMobile ? 20 : 24,
                           ),
                   ),
-                  const SizedBox(width: AppTheme.spacingM),
+                  SizedBox(
+                      width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           feature['title'] as String,
-                          style: AppFonts.h3().copyWith(
+                          style: TextStyle(
+                            fontSize: isMobile ? (isSmallMobile ? 15 : 16) : 18,
+                            fontWeight: AppFonts.bold,
                             color: isDark
                                 ? AppColors.textPrimaryDark
                                 : AppColors.textPrimaryLight,
-                            fontWeight: AppFonts.bold,
                           ),
                         ),
-                        const SizedBox(height: AppTheme.spacingS),
+                        SizedBox(
+                            height: isMobile
+                                ? AppTheme.spacingXS
+                                : AppTheme.spacingS),
                         Text(
                           feature['description'] as String,
-                          style: AppFonts.bodyMedium().copyWith(
+                          style: TextStyle(
+                            fontSize: isMobile ? (isSmallMobile ? 13 : 14) : 15,
+                            height: 1.6,
                             color: isDark
                                 ? AppColors.textSecondaryDark
                                 : AppColors.textSecondaryLight,
-                            height: 1.6,
                           ),
                         ),
                       ],

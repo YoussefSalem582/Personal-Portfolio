@@ -249,7 +249,7 @@ class ProjectCaseStudyAppBar extends StatelessWidget
                   ],
                 ),
                 child: IconButton(
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.menu_rounded,
                     size: 18,
                   ),

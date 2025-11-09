@@ -82,7 +82,7 @@ class OptimizedImage extends StatelessWidget {
                 width: width,
                 height: height,
                 color: AppColors.gray300,
-                child: Icon(AppIcons.error, color: AppColors.gray500),
+                child: const Icon(AppIcons.error, color: AppColors.gray500),
               );
         },
       );
@@ -119,7 +119,7 @@ class OptimizedImage extends StatelessWidget {
               width: width,
               height: height,
               color: AppColors.gray300,
-              child: Icon(AppIcons.error, color: AppColors.gray500),
+              child: const Icon(AppIcons.error, color: AppColors.gray500),
             );
       },
     );
