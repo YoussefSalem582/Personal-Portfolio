@@ -34,7 +34,7 @@ class ContactSection extends StatelessWidget {
       // Light background tint in light mode, dark background in dark mode
       color: isDark
           ? AppColors.backgroundDark
-          : AppColors.primaryLight.withValues(alpha: 0.02),
+          : AppColors.primaryLight.withOpacity(0.02),
       padding: EdgeInsets.symmetric(
         horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
         vertical: ResponsiveHelper.getSectionSpacing(screenWidth) * 0.8,

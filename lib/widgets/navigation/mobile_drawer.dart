@@ -78,7 +78,7 @@ class MobileDrawer extends StatelessWidget {
                                 height: 64,
                                 decoration: BoxDecoration(
                                   color:
-                                      AppColors.white.withValues(alpha: 0.24),
+                                      AppColors.white.withOpacity(0.24),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: SvgPicture.asset(

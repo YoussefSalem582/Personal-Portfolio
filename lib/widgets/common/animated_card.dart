@@ -71,8 +71,8 @@ class _AnimatedCardState extends State<AnimatedCard>
       margin: widget.margin,
       elevation: _isHovered ? widget.hoverElevation : widget.elevation,
       shadowColor: isDark
-          ? AppColors.accentDark.withValues(alpha: 0.3)
-          : AppColors.accentLight.withValues(alpha: 0.2),
+          ? AppColors.accentDark.withOpacity(0.3)
+          : AppColors.accentLight.withOpacity(0.2),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(widget.borderRadius),
       ),

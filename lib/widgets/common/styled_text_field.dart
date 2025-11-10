@@ -49,13 +49,13 @@ class StyledTextField extends StatelessWidget {
         labelText: label,
         hintText: hint,
         labelStyle: TextStyle(color: textSecondary),
-        hintStyle: TextStyle(color: textSecondary.withValues(alpha: 0.6)),
+        hintStyle: TextStyle(color: textSecondary.withOpacity(0.6)),
         prefixIcon: Icon(icon, color: accentColor),
         contentPadding: contentPadding,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusS),
           borderSide: BorderSide(
-            color: textSecondary.withValues(alpha: 0.3),
+            color: textSecondary.withOpacity(0.3),
           ),
         ),
         focusedBorder: OutlineInputBorder(
@@ -65,13 +65,13 @@ class StyledTextField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusS),
           borderSide: BorderSide(
-            color: textSecondary.withValues(alpha: 0.3),
+            color: textSecondary.withOpacity(0.3),
           ),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppTheme.radiusS),
           borderSide: BorderSide(
-            color: textSecondary.withValues(alpha: 0.2),
+            color: textSecondary.withOpacity(0.2),
           ),
         ),
         errorBorder: OutlineInputBorder(
@@ -79,7 +79,7 @@ class StyledTextField extends StatelessWidget {
           borderSide: const BorderSide(color: AppColors.errorLight),
         ),
         filled: true,
-        fillColor: enabled ? fillColor : fillColor.withValues(alpha: 0.5),
+        fillColor: enabled ? fillColor : fillColor.withOpacity(0.5),
       ),
     );
   }

@@ -37,8 +37,8 @@ class IconContainer extends StatelessWidget {
 
     final defaultGradient = gradientColors ??
         [
-          defaultIconColor.withValues(alpha: 0.15),
-          defaultIconColor.withValues(alpha: 0.05),
+          defaultIconColor.withOpacity(0.15),
+          defaultIconColor.withOpacity(0.05),
         ];
 
     return Container(
@@ -88,7 +88,7 @@ class GradientText extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final defaultGradient = gradientColors ??
         (isDark
-            ? [AppColors.accentDark, AppColors.accentDark.withValues(alpha: 0.8)]
+            ? [AppColors.accentDark, AppColors.accentDark.withOpacity(0.8)]
             : [AppColors.accentLight, AppColors.primaryLight]);
 
     return ShaderMask(

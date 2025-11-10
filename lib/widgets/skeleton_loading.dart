@@ -14,11 +14,11 @@ class SkeletonLoading extends StatelessWidget {
 
     return Shimmer.fromColors(
       baseColor: isDark
-          ? AppColors.surfaceDark.withValues(alpha: 0.3)
-          : AppColors.surfaceLight.withValues(alpha: 0.3),
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
       highlightColor: isDark
-          ? AppColors.accentDark.withValues(alpha: 0.1)
-          : AppColors.accentLight.withValues(alpha: 0.1),
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
       period: const Duration(milliseconds: 1500),
       child: SingleChildScrollView(
         child: Column(
@@ -182,11 +182,11 @@ class ProjectCardSkeleton extends StatelessWidget {
 
     return Shimmer.fromColors(
       baseColor: isDark
-          ? AppColors.surfaceDark.withValues(alpha: 0.3)
-          : AppColors.surfaceLight.withValues(alpha: 0.3),
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
       highlightColor: isDark
-          ? AppColors.accentDark.withValues(alpha: 0.1)
-          : AppColors.accentLight.withValues(alpha: 0.1),
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
       period: const Duration(milliseconds: 1500),
       child: Container(
         height: isCompact ? 260 : 360,
@@ -269,11 +269,11 @@ class CertificateCardSkeleton extends StatelessWidget {
 
     return Shimmer.fromColors(
       baseColor: isDark
-          ? AppColors.surfaceDark.withValues(alpha: 0.3)
-          : AppColors.surfaceLight.withValues(alpha: 0.3),
+          ? AppColors.surfaceDark.withOpacity(0.3)
+          : AppColors.surfaceLight.withOpacity(0.3),
       highlightColor: isDark
-          ? AppColors.accentDark.withValues(alpha: 0.1)
-          : AppColors.accentLight.withValues(alpha: 0.1),
+          ? AppColors.accentDark.withOpacity(0.1)
+          : AppColors.accentLight.withOpacity(0.1),
       period: const Duration(milliseconds: 1500),
       child: Container(
         height: 200,

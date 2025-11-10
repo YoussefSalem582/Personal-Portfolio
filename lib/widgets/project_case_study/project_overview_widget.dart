@@ -41,7 +41,7 @@ class ProjectOverviewWidget extends StatelessWidget {
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withValues(alpha: 0.3),
+                            .withOpacity(0.3),
                     blurRadius: isMobile ? 8 : 12,
                     offset: Offset(0, isMobile ? 2 : 4),
                   ),
@@ -97,13 +97,13 @@ class ProjectOverviewWidget extends StatelessWidget {
                 isMobile ? AppTheme.radiusM : AppTheme.radiusL),
             border: Border.all(
               color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                  .withValues(alpha: 0.2),
+                  .withOpacity(0.2),
               width: 1.5,
             ),
             boxShadow: [
               BoxShadow(
                 color: (isDark ? AppColors.black : AppColors.gray300)
-                    .withValues(alpha: 0.1),
+                    .withOpacity(0.1),
                 blurRadius: isMobile ? 12 : 20,
                 offset: Offset(0, isMobile ? 4 : 8),
               ),
@@ -196,7 +196,7 @@ class ProjectOverviewWidget extends StatelessWidget {
                           color: (isDark
                                   ? AppColors.accentDark
                                   : AppColors.accentLight)
-                              .withValues(alpha: 0.3),
+                              .withOpacity(0.3),
                           blurRadius: isMobile ? 6 : 8,
                           offset: Offset(0, isMobile ? 1 : 2),
                         ),

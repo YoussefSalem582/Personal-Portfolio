@@ -30,17 +30,17 @@ class BackButtonWidget extends StatelessWidget {
               // Glassmorphic styling
               decoration: BoxDecoration(
                 color: AppColors.black
-                    .withValues(alpha: 0.7), // Semi-transparent dark background
+                    .withOpacity(0.7), // Semi-transparent dark background
                 borderRadius: BorderRadius.circular(16),
                 border: Border.all(
                   color: AppColors.white
-                      .withValues(alpha: 0.3), // Subtle white border
+                      .withOpacity(0.3), // Subtle white border
                   width: 1.5,
                 ),
                 // Elevation shadow for depth
                 boxShadow: [
                   BoxShadow(
-                    color: AppColors.black.withValues(alpha: 0.3),
+                    color: AppColors.black.withOpacity(0.3),
                     blurRadius: 12,
                     offset: const Offset(0, 4), // Shadow offset downwards
                   ),

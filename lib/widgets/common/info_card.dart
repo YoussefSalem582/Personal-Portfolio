@@ -43,13 +43,13 @@ class InfoCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: backgroundColor ??
             (isDark
-                ? AppColors.surfaceDark.withValues(alpha: 0.5)
+                ? AppColors.surfaceDark.withOpacity(0.5)
                 : AppColors.gray50),
         borderRadius: BorderRadius.circular(borderRadius),
         border: Border.all(
           color: borderColor ??
               (isDark
-                  ? AppColors.textSecondaryDark.withValues(alpha: 0.15)
+                  ? AppColors.textSecondaryDark.withOpacity(0.15)
                   : AppColors.gray200),
           width: borderWidth,
         ),
@@ -74,12 +74,12 @@ class InfoCard extends StatelessWidget {
         gradient: useGradientIcon
             ? LinearGradient(
                 colors: [
-                  accentColor.withValues(alpha: 0.15),
-                  accentColor.withValues(alpha: 0.05),
+                  accentColor.withOpacity(0.15),
+                  accentColor.withOpacity(0.05),
                 ],
               )
             : null,
-        color: useGradientIcon ? null : accentColor.withValues(alpha: 0.1),
+        color: useGradientIcon ? null : accentColor.withOpacity(0.1),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Icon(icon, size: iconSize ?? 22, color: accentColor),

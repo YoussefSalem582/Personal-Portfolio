@@ -28,7 +28,7 @@ class ExpertiseSection extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
                   AppColors.surfaceDark,
-                  AppColors.cardDark.withValues(alpha: 0.5),
+                  AppColors.cardDark.withOpacity(0.5),
                 ],
               )
             : const LinearGradient(
@@ -146,7 +146,7 @@ class ExpertiseSection extends StatelessWidget {
                 end: Alignment.bottomRight,
                 colors: [
                   AppColors.cardDark,
-                  AppColors.cardDark.withValues(alpha: 0.8),
+                  AppColors.cardDark.withOpacity(0.8),
                 ],
               )
             : LinearGradient(
@@ -154,21 +154,21 @@ class ExpertiseSection extends StatelessWidget {
                 end: Alignment.bottomRight,
                 colors: [
                   AppColors.white,
-                  AppColors.gray50.withValues(alpha: 0.5),
+                  AppColors.gray50.withOpacity(0.5),
                 ],
               ),
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
           color: isDark
-              ? accentColor.withValues(alpha: 0.2)
-              : accentColor.withValues(alpha: 0.15),
+              ? accentColor.withOpacity(0.2)
+              : accentColor.withOpacity(0.15),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
             color: isDark
-                ? AppColors.black.withValues(alpha: 0.3)
-                : accentColor.withValues(alpha: 0.1),
+                ? AppColors.black.withOpacity(0.3)
+                : accentColor.withOpacity(0.1),
             blurRadius: 15,
             offset: const Offset(0, 4),
           ),
@@ -180,7 +180,7 @@ class ExpertiseSection extends StatelessWidget {
           color: AppColors.transparent,
           child: InkWell(
             onTap: () {},
-            hoverColor: accentColor.withValues(alpha: 0.05),
+            hoverColor: accentColor.withOpacity(0.05),
             child: Padding(
               padding: EdgeInsets.all(isMobile ? 12 : 20),
               child: Column(
@@ -200,14 +200,14 @@ class ExpertiseSection extends StatelessWidget {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                             colors: [
-                              accentColor.withValues(alpha: 0.15),
-                              accentColor.withValues(alpha: 0.05),
+                              accentColor.withOpacity(0.15),
+                              accentColor.withOpacity(0.05),
                             ],
                           ),
                           borderRadius:
                               BorderRadius.circular(isMobile ? 10 : 12),
                           border: Border.all(
-                            color: accentColor.withValues(alpha: 0.3),
+                            color: accentColor.withOpacity(0.3),
                             width: 1.5,
                           ),
                         ),
@@ -257,8 +257,8 @@ class ExpertiseSection extends StatelessWidget {
                       style: TextStyle(
                         fontSize: isMobile ? 14 : 14.5,
                         color: isDark
-                            ? AppColors.textSecondaryDark.withValues(alpha: 0.85)
-                            : AppColors.textSecondaryLight.withValues(alpha: 0.85),
+                            ? AppColors.textSecondaryDark.withOpacity(0.85)
+                            : AppColors.textSecondaryLight.withOpacity(0.85),
                         height: 1.4,
                       ),
                       maxLines: isMobile ? 15 : null,

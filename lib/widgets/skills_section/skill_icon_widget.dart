@@ -66,7 +66,7 @@ class SkillIconWidget extends StatelessWidget {
           child: Center(
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              valueColor: AlwaysStoppedAnimation<Color>(color.withValues(alpha: 0.5)),
+              valueColor: AlwaysStoppedAnimation<Color>(color.withOpacity(0.5)),
             ),
           ),
         ),

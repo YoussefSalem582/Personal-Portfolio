@@ -34,7 +34,7 @@ class Footer extends StatelessWidget {
                 ]
               : [
                   AppColors.primaryLight,
-                  AppColors.primaryLight.withValues(alpha: 0.9),
+                  AppColors.primaryLight.withOpacity(0.9),
                 ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -42,8 +42,8 @@ class Footer extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: isDark
-                ? AppColors.black.withValues(alpha: 0.3)
-                : AppColors.black.withValues(alpha: 0.1),
+                ? AppColors.black.withOpacity(0.3)
+                : AppColors.black.withOpacity(0.1),
             blurRadius: 20,
             offset: const Offset(0, -5),
           ),
@@ -78,7 +78,7 @@ class Footer extends StatelessWidget {
                   colors: [
                     Colors.transparent,
                     (isDark ? AppColors.white : AppColors.white)
-                        .withValues(alpha: 0.2),
+                        .withOpacity(0.2),
                     Colors.transparent,
                   ],
                 ),
@@ -111,11 +111,11 @@ class Footer extends StatelessWidget {
               colors: isDark
                   ? [
                       AppColors.accentDark,
-                      AppColors.accentDark.withValues(alpha: 0.8),
+                      AppColors.accentDark.withOpacity(0.8),
                     ]
                   : [
                       AppColors.accentLight,
-                      AppColors.accentLight.withValues(alpha: 0.8),
+                      AppColors.accentLight.withOpacity(0.8),
                     ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -124,7 +124,7 @@ class Footer extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                    .withValues(alpha: 0.3),
+                    .withOpacity(0.3),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -153,7 +153,7 @@ class Footer extends StatelessWidget {
           '© ${DateTime.now().year} ${PortfolioData.fullName}. All rights reserved.',
           style: AppFonts.bodyMedium().copyWith(
             color: (isDark ? AppColors.textSecondaryDark : AppColors.white)
-                .withValues(alpha: 0.8),
+                .withOpacity(0.8),
           ),
           textAlign: TextAlign.center,
         ),
@@ -168,21 +168,21 @@ class Footer extends StatelessWidget {
               'Built with',
               style: AppFonts.bodySmall().copyWith(
                 color: (isDark ? AppColors.textSecondaryDark : AppColors.white)
-                    .withValues(alpha: 0.6),
+                    .withOpacity(0.6),
               ),
             ),
             const SizedBox(width: AppTheme.spacingXS),
             Icon(
               Icons.favorite,
               size: 14,
-              color: Colors.red.withValues(alpha: 0.8),
+              color: Colors.red.withOpacity(0.8),
             ),
             const SizedBox(width: AppTheme.spacingXS),
             Text(
               'using Flutter',
               style: AppFonts.bodySmall().copyWith(
                 color: (isDark ? AppColors.textSecondaryDark : AppColors.white)
-                    .withValues(alpha: 0.6),
+                    .withOpacity(0.6),
               ),
             ),
             const SizedBox(width: AppTheme.spacingXS),
@@ -192,10 +192,10 @@ class Footer extends StatelessWidget {
                 vertical: 2,
               ),
               decoration: BoxDecoration(
-                color: const Color(0xFF027DFD).withValues(alpha: 0.2),
+                color: const Color(0xFF027DFD).withOpacity(0.2),
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(
-                  color: const Color(0xFF027DFD).withValues(alpha: 0.3),
+                  color: const Color(0xFF027DFD).withOpacity(0.3),
                 ),
               ),
               child: const Text(
@@ -248,11 +248,11 @@ class Footer extends StatelessWidget {
                         colors: isDark
                             ? [
                                 AppColors.accentDark,
-                                AppColors.accentDark.withValues(alpha: 0.7)
+                                AppColors.accentDark.withOpacity(0.7)
                               ]
                             : [
                                 AppColors.accentLight,
-                                AppColors.accentLight.withValues(alpha: 0.8)
+                                AppColors.accentLight.withOpacity(0.8)
                               ],
                       ),
                       borderRadius: BorderRadius.circular(8),
@@ -285,7 +285,7 @@ class Footer extends StatelessWidget {
                 style: AppFonts.bodyMedium().copyWith(
                   color:
                       (isDark ? AppColors.textSecondaryDark : AppColors.white)
-                          .withValues(alpha: 0.8),
+                          .withOpacity(0.8),
                   height: 1.6,
                 ),
                 maxLines: 3,
@@ -357,7 +357,7 @@ class Footer extends StatelessWidget {
                 style: AppFonts.labelMedium().copyWith(
                   color:
                       (isDark ? AppColors.textSecondaryDark : AppColors.white)
-                          .withValues(alpha: 0.9),
+                          .withOpacity(0.9),
                   fontWeight: AppFonts.semiBold,
                 ),
               ),
@@ -388,11 +388,11 @@ class Footer extends StatelessWidget {
               colors: isDark
                   ? [
                       AppColors.accentDark,
-                      AppColors.accentDark.withValues(alpha: 0.5)
+                      AppColors.accentDark.withOpacity(0.5)
                     ]
                   : [
                       AppColors.accentLight,
-                      AppColors.accentLight.withValues(alpha: 0.5)
+                      AppColors.accentLight.withOpacity(0.5)
                     ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -427,12 +427,12 @@ class Footer extends StatelessWidget {
             gradient: LinearGradient(
               colors: isDark
                   ? [
-                      AppColors.white.withValues(alpha: 0.1),
-                      AppColors.white.withValues(alpha: 0.05),
+                      AppColors.white.withOpacity(0.1),
+                      AppColors.white.withOpacity(0.05),
                     ]
                   : [
-                      AppColors.white.withValues(alpha: 0.2),
-                      AppColors.white.withValues(alpha: 0.1),
+                      AppColors.white.withOpacity(0.2),
+                      AppColors.white.withOpacity(0.1),
                     ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -440,11 +440,11 @@ class Footer extends StatelessWidget {
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color:
-                  (isDark ? AppColors.white : AppColors.white).withValues(alpha: 0.2),
+                  (isDark ? AppColors.white : AppColors.white).withOpacity(0.2),
             ),
             boxShadow: [
               BoxShadow(
-                color: AppColors.black.withValues(alpha: 0.1),
+                color: AppColors.black.withOpacity(0.1),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -545,18 +545,18 @@ class Footer extends StatelessWidget {
               gradient: LinearGradient(
                 colors: isDark
                     ? [
-                        AppColors.white.withValues(alpha: 0.1),
-                        AppColors.white.withValues(alpha: 0.05),
+                        AppColors.white.withOpacity(0.1),
+                        AppColors.white.withOpacity(0.05),
                       ]
                     : [
-                        AppColors.white.withValues(alpha: 0.2),
-                        AppColors.white.withValues(alpha: 0.1),
+                        AppColors.white.withOpacity(0.2),
+                        AppColors.white.withOpacity(0.1),
                       ],
               ),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
                 color: (isDark ? AppColors.white : AppColors.white)
-                    .withValues(alpha: 0.2),
+                    .withOpacity(0.2),
               ),
             ),
             child: Row(
@@ -600,7 +600,7 @@ class Footer extends StatelessWidget {
               elevation: 0,
               shadowColor:
                   (isDark ? AppColors.accentDark : AppColors.accentLight)
-                      .withValues(alpha: 0.3),
+                      .withOpacity(0.3),
               textStyle: AppFonts.labelLarge().copyWith(
                 fontWeight: AppFonts.bold,
               ),
@@ -635,7 +635,7 @@ class Footer extends StatelessWidget {
                   size: 16,
                   color:
                       (isDark ? AppColors.textSecondaryDark : AppColors.white)
-                          .withValues(alpha: 0.7),
+                          .withOpacity(0.7),
                 ),
                 const SizedBox(width: AppTheme.spacingS),
                 Text(
@@ -643,7 +643,7 @@ class Footer extends StatelessWidget {
                   style: AppFonts.bodyMedium().copyWith(
                     color:
                         (isDark ? AppColors.textSecondaryDark : AppColors.white)
-                            .withValues(alpha: 0.8),
+                            .withOpacity(0.8),
                   ),
                 ),
               ],
@@ -672,11 +672,11 @@ class Footer extends StatelessWidget {
             padding: const EdgeInsets.all(AppTheme.spacingS),
             decoration: BoxDecoration(
               color: (isDark ? AppColors.white : AppColors.white)
-                  .withValues(alpha: 0.05),
+                  .withOpacity(0.05),
               borderRadius: BorderRadius.circular(8),
               border: Border.all(
                 color: (isDark ? AppColors.white : AppColors.white)
-                    .withValues(alpha: 0.1),
+                    .withOpacity(0.1),
               ),
             ),
             child: Row(
@@ -694,7 +694,7 @@ class Footer extends StatelessWidget {
                       color: (isDark
                               ? AppColors.textSecondaryDark
                               : AppColors.white)
-                          .withValues(alpha: 0.8),
+                          .withOpacity(0.8),
                     ),
                   ),
                 ),

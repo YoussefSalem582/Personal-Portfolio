@@ -36,7 +36,7 @@ class AboutSection extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
                   AppColors.surfaceDark,
-                  AppColors.cardDark.withValues(alpha: 0.5),
+                  AppColors.cardDark.withOpacity(0.5),
                 ],
               )
             : const LinearGradient(
@@ -97,7 +97,7 @@ class AboutSection extends StatelessWidget {
                     color: (isDark
                             ? AppColors.primaryLight
                             : AppColors.accentLight)
-                        .withValues(alpha: 0.4),
+                        .withOpacity(0.4),
                     blurRadius: 12,
                     spreadRadius: 2,
                   ),
@@ -121,7 +121,7 @@ class AboutSection extends StatelessWidget {
                       : ResponsiveHelper.getBodySize(screenWidth,
                           isLarge: true),
                   color: isDark
-                      ? AppColors.textSecondaryDark.withValues(alpha: 0.9)
+                      ? AppColors.textSecondaryDark.withOpacity(0.9)
                       : AppColors.textSecondaryLight,
                   letterSpacing: 0.3,
                   height: 1.5,

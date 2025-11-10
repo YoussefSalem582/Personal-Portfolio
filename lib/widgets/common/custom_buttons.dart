@@ -43,7 +43,7 @@ class PrimaryGradientButton extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                .withValues(alpha: 0.3),
+                .withOpacity(0.3),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),
@@ -160,7 +160,7 @@ class SecondaryOutlinedButton extends StatelessWidget {
     return OutlinedButton.styleFrom(
       foregroundColor: accentColor,
       side: BorderSide(
-        color: accentColor.withValues(alpha: 0.5),
+        color: accentColor.withOpacity(0.5),
         width: 1.5,
       ),
       padding: buttonPadding,
@@ -204,7 +204,7 @@ class _IconButtonWithHoverState extends State<IconButtonWithHover> {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final defaultColor = widget.iconColor ??
         (isDark ? AppColors.accentDark : AppColors.accentLight);
-    final hoverColor = widget.hoverColor ?? defaultColor.withValues(alpha: 0.7);
+    final hoverColor = widget.hoverColor ?? defaultColor.withOpacity(0.7);
 
     final button = MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),

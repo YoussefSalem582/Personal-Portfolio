@@ -48,7 +48,7 @@ class ThemeToggleSwitch extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           color: themeController.isDarkMode
               ? AppColors.accentDark
-              : AppColors.accentLight.withValues(alpha: 0.3),
+              : AppColors.accentLight.withOpacity(0.3),
         ),
         child: Stack(
           children: [
@@ -69,7 +69,7 @@ class ThemeToggleSwitch extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.black.withValues(alpha: 0.2),
+                        color: AppColors.black.withOpacity(0.2),
                         blurRadius: 2,
                         offset: const Offset(0, 1),
                       ),

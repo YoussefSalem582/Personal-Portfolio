@@ -62,7 +62,7 @@ class _CertificateCardState extends State<CertificateCard>
             boxShadow: [
               BoxShadow(
                 color: _isHovered
-                    ? accentColor.withValues(alpha: 0.2)
+                    ? accentColor.withOpacity(0.2)
                     : (isDark ? Colors.black38 : Colors.black12),
                 blurRadius: _isHovered ? 24 : 12,
                 offset: Offset(0, _isHovered ? 12 : 6),
@@ -76,7 +76,7 @@ class _CertificateCardState extends State<CertificateCard>
               borderRadius: BorderRadius.circular(AppTheme.radiusXL),
               side: BorderSide(
                 color: _isHovered
-                    ? accentColor.withValues(alpha: 0.3)
+                    ? accentColor.withOpacity(0.3)
                     : AppColors.transparent,
                 width: 2,
               ),
@@ -93,7 +93,7 @@ class _CertificateCardState extends State<CertificateCard>
                           end: Alignment.bottomRight,
                           colors: [
                             AppColors.cardDark,
-                            AppColors.cardDark.withValues(alpha: 0.8),
+                            AppColors.cardDark.withOpacity(0.8),
                           ],
                         )
                       : null,
@@ -136,7 +136,7 @@ class _CertificateCardState extends State<CertificateCard>
     showDialog(
       context: context,
       barrierDismissible: true,
-      barrierColor: AppColors.black.withValues(alpha: 0.6),
+      barrierColor: AppColors.black.withOpacity(0.6),
       builder: (context) => CertificateDetailsDialog(
         certificate: widget.certificate,
       ),

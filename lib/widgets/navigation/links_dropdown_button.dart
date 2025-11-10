@@ -61,12 +61,12 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: widget.isDark
-                        ? AppColors.white.withValues(alpha: 0.1)
-                        : AppColors.black.withValues(alpha: 0.08),
+                        ? AppColors.white.withOpacity(0.1)
+                        : AppColors.black.withOpacity(0.08),
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: AppColors.black.withValues(alpha: 0.2),
+                      color: AppColors.black.withOpacity(0.2),
                       blurRadius: 16,
                       offset: const Offset(0, 4),
                     ),
@@ -224,8 +224,8 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
       height: 1,
       thickness: 1,
       color: widget.isDark
-          ? AppColors.white.withValues(alpha: 0.08)
-          : AppColors.black.withValues(alpha: 0.06),
+          ? AppColors.white.withOpacity(0.08)
+          : AppColors.black.withOpacity(0.06),
     );
   }
 
@@ -245,7 +245,7 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
         borderRadius: BorderRadius.circular(10),
         hoverColor:
             (widget.isDark ? AppColors.accentDark : AppColors.accentLight)
-                .withValues(alpha: 0.1),
+                .withOpacity(0.1),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
           child: Row(

@@ -63,11 +63,11 @@ class _DesktopAppBarState extends State<DesktopAppBar>
             colors: isDark
                 ? [
                     AppColors.surfaceDark,
-                    AppColors.surfaceDark.withValues(alpha: 0.98),
+                    AppColors.surfaceDark.withOpacity(0.98),
                   ]
                 : [
                     AppColors.white,
-                    AppColors.surfaceLight.withValues(alpha: 0.98),
+                    AppColors.surfaceLight.withOpacity(0.98),
                   ],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -75,16 +75,16 @@ class _DesktopAppBarState extends State<DesktopAppBar>
           border: Border(
             bottom: BorderSide(
               color: isDark
-                  ? AppColors.accentDark.withValues(alpha: 0.15)
-                  : AppColors.accentLight.withValues(alpha: 0.08),
+                  ? AppColors.accentDark.withOpacity(0.15)
+                  : AppColors.accentLight.withOpacity(0.08),
               width: 1.5,
             ),
           ),
           boxShadow: [
             BoxShadow(
               color: isDark
-                  ? AppColors.black.withValues(alpha: 0.4)
-                  : AppColors.black.withValues(alpha: 0.06),
+                  ? AppColors.black.withOpacity(0.4)
+                  : AppColors.black.withOpacity(0.06),
               blurRadius: 16,
               offset: const Offset(0, 2),
               spreadRadius: 0,
@@ -250,7 +250,7 @@ class _AppBarLogoState extends State<_AppBarLogo> {
                           color: (widget.isDark
                                   ? AppColors.accentDark
                                   : AppColors.accentLight)
-                              .withValues(alpha: _isHovered ? 0.4 : 0.2),
+                              .withOpacity(_isHovered ? 0.4 : 0.2),
                           blurRadius: _isHovered ? 12 : 8,
                           offset: const Offset(0, 2),
                         ),
@@ -272,11 +272,11 @@ class _AppBarLogoState extends State<_AppBarLogo> {
                                 colors: widget.isDark
                                     ? [
                                         AppColors.accentDark,
-                                        AppColors.accentDark.withValues(alpha: 0.7)
+                                        AppColors.accentDark.withOpacity(0.7)
                                       ]
                                     : [
                                         AppColors.accentLight,
-                                        AppColors.accentLight.withValues(alpha: 0.8)
+                                        AppColors.accentLight.withOpacity(0.8)
                                       ],
                               ),
                               borderRadius: BorderRadius.circular(10),

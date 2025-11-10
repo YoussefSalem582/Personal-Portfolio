@@ -250,7 +250,7 @@ class GallerySectionWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                    .withValues(alpha: 0.3),
+                    .withOpacity(0.3),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -309,13 +309,13 @@ class GallerySectionWidget extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            accentColor.withValues(alpha: 0.15),
-            accentColor.withValues(alpha: 0.05),
+            accentColor.withOpacity(0.15),
+            accentColor.withOpacity(0.05),
           ],
         ),
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         border: Border.all(
-          color: accentColor.withValues(alpha: 0.3),
+          color: accentColor.withOpacity(0.3),
           width: 1.5,
         ),
       ),
@@ -324,7 +324,7 @@ class GallerySectionWidget extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: accentColor.withValues(alpha: 0.2),
+              color: accentColor.withOpacity(0.2),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Icon(
@@ -351,7 +351,7 @@ class GallerySectionWidget extends StatelessWidget {
               vertical: 4,
             ),
             decoration: BoxDecoration(
-              color: accentColor.withValues(alpha: 0.2),
+              color: accentColor.withOpacity(0.2),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
@@ -528,14 +528,14 @@ class GallerySectionWidget extends StatelessWidget {
                           color: (isDark
                                   ? AppColors.accentDark
                                   : AppColors.accentLight)
-                              .withValues(alpha: 0.2),
+                              .withOpacity(0.2),
                           width: 1.5,
                         ),
                         boxShadow: [
                           BoxShadow(
                             color:
                                 (isDark ? AppColors.black : AppColors.gray300)
-                                    .withValues(alpha: 0.2),
+                                    .withOpacity(0.2),
                             blurRadius: 12,
                             offset: const Offset(0, 4),
                           ),
@@ -574,13 +574,13 @@ class GallerySectionWidget extends StatelessWidget {
                   border: Border.all(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withValues(alpha: 0.2),
+                            .withOpacity(0.2),
                     width: 1.5,
                   ),
                   boxShadow: [
                     BoxShadow(
                       color: (isDark ? AppColors.black : AppColors.gray300)
-                          .withValues(alpha: 0.2),
+                          .withOpacity(0.2),
                       blurRadius: 12,
                       offset: const Offset(0, 4),
                     ),
@@ -639,13 +639,13 @@ class GallerySectionWidget extends StatelessWidget {
                         color: (isDark
                                 ? AppColors.accentDark
                                 : AppColors.accentLight)
-                            .withValues(alpha: 0.2),
+                            .withOpacity(0.2),
                         width: 1.5,
                       ),
                       boxShadow: [
                         BoxShadow(
                           color: (isDark ? AppColors.black : AppColors.gray300)
-                              .withValues(alpha: 0.2),
+                              .withOpacity(0.2),
                           blurRadius: 12,
                           offset: const Offset(0, 4),
                         ),
@@ -687,13 +687,13 @@ class GallerySectionWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(AppTheme.radiusL),
               border: Border.all(
                 color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                    .withValues(alpha: 0.2),
+                    .withOpacity(0.2),
                 width: 1.5,
               ),
               boxShadow: [
                 BoxShadow(
                   color: (isDark ? AppColors.black : AppColors.gray300)
-                      .withValues(alpha: 0.2),
+                      .withOpacity(0.2),
                   blurRadius: 12,
                   offset: const Offset(0, 4),
                 ),
@@ -719,7 +719,7 @@ class GallerySectionWidget extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => Dialog(
-        backgroundColor: AppColors.black.withValues(alpha: 0.87),
+        backgroundColor: AppColors.black.withOpacity(0.87),
         child: Container(
           constraints: const BoxConstraints(maxWidth: 800),
           child: Stack(
@@ -735,7 +735,7 @@ class GallerySectionWidget extends StatelessWidget {
                   onPressed: () => Navigator.pop(context),
                   icon: const Icon(AppIcons.close, color: AppColors.white),
                   style: IconButton.styleFrom(
-                    backgroundColor: AppColors.black.withValues(alpha: 0.54),
+                    backgroundColor: AppColors.black.withOpacity(0.54),
                   ),
                 ),
               ),

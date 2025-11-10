@@ -56,9 +56,8 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget>
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         transform: Matrix4.identity()
-          ..translateByDouble(0.0, _isHovered ? -12.0 : 0.0, 0.0, 1.0)
-          ..scaleByDouble(
-              _isHovered ? 1.02 : 1.0, _isHovered ? 1.02 : 1.0, 1.0, 1.0),
+          ..translate(0.0, _isHovered ? -12.0 : 0.0)
+          ..scale(_isHovered ? 1.02 : 1.0),
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
@@ -75,13 +74,13 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget>
                   : [
                       AppColors.primaryLight,
                       AppColors.accentLight,
-                      AppColors.primaryLight.withValues(alpha: 0.8),
+                      AppColors.primaryLight.withOpacity(0.8),
                     ],
             ),
             boxShadow: [
               BoxShadow(
                 color: (isDark ? AppColors.primaryLight : AppColors.accentLight)
-                    .withValues(alpha: _isHovered ? 0.5 : 0.3),
+                    .withOpacity(_isHovered ? 0.5 : 0.3),
                 blurRadius: _isHovered ? 32 : 20,
                 offset: Offset(0, _isHovered ? 16 : 10),
               ),
@@ -105,8 +104,8 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget>
                           shape: BoxShape.circle,
                           gradient: RadialGradient(
                             colors: [
-                              AppColors.white.withValues(alpha: 0.15),
-                              AppColors.white.withValues(alpha: 0.05),
+                              AppColors.white.withOpacity(0.15),
+                              AppColors.white.withOpacity(0.05),
                               AppColors.transparent,
                             ],
                           ),
@@ -131,8 +130,8 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget>
                           shape: BoxShape.circle,
                           gradient: RadialGradient(
                             colors: [
-                              AppColors.white.withValues(alpha: 0.12),
-                              AppColors.white.withValues(alpha: 0.04),
+                              AppColors.white.withOpacity(0.12),
+                              AppColors.white.withOpacity(0.04),
                               AppColors.transparent,
                             ],
                           ),
@@ -154,15 +153,15 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget>
                       width: _isHovered ? 110 : 100,
                       height: _isHovered ? 110 : 100,
                       decoration: BoxDecoration(
-                        color: AppColors.white.withValues(alpha: 0.15),
+                        color: AppColors.white.withOpacity(0.15),
                         borderRadius: BorderRadius.circular(AppTheme.radiusXL),
                         border: Border.all(
-                          color: AppColors.white.withValues(alpha: 0.3),
+                          color: AppColors.white.withOpacity(0.3),
                           width: 2,
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: AppColors.white.withValues(alpha: 0.2),
+                            color: AppColors.white.withOpacity(0.2),
                             blurRadius: _isHovered ? 20 : 12,
                             spreadRadius: _isHovered ? 2 : 0,
                           ),
@@ -204,7 +203,7 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget>
                     Text(
                       'Explore my professional journey,\nskills, and achievements',
                       style: AppFonts.bodyMedium().copyWith(
-                        color: AppColors.white.withValues(alpha: 0.92),
+                        color: AppColors.white.withOpacity(0.92),
                         fontWeight: AppFonts.medium,
                         height: 1.6,
                         fontSize: 15,
@@ -236,7 +235,7 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget>
                             boxShadow: [
                               BoxShadow(
                                 color: AppColors.black
-                                    .withValues(alpha: _isHovered ? 0.3 : 0.2),
+                                    .withOpacity(_isHovered ? 0.3 : 0.2),
                                 blurRadius: _isHovered ? 16 : 12,
                                 offset: Offset(0, _isHovered ? 6 : 4),
                               ),

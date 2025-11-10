@@ -74,7 +74,7 @@ class _CertificateDetailsDialogState extends State<CertificateDetailsDialog>
               borderRadius: BorderRadius.circular(AppTheme.radiusXL + 4),
               boxShadow: [
                 BoxShadow(
-                  color: accentColor.withValues(alpha: 0.2),
+                  color: accentColor.withOpacity(0.2),
                   blurRadius: 40,
                   offset: const Offset(0, 20),
                 ),
