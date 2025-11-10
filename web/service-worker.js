@@ -6,8 +6,8 @@ const CRITICAL_ASSETS = [
   '/Youssef-Hassan-Portfolio/index.html',
   '/Youssef-Hassan-Portfolio/main.dart.js',
   '/Youssef-Hassan-Portfolio/flutter_bootstrap.js',
-  '/Youssef-Hassan-Portfolio/assets/images/portfolio_logo.png',
-  '/Youssef-Hassan-Portfolio/assets/images/profile.jpg',
+  '/Youssef-Hassan-Portfolio/assets/assets/images/portfolio_logo.jpg',
+  '/Youssef-Hassan-Portfolio/assets/assets/images/profile.jpg',
   '/Youssef-Hassan-Portfolio/favicon.png',
   '/Youssef-Hassan-Portfolio/manifest.json'
 ];
