@@ -10,12 +10,13 @@ import 'theme/app_theme.dart';
 /// No backend dependencies - uses only local assets and data
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Mobile performance optimizations
   if (kIsWeb) {
     // Reduce unnecessary repaints on mobile
     PaintingBinding.instance.imageCache.maximumSize = 50;
-    PaintingBinding.instance.imageCache.maximumSizeBytes = 50 * 1024 * 1024; // 50MB
+    PaintingBinding.instance.imageCache.maximumSizeBytes =
+        50 * 1024 * 1024; // 50MB
   }
 
   runApp(const PortfolioApp());
@@ -30,7 +31,7 @@ class PortfolioApp extends StatelessWidget {
     InitialBindings().dependencies();
 
     return GetMaterialApp(
-      title: 'Youssef Salem Hassan - Portfolio',
+      title: 'Youssef Hassan - Portfolio',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

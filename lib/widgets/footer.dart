@@ -4,6 +4,7 @@ import '../utils/assets/app_constants.dart';
 import '../utils/responsive_helper.dart';
 import '../utils/data/portfolio_data.dart';
 import '../utils/url_helper.dart';
+import 'visitor_counter.dart';
 
 import '../theme/app_theme.dart';
 
@@ -209,120 +210,8 @@ class Footer extends StatelessWidget {
         const SizedBox(height: AppTheme.spacingM),
 
         // Visitor counter
-        _buildVisitorCounter(isDark),
+        VisitorCounter(isDark: isDark),
       ],
-    );
-  }
-
-  Widget _buildVisitorCounter(bool isDark) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: AppTheme.spacingM,
-        vertical: AppTheme.spacingS,
-      ),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: isDark
-              ? [
-                  AppColors.accentDark.withOpacity(0.15),
-                  AppColors.accentDark.withOpacity(0.05),
-                ]
-              : [
-                  AppColors.accentLight.withOpacity(0.2),
-                  AppColors.accentLight.withOpacity(0.1),
-                ],
-        ),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-              .withOpacity(0.3),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                  .withOpacity(0.2),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(
-              AppIcons.view,
-              size: 16,
-              color: isDark ? AppColors.accentDark : AppColors.accentLight,
-            ),
-          ),
-          const SizedBox(width: AppTheme.spacingM),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'VISITORS',
-                style: AppFonts.bodySmall().copyWith(
-                  color:
-                      (isDark ? AppColors.textSecondaryDark : AppColors.white)
-                          .withOpacity(0.6),
-                  fontSize: 10,
-                  fontWeight: AppFonts.semiBold,
-                  letterSpacing: 1.2,
-                ),
-              ),
-              const SizedBox(height: 2),
-              // Try with proper image loading without cache busting initially
-              Image.network(
-                'https://profile-counter.glitch.me/youssefsalem582-portfolio/count.svg',
-                height: 20,
-                fit: BoxFit.contain,
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return SizedBox(
-                    height: 20,
-                    width: 60,
-                    child: Center(
-                      child: SizedBox(
-                        width: 12,
-                        height: 12,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            (isDark
-                                    ? AppColors.accentDark
-                                    : AppColors.accentLight)
-                                .withOpacity(0.6),
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                errorBuilder: (context, error, stackTrace) {
-                  // Try GitHub profile counter as backup
-                  return Image.network(
-                    'https://komarev.com/ghpvc/?username=youssefsalem582&abbreviated=true&style=flat-square&label=&color=${isDark ? "79c83d" : "3498db"}',
-                    height: 20,
-                    fit: BoxFit.contain,
-                    errorBuilder: (_, __, ___) {
-                      // Final fallback with styled text
-                      return Text(
-                        '1,234+',
-                        style: AppFonts.h5().copyWith(
-                          color: isDark
-                              ? AppColors.accentDark
-                              : AppColors.accentLight,
-                          fontWeight: AppFonts.bold,
-                        ),
-                      );
-                    },
-                  );
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
     );
   }
 
