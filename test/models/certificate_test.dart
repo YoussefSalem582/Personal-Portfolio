@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:personal_portfolio/models/certificate.dart';
+import 'package:youssef_hassan_portfolio/models/certificate.dart';
 
 void main() {
   group('Certificate Model Tests', () {

@@ -1,15 +1,15 @@
 // Service Worker for caching and faster loads
 const CACHE_PREFIX = 'ysh-portfolio';
-const VERSION_URL = '/Personal-Portfolio/version.json';
+const VERSION_URL = '/Youssef-Hassan-Portfolio/version.json';
 const CRITICAL_ASSETS = [
-  '/Personal-Portfolio/',
-  '/Personal-Portfolio/index.html',
-  '/Personal-Portfolio/main.dart.js',
-  '/Personal-Portfolio/flutter_bootstrap.js',
-  '/Personal-Portfolio/assets/images/portfolio_logo.png',
-  '/Personal-Portfolio/assets/images/profile.jpg',
-  '/Personal-Portfolio/favicon.png',
-  '/Personal-Portfolio/manifest.json'
+  '/Youssef-Hassan-Portfolio/',
+  '/Youssef-Hassan-Portfolio/index.html',
+  '/Youssef-Hassan-Portfolio/main.dart.js',
+  '/Youssef-Hassan-Portfolio/flutter_bootstrap.js',
+  '/Youssef-Hassan-Portfolio/assets/images/portfolio_logo.png',
+  '/Youssef-Hassan-Portfolio/assets/images/profile.jpg',
+  '/Youssef-Hassan-Portfolio/favicon.png',
+  '/Youssef-Hassan-Portfolio/manifest.json'
 ];
 
 // Resolve cache name dynamically so each deployment invalidates the old cache

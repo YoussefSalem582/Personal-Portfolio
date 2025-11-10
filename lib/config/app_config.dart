@@ -10,7 +10,7 @@ class AppConfig {
   static const String githubOwner = 'YoussefSalem582';
 
   /// GitHub repository name
-  static const String githubRepo = 'Personal-Portfolio';
+  static const String githubRepo = 'Youssef-Hassan-Portfolio';
 
   /// GitHub repository branch (usually 'master' or 'main')
   static const String githubBranch = 'master';
@@ -29,8 +29,8 @@ class AppConfig {
   ///
   /// Example:
   /// ```dart
-  /// getGithubRawUrl('assets/documents/resume.pdf')
-  /// // Returns: https://raw.githubusercontent.com/YoussefSalem582/Personal-Portfolio/master/assets/documents/resume.pdf
+  /// getGitHubRawUrl('assets/documents/resume.pdf');
+  /// // Returns: https://raw.githubusercontent.com/YoussefSalem582/Youssef-Hassan-Portfolio/master/assets/documents/resume.pdf
   /// ```
   static String getGithubRawUrl(String assetPath) {
     // Remove leading slash if present
@@ -43,8 +43,8 @@ class AppConfig {
   ///
   /// Example:
   /// ```dart
-  /// getGithubPagesAssetUrl('assets/documents/resume.pdf')
-  /// // Returns: https://youssefsalem582.github.io/Personal-Portfolio/assets/documents/resume.pdf
+  /// getGitHubPagesUrl('assets/documents/resume.pdf');
+  /// // Returns: https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/assets/documents/resume.pdf
   /// ```
   static String getGithubPagesAssetUrl(String assetPath) {
     // Remove leading slash if present

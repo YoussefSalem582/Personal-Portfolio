@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:personal_portfolio/utils/data/portfolio_data.dart';
+import 'package:youssef_hassan_portfolio/utils/data/portfolio_data.dart';
 
 void main() {
   group('PortfolioData Tests', () {

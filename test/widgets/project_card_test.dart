@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:personal_portfolio/widgets/project_card.dart';
-import 'package:personal_portfolio/models/project.dart';
+
+import 'package:youssef_hassan_portfolio/models/project.dart';
+import 'package:youssef_hassan_portfolio/widgets/project_card.dart';
 
 void main() {
   group('ProjectCard Widget Tests', () {

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:personal_portfolio/models/project.dart';
+import 'package:youssef_hassan_portfolio/models/project.dart';
 
 void main() {
   group('Project Model Tests', () {

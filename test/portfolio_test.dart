@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:personal_portfolio/main.dart';
-import 'package:personal_portfolio/theme/app_theme.dart';
-import 'package:personal_portfolio/utils/data/portfolio_data.dart';
+import 'package:youssef_hassan_portfolio/main.dart';
+import 'package:youssef_hassan_portfolio/theme/app_theme.dart';
+import 'package:youssef_hassan_portfolio/utils/data/portfolio_data.dart';
 
 void main() {
   group('Portfolio App Tests', () {

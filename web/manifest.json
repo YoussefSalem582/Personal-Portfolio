@@ -1,8 +1,8 @@
 {
     "name": "Youssef Salem Hassan - Portfolio",
     "short_name": "YSH Portfolio",
-    "start_url": "/Personal-Portfolio/",
-    "scope": "/Personal-Portfolio/",
+    "start_url": "/Youssef-Hassan-Portfolio/",
+    "scope": "/Youssef-Hassan-Portfolio/",
     "display": "standalone",
     "background_color": "#0D1117",
     "theme_color": "#3498DB",
@@ -19,10 +19,10 @@
     "screenshots": [],
     "shortcuts": [
         {
-            "name": "Projects",
+            "name": "View Projects",
             "short_name": "Projects",
-            "description": "View all projects",
-            "url": "/Personal-Portfolio/#/projects",
+            "description": "Browse my portfolio projects",
+            "url": "/Youssef-Hassan-Portfolio/#/projects",
             "icons": [
                 {
                     "src": "icons/Icon-192.png",
@@ -32,10 +32,10 @@
             ]
         },
         {
-            "name": "Contact",
+            "name": "Contact Me",
             "short_name": "Contact",
             "description": "Get in touch",
-            "url": "/Personal-Portfolio/#/contact",
+            "url": "/Youssef-Hassan-Portfolio/#/contact",
             "icons": [
                 {
                     "src": "icons/Icon-192.png",

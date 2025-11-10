@@ -44,7 +44,7 @@ jobs:
         run: |
           flutter build web \
             --release \
-            --base-href "/Personal-Portfolio/" \
+            --base-href "/Youssef-Hassan-Portfolio/" \
             --no-source-maps
       
       - name: Copy service worker and headers

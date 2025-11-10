@@ -31,7 +31,7 @@ Write-Host ""
 flutter build web `
     --release `
     --web-renderer html `
-    --base-href "/Personal-Portfolio/" `
+    --base-href "/Youssef-Hassan-Portfolio/" `
     --no-source-maps `
     --dart-define=FLUTTER_WEB_USE_SKIA=false `
     --dart-define=FLUTTER_WEB_CANVASKIT_URL=https://unpkg.com/canvaskit-wasm@latest/bin/
@@ -82,5 +82,5 @@ Write-Host "   2. git commit -m `"Deploy optimized build`"" -ForegroundColor Whi
 Write-Host "   3. git push origin master" -ForegroundColor White
 Write-Host ""
 Write-Host "🎉 Done! Your site will be live at:" -ForegroundColor Green
-Write-Host "   https://youssefsalem582.github.io/Personal-Portfolio/" -ForegroundColor Cyan
+Write-Host "   https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/" -ForegroundColor Cyan
 Write-Host ""

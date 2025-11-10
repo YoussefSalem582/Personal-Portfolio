@@ -1,6 +1,6 @@
 # Youssef Salem Hassan - Flutter Developer Portfolio
 
-![Visitor Count](https://hits.sh/youssefsalem582.github.io/Personal-Portfolio.svg?style=flat-square&label=Visitors&color=3498db&labelColor=2c3e50)
+![Visitor Count](https://hits.sh/youssefsalem582.github.io/Youssef-Hassan-Portfolio.svg?style=flat-square&label=Visitors&color=3498db&labelColor=2c3e50)
 ![GitHub Pages](https://img.shields.io/badge/Deployed-GitHub%20Pages-success?style=flat-square)
 ![Flutter](https://img.shields.io/badge/Built%20with-Flutter-02569B?style=flat-square&logo=flutter)
 
@@ -8,7 +8,7 @@ A modern, responsive portfolio website showcasing Flutter development skills, ma
 
 ## 🚀 Live Demo
 
-Visit the live portfolio: [https://youssefsalem582.github.io/Personal-Portfolio/](https://youssefsalem582.github.io/Personal-Portfolio/)
+Visit the live portfolio: [https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/](https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/)
 
 ## ⚡ Performance
 
@@ -78,8 +78,8 @@ dev_dependencies:
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YoussefSalem582/Personal-Portfolio.git
-   cd Personal-Portfolio
+   git clone https://github.com/YoussefSalem582/Youssef-Hassan-Portfolio.git
+   cd Youssef-Hassan-Portfolio
    ```
 
 2. **Install dependencies**
@@ -98,7 +98,7 @@ dev_dependencies:
    .\build_optimized.ps1
    
    # Or manual build
-   flutter build web --release --web-renderer html --base-href "/Personal-Portfolio/" --no-source-maps
+   flutter build web --release --web-renderer html --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps
    ```
 
 ### Development Commands
@@ -117,7 +117,7 @@ flutter test --coverage
 .\build_optimized.ps1
 
 # Build manually with optimizations
-flutter build web --release --web-renderer html --base-href "/Personal-Portfolio/" --no-source-maps
+flutter build web --release --web-renderer html --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps
 
 # Analyze code
 flutter analyze
@@ -131,70 +131,37 @@ flutter build web --release --web-renderer html
 ```
 lib/
 ├── main.dart                 # App entry point
-├── bindings/                # GetX bindings
-├── config/                  # App configuration
-├── controllers/             # GetX controllers
-├── models/                  # Data models
-│   ├── project.dart        # Project model
-│   ├── certificate.dart    # Certificate model
-│   ├── skill.dart         # Skill model
-│   └── contact.dart        # Contact model
-├── routes/                  # App routing
-│   ├── app_pages.dart      # Route definitions
-│   └── app_routes.dart     # Route names
+├── models/                   # Data models
+│   ├── project.dart         # Project model
+│   ├── certificate.dart     # Certificate model
+│   ├── skill.dart          # Skill model
+│   └── contact.dart         # Contact model
 ├── screens/                 # Main screens
 │   ├── portfolio_screen.dart # Main portfolio screen
-│   ├── project_case_study.dart # Project detail screen
 │   └── sections/            # Page sections
 │       ├── hero_section.dart
 │       ├── about_section.dart
-│       ├── expertise_section.dart
 │       ├── projects_section.dart
 │       ├── skills_section.dart
 │       ├── certificates_section.dart
 │       └── contact_section.dart
 ├── widgets/                 # Reusable widgets
-│   ├── navigation/         # Navigation components
-│   │   ├── app_navigation.dart
-│   │   ├── desktop_app_bar.dart
-│   │   ├── mobile_app_bar.dart
-│   │   └── mobile_drawer.dart
-│   ├── project_case_study/ # Case study components
-│   │   ├── project_overview_widget.dart
-│   │   ├── technical_stack_widget.dart
-│   │   ├── documents_section_widget.dart
-│   │   ├── challenges_solutions_widget.dart
-│   │   ├── key_learnings_widget.dart
-│   │   ├── action_buttons_widget.dart
-│   │   └── gallery_section_widget.dart
 │   ├── project_card.dart   # Project display cards
-│   ├── lazy_image.dart     # Lazy loading images
-│   ├── footer.dart         # Footer component
-│   └── ...                 # Other widgets
+│   ├── app_navigation.dart  # Navigation component
+│   └── footer.dart         # Footer component
 ├── utils/                   # Utilities and data
 │   ├── portfolio_data.dart  # Portfolio content data
 │   ├── responsive_helper.dart # Responsive utilities
-│   ├── url_helper.dart      # URL handling utilities
-│   └── assets/             # Asset constants
+│   └── url_helper.dart      # URL handling utilities
 └── theme/                   # App theming
     └── app_theme.dart       # Theme configuration
 
 assets/
-├── documents/              # Project documents
-├── fonts/                  # Custom fonts
-├── icons/                  # App icons
-└── images/                 # Project images
-    └── projects/          # Project screenshots
-
-tech_readme_files/          # 📚 Technical Documentation
-├── README.md              # Main documentation index ⭐
-├── 01_Getting_Started/    # Setup & introduction
-├── 02_Architecture/       # GetX, routing, assets
-├── 03_Features/          # Contact forms, images, loading
-├── 04_Optimization/      # Performance & mobile optimization
-├── 05_Deployment/        # Deployment guides
-├── 06_UI_Components/     # UI components & design
-└── 07_Archived/          # Historical documents
+├── images/                  # Project images
+│   └── projects/           # Project screenshots
+├── certificates/           # Certificate files and images
+├── resume.pdf             # Resume download
+└── profile.jpeg           # Profile image
 
 test/                       # Test files
 ├── models/                # Model tests
@@ -230,11 +197,6 @@ test/                       # Test files
 
 4. **Skills**: Update skills categories in `PortfolioData.skills`
 
-**📚 For detailed guides, see:**
-- Asset management: [ASSET_MANAGEMENT_GUIDE.md](tech_readme_files/02_Architecture/ASSET_MANAGEMENT_GUIDE.md)
-- UI components: [06_UI_Components/](tech_readme_files/06_UI_Components/)
-- Project cards: [PROJECT_CARD_OPTIMIZED_FINAL.md](tech_readme_files/06_UI_Components/PROJECT_CARD_OPTIMIZED_FINAL.md)
-
 ### Adding New Images
 
 1. Place images in `assets/images/projects/[project-name]/`
@@ -249,8 +211,6 @@ Edit `lib/theme/app_theme.dart` to customize:
 - Spacing
 - Border radius
 - Shadows
-
-**📚 UI Documentation:** See [UI_IMPROVEMENTS.md](tech_readme_files/06_UI_Components/UI_IMPROVEMENTS.md) for design system details.
 
 ## 🚀 Deployment
 
@@ -270,10 +230,7 @@ Edit `lib/theme/app_theme.dart` to customize:
 
 3. **Done!** GitHub Pages auto-deploys from `docs` folder
 
-**📚 Documentation:** See [tech_readme_files/](tech_readme_files/) for comprehensive guides:
-- Quick deploy: [05_Deployment/DEPLOY_FAST.md](tech_readme_files/05_Deployment/DEPLOY_FAST.md)
-- Complete checklist: [05_Deployment/UPGRADE_CHECKLIST.md](tech_readme_files/05_Deployment/UPGRADE_CHECKLIST.md)
-- Optimization: [04_Optimization/](tech_readme_files/04_Optimization/)
+**See [DEPLOY_FAST.md](DEPLOY_FAST.md) for quick guide or [OPTIMIZATION_GUIDE.md](OPTIMIZATION_GUIDE.md) for details.**
 
 ### GitHub Pages (Automated)
 
@@ -326,45 +283,8 @@ flutter test test/widgets/project_card_test.dart
 
 - **Lighthouse Score**: 90+ (Performance, Accessibility, Best Practices, SEO)
 - **Bundle Size**: Optimized with tree-shaking
-- **Image Optimization**: WebP format with lazy loading
-- **Service Worker**: PWA with offline caching
-- **Mobile Responsive**: Optimized breakpoints for all screen sizes
-
-**📚 Performance Guides:**
-- Latest optimization: [PERFORMANCE_OPTIMIZATION_V2.md](tech_readme_files/04_Optimization/PERFORMANCE_OPTIMIZATION_V2.md)
-- Mobile optimization: [MOBILE_OPTIMIZATION.md](tech_readme_files/04_Optimization/MOBILE_OPTIMIZATION.md)
-- Quick reference: [PERFORMANCE_QUICK_REFERENCE.md](tech_readme_files/04_Optimization/PERFORMANCE_QUICK_REFERENCE.md)
-
-## 📚 Documentation
-
-### Quick Links
-
-| Category | Description | Link |
-|----------|-------------|------|
-| 🚀 **Getting Started** | Setup & introduction | [01_Getting_Started/](tech_readme_files/01_Getting_Started/) |
-| 🏗️ **Architecture** | GetX, routing, assets | [02_Architecture/](tech_readme_files/02_Architecture/) |
-| ✨ **Features** | Contact forms, images, loading | [03_Features/](tech_readme_files/03_Features/) |
-| ⚡ **Optimization** | Performance & mobile | [04_Optimization/](tech_readme_files/04_Optimization/) |
-| 🚀 **Deployment** | Deploy guides & checklists | [05_Deployment/](tech_readme_files/05_Deployment/) |
-| 🎨 **UI Components** | Component documentation | [06_UI_Components/](tech_readme_files/06_UI_Components/) |
-
-### Essential Documents
-
-**New to the project?**
-1. [README_START_HERE.md](tech_readme_files/01_Getting_Started/README_START_HERE.md) - Project overview
-2. [QUICK_REFERENCE.md](tech_readme_files/01_Getting_Started/QUICK_REFERENCE.md) - Quick commands
-3. [step-by-step_plan_&_instructions.md](tech_readme_files/01_Getting_Started/step-by-step_plan_&_nstructions.md) - Setup guide
-
-**Working on features?**
-- State Management: [GETX_COMPLETE.md](tech_readme_files/02_Architecture/GETX_COMPLETE.md)
-- Routing: [ROUTES_DOCUMENTATION.md](tech_readme_files/02_Architecture/ROUTES_DOCUMENTATION.md)
-- Contact Form: [FORMSPREE_SETUP_GUIDE.md](tech_readme_files/03_Features/FORMSPREE_SETUP_GUIDE.md)
-
-**Deploying?**
-- Quick: [DEPLOY_FAST.md](tech_readme_files/05_Deployment/DEPLOY_FAST.md)
-- Complete: [UPGRADE_CHECKLIST.md](tech_readme_files/05_Deployment/UPGRADE_CHECKLIST.md)
-
-**📖 Full Documentation Index:** [tech_readme_files/README.md](tech_readme_files/README.md)
+- **Image Optimization**: WebP format where supported
+- **Lazy Loading**: Non-critical images loaded on demand
 
 ## 🔧 Development Tools
 
@@ -387,6 +307,14 @@ flutter test test/widgets/project_card_test.dart
 - Edge
 - Mobile browsers (iOS Safari, Chrome Mobile)
 
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -397,7 +325,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Email: [youssef.salem.hassan582@gmail.com](mailto:youssef.salem.hassan582@gmail.com)
 - LinkedIn: [linkedin.com/in/youssef-hassan-8529372b7/](https://www.linkedin.com/in/youssef-hassan-8529372b7/)
 - GitHub: [github.com/YoussefSalem582](https://github.com/YoussefSalem582)
-- Portfolio: [youssefsalem582.github.io/Personal-Portfolio/](https://youssefsalem582.github.io/Personal-Portfolio/)
+- Portfolio: [youssefsalem582.github.io/Youssef-Hassan-Portfolio/](https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/)
 
 ## 🙏 Acknowledgments
 
