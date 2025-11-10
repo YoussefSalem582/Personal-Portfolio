@@ -4,7 +4,6 @@ import '../utils/assets/app_constants.dart';
 import '../utils/responsive_helper.dart';
 import '../utils/data/portfolio_data.dart';
 import '../utils/url_helper.dart';
-import 'visitor_counter.dart';
 
 import '../theme/app_theme.dart';
 
@@ -208,9 +207,6 @@ class Footer extends StatelessWidget {
         ),
 
         const SizedBox(height: AppTheme.spacingM),
-
-        // Visitor counter
-        VisitorCounter(isDark: isDark),
       ],
     );
   }
