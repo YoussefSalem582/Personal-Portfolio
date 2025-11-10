@@ -67,8 +67,8 @@ class CertificateCardInfo extends StatelessWidget {
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [
-                accentColor.withOpacity(0.15),
-                accentColor.withOpacity(0.05),
+                accentColor.withValues(alpha: 0.15),
+                accentColor.withValues(alpha: 0.05),
               ],
             ),
             borderRadius: BorderRadius.circular(isMobile ? 6 : 8),
@@ -129,7 +129,7 @@ class CertificateCardInfo extends StatelessWidget {
         borderRadius: BorderRadius.circular(isMobile ? 8 : 10),
         border: Border.all(
           color: isDark
-              ? AppColors.textSecondaryDark.withOpacity(0.2)
+              ? AppColors.textSecondaryDark.withValues(alpha: 0.2)
               : AppColors.gray300,
         ),
       ),
@@ -168,12 +168,12 @@ class CertificateCardInfo extends StatelessWidget {
       padding: EdgeInsets.all(isMobile ? 6 : 8),
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [accentColor, accentColor.withOpacity(0.8)],
+          colors: [accentColor, accentColor.withValues(alpha: 0.8)],
         ),
         borderRadius: BorderRadius.circular(isMobile ? 8 : 10),
         boxShadow: [
           BoxShadow(
-            color: accentColor.withOpacity(0.3),
+            color: accentColor.withValues(alpha: 0.3),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),

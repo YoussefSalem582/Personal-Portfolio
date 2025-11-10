@@ -22,8 +22,8 @@ class ProfileImageWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: isDark
-                    ? AppColors.accentDark.withOpacity(0.3)
-                    : AppColors.accentLight.withOpacity(0.2),
+                    ? AppColors.accentDark.withValues(alpha: 0.3)
+                    : AppColors.accentLight.withValues(alpha: 0.2),
                 blurRadius: 20,
                 spreadRadius: 2,
               ),
@@ -43,8 +43,8 @@ class ProfileImageWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(17),
                     color: isDark
-                        ? AppColors.accentDark.withOpacity(0.1)
-                        : AppColors.accentLight.withOpacity(0.1),
+                        ? AppColors.accentDark.withValues(alpha: 0.1)
+                        : AppColors.accentLight.withValues(alpha: 0.1),
                   ),
                   child: Icon(
                     AppIcons.user,

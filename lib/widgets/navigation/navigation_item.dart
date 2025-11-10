@@ -36,15 +36,15 @@ class NavigationItem extends StatelessWidget {
               decoration: BoxDecoration(
                 color: isSelected
                     ? (isDark
-                        ? AppColors.white.withOpacity(0.08)
-                        : AppColors.black.withOpacity(0.06))
+                        ? AppColors.white.withValues(alpha: 0.08)
+                        : AppColors.black.withValues(alpha: 0.06))
                     : AppColors.transparent,
                 borderRadius: BorderRadius.circular(12),
                 border: isSelected
                     ? Border.all(
                         color: isDark
-                            ? AppColors.white.withOpacity(0.3)
-                            : AppColors.black.withOpacity(0.2),
+                            ? AppColors.white.withValues(alpha: 0.3)
+                            : AppColors.black.withValues(alpha: 0.2),
                         width: 2,
                       )
                     : null,
@@ -68,8 +68,8 @@ class NavigationItem extends StatelessWidget {
                       color: isSelected
                           ? (isDark ? AppColors.white : AppColors.black)
                           : (isDark
-                              ? AppColors.white.withOpacity(0.6)
-                              : AppColors.black.withOpacity(0.54)),
+                              ? AppColors.white.withValues(alpha: 0.6)
+                              : AppColors.black.withValues(alpha: 0.54)),
                       fontWeight:
                           isSelected ? AppFonts.semiBold : AppFonts.regular,
                     ),
@@ -87,7 +87,7 @@ class NavigationItem extends StatelessWidget {
           onTap: onTap,
           borderRadius: BorderRadius.circular(10),
           hoverColor: (isDark ? AppColors.accentDark : AppColors.accentLight)
-              .withOpacity(0.1),
+              .withValues(alpha: 0.1),
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
@@ -97,12 +97,12 @@ class NavigationItem extends StatelessWidget {
                   ? LinearGradient(
                       colors: isDark
                           ? [
-                              AppColors.accentDark.withOpacity(0.2),
-                              AppColors.accentDark.withOpacity(0.1),
+                              AppColors.accentDark.withValues(alpha: 0.2),
+                              AppColors.accentDark.withValues(alpha: 0.1),
                             ]
                           : [
-                              AppColors.accentLight.withOpacity(0.15),
-                              AppColors.accentLight.withOpacity(0.08),
+                              AppColors.accentLight.withValues(alpha: 0.15),
+                              AppColors.accentLight.withValues(alpha: 0.08),
                             ],
                     )
                   : null,
@@ -111,7 +111,7 @@ class NavigationItem extends StatelessWidget {
                       color: (isDark
                               ? AppColors.accentDark
                               : AppColors.accentLight)
-                          .withOpacity(0.4),
+                          .withValues(alpha: 0.4),
                       width: 1.5,
                     )
                   : null,
@@ -121,7 +121,7 @@ class NavigationItem extends StatelessWidget {
                         color: (isDark
                                 ? AppColors.accentDark
                                 : AppColors.accentLight)
-                            .withOpacity(0.2),
+                            .withValues(alpha: 0.2),
                         blurRadius: 8,
                         offset: const Offset(0, 2),
                       ),

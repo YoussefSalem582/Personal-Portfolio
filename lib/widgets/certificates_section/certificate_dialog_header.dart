@@ -28,7 +28,7 @@ class CertificateDialogHeader extends StatelessWidget {
                 end: Alignment.bottomRight,
                 colors: [
                   AppColors.accentDark,
-                  AppColors.accentDark.withOpacity(0.8),
+                  AppColors.accentDark.withValues(alpha: 0.8),
                 ],
               )
             : AppColors.primaryGradientLight,
@@ -37,7 +37,7 @@ class CertificateDialogHeader extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: accentColor.withOpacity(0.3),
+            color: accentColor.withValues(alpha: 0.3),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -65,10 +65,10 @@ class CertificateDialogHeader extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: AppColors.white.withOpacity(0.2),
+        color: AppColors.white.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: AppColors.white.withOpacity(0.3),
+          color: AppColors.white.withValues(alpha: 0.3),
           width: 2,
         ),
       ),
@@ -87,7 +87,7 @@ class CertificateDialogHeader extends StatelessWidget {
         Text(
           'Certificate Details',
           style: AppFonts.labelMedium().copyWith(
-            color: AppColors.white.withOpacity(0.9),
+            color: AppColors.white.withValues(alpha: 0.9),
             letterSpacing: 1,
             fontWeight: AppFonts.semiBold,
           ),
@@ -112,7 +112,7 @@ class CertificateDialogHeader extends StatelessWidget {
       onPressed: () => Navigator.of(context).pop(),
       icon: const Icon(AppIcons.close, color: AppColors.white, size: 24),
       style: IconButton.styleFrom(
-        backgroundColor: AppColors.white.withOpacity(0.2),
+        backgroundColor: AppColors.white.withValues(alpha: 0.2),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),

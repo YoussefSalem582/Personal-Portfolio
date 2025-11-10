@@ -75,7 +75,7 @@ class ProjectsFilterTabs extends StatelessWidget {
             : (isDark
                     ? AppColors.textSecondaryDark
                     : AppColors.textSecondaryLight)
-                .withOpacity(0.3),
+                .withValues(alpha: 0.3),
       ),
     );
   }

@@ -72,8 +72,8 @@ class GetXHelper {
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Shimmer.fromColors(
-                baseColor: AppColors.surfaceDark.withOpacity(0.3),
-                highlightColor: AppColors.accentDark.withOpacity(0.1),
+                baseColor: AppColors.surfaceDark.withValues(alpha: 0.3),
+                highlightColor: AppColors.accentDark.withValues(alpha: 0.1),
                 period: const Duration(milliseconds: 1500),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

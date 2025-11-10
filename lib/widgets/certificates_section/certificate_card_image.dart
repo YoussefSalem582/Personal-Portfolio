@@ -48,8 +48,8 @@ class CertificateCardImage extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            accentColor.withOpacity(0.15),
-            accentColor.withOpacity(0.05),
+            accentColor.withValues(alpha: 0.15),
+            accentColor.withValues(alpha: 0.05),
           ],
         ),
       ),
@@ -81,7 +81,7 @@ class CertificateCardImage extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: [
             AppColors.transparent,
-            AppColors.black.withOpacity(0.3),
+            AppColors.black.withValues(alpha: 0.3),
           ],
         ),
       ),
@@ -96,8 +96,8 @@ class CertificateCardImage extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            accentColor.withOpacity(0.15),
-            accentColor.withOpacity(0.05),
+            accentColor.withValues(alpha: 0.15),
+            accentColor.withValues(alpha: 0.05),
           ],
         ),
       ),
@@ -109,8 +109,8 @@ class CertificateCardImage extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  accentColor.withOpacity(0.2),
-                  accentColor.withOpacity(0.1),
+                  accentColor.withValues(alpha: 0.2),
+                  accentColor.withValues(alpha: 0.1),
                 ],
               ),
               shape: BoxShape.circle,

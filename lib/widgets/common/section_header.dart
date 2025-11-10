@@ -115,7 +115,7 @@ class SectionHeader extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                .withOpacity(0.3),
+                .withValues(alpha: 0.3),
             blurRadius: 12,
             offset: const Offset(0, 4),
           ),

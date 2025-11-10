@@ -28,14 +28,14 @@ class CertificateDialogActions extends StatelessWidget {
       padding: EdgeInsets.all(isMobile ? AppTheme.spacingM : AppTheme.spacingL),
       decoration: BoxDecoration(
         color:
-            isDark ? AppColors.surfaceDark.withOpacity(0.3) : AppColors.gray50,
+            isDark ? AppColors.surfaceDark.withValues(alpha: 0.3) : AppColors.gray50,
         borderRadius: const BorderRadius.vertical(
           bottom: Radius.circular(AppTheme.radiusXL + 4),
         ),
         border: Border(
           top: BorderSide(
             color: isDark
-                ? AppColors.textSecondaryDark.withOpacity(0.1)
+                ? AppColors.textSecondaryDark.withValues(alpha: 0.1)
                 : AppColors.gray200,
             width: 1,
           ),
@@ -90,7 +90,7 @@ class CertificateDialogActions extends StatelessWidget {
             borderRadius: BorderRadius.circular(AppTheme.radiusM),
           ),
           elevation: 0,
-          shadowColor: AppColors.errorLight.withOpacity(0.3),
+          shadowColor: AppColors.errorLight.withValues(alpha: 0.3),
         ).copyWith(
           elevation: WidgetStateProperty.resolveWith<double>(
             (states) => states.contains(WidgetState.hovered) ? 8 : 0,
@@ -124,7 +124,7 @@ class CertificateDialogActions extends StatelessWidget {
         ).copyWith(
           backgroundColor: WidgetStateProperty.resolveWith<Color>(
             (states) => states.contains(WidgetState.hovered)
-                ? accentColor.withOpacity(0.1)
+                ? accentColor.withValues(alpha: 0.1)
                 : AppColors.transparent,
           ),
         ),

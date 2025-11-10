@@ -30,7 +30,7 @@ class HeroTextWidget extends StatelessWidget {
                   colors: [
                     isDark ? AppColors.accentDark : AppColors.accentLight,
                     (isDark ? AppColors.accentDark : AppColors.accentLight)
-                        .withOpacity(0.3),
+                        .withValues(alpha: 0.3),
                   ],
                 ),
                 borderRadius: BorderRadius.circular(2),
@@ -83,11 +83,11 @@ class HeroTextWidget extends StatelessWidget {
           ),
           // decoration: BoxDecoration(
           //   color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-          //       .withOpacity(0.1),
+          //       .withValues(alpha: 0.1),
           //   borderRadius: BorderRadius.circular(12),
           //   border: Border.all(
           //     color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-          //         .withOpacity(0.3),
+          //         .withValues(alpha: 0.3),
           //     width: 1,
           //   ),
           // ),

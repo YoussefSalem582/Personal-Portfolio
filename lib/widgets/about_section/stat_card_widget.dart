@@ -53,11 +53,11 @@ class StatCardWidget extends StatelessWidget {
             ]
           : [
               AppColors.surfaceLight,
-              AppColors.surfaceLight.withOpacity(0.95),
+              AppColors.surfaceLight.withValues(alpha: 0.95),
             ],
       hoverBorderColor: isDark
-          ? AppColors.accentDark.withOpacity(0.5)
-          : AppColors.accentLight.withOpacity(0.3),
+          ? AppColors.accentDark.withValues(alpha: 0.5)
+          : AppColors.accentLight.withValues(alpha: 0.3),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,12 +72,12 @@ class StatCardWidget extends StatelessWidget {
               shape: BoxShape.circle,
               gradientColors: isDark
                   ? [
-                      AppColors.accentDark.withOpacity(0.2),
-                      AppColors.accentDark.withOpacity(0.1),
+                      AppColors.accentDark.withValues(alpha: 0.2),
+                      AppColors.accentDark.withValues(alpha: 0.1),
                     ]
                   : [
-                      AppColors.accentLight.withOpacity(0.2),
-                      AppColors.primaryLight.withOpacity(0.1),
+                      AppColors.accentLight.withValues(alpha: 0.2),
+                      AppColors.primaryLight.withValues(alpha: 0.1),
                     ],
               iconColor: isDark ? AppColors.accentDark : AppColors.accentLight,
             ),
@@ -100,7 +100,7 @@ class StatCardWidget extends StatelessWidget {
             gradientColors: isDark
                 ? [
                     AppColors.accentDark,
-                    AppColors.accentDark.withOpacity(0.8),
+                    AppColors.accentDark.withValues(alpha: 0.8),
                   ]
                 : [
                     AppColors.accentLight,

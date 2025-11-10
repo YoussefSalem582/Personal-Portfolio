@@ -46,8 +46,8 @@ class ContactItemWidget extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(
             isMobile ? AppTheme.radiusS : AppTheme.radiusM),
-        hoverColor: accentColor.withOpacity(0.05),
-        splashColor: accentColor.withOpacity(0.1),
+        hoverColor: accentColor.withValues(alpha: 0.05),
+        splashColor: accentColor.withValues(alpha: 0.1),
         child: Container(
           padding:
               EdgeInsets.all(isMobile ? AppTheme.spacingS : AppTheme.spacingM),
@@ -55,12 +55,12 @@ class ContactItemWidget extends StatelessWidget {
             gradient: LinearGradient(
               colors: isDark
                   ? [
-                      AppColors.cardDark.withOpacity(0.5),
-                      AppColors.surfaceDark.withOpacity(0.3),
+                      AppColors.cardDark.withValues(alpha: 0.5),
+                      AppColors.surfaceDark.withValues(alpha: 0.3),
                     ]
                   : [
                       AppColors.white,
-                      AppColors.surfaceLight.withOpacity(0.5),
+                      AppColors.surfaceLight.withValues(alpha: 0.5),
                     ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -69,15 +69,15 @@ class ContactItemWidget extends StatelessWidget {
                 isMobile ? AppTheme.radiusS : AppTheme.radiusM),
             border: Border.all(
               color: isDark
-                  ? AppColors.white.withOpacity(0.05)
-                  : AppColors.black.withOpacity(0.05),
+                  ? AppColors.white.withValues(alpha: 0.05)
+                  : AppColors.black.withValues(alpha: 0.05),
               width: 1,
             ),
             boxShadow: [
               BoxShadow(
                 color: isDark
-                    ? AppColors.black.withOpacity(0.2)
-                    : AppColors.black.withOpacity(0.03),
+                    ? AppColors.black.withValues(alpha: 0.2)
+                    : AppColors.black.withValues(alpha: 0.03),
                 blurRadius: 8,
                 offset: const Offset(0, 2),
               ),
@@ -93,7 +93,7 @@ class ContactItemWidget extends StatelessWidget {
                   gradient: LinearGradient(
                     colors: [
                       accentColor,
-                      accentColor.withOpacity(0.8),
+                      accentColor.withValues(alpha: 0.8),
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -102,7 +102,7 @@ class ContactItemWidget extends StatelessWidget {
                       BorderRadius.circular(isMobile ? 6 : AppTheme.radiusS),
                   boxShadow: [
                     BoxShadow(
-                      color: accentColor.withOpacity(0.3),
+                      color: accentColor.withValues(alpha: 0.3),
                       blurRadius: 8,
                       offset: const Offset(0, 2),
                     ),
@@ -156,7 +156,7 @@ class ContactItemWidget extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(isMobile ? 6 : 8),
                   decoration: BoxDecoration(
-                    color: accentColor.withOpacity(0.1),
+                    color: accentColor.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(isMobile ? 6 : 8),
                   ),
                   child: Icon(

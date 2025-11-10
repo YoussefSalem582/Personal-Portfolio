@@ -27,26 +27,26 @@ class ThemeToggleButtonContainer extends StatelessWidget {
         gradient: LinearGradient(
           colors: isDark
               ? [
-                  AppColors.white.withOpacity(0.08),
-                  AppColors.white.withOpacity(0.04),
+                  AppColors.white.withValues(alpha: 0.08),
+                  AppColors.white.withValues(alpha: 0.04),
                 ]
               : [
-                  AppColors.black.withOpacity(0.04),
-                  AppColors.black.withOpacity(0.02),
+                  AppColors.black.withValues(alpha: 0.04),
+                  AppColors.black.withValues(alpha: 0.02),
                 ],
         ),
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
           color: isDark
-              ? AppColors.white.withOpacity(0.12)
-              : AppColors.black.withOpacity(0.08),
+              ? AppColors.white.withValues(alpha: 0.12)
+              : AppColors.black.withValues(alpha: 0.08),
           width: 1,
         ),
         boxShadow: [
           BoxShadow(
             color: isDark
-                ? AppColors.black.withOpacity(0.2)
-                : AppColors.black.withOpacity(0.04),
+                ? AppColors.black.withValues(alpha: 0.2)
+                : AppColors.black.withValues(alpha: 0.04),
             blurRadius: 8,
             offset: const Offset(0, 2),
           ),

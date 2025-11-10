@@ -62,11 +62,11 @@ class _MobileAppBarState extends State<MobileAppBar>
               colors: isDark
                   ? [
                       AppColors.surfaceDark,
-                      AppColors.surfaceDark.withOpacity(0.98),
+                      AppColors.surfaceDark.withValues(alpha: 0.98),
                     ]
                   : [
                       AppColors.white,
-                      AppColors.surfaceLight.withOpacity(0.98),
+                      AppColors.surfaceLight.withValues(alpha: 0.98),
                     ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
@@ -74,16 +74,16 @@ class _MobileAppBarState extends State<MobileAppBar>
             border: Border(
               bottom: BorderSide(
                 color: isDark
-                    ? AppColors.accentDark.withOpacity(0.15)
-                    : AppColors.accentLight.withOpacity(0.08),
+                    ? AppColors.accentDark.withValues(alpha: 0.15)
+                    : AppColors.accentLight.withValues(alpha: 0.08),
                 width: 1.5,
               ),
             ),
             boxShadow: [
               BoxShadow(
                 color: isDark
-                    ? AppColors.black.withOpacity(0.4)
-                    : AppColors.black.withOpacity(0.06),
+                    ? AppColors.black.withValues(alpha: 0.4)
+                    : AppColors.black.withValues(alpha: 0.06),
                 blurRadius: 16,
                 offset: const Offset(0, 2),
                 spreadRadius: 0,
@@ -153,19 +153,19 @@ class _MenuButtonState extends State<_MenuButton> {
           gradient: LinearGradient(
             colors: widget.isDark
                 ? [
-                    AppColors.accentDark.withOpacity(_isPressed ? 0.3 : 0.2),
-                    AppColors.accentDark.withOpacity(_isPressed ? 0.2 : 0.1),
+                    AppColors.accentDark.withValues(alpha: _isPressed ? 0.3 : 0.2),
+                    AppColors.accentDark.withValues(alpha: _isPressed ? 0.2 : 0.1),
                   ]
                 : [
-                    AppColors.accentLight.withOpacity(_isPressed ? 0.2 : 0.15),
-                    AppColors.accentLight.withOpacity(_isPressed ? 0.1 : 0.05),
+                    AppColors.accentLight.withValues(alpha: _isPressed ? 0.2 : 0.15),
+                    AppColors.accentLight.withValues(alpha: _isPressed ? 0.1 : 0.05),
                   ],
           ),
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: widget.isDark
-                ? AppColors.accentDark.withOpacity(_isPressed ? 0.5 : 0.3)
-                : AppColors.accentLight.withOpacity(_isPressed ? 0.3 : 0.2),
+                ? AppColors.accentDark.withValues(alpha: _isPressed ? 0.5 : 0.3)
+                : AppColors.accentLight.withValues(alpha: _isPressed ? 0.3 : 0.2),
             width: _isPressed ? 1.5 : 1,
           ),
           boxShadow: _isPressed
@@ -175,7 +175,7 @@ class _MenuButtonState extends State<_MenuButton> {
                     color: (widget.isDark
                             ? AppColors.accentDark
                             : AppColors.accentLight)
-                        .withOpacity(0.15),
+                        .withValues(alpha: 0.15),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -243,7 +243,7 @@ class _AppBarTitle extends StatelessWidget {
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withOpacity(0.2),
+                            .withValues(alpha: 0.2),
                     blurRadius: 8,
                     offset: const Offset(0, 2),
                   ),
@@ -265,11 +265,11 @@ class _AppBarTitle extends StatelessWidget {
                           colors: isDark
                               ? [
                                   AppColors.accentDark,
-                                  AppColors.accentDark.withOpacity(0.7)
+                                  AppColors.accentDark.withValues(alpha: 0.7)
                                 ]
                               : [
                                   AppColors.accentLight,
-                                  AppColors.accentLight.withOpacity(0.8)
+                                  AppColors.accentLight.withValues(alpha: 0.8)
                                 ],
                         ),
                         borderRadius: BorderRadius.circular(8),

@@ -69,13 +69,13 @@ class CertificateDialogInfoSection extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            AppColors.successLight.withOpacity(0.15),
-            AppColors.successLight.withOpacity(0.05),
+            AppColors.successLight.withValues(alpha: 0.15),
+            AppColors.successLight.withValues(alpha: 0.05),
           ],
         ),
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
         border: Border.all(
-          color: AppColors.successLight.withOpacity(0.3),
+          color: AppColors.successLight.withValues(alpha: 0.3),
           width: 2,
         ),
       ),
@@ -84,7 +84,7 @@ class CertificateDialogInfoSection extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppColors.successLight.withOpacity(0.2),
+              color: AppColors.successLight.withValues(alpha: 0.2),
               shape: BoxShape.circle,
             ),
             child: const Icon(
@@ -109,7 +109,7 @@ class CertificateDialogInfoSection extends StatelessWidget {
                 Text(
                   'This certificate can be validated online',
                   style: AppFonts.bodySmall().copyWith(
-                    color: AppColors.successLight.withOpacity(0.8),
+                    color: AppColors.successLight.withValues(alpha: 0.8),
                   ),
                 ),
               ],

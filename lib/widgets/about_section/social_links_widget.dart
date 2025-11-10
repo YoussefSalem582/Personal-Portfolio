@@ -56,7 +56,7 @@ class SocialLinksWidget extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: (isDark ? AppColors.primaryLight : AppColors.accentLight)
-                    .withOpacity(0.4),
+                    .withValues(alpha: 0.4),
                 blurRadius: 12,
                 spreadRadius: 2,
               ),
@@ -91,10 +91,10 @@ class SocialLinksWidget extends StatelessWidget {
         width: 50,
         height: 50,
         decoration: BoxDecoration(
-          color: AppColors.accentLight.withOpacity(0.1),
+          color: AppColors.accentLight.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(AppTheme.radiusL),
           border: Border.all(
-            color: AppColors.accentLight.withOpacity(0.2),
+            color: AppColors.accentLight.withValues(alpha: 0.2),
           ),
         ),
         child: Center(

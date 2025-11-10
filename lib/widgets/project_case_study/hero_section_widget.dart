@@ -49,8 +49,8 @@ class HeroSectionWidget extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppColors.primaryLight.withOpacity(0.3),
-            AppColors.accentLight.withOpacity(0.3),
+            AppColors.primaryLight.withValues(alpha: 0.3),
+            AppColors.accentLight.withValues(alpha: 0.3),
           ],
         ),
       ),
@@ -77,8 +77,8 @@ class HeroSectionWidget extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    AppColors.black.withOpacity(0.2), // Subtle top overlay
-                    AppColors.black.withOpacity(0.8), // Darker bottom for text
+                    AppColors.black.withValues(alpha: 0.2), // Subtle top overlay
+                    AppColors.black.withValues(alpha: 0.8), // Darker bottom for text
                   ],
                   stops: const [0.5, 1.0], // Gradient transition point
                 ),
@@ -100,15 +100,15 @@ class HeroSectionWidget extends StatelessWidget {
                   // Glassmorphic pill-shaped badge
                   decoration: BoxDecoration(
                     color: AppColors.black
-                        .withOpacity(0.7), // Semi-transparent background
+                        .withValues(alpha: 0.7), // Semi-transparent background
                     borderRadius: BorderRadius.circular(24), // Pill shape
                     border: Border.all(
-                      color: AppColors.white.withOpacity(0.3),
+                      color: AppColors.white.withValues(alpha: 0.3),
                       width: 1.5,
                     ),
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.black.withOpacity(0.3),
+                        color: AppColors.black.withValues(alpha: 0.3),
                         blurRadius: 12,
                         offset: const Offset(0, 4),
                       ),
@@ -143,7 +143,7 @@ class HeroSectionWidget extends StatelessWidget {
                     colors: [
                       AppColors.transparent,
                       AppColors.black
-                          .withOpacity(0.9), // Dark background for readability
+                          .withValues(alpha: 0.9), // Dark background for readability
                     ],
                   ),
                 ),
@@ -183,7 +183,7 @@ class HeroSectionWidget extends StatelessWidget {
                         // Text shadow for depth
                         shadows: [
                           Shadow(
-                            color: AppColors.black.withOpacity(0.6),
+                            color: AppColors.black.withValues(alpha: 0.6),
                             blurRadius: 10,
                             offset: const Offset(0, 2),
                           ),

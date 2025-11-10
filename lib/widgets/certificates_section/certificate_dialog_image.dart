@@ -32,17 +32,17 @@ class CertificateDialogImage extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            accentColor.withOpacity(0.1),
-            accentColor.withOpacity(0.05),
+            accentColor.withValues(alpha: 0.1),
+            accentColor.withValues(alpha: 0.05),
           ],
         ),
         border: Border.all(
-          color: accentColor.withOpacity(0.2),
+          color: accentColor.withValues(alpha: 0.2),
           width: 2,
         ),
         boxShadow: [
           BoxShadow(
-            color: accentColor.withOpacity(0.1),
+            color: accentColor.withValues(alpha: 0.1),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -69,7 +69,7 @@ class CertificateDialogImage extends StatelessWidget {
           Icon(
             AppIcons.certificate,
             size: 80,
-            color: accentColor.withOpacity(0.5),
+            color: accentColor.withValues(alpha: 0.5),
           ),
           const SizedBox(height: AppTheme.spacingM),
           Text(

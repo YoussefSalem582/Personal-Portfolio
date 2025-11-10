@@ -52,14 +52,14 @@ class _InteractiveListItemState extends State<InteractiveListItem> {
           decoration: BoxDecoration(
             color: _isHovered && isClickable
                 ? (isDark
-                    ? AppColors.primaryLight.withOpacity(0.1)
-                    : AppColors.accentLight.withOpacity(0.05))
+                    ? AppColors.primaryLight.withValues(alpha: 0.1)
+                    : AppColors.accentLight.withValues(alpha: 0.05))
                 : AppColors.transparent,
             borderRadius: BorderRadius.circular(AppTheme.radiusM),
             border: Border.all(
               color: _isHovered && isClickable
                   ? (isDark ? AppColors.primaryLight : AppColors.accentLight)
-                      .withOpacity(0.3)
+                      .withValues(alpha: 0.3)
                   : AppColors.transparent,
             ),
           ),
@@ -73,12 +73,12 @@ class _InteractiveListItemState extends State<InteractiveListItem> {
                 iconColor: widget.iconColor ?? AppColors.accentLight,
                 gradientColors: isDark
                     ? [
-                        AppColors.primaryLight.withOpacity(0.2),
-                        AppColors.accentDark.withOpacity(0.1),
+                        AppColors.primaryLight.withValues(alpha: 0.2),
+                        AppColors.accentDark.withValues(alpha: 0.1),
                       ]
                     : [
-                        AppColors.primaryLight.withOpacity(0.15),
-                        AppColors.accentLight.withOpacity(0.1),
+                        AppColors.primaryLight.withValues(alpha: 0.15),
+                        AppColors.accentLight.withValues(alpha: 0.1),
                       ],
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(AppTheme.radiusS),
@@ -136,8 +136,8 @@ class _InteractiveListItemState extends State<InteractiveListItem> {
                     Icons.arrow_forward_rounded,
                     size: 18,
                     color: isDark
-                        ? AppColors.primaryLight.withOpacity(0.7)
-                        : AppColors.accentLight.withOpacity(0.7),
+                        ? AppColors.primaryLight.withValues(alpha: 0.7)
+                        : AppColors.accentLight.withValues(alpha: 0.7),
                   ),
                 ),
             ],

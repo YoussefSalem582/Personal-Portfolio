@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/url_helper.dart';
 import '../../utils/data/portfolio_data.dart';
-import '../../utils/responsive_helper.dart';
 import '../theme_toggle.dart';
 import 'navigation_item.dart';
 
@@ -78,7 +77,8 @@ class MobileDrawer extends StatelessWidget {
                                 width: 64,
                                 height: 64,
                                 decoration: BoxDecoration(
-                                  color: AppColors.white.withOpacity(0.24),
+                                  color:
+                                      AppColors.white.withValues(alpha: 0.24),
                                   borderRadius: BorderRadius.circular(12),
                                 ),
                                 child: SvgPicture.asset(

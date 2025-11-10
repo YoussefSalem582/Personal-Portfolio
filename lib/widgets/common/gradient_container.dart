@@ -96,7 +96,7 @@ class GradientDivider extends StatelessWidget {
         boxShadow: boxShadow ??
             [
               BoxShadow(
-                color: accentColor.withOpacity(0.3),
+                color: accentColor.withValues(alpha: 0.3),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),

@@ -162,7 +162,7 @@ class DocumentsSectionWidget extends StatelessWidget {
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withOpacity(0.3),
+                            .withValues(alpha: 0.3),
                     blurRadius: isMobile ? 8 : 12,
                     offset: Offset(0, isMobile ? 2 : 4),
                   ),
@@ -236,12 +236,12 @@ class DocumentsSectionWidget extends StatelessWidget {
               gradient: LinearGradient(
                 colors: isDark
                     ? [
-                        AppColors.surfaceDark.withOpacity(0.6),
-                        AppColors.surfaceDark.withOpacity(0.4),
+                        AppColors.surfaceDark.withValues(alpha: 0.6),
+                        AppColors.surfaceDark.withValues(alpha: 0.4),
                       ]
                     : [
                         AppColors.surfaceLight,
-                        AppColors.surfaceLight.withOpacity(0.8),
+                        AppColors.surfaceLight.withValues(alpha: 0.8),
                       ],
               ),
               borderRadius: BorderRadius.circular(
@@ -249,14 +249,14 @@ class DocumentsSectionWidget extends StatelessWidget {
               // Enhanced border matching gallery style
               border: Border.all(
                 color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                    .withOpacity(0.2),
+                    .withValues(alpha: 0.2),
                 width: 1.5,
               ),
               // Enhanced shadow for depth
               boxShadow: [
                 BoxShadow(
                   color: (isDark ? AppColors.black : AppColors.gray300)
-                      .withOpacity(0.2),
+                      .withValues(alpha: 0.2),
                   blurRadius: isMobile ? 8 : 12,
                   offset: Offset(0, isMobile ? 2 : 4),
                 ),
@@ -272,12 +272,12 @@ class DocumentsSectionWidget extends StatelessWidget {
                     gradient: LinearGradient(
                       colors: isDark
                           ? [
-                              AppColors.accentDark.withOpacity(0.3),
-                              AppColors.primaryDark.withOpacity(0.3),
+                              AppColors.accentDark.withValues(alpha: 0.3),
+                              AppColors.primaryDark.withValues(alpha: 0.3),
                             ]
                           : [
-                              AppColors.accentLight.withOpacity(0.2),
-                              AppColors.primaryLight.withOpacity(0.2),
+                              AppColors.accentLight.withValues(alpha: 0.2),
+                              AppColors.primaryLight.withValues(alpha: 0.2),
                             ],
                     ),
                     borderRadius: BorderRadius.circular(
@@ -286,7 +286,7 @@ class DocumentsSectionWidget extends StatelessWidget {
                       color: (isDark
                               ? AppColors.accentDark
                               : AppColors.accentLight)
-                          .withOpacity(0.4),
+                          .withValues(alpha: 0.4),
                       width: 1,
                     ),
                   ),
@@ -337,14 +337,14 @@ class DocumentsSectionWidget extends StatelessWidget {
                           color: (isDark
                                   ? AppColors.accentDark
                                   : AppColors.accentLight)
-                              .withOpacity(0.15),
+                              .withValues(alpha: 0.15),
                           borderRadius:
                               BorderRadius.circular(isMobile ? 10 : 12),
                           border: Border.all(
                             color: (isDark
                                     ? AppColors.accentDark
                                     : AppColors.accentLight)
-                                .withOpacity(0.3),
+                                .withValues(alpha: 0.3),
                             width: 1,
                           ),
                         ),
@@ -386,7 +386,7 @@ class DocumentsSectionWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withOpacity(0.15),
+                            .withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(isMobile ? 6 : 8),
                   ),
                   child: Icon(

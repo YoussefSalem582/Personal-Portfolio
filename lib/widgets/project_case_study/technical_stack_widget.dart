@@ -48,7 +48,7 @@ class TechnicalStackWidget extends StatelessWidget {
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withOpacity(0.3),
+                            .withValues(alpha: 0.3),
                     blurRadius: isMobile ? 8 : 12,
                     offset: Offset(0, isMobile ? 2 : 4),
                   ),
@@ -110,12 +110,12 @@ class TechnicalStackWidget extends StatelessWidget {
                 gradient: LinearGradient(
                   colors: isDark
                       ? [
-                          AppColors.accentDark.withOpacity(0.2),
-                          AppColors.primaryDark.withOpacity(0.2),
+                          AppColors.accentDark.withValues(alpha: 0.2),
+                          AppColors.primaryDark.withValues(alpha: 0.2),
                         ]
                       : [
-                          AppColors.accentLight.withOpacity(0.15),
-                          AppColors.primaryLight.withOpacity(0.15),
+                          AppColors.accentLight.withValues(alpha: 0.15),
+                          AppColors.primaryLight.withValues(alpha: 0.15),
                         ],
                 ),
                 borderRadius: BorderRadius.circular(
@@ -123,7 +123,7 @@ class TechnicalStackWidget extends StatelessWidget {
                 // Colored border for accent
                 border: Border.all(
                   color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-                      .withOpacity(0.4),
+                      .withValues(alpha: 0.4),
                   width: 1.5,
                 ),
                 // Subtle shadow for depth
@@ -131,7 +131,7 @@ class TechnicalStackWidget extends StatelessWidget {
                   BoxShadow(
                     color:
                         (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withOpacity(0.1),
+                            .withValues(alpha: 0.1),
                     blurRadius: isMobile ? 6 : 8,
                     offset: Offset(0, isMobile ? 1 : 2),
                   ),

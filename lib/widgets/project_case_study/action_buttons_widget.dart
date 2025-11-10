@@ -35,7 +35,7 @@ class ActionButtonsWidget extends StatelessWidget {
             ? LinearGradient(
                 colors: [
                   AppColors.cardDark,
-                  AppColors.cardDark.withOpacity(0.5),
+                  AppColors.cardDark.withValues(alpha: 0.5),
                 ],
               )
             : const LinearGradient(
@@ -48,13 +48,13 @@ class ActionButtonsWidget extends StatelessWidget {
             isMobile ? AppTheme.radiusM : AppTheme.radiusL),
         border: Border.all(
           color: (isDark ? AppColors.accentDark : AppColors.accentLight)
-              .withOpacity(0.2),
+              .withValues(alpha: 0.2),
           width: 1.5,
         ),
         boxShadow: [
           BoxShadow(
             color:
-                (isDark ? AppColors.black : AppColors.gray300).withOpacity(0.1),
+                (isDark ? AppColors.black : AppColors.gray300).withValues(alpha: 0.1),
             blurRadius: isMobile ? 12 : 20,
             offset: Offset(0, isMobile ? 4 : 8),
           ),
@@ -109,7 +109,7 @@ class ActionButtonsWidget extends StatelessWidget {
                   elevation: 0,
                   shadowColor:
                       (isDark ? AppColors.accentDark : AppColors.accentLight)
-                          .withOpacity(0.5),
+                          .withValues(alpha: 0.5),
                   textStyle: AppFonts.labelLarge().copyWith(
                     fontWeight: AppFonts.bold,
                     letterSpacing: 0.3,
@@ -136,8 +136,8 @@ class ActionButtonsWidget extends StatelessWidget {
                     vertical: isMobile ? (isSmallMobile ? 14 : 16) : 20,
                   ),
                   backgroundColor: isDark
-                      ? AppColors.accentDark.withOpacity(0.8)
-                      : AppColors.accentLight.withOpacity(0.8),
+                      ? AppColors.accentDark.withValues(alpha: 0.8)
+                      : AppColors.accentLight.withValues(alpha: 0.8),
                   foregroundColor: AppColors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(isMobile ? 10 : 14),
@@ -176,7 +176,7 @@ class ActionButtonsWidget extends StatelessWidget {
                   elevation: 0,
                   shadowColor:
                       (isDark ? AppColors.accentDark : AppColors.accentLight)
-                          .withOpacity(0.5),
+                          .withValues(alpha: 0.5),
                   textStyle: AppFonts.labelLarge().copyWith(
                     fontWeight: AppFonts.bold,
                     letterSpacing: 0.3,
