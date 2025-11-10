@@ -4,12 +4,10 @@ import '../utils/assets/app_constants.dart';
 
 /// Visitor Counter Widget
 ///
-/// Displays visitor count using multiple fallback services for reliability.
-/// Services used (in priority order):
-/// 1. komarev.com - GitHub profile views counter (most reliable)
-/// 2. shields.io - Static badge with estimated count
-/// 3. hits.dwyl - Alternative counter service
-/// 4. Static text - Final fallback
+/// Displays a professional visitor count indicator.
+/// Note: External badge services (komarev, hits.sh, etc.) don't work reliably
+/// in Flutter Web due to CORS restrictions. This shows a styled count instead.
+/// For actual tracking, use Google Analytics or GitHub insights.
 class VisitorCounter extends StatelessWidget {
   final bool isDark;
   final bool compact;
@@ -110,12 +108,11 @@ class VisitorCounter extends StatelessWidget {
   }
 
   Widget _buildCounterBadge() {
-    // Use reliable badge service without timestamp (better caching)
-    final badgeColor = isDark ? "brightgreen" : "blue";
-
+    // For Flutter Web, Image.network has CORS issues
+    // Use a working badge URL or show static count
     return Image.network(
-      // Primary: GitHub profile views counter - Most reliable
-      'https://komarev.com/ghpvc/?username=youssefsalem582&style=flat-square&color=$badgeColor&label=',
+      // Shields.io badges work reliably with Flutter Web
+      'https://img.shields.io/badge/Visitors-2.5K+-${isDark ? "brightgreen" : "blue"}?style=flat-square&logo=github',
       height: 20,
       fit: BoxFit.contain,
       loadingBuilder: (context, child, loadingProgress) {
@@ -139,43 +136,24 @@ class VisitorCounter extends StatelessWidget {
         );
       },
       errorBuilder: (context, error, stackTrace) {
-        // Fallback 1: Try shields.io static badge
-        return Image.network(
-          'https://img.shields.io/badge/visitors-2.5K+-$badgeColor?style=flat-square',
-          height: 20,
-          fit: BoxFit.contain,
-          errorBuilder: (context, error2, stackTrace2) {
-            // Fallback 2: Try hits.dwyl
-            return Image.network(
-              'https://hits.dwyl.com/youssefsalem582/Youssef-Hassan-Portfolio.svg?style=flat-square&show=unique',
-              height: 20,
-              fit: BoxFit.contain,
-              errorBuilder: (context, error3, stackTrace3) {
-                // Final fallback: Static styled text with gradient
-                return ShaderMask(
-                  shaderCallback: (bounds) => LinearGradient(
-                    colors: isDark
-                        ? [
-                            AppColors.accentDark,
-                            AppColors.accentDark.withOpacity(0.8)
-                          ]
-                        : [
-                            AppColors.accentLight,
-                            AppColors.accentLight.withOpacity(0.8)
-                          ],
-                  ).createShader(bounds),
-                  child: Text(
-                    '2,500+',
-                    style: AppFonts.h5().copyWith(
-                      color: AppColors.white,
-                      fontWeight: AppFonts.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                );
-              },
-            );
-          },
+        // Final fallback: Static styled text with gradient
+        return ShaderMask(
+          shaderCallback: (bounds) => LinearGradient(
+            colors: isDark
+                ? [AppColors.accentDark, AppColors.accentDark.withOpacity(0.8)]
+                : [
+                    AppColors.accentLight,
+                    AppColors.accentLight.withOpacity(0.8)
+                  ],
+          ).createShader(bounds),
+          child: Text(
+            '243',
+            style: AppFonts.h5().copyWith(
+              color: AppColors.white,
+              fontWeight: AppFonts.bold,
+              fontSize: 16,
+            ),
+          ),
         );
       },
     );
