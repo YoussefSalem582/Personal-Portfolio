@@ -54,7 +54,7 @@ dependencies:
   shimmer: ^3.0.0
   
   # HTTP requests for contact form
-  http: ^1.1.2
+  dio: ^5.4.0
   
   # State management
   get: ^4.6.6

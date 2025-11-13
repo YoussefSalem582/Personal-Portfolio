@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:dio/dio.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../models/contact_form.dart';
 import '../../config/api_keys.dart';
@@ -433,6 +432,17 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
             'Formspree endpoint not configured. Please contact the administrator.');
       }
 
+      // Create Dio instance with configuration
+      final dio = Dio(BaseOptions(
+        connectTimeout: const Duration(seconds: 15),
+        receiveTimeout: const Duration(seconds: 15),
+        sendTimeout: const Duration(seconds: 15),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      ));
+
       // Create form data
       final formData = {
         'name': form.name,
@@ -443,21 +453,10 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
         '_subject': '${form.subject} - Portfolio Contact Form',
       };
 
-      // Send POST request to Formspree
-      final response = await http
-          .post(
-        Uri.parse(formspreeEndpoint),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: json.encode(formData),
-      )
-          .timeout(
-        const Duration(seconds: 15),
-        onTimeout: () {
-          throw Exception('Request timeout. Please try again.');
-        },
+      // Send POST request to Formspree using Dio
+      final response = await dio.post(
+        formspreeEndpoint,
+        data: formData,
       );
 
       // Check response status
@@ -465,8 +464,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
         // Success!
       } else if (response.statusCode == 422) {
         // Validation error
-        final responseData = json.decode(response.body);
-        final errors = responseData['errors'] as List?;
+        final errors = response.data['errors'] as List?;
         final errorMessage = errors?.isNotEmpty == true
             ? errors!.first['message']
             : 'Invalid form data';
@@ -480,6 +478,41 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       } else {
         throw Exception(
             'Failed to send message (Error ${response.statusCode}). Please try again or contact me directly at ${ApiKeys.recipientEmail}');
+      }
+    } on DioException catch (e) {
+      // Handle Dio-specific errors
+      if (e.type == DioExceptionType.connectionTimeout ||
+          e.type == DioExceptionType.sendTimeout ||
+          e.type == DioExceptionType.receiveTimeout) {
+        throw Exception(
+            'Request timeout. Please check your internet connection and try again.');
+      } else if (e.type == DioExceptionType.connectionError) {
+        throw Exception(
+            'Network error. Please check your internet connection and try again.');
+      } else if (e.type == DioExceptionType.badResponse) {
+        final statusCode = e.response?.statusCode;
+        if (statusCode == 422) {
+          final errors = e.response?.data['errors'] as List?;
+          final errorMessage = errors?.isNotEmpty == true
+              ? errors!.first['message']
+              : 'Invalid form data';
+          throw Exception(errorMessage);
+        } else if (statusCode == 403) {
+          throw Exception(
+              'Form is disabled or spam detected. Please contact me directly at ${ApiKeys.recipientEmail}');
+        } else if (statusCode == 429) {
+          throw Exception(
+              'Too many requests. Please wait a moment and try again.');
+        } else {
+          throw Exception(
+              'Failed to send message (Error $statusCode). Please try again or contact me directly at ${ApiKeys.recipientEmail}');
+        }
+      } else if (e.type == DioExceptionType.badCertificate) {
+        throw Exception(
+            'Security certificate error. Please contact the administrator.');
+      } else {
+        throw Exception(
+            'Network error. Please check your internet connection and try again.');
       }
     } catch (e) {
       // Parse error message for better user feedback
