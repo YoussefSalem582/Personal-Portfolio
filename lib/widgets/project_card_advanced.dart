@@ -315,7 +315,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
 
             // Project Date
             Text(
-              DateFormat('MMMM yyyy').format(widget.project.createdAt),
+              _getProjectDateText(),
               style: AppFonts.bodySmall().copyWith(
                 color: (isDark
                         ? AppColors.textSecondaryDark
@@ -549,5 +549,21 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
         builder: (context) => ProjectDetailsDialog(project: widget.project),
       );
     }
+  }
+
+  /// Get project date text - shows "Under development" for current projects
+  String _getProjectDateText() {
+    final now = DateTime.now();
+    final projectDate = widget.project.createdAt;
+
+    // Check if project is from current month and year (under development)
+    if (projectDate.year == now.year &&
+        projectDate.month == now.month &&
+        projectDate.day == now.day) {
+      return '🚧 Under development';
+    }
+
+    // Otherwise show formatted date
+    return DateFormat('MMMM yyyy').format(projectDate);
   }
 }

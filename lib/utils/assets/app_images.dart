@@ -69,6 +69,9 @@ class ProjectImages {
 
   // GoPooling Carpool App
   static const GoPoolingImages goPooling = GoPoolingImages._();
+
+  // FamilyLink App
+  static const FamilyLinkImages familyLink = FamilyLinkImages._();
 }
 
 // ==================== Emosense App Images ====================
@@ -486,6 +489,61 @@ class GoPoolingImages {
   static const String notificationScreen = '$_base/notification_screen.png';
   static const String sideDrawerNavigation =
       '$_base/side_drawer_navigation.png';
+}
+
+// ==================== FamilyLink App Images ====================
+
+class FamilyLinkImages {
+  const FamilyLinkImages._();
+
+  static const String _base = 'assets/images/projects/family_link';
+
+  /// App logo
+  static const String appLogo = '$_base/app_logo.png';
+
+  /// Splash & Onboarding
+  static const String splashScreen = '$_base/splash_screen.png';
+  static const String onboarding1 = '$_base/onboarding1.png';
+  static const String onboarding2 = '$_base/onboarding2.png';
+  static const String onboarding3 = '$_base/onboarding3.png';
+  static const String onboarding4 = '$_base/onboarding4.png';
+  static const String onboarding5 = '$_base/onboarding5.png';
+
+  /// Authentication
+  static const String loginOrSignupScreen = '$_base/login_or_signup_screen.png';
+  static const String loginScreen = '$_base/login_screen.png';
+  static const String signupScreen = '$_base/signup_screen.png';
+
+  /// Home Dashboard
+  static const String homeScreen = '$_base/home_screen.png';
+  static const String homeScreen2 = '$_base/home_screen_2.png';
+  static const String homeScreen3 = '$_base/home_screen_3.png';
+
+  /// Meals Module
+  static const String mealsScreen = '$_base/meals_screen.png';
+  static const String mealsScreen2 = '$_base/meals_screen_2.png';
+  static const String mealsScreen3 = '$_base/meals_screen_3.png';
+
+  /// Mood Module
+  static const String moodsScreen = '$_base/moods_screen.png';
+  static const String moodsScreen2 = '$_base/moods_screen_2.png';
+  static const String moodsScreen3 = '$_base/moods_screen_3.png';
+
+  /// Map Module
+  static const String mapScreen = '$_base/map_screen.png';
+  static const String mapScreen2 = '$_base/map_screen_2.png';
+
+  /// Social/Wall Module
+  static const String socialScreen = '$_base/social_screen.png';
+  static const String socialScreen2 = '$_base/social_screen_2.png';
+  static const String socialScreen3 = '$_base/social_screen_3.png';
+  static const String socialScreen4 = '$_base/social_screen_4.png';
+  static const String socialScreen5 = '$_base/social_screen_5.png';
+
+  /// Profile & Settings
+  static const String profileScreen = '$_base/profile_screen.png';
+  static const String profileScreen2 = '$_base/profile_screen_2.png';
+  static const String profileScreen3 = '$_base/profile_screen_3.png';
 }
 
 // ==================== Pothole Detection Project Images ====================

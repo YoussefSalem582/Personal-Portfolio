@@ -109,6 +109,32 @@ class GallerySectionWidget extends StatelessWidget {
       };
     }
 
+    if (projectId == 'family-link') {
+      return {
+        'Onboarding & Authentication': galleryImages
+            .where((img) =>
+                img.contains('splash_screen') ||
+                img.contains('onboarding') ||
+                img.contains('login') ||
+                img.contains('signup'))
+            .toList(),
+        'Home Dashboard':
+            galleryImages.where((img) => img.contains('home_screen')).toList(),
+        'Meals Module':
+            galleryImages.where((img) => img.contains('meals_screen')).toList(),
+        'Mood Tracking':
+            galleryImages.where((img) => img.contains('moods_screen')).toList(),
+        'Location & Map':
+            galleryImages.where((img) => img.contains('map_screen')).toList(),
+        'Family Social Wall': galleryImages
+            .where((img) => img.contains('social_screen'))
+            .toList(),
+        'Profile & Settings': galleryImages
+            .where((img) => img.contains('profile_screen'))
+            .toList(),
+      };
+    }
+
     if (projectId == 'gopooling-carpool') {
       return {
         'Onboarding':
@@ -397,6 +423,18 @@ class GallerySectionWidget extends StatelessWidget {
         return AppIcons.user;
       case 'admin panel':
         return AppIcons.settings;
+      case 'home dashboard':
+        return AppIcons.home;
+      case 'meals module':
+        return Icons.restaurant_menu;
+      case 'mood tracking':
+        return Icons.mood;
+      case 'location & map':
+        return AppIcons.location;
+      case 'family social wall':
+        return Icons.chat_bubble;
+      case 'profile & settings':
+        return AppIcons.user;
 
       case 'onboarding':
         return AppIcons.starOutline;

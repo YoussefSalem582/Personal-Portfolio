@@ -155,14 +155,14 @@ class ActionButtonsWidget extends StatelessWidget {
           if (shortVideoUrl != null && (liveUrl != null || githubUrl != null))
             SizedBox(height: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
 
-          // View Case Study button
+          // View Live Demo button
           if (liveUrl != null)
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: () => UrlHelper.launchURL(liveUrl!),
-                icon: Icon(AppIcons.blog, size: isMobile ? 18 : 22),
-                label: const Text('View Full Case Study'),
+                icon: Icon(Icons.open_in_new, size: isMobile ? 18 : 22),
+                label: const Text('View Live Demo'),
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(
                     vertical: isMobile ? (isSmallMobile ? 14 : 16) : 20,
