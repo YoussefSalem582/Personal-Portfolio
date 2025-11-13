@@ -51,6 +51,8 @@ class ProjectCaseStudyData {
         return _emosenseChallenges;
       case 'gogesh-marketplace':
         return _gogeshChallenges;
+      case 'flutter-mate':
+        return _flutterMateChallenges;
       case 'family-link':
         return _familyLinkChallenges;
       case 'music-player':
@@ -73,6 +75,8 @@ class ProjectCaseStudyData {
         return _emosenseLessons;
       case 'gogesh-marketplace':
         return _gogeshLessons;
+      case 'flutter-mate':
+        return _flutterMateLessons;
       case 'family-link':
         return _familyLinkLessons;
       case 'music-player':
@@ -96,6 +100,8 @@ class ProjectCaseStudyData {
         return _emosenseOverview;
       case 'gogesh-marketplace':
         return _gogeshOverview;
+      case 'flutter-mate':
+        return _flutterMateOverview;
       case 'family-link':
         return _familyLinkOverview;
       default:
@@ -117,6 +123,8 @@ class ProjectCaseStudyData {
         return _emosenseFeatures;
       case 'gogesh-marketplace':
         return _gogeshFeatures;
+      case 'flutter-mate':
+        return _flutterMateFeatures;
       case 'family-link':
         return _familyLinkFeatures;
       default:
@@ -302,6 +310,107 @@ class ProjectCaseStudyData {
       'title': 'Business Analytics',
       'description':
           'Comprehensive reporting and analytics dashboard for merchant performance tracking'
+    },
+  ];
+
+  // ==================== FLUTTERMATE PROJECT DATA ====================
+
+  static const String _flutterMateOverview =
+      '📚 FlutterMate is your personal Flutter learning companion that transforms the journey from beginner to advanced developer through structured lessons, gamified progress tracking, and intelligent learning paths. '
+      'Built with Clean Architecture and GetX state management, this comprehensive educational platform provides 22 meticulously crafted lessons across 3 difficulty levels, ensuring a smooth learning progression from fundamental concepts to advanced Flutter development.\n\n'
+      '🎯 Perfect for aspiring Flutter developers and those seeking to level up their skills, FlutterMate features a smart prerequisite system that unlocks lessons as you progress 📈, '
+      '25+ interactive quizzes with instant feedback and explanations 💡, comprehensive progress tracking with XP rewards and achievement badges 🏆, '
+      'detailed lesson pages with curated resources and practice exercises 📖, beautiful Material 3 design with dark/light themes 🎨, '
+      'and weekly progress visualizations to track your learning journey 📊.\n\n'
+      '🚀 Currently in active development (November 2025), this platform demonstrates modern educational app architecture with '
+      'feature-first organization, reactive state management, persistent progress storage, smooth animations with flutter_animate and Lottie, '
+      'and responsive design for mobile, tablet, and web 💻. The app showcases full-stack Flutter development skills with clean code practices, '
+      'automated deployment via GitHub Actions, and progressive web app capabilities ready for learners worldwide 🌍.';
+
+  static final List<Map<String, String>> _flutterMateChallenges = [
+    {
+      'title': '🎓 Structured Learning Path Design',
+      'description':
+          'Designing a comprehensive curriculum with 22 lessons across 3 difficulty levels required careful content organization, time estimation accuracy, and prerequisite dependency mapping. Implemented smart unlock system ensuring learners build strong foundations before advancing to complex topics.',
+    },
+    {
+      'title': '📊 Gamification & Motivation System',
+      'description':
+          'Creating an engaging progress tracking system with XP rewards, achievement badges, day streaks, and performance analytics required balancing motivation with learning effectiveness. Built comprehensive state management to track multiple progress metrics and visualize learning journey.',
+    },
+    {
+      'title': '💡 Interactive Quiz Integration',
+      'description':
+          'Building 25+ quizzes with instant feedback, color-coded answers, explanations, and score tracking required careful question design, answer validation logic, and performance analytics. Implemented smart quiz system that adapts feedback based on learner performance.',
+    },
+    {
+      'title': '⚡ Performance & State Persistence',
+      'description':
+          'Ensuring smooth animations while persisting complex learning progress (lessons, quizzes, XP, streaks) across app restarts required efficient SharedPreferences usage, optimized GetX state management, and careful memory management for 60fps animations.',
+    },
+    {
+      'title': '🎨 Responsive Educational UI/UX',
+      'description':
+          'Designing an interface that works seamlessly across mobile, tablet, and web while maintaining educational clarity required adaptive layouts, proper information hierarchy, accessibility considerations, and intuitive navigation patterns for diverse learning contexts.',
+    },
+    {
+      'title': '🚀 Automated Deployment Pipeline',
+      'description':
+          'Setting up GitHub Actions for automated Flutter web builds with CanvasKit renderer, PWA optimization, tree-shaking, and GitHub Pages deployment required CI/CD configuration, build optimization strategies, and proper base-href routing for production deployment.',
+    },
+  ];
+
+  static const List<String> _flutterMateLessons = [
+    '🏗️ Clean Architecture mastery: feature-first organization with proper separation of concerns',
+    '🔄 Advanced GetX state management: reactive programming, dependency injection, and route management',
+    '📚 Educational platform development: curriculum design, prerequisite systems, and learning path optimization',
+    '🎮 Gamification techniques: XP systems, achievement badges, progress tracking, and motivation patterns',
+    '💾 Data persistence strategies: SharedPreferences for complex state, serialization, and migration handling',
+    '🎨 Material Design 3: modern theming, dark/light modes, smooth animations, and responsive layouts',
+    '⚡ Performance optimization: flutter_animate, Lottie integration, 60fps animations, and memory efficiency',
+    '📊 Analytics & visualization: progress charts, performance metrics, and insightful learning dashboards',
+    '🧪 Flutter testing: widget tests, unit tests, and quality assurance for educational content',
+    '🚀 Modern deployment: GitHub Actions, Flutter web optimization, PWA features, and automated CI/CD',
+    '📱 Multi-platform development: responsive design for mobile, tablet, and web with unified codebase',
+    '🎯 User-centric design: intuitive navigation, clear information hierarchy, and accessibility best practices',
+  ];
+
+  static final List<Map<String, dynamic>> _flutterMateFeatures = [
+    {
+      'icon': 'school',
+      'title': '22 Structured Lessons',
+      'description':
+          'Comprehensive curriculum across Beginner, Intermediate, and Advanced levels with time estimates and prerequisites'
+    },
+    {
+      'icon': 'quiz',
+      'title': 'Interactive Quiz System',
+      'description':
+          '25+ quizzes with instant feedback, explanations, score tracking, and XP rewards for correct answers'
+    },
+    {
+      'icon': 'emoji_events',
+      'title': 'Progress Tracking & Gamification',
+      'description':
+          'Real-time stats, achievement badges, day streaks, weekly charts, and comprehensive learning analytics'
+    },
+    {
+      'icon': 'library_books',
+      'title': 'Rich Lesson Content',
+      'description':
+          'Detailed overviews, learning objectives, curated resources, practice exercises, and difficulty indicators'
+    },
+    {
+      'icon': 'palette',
+      'title': 'Beautiful Material Design 3',
+      'description':
+          'Modern UI with dark/light themes, smooth animations, responsive layouts, and color-coded learning stages'
+    },
+    {
+      'icon': 'devices',
+      'title': 'Multi-Platform Support',
+      'description':
+          'Works seamlessly on mobile, tablet, and web with progressive web app capabilities'
     },
   ];
 

@@ -70,6 +70,9 @@ class ProjectImages {
   // GoPooling Carpool App
   static const GoPoolingImages goPooling = GoPoolingImages._();
 
+  // FlutterMate App
+  static const FlutterMateImages flutterMate = FlutterMateImages._();
+
   // FamilyLink App
   static const FamilyLinkImages familyLink = FamilyLinkImages._();
 }
@@ -489,6 +492,93 @@ class GoPoolingImages {
   static const String notificationScreen = '$_base/notification_screen.png';
   static const String sideDrawerNavigation =
       '$_base/side_drawer_navigation.png';
+}
+
+// ==================== FlutterMate App Images ====================
+
+class FlutterMateImages {
+  const FlutterMateImages._();
+
+  static const String _base = 'assets/images/projects/flutter_mate';
+
+  /// App logo
+  static const String appLogo = '$_base/app_logo.png';
+
+  /// Splash Screen
+  static const String splashScreen = '$_base/splash_screen.png';
+
+  /// Onboarding Screens
+  static const String onboardingScreen = '$_base/onboarding_screen.png';
+  static const String onboardingScreen2 = '$_base/onboarding_screen_2.png';
+  static const String onboardingScreen3 = '$_base/onboarding_screen_3.png';
+
+  /// Authentication
+  static const String loginScreen = '$_base/login_screen.png';
+  static const String signupScreen = '$_base/signup_screen.png';
+
+  /// Roadmap Screens
+  static const String roadmapScreen = '$_base/roadmap_screen.png';
+  static const String roadmapScreen2 = '$_base/roadmap_screen_2.png';
+
+  /// Lesson Screens
+  static const String lessonScreen = '$_base/lesson_screen.png';
+  static const String lessonScreen2 = '$_base/lesson_screen_2.png';
+  static const String lessonScreen3 = '$_base/lesson_screen_3.png';
+
+  /// Lesson Detail Screens
+  static const String lessonDetailScreen = '$_base/lesson_detail_screen.png';
+  static const String lessonDetailScreen2 = '$_base/lesson_detail_screen_2.png';
+  static const String lessonDetailScreen3 = '$_base/lesson_detail_screen_3.png';
+  static const String lessonDetailScreen4 = '$_base/lesson_detail_screen_4.png';
+  static const String lessonDetailScreen5 = '$_base/lesson_detail_screen_5.png';
+  static const String lessonDetailScreen6 = '$_base/lesson_detail_screen_6.png';
+  static const String lessonDetailScreen7 = '$_base/lesson_detail_screen_7.png';
+  static const String lessonDetailScreen8 = '$_base/lesson_detail_screen_8.png';
+  static const String lessonDetailScreen9 = '$_base/lesson_detail_screen_9.png';
+  static const String lessonDetailScreen10 =
+      '$_base/lesson_detail_screen_10.png';
+  static const String lessonDetailScreen11 =
+      '$_base/lesson_detail_screen_11.png';
+  static const String lessonDetailScreen12 =
+      '$_base/lesson_detail_screen_12.png';
+
+  /// Lesson Quiz Screens
+  static const String lessonQuizScreen = '$_base/lesson_quiz_screen.png';
+  static const String lessonQuizScreen2 = '$_base/lesson_quiz_screen_2.png';
+  static const String lessonQuizScreen3 = '$_base/lesson_quiz_screen_3.png';
+  static const String lessonQuizScreen4 = '$_base/lesson_quiz_screen_4.png';
+
+  /// Skill Assessment Screens
+  static const String skillAssessmentScreen =
+      '$_base/skill_assessment_screen.png';
+  static const String skillAssessmentScreen2 =
+      '$_base/skill_assessment_screen_2.png';
+  static const String skillAssessmentScreen3 =
+      '$_base/skill_assessment_screen_3.png';
+  static const String skillAssessmentScreen4 =
+      '$_base/skill_assessment_screen_4.png';
+
+  /// Analytics/Progress Screens
+  static const String analyticsScreen = '$_base/analytics_screen.png';
+  static const String analyticsScreen2 = '$_base/analytics_screen_2.png';
+  static const String analyticsScreen3 = '$_base/analytics_screen_3.png';
+
+  /// Profile Screens
+  static const String profileScreen = '$_base/profile_screen.png';
+  static const String profileScreen2 = '$_base/profile_screen_2.png';
+  static const String profileScreen3 = '$_base/profile_screen_3.png';
+  static const String profileScreen4 = '$_base/profile_screen_4.png';
+
+  /// AI Chat Screens
+  static const String aiChatScreen = '$_base/ai_chat_screen.png';
+  static const String aiChatScreen2 = '$_base/ai_chat_screen_2.png';
+
+  /// Community Screens
+  static const String communityScreen = '$_base/community_screen.png';
+  static const String communityScreen2 = '$_base/community_screen_2.png';
+
+  /// Desktop View
+  static const String desktopScreenView = '$_base/desktop_screen_view.png';
 }
 
 // ==================== FamilyLink App Images ====================

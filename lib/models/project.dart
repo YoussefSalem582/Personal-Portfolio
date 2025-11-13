@@ -12,6 +12,7 @@ class Project {
   final List<String>? galleryImages;
   final DateTime createdAt;
   final bool isFeatured;
+  final bool isUnderDevelopment;
 
   const Project({
     required this.id,
@@ -27,6 +28,7 @@ class Project {
     this.galleryImages,
     required this.createdAt,
     this.isFeatured = false,
+    this.isUnderDevelopment = false,
   });
 
   factory Project.fromJson(Map<String, dynamic> json) {
@@ -46,6 +48,7 @@ class Project {
           : null,
       createdAt: DateTime.parse(json['createdAt']),
       isFeatured: json['isFeatured'] ?? false,
+      isUnderDevelopment: json['isUnderDevelopment'] ?? false,
     );
   }
 
@@ -64,6 +67,7 @@ class Project {
       'galleryImages': galleryImages,
       'createdAt': createdAt.toIso8601String(),
       'isFeatured': isFeatured,
+      'isUnderDevelopment': isUnderDevelopment,
     };
   }
 }

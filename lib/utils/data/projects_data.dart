@@ -4,6 +4,113 @@ import '../assets/app_constants.dart';
 class ProjectsData {
   static final List<Project> projects = [
     Project(
+      id: 'flutter-mate',
+      title: 'FlutterMate - Flutter Learning Companion',
+      shortDescription:
+          '📚 Your personal Flutter learning companion with structured lessons, progress tracking, and AI-powered assistance',
+      description:
+          'FlutterMate is a comprehensive learning assistant designed to guide developers from Flutter beginner to advanced through structured lessons, progress tracking, and AI-powered assistance. '
+          'Built with Clean Architecture and GetX state management, the app features 22 comprehensive lessons across 3 difficulty levels (Beginner: 8 lessons/245 min, Intermediate: 6 lessons/345 min, Advanced: 6 lessons/440 min). '
+          'The prerequisite system ensures proper learning progression by unlocking lessons as you advance, while time estimates help learners plan their study sessions.\n\n'
+          'The interactive quiz system includes 25+ questions covering all lessons and topics, providing instant feedback with color-coded answers and explanations. '
+          'Learners earn XP rewards for correct answers, track their quiz performance, view completion rates and average scores, and receive personalized feedback based on performance. '
+          'The comprehensive progress tracking displays real-time stats for lessons completed, projects built, and XP earned, along with quiz analytics, stage completion progress bars, '
+          'achievement badges, day streak tracking, activity feeds, and weekly progress charts.\n\n'
+          'Each lesson detail page offers rich content with detailed overviews and objectives, curated learning resources and documentation links, hands-on practice exercises, '
+          'integrated quizzes, completion tracking, difficulty indicators (Easy/Medium/Hard), and visible XP rewards. The beautiful Material 3 design features dark/light themes with automatic persistence, '
+          'smooth animations and delightful transitions, fully responsive layouts for all screen sizes, and color-coded stages for visual learning hierarchy. '
+          'An AI assistant is coming soon to provide context-aware help based on learning progress, code examples, and explanations through an interactive chat interface.',
+      technologies: [
+        'Flutter 3.0+',
+        'Dart 3.0+',
+        'Clean Architecture',
+        'GetX 4.6.6',
+        'State Management',
+        'flutter_animate 4.5.0',
+        'Lottie 3.1.0',
+        'shared_preferences 2.2.2',
+        'Material Design 3',
+        'GitHub Pages',
+        'GitHub Actions',
+        'Responsive Design',
+        'Progressive Web App',
+      ],
+      githubUrl: 'https://github.com/YoussefSalem582/flutter_mate',
+      liveUrl: 'https://youssefsalem582.github.io/flutter_mate/',
+      imageUrl: FlutterMateImages.appLogo,
+      galleryImages: [
+        // Splash & Onboarding
+        FlutterMateImages.splashScreen,
+        FlutterMateImages.onboardingScreen,
+        FlutterMateImages.onboardingScreen2,
+        FlutterMateImages.onboardingScreen3,
+
+        // Authentication
+        FlutterMateImages.loginScreen,
+        FlutterMateImages.signupScreen,
+
+        // Roadmap
+        FlutterMateImages.roadmapScreen,
+        FlutterMateImages.roadmapScreen2,
+
+        // Lessons
+        FlutterMateImages.lessonScreen,
+        FlutterMateImages.lessonScreen2,
+        FlutterMateImages.lessonScreen3,
+
+        // Lesson Details (12 screens)
+        FlutterMateImages.lessonDetailScreen,
+        FlutterMateImages.lessonDetailScreen2,
+        FlutterMateImages.lessonDetailScreen3,
+        FlutterMateImages.lessonDetailScreen4,
+        FlutterMateImages.lessonDetailScreen5,
+        FlutterMateImages.lessonDetailScreen6,
+        FlutterMateImages.lessonDetailScreen7,
+        FlutterMateImages.lessonDetailScreen8,
+        FlutterMateImages.lessonDetailScreen9,
+        FlutterMateImages.lessonDetailScreen10,
+        FlutterMateImages.lessonDetailScreen11,
+        FlutterMateImages.lessonDetailScreen12,
+
+        // Lesson Quizzes
+        FlutterMateImages.lessonQuizScreen,
+        FlutterMateImages.lessonQuizScreen2,
+        FlutterMateImages.lessonQuizScreen3,
+        FlutterMateImages.lessonQuizScreen4,
+
+        // Skill Assessment
+        FlutterMateImages.skillAssessmentScreen,
+        FlutterMateImages.skillAssessmentScreen2,
+        FlutterMateImages.skillAssessmentScreen3,
+        FlutterMateImages.skillAssessmentScreen4,
+
+        // Analytics/Progress
+        FlutterMateImages.analyticsScreen,
+        FlutterMateImages.analyticsScreen2,
+        FlutterMateImages.analyticsScreen3,
+
+        // Profile
+        FlutterMateImages.profileScreen,
+        FlutterMateImages.profileScreen2,
+        FlutterMateImages.profileScreen3,
+        FlutterMateImages.profileScreen4,
+
+        // AI Chat
+        FlutterMateImages.aiChatScreen,
+        FlutterMateImages.aiChatScreen2,
+
+        // Community
+        FlutterMateImages.communityScreen,
+        FlutterMateImages.communityScreen2,
+
+        // Desktop View
+        FlutterMateImages.desktopScreenView,
+      ],
+      createdAt: DateTime(2025, 11, 1),
+      isFeatured: true,
+      isUnderDevelopment: true,
+    ),
+    Project(
       id: 'family-link',
       title: 'FamilyLink - Family Management Platform',
       shortDescription:
@@ -89,8 +196,9 @@ class ProjectsData {
         FamilyLinkImages.profileScreen2,
         FamilyLinkImages.profileScreen3,
       ],
-      createdAt: DateTime.now(), // Under development
+      createdAt: DateTime(2025, 11, 1),
       isFeatured: true,
+      isUnderDevelopment: true,
     ),
     Project(
       id: 'emosense-app',

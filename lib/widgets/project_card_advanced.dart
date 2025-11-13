@@ -553,6 +553,11 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
 
   /// Get project date text - shows "Under development" for current projects
   String _getProjectDateText() {
+    // Check if project is marked as under development
+    if (widget.project.isUnderDevelopment) {
+      return '🚧 Under Development';
+    }
+
     final now = DateTime.now();
     final projectDate = widget.project.createdAt;
 
@@ -560,7 +565,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
     if (projectDate.year == now.year &&
         projectDate.month == now.month &&
         projectDate.day == now.day) {
-      return '🚧 Under development';
+      return '🚧 Under Development';
     }
 
     // Otherwise show formatted date
