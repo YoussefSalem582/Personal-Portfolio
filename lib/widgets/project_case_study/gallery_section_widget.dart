@@ -109,6 +109,40 @@ class GallerySectionWidget extends StatelessWidget {
       };
     }
 
+    if (projectId == 'flutter-mate') {
+      return {
+        'Splash & Onboarding': galleryImages
+            .where((img) =>
+                img.contains('splash_screen') || img.contains('onboarding'))
+            .toList(),
+        'Authentication Flow': galleryImages
+            .where((img) => img.contains('login') || img.contains('signup'))
+            .toList(),
+        'Learning Roadmap':
+            galleryImages.where((img) => img.contains('roadmap')).toList(),
+        'Lessons & Course Content': galleryImages
+            .where((img) =>
+                img.contains('lessons_screen') || img.contains('lesson_detail'))
+            .toList(),
+        'Interactive Quizzes':
+            galleryImages.where((img) => img.contains('quiz')).toList(),
+        'Skill Assessment': galleryImages
+            .where((img) => img.contains('skill_assessment'))
+            .toList(),
+        'Analytics Dashboard':
+            galleryImages.where((img) => img.contains('analytics')).toList(),
+        'User Profile': galleryImages
+            .where((img) => img.contains('profile_screen'))
+            .toList(),
+        'AI Chat Assistant':
+            galleryImages.where((img) => img.contains('ai_chat')).toList(),
+        'Community Features':
+            galleryImages.where((img) => img.contains('community')).toList(),
+        'Desktop Experience':
+            galleryImages.where((img) => img.contains('desktop')).toList(),
+      };
+    }
+
     if (projectId == 'family-link') {
       return {
         'Onboarding & Authentication': galleryImages
@@ -435,7 +469,28 @@ class GallerySectionWidget extends StatelessWidget {
         return Icons.chat_bubble;
       case 'profile & settings':
         return AppIcons.user;
-
+      case 'splash & onboarding':
+        return AppIcons.starOutline;
+      case 'authentication flow':
+        return AppIcons.user;
+      case 'learning roadmap':
+        return Icons.route;
+      case 'lessons & course content':
+        return Icons.book;
+      case 'interactive quizzes':
+        return Icons.quiz;
+      case 'skill assessment':
+        return Icons.assessment;
+      case 'analytics dashboard':
+        return AppIcons.dashboard;
+      case 'user profile':
+        return AppIcons.user;
+      case 'ai chat assistant':
+        return Icons.smart_toy;
+      case 'community features':
+        return Icons.groups;
+      case 'desktop experience':
+        return Icons.desktop_windows;
       case 'onboarding':
         return AppIcons.starOutline;
       case 'user authentication':
