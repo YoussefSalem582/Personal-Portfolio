@@ -292,6 +292,9 @@ class AppIcons {
   /// File icon
   static const IconData file = Icons.insert_drive_file_outlined;
 
+  /// Document icon
+  static const IconData document = Icons.article_outlined;
+
   // ==================== Animation Icons ====================
 
   /// Play icon

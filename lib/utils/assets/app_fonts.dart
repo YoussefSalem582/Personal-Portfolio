@@ -337,11 +337,38 @@ class AppFonts {
     return h3(color: color);
   }
 
-  /// Get body text with theme-aware color
-  static TextStyle bodyForTheme(BuildContext context, {bool isLarge = false}) {
+  /// Get heading 4 with theme-aware color
+  static TextStyle h4ForTheme(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final color = isDark ? const Color(0xFF8B949E) : const Color(0xFF7F8C8D);
+    final color = isDark ? const Color(0xFFF0F6FC) : const Color(0xFF2C3E50);
+    return h4(color: color);
+  }
+
+  /// Get heading 5 with theme-aware color
+  static TextStyle h5ForTheme(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final color = isDark ? const Color(0xFFF0F6FC) : const Color(0xFF2C3E50);
+    return h5(color: color);
+  }
+
+  /// Get body text with theme-aware color
+  static TextStyle bodyForTheme(BuildContext context,
+      {bool isLarge = false, bool isSecondary = false}) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final color = isSecondary
+        ? (isDark ? const Color(0xFF8B949E) : const Color(0xFF7F8C8D))
+        : (isDark ? const Color(0xFFC9D1D9) : const Color(0xFF57606A));
     return isLarge ? bodyLarge(color: color) : bodyMedium(color: color);
+  }
+
+  /// Get small body text with theme-aware color
+  static TextStyle bodySmallForTheme(BuildContext context,
+      {bool isSecondary = false}) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final color = isSecondary
+        ? (isDark ? const Color(0xFF8B949E) : const Color(0xFF7F8C8D))
+        : (isDark ? const Color(0xFFC9D1D9) : const Color(0xFF57606A));
+    return bodySmall(color: color);
   }
 
   // ==================== Utility Methods ====================

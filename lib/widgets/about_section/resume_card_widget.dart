@@ -1,17 +1,16 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
-
 import '../../theme/app_theme.dart';
 
 /// A prominent card with a button to view the resume/CV.
 ///
 /// Features:
-/// - Modern gradient background with glassmorphism
-/// - Animated GIF icon
-/// - Hover effects and animations
-/// - Professional styling
+/// - Modern glassmorphism effect with a subtle gradient
+/// - Clean, professional layout with a clear call-to-action
+/// - Subtle hover animations for an interactive feel
 ///
 /// The resume URL is retrieved from PortfolioData and opened using UrlHelper.
 class ResumeCardWidget extends StatefulWidget {
@@ -21,265 +20,132 @@ class ResumeCardWidget extends StatefulWidget {
   State<ResumeCardWidget> createState() => _ResumeCardWidgetState();
 }
 
-class _ResumeCardWidgetState extends State<ResumeCardWidget>
-    with SingleTickerProviderStateMixin {
+class _ResumeCardWidgetState extends State<ResumeCardWidget> {
   bool _isHovered = false;
-  late AnimationController _pulseController;
-  late Animation<double> _pulseAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _pulseController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 2000),
-    )..repeat(reverse: true);
-
-    _pulseAnimation = Tween<double>(begin: 1.0, end: 1.05).animate(
-      CurvedAnimation(parent: _pulseController, curve: Curves.easeInOut),
-    );
-  }
-
-  @override
-  void dispose() {
-    _pulseController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 768;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
-        transform: Matrix4.identity()
-          ..translate(0.0, _isHovered ? -12.0 : 0.0)
-          ..scale(_isHovered ? 1.02 : 1.0),
-        child: Container(
-          width: double.infinity,
+      cursor: SystemMouseCursors.click,
+      child: GestureDetector(
+        onTap: () => UrlHelper.openFile(PortfolioData.resumeUrl),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          transform: Matrix4.identity()
+            ..translate(0.0, _isHovered ? -8.0 : 0.0),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(AppTheme.radiusXL),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: isDark
-                  ? [
-                      AppColors.primaryLight,
-                      AppColors.accentDark,
-                      AppColors.primaryDark,
-                    ]
-                  : [
-                      AppColors.primaryLight,
-                      AppColors.accentLight,
-                      AppColors.primaryLight.withOpacity(0.8),
-                    ],
-            ),
             boxShadow: [
               BoxShadow(
-                color: (isDark ? AppColors.primaryLight : AppColors.accentLight)
-                    .withOpacity(_isHovered ? 0.5 : 0.3),
-                blurRadius: _isHovered ? 32 : 20,
-                offset: Offset(0, _isHovered ? 16 : 10),
+                color: (isDark ? AppColors.primaryDark : AppColors.primaryLight)
+                    .withOpacity(_isHovered ? 0.3 : 0.15),
+                blurRadius: _isHovered ? 24 : 16,
+                offset: Offset(0, _isHovered ? 12 : 8),
               ),
             ],
           ),
-          child: Stack(
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(AppTheme.radiusXL),
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+              child: Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: isMobile ? AppTheme.spacingL : AppTheme.spacingXL,
+                  vertical: isMobile ? AppTheme.spacingL : AppTheme.spacingXL,
+                ),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: isDark
+                        ? [
+                            AppColors.surfaceDark.withOpacity(0.8),
+                            AppColors.cardDark.withOpacity(0.7),
+                          ]
+                        : [
+                            AppColors.white.withOpacity(0.7),
+                            AppColors.surfaceLight.withOpacity(0.6),
+                          ],
+                  ),
+                  borderRadius: BorderRadius.circular(AppTheme.radiusXL),
+                  border: Border.all(
+                    color:
+                        (isDark ? AppColors.accentDark : AppColors.accentLight)
+                            .withOpacity(_isHovered ? 0.3 : 0.15),
+                    width: 1.5,
+                  ),
+                ),
+                child: isMobile
+                    ? _buildMobileLayout(context)
+                    : _buildDesktopLayout(context),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  /// Layout for desktop screens
+  Widget _buildDesktopLayout(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          child: Row(
             children: [
-              // Animated decorative circles
-              Positioned(
-                top: -20,
-                right: -20,
-                child: AnimatedBuilder(
-                  animation: _pulseAnimation,
-                  builder: (context, child) {
-                    return Transform.scale(
-                      scale: _pulseAnimation.value,
-                      child: Container(
-                        width: 140,
-                        height: 140,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: RadialGradient(
-                            colors: [
-                              AppColors.white.withOpacity(0.15),
-                              AppColors.white.withOpacity(0.05),
-                              AppColors.transparent,
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
+              // Icon
+              Container(
+                padding: const EdgeInsets.all(AppTheme.spacingM),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  gradient: LinearGradient(
+                    colors: isDark
+                        ? [AppColors.accentDark, AppColors.primaryDark]
+                        : [AppColors.accentLight, AppColors.primaryLight],
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: (isDark
+                              ? AppColors.accentDark
+                              : AppColors.accentLight)
+                          .withOpacity(0.3),
+                      blurRadius: 12,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: const Icon(
+                  AppIcons.document,
+                  color: AppColors.white,
+                  size: 28,
                 ),
               ),
-              Positioned(
-                bottom: -30,
-                left: -30,
-                child: AnimatedBuilder(
-                  animation: _pulseAnimation,
-                  builder: (context, child) {
-                    return Transform.scale(
-                      scale: 2 - _pulseAnimation.value, // Opposite animation
-                      child: Container(
-                        width: 120,
-                        height: 120,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          gradient: RadialGradient(
-                            colors: [
-                              AppColors.white.withOpacity(0.12),
-                              AppColors.white.withOpacity(0.04),
-                              AppColors.transparent,
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
-
-              // Main content
-              Padding(
-                padding: const EdgeInsets.all(AppTheme.spacingXL),
+              const SizedBox(width: AppTheme.spacingL),
+              // Text content
+              Expanded(
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // Animated GIF icon
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      width: _isHovered ? 110 : 100,
-                      height: _isHovered ? 110 : 100,
-                      decoration: BoxDecoration(
-                        color: AppColors.white.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(AppTheme.radiusXL),
-                        border: Border.all(
-                          color: AppColors.white.withOpacity(0.3),
-                          width: 2,
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.white.withOpacity(0.2),
-                            blurRadius: _isHovered ? 20 : 12,
-                            spreadRadius: _isHovered ? 2 : 0,
-                          ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius:
-                            BorderRadius.circular(AppTheme.radiusXL - 2),
-                        child: Padding(
-                          padding: const EdgeInsets.all(16),
-                          child: Image.asset(
-                            'assets/icons/cv.gif',
-                            fit: BoxFit.contain,
-                          ),
-                        ),
-                      ),
-                    ),
-
-                    const SizedBox(height: AppTheme.spacingL),
-
-                    // Title with animation
-                    AnimatedDefaultTextStyle(
-                      duration: const Duration(milliseconds: 300),
-                      style: AppFonts.h3().copyWith(
-                        color: AppColors.white,
-                        fontWeight: AppFonts.bold,
-                        fontSize: _isHovered ? 26 : 24,
-                        letterSpacing: 0.5,
-                      ),
-                      child: const Text(
-                        'View My Resume',
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-
-                    const SizedBox(height: AppTheme.spacingS),
-
-                    // Description
                     Text(
-                      'Explore my professional journey,\nskills, and achievements',
-                      style: AppFonts.bodyMedium().copyWith(
-                        color: AppColors.white.withOpacity(0.92),
-                        fontWeight: AppFonts.medium,
-                        height: 1.6,
-                        fontSize: 15,
-                      ),
-                      textAlign: TextAlign.center,
+                      'View My Resume',
+                      style: AppFonts.h4ForTheme(context)
+                          .copyWith(fontWeight: AppFonts.bold),
                     ),
-
-                    const SizedBox(height: AppTheme.spacingXL),
-
-                    // View button with enhanced animation
-                    MouseRegion(
-                      cursor: SystemMouseCursors.click,
-                      child: InkWell(
-                        onTap: () =>
-                            UrlHelper.openFile(PortfolioData.resumeUrl),
-                        borderRadius: BorderRadius.circular(AppTheme.radiusL),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 300),
-                          padding: EdgeInsets.symmetric(
-                            horizontal: _isHovered
-                                ? AppTheme.spacingXL + 4
-                                : AppTheme.spacingXL,
-                            vertical: AppTheme.spacingM + 4,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius:
-                                BorderRadius.circular(AppTheme.radiusL),
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.black
-                                    .withOpacity(_isHovered ? 0.3 : 0.2),
-                                blurRadius: _isHovered ? 16 : 12,
-                                offset: Offset(0, _isHovered ? 6 : 4),
-                              ),
-                            ],
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                AppIcons.view,
-                                color: isDark
-                                    ? AppColors.primaryLight
-                                    : AppColors.accentLight,
-                                size: 22,
-                              ),
-                              const SizedBox(width: AppTheme.spacingS),
-                              Text(
-                                'Open Resume',
-                                style: AppFonts.button().copyWith(
-                                  color: isDark
-                                      ? AppColors.primaryLight
-                                      : AppColors.accentLight,
-                                  fontWeight: AppFonts.bold,
-                                  fontSize: 16,
-                                  letterSpacing: 0.5,
-                                ),
-                              ),
-                              const SizedBox(width: AppTheme.spacingS),
-                              AnimatedRotation(
-                                duration: const Duration(milliseconds: 300),
-                                turns: _isHovered ? 0.125 : 0, // 45 degrees
-                                child: Icon(
-                                  Icons.arrow_forward_rounded,
-                                  color: isDark
-                                      ? AppColors.primaryLight
-                                      : AppColors.accentLight,
-                                  size: 22,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                    const SizedBox(height: AppTheme.spacingXS),
+                    Text(
+                      'Explore my professional journey, skills, and achievements.',
+                      style: AppFonts.bodyForTheme(context, isSecondary: true),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
@@ -287,7 +153,98 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget>
             ],
           ),
         ),
-      ),
+        const SizedBox(width: AppTheme.spacingL),
+        // Button
+        ElevatedButton.icon(
+          onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
+          icon: const Icon(AppIcons.view, size: 20),
+          label: const Text('View CV'),
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppTheme.spacingXL,
+              vertical: AppTheme.spacingL,
+            ),
+            backgroundColor:
+                isDark ? AppColors.accentDark : AppColors.accentLight,
+            foregroundColor: AppColors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(AppTheme.radiusM),
+            ),
+            textStyle: AppFonts.button().copyWith(fontWeight: AppFonts.bold),
+          ),
+        ),
+      ],
+    );
+  }
+
+  /// Layout for mobile screens
+  Widget _buildMobileLayout(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Column(
+      children: [
+        Row(
+          children: [
+            // Icon
+            Container(
+              padding: const EdgeInsets.all(AppTheme.spacingS),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: LinearGradient(
+                  colors: isDark
+                      ? [AppColors.accentDark, AppColors.primaryDark]
+                      : [AppColors.accentLight, AppColors.primaryLight],
+                ),
+              ),
+              child: const Icon(
+                AppIcons.document,
+                color: AppColors.white,
+                size: 24,
+              ),
+            ),
+            const SizedBox(width: AppTheme.spacingM),
+            // Text content
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'View My Resume',
+                    style: AppFonts.h5ForTheme(context)
+                        .copyWith(fontWeight: AppFonts.bold),
+                  ),
+                  const SizedBox(height: 2),
+                  Text(
+                    'Explore my professional journey.',
+                    style:
+                        AppFonts.bodySmallForTheme(context, isSecondary: true),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: AppTheme.spacingL),
+        // Button
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton.icon(
+            onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
+            icon: const Icon(AppIcons.view, size: 18),
+            label: const Text('View CV'),
+            style: ElevatedButton.styleFrom(
+              padding: const EdgeInsets.symmetric(vertical: AppTheme.spacingM),
+              backgroundColor:
+                  isDark ? AppColors.accentDark : AppColors.accentLight,
+              foregroundColor: AppColors.white,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(AppTheme.radiusM),
+              ),
+              textStyle: AppFonts.button().copyWith(fontWeight: AppFonts.bold),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
