@@ -35,7 +35,6 @@ class ProjectChallenge {
 /// - 'emosense-app': AI emotion recognition system
 /// - 'music-player': Audio player application
 /// - 'gogesh-marketplace': Commercial marketplace platform
-/// - 'family-link': Family management platform
 /// - 'default': Generic fallback for other projects
 class ProjectCaseStudyData {
   /// Gets project-specific challenges and solutions
@@ -53,8 +52,6 @@ class ProjectCaseStudyData {
         return _gogeshChallenges;
       case 'flutter-mate':
         return _flutterMateChallenges;
-      case 'family-link':
-        return _familyLinkChallenges;
       case 'music-player':
         return _musicPlayerChallenges;
       default:
@@ -77,8 +74,6 @@ class ProjectCaseStudyData {
         return _gogeshLessons;
       case 'flutter-mate':
         return _flutterMateLessons;
-      case 'family-link':
-        return _familyLinkLessons;
       case 'music-player':
         return _musicPlayerLessons;
       default:
@@ -102,8 +97,6 @@ class ProjectCaseStudyData {
         return _gogeshOverview;
       case 'flutter-mate':
         return _flutterMateOverview;
-      case 'family-link':
-        return _familyLinkOverview;
       default:
         // Default: use project's standard description
         return description;
@@ -125,8 +118,6 @@ class ProjectCaseStudyData {
         return _gogeshFeatures;
       case 'flutter-mate':
         return _flutterMateFeatures;
-      case 'family-link':
-        return _familyLinkFeatures;
       default:
         return null; // No custom features for other projects
     }
@@ -411,103 +402,6 @@ class ProjectCaseStudyData {
       'title': 'Multi-Platform Support',
       'description':
           'Works seamlessly on mobile, tablet, and web with progressive web app capabilities'
-    },
-  ];
-
-  // ==================== FAMILY LINK PROJECT DATA ====================
-
-  static const String _familyLinkOverview =
-      '👨‍👩‍👧‍👦 FamilyLink is a comprehensive family management platform designed to strengthen family bonds and simplify daily coordination through intelligent features for location tracking, meal planning, mood monitoring, and social interaction. '
-      'Built with Flutter and GetX, this modern solution provides families with tools to stay connected, organized, and aware of each other\'s well-being in today\'s busy world.\n\n'
-      '🏡 Perfect for modern families seeking better coordination and connection, FamilyLink features real-time location sharing with Google Maps integration 🗺️, '
-      'smart meal planning with nutritional tracking 🍽️, mood and wellness monitoring with insights 😊, family social wall for sharing moments 📸, '
-      'synchronized calendars and event management 📅, and comprehensive family profiles with activity tracking 👤.\n\n'
-      '🚀 Currently under development, this platform demonstrates modern mobile development with Firebase real-time database, Google Maps API, '
-      'Material Design 3, responsive layouts for mobile and tablet, and privacy-first architecture ensuring family data security 🔒. '
-      'The app showcases full-stack development skills with cloud integration, real-time features, and user-centric design ready for family adoption 💙.';
-
-  static final List<Map<String, String>> _familyLinkChallenges = [
-    {
-      'title': '🗺️ Real-Time Location Privacy & Safety',
-      'description':
-          'Implementing family location sharing with geofencing, safe zone alerts, and privacy controls required careful handling of location permissions, battery optimization, background location updates, and secure data transmission. Balanced safety features with privacy concerns through granular permission controls.',
-    },
-    {
-      'title': '🍽️ Intelligent Meal Planning System',
-      'description':
-          'Building comprehensive meal tracking with dietary preferences, nutritional analysis, recipe suggestions, and calendar integration required complex data modeling, API integration for nutrition data, and user-friendly meal scheduling across multiple family members with varying preferences.',
-    },
-    {
-      'title': '😊 Wellness & Mood Analytics',
-      'description':
-          'Creating an emotional well-being tracking system that respects privacy while providing valuable family insights required sensitive UI/UX design, secure data storage, trend analysis algorithms, and notification systems that encourage check-ins without being intrusive.',
-    },
-    {
-      'title': '🔄 Real-Time Data Synchronization',
-      'description':
-          'Ensuring instant updates across all family members\' devices for location, meals, moods, and social posts required Firebase real-time database optimization, conflict resolution strategies, offline support with data queuing, and efficient state management with GetX.',
-    },
-    {
-      'title': '📱 Multi-User State Management',
-      'description':
-          'Managing complex state across multiple family members with different roles, permissions, and data views required advanced GetX architecture, reactive programming patterns, memory-efficient caching, and proper data isolation between family members.',
-    },
-    {
-      'title': '🎨 Adaptive UI for All Ages',
-      'description':
-          'Designing an interface that works for both tech-savvy teenagers and less technical parents/grandparents required accessibility considerations, adjustable text sizes, intuitive navigation, clear visual hierarchy, and comprehensive onboarding tutorials.',
-    },
-  ];
-
-  static const List<String> _familyLinkLessons = [
-    '🏗️ Advanced state management with GetX: reactive programming, dependency injection, and route management',
-    '🗺️ Location services mastery: Google Maps integration, geofencing, background tracking, and battery optimization',
-    '🔥 Firebase real-time features: database, cloud storage, authentication, and cloud messaging',
-    '📊 Complex data modeling: multi-user relationships, role-based access, and data privacy patterns',
-    '🎨 Family-friendly UX design: accessibility, age-appropriate interfaces, and intuitive navigation',
-    '⚡ Performance optimization: real-time updates, efficient state management, and memory management',
-    '🔐 Privacy-first architecture: data encryption, secure authentication, and permission controls',
-    '📅 Calendar integration: event synchronization, reminders, and family schedule coordination',
-    '💬 Social features: real-time feeds, image sharing, comments, and family-only networking',
-    '🚀 Modern Flutter development: Material Design 3, responsive layouts, and progressive web capabilities',
-  ];
-
-  static final List<Map<String, dynamic>> _familyLinkFeatures = [
-    {
-      'icon': 'family_restroom',
-      'title': 'Real-time Family Connection',
-      'description':
-          'Stay connected with family members through live location tracking, activity monitoring, and instant updates'
-    },
-    {
-      'icon': 'restaurant_menu',
-      'title': 'Smart Meal Planning',
-      'description':
-          'Track family meals, dietary preferences, and nutrition with an intelligent meal scheduling system'
-    },
-    {
-      'icon': 'mood',
-      'title': 'Mood & Wellness Tracking',
-      'description':
-          'Monitor family emotional well-being with mood tracking, insights, and wellness recommendations'
-    },
-    {
-      'icon': 'map',
-      'title': 'Interactive Location Features',
-      'description':
-          'Google Maps integration for safe zones, geofencing alerts, and family location sharing'
-    },
-    {
-      'icon': 'chat_bubble',
-      'title': 'Family Social Wall',
-      'description':
-          'Share moments, photos, and updates in a private family social network with real-time interactions'
-    },
-    {
-      'icon': 'calendar_today',
-      'title': 'Shared Calendar & Events',
-      'description':
-          'Coordinate family schedules, events, and activities with synchronized calendars and reminders'
     },
   ];
 
