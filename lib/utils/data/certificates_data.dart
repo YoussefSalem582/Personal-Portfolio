@@ -129,5 +129,16 @@ class CertificatesData {
       pdfUrl: CertificateImages.weCertificatePdf,
       imageUrl: CertificateImages.weCertificate,
     ),
+    Certificate(
+      id: 'sprints-microsoft-summer-camp-mobile-dev',
+      title: 'Sprints x Microsoft Summer Camp - Mobile Development',
+      issuer: 'Sprints x Microsoft',
+      description:
+          'Mobile Development learning track covering fundamentals of mobile apps, Dart essentials, and Flutter fundamentals. The Introduction to Mobile Development module includes 12 short topics covering mobile app basics (why mobile apps, operating systems, native vs non-native languages, cross vs native, and key differences across platforms), mobile app design systems, UX/UI considerations, mobile gaming development, and recommended development machines.\n\n'
+          'Dart Essentials covers the core Dart language, including variables and constants, control flow, functions, and object-oriented programming (OOP). Flutter Fundamentals covers Flutter setup and tooling, widgets, input validation and forms, advanced UI and animations, localization, and a hands-on final Flutter Shopping App project.\n\n'
+          'Microsoft Learn requirement: complete at least one topic and upload proof of completion (PDF/Image), such as building a mobile-optimized app from Power Apps, implementing mobile application management, or transforming a business with Microsoft AI.',
+      issueDate: DateTime(2024, 8, 1),
+      pdfUrl: CertificateImages.sprintsMicrosoftSummerCampMobileDevelopmentPdf,
+    ),
   ];
 }

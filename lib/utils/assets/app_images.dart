@@ -709,7 +709,7 @@ class CertificateImages {
   const CertificateImages._();
 
   static const String _basePhotos = 'assets/images/certificates';
-  static const String _basePdfs = 'assets/images/certificates';
+  static const String _basePdfs = 'assets/documents/certificates';
 
   // Certificate Photos
   static const String routeFlutterDiploma =
@@ -740,6 +740,10 @@ class CertificateImages {
   static const String introJupyterPdf = '$_basePdfs/Intro_to_jupyter.pdf';
   static const String introPythonPdf = '$_basePdfs/Intro_to_python.pdf';
   static const String weCertificatePdf = '$_basePdfs/we_certificate.pdf';
+
+  // New certificates
+  static const String sprintsMicrosoftSummerCampMobileDevelopmentPdf =
+      '$_basePdfs/sprints_x_microsoft_summer_camp_mobile_development.pdf';
 }
 
 // ==================== Helper Methods ====================
