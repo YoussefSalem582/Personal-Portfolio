@@ -724,6 +724,8 @@ class CertificateImages {
   static const String ugrfCertificate1 = '$_basePhotos/UGRF 1.jpg';
   static const String ugrfCertificate2 = '$_basePhotos/UGRF .jpg';
   static const String weCertificate = '$_basePhotos/we_certificate.png';
+  static const String sprintsMicrosoftSummerCampMobileDevelopment =
+      '$_basePhotos/sprints_x_microsoft_summer_camp_mobile_development.png';
 
   // Certificate PDFs - Note: Actual PDFs should be in assets/documents/certificates/
   // These paths are kept for backward compatibility but should point to documents folder
