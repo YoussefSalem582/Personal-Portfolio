@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../features/theme/presentation/bloc/theme_bloc.dart';
-import '../features/theme/presentation/bloc/theme_event.dart';
-import '../features/theme/presentation/bloc/theme_state.dart';
-import '../utils/assets/app_constants.dart';
+import '../../../../utils/assets/app_constants.dart';
+import '../bloc/theme_bloc.dart';
+import '../bloc/theme_event.dart';
+import '../bloc/theme_state.dart';
 
 class ThemeToggle extends StatelessWidget {
   final bool isCompact;
