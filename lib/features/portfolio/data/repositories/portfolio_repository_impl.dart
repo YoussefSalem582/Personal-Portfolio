@@ -6,7 +6,7 @@ import '../../domain/entities/portfolio_snapshot_entity.dart';
 import '../../domain/repositories/portfolio_repository.dart';
 import '../datasources/portfolio_local_datasource.dart';
 
-/// Portfolio repository backed by local static data ([AttendanceRepositoryImpl] analogue).
+/// Portfolio repository backed by local static data (domain / data split).
 class PortfolioRepositoryImpl implements PortfolioRepository {
   PortfolioRepositoryImpl({required PortfolioLocalDataSource local}) : _local = local;
 

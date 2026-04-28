@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/portfolio/domain/repositories/portfolio_repository.dart';
+import '../../features/portfolio/presentation/pages/portfolio_page.dart';
+import '../../features/portfolio/presentation/pages/project_case_study.dart';
 import '../../injection_container.dart';
 import '../../routes/app_routes.dart';
-import '../../features/portfolio/presentation/pages/portfolio_page.dart';
-import '../../screens/project_case_study.dart';
 
 /// Root navigator (snackbars, dialogs that need app-level context).
 final GlobalKey<NavigatorState> rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
 
-/// Section index map for [PortfolioScreen] scroll (matches section order).
+/// Section index map for [PortfolioPage] scroll (matches section order).
 const Map<String, int> _sectionPathToIndex = {
   AppRoutes.about: 1,
   AppRoutes.skills: 2,
@@ -76,7 +76,7 @@ Widget _projectCaseStudyTransition(
 
 NoTransitionPage<void> _portfolioHomePage({int? initialSectionIndex}) {
   return NoTransitionPage<void>(
-    child: PortfolioScreen(initialSectionIndex: initialSectionIndex),
+    child: PortfolioPage(initialSectionIndex: initialSectionIndex),
   );
 }
 
@@ -85,7 +85,7 @@ GoRouter createPortfolioRouter() {
     navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.home,
     redirect: (context, state) => _portfolioRedirect(state),
-    errorBuilder: (context, state) => const PortfolioScreen(),
+    errorBuilder: (context, state) => const PortfolioPage(),
     routes: <RouteBase>[
       GoRoute(
         path: AppRoutes.home,
