@@ -78,7 +78,6 @@ dependencies:
   # Performance optimization
   visibility_detector: ^0.4.0+2
   cached_network_image: ^3.3.1
-  emailjs: ^4.0.0
 
 dev_dependencies:
   flutter_test:
