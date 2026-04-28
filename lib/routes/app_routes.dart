@@ -1,6 +1,4 @@
-/// Application route names
-///
-/// Centralized route management for GetX navigation
+/// Application routes (paths for [GoRouter])
 abstract class AppRoutes {
   // Prevent instantiation
   AppRoutes._();
@@ -8,13 +6,8 @@ abstract class AppRoutes {
   /// Home/Portfolio screen route
   static const home = '/';
 
-  /// Project case study route with dynamic ID parameter
-  /// Usage: Get.toNamed(AppRoutes.project, parameters: {'id': 'project_id'})
-  static const project = '/project/:id';
-
-  /// Project details with slug (SEO friendly)
-  /// Usage: Get.toNamed(AppRoutes.projectSlug, parameters: {'slug': 'project-name'})
-  static const projectSlug = '/project/:slug';
+  /// Path segment for project case study URLs: `{projectPrefix}/:pid`
+  static const projectPrefix = '/project';
 
   /// Contact section direct route (for deep linking)
   static const contact = '/contact';
@@ -57,11 +50,11 @@ abstract class AppRoutes {
 
   /// Helper methods for navigation
 
-  /// Navigate to project by ID
-  static String getProjectRoute(String id) => '/project/$id';
+  /// Navigate to project by ID or title slug.
+  static String getProjectRoute(String id) => '$projectPrefix/$id';
 
-  /// Navigate to project by slug
-  static String getProjectSlugRoute(String slug) => '/project/$slug';
+  /// Same as [getProjectRoute] (legacy name).
+  static String getProjectSlugRoute(String slug) => '$projectPrefix/$slug';
 
   /// Navigate to blog post
   static String getBlogPostRoute(String id) => '/blog/$id';
