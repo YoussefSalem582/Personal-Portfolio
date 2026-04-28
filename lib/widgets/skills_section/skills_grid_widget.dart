@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/skill.dart';
-import '../../utils/data/localized/localized_extensions.dart';
+import 'package:youssef_hassan_portfolio/features/portfolio/data/localized/localized_extensions.dart';
 import '../../utils/data/skills_data.dart';
 import 'skill_category_widget.dart';
 

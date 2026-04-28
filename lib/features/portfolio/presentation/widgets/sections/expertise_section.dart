@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import '../../../../../utils/data/expertise_data.dart';
-import '../../../../../utils/data/localized/localized_extensions.dart';
+import 'package:youssef_hassan_portfolio/features/portfolio/data/localized/localized_extensions.dart';
 import '../../../../../models/expertise.dart';
 
 class ExpertiseSection extends StatelessWidget {

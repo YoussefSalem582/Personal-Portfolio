@@ -1,4 +1,4 @@
-import '../../../l10n/app_localizations.dart';
+import '../../../../l10n/app_localizations.dart';
 
 /// Display label for a project filter [id] (logic uses English ids from [ProjectsSection]).
 String localizedProjectFilterLabel(AppLocalizations l10n, String id) {

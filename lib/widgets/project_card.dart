@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../l10n/app_localizations.dart';
 import '../utils/assets/app_constants.dart';
 import '../models/project.dart';
-import '../utils/data/localized/localized_extensions.dart';
+import 'package:youssef_hassan_portfolio/features/portfolio/data/localized/localized_extensions.dart';
 import '../utils/url_helper.dart';
 import '../utils/responsive_helper.dart';
 import '../routes/app_routes.dart';

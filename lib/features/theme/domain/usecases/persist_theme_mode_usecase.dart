@@ -6,16 +6,7 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/usecase/usecase.dart';
 import '../repositories/theme_repository.dart';
 
-class LoadInitialThemeModeUseCase implements UseCase<ThemeMode, NoParams> {
-  LoadInitialThemeModeUseCase(this._repository);
-
-  final ThemeRepository _repository;
-
-  @override
-  Future<Either<Failure, ThemeMode>> call(NoParams params) =>
-      _repository.resolveInitialThemeMode();
-}
-
+/// Persists user's theme preference.
 class ThemeModeParams extends Equatable {
   const ThemeModeParams(this.mode);
 

@@ -1,4 +1,4 @@
-import '../../../l10n/app_localizations.dart';
+import '../../../../l10n/app_localizations.dart';
 
 /// Localized UI label for a gallery section; [categoryId] matches map keys in [GallerySectionWidget].
 String localizedGalleryCategoryLabel(

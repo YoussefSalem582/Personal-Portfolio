@@ -12,7 +12,7 @@ import '../../../../../widgets/projects_section/projects_grid.dart';
 import '../../../../../widgets/custom_show_more_button.dart';
 import '../../../../../widgets/projects_section/projects_view_all_section.dart';
 import '../../../../../widgets/projects_section/all_projects_dialog.dart';
-import '../../../../../utils/data/localized/localized_project_filter.dart';
+import 'package:youssef_hassan_portfolio/features/portfolio/data/localized/localized_project_filter.dart';
 
 class ProjectsSection extends StatefulWidget {
   const ProjectsSection({super.key});

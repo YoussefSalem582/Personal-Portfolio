@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../l10n/app_localizations.dart';
-import '../utils/data/localized/portfolio_strings.dart';
+import 'package:youssef_hassan_portfolio/features/portfolio/data/localized/portfolio_strings.dart';
 import '../utils/assets/app_constants.dart';
 import '../utils/responsive_helper.dart';
 import '../utils/data/portfolio_data.dart';

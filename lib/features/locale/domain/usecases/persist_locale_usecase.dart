@@ -6,16 +6,7 @@ import '../../../../core/error/failures.dart';
 import '../../../../core/usecase/usecase.dart';
 import '../repositories/locale_repository.dart';
 
-class LoadInitialLocaleUseCase implements UseCase<Locale, NoParams> {
-  LoadInitialLocaleUseCase(this._repository);
-
-  final LocaleRepository _repository;
-
-  @override
-  Future<Either<Failure, Locale>> call(NoParams params) =>
-      _repository.resolveInitialLocale();
-}
-
+/// Persists the user's locale choice.
 class LocaleParams extends Equatable {
   const LocaleParams(this.locale);
 

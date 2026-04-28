@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/certificate.dart';
 import '../../utils/assets/app_constants.dart';
-import '../../utils/data/localized/localized_extensions.dart';
+import 'package:youssef_hassan_portfolio/features/portfolio/data/localized/localized_extensions.dart';
 import '../../theme/app_theme.dart';
 import 'certificate_dialog_info_card.dart';
 

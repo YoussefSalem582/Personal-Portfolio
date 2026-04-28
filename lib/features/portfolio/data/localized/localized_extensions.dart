@@ -1,8 +1,8 @@
-import '../../../core/locale/app_locale_binding.dart';
-import '../../../models/certificate.dart';
-import '../../../models/expertise.dart';
-import '../../../models/project.dart';
-import '../../../models/skill.dart';
+import '../../../../core/locale/app_locale_binding.dart';
+import '../../../../models/certificate.dart';
+import '../../../../models/expertise.dart';
+import '../../../../models/project.dart';
+import '../../../../models/skill.dart';
 import 'certificates_ar.dart';
 import 'expertise_ar.dart';
 import 'projects_ar.dart';

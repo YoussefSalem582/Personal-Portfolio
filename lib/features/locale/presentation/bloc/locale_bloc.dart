@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/locale/app_locale_binding.dart';
 import '../../../../core/usecase/usecase.dart';
-import '../../domain/usecases/locale_usecases.dart';
+import '../../domain/usecases/load_initial_locale_usecase.dart';
+import '../../domain/usecases/persist_locale_usecase.dart';
 import 'locale_event.dart';
 import 'locale_state.dart';
 

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/usecase/usecase.dart';
-import '../../domain/usecases/theme_mode_usecases.dart';
+import '../../domain/usecases/load_initial_theme_mode_usecase.dart';
+import '../../domain/usecases/persist_theme_mode_usecase.dart';
 import 'theme_event.dart';
 import 'theme_state.dart';
 

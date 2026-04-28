@@ -1,6 +1,7 @@
 import '../../../../models/project.dart';
 import '../../../../utils/data/portfolio_data.dart';
 import '../../domain/entities/portfolio_snapshot_entity.dart';
+import '../models/portfolio_snapshot_model.dart';
 import 'portfolio_local_datasource.dart';
 
 class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
@@ -8,7 +9,7 @@ class PortfolioLocalDataSourceImpl implements PortfolioLocalDataSource {
 
   @override
   PortfolioSnapshotEntity getSnapshotSync() {
-    return PortfolioSnapshotEntity.fromPortfolioData();
+    return PortfolioSnapshotModel.toEntity();
   }
 
   @override
