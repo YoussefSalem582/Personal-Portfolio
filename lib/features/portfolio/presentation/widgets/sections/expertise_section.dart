@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../utils/assets/app_constants.dart';
-import '../../utils/data/expertise_data.dart';
-import '../../models/expertise.dart';
+import '../../../../../utils/assets/app_constants.dart';
+import '../../../../../utils/data/expertise_data.dart';
+import '../../../../../models/expertise.dart';
 
 class ExpertiseSection extends StatelessWidget {
   const ExpertiseSection({super.key});

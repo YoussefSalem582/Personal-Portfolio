@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../utils/assets/app_constants.dart';
-import '../../utils/responsive_helper.dart';
-import '../../theme/app_theme.dart';
-import '../../widgets/hero_section/hero_text_widget.dart';
-import '../../widgets/hero_section/profile_image_widget.dart';
-import '../../widgets/hero_section/hero_action_buttons_widget.dart';
-import '../../widgets/about_section/social_links_widget.dart';
+import '../../../../../utils/assets/app_constants.dart';
+import '../../../../../utils/responsive_helper.dart';
+import '../../../../../theme/app_theme.dart';
+import '../../../../../widgets/hero_section/hero_text_widget.dart';
+import '../../../../../widgets/hero_section/profile_image_widget.dart';
+import '../../../../../widgets/hero_section/hero_action_buttons_widget.dart';
+import '../../../../../widgets/about_section/social_links_widget.dart';
 
 class HeroSection extends StatefulWidget {
   final Function(int)? onNavigateToSection;

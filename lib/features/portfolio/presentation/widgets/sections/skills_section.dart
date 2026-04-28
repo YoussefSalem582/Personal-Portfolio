@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../utils/assets/app_constants.dart';
-import '../../utils/responsive_helper.dart';
-import '../../widgets/skills_section/skills_section_header.dart';
-import '../../widgets/skills_section/skills_grid_widget.dart';
+import '../../../../../utils/assets/app_constants.dart';
+import '../../../../../utils/responsive_helper.dart';
+import '../../../../../widgets/skills_section/skills_section_header.dart';
+import '../../../../../widgets/skills_section/skills_grid_widget.dart';
 
 /// Skills Section - Main Screen
 /// Displays the tech stack with categories and individual skills

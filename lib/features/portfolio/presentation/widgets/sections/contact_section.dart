@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../utils/assets/app_constants.dart';
-import '../../utils/responsive_helper.dart';
-import '../../widgets/contact_section/contact_info_widget.dart';
-import '../../widgets/contact_section/contact_form_widget.dart';
+import '../../../../../utils/assets/app_constants.dart';
+import '../../../../../utils/responsive_helper.dart';
+import '../../../../../widgets/contact_section/contact_info_widget.dart';
+import '../../../../../widgets/contact_section/contact_form_widget.dart';
 
-import '../../theme/app_theme.dart';
+import '../../../../../theme/app_theme.dart';
 
 /// The contact section of the portfolio displaying contact information and form.
 ///

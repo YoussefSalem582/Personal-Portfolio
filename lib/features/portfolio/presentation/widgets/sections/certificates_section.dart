@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import '../../utils/assets/app_constants.dart';
-import '../../utils/data/portfolio_data.dart';
-import '../../utils/responsive_helper.dart';
-import '../../theme/app_theme.dart';
-import '../../widgets/certificates_section/certificates_section_header.dart';
-import '../../widgets/certificates_section/certificates_grid.dart';
-import '../../widgets/custom_show_more_button.dart';
+import '../../../../../utils/assets/app_constants.dart';
+import '../../../../../utils/data/portfolio_data.dart';
+import '../../../../../utils/responsive_helper.dart';
+import '../../../../../theme/app_theme.dart';
+import '../../../../../widgets/certificates_section/certificates_section_header.dart';
+import '../../../../../widgets/certificates_section/certificates_grid.dart';
+import '../../../../../widgets/custom_show_more_button.dart';
 
 /// Certificates section displaying all professional certifications and achievements
 /// with modern card-based design and smooth animations

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import '../../utils/responsive_helper.dart';
-import '../../utils/data/portfolio_data.dart';
-import '../../utils/url_helper.dart';
-import '../../utils/assets/app_constants.dart';
-import '../../theme/app_theme.dart';
-import '../../widgets/projects_section/projects_section_header.dart';
-import '../../widgets/projects_section/projects_filter_tabs.dart';
-import '../../widgets/projects_section/projects_empty_state.dart';
-import '../../widgets/projects_section/projects_grid.dart';
-import '../../widgets/custom_show_more_button.dart';
-import '../../widgets/projects_section/projects_view_all_section.dart';
-import '../../widgets/projects_section/all_projects_dialog.dart';
+import '../../../../../utils/responsive_helper.dart';
+import '../../../../../utils/data/portfolio_data.dart';
+import '../../../../../utils/url_helper.dart';
+import '../../../../../utils/assets/app_constants.dart';
+import '../../../../../theme/app_theme.dart';
+import '../../../../../widgets/projects_section/projects_section_header.dart';
+import '../../../../../widgets/projects_section/projects_filter_tabs.dart';
+import '../../../../../widgets/projects_section/projects_empty_state.dart';
+import '../../../../../widgets/projects_section/projects_grid.dart';
+import '../../../../../widgets/custom_show_more_button.dart';
+import '../../../../../widgets/projects_section/projects_view_all_section.dart';
+import '../../../../../widgets/projects_section/all_projects_dialog.dart';
 
 class ProjectsSection extends StatefulWidget {
   const ProjectsSection({super.key});
