@@ -41,7 +41,7 @@ The site is often hosted under a **subpath** (example):
 flutter build web --release --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps
 ```
 
-Exact CI and local build: [04_Contact_And_Deploy/DEPLOYMENT.md](../04_Contact_And_Deploy/DEPLOYMENT.md). Windows one-liner from repo root: `.\build_optimized.ps1`. macOS / Linux: `chmod +x ./build_optimized.sh && ./build_optimized.sh`.
+Exact CI and local build: [04_Contact_And_Deploy/DEPLOYMENT.md](../04_Contact_And_Deploy/DEPLOYMENT.md). Windows one-liner from repo root: `.\scripts\build_optimized.ps1`. macOS / Linux: `chmod +x ./scripts/build_optimized.sh && ./scripts/build_optimized.sh`.
 
 ## Key entry files
 

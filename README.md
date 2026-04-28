@@ -15,7 +15,7 @@ Visit the live portfolio: [https://youssefsalem582.github.io/Youssef-Hassan-Port
 - **Initial Load**: 1-2 seconds (75% faster with optimizations)
 - **Repeat Load**: <1 second (Service Worker caching)
 - **Lighthouse Score**: 90+ (Performance, Accessibility, SEO)
-- **Bundle Size**: ~5 MB (HTML renderer)
+- **Bundle Size**: depends on renderer/engine (release `flutter build web` is tree-shaken)
 - **Offline Support**: PWA with Service Worker
 
 ## ✨ Features
@@ -26,7 +26,7 @@ Visit the live portfolio: [https://youssefsalem582.github.io/Youssef-Hassan-Port
 - **Certificates Section**: Professional achievements and certifications
 - **SEO Optimized**: Complete meta tags and Open Graph support
 - **Accessibility**: WCAG compliant with proper semantic structure
-- **Performance**: HTML renderer, lazy loading, Service Worker caching
+- **Performance**: Lazy loading, service worker caching, optimized release builds
 - **CI/CD**: Automated optimized deployment with GitHub Actions
 - **PWA Ready**: Installable on mobile and desktop devices
 
@@ -34,37 +34,18 @@ Visit the live portfolio: [https://youssefsalem582.github.io/Youssef-Hassan-Port
 
 - **Framework**: Flutter Web
 - **Language**: Dart
-- **State Management**: GetX (reactive state management)
-- **Styling**: Custom theme with responsive design
-- **Testing**: Flutter Test (unit & widget tests)
+- **State management**: [flutter_bloc](https://pub.dev/packages/flutter_bloc) (section-level BLoCs)
+- **Dependency injection**: [get_it](https://pub.dev/packages/get_it)
+- **Routing**: [go_router](https://pub.dev/packages/go_router)
+- **Styling**: Custom theme with responsive design (`responsive_framework`)
+- **Contact form**: Formspree via Dio (see `lib/config/api_keys.dart`)
+- **Testing**: Flutter Test, `bloc_test`, `mocktail`
 - **CI/CD**: GitHub Actions
 - **Deployment**: GitHub Pages
-- **Backend**: Supabase (PostgreSQL + Storage)
 
 ## 📦 Dependencies
 
-```yaml
-dependencies:
-  flutter:
-    sdk: flutter
-  cupertino_icons: ^1.0.8
-  flutter_web_plugins:
-    sdk: flutter
-  responsive_framework: ^1.4.0
-  google_fonts: ^6.1.0
-  flutter_svg: ^2.0.9
-  url_launcher: ^6.2.2
-  flutter_staggered_animations: ^1.1.1
-  animated_text_kit: ^4.2.2
-  http: ^1.1.2
-  get: ^4.6.6
-  supabase_flutter: ^2.5.6
-
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^5.0.0
-```
+See [`pubspec.yaml`](pubspec.yaml) for exact versions. Main packages include `flutter_bloc`, `go_router`, `get_it`, `dio`, `dartz`, `equatable`, `shared_preferences`, and `responsive_framework`.
 
 ## 🏃‍♂️ Getting Started
 
@@ -92,14 +73,21 @@ dev_dependencies:
    flutter run -d chrome
    ```
 
-4. **Build for production (Optimized)**
+4. **Build for production (optimized, matches CI)**
    ```powershell
-   # Windows PowerShell (Recommended - includes all optimizations)
-   .\build_optimized.ps1
-   
-   # Or manual build
-   flutter build web --release --web-renderer html --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps
+   # Windows
+   .\scripts\build_optimized.ps1
    ```
+   ```bash
+   # macOS / Linux
+   chmod +x ./scripts/build_optimized.sh && ./scripts/build_optimized.sh
+   ```
+
+   Manual equivalent (same flags as [.github/workflows/deploy.yml](.github/workflows/deploy.yml)):
+   ```bash
+   flutter build web --release --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps
+   ```
+   Then copy `web/service-worker.js`, `web/.htaccess`, and `web/_headers` into `build/web` if present, and add `build/web/.nojekyll`.
 
 ### Development Commands
 
@@ -113,89 +101,51 @@ flutter test
 # Run tests with coverage
 flutter test --coverage
 
-# Build optimized for production (Windows)
-.\build_optimized.ps1
+# Build optimized for production (Windows / matches CI)
+.\scripts\build_optimized.ps1
 
-# Build manually with optimizations
-flutter build web --release --web-renderer html --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps
+# Build optimized (macOS / Linux)
+./scripts/build_optimized.sh
 
 # Analyze code
-flutter analyze
-
-# Build for web
-flutter build web --release --web-renderer html
+dart analyze
 ```
 
 ## 📁 Project Structure
 
 ```
 lib/
-├── main.dart                 # App entry point
-├── models/                   # Data models
-│   ├── project.dart         # Project model
-│   ├── certificate.dart     # Certificate model
-│   ├── skill.dart          # Skill model
-│   └── contact.dart         # Contact model
-├── screens/                 # Main screens
-│   ├── portfolio_screen.dart # Main portfolio screen
-│   └── sections/            # Page sections
-│       ├── hero_section.dart
-│       ├── about_section.dart
-│       ├── projects_section.dart
-│       ├── skills_section.dart
-│       ├── certificates_section.dart
-│       └── contact_section.dart
-├── widgets/                 # Reusable widgets
-│   ├── project_card.dart   # Project display cards
-│   ├── app_navigation.dart  # Navigation component
-│   └── footer.dart         # Footer component
-├── utils/                   # Utilities and data
-│   ├── portfolio_data.dart  # Portfolio content data
-│   ├── responsive_helper.dart # Responsive utilities
-│   └── url_helper.dart      # URL handling utilities
-└── theme/                   # App theming
-    └── app_theme.dart       # Theme configuration
+├── main.dart                    # Entry: DI init, runApp
+├── app.dart                     # MaterialApp.router, theme/locale BLoCs
+├── injection_container.dart     # get_it registrations
+├── config/                      # routes, api keys
+├── core/                        # locale binding, localization extensions, use case types
+├── features/                    # Feature-first modules (data / domain / presentation)
+│   ├── home/                    # Portfolio shell; HomeBloc + PortfolioPage
+│   ├── hero/, about/, skills/, expertise/, projects/, certificates/, contact/
+│   ├── theme/, locale/
+│   └── ...
+├── models/                      # Shared entity types
+├── utils/data/                  # Static portfolio content (lists, copy)
+├── widgets/                     # Shared UI (navigation, cards, footer, …)
+├── l10n/                        # Generated + ARB localizations
+└── theme/                       # AppTheme
 
-assets/
-├── images/                  # Project images
-│   └── projects/           # Project screenshots
-├── certificates/           # Certificate files and images
-├── resume.pdf             # Resume download
-└── profile.jpeg           # Profile image
+assets/                          # Images, documents, fonts (see pubspec)
 
-test/                       # Test files
-├── models/                # Model tests
-├── widgets/               # Widget tests
-└── utils/                 # Utility tests
+test/                            # e.g. *_bloc_test.dart, *_repository_test.dart
 ```
+
+**Contributor-oriented technical docs** (architecture, DI, routing, l10n): [tech_readme_files/README.md](tech_readme_files/README.md).
 
 ## 🎨 Customization
 
 ### Updating Portfolio Content
 
-1. **Personal Information**: Edit `lib/utils/portfolio_data.dart`
-   ```dart
-   static const String fullName = 'Your Name';
-   static const String title = 'Your Title';
-   static const String email = 'your.email@example.com';
-   ```
-
-2. **Projects**: Add/edit projects in `PortfolioData.projects`
-   ```dart
-   Project(
-     id: 'your-project',
-     title: 'Your Project Title',
-     description: 'Detailed description...',
-     technologies: ['Flutter', 'Dart'],
-     githubUrl: 'https://github.com/username/repo',
-     imageUrl: 'assets/images/projects/your-project.png',
-     // ... other fields
-   )
-   ```
-
-3. **Certificates**: Add/edit certificates in `PortfolioData.certificates`
-
-4. **Skills**: Update skills categories in `PortfolioData.skills`
+1. **Aggregator**: [`lib/utils/data/portfolio_data.dart`](lib/utils/data/portfolio_data.dart) wires section helpers; many lists live in dedicated files under [`lib/utils/data/`](lib/utils/data/) (e.g. `personal_info_data.dart`, `projects_data.dart`, `skills_data.dart`, `certificates_data.dart`).
+2. **Projects / case studies**: Project models and narrative copy in `utils/data` and [`lib/features/projects/data/`](lib/features/projects/data/) as needed.
+3. **Arabic overlays**: Per-feature files under each `features/<name>/data/localized/`.
+4. **Theme**: [`lib/theme/app_theme.dart`](lib/theme/app_theme.dart) and [`lib/utils/assets/app_constants.dart`](lib/utils/assets/app_constants.dart).
 
 ### Adding New Images
 
@@ -214,49 +164,40 @@ Edit `lib/theme/app_theme.dart` to customize:
 
 ## 🚀 Deployment
 
-### Quick Deploy (3 Steps)
+### GitHub Actions (recommended)
 
-1. **Build optimized version**:
-   ```powershell
-   .\build_optimized.ps1
-   ```
+Workflow: [.github/workflows/deploy.yml](.github/workflows/deploy.yml). On push to **`master`**, it builds **`build/web`** with `--base-href "/Youssef-Hassan-Portfolio/"` and deploys to GitHub Pages (not the `docs/` folder).
 
-2. **Commit and push**:
-   ```powershell
-   git add .
-   git commit -m "Deploy optimized build"
-   git push origin master
-   ```
+1. Enable **GitHub Pages** (source: GitHub Actions) in repository settings.
+2. Push to `master` (or run the workflow manually via **Actions**).
 
-3. **Done!** GitHub Pages auto-deploys from `docs` folder
+Details: [tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md).
 
-**See [DEPLOY_FAST.md](DEPLOY_FAST.md) for quick guide or [OPTIMIZATION_GUIDE.md](OPTIMIZATION_GUIDE.md) for details.**
+### Local build (then upload if needed)
 
-### GitHub Pages (Automated)
+Use the same output CI uses:
 
-The repository includes automated GitHub Actions for optimized deployment:
+```powershell
+.\scripts\build_optimized.ps1
+```
 
-1. **Enable GitHub Pages** in repository settings
-2. **Push to main branch** - deployment happens automatically
-3. **Custom domain** (optional): Add CNAME record in `.github/workflows/flutter-web.yml`
+```bash
+chmod +x ./scripts/build_optimized.sh && ./scripts/build_optimized.sh
+```
 
-### Manual Deployment
+Artifact: **`build/web`**.
 
-1. **Build the project**
-   ```bash
-   flutter build web --release
-   ```
+### Manual one-off build
 
-2. **Deploy `build/web/` folder** to your hosting provider:
-   - **Vercel**: Connect repo → Build command: `flutter build web` → Output: `build/web`
-   - **Netlify**: Build command: `flutter build web` → Publish: `build/web`
-   - **Firebase Hosting**: `firebase deploy`
+```bash
+flutter build web --release --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps
+```
 
-### Environment Variables
+Then copy `web/service-worker.js` (and optional `web/.htaccess`, `web/_headers`) into `build/web`, and create `build/web/.nojekyll`.
 
-For contact form functionality, set these in your deployment environment:
-- `CONTACT_FORM_ENDPOINT` (optional)
-- `RECAPTCHA_SITE_KEY` (optional)
+### Environment / API keys
+
+- Contact form endpoint: set `ApiKeys.formspreeEndpoint` in [`lib/config/api_keys.dart`](lib/config/api_keys.dart) (or use `api_keys.dart.template` as a reference). Avoid committing secrets unrelated to Formspree’s public endpoint pattern.
 
 ## 🧪 Testing
 
@@ -270,14 +211,12 @@ flutter test
 flutter test --coverage
 
 # Run specific test file
-flutter test test/widgets/project_card_test.dart
+flutter test test/home_bloc_test.dart
 ```
 
 ### Test Coverage
 
-- **Unit Tests**: Models and utility functions
-- **Widget Tests**: Core UI components
-- **Integration Tests**: User workflows (planned)
+- **BLoC / repository tests**: e.g. `home_bloc_test.dart`, `projects_bloc_test.dart`, `projects_repository_test.dart`, `theme_bloc_test.dart`
 
 ## 📊 Performance
 

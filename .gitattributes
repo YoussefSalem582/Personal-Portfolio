@@ -1,0 +1,2 @@
+# Shell scripts: enforce LF on Windows checkouts (optional but helps bash/WSL).
+scripts/build_optimized.sh text eol=lf

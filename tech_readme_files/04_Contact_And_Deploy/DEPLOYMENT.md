@@ -18,9 +18,9 @@ GitHub Pages often serves the app from a **repository subpath** (this repo uses 
 
 ## Local optimized build
 
-**Windows:** from repo root run `.\build_optimized.ps1`.
+**Windows:** from repo root run `.\scripts\build_optimized.ps1`.
 
-**macOS / Linux:** `chmod +x ./build_optimized.sh && ./build_optimized.sh` (same steps as CI).
+**macOS / Linux:** `chmod +x ./scripts/build_optimized.sh && ./scripts/build_optimized.sh` (same steps as CI).
 
 This mirrors the CI build flags and copies service worker / static server files into `build/web`.
 
