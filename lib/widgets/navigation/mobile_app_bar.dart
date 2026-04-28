@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/responsive_helper.dart';
@@ -141,7 +142,9 @@ class _MenuButtonState extends State<_MenuButton> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return Tooltip(
+      message: AppLocalizations.of(context).tooltipOpenNavigationMenu,
+      child: GestureDetector(
       onTapDown: (_) => setState(() => _isPressed = true),
       onTapUp: (_) => setState(() => _isPressed = false),
       onTapCancel: () => setState(() => _isPressed = false),
@@ -189,6 +192,7 @@ class _MenuButtonState extends State<_MenuButton> {
           ),
         ),
       ),
+    ),
     );
   }
 }
@@ -207,86 +211,91 @@ class _AppBarTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
         // Logo with subtle animation - Opens image on click
-        GestureDetector(
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) => Dialog(
-                backgroundColor: Colors.transparent,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
-                  child: Container(
-                    constraints:
-                        const BoxConstraints(maxWidth: 400, maxHeight: 400),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Image.asset(
-                        AppImages.portfolioLogo,
-                        fit: BoxFit.contain,
+        Tooltip(
+          message: l10n.tooltipViewFullLogo,
+          child: GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) => Dialog(
+                  backgroundColor: Colors.transparent,
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: Container(
+                      constraints: const BoxConstraints(
+                          maxWidth: 400, maxHeight: 400),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: Image.asset(
+                          AppImages.portfolioLogo,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-            );
-          },
-          child: Hero(
-            tag: 'app_logo',
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    color:
-                        (isDark ? AppColors.accentDark : AppColors.accentLight)
-                            .withOpacity(0.2),
-                    blurRadius: 8,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
-                  AppImages.portfolioLogo,
-                  width: isSmallMobile ? 30 : 32,
-                  height: isSmallMobile ? 30 : 32,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      width: isSmallMobile ? 30 : 32,
-                      height: isSmallMobile ? 30 : 32,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: isDark
-                              ? [
-                                  AppColors.accentDark,
-                                  AppColors.accentDark.withOpacity(0.7)
-                                ]
-                              : [
-                                  AppColors.accentLight,
-                                  AppColors.accentLight.withOpacity(0.8)
-                                ],
+              );
+            },
+            child: Hero(
+              tag: 'app_logo',
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: (isDark
+                              ? AppColors.accentDark
+                              : AppColors.accentLight)
+                          .withOpacity(0.2),
+                      blurRadius: 8,
+                      offset: const Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    AppImages.portfolioLogo,
+                    width: isSmallMobile ? 30 : 32,
+                    height: isSmallMobile ? 30 : 32,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        width: isSmallMobile ? 30 : 32,
+                        height: isSmallMobile ? 30 : 32,
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: isDark
+                                ? [
+                                    AppColors.accentDark,
+                                    AppColors.accentDark.withOpacity(0.7)
+                                  ]
+                                : [
+                                    AppColors.accentLight,
+                                    AppColors.accentLight.withOpacity(0.8)
+                                  ],
+                          ),
+                          borderRadius: BorderRadius.circular(8),
                         ),
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: Center(
-                        child: SvgPicture.asset(
-                          AppIcons.flutterIconSvg,
-                          width: isSmallMobile ? 16 : 18,
-                          height: isSmallMobile ? 16 : 18,
-                          colorFilter: const ColorFilter.mode(
-                            AppColors.white,
-                            BlendMode.srcIn,
+                        child: Center(
+                          child: SvgPicture.asset(
+                            AppIcons.flutterIconSvg,
+                            width: isSmallMobile ? 16 : 18,
+                            height: isSmallMobile ? 16 : 18,
+                            colorFilter: const ColorFilter.mode(
+                              AppColors.white,
+                              BlendMode.srcIn,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
