@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../common/empty_state.dart';
 
@@ -14,9 +15,10 @@ class ProjectsEmptyState extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return EmptyState(
       icon: AppIcons.search,
-      message: 'No projects found for "$filterName"',
+      message: l10n.projectsEmptyForFilter(filterName),
     );
   }
 }

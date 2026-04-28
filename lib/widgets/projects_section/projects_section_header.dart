@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../common/section_header.dart';
 
 /// Projects Section Header
@@ -8,9 +9,10 @@ class ProjectsSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SectionHeader(
-      title: 'My Projects',
-      subtitle: 'Here are some of the projects I\'ve worked on',
+    final l10n = AppLocalizations.of(context);
+    return SectionHeader(
+      title: l10n.sectionProjectsTitle,
+      subtitle: l10n.sectionProjectsSubtitle,
       dividerWidth: 60,
     );
   }

@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../l10n/app_localizations.dart';
+import '../../models/project.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/assets/app_constants.dart';
+import '../../utils/data/localized/localized_extensions.dart';
 
 /// All Projects Dialog
 /// Displays a dialog with all projects in a scrollable list
 class AllProjectsDialog extends StatelessWidget {
-  final List<dynamic> projects;
+  final List<Project> projects;
 
   const AllProjectsDialog({
     super.key,
@@ -59,6 +62,7 @@ class AllProjectsDialog extends StatelessWidget {
   }
 
   Widget _buildHeader(BuildContext context, bool isDark) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.all(AppTheme.spacingL),
       decoration: BoxDecoration(
@@ -75,7 +79,7 @@ class AllProjectsDialog extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              'All Projects (${projects.length})',
+              l10n.allProjectsDialogTitle(projects.length),
               style: AppFonts.h2().copyWith(
                 color: isDark
                     ? AppColors.textPrimaryDark
@@ -85,6 +89,7 @@ class AllProjectsDialog extends StatelessWidget {
           ),
           IconButton(
             onPressed: () => Navigator.of(context).pop(),
+            tooltip: l10n.tooltipClose,
             icon: Icon(
               AppIcons.close,
               color: isDark
@@ -102,7 +107,7 @@ class AllProjectsDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildProjectItem(BuildContext context, dynamic project, bool isDark) {
+  Widget _buildProjectItem(BuildContext context, Project project, bool isDark) {
     return Material(
       color: AppColors.transparent,
       child: InkWell(
@@ -112,7 +117,7 @@ class AllProjectsDialog extends StatelessWidget {
           if (project.imageUrl != null ||
               (project.galleryImages != null &&
                   project.galleryImages!.isNotEmpty)) {
-            context.push(AppRoutes.getProjectRoute(project.id as String));
+            context.push(AppRoutes.getProjectRoute(project.id));
           }
         },
         borderRadius: BorderRadius.circular(AppTheme.radiusM),
@@ -155,7 +160,7 @@ class AllProjectsDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildProjectImage(dynamic project, bool isDark) {
+  Widget _buildProjectImage(Project project, bool isDark) {
     return Container(
       width: 70,
       height: 70,
@@ -180,12 +185,12 @@ class AllProjectsDialog extends StatelessWidget {
     );
   }
 
-  Widget _buildProjectContent(dynamic project, bool isDark) {
+  Widget _buildProjectContent(Project project, bool isDark) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          project.title,
+          project.localizedTitle,
           style: AppFonts.h5().copyWith(
             color:
                 isDark ? AppColors.textPrimaryDark : AppColors.textPrimaryLight,
@@ -194,7 +199,7 @@ class AllProjectsDialog extends StatelessWidget {
         ),
         const SizedBox(height: AppTheme.spacingXS),
         Text(
-          project.shortDescription,
+          project.localizedShortDescription,
           style: AppFonts.bodySmall().copyWith(
             color: isDark
                 ? AppColors.textSecondaryDark

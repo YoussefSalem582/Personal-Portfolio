@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
+import '../l10n/app_localizations.dart';
 import '../utils/assets/app_constants.dart';
 import '../models/project.dart';
+import '../utils/data/localized/localized_extensions.dart';
 import '../routes/app_routes.dart';
 import 'lazy_image.dart';
 import 'project_card.dart'; // Import for ProjectDetailsDialog
@@ -88,62 +90,69 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
   }
 
   Widget _buildCard(BuildContext context, bool isDark, double cardHeight) {
-    return GestureDetector(
-      onTap: () => _showProjectDetails(context),
-      child: Container(
-        height: cardHeight,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              color: _isHovered
-                  ? (isDark ? AppColors.accentDark : AppColors.accentLight)
-                      .withOpacity(0.25)
-                  : AppColors.black.withOpacity(0.08),
-              blurRadius: _isHovered ? 20 : 10,
-              offset: Offset(0, _isHovered ? 8 : 4),
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Stack(
-            children: [
-              // Simple background
-              Container(
-                decoration: BoxDecoration(
-                  color: isDark ? AppColors.cardDark : AppColors.white,
-                  border: Border.all(
-                    color: _isHovered
-                        ? (isDark
-                                ? AppColors.accentDark
-                                : AppColors.accentLight)
-                            .withOpacity(0.5)
-                        : (isDark
-                            ? AppColors.white.withOpacity(0.24)
-                            : AppColors.black.withOpacity(0.12)),
-                    width: 1,
+    final l10n = AppLocalizations.of(context);
+    return Semantics(
+      button: true,
+      label:
+          '${l10n.projectCardViewProject}: ${widget.project.localizedTitle}',
+      child: GestureDetector(
+        onTap: () => _showProjectDetails(context),
+        child: Container(
+          height: cardHeight,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: _isHovered
+                    ? (isDark ? AppColors.accentDark : AppColors.accentLight)
+                        .withOpacity(0.25)
+                    : AppColors.black.withOpacity(0.08),
+                blurRadius: _isHovered ? 20 : 10,
+                offset: Offset(0, _isHovered ? 8 : 4),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Stack(
+              children: [
+                // Simple background
+                Container(
+                  decoration: BoxDecoration(
+                    color: isDark ? AppColors.cardDark : AppColors.white,
+                    border: Border.all(
+                      color: _isHovered
+                          ? (isDark
+                                  ? AppColors.accentDark
+                                  : AppColors.accentLight)
+                              .withOpacity(0.5)
+                          : (isDark
+                              ? AppColors.white.withOpacity(0.24)
+                              : AppColors.black.withOpacity(0.12)),
+                      width: 1,
+                    ),
                   ),
                 ),
-              ),
 
-              // Content
-              Column(
-                children: [
-                  // Image Section
-                  _buildImageSection(context, isDark),
+                // Content
+                Column(
+                  children: [
+                    // Image Section
+                    _buildImageSection(context, isDark),
 
-                  // Content Section
-                  _buildContentSection(isDark),
-                ],
-              ),
+                    // Content Section
+                    _buildContentSection(isDark),
+                  ],
+                ),
 
-              // Featured badge
-              if (widget.project.isFeatured) _buildFeaturedBadge(isDark),
+                // Featured badge
+                if (widget.project.isFeatured)
+                  _buildFeaturedBadge(context),
 
-              // Hover overlay (simplified)
-              if (_isHovered) _buildHoverOverlay(context, isDark),
-            ],
+                // Hover overlay (simplified)
+                if (_isHovered) _buildHoverOverlay(context, isDark),
+              ],
+            ),
           ),
         ),
       ),
@@ -262,7 +271,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                                 : null,
                           ),
                           child: Text(
-                            widget.project.title,
+                            widget.project.localizedTitle,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -315,7 +324,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
 
             // Project Date
             Text(
-              _getProjectDateText(),
+              _getProjectDateText(context),
               style: AppFonts.bodySmall().copyWith(
                 color: (isDark
                         ? AppColors.textSecondaryDark
@@ -331,7 +340,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
             // Description
             Expanded(
               child: Text(
-                widget.project.shortDescription,
+                widget.project.localizedShortDescription,
                 style: AppFonts.bodySmall().copyWith(
                   fontSize: widget.isCompact ? 12 : null,
                   color: isDark
@@ -392,7 +401,8 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
     );
   }
 
-  Widget _buildFeaturedBadge(bool isDark) {
+  Widget _buildFeaturedBadge(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Positioned(
       top: 12,
       right: 12,
@@ -422,7 +432,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
             ),
             const SizedBox(width: 4),
             Text(
-              'Featured',
+              l10n.projectCardFeatured,
               style: AppFonts.bodyXS().copyWith(
                 color: AppColors.white,
                 fontWeight: AppFonts.bold,
@@ -435,6 +445,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
   }
 
   Widget _buildHoverOverlay(BuildContext context, bool isDark) {
+    final l10n = AppLocalizations.of(context);
     return Positioned.fill(
       child: IgnorePointer(
         child: AnimatedOpacity(
@@ -477,7 +488,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      'View Project',
+                      l10n.projectCardViewProject,
                       style: AppFonts.labelMedium().copyWith(
                         color: AppColors.white,
                         fontWeight: AppFonts.semiBold,
@@ -519,7 +530,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
             ),
             const SizedBox(height: 16),
             Text(
-              widget.project.title,
+              widget.project.localizedTitle,
               style: AppFonts.bodyLarge().copyWith(
                 color: isDark ? AppColors.accentDark : AppColors.accentLight,
                 fontWeight: AppFonts.bold,
@@ -552,23 +563,22 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
   }
 
   /// Get project date text - shows "Under development" for current projects
-  String _getProjectDateText() {
-    // Check if project is marked as under development
+  String _getProjectDateText(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     if (widget.project.isUnderDevelopment) {
-      return '🚧 Under Development';
+      return l10n.projectUnderDevelopment;
     }
 
     final now = DateTime.now();
     final projectDate = widget.project.createdAt;
 
-    // Check if project is from current month and year (under development)
     if (projectDate.year == now.year &&
         projectDate.month == now.month &&
         projectDate.day == now.day) {
-      return '🚧 Under Development';
+      return l10n.projectUnderDevelopment;
     }
 
-    // Otherwise show formatted date
-    return DateFormat('MMMM yyyy').format(projectDate);
+    return DateFormat.yMMMM(Localizations.localeOf(context).toString())
+        .format(projectDate);
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
+import '../../utils/data/localized/localized_project_filter.dart';
 import '../../theme/app_theme.dart';
 
 /// Projects Filter Tabs
@@ -52,10 +54,12 @@ class ProjectsFilterTabs extends StatelessWidget {
   Widget _buildFilterChip(BuildContext context, String filter) {
     final isSelected = selectedFilter == filter;
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
+    final label = localizedProjectFilterLabel(l10n, filter);
 
     return FilterChip(
       label: Text(
-        filter,
+        label,
         style: AppFonts.bodyMedium().copyWith(
           color: isSelected
               ? AppColors.white

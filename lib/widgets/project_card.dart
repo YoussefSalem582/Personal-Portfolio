@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+import '../l10n/app_localizations.dart';
 import '../utils/assets/app_constants.dart';
 import '../models/project.dart';
+import '../utils/data/localized/localized_extensions.dart';
 import '../utils/url_helper.dart';
 import '../utils/responsive_helper.dart';
 import '../routes/app_routes.dart';
@@ -50,6 +52,7 @@ class _ProjectCardState extends State<ProjectCard>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final screenWidth = MediaQuery.of(context).size.width;
 
@@ -108,26 +111,31 @@ class _ProjectCardState extends State<ProjectCard>
                     width: _isHovered ? 2 : 0,
                   ),
                 ),
-                child: InkWell(
-                  onTap: () => _showProjectDetails(context),
-                  child: Container(
-                    width: double.infinity,
-                    height: cardHeight,
-                    decoration: BoxDecoration(
-                      gradient: isDark
-                          ? AppColors.cardGradientDark
-                          : AppColors.cardGradientLight,
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Fixed Image Section
-                        _buildImageSection(context, isDark, imageHeight),
+                child: Semantics(
+                  button: true,
+                  label:
+                      '${l10n.projectCardViewProject}: ${widget.project.localizedTitle}',
+                  child: InkWell(
+                    onTap: () => _showProjectDetails(context),
+                    child: Container(
+                      width: double.infinity,
+                      height: cardHeight,
+                      decoration: BoxDecoration(
+                        gradient: isDark
+                            ? AppColors.cardGradientDark
+                            : AppColors.cardGradientLight,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Fixed Image Section
+                          _buildImageSection(context, isDark, imageHeight),
 
-                        // Fixed Content Section
-                        _buildContentSection(isDark, contentHeight),
-                      ],
+                          // Fixed Content Section
+                          _buildContentSection(isDark, contentHeight),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -140,6 +148,7 @@ class _ProjectCardState extends State<ProjectCard>
   }
 
   Widget _buildImageSection(BuildContext context, bool isDark, double height) {
+    final l10n = AppLocalizations.of(context);
     return SizedBox(
       width: double.infinity,
       height: height,
@@ -213,7 +222,7 @@ class _ProjectCardState extends State<ProjectCard>
                     ),
                     const SizedBox(width: 4),
                     Text(
-                      'Featured',
+                      l10n.projectCardFeatured,
                       style: AppFonts.bodySmall().copyWith(
                         color: AppColors.white,
                         fontWeight: AppFonts.bold,
@@ -262,7 +271,7 @@ class _ProjectCardState extends State<ProjectCard>
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        'View Project',
+                        l10n.projectCardViewProject,
                         style: AppFonts.bodyMedium().copyWith(
                           color: AppColors.white,
                           fontWeight: AppFonts.bold,
@@ -296,7 +305,7 @@ class _ProjectCardState extends State<ProjectCard>
                 children: [
                   Expanded(
                     child: Text(
-                      widget.project.title,
+                      widget.project.localizedTitle,
                       style: AppFonts.labelMedium().copyWith(
                         fontWeight: AppFonts.bold,
                         color: _isHovered
@@ -332,7 +341,7 @@ class _ProjectCardState extends State<ProjectCard>
             SizedBox(
               height: 13.0,
               child: Text(
-                widget.project.shortDescription,
+                widget.project.localizedShortDescription,
                 style: AppFonts.bodyXS().copyWith(
                   color: isDark
                       ? AppColors.textSecondaryDark
@@ -435,7 +444,7 @@ class _ProjectCardState extends State<ProjectCard>
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
-              widget.project.title,
+              widget.project.localizedTitle,
               style: AppFonts.bodyMedium().copyWith(
                 color: AppColors.accentLight,
                 fontWeight: AppFonts.bold,
@@ -466,6 +475,7 @@ class ProjectDetailsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
 
     return Dialog(
       backgroundColor: AppColors.transparent,
@@ -487,7 +497,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      project.title,
+                      project.localizedTitle,
                       style: AppFonts.h2().copyWith(
                         color: isDark
                             ? AppColors.textPrimaryDark
@@ -497,6 +507,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () => Navigator.of(context).pop(),
+                    tooltip: l10n.tooltipClose,
                     icon: Icon(
                       AppIcons.close,
                       color: isDark
@@ -527,7 +538,7 @@ class ProjectDetailsDialog extends StatelessWidget {
 
                     // Description
                     Text(
-                      'Description',
+                      l10n.projectDialogDescriptionHeading,
                       style: AppFonts.h3().copyWith(
                         color: isDark
                             ? AppColors.textPrimaryDark
@@ -536,7 +547,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                     ),
                     const SizedBox(height: AppTheme.spacingS),
                     Text(
-                      project.description,
+                      project.localizedDescription,
                       style: AppFonts.bodyMedium().copyWith(
                         color: isDark
                             ? AppColors.textSecondaryDark
@@ -548,7 +559,7 @@ class ProjectDetailsDialog extends StatelessWidget {
 
                     // Technologies
                     Text(
-                      'Technologies Used',
+                      l10n.projectDialogTechnologiesHeading,
                       style: AppFonts.h3().copyWith(
                         color: isDark
                             ? AppColors.textPrimaryDark
@@ -601,7 +612,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                           AppRoutes.getProjectRoute(project.id),
                         ),
                         icon: const Icon(AppIcons.blog),
-                        label: const Text('View Case Study'),
+                        label: Text(l10n.projectDialogViewCaseStudy),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: isDark
                               ? AppColors.accentDark
@@ -620,7 +631,7 @@ class ProjectDetailsDialog extends StatelessWidget {
                             onPressed: () =>
                                 UrlHelper.launchURL(project.githubUrl!),
                             icon: const Icon(Icons.code),
-                            label: const Text('View Code'),
+                            label: Text(l10n.projectDialogViewCode),
                           ),
                         ),
                       if (project.githubUrl != null && project.liveUrl != null)
@@ -632,8 +643,11 @@ class ProjectDetailsDialog extends StatelessWidget {
                                 UrlHelper.launchURL(project.liveUrl!),
                             icon: const Icon(AppIcons.demo),
                             label: Text(
-                              UrlHelper.liveUrlButtonLabel(project.liveUrl!,
-                                  compact: true),
+                              UrlHelper.liveUrlButtonLabel(
+                                l10n,
+                                project.liveUrl!,
+                                compact: true,
+                              ),
                             ),
                           ),
                         ),
