@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../utils/assets/app_constants.dart';
+import '../../../../../utils/assets/app_constants.dart';
 
-import '../../theme/app_theme.dart';
+import '../../../../../theme/app_theme.dart';
 
 /// Key learnings section with modern list design
 class KeyLearningsWidget extends StatelessWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../models/project.dart';
-import '../../utils/assets/app_constants.dart';
-import '../../utils/data/project_case_study_data.dart';
+import '../../../../../models/project.dart';
+import '../../../../../utils/assets/app_constants.dart';
+import '../../../data/project_case_study_data.dart';
 
-import '../../theme/app_theme.dart';
+import '../../../../../theme/app_theme.dart';
 
 /// Project overview section with modern card design
 class ProjectOverviewWidget extends StatelessWidget {

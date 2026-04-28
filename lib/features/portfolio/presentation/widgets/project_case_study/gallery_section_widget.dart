@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../utils/assets/app_constants.dart';
-import '../lazy_image.dart';
+import '../../../../../utils/assets/app_constants.dart';
+import '../../../../../widgets/lazy_image.dart';
 
-import '../../theme/app_theme.dart';
+import '../../../../../theme/app_theme.dart';
 
 /// Gallery section widget for project case study with categorized images
 ///
