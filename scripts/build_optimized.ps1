@@ -12,10 +12,18 @@ Write-Host ">> flutter clean"
 flutter clean
 
 Write-Host ">> flutter build web --release"
+$defineArgs = @()
+if ($env:FORMSPREE_ENDPOINT) {
+  $defineArgs += "--dart-define=FORMSPREE_ENDPOINT=$($env:FORMSPREE_ENDPOINT)"
+}
+if ($env:CONTACT_RECIPIENT_EMAIL) {
+  $defineArgs += "--dart-define=CONTACT_RECIPIENT_EMAIL=$($env:CONTACT_RECIPIENT_EMAIL)"
+}
 flutter build web `
   --release `
   --base-href "/Youssef-Hassan-Portfolio/" `
-  --no-source-maps
+  --no-source-maps `
+  @defineArgs
 
 $webOut = Join-Path $RepoRoot "build\web"
 if (-not (Test-Path $webOut)) {

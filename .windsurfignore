@@ -1,0 +1,57 @@
+# ============================================================
+# .windsurfignore — Exclude from Windsurf / Codeium AI context
+# Paths are relative to the repository root (Flutter Web portfolio).
+# ============================================================
+
+# Flutter build artifacts
+build/
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+android/.gradle/
+android/app/build/
+ios/Pods/
+ios/.symlinks/
+
+# Generated / codegen output
+**/*.g.dart
+**/*.freezed.dart
+**/*.mocks.dart
+
+# Binary assets (low signal for code context)
+**/*.png
+**/*.jpg
+**/*.jpeg
+**/*.gif
+**/*.svg
+**/*.ttf
+**/*.otf
+**/*.woff
+**/*.woff2
+**/*.ico
+**/*.mp4
+**/*.mp3
+**/*.pdf
+
+# IDE & OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+**/*.log
+**/*.log.*
+
+# Lock files
+**/pnpm-lock.yaml
+**/package-lock.json
+**/composer.lock
+pubspec.lock

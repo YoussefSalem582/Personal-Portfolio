@@ -1,0 +1,22 @@
+---
+description: "Feature module layout — data, domain, presentation"
+alwaysApply: false
+---
+
+# Feature architecture (portfolio)
+
+## Layout
+
+`lib/features/<feature>/`
+
+- **`data/`** — `datasources/` (local and, for contact, `contact_remote_datasource_impl.dart`), `repositories/*_impl.dart`.
+- **`domain/`** — `entities/`, `repositories/` (abstract), `usecases/` (single-purpose classes).
+- **`presentation/`** — `bloc/` (`*_event.dart`, `*_state.dart`, `*_bloc.dart`), `pages/`, `widgets/`.
+
+## Rule
+
+Dependencies point **inward**: presentation depends on domain; data implements domain. Prefer **no** Flutter imports in `domain/` entities and use cases when practical.
+
+## Shared UI
+
+Cross-cutting widgets live in `lib/widgets/`, not inside a feature, when multiple sections reuse them.

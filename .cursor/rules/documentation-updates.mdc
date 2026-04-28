@@ -1,0 +1,16 @@
+---
+description: "When to update CHANGELOG and tech_readme_files after changes"
+alwaysApply: true
+---
+
+# Documentation updates
+
+## Always (substantive code or content changes)
+
+1. **`CHANGELOG.md`** — Add a bullet under `[Unreleased]` (or the current version): `Added` / `Changed` / `Fixed` / `Removed`, [Keep a Changelog](https://keepachangelog.com/) style.
+
+## When relevant
+
+2. **`tech_readme_files/`** — Update the guide that matches what changed (navigation, DI, contact, deployment, localization, etc.). Use `tech_readme_files/DOCUMENTATION_MAP.md` to pick the right file.
+
+This repo does **not** use `DOCUMENTATION_UPDATE_SUMMARY.md` or `CURRENT_STATUS.md` (those were from another project template).

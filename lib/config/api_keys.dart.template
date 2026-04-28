@@ -1,7 +1,10 @@
 /// API Keys Configuration Template
 ///
-/// Copy this file to api_keys.dart and fill in your values.
-/// If you use .gitignore for api_keys.dart, keep this template in the repo.
+/// Copy to `api_keys.dart` and fill in your values.
+///
+/// You can instead (or also) pass build-time overrides:
+/// `--dart-define=FORMSPREE_ENDPOINT=https://formspree.io/f/YOUR_FORM_ID`
+/// `--dart-define=CONTACT_RECIPIENT_EMAIL=your.email@gmail.com`
 class ApiKeys {
   // Formspree — https://formspree.io/
   // Format: https://formspree.io/f/YOUR_FORM_ID

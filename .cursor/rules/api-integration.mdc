@@ -1,0 +1,16 @@
+---
+description: "HTTP / contact form — Formspree via Dio"
+alwaysApply: false
+---
+
+# API integration (this repo)
+
+There is **no** generic `ApiClient` or backend API surface. The only outbound integration is typically:
+
+- **Contact form** — `contact_remote_datasource_impl.dart` posts to `ContactRuntimeConfig.formspreeEndpoint` (`lib/config/contact_runtime_config.dart`: `--dart-define` overrides, else `lib/config/api_keys.dart`).
+
+## Adding or changing integrations
+
+1. Prefer env-safe configuration: copy from `lib/config/api_keys.dart.template`.
+2. Map failures to user-visible messages in the repository or BLoC (no raw exception strings in UI).
+3. Document new endpoints or services in `tech_readme_files/04_Contact_And_Deploy/` if behavior is non-trivial.

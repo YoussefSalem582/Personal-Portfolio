@@ -6,11 +6,38 @@ The contact section is driven by [ContactBloc](../../lib/features/contact/presen
 
 ## Configuration
 
-Endpoint: [lib/config/api_keys.dart](../../lib/config/api_keys.dart) — `ApiKeys.formspreeEndpoint`.
+Resolved at runtime via [lib/config/contact_runtime_config.dart](../../lib/config/contact_runtime_config.dart) (`ContactRuntimeConfig`):
 
-Template for local setup: [lib/config/api_keys.dart.template](../../lib/config/api_keys.dart.template).
+1. **Build-time defines** (highest priority when non-empty):
+   - `FORMSPREE_ENDPOINT` — full Formspree URL, e.g. `https://formspree.io/f/xxxx`
+   - `CONTACT_RECIPIENT_EMAIL` — shown in some error strings / support copy
 
-## UI entry points
+   Example:
+
+   ```bash
+   flutter run -d chrome \
+     --dart-define=FORMSPREE_ENDPOINT=https://formspree.io/f/your_form \
+     --dart-define=CONTACT_RECIPIENT_EMAIL=you@example.com
+   ```
+
+2. **Fallback:** [lib/config/api_keys.dart](../../lib/config/api_keys.dart) — `ApiKeys.formspreeEndpoint` / `ApiKeys.recipientEmail`.
+
+Template for a fresh fork: [lib/config/api_keys.dart.template](../../lib/config/api_keys.dart.template).
+
+### GitHub Actions / GitHub Pages
+
+[.github/workflows/deploy.yml](../../.github/workflows/deploy.yml) passes defines when repository **Secrets** are set:
+
+| Secret | Maps to |
+|--------|---------|
+| `FORMSPREE_ENDPOINT` | `--dart-define=FORMSPREE_ENDPOINT` |
+| `CONTACT_RECIPIENT_EMAIL` | `--dart-define=CONTACT_RECIPIENT_EMAIL` |
+
+If secrets are empty, the workflow still builds and uses `api_keys.dart` values.
+
+Local **Windows** / **Unix** optimized builds (`scripts/build_optimized.ps1`, `scripts/build_optimized.sh`) read the same variables from the environment when set. Commented examples: [`.env.example`](../../.env.example).
+
+See also: [DEPLOYMENT.md](DEPLOYMENT.md) for CI secrets and local script parity.
 
 - Section wrapper: [lib/features/contact/presentation/widgets/contact_section.dart](../../lib/features/contact/presentation/widgets/contact_section.dart)
 - Form fields + `BlocConsumer`: [lib/widgets/contact_section/contact_form_widget.dart](../../lib/widgets/contact_section/contact_form_widget.dart)

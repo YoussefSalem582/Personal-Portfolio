@@ -18,6 +18,9 @@ Supplements the root [README.md](../README.md). This folder describes how the **
 | Contact form (Formspree) | [04_Contact_And_Deploy/CONTACT_FORM.md](04_Contact_And_Deploy/CONTACT_FORM.md) |
 | CI / Pages deploy | [04_Contact_And_Deploy/DEPLOYMENT.md](04_Contact_And_Deploy/DEPLOYMENT.md) · [04_Contact_And_Deploy/README.md](04_Contact_And_Deploy/README.md) |
 
-## IDE / Copilot
+## IDE / AI assistants
 
-For a short machine-oriented summary, see [.github/copilot-instructions.md](../.github/copilot-instructions.md).
+| Kind | Location |
+|------|-----------|
+| Copilot-oriented summary | [.github/copilot-instructions.md](../.github/copilot-instructions.md) |
+| Cursor / Claude / generic agents | [AGENTS.md](../AGENTS.md) · [CLAUDE.md](../CLAUDE.md) (also listed in [DOCUMENTATION_MAP.md](DOCUMENTATION_MAP.md)) |

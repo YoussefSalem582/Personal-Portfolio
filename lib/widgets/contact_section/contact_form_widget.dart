@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../models/contact_form.dart';
-import '../../config/api_keys.dart';
+import '../../config/contact_runtime_config.dart';
 import 'package:youssef_hassan_portfolio/features/contact/domain/contact_submit_error.dart';
 import 'package:youssef_hassan_portfolio/features/contact/presentation/bloc/contact_bloc.dart';
 import 'package:youssef_hassan_portfolio/features/contact/presentation/bloc/contact_event.dart';
@@ -359,7 +359,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
   }
 
   String _mapSubmitError(ContactSubmitError e, AppLocalizations l10n) {
-    const email = ApiKeys.recipientEmail;
+    final email = ContactRuntimeConfig.recipientEmail;
     switch (e.kind) {
       case ContactSubmitErrorKind.notConfigured:
         return l10n.contactErrorNotConfigured;

@@ -3,8 +3,8 @@ import 'dart:developer' as developer;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// Debug logging for BLoCs (similar role to talker_bloc in technology_ninety_two_app).
-/// Silent in release; logs in debug/profile via [developer.log].
+/// Debug-oriented [BlocObserver] — logs lifecycle, events, and transitions.
+/// Silent in release; uses [developer.log] in debug/profile (similar idea to Talker / bloc logging packages).
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver({
     this.logEvents = true,

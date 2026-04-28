@@ -57,5 +57,5 @@ app.*.map.json
 # Environment variables (contains secrets)
 .env
 
-# API Keys and sensitive configuration (commented out - Formspree endpoint is public)
+# API keys (uncomment to keep real `api_keys.dart` local-only; keep `api_keys.dart.template` in git)
 # lib/config/api_keys.dart

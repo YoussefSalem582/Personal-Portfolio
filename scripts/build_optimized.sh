@@ -13,10 +13,18 @@ echo ">> flutter clean"
 flutter clean
 
 echo ">> flutter build web --release"
+EXTRA=()
+if [[ -n "${FORMSPREE_ENDPOINT:-}" ]]; then
+  EXTRA+=(--dart-define="FORMSPREE_ENDPOINT=$FORMSPREE_ENDPOINT")
+fi
+if [[ -n "${CONTACT_RECIPIENT_EMAIL:-}" ]]; then
+  EXTRA+=(--dart-define="CONTACT_RECIPIENT_EMAIL=$CONTACT_RECIPIENT_EMAIL")
+fi
 flutter build web \
   --release \
   --base-href "/Youssef-Hassan-Portfolio/" \
-  --no-source-maps
+  --no-source-maps \
+  "${EXTRA[@]}"
 
 WEB_OUT="$ROOT/build/web"
 if [[ ! -d "$WEB_OUT" ]]; then

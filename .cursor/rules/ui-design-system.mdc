@@ -1,0 +1,13 @@
+---
+description: "Theme, colors, responsive layout"
+alwaysApply: false
+---
+
+# UI / design system
+
+- **Colors**: `lib/utils/assets/app_colors.dart` — e.g. `AppColors.primaryLight`, `AppColors.backgroundDark`, theme-aware pairs for light/dark.
+- **Typography / fonts**: `lib/utils/assets/app_fonts.dart` and theme `TextTheme` (Tajawal for Arabic support).
+- **Responsive**: `responsive_framework` (`ResponsiveBreakpoints`, etc.) — follow patterns in `lib/app.dart` and existing sections.
+- **Reusable widgets**: Prefer `lib/widgets/common/` and section folders under `lib/widgets/` before duplicating layout.
+
+New UI should match the existing portfolio look (clean, high contrast, sectioned layout).

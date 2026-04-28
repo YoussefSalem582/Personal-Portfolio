@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-import '../../../../config/api_keys.dart';
+import '../../../../config/contact_runtime_config.dart';
 import '../../../../models/contact_form.dart';
 import '../../domain/contact_submit_error.dart';
 import 'contact_remote_datasource.dart';
@@ -24,7 +24,7 @@ class ContactRemoteDataSourceImpl implements ContactRemoteDataSource {
 
   @override
   Future<void> submitFormSpree(ContactForm form) async {
-    const formspreeEndpoint = ApiKeys.formspreeEndpoint;
+    final formspreeEndpoint = ContactRuntimeConfig.formspreeEndpoint;
     if (formspreeEndpoint.isEmpty) {
       throw const ContactSubmitError(ContactSubmitErrorKind.notConfigured);
     }

@@ -197,7 +197,8 @@ Then copy `web/service-worker.js` (and optional `web/.htaccess`, `web/_headers`)
 
 ### Environment / API keys
 
-- Contact form endpoint: set `ApiKeys.formspreeEndpoint` in [`lib/config/api_keys.dart`](lib/config/api_keys.dart) (or use `api_keys.dart.template` as a reference). Avoid committing secrets unrelated to Formspree’s public endpoint pattern.
+- **Default:** [`lib/config/api_keys.dart`](lib/config/api_keys.dart) (`ApiKeys.formspreeEndpoint`, `ApiKeys.recipientEmail`). See [`lib/config/api_keys.dart.template`](lib/config/api_keys.dart.template) for a blank template.
+- **Overrides:** at build/run time, [`lib/config/contact_runtime_config.dart`](lib/config/contact_runtime_config.dart) prefers `--dart-define=FORMSPREE_ENDPOINT=...` and `--dart-define=CONTACT_RECIPIENT_EMAIL=...`. GitHub Actions can use repository **Secrets** with the same names (see [`tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md`](tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md) and [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md)). Shell examples: [`.env.example`](.env.example) (not loaded by Flutter—export vars or use IDE defines).
 
 ## 🧪 Testing
 
@@ -247,6 +248,8 @@ flutter test test/home_bloc_test.dart
 - Mobile browsers (iOS Safari, Chrome Mobile)
 
 ## 🤝 Contributing
+
+For structure, tooling, and AI assistant conventions, see [`tech_readme_files/README.md`](tech_readme_files/README.md), [`AGENTS.md`](AGENTS.md), and [`CLAUDE.md`](CLAUDE.md).
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)

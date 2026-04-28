@@ -41,11 +41,24 @@ jobs:
         run: flutter clean
       
       - name: Build optimized web app
+        env:
+          # Optional: set FORMSPREE_ENDPOINT and CONTACT_RECIPIENT_EMAIL in repo Secrets
+          # to override values in lib/config/api_keys.dart for Pages builds.
+          FORMSPREE_ENDPOINT: ${{ secrets.FORMSPREE_ENDPOINT }}
+          CONTACT_RECIPIENT_EMAIL: ${{ secrets.CONTACT_RECIPIENT_EMAIL }}
         run: |
+          EXTRA=""
+          if [ -n "$FORMSPREE_ENDPOINT" ]; then
+            EXTRA="$EXTRA --dart-define=FORMSPREE_ENDPOINT=$FORMSPREE_ENDPOINT"
+          fi
+          if [ -n "$CONTACT_RECIPIENT_EMAIL" ]; then
+            EXTRA="$EXTRA --dart-define=CONTACT_RECIPIENT_EMAIL=$CONTACT_RECIPIENT_EMAIL"
+          fi
           flutter build web \
             --release \
             --base-href "/Youssef-Hassan-Portfolio/" \
-            --no-source-maps
+            --no-source-maps \
+            $EXTRA
       
       - name: Copy service worker and headers
         run: |

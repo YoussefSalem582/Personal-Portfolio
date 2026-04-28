@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-/// Base failure for domain / repository error handling (matches technology_ninety_two_app).
+/// Base failure for domain / repository error handling (`dartz` / Clean Architecture style).
 abstract class Failure extends Equatable {
   final String message;
   final int? statusCode;

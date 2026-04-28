@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 
 import '../error/failures.dart';
 
-/// Base use case ([technology_ninety_two_app] style).
+/// Callable use-case base: single [call] entry returning [Either]<[Failure], [Result]>.
 abstract class UseCase<Result, Params> {
   Future<Either<Failure, Result>> call(Params params);
 }

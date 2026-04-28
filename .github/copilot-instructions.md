@@ -19,7 +19,7 @@
 
 ## Contact form
 - UI: [lib/widgets/contact_section/contact_form_widget.dart](../lib/widgets/contact_section/contact_form_widget.dart) dispatches to `ContactBloc`.
-- Remote: [lib/features/contact/data/datasources/contact_remote_datasource_impl.dart](../lib/features/contact/data/datasources/contact_remote_datasource_impl.dart); endpoint [lib/config/api_keys.dart](../lib/config/api_keys.dart) (`ApiKeys.formspreeEndpoint`).
+- Remote: [lib/features/contact/data/datasources/contact_remote_datasource_impl.dart](../lib/features/contact/data/datasources/contact_remote_datasource_impl.dart); URL from [lib/config/contact_runtime_config.dart](../lib/config/contact_runtime_config.dart) (`ContactRuntimeConfig.formspreeEndpoint`, with optional `--dart-define` overrides; fall back to [api_keys.dart](../lib/config/api_keys.dart)).
 
 ## Assets and web
 - Constants/images: [lib/utils/assets/](../lib/utils/assets/).
