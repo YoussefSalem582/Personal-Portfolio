@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../controllers/theme_controller.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../features/theme/presentation/bloc/theme_bloc.dart';
+import '../../features/theme/presentation/bloc/theme_event.dart';
+import '../../features/theme/presentation/bloc/theme_state.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 
@@ -44,15 +47,16 @@ class ProjectCaseStudyAppBar extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final themeController = Get.find<ThemeController>();
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
     final isSmallMobile = ResponsiveHelper.isSmallMobile(screenWidth);
 
-    return Obx(() {
-      final isDark = themeController.isDarkMode;
+    return BlocBuilder<ThemeBloc, ThemeUiState>(
+      builder: (context, _) {
+        final isDark =
+            context.read<ThemeBloc>().isDarkModeEffective(context);
 
-      return Container(
+        return Container(
         height: 70,
         padding: EdgeInsets.symmetric(
           horizontal: ResponsiveHelper.getHorizontalPadding(screenWidth),
@@ -306,7 +310,11 @@ class ProjectCaseStudyAppBar extends StatelessWidget
                     size: 20,
                   ),
                   color: isDark ? AppColors.accentDark : AppColors.accentLight,
-                  onPressed: themeController.toggleTheme,
+                  onPressed: () => context.read<ThemeBloc>().add(
+                        ThemeToggleSubmitted(
+                          ambientBrightness: Theme.of(context).brightness,
+                        ),
+                      ),
                   tooltip: isDark ? 'Light Mode' : 'Dark Mode',
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(
@@ -318,7 +326,8 @@ class ProjectCaseStudyAppBar extends StatelessWidget
           ],
         ),
       );
-    });
+      },
+    );
   }
 
   List<Widget> _buildSectionItems(bool isDark) {
@@ -487,9 +496,11 @@ class ProjectCaseStudyAppBar extends StatelessWidget
             const Divider(height: 1),
             // Dark mode toggle
             InkWell(
-              onTap: () {
-                Get.find<ThemeController>().toggleTheme();
-              },
+              onTap: () => context.read<ThemeBloc>().add(
+                    ThemeToggleSubmitted(
+                      ambientBrightness: Theme.of(context).brightness,
+                    ),
+                  ),
               child: Container(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,

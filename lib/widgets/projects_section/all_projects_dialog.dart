@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../utils/assets/app_constants.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../routes/app_routes.dart';
 import '../../theme/app_theme.dart';
+import '../../utils/assets/app_constants.dart';
 
 /// All Projects Dialog
 /// Displays a dialog with all projects in a scrollable list
@@ -110,7 +112,7 @@ class AllProjectsDialog extends StatelessWidget {
           if (project.imageUrl != null ||
               (project.galleryImages != null &&
                   project.galleryImages!.isNotEmpty)) {
-            Get.toNamed('/project/${project.id}');
+            context.push(AppRoutes.getProjectRoute(project.id as String));
           }
         },
         borderRadius: BorderRadius.circular(AppTheme.radiusM),

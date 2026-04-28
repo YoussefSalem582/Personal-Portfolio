@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import '../utils/assets/app_constants.dart';
 import '../models/project.dart';
@@ -541,7 +541,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
       final route = AppRoutes.getProjectRoute(widget.project.id);
 
       // Navigate directly to the constructed route
-      Get.toNamed(route);
+      context.push(route);
     } else {
       // Show dialog for projects without images
       showDialog(

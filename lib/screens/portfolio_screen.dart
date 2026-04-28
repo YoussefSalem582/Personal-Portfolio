@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import '../utils/assets/app_constants.dart';
 import '../widgets/navigation/app_navigation.dart';
 import '../utils/responsive_helper.dart';
-import '../controllers/portfolio_controller.dart';
-import 'sections/hero_section.dart';
 import 'sections/about_section.dart';
-import 'sections/projects_section.dart';
-import 'sections/expertise_section.dart';
-import 'sections/skills_section.dart';
 import 'sections/certificates_section.dart';
 import 'sections/contact_section.dart';
+import 'sections/expertise_section.dart';
+import 'sections/hero_section.dart';
+import 'sections/projects_section.dart';
+import 'sections/skills_section.dart';
 import '../widgets/footer.dart';
-import '../widgets/skeleton_loading.dart';
 
 class PortfolioScreen extends StatefulWidget {
-  const PortfolioScreen({super.key});
+  const PortfolioScreen({super.key, this.initialSectionIndex});
+
+  /// Scroll target section (0–6) after first layout; used by section deep links.
+  final int? initialSectionIndex;
 
   @override
   State<PortfolioScreen> createState() => _PortfolioScreenState();
@@ -30,6 +31,15 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    final idx = widget.initialSectionIndex;
+    if (idx != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(const Duration(milliseconds: 150), () {
+          if (!mounted) return;
+          _scrollToSection(idx);
+        });
+      });
+    }
   }
 
   @override
@@ -111,7 +121,6 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    final controller = Get.find<PortfolioController>();
 
     return Scaffold(
       backgroundColor:
@@ -120,23 +129,16 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
           ? AppNavigation.buildDrawer(
               context, _scrollToSection, _currentSection)
           : null,
-      body: Obx(() {
-        // Show loading state
-        if (controller.isLoading) {
-          return const SkeletonLoading();
-        }
+      body: Column(
+        children: [
+          // Fixed Navigation Bar
+          AppNavigation(
+            onItemSelected: _scrollToSection,
+            currentIndex: _currentSection,
+          ),
 
-        // Show main content with optimized Slivers for better performance
-        return Column(
-          children: [
-            // Fixed Navigation Bar
-            AppNavigation(
-              onItemSelected: _scrollToSection,
-              currentIndex: _currentSection,
-            ),
-
-            // Scrollable Content - Removed lazy loading for better performance
-            Expanded(
+          // Scrollable Content - Removed lazy loading for better performance
+          Expanded(
               child: CustomScrollView(
                 controller: _scrollController,
                 physics: const BouncingScrollPhysics(
@@ -196,8 +198,7 @@ class _PortfolioScreenState extends State<PortfolioScreen> {
               ),
             ),
           ],
-        );
-      }),
+        ),
 
       // Floating Action Button for mobile
       floatingActionButton: isMobile

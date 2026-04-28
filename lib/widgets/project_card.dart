@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
+
 import '../utils/assets/app_constants.dart';
 import '../models/project.dart';
 import '../utils/url_helper.dart';
@@ -596,9 +597,8 @@ class ProjectDetailsDialog extends StatelessWidget {
                       width: double.infinity,
                       margin: const EdgeInsets.only(bottom: AppTheme.spacingM),
                       child: ElevatedButton.icon(
-                        onPressed: () => Get.toNamed(
-                          AppRoutes.project,
-                          parameters: {'id': project.id},
+                        onPressed: () => context.push(
+                          AppRoutes.getProjectRoute(project.id),
                         ),
                         icon: const Icon(AppIcons.blog),
                         label: const Text('View Case Study'),
