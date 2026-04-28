@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../common/section_header.dart';
 
 /// Skills Section Header Widget
@@ -15,10 +16,10 @@ class SkillsSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return SectionHeader(
-      title: 'My Tech Stack',
-      subtitle:
-          'A collection of technologies I am proficient in and enjoy working with.',
+      title: l10n.sectionSkillsTitle,
+      subtitle: l10n.sectionSkillsSubtitle,
       useShaderMask: true,
       isMobile: isMobile,
     );

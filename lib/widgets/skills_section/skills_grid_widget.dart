@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../models/skill.dart';
+import '../../utils/data/localized/localized_extensions.dart';
 import '../../utils/data/skills_data.dart';
 import 'skill_category_widget.dart';
 
@@ -17,7 +19,7 @@ class SkillsGridWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final maxWidth = isMobile ? double.infinity : 1400.0;
-    final categories = SkillsData.skills;
+    final List<SkillCategory> categories = SkillsData.skills;
 
     return Center(
       child: Container(
@@ -30,12 +32,12 @@ class SkillsGridWidget extends StatelessWidget {
   }
 
   /// Mobile Layout - Vertical Column
-  Widget _buildMobileLayout(List<dynamic> categories) {
+  Widget _buildMobileLayout(List<SkillCategory> categories) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: categories.map((category) {
         return SkillCategoryWidget(
-          categoryName: category.name,
+          categoryName: category.localizedName,
           skills: category.skills,
           isDark: isDark,
           isMobile: isMobile,
@@ -45,14 +47,14 @@ class SkillsGridWidget extends StatelessWidget {
   }
 
   /// Desktop Layout - Horizontal Row
-  Widget _buildDesktopLayout(List<dynamic> categories) {
+  Widget _buildDesktopLayout(List<SkillCategory> categories) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: categories.map((category) {
         return Expanded(
           child: SkillCategoryWidget(
-            categoryName: category.name,
+            categoryName: category.localizedName,
             skills: category.skills,
             isDark: isDark,
             isMobile: isMobile,
