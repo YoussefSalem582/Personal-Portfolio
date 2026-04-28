@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
@@ -21,6 +22,7 @@ class SocialLinksWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       children: [
@@ -32,7 +34,7 @@ class SocialLinksWidget extends StatelessWidget {
                 : [AppColors.accentLight, AppColors.primaryLight],
           ).createShader(bounds),
           child: Text(
-            'Connect With Me',
+            l10n.contactSocialHeading,
             style: (isDark ? AppFonts.h3() : AppFonts.h3()).copyWith(
               color: AppColors.white,
               fontWeight: AppFonts.extraBold,

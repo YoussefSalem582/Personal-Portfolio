@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
+import '../../utils/data/localized/portfolio_strings.dart';
 import '../../utils/url_helper.dart';
 import 'contact_info_item_widget.dart';
 
@@ -24,6 +26,7 @@ class ContactInfoListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -46,7 +49,7 @@ class ContactInfoListWidget extends StatelessWidget {
             ),
             const SizedBox(width: AppTheme.spacingS),
             Text(
-              'Get In Touch',
+              l10n.contactInfoHeading,
               style: (isDark ? AppFonts.h3() : AppFonts.h3()).copyWith(
                 color: isDark ? AppColors.white : AppColors.gray900,
                 fontWeight: AppFonts.bold,
@@ -86,7 +89,7 @@ class ContactInfoListWidget extends StatelessWidget {
               // Email contact item (clickable)
               ContactInfoItemWidget(
                 icon: AppIcons.email,
-                label: 'Email',
+                label: l10n.contactInfoEmailLabel,
                 value: PortfolioData.email,
                 onTap: () => UrlHelper.launchEmail(email: PortfolioData.email),
               ),
@@ -116,17 +119,17 @@ class ContactInfoListWidget extends StatelessWidget {
               const SizedBox(height: AppTheme.spacingM),
 
               // Location item (non-clickable)
-              const ContactInfoItemWidget(
+              ContactInfoItemWidget(
                 icon: AppIcons.location,
-                label: 'Location',
-                value: PortfolioData.location,
+                label: l10n.contactInfoLocationLabel,
+                value: PortfolioStrings.locationDisplay,
                 onTap: null,
               ),
 
               const SizedBox(height: AppTheme.spacingL),
 
               // Contact Me button
-              _buildContactButton(context, isDark),
+              _buildContactButton(context, isDark, l10n),
             ],
           ),
         ),
@@ -134,7 +137,8 @@ class ContactInfoListWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildContactButton(BuildContext context, bool isDark) {
+  Widget _buildContactButton(
+      BuildContext context, bool isDark, AppLocalizations l10n) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: InkWell(
@@ -174,7 +178,7 @@ class ContactInfoListWidget extends StatelessWidget {
               ),
               const SizedBox(width: AppTheme.spacingS),
               Text(
-                'Send Me a Message',
+                l10n.contactFormTitle,
                 style: AppFonts.button().copyWith(
                   color: AppColors.white,
                   fontWeight: AppFonts.bold,

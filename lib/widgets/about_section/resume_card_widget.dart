@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
@@ -95,6 +96,7 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget> {
   /// Layout for desktop screens
   Widget _buildDesktopLayout(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -136,13 +138,13 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'View My Resume',
+                      l10n.resumeCardTitle,
                       style: AppFonts.h4ForTheme(context)
                           .copyWith(fontWeight: AppFonts.bold),
                     ),
                     const SizedBox(height: AppTheme.spacingXS),
                     Text(
-                      'Explore my professional journey, skills, and achievements.',
+                      l10n.resumeCardSubtitle,
                       style: AppFonts.bodyForTheme(context, isSecondary: true),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -158,7 +160,7 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget> {
         ElevatedButton.icon(
           onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
           icon: const Icon(AppIcons.view, size: 20),
-          label: const Text('View CV'),
+          label: Text(l10n.resumeViewCv),
           style: ElevatedButton.styleFrom(
             padding: const EdgeInsets.symmetric(
               horizontal: AppTheme.spacingXL,
@@ -180,6 +182,7 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget> {
   /// Layout for mobile screens
   Widget _buildMobileLayout(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       children: [
@@ -209,13 +212,13 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'View My Resume',
+                    l10n.resumeCardTitle,
                     style: AppFonts.h5ForTheme(context)
                         .copyWith(fontWeight: AppFonts.bold),
                   ),
                   const SizedBox(height: 2),
                   Text(
-                    'Explore my professional journey.',
+                    l10n.resumeCardSubtitle,
                     style:
                         AppFonts.bodySmallForTheme(context, isSecondary: true),
                   ),
@@ -231,7 +234,7 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget> {
           child: ElevatedButton.icon(
             onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
             icon: const Icon(AppIcons.view, size: 18),
-            label: const Text('View CV'),
+            label: Text(l10n.resumeViewCv),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: AppTheme.spacingM),
               backgroundColor:
