@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../common/section_header.dart';
 
 /// Certificates Section Header
@@ -8,10 +9,10 @@ class CertificatesSectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SectionHeader(
-      title: 'Certificates & Achievements',
-      subtitle:
-          'Professional certifications showcasing continuous learning and expertise',
+    final l10n = AppLocalizations.of(context);
+    return SectionHeader(
+      title: l10n.sectionCertificatesTitle,
+      subtitle: l10n.sectionCertificatesSubtitle,
       dividerHeight: 5,
     );
   }

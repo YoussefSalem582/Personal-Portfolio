@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/certificate.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../theme/app_theme.dart';
@@ -23,7 +24,7 @@ class CertificateCardImage extends StatelessWidget {
     return Stack(
       children: [
         // Image Container
-        _buildImageContainer(),
+        _buildImageContainer(context),
 
         // Gradient Overlay
         _buildGradientOverlay(),
@@ -37,7 +38,7 @@ class CertificateCardImage extends StatelessWidget {
     );
   }
 
-  Widget _buildImageContainer() {
+  Widget _buildImageContainer(BuildContext context) {
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -61,11 +62,11 @@ class CertificateCardImage extends StatelessWidget {
             ? Image.asset(
                 certificate.imageUrl!,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return _buildPlaceholderIcon();
+                errorBuilder: (ctx, error, stackTrace) {
+                  return _buildPlaceholderIcon(ctx);
                 },
               )
-            : _buildPlaceholderIcon(),
+            : _buildPlaceholderIcon(context),
       ),
     );
   }
@@ -88,7 +89,8 @@ class CertificateCardImage extends StatelessWidget {
     );
   }
 
-  Widget _buildPlaceholderIcon() {
+  Widget _buildPlaceholderIcon(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       width: double.infinity,
       decoration: BoxDecoration(
@@ -123,7 +125,7 @@ class CertificateCardImage extends StatelessWidget {
           ),
           const SizedBox(height: AppTheme.spacingS),
           Text(
-            'Certificate',
+            l10n.certificatePlaceholderShort,
             style: AppFonts.bodyMedium().copyWith(
               color: accentColor,
               fontWeight: AppFonts.bold,

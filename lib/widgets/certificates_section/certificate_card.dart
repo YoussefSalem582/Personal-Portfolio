@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/certificate.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../theme/app_theme.dart';
@@ -44,6 +45,7 @@ class _CertificateCardState extends State<CertificateCard>
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
+    final l10n = AppLocalizations.of(context);
 
     return MouseRegion(
       onEnter: (_) {
@@ -81,7 +83,10 @@ class _CertificateCardState extends State<CertificateCard>
                 width: 2,
               ),
             ),
-            child: InkWell(
+            child: Semantics(
+              button: true,
+              label: l10n.tooltipCertificateOpenDetails,
+              child: InkWell(
               onTap: () => _showCertificateDetails(context),
               borderRadius: BorderRadius.circular(AppTheme.radiusXL),
               child: Container(
@@ -124,6 +129,7 @@ class _CertificateCardState extends State<CertificateCard>
                   ],
                 ),
               ),
+            ),
             ),
           ),
         ),

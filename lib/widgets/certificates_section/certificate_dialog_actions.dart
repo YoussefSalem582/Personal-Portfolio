@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/certificate.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
@@ -23,6 +24,7 @@ class CertificateDialogActions extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final l10n = AppLocalizations.of(context);
 
     return Container(
       padding: EdgeInsets.all(isMobile ? AppTheme.spacingM : AppTheme.spacingL),
@@ -41,34 +43,35 @@ class CertificateDialogActions extends StatelessWidget {
           ),
         ),
       ),
-      child: isMobile ? _buildMobileLayout() : _buildDesktopLayout(),
+      child: isMobile ? _buildMobileLayout(l10n) : _buildDesktopLayout(l10n),
     );
   }
 
-  Widget _buildMobileLayout() {
+  Widget _buildMobileLayout(AppLocalizations l10n) {
     return Column(
       children: [
-        if (certificate.pdfUrl != null) _buildPDFButton(true),
+        if (certificate.pdfUrl != null) _buildPDFButton(l10n, true),
         if (certificate.pdfUrl != null && certificate.credentialUrl != null)
           const SizedBox(height: AppTheme.spacingM),
-        if (certificate.credentialUrl != null) _buildVerifyButton(true),
+        if (certificate.credentialUrl != null) _buildVerifyButton(l10n, true),
       ],
     );
   }
 
-  Widget _buildDesktopLayout() {
+  Widget _buildDesktopLayout(AppLocalizations l10n) {
     return Row(
       children: [
-        if (certificate.pdfUrl != null) Expanded(child: _buildPDFButton(false)),
+        if (certificate.pdfUrl != null)
+          Expanded(child: _buildPDFButton(l10n, false)),
         if (certificate.pdfUrl != null && certificate.credentialUrl != null)
           const SizedBox(width: AppTheme.spacingM),
         if (certificate.credentialUrl != null)
-          Expanded(child: _buildVerifyButton(false)),
+          Expanded(child: _buildVerifyButton(l10n, false)),
       ],
     );
   }
 
-  Widget _buildPDFButton(bool fullWidth) {
+  Widget _buildPDFButton(AppLocalizations l10n, bool fullWidth) {
     return SizedBox(
       width: fullWidth ? double.infinity : null,
       child: ElevatedButton.icon(
@@ -78,7 +81,7 @@ class CertificateDialogActions extends StatelessWidget {
           }
         },
         icon: const Icon(AppIcons.pdf, size: 22),
-        label: const Text('View PDF'),
+        label: Text(l10n.certificateViewPdf),
         style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.errorLight,
           foregroundColor: AppColors.white,
@@ -100,7 +103,7 @@ class CertificateDialogActions extends StatelessWidget {
     );
   }
 
-  Widget _buildVerifyButton(bool fullWidth) {
+  Widget _buildVerifyButton(AppLocalizations l10n, bool fullWidth) {
     return SizedBox(
       width: fullWidth ? double.infinity : null,
       child: OutlinedButton.icon(
@@ -110,7 +113,7 @@ class CertificateDialogActions extends StatelessWidget {
           }
         },
         icon: const Icon(AppIcons.badge, size: 22),
-        label: const Text('Verify Certificate'),
+        label: Text(l10n.certificateVerify),
         style: OutlinedButton.styleFrom(
           foregroundColor: accentColor,
           padding: const EdgeInsets.symmetric(
