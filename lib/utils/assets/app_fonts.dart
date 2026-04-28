@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../core/locale/app_locale_binding.dart';
+
 /// App Fonts - Centralized typography definitions
 /// Used throughout the app for consistent text styling
 class AppFonts {
@@ -9,11 +11,13 @@ class AppFonts {
 
   // ==================== Font Families ====================
 
-  /// Primary font family (Poppins) - Used for headings
-  static String get primaryFont => 'Poppins';
+  /// Primary font family — Tajawal for Arabic, Poppins for Latin UI
+  static String get primaryFont => _isArabic ? 'Tajawal' : 'Poppins';
 
-  /// Secondary font family (Inter) - Used for body text
-  static String get secondaryFont => 'Inter';
+  /// Secondary font family — Tajawal for Arabic, Inter for Latin UI
+  static String get secondaryFont => _isArabic ? 'Tajawal' : 'Inter';
+
+  static bool get _isArabic => AppLocaleBinding.isArabic;
 
   // ==================== Font Weights ====================
 
@@ -96,150 +100,352 @@ class AppFonts {
   /// Loose line height - 1.6
   static const double lineHeightLoose = 1.6;
 
+  static const String _tajawalFamily = 'Tajawal';
+
+  static FontWeight _tajawalWeight(FontWeight w) {
+    final v = w.value;
+    if (v <= 450) return FontWeight.w400;
+    if (v <= 550) return FontWeight.w500;
+    return FontWeight.w700;
+  }
+
+  static TextStyle _tajawalText({
+    required double fontSize,
+    FontWeight fontWeight = FontWeight.w400,
+    Color? color,
+    double? height,
+    double? letterSpacing,
+    TextBaseline? textBaseline,
+    FontStyle? fontStyle,
+  }) {
+    return TextStyle(
+      fontFamily: _tajawalFamily,
+      fontSize: fontSize,
+      fontWeight: _tajawalWeight(fontWeight),
+      color: color,
+      height: height,
+      letterSpacing: letterSpacing,
+      textBaseline: textBaseline,
+      fontStyle: fontStyle,
+    );
+  }
+
   // ==================== Heading Styles ====================
 
   /// Display Large - 56px, Bold
-  static TextStyle displayLarge({Color? color}) => GoogleFonts.poppins(
+  static TextStyle displayLarge({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeDisplay,
         fontWeight: bold,
         color: color,
         height: lineHeightTight,
       );
+    }
+    return GoogleFonts.poppins(
+      fontSize: sizeDisplay,
+      fontWeight: bold,
+      color: color,
+      height: lineHeightTight,
+    );
+  }
 
   /// Heading 1 - 48px, Bold
-  static TextStyle h1({Color? color}) => GoogleFonts.poppins(
+  static TextStyle h1({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeH1,
         fontWeight: bold,
         color: color,
         height: lineHeightTight,
       );
+    }
+    return GoogleFonts.poppins(
+      fontSize: sizeH1,
+      fontWeight: bold,
+      color: color,
+      height: lineHeightTight,
+    );
+  }
 
   /// Heading 2 - 40px, Bold
-  static TextStyle h2({Color? color}) => GoogleFonts.poppins(
+  static TextStyle h2({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeH2,
         fontWeight: bold,
         color: color,
         height: lineHeightTight,
       );
+    }
+    return GoogleFonts.poppins(
+      fontSize: sizeH2,
+      fontWeight: bold,
+      color: color,
+      height: lineHeightTight,
+    );
+  }
 
   /// Heading 3 - 32px, Bold
-  static TextStyle h3({Color? color}) => GoogleFonts.poppins(
+  static TextStyle h3({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeH3,
         fontWeight: bold,
         color: color,
         height: lineHeightNormal,
       );
+    }
+    return GoogleFonts.poppins(
+      fontSize: sizeH3,
+      fontWeight: bold,
+      color: color,
+      height: lineHeightNormal,
+    );
+  }
 
   /// Heading 4 - 28px, Semi Bold
-  static TextStyle h4({Color? color}) => GoogleFonts.poppins(
+  static TextStyle h4({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeH4,
         fontWeight: semiBold,
         color: color,
         height: lineHeightNormal,
       );
+    }
+    return GoogleFonts.poppins(
+      fontSize: sizeH4,
+      fontWeight: semiBold,
+      color: color,
+      height: lineHeightNormal,
+    );
+  }
 
   /// Heading 5 - 24px, Semi Bold
-  static TextStyle h5({Color? color}) => GoogleFonts.poppins(
+  static TextStyle h5({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeH5,
         fontWeight: semiBold,
         color: color,
         height: lineHeightNormal,
       );
+    }
+    return GoogleFonts.poppins(
+      fontSize: sizeH5,
+      fontWeight: semiBold,
+      color: color,
+      height: lineHeightNormal,
+    );
+  }
 
   /// Heading 6 - 20px, Semi Bold
-  static TextStyle h6({Color? color}) => GoogleFonts.poppins(
+  static TextStyle h6({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeH6,
         fontWeight: semiBold,
         color: color,
         height: lineHeightRelaxed,
       );
+    }
+    return GoogleFonts.poppins(
+      fontSize: sizeH6,
+      fontWeight: semiBold,
+      color: color,
+      height: lineHeightRelaxed,
+    );
+  }
 
   // ==================== Body Styles ====================
 
   /// Body Large - 18px, Regular
-  static TextStyle bodyLarge({Color? color}) => GoogleFonts.inter(
+  static TextStyle bodyLarge({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeXL,
         fontWeight: regular,
         color: color,
         height: lineHeightLoose,
       );
+    }
+    return GoogleFonts.inter(
+      fontSize: sizeXL,
+      fontWeight: regular,
+      color: color,
+      height: lineHeightLoose,
+    );
+  }
 
   /// Body Medium - 16px, Regular
-  static TextStyle bodyMedium({Color? color}) => GoogleFonts.inter(
+  static TextStyle bodyMedium({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeL,
         fontWeight: regular,
         color: color,
-        height: lineHeightRelaxed,
+        height: lineHeightLoose,
       );
+    }
+    return GoogleFonts.inter(
+      fontSize: sizeL,
+      fontWeight: regular,
+      color: color,
+      height: lineHeightLoose,
+    );
+  }
 
   /// Body Small - 14px, Regular
-  static TextStyle bodySmall({Color? color}) => GoogleFonts.inter(
+  static TextStyle bodySmall({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeM,
         fontWeight: regular,
         color: color,
-        height: lineHeightRelaxed,
+        height: lineHeightLoose,
       );
+    }
+    return GoogleFonts.inter(
+      fontSize: sizeM,
+      fontWeight: regular,
+      color: color,
+      height: lineHeightLoose,
+    );
+  }
 
   /// Body Extra Small - 12px, Regular
-  static TextStyle bodyXS({Color? color}) => GoogleFonts.inter(
+  static TextStyle bodyXS({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeS,
         fontWeight: regular,
         color: color,
         height: lineHeightNormal,
       );
+    }
+    return GoogleFonts.inter(
+      fontSize: sizeS,
+      fontWeight: regular,
+      color: color,
+      height: lineHeightNormal,
+    );
+  }
 
   // ==================== Special Styles ====================
 
   /// Button text - 16px, Semi Bold
-  static TextStyle button({Color? color}) => GoogleFonts.poppins(
+  static TextStyle button({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeL,
         fontWeight: semiBold,
         color: color,
         letterSpacing: 0.5,
       );
+    }
+    return GoogleFonts.poppins(
+      fontSize: sizeL,
+      fontWeight: semiBold,
+      color: color,
+      letterSpacing: 0.5,
+    );
+  }
 
   /// Caption - 12px, Regular
-  static TextStyle caption({Color? color}) => GoogleFonts.inter(
+  static TextStyle caption({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeS,
         fontWeight: regular,
         color: color,
         height: lineHeightNormal,
       );
+    }
+    return GoogleFonts.inter(
+      fontSize: sizeS,
+      fontWeight: regular,
+      color: color,
+      height: lineHeightNormal,
+    );
+  }
 
   /// Overline - 10px, Medium, Uppercase
-  static TextStyle overline({Color? color}) => GoogleFonts.inter(
+  static TextStyle overline({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeXS,
         fontWeight: medium,
         color: color,
         letterSpacing: 1.5,
         height: lineHeightNormal,
-      ).copyWith(
         textBaseline: TextBaseline.alphabetic,
       );
+    }
+    return GoogleFonts.inter(
+      fontSize: sizeXS,
+      fontWeight: medium,
+      color: color,
+      letterSpacing: 1.5,
+      height: lineHeightNormal,
+    ).copyWith(
+      textBaseline: TextBaseline.alphabetic,
+    );
+  }
 
   /// Label Large - 14px, Medium
-  static TextStyle labelLarge({Color? color}) => GoogleFonts.inter(
+  static TextStyle labelLarge({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeM,
         fontWeight: medium,
         color: color,
         letterSpacing: 0.1,
       );
+    }
+    return GoogleFonts.inter(
+      fontSize: sizeM,
+      fontWeight: medium,
+      color: color,
+      letterSpacing: 0.1,
+    );
+  }
 
   /// Label Medium - 12px, Medium
-  static TextStyle labelMedium({Color? color}) => GoogleFonts.inter(
+  static TextStyle labelMedium({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeS,
         fontWeight: medium,
         color: color,
         letterSpacing: 0.5,
       );
+    }
+    return GoogleFonts.inter(
+      fontSize: sizeS,
+      fontWeight: medium,
+      color: color,
+      letterSpacing: 0.5,
+    );
+  }
 
   /// Label Small - 10px, Medium
-  static TextStyle labelSmall({Color? color}) => GoogleFonts.inter(
+  static TextStyle labelSmall({Color? color}) {
+    if (_isArabic) {
+      return _tajawalText(
         fontSize: sizeXS,
         fontWeight: medium,
         color: color,
         letterSpacing: 0.5,
       );
+    }
+    return GoogleFonts.inter(
+      fontSize: sizeXS,
+      fontWeight: medium,
+      color: color,
+      letterSpacing: 0.5,
+    );
+  }
 
   // ==================== Code Styles ====================
 
@@ -261,6 +467,14 @@ class AppFonts {
         : screenWidth < 900
             ? 40.0
             : sizeH1;
+    if (_isArabic) {
+      return _tajawalText(
+        fontSize: fontSize,
+        fontWeight: bold,
+        color: color,
+        height: lineHeightTight,
+      );
+    }
     return GoogleFonts.poppins(
       fontSize: fontSize,
       fontWeight: bold,
@@ -276,6 +490,14 @@ class AppFonts {
         : screenWidth < 900
             ? 32.0
             : sizeH2;
+    if (_isArabic) {
+      return _tajawalText(
+        fontSize: fontSize,
+        fontWeight: bold,
+        color: color,
+        height: lineHeightTight,
+      );
+    }
     return GoogleFonts.poppins(
       fontSize: fontSize,
       fontWeight: bold,
@@ -291,6 +513,14 @@ class AppFonts {
         : screenWidth < 900
             ? 28.0
             : sizeH3;
+    if (_isArabic) {
+      return _tajawalText(
+        fontSize: fontSize,
+        fontWeight: bold,
+        color: color,
+        height: lineHeightNormal,
+      );
+    }
     return GoogleFonts.poppins(
       fontSize: fontSize,
       fontWeight: bold,
@@ -306,11 +536,19 @@ class AppFonts {
         : screenWidth < 900
             ? sizeL
             : sizeXL;
+    if (_isArabic) {
+      return _tajawalText(
+        fontSize: fontSize,
+        fontWeight: regular,
+        color: color,
+        height: lineHeightLoose,
+      );
+    }
     return GoogleFonts.inter(
       fontSize: fontSize,
       fontWeight: regular,
       color: color,
-      height: lineHeightRelaxed,
+      height: lineHeightLoose,
     );
   }
 
