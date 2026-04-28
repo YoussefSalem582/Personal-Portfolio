@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import '../../../../../utils/data/expertise_data.dart';
+import '../../../../../utils/data/localized/localized_extensions.dart';
 import '../../../../../models/expertise.dart';
 
 class ExpertiseSection extends StatelessWidget {
@@ -54,6 +56,7 @@ class ExpertiseSection extends StatelessWidget {
   }
 
   Widget _buildSectionHeader(BuildContext context, bool isDark, bool isMobile) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       children: [
         ShaderMask(
@@ -63,12 +66,13 @@ class ExpertiseSection extends StatelessWidget {
                 : [AppColors.accentLight, AppColors.primaryLight],
           ).createShader(bounds),
           child: Text(
-            'My Expertise',
+            l10n.sectionExpertiseTitle,
             style: TextStyle(
               fontSize: isMobile ? 36 : 48,
               fontWeight: AppFonts.extraBold,
               letterSpacing: -1,
               color: AppColors.white,
+              fontFamily: AppFonts.primaryFont,
             ),
             textAlign: TextAlign.center,
           ),
@@ -77,13 +81,14 @@ class ExpertiseSection extends StatelessWidget {
         Container(
           constraints: const BoxConstraints(maxWidth: 700),
           child: Text(
-            'Combining cutting-edge technology with innovative solutions',
+            l10n.sectionExpertiseSubtitle,
             style: TextStyle(
               fontSize: isMobile ? 16 : 18,
               color: isDark
                   ? AppColors.textSecondaryDark
                   : AppColors.textSecondaryLight,
               height: 1.5,
+              fontFamily: AppFonts.secondaryFont,
             ),
             textAlign: TextAlign.center,
           ),
@@ -232,7 +237,7 @@ class ExpertiseSection extends StatelessWidget {
                       // Title
                       Expanded(
                         child: Text(
-                          expertise.title,
+                          expertise.localizedTitle,
                           style: TextStyle(
                             fontSize: isMobile ? 14 : 17,
                             fontWeight: FontWeight.bold,
@@ -253,7 +258,7 @@ class ExpertiseSection extends StatelessWidget {
                   // Description
                   Expanded(
                     child: Text(
-                      expertise.description,
+                      expertise.localizedDescription,
                       style: TextStyle(
                         fontSize: isMobile ? 14 : 14.5,
                         color: isDark

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import '../../../../../utils/responsive_helper.dart';
 import '../../../../../widgets/contact_section/contact_info_widget.dart';
@@ -57,7 +58,7 @@ class ContactSection extends StatelessWidget {
               children: [
                 // Main section heading
                 Text(
-                  'Get In Touch',
+                  AppLocalizations.of(context).sectionContactTitle,
                   style: (isDark ? AppFonts.h1() : AppFonts.h1()).copyWith(
                     fontSize: isMobile
                         ? (isSmallMobile ? 28 : 32)
@@ -89,7 +90,7 @@ class ContactSection extends StatelessWidget {
                     horizontal: isMobile ? 16 : 0,
                   ),
                   child: Text(
-                    'Let\'s discuss your next project or collaboration opportunity',
+                    AppLocalizations.of(context).sectionContactSubtitle,
                     style:
                         (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge())
                             .copyWith(

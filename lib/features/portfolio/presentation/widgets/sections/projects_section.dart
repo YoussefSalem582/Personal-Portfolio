@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/responsive_helper.dart';
 import '../../../../../utils/data/portfolio_data.dart';
 import '../../../../../utils/url_helper.dart';
@@ -11,6 +12,7 @@ import '../../../../../widgets/projects_section/projects_grid.dart';
 import '../../../../../widgets/custom_show_more_button.dart';
 import '../../../../../widgets/projects_section/projects_view_all_section.dart';
 import '../../../../../widgets/projects_section/all_projects_dialog.dart';
+import '../../../../../utils/data/localized/localized_project_filter.dart';
 
 class ProjectsSection extends StatefulWidget {
   const ProjectsSection({super.key});
@@ -266,6 +268,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -307,7 +310,10 @@ class _ProjectsSectionState extends State<ProjectsSection> {
 
             // Projects grid or empty state
             if (filteredProjects.isEmpty)
-              ProjectsEmptyState(filterName: _selectedFilter)
+              ProjectsEmptyState(
+                filterName:
+                    localizedProjectFilterLabel(l10n, _selectedFilter),
+              )
             else
               ProjectsGrid(
                 projects: filteredProjects,
@@ -318,6 +324,7 @@ class _ProjectsSectionState extends State<ProjectsSection> {
             if (_allFilteredProjects.length > _displayedProjectCount) ...[
               const SizedBox(height: AppTheme.spacingXL),
               CustomShowMoreButton(
+                label: l10n.showMore,
                 onPressed: () {
                   setState(() {
                     _displayedProjectCount += _incrementCount;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import '../../../../../utils/data/portfolio_data.dart';
 import '../../../../../utils/responsive_helper.dart';
@@ -28,6 +29,7 @@ class _CertificatesSectionState extends State<CertificatesSection> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
@@ -65,7 +67,10 @@ class _CertificatesSectionState extends State<CertificatesSection> {
             // Show More Button
             if (hasMore) ...[
               const SizedBox(height: AppTheme.spacingXL),
-              CustomShowMoreButton(onPressed: _showMore),
+              CustomShowMoreButton(
+                label: l10n.showMore,
+                onPressed: _showMore,
+              ),
             ],
           ],
         ),
