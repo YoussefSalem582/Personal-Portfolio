@@ -33,6 +33,9 @@ migrate_working_dir/
 .pub/
 /build/
 
+# Old manual Pages output; CI deploys via Actions (artifact from build/web).
+/docs/
+
 # Platform folders (web-only project - not needed)
 windows/
 linux/
