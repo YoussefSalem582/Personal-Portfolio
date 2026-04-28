@@ -6,23 +6,21 @@ import '../../theme/app_theme.dart';
 /// A widget that displays form submission status messages.
 ///
 /// This widget shows either a success or error message after form submission.
-/// The styling (color, icon) automatically adjusts based on whether the
-/// message indicates an error or success. Errors are detected by checking
-/// if the message contains the word "Error".
+/// Use [isError] so styling stays correct for all locales (do not rely on
+/// English keywords in [statusMessage]).
 class SubmitStatusWidget extends StatelessWidget {
   /// The status message to display (success or error message)
   final String statusMessage;
+  final bool isError;
 
   const SubmitStatusWidget({
     super.key,
     required this.statusMessage,
+    required this.isError,
   });
 
   @override
   Widget build(BuildContext context) {
-    // Determine if this is an error message by checking for "Error" keyword
-    final isError = statusMessage.contains('Error');
-
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
       padding: const EdgeInsets.all(AppTheme.spacingL),

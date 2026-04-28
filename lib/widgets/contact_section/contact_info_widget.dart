@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
+import '../../utils/data/localized/portfolio_strings.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import 'contact_item_widget.dart';
@@ -23,6 +25,7 @@ class ContactInfoWidget extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 768;
     final isSmallMobile = screenWidth < 375;
+    final l10n = AppLocalizations.of(context);
 
     return Container(
       padding:
@@ -96,7 +99,7 @@ class ContactInfoWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Contact Information',
+                      l10n.contactCardTitle,
                       style: AppFonts.h3().copyWith(
                         fontSize: isMobile ? (isSmallMobile ? 15 : 16) : null,
                         color: isDark
@@ -107,7 +110,7 @@ class ContactInfoWidget extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Get in touch with me',
+                      l10n.contactCardSubtitle,
                       style: AppFonts.bodySmall().copyWith(
                         fontSize: isMobile ? (isSmallMobile ? 10 : 11) : null,
                         color: isDark
@@ -126,7 +129,7 @@ class ContactInfoWidget extends StatelessWidget {
           // Email contact item (clickable - launches email client)
           ContactItemWidget(
             icon: AppIcons.email,
-            title: 'Email',
+            title: l10n.contactInfoEmailLabel,
             value: PortfolioData.contactInfo.email,
             onTap: () =>
                 UrlHelper.launchEmail(email: PortfolioData.contactInfo.email),
@@ -137,8 +140,8 @@ class ContactInfoWidget extends StatelessWidget {
           // Location contact item (non-clickable - just displays location)
           ContactItemWidget(
             icon: AppIcons.location,
-            title: 'Location',
-            value: PortfolioData.contactInfo.location,
+            title: l10n.contactInfoLocationLabel,
+            value: PortfolioStrings.locationDisplay,
             onTap: null, // No action for location
           ),
 
@@ -187,7 +190,7 @@ class ContactInfoWidget extends StatelessWidget {
               ),
               SizedBox(width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
               Text(
-                'Connect With Me',
+                l10n.contactSocialHeading,
                 style: AppFonts.h4().copyWith(
                   fontSize: isMobile ? (isSmallMobile ? 13 : 14) : null,
                   color: isDark
