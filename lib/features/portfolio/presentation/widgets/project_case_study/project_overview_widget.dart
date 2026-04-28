@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../models/project.dart';
 import '../../../../../utils/assets/app_constants.dart';
-import '../../../data/project_case_study_data.dart';
+import 'project_content_helper.dart';
 
 import '../../../../../theme/app_theme.dart';
 
@@ -24,6 +25,7 @@ class ProjectOverviewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -60,7 +62,7 @@ class ProjectOverviewWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Project Overview',
+                    l10n.caseStudySectionProjectOverview,
                     style: TextStyle(
                       fontSize: isMobile ? (isSmallMobile ? 20 : 22) : 28,
                       fontWeight: AppFonts.extraBold,
@@ -127,9 +129,10 @@ class ProjectOverviewWidget extends StatelessWidget {
               ),
 
               // Additional project-specific features
-              if (ProjectCaseStudyData.getProjectFeatures(project.id) != null)
+              if (ProjectContentHelper.getProjectFeatures(project.id) != null)
                 _buildProjectFeatures(
-                    ProjectCaseStudyData.getProjectFeatures(project.id)!,
+                    context,
+                    ProjectContentHelper.getProjectFeatures(project.id)!,
                     isDark),
             ],
           ),
@@ -140,7 +143,10 @@ class ProjectOverviewWidget extends StatelessWidget {
 
   /// Build project-specific features section
   Widget _buildProjectFeatures(
-      List<Map<String, dynamic>> features, bool isDark) {
+      BuildContext context,
+      List<Map<String, dynamic>> features,
+      bool isDark) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -148,7 +154,7 @@ class ProjectOverviewWidget extends StatelessWidget {
         const Divider(),
         SizedBox(height: isMobile ? AppTheme.spacingM : AppTheme.spacingXL),
         Text(
-          'Key Features',
+          l10n.caseStudySectionKeyFeatures,
           style: TextStyle(
             fontSize: isMobile ? (isSmallMobile ? 18 : 20) : 22,
             fontWeight: AppFonts.bold,

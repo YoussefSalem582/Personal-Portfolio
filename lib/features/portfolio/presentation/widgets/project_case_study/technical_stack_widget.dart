@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 
 import '../../../../../theme/app_theme.dart';
@@ -29,6 +30,7 @@ class TechnicalStackWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // Detect current theme mode for styling
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,7 +68,7 @@ class TechnicalStackWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Technical Stack',
+                    l10n.caseStudySectionTechnicalStack,
                     style: TextStyle(
                       fontSize: isMobile ? (isSmallMobile ? 20 : 22) : 28,
                       fontWeight: AppFonts.extraBold,

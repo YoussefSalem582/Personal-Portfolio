@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../features/theme/presentation/bloc/theme_bloc.dart';
 import '../../../../../features/theme/presentation/bloc/theme_event.dart';
 import '../../../../../features/theme/presentation/bloc/theme_state.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import '../../../../../utils/responsive_helper.dart';
 
@@ -55,6 +56,7 @@ class ProjectCaseStudyAppBar extends StatelessWidget
       builder: (context, _) {
         final isDark =
             context.read<ThemeBloc>().isDarkModeEffective(context);
+        final l10n = AppLocalizations.of(context);
 
         return Container(
         height: 70,
@@ -111,7 +113,7 @@ class ProjectCaseStudyAppBar extends StatelessWidget
                       size: isMobile ? 18 : 20,
                     ),
                     onPressed: () => Navigator.pop(context),
-                    tooltip: 'Back to Projects',
+                    tooltip: l10n.caseStudyBackTooltip,
                     style: IconButton.styleFrom(
                       backgroundColor: isDark
                           ? AppColors.white.withOpacity(0.1)
@@ -210,7 +212,7 @@ class ProjectCaseStudyAppBar extends StatelessWidget
                 flex: 3,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: _buildSectionItems(isDark),
+                  children: _buildSectionItems(context, isDark, l10n),
                 ),
               ),
 
@@ -258,8 +260,8 @@ class ProjectCaseStudyAppBar extends StatelessWidget
                     size: 18,
                   ),
                   color: isDark ? AppColors.accentDark : AppColors.accentLight,
-                  onPressed: () => _showMobileSectionsMenu(context, isDark),
-                  tooltip: 'Sections Menu',
+                  onPressed: () => _showMobileSectionsMenu(context, isDark, l10n),
+                  tooltip: l10n.caseStudySectionsMenuTooltip,
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(
                     minWidth: 28,
@@ -315,7 +317,7 @@ class ProjectCaseStudyAppBar extends StatelessWidget
                           ambientBrightness: Theme.of(context).brightness,
                         ),
                       ),
-                  tooltip: isDark ? 'Light Mode' : 'Dark Mode',
+                  tooltip: isDark ? l10n.tooltipLightMode : l10n.tooltipDarkMode,
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(
                     minWidth: 32,
@@ -330,14 +332,15 @@ class ProjectCaseStudyAppBar extends StatelessWidget
     );
   }
 
-  List<Widget> _buildSectionItems(bool isDark) {
+  List<Widget> _buildSectionItems(
+      BuildContext context, bool isDark, AppLocalizations l10n) {
     final sections = [
-      {'title': 'Overview', 'index': 0, 'key': overviewKey},
-      {'title': 'Tech Stack', 'index': 1, 'key': techStackKey},
-      {'title': 'Documents', 'index': 2, 'key': documentsKey},
-      {'title': 'Gallery', 'index': 3, 'key': galleryKey},
-      {'title': 'Challenges', 'index': 4, 'key': challengesKey},
-      {'title': 'Learnings', 'index': 5, 'key': learningsKey},
+      {'title': l10n.caseStudyNavOverview, 'index': 0, 'key': overviewKey},
+      {'title': l10n.caseStudyNavTechStack, 'index': 1, 'key': techStackKey},
+      {'title': l10n.caseStudyNavDocuments, 'index': 2, 'key': documentsKey},
+      {'title': l10n.caseStudyNavGallery, 'index': 3, 'key': galleryKey},
+      {'title': l10n.caseStudyNavChallenges, 'index': 4, 'key': challengesKey},
+      {'title': l10n.caseStudyNavLearnings, 'index': 5, 'key': learningsKey},
     ];
 
     return sections
@@ -400,40 +403,41 @@ class ProjectCaseStudyAppBar extends StatelessWidget
   }
 
   /// Show mobile sections menu as bottom sheet
-  void _showMobileSectionsMenu(BuildContext context, bool isDark) {
+  void _showMobileSectionsMenu(
+      BuildContext context, bool isDark, AppLocalizations l10n) {
     final sections = [
       {
-        'title': 'Overview',
+        'title': l10n.caseStudyNavOverview,
         'icon': Icons.info_outline_rounded,
         'index': 0,
         'key': overviewKey
       },
       {
-        'title': 'Tech Stack',
+        'title': l10n.caseStudyNavTechStack,
         'icon': Icons.code_rounded,
         'index': 1,
         'key': techStackKey
       },
       {
-        'title': 'Documents',
+        'title': l10n.caseStudyNavDocuments,
         'icon': Icons.description_outlined,
         'index': 2,
         'key': documentsKey
       },
       {
-        'title': 'Gallery',
+        'title': l10n.caseStudyNavGallery,
         'icon': Icons.photo_library_outlined,
         'index': 3,
         'key': galleryKey
       },
       {
-        'title': 'Challenges',
+        'title': l10n.caseStudyNavChallenges,
         'icon': Icons.psychology_outlined,
         'index': 4,
         'key': challengesKey
       },
       {
-        'title': 'Learnings',
+        'title': l10n.caseStudyNavLearnings,
         'icon': Icons.lightbulb_outline_rounded,
         'index': 5,
         'key': learningsKey
@@ -482,7 +486,7 @@ class ProjectCaseStudyAppBar extends StatelessWidget
                   ),
                   const SizedBox(width: 12),
                   Text(
-                    'Sections',
+                    l10n.caseStudySectionsSheetTitle,
                     style: AppFonts.h6().copyWith(
                       color: isDark
                           ? AppColors.textPrimaryDark
@@ -548,7 +552,7 @@ class ProjectCaseStudyAppBar extends StatelessWidget
                     const SizedBox(width: 16),
                     Expanded(
                       child: Text(
-                        isDark ? 'Light Mode' : 'Dark Mode',
+                        isDark ? l10n.tooltipLightMode : l10n.tooltipDarkMode,
                         style: AppFonts.bodyMedium().copyWith(
                           color: isDark
                               ? AppColors.textPrimaryDark

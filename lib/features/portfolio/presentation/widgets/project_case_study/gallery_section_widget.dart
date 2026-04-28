@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
+import '../../../../../utils/data/localized/localized_gallery_category.dart';
 import '../../../../../widgets/lazy_image.dart';
 
 import '../../../../../theme/app_theme.dart';
@@ -267,12 +269,13 @@ class GallerySectionWidget extends StatelessWidget {
     // Detect current theme mode for styling
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final categorizedImages = _getCategorizedImages();
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Main Section Title
-        _buildMainHeader(isDark),
+        _buildMainHeader(context, isDark, l10n),
 
         const SizedBox(height: AppTheme.spacingXL),
 
@@ -285,13 +288,13 @@ class GallerySectionWidget extends StatelessWidget {
             children: [
               // Category Header
               if (categorizedImages.length > 1)
-                _buildCategoryHeader(entry.key, isDark),
+                _buildCategoryHeader(context, entry.key, isDark),
 
               if (categorizedImages.length > 1)
                 const SizedBox(height: AppTheme.spacingM),
 
               // Category Image Grid
-              _buildImageGrid(context, entry.value, isDark),
+              _buildImageGrid(context, entry.value, isDark, l10n),
 
               const SizedBox(height: AppTheme.spacingXL),
             ],
@@ -302,7 +305,8 @@ class GallerySectionWidget extends StatelessWidget {
   }
 
   /// Builds the main section header
-  Widget _buildMainHeader(bool isDark) {
+  Widget _buildMainHeader(
+      BuildContext context, bool isDark, AppLocalizations l10n) {
     return Row(
       children: [
         // Gradient icon container with photo library icon
@@ -336,7 +340,7 @@ class GallerySectionWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Screenshots & Gallery',
+                l10n.caseStudyGalleryHeading,
                 style: AppFonts.h4(
                   color: isDark
                       ? AppColors.textPrimaryDark
@@ -364,8 +368,11 @@ class GallerySectionWidget extends StatelessWidget {
   }
 
   /// Builds a category header with icon and title
-  Widget _buildCategoryHeader(String title, bool isDark) {
+  Widget _buildCategoryHeader(
+      BuildContext context, String title, bool isDark) {
     final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
+    final l10n = AppLocalizations.of(context);
+    final imageCount = _getCategoryImageCount(title);
 
     return Container(
       padding: const EdgeInsets.symmetric(
@@ -401,7 +408,7 @@ class GallerySectionWidget extends StatelessWidget {
           ),
           const SizedBox(width: AppTheme.spacingM),
           Text(
-            title,
+            localizedGalleryCategoryLabel(l10n, title),
             style: AppFonts.h6(
               color: isDark
                   ? AppColors.textPrimaryDark
@@ -421,7 +428,7 @@ class GallerySectionWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(12),
             ),
             child: Text(
-              '${_getCategoryImageCount(title)} ${_getCategoryImageCount(title) == 1 ? 'image' : 'images'}',
+              l10n.galleryImageCount(imageCount),
               style: AppFonts.labelSmall(
                 color: accentColor,
               ).copyWith(
@@ -523,40 +530,44 @@ class GallerySectionWidget extends StatelessWidget {
   }
 
   /// Returns the diagram type based on the image URL
-  String _getDiagramType(String imageUrl) {
+  String _localizedDiagramType(AppLocalizations l10n, String imageUrl) {
     if (imageUrl.contains('use_case_diagram') ||
         imageUrl.toLowerCase().contains('use case')) {
-      return 'USE CASE DIAGRAM';
+      return l10n.diagramLabelUseCase;
     } else if (imageUrl.contains('class_diagram') ||
         imageUrl.toLowerCase().contains('class')) {
-      return 'CLASS DIAGRAM';
+      return l10n.diagramLabelClass;
     } else if (imageUrl.contains('sequence_diagram') ||
         imageUrl.toLowerCase().contains('sequence')) {
-      return 'SEQUENCE DIAGRAM';
+      return l10n.diagramLabelSequence;
     } else if (imageUrl.contains('activity_diagram') ||
         imageUrl.toLowerCase().contains('activity')) {
-      return 'ACTIVITY DIAGRAM';
+      return l10n.diagramLabelActivity;
     } else if (imageUrl.contains('state_diagram') ||
         imageUrl.toLowerCase().contains('state')) {
-      return 'STATE DIAGRAM';
+      return l10n.diagramLabelState;
     } else if (imageUrl.contains('er_diagram') ||
         imageUrl.toLowerCase().contains('entity') ||
         imageUrl.toLowerCase().contains('relationship')) {
-      return 'ER DIAGRAM';
+      return l10n.diagramLabelEr;
     } else if (imageUrl.contains('block_diagram') ||
         imageUrl.toLowerCase().contains('block')) {
-      return 'BLOCK DIAGRAM';
+      return l10n.diagramLabelBlock;
     } else if (imageUrl.contains('flowchart') ||
         imageUrl.toLowerCase().contains('flow')) {
-      return 'FLOWCHART';
+      return l10n.diagramLabelFlowchart;
     } else {
-      return 'DIAGRAM';
+      return l10n.diagramLabelGeneric;
     }
   }
 
   /// Builds the image grid for a category
   Widget _buildImageGrid(
-      BuildContext context, List<String> images, bool isDark) {
+    BuildContext context,
+    List<String> images,
+    bool isDark,
+    AppLocalizations l10n,
+  ) {
     // Check if this category contains diagrams (they need special handling)
     final isDiagramCategory = images.any((img) =>
         img.contains('diagram') ||
@@ -605,7 +616,7 @@ class GallerySectionWidget extends StatelessWidget {
                       bottom: AppTheme.spacingS,
                     ),
                     child: Text(
-                      _getDiagramType(imageUrl),
+                      _localizedDiagramType(l10n, imageUrl),
                       style: AppFonts.labelSmall(
                         color: isDark
                             ? AppColors.textSecondaryDark
@@ -716,7 +727,7 @@ class GallerySectionWidget extends StatelessWidget {
                     bottom: AppTheme.spacingS,
                   ),
                   child: Text(
-                    _getDiagramType(imageUrl),
+                    _localizedDiagramType(l10n, imageUrl),
                     style: AppFonts.labelSmall(
                       color: isDark
                           ? AppColors.textSecondaryDark
@@ -815,9 +826,10 @@ class GallerySectionWidget extends StatelessWidget {
   /// Shows a full-screen lightbox dialog for viewing images
   void _showImageDialog(
       BuildContext context, List<String> images, int initialIndex) {
+    final l10n = AppLocalizations.of(context);
     showDialog(
       context: context,
-      builder: (context) => Dialog(
+      builder: (dialogContext) => Dialog(
         backgroundColor: AppColors.black.withOpacity(0.87),
         child: Container(
           constraints: const BoxConstraints(maxWidth: 800),
@@ -831,7 +843,8 @@ class GallerySectionWidget extends StatelessWidget {
                 top: 16,
                 right: 16,
                 child: IconButton(
-                  onPressed: () => Navigator.pop(context),
+                  onPressed: () => Navigator.pop(dialogContext),
+                  tooltip: l10n.tooltipClose,
                   icon: const Icon(AppIcons.close, color: AppColors.white),
                   style: IconButton.styleFrom(
                     backgroundColor: AppColors.black.withOpacity(0.54),

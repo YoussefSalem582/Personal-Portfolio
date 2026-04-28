@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../../../../core/locale/app_locale_binding.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
+import '../../../../../utils/data/localized/case_study_documents_ar.dart';
 import '../../../../../utils/url_helper.dart';
 import '../../../../../theme/app_theme.dart';
 
@@ -139,6 +142,7 @@ class DocumentsSectionWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final documents = _getProjectDocuments();
+    final l10n = AppLocalizations.of(context);
 
     if (documents.isEmpty) {
       return const SizedBox.shrink();
@@ -180,7 +184,7 @@ class DocumentsSectionWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Project Documents',
+                    l10n.caseStudySectionProjectDocuments,
                     style: TextStyle(
                       fontSize: isMobile ? (isSmallMobile ? 20 : 22) : 28,
                       fontWeight: AppFonts.extraBold,
@@ -214,11 +218,24 @@ class DocumentsSectionWidget extends StatelessWidget {
     );
   }
 
+  String _docTitle(DocumentInfo doc) {
+    final ar = CaseStudyDocumentsAr.forPath(doc.path);
+    if (ar == null || !AppLocaleBinding.isArabic) return doc.title;
+    return ar.title;
+  }
+
+  String _docDescription(DocumentInfo doc) {
+    final ar = CaseStudyDocumentsAr.forPath(doc.path);
+    if (ar == null || !AppLocaleBinding.isArabic) return doc.description;
+    return ar.description;
+  }
+
   Widget _buildDocumentCard(
     BuildContext context,
     DocumentInfo doc,
     bool isDark,
   ) {
+    final l10n = AppLocalizations.of(context);
     return Padding(
       padding: EdgeInsets.only(
           bottom: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
@@ -307,7 +324,7 @@ class DocumentsSectionWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        doc.title,
+                        _docTitle(doc),
                         style: TextStyle(
                           fontSize: isMobile ? (isSmallMobile ? 15 : 16) : 18,
                           fontWeight: AppFonts.bold,
@@ -318,7 +335,7 @@ class DocumentsSectionWidget extends StatelessWidget {
                       ),
                       SizedBox(height: isMobile ? 4 : 6),
                       Text(
-                        doc.description,
+                        _docDescription(doc),
                         style: TextStyle(
                           fontSize: isMobile ? (isSmallMobile ? 12 : 13) : 14,
                           color: isDark
@@ -360,7 +377,7 @@ class DocumentsSectionWidget extends StatelessWidget {
                             ),
                             SizedBox(width: isMobile ? 4 : 6),
                             Text(
-                              doc.isHtml ? 'HTML' : 'PDF',
+                              doc.isHtml ? l10n.labelHtml : l10n.labelPdf,
                               style: TextStyle(
                                 fontSize:
                                     isMobile ? (isSmallMobile ? 10 : 11) : 12,

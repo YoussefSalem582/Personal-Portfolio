@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import '../../../../../utils/url_helper.dart';
 
@@ -26,6 +27,7 @@ class ActionButtonsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
 
     return Container(
       padding:
@@ -64,7 +66,7 @@ class ActionButtonsWidget extends StatelessWidget {
         children: [
           // Call to action text
           Text(
-            'Want to learn more?',
+            l10n.caseStudyCtaTitle,
             style: AppFonts.h5(
               color: isDark
                   ? AppColors.textPrimaryDark
@@ -77,7 +79,7 @@ class ActionButtonsWidget extends StatelessWidget {
           ),
           SizedBox(height: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
           Text(
-            'Explore the full case study or check out the source code',
+            l10n.caseStudyCtaSubtitle,
             style: AppFonts.bodyMedium().copyWith(
               color: isDark
                   ? AppColors.textSecondaryDark
@@ -95,7 +97,7 @@ class ActionButtonsWidget extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () => UrlHelper.launchURL(videoUrl!),
                 icon: Icon(Icons.play_circle_outline, size: isMobile ? 20 : 24),
-                label: const Text('Watch Demo Video'),
+                label: Text(l10n.caseStudyWatchDemoVideo),
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(
                     vertical: isMobile ? (isSmallMobile ? 14 : 16) : 20,
@@ -130,7 +132,7 @@ class ActionButtonsWidget extends StatelessWidget {
                 onPressed: () => UrlHelper.launchURL(shortVideoUrl!),
                 icon: Icon(Icons.video_library_outlined,
                     size: isMobile ? 20 : 24),
-                label: const Text('Watch Short Video'),
+                label: Text(l10n.caseStudyWatchShortVideo),
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(
                     vertical: isMobile ? (isSmallMobile ? 14 : 16) : 20,
@@ -162,7 +164,7 @@ class ActionButtonsWidget extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () => UrlHelper.launchURL(liveUrl!),
                 icon: Icon(Icons.open_in_new, size: isMobile ? 18 : 22),
-                label: Text(UrlHelper.liveUrlButtonLabel(liveUrl!)),
+                label: Text(UrlHelper.liveUrlButtonLabel(l10n, liveUrl!)),
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(
                     vertical: isMobile ? (isSmallMobile ? 14 : 16) : 20,
@@ -196,7 +198,7 @@ class ActionButtonsWidget extends StatelessWidget {
               child: OutlinedButton.icon(
                 onPressed: () => UrlHelper.launchURL(githubUrl!),
                 icon: Icon(Icons.code, size: isMobile ? 18 : 22),
-                label: const Text('View Source Code'),
+                label: Text(l10n.caseStudyViewSourceCode),
                 style: OutlinedButton.styleFrom(
                   padding: EdgeInsets.symmetric(
                     vertical: isMobile ? (isSmallMobile ? 14 : 16) : 20,

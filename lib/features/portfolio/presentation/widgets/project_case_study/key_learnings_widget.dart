@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 
 import '../../../../../theme/app_theme.dart';
@@ -19,6 +20,7 @@ class KeyLearningsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,7 +57,7 @@ class KeyLearningsWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Key Learnings',
+                    l10n.caseStudySectionKeyLearnings,
                     style: TextStyle(
                       fontSize: isMobile ? (isSmallMobile ? 20 : 22) : 28,
                       fontWeight: AppFonts.extraBold,
