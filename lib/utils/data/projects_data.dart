@@ -111,6 +111,49 @@ class ProjectsData {
       isUnderDevelopment: true,
     ),
     Project(
+      id: 'technology-ninety-two-job-marketplace',
+      title: 'Technology 92 — Job Marketplace App',
+      shortDescription:
+          'Flutter job marketplace with Clean Architecture, BLoC, Dio, and full Arabic / English localization against a Laravel API',
+      description:
+          'Technology 92 is a cross-platform job marketplace mobile app built with Clean Architecture (domain / data / presentation per feature), BLoC state management, '
+          '`go_router` navigation, GetIt dependency injection, and functional error handling with `dartz` (Either). '
+          'It integrates with the Technology 92 Laravel backend via Dio across 50+ API endpoints covering authentication (including Google Sign-In), profiles, KPIs, '
+          'attendance with background timers and notifications, jobs and marketplace flows, settings, and more.\n\n'
+          'The presentation layer ships multiple feature modules—including auth, home shell with bottom navigation, profile (view and edit), KPIs, attendance, and settings—with '
+          'about 343 localization keys per language using Flutter `intl` and ARB files for Arabic and English, including RTL. '
+          'The stack uses Material 3 styling, cached images, forms and validation tooling, observability helpers (talker family), Firebase and Sentry where configured, and dev tooling such as '
+          'freezed/json_serializable/injectable for generated code.\n\n'
+          'Designed for Android, iOS, web, and desktop targets; proprietary codebase (not on pub.dev). Version 0.4.2+7 at Flutter SDK ^3.10.3.',
+      technologies: [
+        'Flutter',
+        'Dart',
+        'flutter_bloc',
+        'BLoC/Cubit',
+        'Clean Architecture',
+        'go_router',
+        'get_it',
+        'dio',
+        'dartz',
+        'intl / ARB',
+        'Arabic / English',
+        'Laravel API',
+        'Enterprise',
+      ],
+      liveUrl:
+          'https://play.google.com/store/apps/details?id=com.technology92.employee',
+      imageUrl: Technology92Images.appLogo,
+      galleryImages: [
+        Technology92Images.p1,
+        Technology92Images.p2,
+        Technology92Images.p3,
+        Technology92Images.p4,
+        Technology92Images.p5,
+      ],
+      createdAt: DateTime(2026, 3, 11),
+      isFeatured: true,
+    ),
+    Project(
       id: 'emosense-app',
       title: 'EmoSense - Enterprise Emotion Recognition Platform',
       shortDescription:

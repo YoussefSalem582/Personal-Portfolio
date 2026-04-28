@@ -35,6 +35,7 @@ class ProjectChallenge {
 /// - 'emosense-app': AI emotion recognition system
 /// - 'music-player': Audio player application
 /// - 'gogesh-marketplace': Commercial marketplace platform
+/// - 'technology-ninety-two-job-marketplace': Job marketplace (Technology 92)
 /// - 'default': Generic fallback for other projects
 class ProjectCaseStudyData {
   /// Gets project-specific challenges and solutions
@@ -52,6 +53,8 @@ class ProjectCaseStudyData {
         return _gogeshChallenges;
       case 'flutter-mate':
         return _flutterMateChallenges;
+      case 'technology-ninety-two-job-marketplace':
+        return _technology92Challenges;
       case 'music-player':
         return _musicPlayerChallenges;
       default:
@@ -74,6 +77,8 @@ class ProjectCaseStudyData {
         return _gogeshLessons;
       case 'flutter-mate':
         return _flutterMateLessons;
+      case 'technology-ninety-two-job-marketplace':
+        return _technology92Lessons;
       case 'music-player':
         return _musicPlayerLessons;
       default:
@@ -97,6 +102,8 @@ class ProjectCaseStudyData {
         return _gogeshOverview;
       case 'flutter-mate':
         return _flutterMateOverview;
+      case 'technology-ninety-two-job-marketplace':
+        return _technology92Overview;
       default:
         // Default: use project's standard description
         return description;
@@ -118,6 +125,8 @@ class ProjectCaseStudyData {
         return _gogeshFeatures;
       case 'flutter-mate':
         return _flutterMateFeatures;
+      case 'technology-ninety-two-job-marketplace':
+        return _technology92Features;
       default:
         return null; // No custom features for other projects
     }
@@ -301,6 +310,89 @@ class ProjectCaseStudyData {
       'title': 'Business Analytics',
       'description':
           'Comprehensive reporting and analytics dashboard for merchant performance tracking'
+    },
+  ];
+
+  // ==================== TECHNOLOGY 92 PROJECT DATA ====================
+
+  static const String _technology92Overview =
+      'Technology 92 is a proprietary Flutter job marketplace client aligned with Clean Architecture: each feature owns domain contracts, repository implementations, and presentation with BLoC. '
+      'Routing uses go_router; dependency injection uses GetIt; networking uses Dio against a Laravel backend with typed layers and Either-based failures.\n\n'
+      'Major surfaces include authentication (credentials and Google Sign-In), a main shell with bottom navigation, rich profile viewing and editing, KPI definitions and entries with filtering, '
+      'attendance flows including background timing and notifications, and a broad settings area (theme, locale, policies, account actions). '
+      'Localization spans roughly 343 keys per language via ARB workflows with Arabic RTL and English LTR.\n\n'
+      'Built for Flutter SDK ^3.10.3 at app version 0.4.2+7; targets Android, iOS, web, Linux, macOS, and Windows. Observability can integrate Talker-family loggers and Sentry alongside Firebase where configured.';
+
+  static final List<Map<String, String>> _technology92Challenges = [
+    {
+      'title': 'Enterprise-scale Clean Architecture',
+      'description':
+          'Organizing seven feature modules with shared patterns for repositories, datasources, and use cases while keeping domain free of Flutter imports required disciplined layering and consistent failure mapping from Dio to domain types.',
+    },
+    {
+      'title': 'Arabic / English product parity',
+      'description':
+          'Maintaining RTL and LTR layouts, typography, and semantics across 300+ strings per language needed structured ARB workflows, context-aware formatting, and regression checks on critical flows.',
+    },
+    {
+      'title': 'Attendance and background behavior',
+      'description':
+          'Combining foreground services, timers, lock-screen visibility, and notification channels with correct platform policies demanded careful lifecycle handling and user-facing status clarity.',
+    },
+    {
+      'title': 'Breadth of API integration',
+      'description':
+          'Coordinating 50+ endpoints for auth, profiles, KPIs, attendance, and settings required consistent error contracts, token refresh behavior, and resilient offline or degraded states where applicable.',
+    },
+  ];
+
+  static const List<String> _technology92Lessons = [
+    'Feature-first Clean Architecture at scale: domain entities, abstract repos, and testable use cases per module',
+    'Production BLoC usage with equatable states and explicit events across auth, home, KPI, attendance, and profile',
+    'Declarative navigation with go_router and typed route segments integrated with DI-resolved repositories',
+    'Functional error handling with dartz (Either) from repository boundaries through UI feedback',
+    'Intl / ARB bilingual workflows with RTL polish and shared copy discipline across large key sets',
+    'Dio interceptors, environment-driven base URLs, and Laravel API integration patterns',
+    'Cross-form concerns: formz-style validation, secure storage for tokens, and selective code generation (freezed/json_serializable)',
+    'Multi-platform targets with shared UI while respecting desktop and web constraints where relevant',
+  ];
+
+  static final List<Map<String, dynamic>> _technology92Features = [
+    {
+      'icon': 'verified_user',
+      'title': 'Auth & onboarding',
+      'description':
+          'Splash, onboarding, language selection, and credential plus Google Sign-In flows wired to secure token handling',
+    },
+    {
+      'icon': 'home',
+      'title': 'Shell & dashboard',
+      'description':
+          'Bottom navigation Home, KPIs, Attendance, and Settings with dashboard cards and live summaries',
+    },
+    {
+      'icon': 'badge',
+      'title': 'Profile & KPI',
+      'description':
+          'Deep profile viewing and editing modules plus KPI definitions, entries CRUD, and date-filtered listings',
+    },
+    {
+      'icon': 'schedule',
+      'title': 'Attendance',
+      'description':
+          'Clock in/out, status and history, background timer, and lock-screen notification experiences',
+    },
+    {
+      'icon': 'language',
+      'title': 'Localization',
+      'description':
+          'ARB-driven English and Arabic with RTL support and consistent Material 3 presentation',
+    },
+    {
+      'icon': 'settings',
+      'title': 'Settings suite',
+      'description':
+          'Theme and locale switches, policies, contact, About, notifications, rate app, delete account, and logout',
     },
   ];
 

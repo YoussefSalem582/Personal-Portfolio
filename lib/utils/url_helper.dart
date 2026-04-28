@@ -119,4 +119,12 @@ class UrlHelper {
       throw 'Could not open $url';
     }
   }
+
+  /// Label for project [liveUrl] buttons (Google Play listing vs deployed web app).
+  static String liveUrlButtonLabel(String url, {bool compact = false}) {
+    if (url.contains('play.google.com')) {
+      return compact ? 'Google Play' : 'View on Google Play';
+    }
+    return compact ? 'Live Demo' : 'View Live Demo';
+  }
 }

@@ -73,8 +73,26 @@ class ProjectImages {
   // FlutterMate App
   static const FlutterMateImages flutterMate = FlutterMateImages._();
 
+  // Technology 92 — Job Marketplace
+  static const Technology92Images technology92 = Technology92Images._();
+
   // FamilyLink App
   static const FamilyLinkImages familyLink = FamilyLinkImages._();
+}
+
+// ==================== Technology 92 (Job Marketplace) Images ====================
+
+class Technology92Images {
+  const Technology92Images._();
+
+  static const String _base = 'assets/images/projects/tech92';
+
+  static const String appLogo = '$_base/app_logo.png';
+  static const String p1 = '$_base/p1.png';
+  static const String p2 = '$_base/p2.png';
+  static const String p3 = '$_base/p3.jpg';
+  static const String p4 = '$_base/p4.png';
+  static const String p5 = '$_base/p5.png';
 }
 
 // ==================== Emosense App Images ====================

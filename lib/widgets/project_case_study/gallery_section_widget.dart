@@ -246,6 +246,12 @@ class GallerySectionWidget extends StatelessWidget {
       };
     }
 
+    if (projectId == 'technology-ninety-two-job-marketplace') {
+      return {
+        'App screenshots': galleryImages,
+      };
+    }
+
     if (projectId == 'facial-recognition') {
       return {
         'System Interface': galleryImages,

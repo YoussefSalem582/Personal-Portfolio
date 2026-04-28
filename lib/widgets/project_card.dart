@@ -631,7 +631,10 @@ class ProjectDetailsDialog extends StatelessWidget {
                             onPressed: () =>
                                 UrlHelper.launchURL(project.liveUrl!),
                             icon: const Icon(AppIcons.demo),
-                            label: const Text('Live Demo'),
+                            label: Text(
+                              UrlHelper.liveUrlButtonLabel(project.liveUrl!,
+                                  compact: true),
+                            ),
                           ),
                         ),
                     ],

@@ -285,6 +285,18 @@ class ProjectOverviewWidget extends StatelessWidget {
         case 'calendar_today':
           return Icon(Icons.calendar_today,
               color: AppColors.white, size: isMobile ? 20 : 24);
+        case 'verified_user':
+          return Icon(Icons.verified_user,
+              color: AppColors.white, size: isMobile ? 20 : 24);
+        case 'home':
+          return Icon(Icons.home,
+              color: AppColors.white, size: isMobile ? 20 : 24);
+        case 'schedule':
+          return Icon(Icons.schedule,
+              color: AppColors.white, size: isMobile ? 20 : 24);
+        case 'settings':
+          return Icon(Icons.settings,
+              color: AppColors.white, size: isMobile ? 20 : 24);
         default:
           return Icon(Icons.check_circle,
               color: AppColors.white, size: isMobile ? 20 : 24);

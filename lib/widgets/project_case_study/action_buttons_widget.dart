@@ -162,7 +162,7 @@ class ActionButtonsWidget extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () => UrlHelper.launchURL(liveUrl!),
                 icon: Icon(Icons.open_in_new, size: isMobile ? 18 : 22),
-                label: const Text('View Live Demo'),
+                label: Text(UrlHelper.liveUrlButtonLabel(liveUrl!)),
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(
                     vertical: isMobile ? (isSmallMobile ? 14 : 16) : 20,
