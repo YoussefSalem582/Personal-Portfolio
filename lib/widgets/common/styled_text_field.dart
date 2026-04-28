@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../theme/app_theme.dart';
 
@@ -98,22 +99,24 @@ class EmailTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return StyledTextField(
       controller: controller,
-      label: 'Email',
-      hint: 'your.email@example.com',
+      label: l10n.contactFieldEmail,
+      hint: l10n.contactFieldEmailHint,
       icon: Icons.email_outlined,
       keyboardType: TextInputType.emailAddress,
-      validator: customValidator ?? _defaultEmailValidator,
+      validator: customValidator ??
+          (value) => _defaultEmailValidator(value, l10n),
     );
   }
 
-  String? _defaultEmailValidator(String? value) {
+  String? _defaultEmailValidator(String? value, AppLocalizations l10n) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your email';
+      return l10n.contactValidationEmailRequired;
     }
     if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
-      return 'Please enter a valid email';
+      return l10n.contactValidationEmailInvalid;
     }
     return null;
   }
@@ -132,10 +135,11 @@ class PhoneTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return StyledTextField(
       controller: controller,
-      label: 'Phone',
-      hint: '+1 (555) 123-4567',
+      label: l10n.contactFieldPhone,
+      hint: l10n.contactFieldPhoneHint,
       icon: Icons.phone_outlined,
       keyboardType: TextInputType.phone,
       validator: customValidator,
@@ -146,39 +150,41 @@ class PhoneTextField extends StatelessWidget {
 /// Message Text Field (multiline)
 class MessageTextField extends StatelessWidget {
   final TextEditingController controller;
-  final String label;
-  final String hint;
+  final String? label;
+  final String? hint;
   final int maxLines;
   final String? Function(String?)? customValidator;
 
   const MessageTextField({
     super.key,
     required this.controller,
-    this.label = 'Message',
-    this.hint = 'Enter your message here...',
+    this.label,
+    this.hint,
     this.maxLines = 5,
     this.customValidator,
   });
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return StyledTextField(
       controller: controller,
-      label: label,
-      hint: hint,
+      label: label ?? l10n.contactFieldMessage,
+      hint: hint ?? l10n.contactFieldMessageHint,
       icon: Icons.message_outlined,
       keyboardType: TextInputType.multiline,
       maxLines: maxLines,
-      validator: customValidator ?? _defaultMessageValidator,
+      validator: customValidator ??
+          (value) => _defaultMessageValidator(value, l10n),
     );
   }
 
-  String? _defaultMessageValidator(String? value) {
+  String? _defaultMessageValidator(String? value, AppLocalizations l10n) {
     if (value == null || value.isEmpty) {
-      return 'Please enter a message';
+      return l10n.contactValidationMessageRequired;
     }
     if (value.length < 10) {
-      return 'Message must be at least 10 characters';
+      return l10n.contactValidationMessageMinLength;
     }
     return null;
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../theme/app_theme.dart';
 
@@ -16,10 +17,11 @@ class ProjectsViewAllSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       children: [
         Text(
-          'Interested in seeing more?',
+          l10n.projectsSeeMorePrompt,
           style: AppFonts.bodyLarge(),
           textAlign: TextAlign.center,
         ),
@@ -30,13 +32,13 @@ class ProjectsViewAllSection extends StatelessWidget {
             OutlinedButton.icon(
               onPressed: onViewAllProjects,
               icon: const Icon(AppIcons.projects),
-              label: const Text('View All Projects'),
+              label: Text(l10n.projectsViewAll),
             ),
             const SizedBox(width: AppTheme.spacingM),
             ElevatedButton.icon(
               onPressed: onVisitGitHub,
               icon: const Icon(Icons.code),
-              label: const Text('Visit GitHub'),
+              label: Text(l10n.projectsVisitGitHub),
             ),
           ],
         ),

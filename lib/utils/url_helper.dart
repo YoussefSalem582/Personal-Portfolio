@@ -2,6 +2,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, kDebugMode;
 import 'package:web/web.dart' as web show window;
 import '../config/app_config.dart';
+import '../l10n/app_localizations.dart';
 
 class UrlHelper {
   static Future<void> launchURL(String url) async {
@@ -121,10 +122,14 @@ class UrlHelper {
   }
 
   /// Label for project [liveUrl] buttons (Google Play listing vs deployed web app).
-  static String liveUrlButtonLabel(String url, {bool compact = false}) {
+  static String liveUrlButtonLabel(
+    AppLocalizations l10n,
+    String url, {
+    bool compact = false,
+  }) {
     if (url.contains('play.google.com')) {
-      return compact ? 'Google Play' : 'View on Google Play';
+      return compact ? l10n.liveUrlGooglePlayShort : l10n.liveUrlGooglePlay;
     }
-    return compact ? 'Live Demo' : 'View Live Demo';
+    return compact ? l10n.liveUrlDemoShort : l10n.liveUrlDemo;
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:dio/dio.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../models/contact_form.dart';
 import '../../config/api_keys.dart';
@@ -8,6 +9,23 @@ import 'contact_form_field_widget.dart';
 import 'submit_status_widget.dart';
 
 import '../../theme/app_theme.dart';
+
+enum _ContactSubmitKind {
+  notConfigured,
+  invalidForm,
+  formDisabled,
+  rateLimit,
+  failedWithStatus,
+  timeout,
+  network,
+  badCertificate,
+}
+
+class _ContactSubmitException implements Exception {
+  _ContactSubmitException(this.kind, {this.statusCode});
+  final _ContactSubmitKind kind;
+  final int? statusCode;
+}
 
 /// A comprehensive contact form widget with validation and submission handling.
 ///
@@ -35,6 +53,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
   // Form submission state
   bool _isSubmitting = false;
   String? _submitStatus;
+  bool _submitStatusIsError = false;
 
   @override
   void dispose() {
@@ -53,6 +72,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 768;
     final isSmallMobile = screenWidth < 375;
+    final l10n = AppLocalizations.of(context);
 
     return Container(
       decoration: BoxDecoration(
@@ -144,7 +164,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Send Me a Message',
+                            l10n.contactFormTitle,
                             style: AppFonts.h2().copyWith(
                               fontSize:
                                   isMobile ? (isSmallMobile ? 18 : 20) : null,
@@ -156,7 +176,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            'I\'ll get back to you within 24 hours',
+                            l10n.contactFormSubtitle,
                             style: AppFonts.bodySmall().copyWith(
                               fontSize:
                                   isMobile ? (isSmallMobile ? 10 : 11) : null,
@@ -177,12 +197,12 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                 // Name field - Required, basic validation
                 ContactFormFieldWidget(
                   controller: _nameController,
-                  label: 'Your Name',
-                  hint: 'Enter your full name',
+                  label: l10n.contactFieldName,
+                  hint: l10n.contactFieldNameHint,
                   icon: AppIcons.user,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your name';
+                      return l10n.contactValidationNameRequired;
                     }
                     return null;
                   },
@@ -193,18 +213,18 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                 // Email field - Required, validates email format with regex
                 ContactFormFieldWidget(
                   controller: _emailController,
-                  label: 'Your Email',
-                  hint: 'Enter your email address',
+                  label: l10n.contactFieldEmail,
+                  hint: l10n.contactFieldEmailHint,
                   icon: AppIcons.email,
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your email';
+                      return l10n.contactValidationEmailRequired;
                     }
                     if (!RegExp(
                       r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
                     ).hasMatch(value)) {
-                      return 'Please enter a valid email';
+                      return l10n.contactValidationEmailInvalid;
                     }
                     return null;
                   },
@@ -215,12 +235,12 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                 // Subject field - Required, basic validation
                 ContactFormFieldWidget(
                   controller: _subjectController,
-                  label: 'Subject',
-                  hint: 'What is this about?',
+                  label: l10n.contactFieldSubject,
+                  hint: l10n.contactFieldSubjectHint,
                   icon: AppIcons.subject,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter a subject';
+                      return l10n.contactValidationSubjectRequired;
                     }
                     return null;
                   },
@@ -232,16 +252,16 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                 // Multi-line text area (5 lines)
                 ContactFormFieldWidget(
                   controller: _messageController,
-                  label: 'Message',
-                  hint: 'Tell me about your project or inquiry...',
+                  label: l10n.contactFieldMessage,
+                  hint: l10n.contactFieldMessageHint,
                   icon: AppIcons.message,
                   maxLines: 5,
                   validator: (value) {
                     if (value == null || value.trim().isEmpty) {
-                      return 'Please enter your message';
+                      return l10n.contactValidationMessageRequired;
                     }
                     if (value.trim().length < 10) {
-                      return 'Message must be at least 10 characters';
+                      return l10n.contactValidationMessageMinLength;
                     }
                     return null;
                   },
@@ -252,7 +272,10 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
 
                 // Show success or error message after form submission
                 if (_submitStatus != null) ...[
-                  SubmitStatusWidget(statusMessage: _submitStatus!),
+                  SubmitStatusWidget(
+                    statusMessage: _submitStatus!,
+                    isError: _submitStatusIsError,
+                  ),
                   const SizedBox(height: AppTheme.spacingL),
                 ],
 
@@ -300,7 +323,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
                                       : 20),
                               SizedBox(width: isMobile ? 6 : AppTheme.spacingS),
                               Text(
-                                'Send Message',
+                                l10n.contactSendButton,
                                 style: AppFonts.button().copyWith(
                                   fontSize:
                                       isMobile ? (isSmallMobile ? 14 : 15) : 16,
@@ -335,6 +358,7 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
     setState(() {
       _isSubmitting = true;
       _submitStatus = null;
+      _submitStatusIsError = false;
     });
 
     try {
@@ -350,10 +374,12 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       await _submitContactForm(contactForm);
 
       // Show success message
+      if (!mounted) return;
+      final l10n = AppLocalizations.of(context);
       setState(() {
-        _submitStatus =
-            'Message sent successfully! I\'ll get back to you soon.';
+        _submitStatus = l10n.contactSuccessMessage;
         _isSubmitting = false;
+        _submitStatusIsError = false;
       });
 
       // Clear form fields after successful submission
@@ -362,46 +388,48 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
       _subjectController.clear();
       _messageController.clear();
     } catch (e) {
-      // Show error message if submission fails
-      // Provide more helpful error message based on error type
-      String errorMessage = 'Error sending message. ';
-
-      if (e.toString().contains('timeout')) {
-        errorMessage +=
-            'Request timeout. Please check your internet connection and try again.';
-      } else if (e.toString().contains('403') ||
-          e.toString().contains('Access denied')) {
-        errorMessage +=
-            'Email service authentication issue. Please contact me directly at youssef.salem.hassan582@gmail.com';
-      } else if (e.toString().contains('404')) {
-        errorMessage +=
-            'Email service configuration not found. Please contact me directly at youssef.salem.hassan582@gmail.com';
-      } else if (e.toString().contains('400') ||
-          e.toString().contains('Invalid')) {
-        errorMessage +=
-            'Invalid form data. Please check your inputs and try again.';
-      } else if (e.toString().contains('500') ||
-          e.toString().contains('server')) {
-        errorMessage +=
-            'Email service is temporarily unavailable. Please try again later or contact me directly at youssef.salem.hassan582@gmail.com';
-      } else if (e.toString().contains('CORS') ||
-          e.toString().contains('XMLHttpRequest')) {
-        errorMessage +=
-            'Browser security issue. Please try again or contact me directly at youssef.salem.hassan582@gmail.com';
-      } else if (e.toString().contains('SocketException') ||
-          e.toString().contains('network')) {
-        errorMessage +=
-            'Network connection issue. Please check your internet and try again.';
-      } else {
-        errorMessage +=
-            'Please try again or contact me directly at youssef.salem.hassan582@gmail.com';
-      }
+      if (!mounted) return;
+      final l10n = AppLocalizations.of(context);
+      final errorMessage = _localizedSubmitError(e, l10n);
 
       setState(() {
         _submitStatus = errorMessage;
         _isSubmitting = false;
+        _submitStatusIsError = true;
       });
     }
+  }
+
+  String _localizedSubmitError(Object e, AppLocalizations l10n) {
+    const email = ApiKeys.recipientEmail;
+    if (e is _ContactSubmitException) {
+      switch (e.kind) {
+        case _ContactSubmitKind.notConfigured:
+          return l10n.contactErrorNotConfigured;
+        case _ContactSubmitKind.invalidForm:
+          return l10n.contactErrorInvalidForm;
+        case _ContactSubmitKind.formDisabled:
+          return l10n.contactErrorFormDisabledWithEmail(email);
+        case _ContactSubmitKind.rateLimit:
+          return l10n.contactErrorRateLimit;
+        case _ContactSubmitKind.failedWithStatus:
+          final c = e.statusCode ?? 0;
+          if (c == 404) return l10n.contactError404(email);
+          if (c >= 500) return l10n.contactErrorServer(email);
+          return l10n.contactErrorFailedWithCode(c, email);
+        case _ContactSubmitKind.timeout:
+          return l10n.contactErrorTimeout;
+        case _ContactSubmitKind.network:
+          return l10n.contactErrorNetworkSimple;
+        case _ContactSubmitKind.badCertificate:
+          return l10n.contactErrorCertificate;
+      }
+    }
+    final s = e.toString().toLowerCase();
+    if (s.contains('cors') || s.contains('xmlhttprequest')) {
+      return '${l10n.contactErrorGeneric}${l10n.contactErrorCors(email)}';
+    }
+    return '${l10n.contactErrorGeneric}${l10n.contactErrorTryDirect(email)}';
   }
 
   /// Submits the contact form using Formspree (100% FREE, no domain restrictions!)
@@ -422,117 +450,81 @@ class _ContactFormWidgetState extends State<ContactFormWidget> {
   /// - Email notifications
   /// - File uploads
   Future<void> _submitContactForm(ContactForm form) async {
+    const formspreeEndpoint = ApiKeys.formspreeEndpoint;
+    if (formspreeEndpoint.isEmpty) {
+      throw _ContactSubmitException(_ContactSubmitKind.notConfigured);
+    }
+
+    final dio = Dio(BaseOptions(
+      connectTimeout: const Duration(seconds: 15),
+      receiveTimeout: const Duration(seconds: 15),
+      sendTimeout: const Duration(seconds: 15),
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    ));
+
+    final formData = {
+      'name': form.name,
+      'email': form.email,
+      'subject': form.subject,
+      'message': form.message,
+      '_replyto': form.email,
+      '_subject': '${form.subject} - Portfolio Contact Form',
+    };
+
     try {
-      // Formspree endpoint - FREE and works on any domain!
-      const formspreeEndpoint = ApiKeys.formspreeEndpoint;
-
-      // Check if endpoint is configured
-      if (formspreeEndpoint.isEmpty) {
-        throw Exception(
-            'Formspree endpoint not configured. Please contact the administrator.');
-      }
-
-      // Create Dio instance with configuration
-      final dio = Dio(BaseOptions(
-        connectTimeout: const Duration(seconds: 15),
-        receiveTimeout: const Duration(seconds: 15),
-        sendTimeout: const Duration(seconds: 15),
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-      ));
-
-      // Create form data
-      final formData = {
-        'name': form.name,
-        'email': form.email,
-        'subject': form.subject,
-        'message': form.message,
-        '_replyto': form.email, // Formspree will use this as reply-to
-        '_subject': '${form.subject} - Portfolio Contact Form',
-      };
-
-      // Send POST request to Formspree using Dio
       final response = await dio.post(
         formspreeEndpoint,
         data: formData,
       );
 
-      // Check response status
       if (response.statusCode == 200 || response.statusCode == 201) {
-        // Success!
-      } else if (response.statusCode == 422) {
-        // Validation error
-        final errors = response.data['errors'] as List?;
-        final errorMessage = errors?.isNotEmpty == true
-            ? errors!.first['message']
-            : 'Invalid form data';
-        throw Exception(errorMessage);
-      } else if (response.statusCode == 403) {
-        throw Exception(
-            'Form is disabled or spam detected. Please contact me directly at ${ApiKeys.recipientEmail}');
-      } else if (response.statusCode == 429) {
-        throw Exception(
-            'Too many requests. Please wait a moment and try again.');
-      } else {
-        throw Exception(
-            'Failed to send message (Error ${response.statusCode}). Please try again or contact me directly at ${ApiKeys.recipientEmail}');
+        return;
       }
+      if (response.statusCode == 422) {
+        throw _ContactSubmitException(_ContactSubmitKind.invalidForm);
+      }
+      if (response.statusCode == 403) {
+        throw _ContactSubmitException(_ContactSubmitKind.formDisabled);
+      }
+      if (response.statusCode == 429) {
+        throw _ContactSubmitException(_ContactSubmitKind.rateLimit);
+      }
+      throw _ContactSubmitException(
+        _ContactSubmitKind.failedWithStatus,
+        statusCode: response.statusCode ?? 0,
+      );
     } on DioException catch (e) {
-      // Handle Dio-specific errors
       if (e.type == DioExceptionType.connectionTimeout ||
           e.type == DioExceptionType.sendTimeout ||
           e.type == DioExceptionType.receiveTimeout) {
-        throw Exception(
-            'Request timeout. Please check your internet connection and try again.');
-      } else if (e.type == DioExceptionType.connectionError) {
-        throw Exception(
-            'Network error. Please check your internet connection and try again.');
-      } else if (e.type == DioExceptionType.badResponse) {
-        final statusCode = e.response?.statusCode;
+        throw _ContactSubmitException(_ContactSubmitKind.timeout);
+      }
+      if (e.type == DioExceptionType.connectionError) {
+        throw _ContactSubmitException(_ContactSubmitKind.network);
+      }
+      if (e.type == DioExceptionType.badResponse) {
+        final statusCode = e.response?.statusCode ?? 0;
         if (statusCode == 422) {
-          final errors = e.response?.data['errors'] as List?;
-          final errorMessage = errors?.isNotEmpty == true
-              ? errors!.first['message']
-              : 'Invalid form data';
-          throw Exception(errorMessage);
-        } else if (statusCode == 403) {
-          throw Exception(
-              'Form is disabled or spam detected. Please contact me directly at ${ApiKeys.recipientEmail}');
-        } else if (statusCode == 429) {
-          throw Exception(
-              'Too many requests. Please wait a moment and try again.');
-        } else {
-          throw Exception(
-              'Failed to send message (Error $statusCode). Please try again or contact me directly at ${ApiKeys.recipientEmail}');
+          throw _ContactSubmitException(_ContactSubmitKind.invalidForm);
         }
-      } else if (e.type == DioExceptionType.badCertificate) {
-        throw Exception(
-            'Security certificate error. Please contact the administrator.');
-      } else {
-        throw Exception(
-            'Network error. Please check your internet connection and try again.');
+        if (statusCode == 403) {
+          throw _ContactSubmitException(_ContactSubmitKind.formDisabled);
+        }
+        if (statusCode == 429) {
+          throw _ContactSubmitException(_ContactSubmitKind.rateLimit);
+        }
+        throw _ContactSubmitException(
+          _ContactSubmitKind.failedWithStatus,
+          statusCode: statusCode,
+        );
       }
-    } catch (e) {
-      // Parse error message for better user feedback
-      final errorString = e.toString().toLowerCase();
-
-      // Check for specific error types
-      if (errorString.contains('timeout')) {
-        throw Exception(
-            'Request timeout. Please check your internet connection and try again.');
-      } else if (errorString.contains('socketexception') ||
-          errorString.contains('network')) {
-        throw Exception(
-            'Network error. Please check your internet connection and try again.');
-      } else if (errorString.contains('format')) {
-        throw Exception(
-            'Invalid form data. Please check your inputs and try again.');
+      if (e.type == DioExceptionType.badCertificate) {
+        throw _ContactSubmitException(_ContactSubmitKind.badCertificate);
       }
-
-      // Re-throw the exception to be caught by _submitForm
-      rethrow;
+      throw _ContactSubmitException(_ContactSubmitKind.network);
     }
   }
 }

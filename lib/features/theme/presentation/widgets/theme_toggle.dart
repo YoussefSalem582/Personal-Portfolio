@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../l10n/app_localizations.dart';
 import '../../../../utils/assets/app_constants.dart';
 import '../bloc/theme_bloc.dart';
 import '../bloc/theme_event.dart';
@@ -16,6 +17,7 @@ class ThemeToggle extends StatelessWidget {
     return BlocBuilder<ThemeBloc, ThemeUiState>(
       builder: (context, state) {
         final isDark = context.read<ThemeBloc>().isDarkModeEffective(context);
+        final l10n = AppLocalizations.of(context);
 
         return IconButton(
           icon: Icon(
@@ -28,7 +30,7 @@ class ThemeToggle extends StatelessWidget {
                   ambientBrightness: Theme.of(context).brightness,
                 ),
               ),
-          tooltip: isDark ? 'Light Mode' : 'Dark Mode',
+          tooltip: isDark ? l10n.tooltipLightMode : l10n.tooltipDarkMode,
           padding: EdgeInsets.zero,
           constraints: BoxConstraints(
             minWidth: isCompact ? 32 : 40,

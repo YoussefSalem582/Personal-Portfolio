@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../l10n/app_localizations.dart';
+import '../utils/data/localized/portfolio_strings.dart';
 import '../utils/assets/app_constants.dart';
 import '../utils/responsive_helper.dart';
 import '../utils/data/portfolio_data.dart';
@@ -22,6 +24,7 @@ class Footer extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
 
     return Container(
       width: double.infinity,
@@ -60,9 +63,9 @@ class Footer extends StatelessWidget {
         child: Column(
           children: [
             if (isMobile)
-              _buildMobileFooter(isDark)
+              _buildMobileFooter(isDark, l10n)
             else
-              _buildDesktopFooter(isDark),
+              _buildDesktopFooter(isDark, l10n),
 
             const SizedBox(height: AppTheme.spacingXL),
 
@@ -88,7 +91,7 @@ class Footer extends StatelessWidget {
             const SizedBox(height: AppTheme.spacingL),
 
             // Copyright and tech stack
-            _buildCopyrightSection(isDark),
+            _buildCopyrightSection(isDark, l10n),
           ],
         ),
       ),
@@ -145,12 +148,12 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildCopyrightSection(bool isDark) {
+  Widget _buildCopyrightSection(bool isDark, AppLocalizations l10n) {
     return Column(
       children: [
         // Copyright
         Text(
-          '© ${DateTime.now().year} ${PortfolioData.fullName}. All rights reserved.',
+          l10n.copyrightNotice(DateTime.now().year, PortfolioData.fullName),
           style: AppFonts.bodyMedium().copyWith(
             color: (isDark ? AppColors.textSecondaryDark : AppColors.white)
                 .withOpacity(0.8),
@@ -165,7 +168,7 @@ class Footer extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Built with',
+              l10n.footerBuiltWith,
               style: AppFonts.bodySmall().copyWith(
                 color: (isDark ? AppColors.textSecondaryDark : AppColors.white)
                     .withOpacity(0.6),
@@ -179,7 +182,7 @@ class Footer extends StatelessWidget {
             ),
             const SizedBox(width: AppTheme.spacingXS),
             Text(
-              'using Flutter',
+              l10n.footerUsingFlutter,
               style: AppFonts.bodySmall().copyWith(
                 color: (isDark ? AppColors.textSecondaryDark : AppColors.white)
                     .withOpacity(0.6),
@@ -211,7 +214,7 @@ class Footer extends StatelessWidget {
     );
   }
 
-  Widget _buildDesktopFooter(bool isDark) {
+  Widget _buildDesktopFooter(bool isDark, AppLocalizations l10n) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -266,7 +269,7 @@ class Footer extends StatelessWidget {
                   const SizedBox(width: AppTheme.spacingS),
                   Expanded(
                     child: Text(
-                      PortfolioData.title,
+                      PortfolioStrings.title,
                       style: AppFonts.bodyLarge().copyWith(
                         color: isDark
                             ? AppColors.accentDark
@@ -281,7 +284,7 @@ class Footer extends StatelessWidget {
 
               // Description
               Text(
-                'Creating beautiful and functional applications with Flutter. Passionate about clean code and exceptional user experiences.',
+                l10n.footerTagline,
                 style: AppFonts.bodyMedium().copyWith(
                   color:
                       (isDark ? AppColors.textSecondaryDark : AppColors.white)
@@ -303,21 +306,21 @@ class Footer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildSectionTitle('Quick Links', isDark),
+              _buildSectionTitle(l10n.footerQuickLinks, isDark),
               const SizedBox(height: AppTheme.spacingM),
               _buildFooterLink(
-                  'Home', AppIcons.home, () => _scrollToSection(0), isDark),
+                  l10n.navHome, AppIcons.home, () => _scrollToSection(0), isDark),
               _buildFooterLink(
-                  'About', AppIcons.about, () => _scrollToSection(1), isDark),
+                  l10n.navAbout, AppIcons.about, () => _scrollToSection(1), isDark),
               _buildFooterLink(
-                  'Skills', AppIcons.skills, () => _scrollToSection(2), isDark),
-              _buildFooterLink('Projects', AppIcons.projects,
+                  l10n.navSkills, AppIcons.skills, () => _scrollToSection(2), isDark),
+              _buildFooterLink(l10n.navProjects, AppIcons.projects,
                   () => _scrollToSection(4), isDark),
-              _buildFooterLink('Contact', AppIcons.contact,
+              _buildFooterLink(l10n.navContact, AppIcons.contact,
                   () => _scrollToSection(6), isDark),
               const SizedBox(height: AppTheme.spacingS),
               _buildFooterLink(
-                  'View Resume', AppIcons.view, () => _viewResume(), isDark),
+                  l10n.footerViewResume, AppIcons.view, () => _viewResume(), isDark),
             ],
           ),
         ),
@@ -330,7 +333,7 @@ class Footer extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _buildSectionTitle('Get In Touch', isDark),
+              _buildSectionTitle(l10n.footerGetInTouch, isDark),
               const SizedBox(height: AppTheme.spacingM),
 
               _buildContactLink(
@@ -353,7 +356,7 @@ class Footer extends StatelessWidget {
 
               // Social links with improved styling
               Text(
-                'Follow Me',
+                l10n.footerFollowMe,
                 style: AppFonts.labelMedium().copyWith(
                   color:
                       (isDark ? AppColors.textSecondaryDark : AppColors.white)
@@ -485,7 +488,7 @@ class Footer extends StatelessWidget {
     }
   }
 
-  Widget _buildMobileFooter(bool isDark) {
+  Widget _buildMobileFooter(bool isDark, AppLocalizations l10n) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -510,7 +513,7 @@ class Footer extends StatelessWidget {
 
         // Title
         Text(
-          PortfolioData.title,
+          PortfolioStrings.title,
           style: AppFonts.bodyLarge().copyWith(
             color: isDark ? AppColors.accentDark : AppColors.accentLight,
             fontWeight: AppFonts.semiBold,
@@ -588,7 +591,7 @@ class Footer extends StatelessWidget {
           child: ElevatedButton.icon(
             onPressed: () => _viewResume(),
             icon: const Icon(AppIcons.view, size: 20),
-            label: const Text('View Resume'),
+            label: Text(l10n.footerViewResume),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.symmetric(vertical: 16),
               backgroundColor:

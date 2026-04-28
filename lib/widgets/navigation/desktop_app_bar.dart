@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/data/portfolio_data.dart';
+import '../../features/locale/presentation/widgets/locale_toggle_button_container.dart';
 import '../common/theme_toggle_button_container.dart';
 import 'navigation_item.dart';
 import 'links_dropdown_button.dart';
@@ -112,7 +114,11 @@ class _DesktopAppBarState extends State<DesktopAppBar>
             // Links dropdown button
             LinksDropdownButton(isDark: isDark),
 
-            const SizedBox(width: 16),
+            const SizedBox(width: 8),
+
+            LocaleToggleButtonContainer(isDark: isDark),
+
+            const SizedBox(width: 8),
 
             // Theme toggle with better styling
             ThemeToggleButtonContainer(isDark: isDark),
@@ -123,51 +129,52 @@ class _DesktopAppBarState extends State<DesktopAppBar>
   }
 
   List<Widget> _buildNavigationItems(bool isVertical) {
+    final l10n = AppLocalizations.of(context);
     final items = [
       NavigationItem(
-        title: 'Home',
+        title: l10n.navHome,
         index: 0,
         isSelected: widget.currentIndex == 0,
         onTap: () => widget.onItemSelected(0),
         isVertical: isVertical,
       ),
       NavigationItem(
-        title: 'About',
+        title: l10n.navAbout,
         index: 1,
         isSelected: widget.currentIndex == 1,
         onTap: () => widget.onItemSelected(1),
         isVertical: isVertical,
       ),
       NavigationItem(
-        title: 'Skills',
+        title: l10n.navSkills,
         index: 2,
         isSelected: widget.currentIndex == 2,
         onTap: () => widget.onItemSelected(2),
         isVertical: isVertical,
       ),
       NavigationItem(
-        title: 'Expertise',
+        title: l10n.navExpertise,
         index: 3,
         isSelected: widget.currentIndex == 3,
         onTap: () => widget.onItemSelected(3),
         isVertical: isVertical,
       ),
       NavigationItem(
-        title: 'Projects',
+        title: l10n.navProjects,
         index: 4,
         isSelected: widget.currentIndex == 4,
         onTap: () => widget.onItemSelected(4),
         isVertical: isVertical,
       ),
       NavigationItem(
-        title: 'Certificates',
+        title: l10n.navCertificates,
         index: 5,
         isSelected: widget.currentIndex == 5,
         onTap: () => widget.onItemSelected(5),
         isVertical: isVertical,
       ),
       NavigationItem(
-        title: 'Contact',
+        title: l10n.navContact,
         index: 6,
         isSelected: widget.currentIndex == 6,
         onTap: () => widget.onItemSelected(6),
@@ -216,7 +223,9 @@ class _AppBarLogoState extends State<_AppBarLogo> {
             mainAxisSize: MainAxisSize.min,
             children: [
               // Logo with hero animation - Opens image on click
-              GestureDetector(
+              Tooltip(
+                message: AppLocalizations.of(context).tooltipViewFullLogo,
+                child: GestureDetector(
                 onTap: () {
                   // Open the logo image in a dialog
                   showDialog(
@@ -298,6 +307,7 @@ class _AppBarLogoState extends State<_AppBarLogo> {
                     ),
                   ),
                 ),
+              ),
               ),
               const SizedBox(width: 14),
               // Name with gradient - Navigates to top on click

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/url_helper.dart';
 import '../../utils/data/portfolio_data.dart';
@@ -35,7 +36,9 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
     final offset = renderBox.localToGlobal(Offset.zero);
 
     _overlayEntry = OverlayEntry(
-      builder: (context) => Stack(
+      builder: (overlayContext) {
+        final l10n = AppLocalizations.of(overlayContext);
+        return Stack(
         children: [
           // Backdrop to close dropdown
           Positioned.fill(
@@ -77,7 +80,7 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
                   children: [
                     _buildDropdownItemWithSvg(
                       svgPath: AppIcons.githubIconSvg,
-                      label: 'GitHub Profile',
+                      label: l10n.linksGithubProfile,
                       onTap: () {
                         _closeDropdown();
                         final githubLink = PortfolioData.socialLinks
@@ -88,7 +91,7 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
                     _buildDivider(),
                     _buildDropdownItemWithSvg(
                       svgPath: AppIcons.linkedinIconSvg,
-                      label: 'LinkedIn Profile',
+                      label: l10n.linksLinkedIn,
                       onTap: () {
                         _closeDropdown();
                         final linkedInLink = PortfolioData.socialLinks
@@ -99,7 +102,7 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
                     _buildDivider(),
                     _buildDropdownItemWithSvg(
                       svgPath: AppIcons.youtubeIconSvg,
-                      label: 'YouTube Channel',
+                      label: l10n.linksYoutube,
                       onTap: () {
                         _closeDropdown();
                         final youtubeLink = PortfolioData.socialLinks
@@ -111,20 +114,21 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
                     _buildDivider(),
                     _buildDropdownItem(
                       icon: AppIcons.download,
-                      label: 'Resume',
+                      label: l10n.linksResume,
                       onTap: () async {
+                        final messenger = ScaffoldMessenger.of(context);
+                        final loc = AppLocalizations.of(context);
                         _closeDropdown();
                         try {
                           await UrlHelper.openFile(PortfolioData.resumeUrl);
                         } catch (e) {
-                          if (context.mounted) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Error opening resume'),
-                                backgroundColor: AppColors.errorLight,
-                              ),
-                            );
-                          }
+                          if (!context.mounted) return;
+                          messenger.showSnackBar(
+                            SnackBar(
+                              content: Text(loc.resumeOpenError),
+                              backgroundColor: AppColors.errorLight,
+                            ),
+                          );
                         }
                       },
                     ),
@@ -134,7 +138,8 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
             ),
           ),
         ],
-      ),
+        );
+      },
     );
 
     Overlay.of(context).insert(_overlayEntry!);
@@ -252,7 +257,7 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'Links',
+                AppLocalizations.of(context).linksMenu,
                 style: AppFonts.labelLarge().copyWith(
                   color: widget.isDark
                       ? AppColors.textPrimaryDark

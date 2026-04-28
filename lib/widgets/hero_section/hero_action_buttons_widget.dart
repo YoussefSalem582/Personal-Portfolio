@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import '../../utils/responsive_helper.dart';
@@ -16,6 +17,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
     final isSmallMobile = ResponsiveHelper.isSmallMobile(screenWidth);
@@ -27,7 +29,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
       children: [
         // Primary CTA - Get In Touch
         PrimaryGradientButton(
-          label: 'Get In Touch',
+          label: l10n.footerGetInTouch,
           icon: AppIcons.send,
           onPressed: () => _navigateToSection(6),
           isMobile: isMobile,
@@ -35,7 +37,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
 
         // Secondary CTA - View Resume
         SecondaryOutlinedButton(
-          label: 'View Resume',
+          label: l10n.footerViewResume,
           icon: AppIcons.download,
           onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
           isMobile: isMobile,
@@ -43,7 +45,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
 
         // Tertiary CTA - View Projects
         SecondaryOutlinedButton(
-          label: 'View Projects',
+          label: l10n.heroViewProjects,
           icon: AppIcons.projects,
           onPressed: () => _navigateToSection(4),
           isMobile: isMobile,

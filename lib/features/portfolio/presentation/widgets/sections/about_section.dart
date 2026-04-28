@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import '../../../../../utils/responsive_helper.dart';
 import '../../../../../widgets/about_section/bio_section_widget.dart';
@@ -67,7 +68,7 @@ class AboutSection extends StatelessWidget {
                     : [AppColors.accentLight, AppColors.primaryLight],
               ).createShader(bounds),
               child: Text(
-                'About Me',
+                AppLocalizations.of(context).sectionAboutTitle,
                 style: (isDark ? AppFonts.h1() : AppFonts.h1()).copyWith(
                   fontSize: isMobile
                       ? (isSmallMobile ? 32 : 38)
@@ -113,7 +114,7 @@ class AboutSection extends StatelessWidget {
                 horizontal: isMobile ? AppTheme.spacingM : 0,
               ),
               child: Text(
-                'Discover my journey, skills, and passion for technology',
+                AppLocalizations.of(context).aboutTagline,
                 style: (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge())
                     .copyWith(
                   fontSize: isMobile

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/certificate.dart';
 import '../../utils/assets/app_constants.dart';
+import '../../utils/data/localized/localized_extensions.dart';
 import '../../theme/app_theme.dart';
 
 /// Certificate Dialog Header
@@ -51,7 +53,7 @@ class CertificateDialogHeader extends StatelessWidget {
 
           // Title Section
           Expanded(
-            child: _buildTitleSection(),
+            child: _buildTitleSection(context),
           ),
 
           // Close Button
@@ -80,12 +82,13 @@ class CertificateDialogHeader extends StatelessWidget {
     );
   }
 
-  Widget _buildTitleSection() {
+  Widget _buildTitleSection(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Certificate Details',
+          l10n.certificateDetailsHeading,
           style: AppFonts.labelMedium().copyWith(
             color: AppColors.white.withOpacity(0.9),
             letterSpacing: 1,
@@ -94,7 +97,7 @@ class CertificateDialogHeader extends StatelessWidget {
         ),
         const SizedBox(height: 4),
         Text(
-          certificate.title,
+          certificate.localizedTitle,
           style: AppFonts.h3().copyWith(
             color: AppColors.white,
             fontWeight: AppFonts.extraBold,
@@ -108,8 +111,10 @@ class CertificateDialogHeader extends StatelessWidget {
   }
 
   Widget _buildCloseButton(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return IconButton(
       onPressed: () => Navigator.of(context).pop(),
+      tooltip: l10n.tooltipClose,
       icon: const Icon(AppIcons.close, color: AppColors.white, size: 24),
       style: IconButton.styleFrom(
         backgroundColor: AppColors.white.withOpacity(0.2),

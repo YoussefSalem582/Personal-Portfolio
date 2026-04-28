@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/certificate.dart';
 import '../../utils/assets/app_constants.dart';
+import '../../utils/data/localized/localized_extensions.dart';
 import '../../theme/app_theme.dart';
 import 'certificate_dialog_info_card.dart';
 
@@ -20,14 +23,15 @@ class CertificateDialogInfoSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Issuer Card
         CertificateDialogInfoCard(
           icon: AppIcons.experience,
-          title: 'Issued by',
-          content: certificate.issuer,
+          title: l10n.certificateIssuedByLabel,
+          content: certificate.localizedIssuer,
           accentColor: accentColor,
           isDark: isDark,
         ),
@@ -37,8 +41,8 @@ class CertificateDialogInfoSection extends StatelessWidget {
         // Date Card
         CertificateDialogInfoCard(
           icon: AppIcons.date,
-          title: 'Issue Date',
-          content: _formatFullDate(certificate.issueDate),
+          title: l10n.certificateIssueDateLabel,
+          content: _formatFullDate(context, certificate.issueDate),
           accentColor: accentColor,
           isDark: isDark,
         ),
@@ -48,8 +52,8 @@ class CertificateDialogInfoSection extends StatelessWidget {
         // Description Card
         CertificateDialogInfoCard(
           icon: AppIcons.blog,
-          title: 'Description',
-          content: certificate.description,
+          title: l10n.certificateDescriptionLabel,
+          content: certificate.localizedDescription,
           accentColor: accentColor,
           isDark: isDark,
         ),
@@ -57,13 +61,14 @@ class CertificateDialogInfoSection extends StatelessWidget {
         // Verified Badge
         if (certificate.credentialUrl != null) ...[
           const SizedBox(height: AppTheme.spacingM),
-          _buildVerifiedBanner(),
+          _buildVerifiedBanner(context),
         ],
       ],
     );
   }
 
-  Widget _buildVerifiedBanner() {
+  Widget _buildVerifiedBanner(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Container(
       padding: const EdgeInsets.all(AppTheme.spacingM),
       decoration: BoxDecoration(
@@ -99,7 +104,7 @@ class CertificateDialogInfoSection extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Verified Certificate',
+                  l10n.certificateVerifiedTitle,
                   style: AppFonts.labelLarge().copyWith(
                     color: AppColors.successLight,
                     fontWeight: AppFonts.bold,
@@ -107,7 +112,7 @@ class CertificateDialogInfoSection extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  'This certificate can be validated online',
+                  l10n.certificateValidatedOnlineHint,
                   style: AppFonts.bodySmall().copyWith(
                     color: AppColors.successLight.withOpacity(0.8),
                   ),
@@ -120,22 +125,9 @@ class CertificateDialogInfoSection extends StatelessWidget {
     );
   }
 
-  /// Formats date to "Month YYYY" format
-  String _formatFullDate(DateTime date) {
-    const months = [
-      'January',
-      'February',
-      'March',
-      'April',
-      'May',
-      'June',
-      'July',
-      'August',
-      'September',
-      'October',
-      'November',
-      'December',
-    ];
-    return '${months[date.month - 1]} ${date.year}';
+  /// Month and year in the current locale (e.g. April 2026 / أبريل 2026).
+  String _formatFullDate(BuildContext context, DateTime date) {
+    final locale = Localizations.localeOf(context).toString();
+    return DateFormat.yMMMM(locale).format(date);
   }
 }

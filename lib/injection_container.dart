@@ -14,6 +14,12 @@ import 'features/theme/data/datasources/theme_local_datasource_impl.dart';
 import 'features/theme/data/repositories/theme_repository_impl.dart';
 import 'features/theme/domain/repositories/theme_repository.dart';
 import 'features/theme/domain/usecases/theme_mode_usecases.dart';
+import 'features/locale/data/datasources/locale_local_datasource.dart';
+import 'features/locale/data/datasources/locale_local_datasource_impl.dart';
+import 'features/locale/data/repositories/locale_repository_impl.dart';
+import 'features/locale/domain/repositories/locale_repository.dart';
+import 'features/locale/domain/usecases/locale_usecases.dart';
+import 'features/locale/presentation/bloc/locale_bloc.dart';
 import 'features/theme/presentation/bloc/theme_bloc.dart';
 
 final sl = GetIt.instance;
@@ -47,6 +53,22 @@ Future<void> initDependencies() async {
     () => ThemeBloc(
       loadInitialThemeMode: sl(),
       persistThemeMode: sl(),
+    ),
+  );
+
+  // Locale (language preference)
+  sl.registerLazySingleton<LocaleLocalDataSource>(
+    () => LocaleLocalDataSourceImpl(sharedPreferences: sl()),
+  );
+  sl.registerLazySingleton<LocaleRepository>(
+    () => LocaleRepositoryImpl(local: sl()),
+  );
+  sl.registerLazySingleton(() => LoadInitialLocaleUseCase(sl()));
+  sl.registerLazySingleton(() => PersistLocaleUseCase(sl()));
+  sl.registerLazySingleton(
+    () => LocaleBloc(
+      loadInitialLocale: sl(),
+      persistLocale: sl(),
     ),
   );
 

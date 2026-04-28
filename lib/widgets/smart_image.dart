@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import '../l10n/app_localizations.dart';
 import '../utils/assets/app_constants.dart';
 
 /// SmartImage widget - Simplified for static asset-only deployment
@@ -123,7 +124,7 @@ class _SmartImageState extends State<SmartImage>
             ),
             const SizedBox(height: 8),
             Text(
-              'Image not found',
+              AppLocalizations.of(context).imageNotFound,
               style: AppFonts.bodySmall().copyWith(
                 color: isDark
                     ? AppColors.textSecondaryDark.withOpacity(0.5)

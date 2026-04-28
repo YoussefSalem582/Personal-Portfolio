@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/assets/app_constants.dart';
 import 'stat_card_widget.dart';
@@ -29,27 +30,28 @@ class StatsGridWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 768;
+    final l10n = AppLocalizations.of(context);
 
     // Define the statistics to display with icons
     final stats = [
       {
         'title': '${PortfolioData.projects.length}+',
-        'subtitle': 'Projects Completed',
+        'subtitle': l10n.statProjectsCompleted,
         'icon': AppIcons.projects,
       },
       {
         'title': '2+',
-        'subtitle': 'Years Experience',
+        'subtitle': l10n.statYearsExperience,
         'icon': AppIcons.experience,
       },
       {
         'title': '${PortfolioData.skills.expand((cat) => cat.skills).length}+',
-        'subtitle': 'Technologies',
+        'subtitle': l10n.statTechnologies,
         'icon': AppIcons.technology,
       },
       {
         'title': '100%',
-        'subtitle': 'Client Satisfaction',
+        'subtitle': l10n.statClientSatisfaction,
         'icon': AppIcons.featured,
       },
     ];

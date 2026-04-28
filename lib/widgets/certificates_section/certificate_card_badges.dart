@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../common/icon_badge.dart';
 
@@ -8,11 +9,12 @@ class PdfBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PositionedBadge(
+    final l10n = AppLocalizations.of(context);
+    return PositionedBadge(
       top: 12,
       left: 12,
       badge: IconBadge(
-        label: 'PDF',
+        label: l10n.labelPdf,
         icon: AppIcons.pdf,
         backgroundColor: AppColors.errorLight,
       ),
@@ -26,11 +28,12 @@ class VerifiedBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const PositionedBadge(
+    final l10n = AppLocalizations.of(context);
+    return PositionedBadge(
       top: 12,
       right: 12,
       badge: IconBadge(
-        label: 'Verified',
+        label: l10n.certificateVerifiedShort,
         icon: AppIcons.badge,
         backgroundColor: AppColors.successLight,
       ),

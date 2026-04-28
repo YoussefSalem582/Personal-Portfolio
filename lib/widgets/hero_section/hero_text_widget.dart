@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/data/portfolio_data.dart';
+import '../../utils/data/localized/portfolio_strings.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
 
@@ -13,15 +15,18 @@ class HeroTextWidget extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = ResponsiveHelper.isMobile(screenWidth);
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       crossAxisAlignment:
           isMobile ? CrossAxisAlignment.center : CrossAxisAlignment.start,
       children: [
-        // Greeting with decorative line
-        Row(
-          mainAxisSize: isMobile ? MainAxisSize.min : MainAxisSize.max,
-          children: [
+        // Greeting with decorative line (fixed LTR strip so layout matches design in Arabic)
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: Row(
+            mainAxisSize: isMobile ? MainAxisSize.min : MainAxisSize.max,
+            children: [
             Container(
               width: 60,
               height: 5,
@@ -38,7 +43,7 @@ class HeroTextWidget extends StatelessWidget {
             ),
             const SizedBox(width: AppTheme.spacingS),
             Text(
-              'Hello, I\'m',
+              l10n.heroGreeting,
               style: AppFonts.bodyLarge().copyWith(
                 color: isDark ? AppColors.accentDark : AppColors.accentLight,
                 fontWeight: AppFonts.semiBold,
@@ -47,6 +52,7 @@ class HeroTextWidget extends StatelessWidget {
               ),
             ),
           ],
+          ),
         ),
 
         const SizedBox(height: AppTheme.spacingL),
@@ -97,7 +103,7 @@ class HeroTextWidget extends StatelessWidget {
               AnimatedTextKit(
                 animatedTexts: [
                   TypewriterAnimatedText(
-                    'Flutter Developer',
+                    l10n.heroRoleFlutterDeveloper,
                     textStyle: AppFonts.h4().copyWith(
                       color:
                           isDark ? AppColors.accentDark : AppColors.accentLight,
@@ -107,7 +113,7 @@ class HeroTextWidget extends StatelessWidget {
                     speed: const Duration(milliseconds: 100),
                   ),
                   TypewriterAnimatedText(
-                    'Mobile App Developer',
+                    l10n.heroRoleMobileAppDeveloper,
                     textStyle: AppFonts.h4().copyWith(
                       color:
                           isDark ? AppColors.accentDark : AppColors.accentLight,
@@ -117,7 +123,7 @@ class HeroTextWidget extends StatelessWidget {
                     speed: const Duration(milliseconds: 100),
                   ),
                   TypewriterAnimatedText(
-                    'Software Engineer',
+                    l10n.heroRoleSoftwareEngineer,
                     textStyle: AppFonts.h4().copyWith(
                       color:
                           isDark ? AppColors.accentDark : AppColors.accentLight,
@@ -142,7 +148,7 @@ class HeroTextWidget extends StatelessWidget {
             left: isMobile ? 0 : AppTheme.spacingS,
           ),
           child: Text(
-            PortfolioData.bio,
+            PortfolioStrings.bio,
             style: AppFonts.bodyLarge().copyWith(
               color: isDark
                   ? AppColors.textSecondaryDark

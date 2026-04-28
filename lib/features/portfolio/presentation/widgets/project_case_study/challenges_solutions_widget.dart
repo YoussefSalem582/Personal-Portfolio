@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 
 import '../../../../../theme/app_theme.dart';
@@ -30,6 +31,7 @@ class ChallengesSolutionsWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // Detect current theme mode for styling
     final isDark = Theme.of(context).brightness == Brightness.dark;
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,7 +69,7 @@ class ChallengesSolutionsWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Challenges & Solutions',
+                    l10n.caseStudySectionChallengesSolutions,
                     style: TextStyle(
                       fontSize: isMobile ? (isSmallMobile ? 20 : 22) : 28,
                       fontWeight: AppFonts.extraBold,

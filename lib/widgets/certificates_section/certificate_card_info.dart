@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/certificate.dart';
 import '../../utils/assets/app_constants.dart';
+import '../../utils/data/localized/localized_extensions.dart';
 import '../../utils/responsive_helper.dart';
 import '../../theme/app_theme.dart';
 
@@ -39,8 +41,8 @@ class CertificateCardInfo extends StatelessWidget {
 
           const Spacer(),
 
-          // Duration and Action Row
-          _buildBottomRow(isMobile, isSmallMobile),
+        // Duration and Action Row
+        _buildBottomRow(context, isMobile, isSmallMobile),
         ],
       ),
     );
@@ -48,7 +50,7 @@ class CertificateCardInfo extends StatelessWidget {
 
   Widget _buildTitle(bool isMobile, bool isSmallMobile) {
     return Text(
-      certificate.title,
+      certificate.localizedTitle,
       style: AppFonts.h4().copyWith(
         fontSize: isSmallMobile ? 13 : (isMobile ? 14 : null),
         fontWeight: AppFonts.bold,
@@ -82,7 +84,7 @@ class CertificateCardInfo extends StatelessWidget {
         const SizedBox(width: 6),
         Expanded(
           child: Text(
-            certificate.issuer,
+            certificate.localizedIssuer,
             style: AppFonts.labelMedium().copyWith(
               fontSize: isSmallMobile ? 11 : (isMobile ? 12 : null),
               color: accentColor,
@@ -96,8 +98,10 @@ class CertificateCardInfo extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomRow(bool isMobile, bool isSmallMobile) {
+  Widget _buildBottomRow(
+      BuildContext context, bool isMobile, bool isSmallMobile) {
     final duration = _extractDuration();
+    final l10n = AppLocalizations.of(context);
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -112,7 +116,7 @@ class CertificateCardInfo extends StatelessWidget {
         if (!isMobile && duration != null) const SizedBox(width: 8),
 
         // View Details Button
-        _buildViewButton(isMobile),
+        _buildViewButton(context, isMobile, l10n),
       ],
     );
   }
@@ -163,26 +167,30 @@ class CertificateCardInfo extends StatelessWidget {
     );
   }
 
-  Widget _buildViewButton(bool isMobile) {
-    return Container(
-      padding: EdgeInsets.all(isMobile ? 6 : 8),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [accentColor, accentColor.withOpacity(0.8)],
-        ),
-        borderRadius: BorderRadius.circular(isMobile ? 8 : 10),
-        boxShadow: [
-          BoxShadow(
-            color: accentColor.withOpacity(0.3),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
+  Widget _buildViewButton(
+      BuildContext context, bool isMobile, AppLocalizations l10n) {
+    return Tooltip(
+      message: l10n.tooltipCertificateOpenDetails,
+      child: Container(
+        padding: EdgeInsets.all(isMobile ? 6 : 8),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [accentColor, accentColor.withOpacity(0.8)],
           ),
-        ],
-      ),
-      child: Icon(
-        AppIcons.arrowRight,
-        size: isMobile ? 14 : 18,
-        color: AppColors.white,
+          borderRadius: BorderRadius.circular(isMobile ? 8 : 10),
+          boxShadow: [
+            BoxShadow(
+              color: accentColor.withOpacity(0.3),
+              blurRadius: 8,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Icon(
+          AppIcons.arrowRight,
+          size: isMobile ? 14 : 18,
+          color: AppColors.white,
+        ),
       ),
     );
   }
@@ -190,7 +198,10 @@ class CertificateCardInfo extends StatelessWidget {
   /// Extracts duration information from certificate description
   String? _extractDuration() {
     final description = certificate.description;
-    final durationRegex = RegExp(r'Duration:\s*(.+?)(?:\n|$)', multiLine: true);
+    final durationRegex = RegExp(
+      r'(?:Duration|المدة):\s*(.+?)(?:\n|$)',
+      multiLine: true,
+    );
     final match = durationRegex.firstMatch(description);
 
     if (match != null && match.groupCount > 0) {

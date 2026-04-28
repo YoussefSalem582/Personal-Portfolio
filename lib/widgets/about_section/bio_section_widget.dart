@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import 'contact_info_list_widget.dart';
 
@@ -23,6 +24,7 @@ class BioSectionWidget extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final isMobile = screenWidth < 768;
     final isSmallMobile = screenWidth < 375;
+    final l10n = AppLocalizations.of(context);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +33,7 @@ class BioSectionWidget extends StatelessWidget {
         Row(
           children: [
             Text(
-              'Who I Am',
+              l10n.bioWhoIAm,
               style: (isDark ? AppFonts.h2() : AppFonts.h2()).copyWith(
                 fontSize: isMobile ? (isSmallMobile ? 22 : 24) : null,
                 fontWeight: AppFonts.bold,
@@ -56,7 +58,7 @@ class BioSectionWidget extends StatelessWidget {
 
         // Main bio introduction
         Text(
-          'As a dedicated Flutter Developer and Computer Science student at Nile University, I am passionate about crafting high-performance, cross-platform mobile applications using Dart and Flutter. With hands-on experience in building scalable apps like ChargeHub (EV station finder) and a carpooling platform, I excel in implementing robust state management with BLoC, integrating RESTful APIs, and leveraging Firebase for real-time backend services.',
+          l10n.bioIntro,
           style:
               (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge()).copyWith(
             fontSize: isMobile ? (isSmallMobile ? 14 : 15) : null,
@@ -73,9 +75,8 @@ class BioSectionWidget extends StatelessWidget {
         _buildHighlightSection(
           context,
           icon: Icons.phone_android,
-          title: 'Mobile App Development',
-          description:
-              'My projects emphasize clean architecture, modern UI/UX design, and seamless user experiences across Android and iOS platforms.',
+          title: l10n.bioMobileDevTitle,
+          description: l10n.bioMobileDevBody,
           isDark: isDark,
           isMobile: isMobile,
           isSmallMobile: isSmallMobile,
@@ -87,9 +88,8 @@ class BioSectionWidget extends StatelessWidget {
         _buildHighlightSection(
           context,
           icon: AppIcons.technology,
-          title: 'Technical Interests',
-          description:
-              'Passionate about advancing in Natural Language Processing, Machine Learning, and Computer Vision, with a keen interest in leveraging these fields to drive innovative tech solutions.',
+          title: l10n.bioTechTitle,
+          description: l10n.bioTechBody,
           isDark: isDark,
           isMobile: isMobile,
           isSmallMobile: isSmallMobile,
@@ -101,9 +101,8 @@ class BioSectionWidget extends StatelessWidget {
         _buildHighlightSection(
           context,
           icon: AppIcons.flutterIconSvg,
-          title: 'Skills & Communication',
-          description:
-              'Proficient in developing feature-rich applications from music players to e-commerce marketplaces. I combine technical expertise with a focus on maintainable code and agile practices.',
+          title: l10n.bioSkillsTitle,
+          description: l10n.bioSkillsBody,
           isDark: isDark,
           isMobile: isMobile,
           isSmallMobile: isSmallMobile,
@@ -149,7 +148,7 @@ class BioSectionWidget extends StatelessWidget {
               SizedBox(width: isMobile ? AppTheme.spacingS : AppTheme.spacingM),
               Expanded(
                 child: Text(
-                  'I am eager to contribute my Flutter skills to innovate user-centric mobile solutions that drive engagement and scalability.',
+                  l10n.bioHighlightClosing,
                   style: (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge())
                       .copyWith(
                     fontSize: isMobile ? (isSmallMobile ? 13 : 14) : null,
@@ -167,7 +166,7 @@ class BioSectionWidget extends StatelessWidget {
 
         // Call to action
         Text(
-          'Feel free to connect if you\'re interested in discussing technology, design, machine learning, or collaborative opportunities!',
+          l10n.bioClosingCta,
           style:
               (isDark ? AppFonts.bodyLarge() : AppFonts.bodyLarge()).copyWith(
             fontSize: isMobile ? (isSmallMobile ? 13 : 14) : null,

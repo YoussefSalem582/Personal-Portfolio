@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/certificate.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../theme/app_theme.dart';
@@ -54,14 +55,15 @@ class CertificateDialogImage extends StatelessWidget {
           certificate.imageUrl!,
           fit: BoxFit.contain,
           errorBuilder: (context, error, stackTrace) {
-            return _buildPlaceholder();
+            return _buildPlaceholder(context);
           },
         ),
       ),
     );
   }
 
-  Widget _buildPlaceholder() {
+  Widget _buildPlaceholder(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -73,7 +75,7 @@ class CertificateDialogImage extends StatelessWidget {
           ),
           const SizedBox(height: AppTheme.spacingM),
           Text(
-            'Certificate Image',
+            l10n.certificateImageUnavailable,
             style: AppFonts.bodyLarge().copyWith(
               color: accentColor,
               fontWeight: AppFonts.semiBold,
