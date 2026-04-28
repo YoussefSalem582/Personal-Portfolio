@@ -15,7 +15,7 @@ class CustomShowMoreButton extends StatelessWidget {
   const CustomShowMoreButton({
     super.key,
     required this.onPressed,
-    this.label = 'Show More',
+    required this.label,
     this.icon = AppIcons.arrowDown,
     this.iconSize = 20,
     this.padding,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import '../l10n/app_localizations.dart';
 import '../utils/assets/app_constants.dart';
 
 class LazyImage extends StatefulWidget {
@@ -115,7 +116,7 @@ class _LazyImageState extends State<LazyImage>
             ),
             const SizedBox(height: 8),
             Text(
-              'Image not found',
+              AppLocalizations.of(context).imageNotFound,
               style: AppFonts.bodySmall().copyWith(
                 color: AppColors.textSecondaryLight.withOpacity(0.5),
               ),
