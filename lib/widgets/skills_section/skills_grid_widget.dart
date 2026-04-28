@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/skill.dart';
-import 'package:youssef_hassan_portfolio/features/portfolio/data/localized/localized_extensions.dart';
-import '../../utils/data/skills_data.dart';
+import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
 import 'skill_category_widget.dart';
 
 /// Skills Grid Widget
@@ -9,17 +8,19 @@ import 'skill_category_widget.dart';
 class SkillsGridWidget extends StatelessWidget {
   final bool isDark;
   final bool isMobile;
+  final List<SkillCategory> categories;
 
   const SkillsGridWidget({
     super.key,
     required this.isDark,
     required this.isMobile,
+    required this.categories,
   });
 
   @override
   Widget build(BuildContext context) {
     final maxWidth = isMobile ? double.infinity : 1400.0;
-    final List<SkillCategory> categories = SkillsData.skills;
+    final List<SkillCategory> categories = this.categories;
 
     return Center(
       child: Container(

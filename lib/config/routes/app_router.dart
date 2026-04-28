@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../features/portfolio/domain/repositories/portfolio_repository.dart';
-import '../../features/portfolio/presentation/pages/portfolio_page.dart';
-import '../../features/portfolio/presentation/pages/project_case_study.dart';
+import '../../features/home/presentation/pages/portfolio_page.dart';
+import '../../features/projects/domain/repositories/projects_repository.dart';
+import '../../features/projects/presentation/pages/project_case_study.dart';
 import '../../injection_container.dart';
 import '../../routes/app_routes.dart';
 
@@ -27,14 +27,14 @@ const Map<String, int> _sectionPathToIndex = {
   AppRoutes.notFound: 0,
 };
 
-/// Invalid `/project/:pid` → home (legacy GetX parity).
+/// Invalid `/project/:segment` → home when no project matches.
 String? _portfolioRedirect(GoRouterState state) {
   final segments = state.uri.pathSegments;
   if (segments.length >= 2 &&
       segments[0] == 'project' &&
       segments[1].isNotEmpty) {
     final segment = segments[1];
-    if (sl<PortfolioRepository>().resolveProjectSegment(segment) == null) {
+    if (sl<ProjectsRepository>().resolveProjectSegment(segment) == null) {
       return AppRoutes.home;
     }
   }
@@ -171,7 +171,7 @@ GoRouter createPortfolioRouter() {
         pageBuilder: (context, state) {
           final segment = state.pathParameters['pid']!;
           final project =
-              sl<PortfolioRepository>().resolveProjectSegment(segment)!;
+              sl<ProjectsRepository>().resolveProjectSegment(segment)!;
           return CustomTransitionPage<void>(
             key: state.pageKey,
             transitionDuration: const Duration(milliseconds: 600),

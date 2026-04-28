@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../l10n/app_localizations.dart';
+import '../../models/contact.dart';
 import '../../utils/assets/app_constants.dart';
-import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 
 import '../../theme/app_theme.dart';
@@ -17,8 +17,9 @@ import '../../theme/app_theme.dart';
 /// Each icon is clickable and opens the corresponding social profile in a browser.
 /// Icons are determined by platform name using SVG assets from AppIcons.
 class SocialLinksWidget extends StatelessWidget {
-  const SocialLinksWidget({super.key});
+  const SocialLinksWidget({super.key, required this.links});
 
+  final List<SocialLink> links;
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -73,7 +74,7 @@ class SocialLinksWidget extends StatelessWidget {
           spacing: AppTheme.spacingM,
           runSpacing: AppTheme.spacingM,
           alignment: WrapAlignment.center,
-          children: PortfolioData.socialLinks
+          children: links
               .map((social) => _buildSocialButton(social))
               .toList(),
         ),

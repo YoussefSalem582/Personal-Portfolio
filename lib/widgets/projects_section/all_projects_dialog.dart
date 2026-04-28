@@ -6,7 +6,7 @@ import '../../models/project.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/assets/app_constants.dart';
-import 'package:youssef_hassan_portfolio/features/portfolio/data/localized/localized_extensions.dart';
+import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
 
 /// All Projects Dialog
 /// Displays a dialog with all projects in a scrollable list

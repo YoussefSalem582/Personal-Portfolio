@@ -53,7 +53,7 @@ abstract class AppRoutes {
   /// Navigate to project by ID or title slug.
   static String getProjectRoute(String id) => '$projectPrefix/$id';
 
-  /// Same as [getProjectRoute] (legacy name).
+  /// Alias for [getProjectRoute]; IDs and slugs share the same path shape.
   static String getProjectSlugRoute(String slug) => '$projectPrefix/$slug';
 
   /// Navigate to blog post

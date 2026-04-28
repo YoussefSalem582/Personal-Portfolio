@@ -7,7 +7,7 @@ import '../../domain/usecases/persist_theme_mode_usecase.dart';
 import 'theme_event.dart';
 import 'theme_state.dart';
 
-/// Theme mode from preferences via repository + use cases (attendance-style layering).
+/// Theme mode from preferences via repository and use cases.
 class ThemeBloc extends Bloc<ThemeEvent, ThemeUiState> {
   ThemeBloc({
     required LoadInitialThemeModeUseCase loadInitialThemeMode,

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
-import '../../utils/data/portfolio_data.dart';
-import 'package:youssef_hassan_portfolio/features/portfolio/data/localized/portfolio_strings.dart';
+import 'package:youssef_hassan_portfolio/features/hero/data/localized/portfolio_strings.dart';
 import '../../theme/app_theme.dart';
 import '../../utils/responsive_helper.dart';
 
 class HeroTextWidget extends StatelessWidget {
-  const HeroTextWidget({super.key});
+  const HeroTextWidget({super.key, required this.fullName});
 
+  final String fullName;
   @override
   Widget build(BuildContext context) {
     final isDark = Theme.of(context).brightness == Brightness.dark;
@@ -66,7 +66,7 @@ class HeroTextWidget extends StatelessWidget {
             ],
           ).createShader(bounds),
           child: Text(
-            PortfolioData.fullName,
+            fullName,
             style: AppFonts.h1(
               color: AppColors.white,
             ).copyWith(

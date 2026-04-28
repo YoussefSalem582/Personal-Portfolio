@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../l10n/app_localizations.dart';
-import '../../utils/data/portfolio_data.dart';
 import '../../utils/assets/app_constants.dart';
 import 'stat_card_widget.dart';
 
@@ -24,7 +23,14 @@ import '../../theme/app_theme.dart';
 /// Each statistic is displayed in a StatCardWidget with gradient background,
 /// hover effects, and smooth animations.
 class StatsGridWidget extends StatelessWidget {
-  const StatsGridWidget({super.key});
+  const StatsGridWidget({
+    super.key,
+    required this.projectsCount,
+    required this.technologiesCount,
+  });
+
+  final int projectsCount;
+  final int technologiesCount;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +41,7 @@ class StatsGridWidget extends StatelessWidget {
     // Define the statistics to display with icons
     final stats = [
       {
-        'title': '${PortfolioData.projects.length}+',
+        'title': '$projectsCount+',
         'subtitle': l10n.statProjectsCompleted,
         'icon': AppIcons.projects,
       },
@@ -45,7 +51,7 @@ class StatsGridWidget extends StatelessWidget {
         'icon': AppIcons.experience,
       },
       {
-        'title': '${PortfolioData.skills.expand((cat) => cat.skills).length}+',
+        'title': '$technologiesCount+',
         'subtitle': l10n.statTechnologies,
         'icon': AppIcons.technology,
       },

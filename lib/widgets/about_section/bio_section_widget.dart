@@ -15,8 +15,13 @@ import '../../theme/app_theme.dart';
 /// - Icon-based visual elements
 class BioSectionWidget extends StatelessWidget {
   final VoidCallback? onNavigateToContact;
+  final String email;
 
-  const BioSectionWidget({super.key, this.onNavigateToContact});
+  const BioSectionWidget({
+    super.key,
+    this.onNavigateToContact,
+    required this.email,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -182,6 +187,7 @@ class BioSectionWidget extends StatelessWidget {
         // Contact information list
         ContactInfoListWidget(
           onNavigateToContact: onNavigateToContact,
+          email: email,
         ),
       ],
     );

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
+import '../../models/contact_form.dart';
+import 'package:youssef_hassan_portfolio/features/hero/data/localized/portfolio_strings.dart';
 import '../../utils/assets/app_constants.dart';
-import 'package:youssef_hassan_portfolio/features/portfolio/data/localized/portfolio_strings.dart';
 import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import 'contact_item_widget.dart';
@@ -16,8 +17,9 @@ import '../../theme/app_theme.dart';
 /// It includes clickable items for email and phone that launch the respective apps,
 /// and social media buttons that open external links.
 class ContactInfoWidget extends StatelessWidget {
-  const ContactInfoWidget({super.key});
+  const ContactInfoWidget({super.key, required this.contactInfo});
 
+  final ContactInfo contactInfo;
   @override
   Widget build(BuildContext context) {
     // Determine theme mode for styling
@@ -130,9 +132,9 @@ class ContactInfoWidget extends StatelessWidget {
           ContactItemWidget(
             icon: AppIcons.email,
             title: l10n.contactInfoEmailLabel,
-            value: PortfolioData.contactInfo.email,
+            value: contactInfo.email,
             onTap: () =>
-                UrlHelper.launchEmail(email: PortfolioData.contactInfo.email),
+                UrlHelper.launchEmail(email: contactInfo.email),
           ),
 
           SizedBox(height: isMobile ? AppTheme.spacingS : AppTheme.spacingM),

@@ -2,7 +2,6 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
-import '../../utils/data/portfolio_data.dart';
 import '../../utils/url_helper.dart';
 import '../../theme/app_theme.dart';
 
@@ -13,10 +12,11 @@ import '../../theme/app_theme.dart';
 /// - Clean, professional layout with a clear call-to-action
 /// - Subtle hover animations for an interactive feel
 ///
-/// The resume URL is retrieved from PortfolioData and opened using UrlHelper.
+/// The resume URL is injected from [AboutContentEntity].
 class ResumeCardWidget extends StatefulWidget {
-  const ResumeCardWidget({super.key});
+  const ResumeCardWidget({super.key, required this.resumeUrl});
 
+  final String resumeUrl;
   @override
   State<ResumeCardWidget> createState() => _ResumeCardWidgetState();
 }
@@ -35,7 +35,7 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget> {
       onExit: (_) => setState(() => _isHovered = false),
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
-        onTap: () => UrlHelper.openFile(PortfolioData.resumeUrl),
+        onTap: () => UrlHelper.openFile(widget.resumeUrl),
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           transform: Matrix4.identity()
@@ -158,7 +158,7 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget> {
         const SizedBox(width: AppTheme.spacingL),
         // Button
         ElevatedButton.icon(
-          onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
+          onPressed: () => UrlHelper.openFile(widget.resumeUrl),
           icon: const Icon(AppIcons.view, size: 20),
           label: Text(l10n.resumeViewCv),
           style: ElevatedButton.styleFrom(
@@ -232,7 +232,7 @@ class _ResumeCardWidgetState extends State<ResumeCardWidget> {
         SizedBox(
           width: double.infinity,
           child: ElevatedButton.icon(
-            onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
+            onPressed: () => UrlHelper.openFile(widget.resumeUrl),
             icon: const Icon(AppIcons.view, size: 18),
             label: Text(l10n.resumeViewCv),
             style: ElevatedButton.styleFrom(

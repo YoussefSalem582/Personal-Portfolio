@@ -6,7 +6,6 @@ import 'package:responsive_framework/responsive_framework.dart';
 import 'core/locale/app_locale_binding.dart';
 import 'features/locale/presentation/bloc/locale_bloc.dart';
 import 'features/locale/presentation/bloc/locale_state.dart';
-import 'features/portfolio/presentation/bloc/portfolio_bloc.dart';
 import 'features/theme/presentation/bloc/theme_bloc.dart';
 import 'features/theme/presentation/bloc/theme_state.dart';
 import 'injection_container.dart';
@@ -20,7 +19,6 @@ class PortfolioApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<PortfolioBloc>.value(value: sl<PortfolioBloc>()),
         BlocProvider<ThemeBloc>.value(value: sl<ThemeBloc>()),
         BlocProvider<LocaleBloc>.value(value: sl<LocaleBloc>()),
       ],

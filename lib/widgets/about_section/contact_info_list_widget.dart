@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
-import '../../utils/data/portfolio_data.dart';
-import 'package:youssef_hassan_portfolio/features/portfolio/data/localized/portfolio_strings.dart';
+import 'package:youssef_hassan_portfolio/features/hero/data/localized/portfolio_strings.dart';
 import '../../utils/url_helper.dart';
 import 'contact_info_item_widget.dart';
 
@@ -19,8 +18,13 @@ import '../../theme/app_theme.dart';
 /// Each item uses ContactInfoItemWidget with enhanced dark mode visibility.
 class ContactInfoListWidget extends StatelessWidget {
   final VoidCallback? onNavigateToContact;
+  final String email;
 
-  const ContactInfoListWidget({super.key, this.onNavigateToContact});
+  const ContactInfoListWidget({
+    super.key,
+    this.onNavigateToContact,
+    required this.email,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -90,8 +94,8 @@ class ContactInfoListWidget extends StatelessWidget {
               ContactInfoItemWidget(
                 icon: AppIcons.email,
                 label: l10n.contactInfoEmailLabel,
-                value: PortfolioData.email,
-                onTap: () => UrlHelper.launchEmail(email: PortfolioData.email),
+                value: email,
+                onTap: () => UrlHelper.launchEmail(email: email),
               ),
 
               const SizedBox(height: AppTheme.spacingM),
