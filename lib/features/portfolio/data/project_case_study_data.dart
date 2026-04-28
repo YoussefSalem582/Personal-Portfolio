@@ -1,12 +1,7 @@
-/// Project Case Study Data
+/// Static case study content for project detail (portfolio feature [`data`] layer).
 ///
-/// This file contains all project-specific case study content including:
-/// - Custom overview texts
-/// - Challenges and solutions
-/// - Key learnings and lessons
-///
-/// This data is used by the case study widgets to display rich,
-/// project-specific information beyond basic project metadata.
+/// Custom overview copy, challenges, and learnings keyed by project id.
+library;
 
 /// Model for a challenge/solution pair
 class ProjectChallenge {
