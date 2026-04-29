@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import '../l10n/app_localizations.dart';
-import '../utils/assets/app_constants.dart';
+import '../../l10n/app_localizations.dart';
+import '../../utils/assets/app_constants.dart';
 
 class LazyImage extends StatefulWidget {
   final String imageUrl;
