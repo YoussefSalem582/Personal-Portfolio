@@ -10,7 +10,7 @@ import 'features/theme/presentation/bloc/theme_bloc.dart';
 import 'features/theme/presentation/bloc/theme_state.dart';
 import 'injection_container.dart';
 import 'l10n/app_localizations.dart';
-import 'theme/app_theme.dart';
+import 'core/theme/app_theme.dart';
 
 class PortfolioApp extends StatelessWidget {
   const PortfolioApp({super.key});
