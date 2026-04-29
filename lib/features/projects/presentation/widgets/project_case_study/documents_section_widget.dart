@@ -4,7 +4,7 @@ import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import 'package:youssef_hassan_portfolio/features/projects/data/localized/case_study_documents_ar.dart';
 import '../../../../../utils/url_helper.dart';
-import '../../../../../theme/app_theme.dart';
+import '../../../../../core/theme/app_theme.dart';
 
 /// Documents Section Widget
 ///

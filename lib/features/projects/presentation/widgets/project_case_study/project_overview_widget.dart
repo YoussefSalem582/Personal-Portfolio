@@ -5,7 +5,7 @@ import '../../../../../models/project.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import 'project_content_helper.dart';
 
-import '../../../../../theme/app_theme.dart';
+import '../../../../../core/theme/app_theme.dart';
 
 /// Project overview section with modern card design
 class ProjectOverviewWidget extends StatelessWidget {

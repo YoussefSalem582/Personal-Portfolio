@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import '../../../../../models/project.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
-import '../../../../../widgets/lazy_image.dart';
+import '../../../../../core/widgets/lazy_image.dart';
 
-import '../../../../../theme/app_theme.dart';
+import '../../../../../core/theme/app_theme.dart';
 
 /// Hero section widget for project case study
 ///

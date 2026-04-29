@@ -3,7 +3,7 @@ import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import '../../../../../utils/url_helper.dart';
 
-import '../../../../../theme/app_theme.dart';
+import '../../../../../core/theme/app_theme.dart';
 
 /// Action buttons section with modern design
 class ActionButtonsWidget extends StatelessWidget {

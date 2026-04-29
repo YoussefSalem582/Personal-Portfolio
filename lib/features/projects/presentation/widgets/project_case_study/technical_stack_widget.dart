@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../../utils/assets/app_constants.dart';
 
-import '../../../../../theme/app_theme.dart';
+import '../../../../../core/theme/app_theme.dart';
 
 /// Technical stack section widget
 ///
