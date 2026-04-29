@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../utils/assets/app_constants.dart';
-import '../../../utils/data/portfolio_data.dart';
+import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
 import '../../../utils/responsive_helper.dart';
 import '../common/theme_toggle_button_container.dart';
 
@@ -316,7 +316,7 @@ class _AppBarTitle extends StatelessWidget {
                 end: Alignment.bottomRight,
               ).createShader(bounds),
               child: Text(
-                PortfolioData.fullName,
+                PersonalInfoData.fullName,
                 style: AppFonts.h5().copyWith(
                   color: AppColors.white,
                   fontWeight: AppFonts.bold,

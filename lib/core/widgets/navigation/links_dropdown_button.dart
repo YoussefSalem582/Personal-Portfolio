@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../utils/assets/app_constants.dart';
 import '../../../utils/url_helper.dart';
-import '../../../utils/data/portfolio_data.dart';
+import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
 
 /// Links dropdown button widget that displays external links
 /// (GitHub, LinkedIn, YouTube, Resume)
@@ -83,7 +83,7 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
                       label: l10n.linksGithubProfile,
                       onTap: () {
                         _closeDropdown();
-                        final githubLink = PortfolioData.socialLinks
+                        final githubLink = PersonalInfoData.socialLinks
                             .firstWhere((link) => link.name == 'GitHub');
                         UrlHelper.launchURL(githubLink.url);
                       },
@@ -94,7 +94,7 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
                       label: l10n.linksLinkedIn,
                       onTap: () {
                         _closeDropdown();
-                        final linkedInLink = PortfolioData.socialLinks
+                        final linkedInLink = PersonalInfoData.socialLinks
                             .firstWhere((link) => link.name == 'LinkedIn');
                         UrlHelper.launchURL(linkedInLink.url);
                       },
@@ -105,9 +105,9 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
                       label: l10n.linksYoutube,
                       onTap: () {
                         _closeDropdown();
-                        final youtubeLink = PortfolioData.socialLinks
+                        final youtubeLink = PersonalInfoData.socialLinks
                             .firstWhere((link) => link.name == 'YouTube',
-                                orElse: () => PortfolioData.socialLinks.first);
+                                orElse: () => PersonalInfoData.socialLinks.first);
                         UrlHelper.launchURL(youtubeLink.url);
                       },
                     ),
@@ -120,7 +120,7 @@ class _LinksDropdownButtonState extends State<LinksDropdownButton> {
                         final loc = AppLocalizations.of(context);
                         _closeDropdown();
                         try {
-                          await UrlHelper.openFile(PortfolioData.resumeUrl);
+                          await UrlHelper.openFile(PersonalInfoData.resumeUrl);
                         } catch (e) {
                           if (!context.mounted) return;
                           messenger.showSnackBar(

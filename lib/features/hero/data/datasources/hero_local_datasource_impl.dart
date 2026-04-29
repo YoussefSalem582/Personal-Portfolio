@@ -1,4 +1,4 @@
-import '../../../../utils/data/personal_info_data.dart';
+import '../local/personal_info_data.dart';
 import '../../domain/entities/hero_content_entity.dart';
 import 'hero_local_datasource.dart';
 

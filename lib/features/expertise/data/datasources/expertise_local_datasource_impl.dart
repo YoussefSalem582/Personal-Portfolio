@@ -1,4 +1,4 @@
-import '../../../../utils/data/expertise_data.dart';
+import '../local/expertise_data.dart';
 import '../../domain/entities/expertise_content_entity.dart';
 import 'expertise_local_datasource.dart';
 

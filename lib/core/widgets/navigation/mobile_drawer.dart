@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../../utils/assets/app_constants.dart';
 import '../../../utils/url_helper.dart';
-import '../../../utils/data/portfolio_data.dart';
+import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
 import '../../../features/locale/presentation/bloc/locale_bloc.dart';
 import '../../../features/locale/presentation/bloc/locale_event.dart';
 import '../../../features/locale/presentation/bloc/locale_state.dart';
@@ -113,7 +113,7 @@ class MobileDrawer extends StatelessWidget {
                         },
                         behavior: HitTestBehavior.opaque,
                         child: Text(
-                          PortfolioData.fullName,
+                          PersonalInfoData.fullName,
                           style: AppFonts.h4(color: AppColors.white),
                         ),
                       ),
@@ -351,7 +351,7 @@ class MobileDrawer extends StatelessWidget {
 
   void _openResume(BuildContext context) async {
     try {
-      await UrlHelper.openFile(PortfolioData.resumeUrl);
+      await UrlHelper.openFile(PersonalInfoData.resumeUrl);
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar(

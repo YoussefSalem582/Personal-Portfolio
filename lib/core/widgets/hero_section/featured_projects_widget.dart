@@ -1,6 +1,6 @@
 // import 'package:flutter/material.dart';
 // import '../../../utils/assets/app_constants.dart';
-// import '../../../utils/data/portfolio_data.dart';
+// import 'package:youssef_hassan_portfolio/features/projects/data/local/projects_data.dart';
 // import '../../../utils/responsive_helper.dart';
 // import '../../widgets/project_card.dart';
 // import '../../theme/app_theme.dart';
@@ -11,7 +11,7 @@
 //   @override
 //   Widget build(BuildContext context) {
 //     final screenWidth = MediaQuery.of(context).size.width;
-//     final featuredProjects = PortfolioData.featuredProjects.take(2).toList();
+//     final featuredProjects = ProjectsData.featuredProjects.take(2).toList();
 //     final isDark = Theme.of(context).brightness == Brightness.dark;
 //     final isMobile = ResponsiveHelper.isMobile(screenWidth);
 

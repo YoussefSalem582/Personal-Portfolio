@@ -4,7 +4,8 @@ import '../../l10n/app_localizations.dart';
 import 'package:youssef_hassan_portfolio/features/hero/data/localized/portfolio_strings.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/responsive_helper.dart';
-import '../../utils/data/portfolio_data.dart';
+import 'package:youssef_hassan_portfolio/features/contact/data/local/contact_data.dart';
+import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
 import '../../utils/url_helper.dart';
 
 import '../theme/app_theme.dart';
@@ -153,7 +154,7 @@ class Footer extends StatelessWidget {
       children: [
         // Copyright
         Text(
-          l10n.copyrightNotice(DateTime.now().year, PortfolioData.fullName),
+          l10n.copyrightNotice(DateTime.now().year, PersonalInfoData.fullName),
           style: AppFonts.bodyMedium().copyWith(
             color: (isDark ? AppColors.textSecondaryDark : AppColors.white)
                 .withOpacity(0.8),
@@ -232,7 +233,7 @@ class Footer extends StatelessWidget {
                       : [AppColors.accentLight, AppColors.white],
                 ).createShader(bounds),
                 child: Text(
-                  PortfolioData.fullName,
+                  PersonalInfoData.fullName,
                   style: AppFonts.h3().copyWith(
                     color: AppColors.white,
                     fontWeight: AppFonts.bold,
@@ -338,16 +339,16 @@ class Footer extends StatelessWidget {
 
               _buildContactLink(
                 AppIcons.email,
-                PortfolioData.contactInfo.email,
+                ContactData.contactInfo.email,
                 () => UrlHelper.launchEmail(
-                  email: PortfolioData.contactInfo.email,
+                  email: ContactData.contactInfo.email,
                 ),
                 isDark,
               ),
 
               _buildContactLink(
                 AppIcons.location,
-                PortfolioData.contactInfo.location,
+                ContactData.contactInfo.location,
                 null,
                 isDark,
               ),
@@ -369,7 +370,7 @@ class Footer extends StatelessWidget {
               Wrap(
                 spacing: AppTheme.spacingS,
                 runSpacing: AppTheme.spacingS,
-                children: PortfolioData.socialLinks.map((social) {
+                children: PersonalInfoData.socialLinks.map((social) {
                   return _buildSocialButton(social.name, social.url, isDark);
                 }).toList(),
               ),
@@ -500,7 +501,7 @@ class Footer extends StatelessWidget {
                 : [AppColors.accentLight, AppColors.white],
           ).createShader(bounds),
           child: Text(
-            PortfolioData.fullName,
+            PersonalInfoData.fullName,
             style: AppFonts.h3().copyWith(
               color: AppColors.white,
               fontWeight: AppFonts.bold,
@@ -528,7 +529,7 @@ class Footer extends StatelessWidget {
           spacing: AppTheme.spacingM,
           runSpacing: AppTheme.spacingM,
           alignment: WrapAlignment.center,
-          children: PortfolioData.socialLinks.map((social) {
+          children: PersonalInfoData.socialLinks.map((social) {
             return _buildSocialButton(social.name, social.url, isDark);
           }).toList(),
         ),
@@ -538,7 +539,7 @@ class Footer extends StatelessWidget {
         // Contact email
         InkWell(
           onTap: () =>
-              UrlHelper.launchEmail(email: PortfolioData.contactInfo.email),
+              UrlHelper.launchEmail(email: ContactData.contactInfo.email),
           child: Container(
             padding: const EdgeInsets.symmetric(
               horizontal: AppTheme.spacingM,
@@ -572,7 +573,7 @@ class Footer extends StatelessWidget {
                 ),
                 const SizedBox(width: AppTheme.spacingS),
                 Text(
-                  PortfolioData.contactInfo.email,
+                  ContactData.contactInfo.email,
                   style: AppFonts.bodyMedium().copyWith(
                     color: isDark ? AppColors.textPrimaryDark : AppColors.white,
                   ),
@@ -732,7 +733,7 @@ class Footer extends StatelessWidget {
 
   void _viewResume() async {
     try {
-      await UrlHelper.openFile(PortfolioData.resumeUrl);
+      await UrlHelper.openFile(PersonalInfoData.resumeUrl);
     } catch (e) {
       // Handle error silently
     }

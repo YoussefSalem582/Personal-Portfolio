@@ -1,5 +1,5 @@
 import 'package:youssef_hassan_portfolio/features/projects/domain/entities/project.dart';
-import '../assets/app_constants.dart';
+import 'package:youssef_hassan_portfolio/utils/assets/app_constants.dart';
 
 class ProjectsData {
   static final List<Project> projects = [

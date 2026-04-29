@@ -1,4 +1,4 @@
-import '../../../../utils/data/skills_data.dart';
+import '../local/skills_data.dart';
 import '../../domain/entities/skills_content_entity.dart';
 import 'skills_local_datasource.dart';
 

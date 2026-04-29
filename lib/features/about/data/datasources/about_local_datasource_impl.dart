@@ -1,5 +1,7 @@
-import '../../../../utils/data/portfolio_data.dart';
 import '../../domain/entities/about_content_entity.dart';
+import '../../../hero/data/local/personal_info_data.dart';
+import '../../../projects/data/local/projects_data.dart';
+import '../../../skills/data/local/skills_data.dart';
 import 'about_local_datasource.dart';
 
 class AboutLocalDataSourceImpl implements AboutLocalDataSource {
@@ -8,12 +10,12 @@ class AboutLocalDataSourceImpl implements AboutLocalDataSource {
   @override
   AboutContentEntity getContentSync() {
     final techCount =
-        PortfolioData.skills.expand((cat) => cat.skills).length;
+        SkillsData.skills.expand((cat) => cat.skills).length;
     return AboutContentEntity(
       email: PersonalInfoData.email,
       resumeUrl: PersonalInfoData.resumeUrl,
       socialLinks: PersonalInfoData.socialLinks,
-      projectsCount: PortfolioData.projects.length,
+      projectsCount: ProjectsData.projectsSortedByDate.length,
       technologiesCount: techCount,
     );
   }

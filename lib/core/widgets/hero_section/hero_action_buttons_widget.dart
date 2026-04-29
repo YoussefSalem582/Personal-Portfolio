@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../../utils/data/portfolio_data.dart';
+import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
 import '../../../utils/url_helper.dart';
 import '../../../utils/responsive_helper.dart';
 import '../../../utils/assets/app_constants.dart';
@@ -39,7 +39,7 @@ class HeroActionButtonsWidget extends StatelessWidget {
         SecondaryOutlinedButton(
           label: l10n.footerViewResume,
           icon: AppIcons.download,
-          onPressed: () => UrlHelper.openFile(PortfolioData.resumeUrl),
+          onPressed: () => UrlHelper.openFile(PersonalInfoData.resumeUrl),
           isMobile: isMobile,
         ),
 

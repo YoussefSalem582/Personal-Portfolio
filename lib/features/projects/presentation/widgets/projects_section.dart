@@ -5,7 +5,7 @@ import '../../domain/entities/project.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../utils/assets/app_constants.dart';
-import '../../../../utils/data/portfolio_data.dart';
+import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
 import '../../../../utils/responsive_helper.dart';
 import '../../../../utils/url_helper.dart';
 import '../../../../core/widgets/custom_show_more_button.dart';
@@ -119,7 +119,7 @@ class ProjectsSection extends StatelessWidget {
   }
 
   void _navigateToGitHub() {
-    final githubLink = PortfolioData.socialLinks.firstWhere(
+    final githubLink = PersonalInfoData.socialLinks.firstWhere(
       (link) => link.name.toLowerCase() == 'github',
     );
     UrlHelper.launchURL(githubLink.url);

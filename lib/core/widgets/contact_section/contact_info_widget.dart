@@ -3,7 +3,7 @@ import '../../../l10n/app_localizations.dart';
 import 'package:youssef_hassan_portfolio/features/contact/domain/entities/contact_entities.dart';
 import 'package:youssef_hassan_portfolio/features/hero/data/localized/portfolio_strings.dart';
 import '../../../utils/assets/app_constants.dart';
-import '../../../utils/data/portfolio_data.dart';
+import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
 import '../../../utils/url_helper.dart';
 import 'contact_item_widget.dart';
 import 'social_button_widget.dart';
@@ -210,7 +210,7 @@ class ContactInfoWidget extends StatelessWidget {
           Wrap(
             spacing: isMobile ? AppTheme.spacingS : AppTheme.spacingM,
             runSpacing: isMobile ? AppTheme.spacingS : AppTheme.spacingM,
-            children: PortfolioData.socialLinks.map((social) {
+            children: PersonalInfoData.socialLinks.map((social) {
               return SocialButtonWidget(
                 title: social.name,
                 iconPath: social.iconPath,

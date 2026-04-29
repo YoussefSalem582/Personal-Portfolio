@@ -1,5 +1,5 @@
 import '../../../../core/locale/app_locale_binding.dart';
-import '../../../../utils/data/personal_info_data.dart';
+import '../local/personal_info_data.dart';
 import 'personal_ar.dart';
 
 /// Locale-aware strings for personal headline fields used outside [AppLocalizations].
