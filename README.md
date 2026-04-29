@@ -38,7 +38,7 @@ Visit the live portfolio: [https://youssefsalem582.github.io/Youssef-Hassan-Port
 - **Dependency injection**: [get_it](https://pub.dev/packages/get_it)
 - **Routing**: [go_router](https://pub.dev/packages/go_router)
 - **Styling**: Custom theme with responsive design (`responsive_framework`)
-- **Contact form**: Formspree via Dio (see `lib/config/api_keys.dart`)
+- **Contact form**: Formspree via Dio (see `lib/core/config/api_keys.dart` and `contact_runtime_config.dart`)
 - **Testing**: Flutter Test, `bloc_test`, `mocktail`
 - **CI/CD**: GitHub Actions
 - **Deployment**: GitHub Pages
@@ -118,18 +118,20 @@ lib/
 ├── main.dart                    # Entry: DI init, runApp
 ├── app.dart                     # MaterialApp.router, theme/locale BLoCs
 ├── injection_container.dart     # get_it registrations
-├── config/                      # routes, api keys
-├── core/                        # locale binding, localization extensions, use case types
+├── core/
+│   ├── config/                  # app_config, api keys, contact_runtime_config, routes/app_router
+│   ├── routes/app_routes.dart   # path constants
+│   ├── theme/app_theme.dart
+│   ├── locale/, localization/
+│   ├── utils/assets/            # AppColors, fonts, constants; flutter_gen output (e.g. assets.gen.dart)
+│   └── widgets/                 # Shared section UI (nav, cards, contact form, …)
 ├── features/                    # Feature-first modules (data / domain / presentation)
 │   ├── home/                    # Portfolio shell; HomeBloc + PortfolioPage
 │   ├── hero/, about/, skills/, expertise/, projects/, certificates/, contact/
 │   ├── theme/, locale/
-│   └── ...
-├── models/                      # Shared entity types
-├── utils/data/                  # Static portfolio content (lists, copy)
-├── widgets/                     # Shared UI (navigation, cards, footer, …)
+│   └── ...                      # each feature: data/local/, data/localized/, domain/entities/, …
 ├── l10n/                        # Generated + ARB localizations
-└── theme/                       # AppTheme
+└── …
 
 assets/                          # Images, documents, fonts (see pubspec)
 
@@ -142,10 +144,10 @@ test/                            # e.g. *_bloc_test.dart, *_repository_test.dart
 
 ### Updating Portfolio Content
 
-1. **Aggregator**: [`lib/utils/data/portfolio_data.dart`](lib/utils/data/portfolio_data.dart) wires section helpers; many lists live in dedicated files under [`lib/utils/data/`](lib/utils/data/) (e.g. `personal_info_data.dart`, `projects_data.dart`, `skills_data.dart`, `certificates_data.dart`).
-2. **Projects / case studies**: Project models and narrative copy in `utils/data` and [`lib/features/projects/data/`](lib/features/projects/data/) as needed.
+1. **Per-feature data**: Static lists and copy live in **`lib/features/<name>/data/local/`** (e.g. [`lib/features/projects/data/local/projects_data.dart`](lib/features/projects/data/local/projects_data.dart), [`lib/features/hero/data/local/personal_info_data.dart`](lib/features/hero/data/local/personal_info_data.dart), skills/certificates as appropriate).
+2. **Projects / case studies**: Types in [`lib/features/projects/domain/entities/`](lib/features/projects/domain/entities/); narrative and case study content alongside [`lib/features/projects/data/`](lib/features/projects/data/).
 3. **Arabic overlays**: Per-feature files under each `features/<name>/data/localized/`.
-4. **Theme**: [`lib/theme/app_theme.dart`](lib/theme/app_theme.dart) and [`lib/utils/assets/app_constants.dart`](lib/utils/assets/app_constants.dart).
+4. **Theme**: [`lib/core/theme/app_theme.dart`](lib/core/theme/app_theme.dart) and [`lib/core/utils/assets/app_constants.dart`](lib/core/utils/assets/app_constants.dart).
 
 ### Adding New Images
 
@@ -155,7 +157,7 @@ test/                            # e.g. *_bloc_test.dart, *_repository_test.dart
 
 ### Theme Customization
 
-Edit `lib/theme/app_theme.dart` to customize:
+Edit [`lib/core/theme/app_theme.dart`](lib/core/theme/app_theme.dart) to customize:
 - Colors and gradients
 - Typography
 - Spacing
@@ -197,8 +199,8 @@ Then copy `web/service-worker.js` (and optional `web/.htaccess`, `web/_headers`)
 
 ### Environment / API keys
 
-- **Default:** [`lib/config/api_keys.dart`](lib/config/api_keys.dart) (`ApiKeys.formspreeEndpoint`, `ApiKeys.recipientEmail`). See [`lib/config/api_keys.dart.template`](lib/config/api_keys.dart.template) for a blank template.
-- **Overrides:** at build/run time, [`lib/config/contact_runtime_config.dart`](lib/config/contact_runtime_config.dart) prefers `--dart-define=FORMSPREE_ENDPOINT=...` and `--dart-define=CONTACT_RECIPIENT_EMAIL=...`. GitHub Actions can use repository **Secrets** with the same names (see [`tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md`](tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md) and [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md)). Shell examples: [`.env.example`](.env.example) (not loaded by Flutter—export vars or use IDE defines).
+- **Default:** [`lib/core/config/api_keys.dart`](lib/core/config/api_keys.dart) (`ApiKeys.formspreeEndpoint`, `ApiKeys.recipientEmail`). See [`lib/core/config/api_keys.dart.template`](lib/core/config/api_keys.dart.template) for a blank template.
+- **Overrides:** at build/run time, [`lib/core/config/contact_runtime_config.dart`](lib/core/config/contact_runtime_config.dart) prefers `--dart-define=FORMSPREE_ENDPOINT=...` and `--dart-define=CONTACT_RECIPIENT_EMAIL=...`. GitHub Actions can use repository **Secrets** with the same names (see [`tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md`](tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md) and [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md)). Shell examples: [`.env.example`](.env.example) (not loaded by Flutter—export vars or use IDE defines).
 
 ## 🧪 Testing
 

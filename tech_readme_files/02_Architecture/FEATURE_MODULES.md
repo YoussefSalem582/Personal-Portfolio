@@ -9,6 +9,7 @@ lib/features/<name>/
 ├── data/
 │   ├── datasources/<name>_local_datasource.dart
 │   ├── datasources/<name>_local_datasource_impl.dart
+│   ├── local/                # optional: static lists / maps (e.g. projects_data.dart)
 │   ├── repositories/<name>_repository_impl.dart
 │   └── localized/          # optional: *_ar.dart
 ├── domain/
@@ -36,7 +37,7 @@ lib/features/<name>/
 
 ## Where to put shared widgets
 
-Cross-feature UI (navigation bar, generic cards) stays under [lib/widgets/](../../lib/widgets/). Feature-specific section composition lives under `features/<name>/presentation/`.
+Cross-feature UI (navigation bar, generic cards, contact section) stays under [lib/core/widgets/](../../lib/core/widgets/). Feature-specific composition lives under `features/<name>/presentation/`; static copy lists often live in `features/<name>/data/local/`.
 
 ## Localization
 

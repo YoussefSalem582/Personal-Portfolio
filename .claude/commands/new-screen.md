@@ -10,7 +10,7 @@ Add a **new page** inside an **existing** `lib/features/<feature>/` module (for 
 
 1. **Feature** — e.g. `projects`, `home`, `contact`
 2. **Screen name** — file/widget naming
-3. **Routing** — new path under `lib/routes/app_routes.dart` / `lib/config/routes/app_router.dart` if user-navigable
+3. **Routing** — new path under `lib/core/routes/app_routes.dart` / `lib/core/config/routes/app_router.dart` if user-navigable
 
 ## Steps (portfolio)
 
@@ -23,7 +23,7 @@ Add a **new page** inside an **existing** `lib/features/<feature>/` module (for 
 
 ## Checklist
 
-- [ ] Matches existing portfolio theme/widgets (`AppColors`, shared `lib/widgets/`)
+- [ ] Matches existing portfolio theme/widgets (`AppColors`, shared `lib/core/widgets/`)
 - [ ] No hardcoded user-facing strings
 - [ ] BLoC/dispose patterns consistent with sibling pages
 

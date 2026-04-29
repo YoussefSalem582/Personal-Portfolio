@@ -58,4 +58,4 @@ app.*.map.json
 .env
 
 # API keys (uncomment to keep real `api_keys.dart` local-only; keep `api_keys.dart.template` in git)
-# lib/config/api_keys.dart
+# lib/core/config/api_keys.dart

@@ -6,7 +6,7 @@ The contact section is driven by [ContactBloc](../../lib/features/contact/presen
 
 ## Configuration
 
-Resolved at runtime via [lib/config/contact_runtime_config.dart](../../lib/config/contact_runtime_config.dart) (`ContactRuntimeConfig`):
+Resolved at runtime via [lib/core/config/contact_runtime_config.dart](../../lib/core/config/contact_runtime_config.dart) (`ContactRuntimeConfig`):
 
 1. **Build-time defines** (highest priority when non-empty):
    - `FORMSPREE_ENDPOINT` — full Formspree URL, e.g. `https://formspree.io/f/xxxx`
@@ -20,9 +20,9 @@ Resolved at runtime via [lib/config/contact_runtime_config.dart](../../lib/confi
      --dart-define=CONTACT_RECIPIENT_EMAIL=you@example.com
    ```
 
-2. **Fallback:** [lib/config/api_keys.dart](../../lib/config/api_keys.dart) — `ApiKeys.formspreeEndpoint` / `ApiKeys.recipientEmail`.
+2. **Fallback:** [lib/core/config/api_keys.dart](../../lib/core/config/api_keys.dart) — `ApiKeys.formspreeEndpoint` / `ApiKeys.recipientEmail`.
 
-Template for a fresh fork: [lib/config/api_keys.dart.template](../../lib/config/api_keys.dart.template).
+Template for a fresh fork: [lib/core/config/api_keys.dart.template](../../lib/core/config/api_keys.dart.template).
 
 ### GitHub Actions / GitHub Pages
 
@@ -39,8 +39,10 @@ Local **Windows** / **Unix** optimized builds (`scripts/build_optimized.ps1`, `s
 
 See also: [DEPLOYMENT.md](DEPLOYMENT.md) for CI secrets and local script parity.
 
+## UI entry points
+
 - Section wrapper: [lib/features/contact/presentation/widgets/contact_section.dart](../../lib/features/contact/presentation/widgets/contact_section.dart)
-- Form fields + `BlocConsumer`: [lib/widgets/contact_section/contact_form_widget.dart](../../lib/widgets/contact_section/contact_form_widget.dart)
+- Form fields + `BlocConsumer`: [lib/core/widgets/contact_section/contact_form_widget.dart](../../lib/core/widgets/contact_section/contact_form_widget.dart)
 
 ## Errors
 

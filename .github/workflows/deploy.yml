@@ -43,7 +43,7 @@ jobs:
       - name: Build optimized web app
         env:
           # Optional: set FORMSPREE_ENDPOINT and CONTACT_RECIPIENT_EMAIL in repo Secrets
-          # to override values in lib/config/api_keys.dart for Pages builds.
+          # to override values in lib/core/config/api_keys.dart for Pages builds.
           FORMSPREE_ENDPOINT: ${{ secrets.FORMSPREE_ENDPOINT }}
           CONTACT_RECIPIENT_EMAIL: ${{ secrets.CONTACT_RECIPIENT_EMAIL }}
         run: |

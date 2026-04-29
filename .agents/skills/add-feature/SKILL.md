@@ -38,9 +38,9 @@ lib/features/<feature_name>/
 2. **Data** — Local datasources (Dart/maps/assets) and/or remote (see contact feature); repository impl maps errors to failures.
 3. **Presentation** — `*_event.dart`, `*_state.dart`, `*_bloc.dart`; use `BlocProvider` where the UI subtree needs the bloc (see `portfolio_page.dart` patterns).
 4. **DI** — `lib/injection_container.dart`: lazy singletons for repos/use cases, `registerFactory` for BLoCs unless a singleton is clearly intended.
-5. **Routes** — If a new path is needed: add to `lib/routes/app_routes.dart` and `lib/config/routes/app_router.dart` (and deep-link / section map if applicable).
+5. **Routes** — If a new path is needed: add to `lib/core/routes/app_routes.dart` and `lib/core/config/routes/app_router.dart` (and deep-link / section map if applicable).
 6. **Strings** — `lib/l10n/app_en.arb` and `lib/l10n/app_ar.arb`, then `flutter gen-l10n`.
-7. **Shared UI** — Prefer `lib/widgets/` for reusable pieces.
+7. **Shared UI** — Prefer `lib/core/widgets/` for reusable pieces.
 
 ## Checklist
 

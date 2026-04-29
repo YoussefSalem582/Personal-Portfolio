@@ -19,4 +19,4 @@ Dependencies point **inward**: presentation depends on domain; data implements d
 
 ## Shared UI
 
-Cross-cutting widgets live in `lib/widgets/`, not inside a feature, when multiple sections reuse them.
+Cross-cutting widgets live in `lib/core/widgets/`, not inside a feature, when multiple sections reuse them.

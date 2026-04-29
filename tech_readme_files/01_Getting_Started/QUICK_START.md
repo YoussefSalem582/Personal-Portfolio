@@ -50,4 +50,4 @@ Exact CI and local build: [04_Contact_And_Deploy/DEPLOYMENT.md](../04_Contact_An
 | [lib/main.dart](../../lib/main.dart) | `initDependencies()`, `runApp` |
 | [lib/app.dart](../../lib/app.dart) | `MaterialApp.router`, global theme/locale BLoCs |
 | [lib/injection_container.dart](../../lib/injection_container.dart) | GetIt `sl` registrations |
-| [lib/config/routes/app_router.dart](../../lib/config/routes/app_router.dart) | `GoRouter` factory |
+| [lib/core/config/routes/app_router.dart](../../lib/core/config/routes/app_router.dart) | `GoRouter` factory |

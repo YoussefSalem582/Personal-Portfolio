@@ -14,6 +14,7 @@ Supplements the root [README.md](../README.md). This folder describes how the **
 | GetIt registration rules | [02_Architecture/DEPENDENCY_INJECTION.md](02_Architecture/DEPENDENCY_INJECTION.md) |
 | Routes and deep links | [02_Architecture/NAVIGATION.md](02_Architecture/NAVIGATION.md) |
 | Standard feature layout | [02_Architecture/FEATURE_MODULES.md](02_Architecture/FEATURE_MODULES.md) |
+| Codebase file inventory | [02_Architecture/CODEBASE_INVENTORY.md](02_Architecture/CODEBASE_INVENTORY.md) |
 | Static data and Arabic copy | [03_Content_And_L10n/DATA_AND_LOCALIZATION.md](03_Content_And_L10n/DATA_AND_LOCALIZATION.md) · [03_Content_And_L10n/README.md](03_Content_And_L10n/README.md) |
 | Contact form (Formspree) | [04_Contact_And_Deploy/CONTACT_FORM.md](04_Contact_And_Deploy/CONTACT_FORM.md) |
 | CI / Pages deploy | [04_Contact_And_Deploy/DEPLOYMENT.md](04_Contact_And_Deploy/DEPLOYMENT.md) · [04_Contact_And_Deploy/README.md](04_Contact_And_Deploy/README.md) |

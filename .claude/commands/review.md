@@ -18,7 +18,7 @@ Audit files or a feature against **Youssef Hassan Portfolio** conventions (Flutt
 
 - Prefer `AppColors` (and existing theme/text helpers) over raw `Color(0xFF...)` / ad-hoc `Colors.*` for brand surfaces
 - Prefer existing spacing/constants patterns in the file’s section over magic numbers when a shared constant already exists
-- Route paths: prefer `AppRoutes` / helpers in `lib/routes/app_routes.dart` over scattered string literals
+- Route paths: prefer `AppRoutes` / helpers in `lib/core/routes/app_routes.dart` over scattered string literals
 
 ### Localization
 

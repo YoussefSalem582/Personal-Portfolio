@@ -15,8 +15,8 @@
 
 ## UI constants
 
-- Prefer `AppColors` and existing helpers in `lib/utils/assets/` over raw `Color(0xFF...)`.
-- Routes: use `AppRoutes` in `lib/routes/app_routes.dart`, not string literals.
+- Prefer `AppColors` and existing helpers in `lib/core/utils/assets/` over raw `Color(0xFF...)`.
+- Routes: use `AppRoutes` in `lib/core/routes/app_routes.dart`, not string literals.
 
 ## Localization
 

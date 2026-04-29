@@ -19,16 +19,18 @@ Single Flutter package at repo root: **`youssef_hassan_portfolio`** (`pubspec.ya
 ## Stack (short)
 
 - BLoC + GetIt + GoRouter + Dio (contact) + `responsive_framework` + ARB l10n.
-- Routes: `lib/routes/app_routes.dart`; router: `lib/config/routes/app_router.dart`.
+- Routes: `lib/core/routes/app_routes.dart`; router: `lib/core/config/routes/app_router.dart`.
+- Shared UI: `lib/core/widgets/`; tokens/assets: `lib/core/utils/assets/`; theme: `lib/core/theme/app_theme.dart`.
+- Static copy per feature: `lib/features/<name>/data/local/`.
 
 ## Design & code
 
-- Reuse `AppColors` / existing theme and widget patterns under `lib/utils/assets/` and `lib/widgets/`.
+- Reuse `AppColors` and patterns under `lib/core/utils/assets/` and `lib/core/widgets/`.
 - User-facing strings: ARB + `flutter gen-l10n`.
 
 ## Secrets
 
-Contact values: `lib/config/contact_runtime_config.dart` — optional `--dart-define=FORMSPREE_ENDPOINT` and `CONTACT_RECIPIENT_EMAIL`; otherwise `lib/config/api_keys.dart` (from `api_keys.dart.template`). Never commit unrelated production secrets.
+Contact values: `lib/core/config/contact_runtime_config.dart` — optional `--dart-define=FORMSPREE_ENDPOINT` and `CONTACT_RECIPIENT_EMAIL`; otherwise `lib/core/config/api_keys.dart` (from `api_keys.dart.template`). Never commit unrelated production secrets.
 
 ## After substantive changes
 

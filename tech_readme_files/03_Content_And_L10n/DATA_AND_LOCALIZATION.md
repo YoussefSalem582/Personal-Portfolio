@@ -2,18 +2,23 @@
 
 ## Static portfolio data
 
-Primary location: [lib/utils/data/](../../lib/utils/data/).
+Primary location: **`lib/features/<name>/data/local/`** (per feature).
 
-Common files:
+Examples:
 
-- `portfolio_data.dart` — aggregator / wiring
-- `personal_info_data.dart`, `projects_data.dart`, `skills_data.dart`, `certificates_data.dart`, `expertise_data.dart`, `contact_data.dart`, …
+- [lib/features/projects/data/local/projects_data.dart](../../lib/features/projects/data/local/projects_data.dart)
+- [lib/features/hero/data/local/personal_info_data.dart](../../lib/features/hero/data/local/personal_info_data.dart)
+- [lib/features/skills/data/local/skills_data.dart](../../lib/features/skills/data/local/skills_data.dart)
 
-Feature **datasources** call into these helpers rather than embedding long strings in blocs.
+Feature **datasources** load from these (and from `localized/` maps) rather than embedding long strings only in blocs.
 
-## Models
+## Domain types (entities)
 
-Shared types: [lib/models/](../../lib/models/) (`Project`, `Certificate`, `Skill`, …).
+Per-feature models under **`lib/features/<name>/domain/entities/`**, for example:
+
+- [project.dart](../../lib/features/projects/domain/entities/project.dart)
+- [certificate.dart](../../lib/features/certificates/domain/entities/certificate.dart)
+- [skill.dart](../../lib/features/skills/domain/entities/skill.dart)
 
 ## English UI strings
 
@@ -34,6 +39,6 @@ Extensions in [lib/core/localization/localized_extensions.dart](../../lib/core/l
 
 ## Changing content safely
 
-1. Prefer editing **utils/data** and **models** first.
+1. Prefer editing **`features/<name>/data/local/`** and the relevant **`domain/entities`** first.
 2. If you add fields, update entity + datasource + any AR overlays.
 3. Run `flutter gen-l10n` if you change ARB (often automatic on build).

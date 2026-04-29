@@ -4,11 +4,11 @@
 
 ## Stack
 
-- **UI**: Flutter Web, `responsive_framework`, shared widgets under `lib/widgets/`.
+- **UI**: Flutter Web, `responsive_framework`, shared widgets under `lib/core/widgets/`.
 - **State**: `flutter_bloc` (feature/section BLoCs).
 - **DI**: `get_it` — `lib/injection_container.dart`.
-- **Routes**: `go_router` — `lib/config/routes/app_router.dart`; constants `lib/routes/app_routes.dart`.
-- **Data**: Mostly local datasources + static Dart data; **contact** uses Dio → Formspree (`lib/config/api_keys.dart` from template).
+- **Routes**: `go_router` — `lib/core/config/routes/app_router.dart`; constants `lib/core/routes/app_routes.dart`.
+- **Data**: Local datasources + `lib/features/<name>/data/local/`; **contact** uses Dio → Formspree (`lib/core/config/api_keys.dart` / `contact_runtime_config.dart`).
 - **l10n**: `lib/l10n/app_en.arb`, `lib/l10n/app_ar.arb` → `flutter gen-l10n`.
 
 ## Entry points

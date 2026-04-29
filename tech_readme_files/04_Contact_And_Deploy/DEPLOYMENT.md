@@ -14,14 +14,14 @@ What it does (summary):
 
 ### Contact form / optional repository secrets
 
-The workflow can inject Formspree and display email at compile time (see [contact_runtime_config.dart](../../lib/config/contact_runtime_config.dart)):
+The workflow can inject Formspree and display email at compile time (see [contact_runtime_config.dart](../../lib/core/config/contact_runtime_config.dart)):
 
 | Repository secret | Effect |
 |-------------------|--------|
 | `FORMSPREE_ENDPOINT` | Adds `--dart-define=FORMSPREE_ENDPOINT=…` when non-empty |
 | `CONTACT_RECIPIENT_EMAIL` | Adds `--dart-define=CONTACT_RECIPIENT_EMAIL=…` when non-empty |
 
-If both are **unset** or empty, the build uses fallbacks in [`lib/config/api_keys.dart`](../../lib/config/api_keys.dart).
+If both are **unset** or empty, the build uses fallbacks in [`lib/core/config/api_keys.dart`](../../lib/core/config/api_keys.dart).
 
 **Setup:** GitHub → **Settings → Secrets and variables → Actions → New repository secret**.
 
@@ -49,4 +49,4 @@ CI deploys **`build/web`**, not `docs/`.
 
 ## Assets and GitHub raw URLs
 
-Some documents open from GitHub (raw / Pages). If you fork or rename the repo, update [lib/config/app_config.dart](../../lib/config/app_config.dart) and related URL helpers per [lib/utils/url_helper.dart](../../lib/utils/url_helper.dart).
+Some documents open from GitHub (raw / Pages). If you fork or rename the repo, update [lib/core/config/app_config.dart](../../lib/core/config/app_config.dart) and related URL helpers per [lib/core/utils/url_helper.dart](../../lib/core/utils/url_helper.dart).
