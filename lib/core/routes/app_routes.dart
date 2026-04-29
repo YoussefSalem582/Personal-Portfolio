@@ -33,11 +33,8 @@ abstract class AppRoutes {
   /// Services section direct route (for deep linking)
   static const services = '/services';
 
-  /// Blog section direct route (for deep linking)
+  /// Blog section direct route (legacy; redirects to [home] in router)
   static const blog = '/blog';
-
-  /// Blog post detail route
-  static const blogPost = '/blog/:id';
 
   /// Privacy policy route
   static const privacy = '/privacy';
@@ -56,22 +53,26 @@ abstract class AppRoutes {
   /// Alias for [getProjectRoute]; IDs and slugs share the same path shape.
   static String getProjectSlugRoute(String slug) => '$projectPrefix/$slug';
 
-  /// Navigate to blog post
-  static String getBlogPostRoute(String id) => '/blog/$id';
+  /// Canonical path for a named section segment (e.g. `about` → `/about`).
+  static String getSectionRoute(String section) {
+    final s = section.startsWith('/') ? section.substring(1) : section;
+    return '/$s';
+  }
 
-  /// Navigate to section with scroll
-  static String getSectionRoute(String section) => '/$section';
-
-  /// Check if route is a section route
+  /// Whether [route] is a primary portfolio section path (deep links).
   static bool isSectionRoute(String route) {
-    return route == about ||
-        route == skills ||
-        route == projects ||
-        route == certificates ||
-        route == experience ||
-        route == education ||
-        route == services ||
-        route == contact ||
-        route == blog;
+    var r = route;
+    if (r.isEmpty) {
+      return false;
+    }
+    if (r != '/' && r.endsWith('/')) {
+      r = r.substring(0, r.length - 1);
+    }
+    return r == about ||
+        r == skills ||
+        r == projects ||
+        r == certificates ||
+        r == experience ||
+        r == contact;
   }
 }

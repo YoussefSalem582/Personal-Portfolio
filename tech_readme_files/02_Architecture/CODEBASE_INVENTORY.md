@@ -21,7 +21,8 @@ For how pieces fit together, see [OVERVIEW.md](OVERVIEW.md), [DEPENDENCY_INJECTI
 | File | Role |
 |------|------|
 | `lib/core/routes/app_routes.dart` | Path constants and helpers (`AppRoutes`) |
-| `lib/core/config/routes/app_router.dart` | `GoRouter` factory (`createPortfolioRouter`), section index map, project redirect |
+| `lib/core/routes/portfolio_section_routes.dart` | Landing section index ↔ canonical paths; `:section` route pattern |
+| `lib/core/config/routes/app_router.dart` | `GoRouter` factory (`createPortfolioRouter`), redirects (invalid project, legacy aliases), stable portfolio shell page |
 | `lib/core/config/contact_runtime_config.dart` | Formspree / recipient from `--dart-define` or `api_keys` |
 | `lib/core/config/api_keys.dart` | Fallback Formspree URL and display email (template: `api_keys.dart.template`) |
 | `lib/core/config/app_config.dart` | App-level URLs / constants (e.g. GitHub Pages base) |

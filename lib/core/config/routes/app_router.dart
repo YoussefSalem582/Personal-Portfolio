@@ -6,29 +6,18 @@ import '../../../features/projects/domain/repositories/projects_repository.dart'
 import '../../../features/projects/presentation/pages/project_case_study.dart';
 import '../../../injection_container.dart';
 import '../../routes/app_routes.dart';
+import '../../routes/portfolio_section_routes.dart';
 
 /// Root navigator (snackbars, dialogs that need app-level context).
 final GlobalKey<NavigatorState> rootNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'root');
 
-/// Section index map for [PortfolioPage] scroll (matches section order).
-const Map<String, int> _sectionPathToIndex = {
-  AppRoutes.about: 1,
-  AppRoutes.skills: 2,
-  AppRoutes.experience: 3,
-  AppRoutes.projects: 4,
-  AppRoutes.certificates: 5,
-  AppRoutes.contact: 6,
-  AppRoutes.education: 1,
-  AppRoutes.services: 4,
-  AppRoutes.blog: 0,
-  AppRoutes.privacy: 0,
-  AppRoutes.terms: 0,
-  AppRoutes.notFound: 0,
-};
+const ValueKey<String> _portfolioShellPageKey =
+    ValueKey<String>('portfolio-shell');
 
 /// Invalid `/project/:segment` → home when no project matches.
-String? _portfolioRedirect(GoRouterState state) {
+/// Legacy section aliases → canonical paths.
+String? _portfolioGlobalRedirect(BuildContext context, GoRouterState state) {
   final segments = state.uri.pathSegments;
   if (segments.length >= 2 &&
       segments[0] == 'project' &&
@@ -37,7 +26,32 @@ String? _portfolioRedirect(GoRouterState state) {
     if (sl<ProjectsRepository>().resolveProjectSegment(segment) == null) {
       return AppRoutes.home;
     }
+    return null;
   }
+
+  final path = PortfolioSectionRoutes.normalizePath(state.uri.path);
+
+  if (path == PortfolioSectionRoutes.normalizePath(AppRoutes.education)) {
+    return AppRoutes.about;
+  }
+  if (path == PortfolioSectionRoutes.normalizePath(AppRoutes.services)) {
+    return AppRoutes.projects;
+  }
+  if (path == PortfolioSectionRoutes.normalizePath(AppRoutes.blog) ||
+      path.startsWith(
+          '${PortfolioSectionRoutes.normalizePath(AppRoutes.blog)}/')) {
+    return AppRoutes.home;
+  }
+  if (path == PortfolioSectionRoutes.normalizePath(AppRoutes.privacy)) {
+    return AppRoutes.home;
+  }
+  if (path == PortfolioSectionRoutes.normalizePath(AppRoutes.terms)) {
+    return AppRoutes.home;
+  }
+  if (path == PortfolioSectionRoutes.normalizePath(AppRoutes.notFound)) {
+    return AppRoutes.home;
+  }
+
   return null;
 }
 
@@ -74,8 +88,9 @@ Widget _projectCaseStudyTransition(
   );
 }
 
-NoTransitionPage<void> _portfolioHomePage({int? initialSectionIndex}) {
+NoTransitionPage<void> _portfolioShellPage({required int initialSectionIndex}) {
   return NoTransitionPage<void>(
+    key: _portfolioShellPageKey,
     child: PortfolioPage(initialSectionIndex: initialSectionIndex),
   );
 }
@@ -84,86 +99,24 @@ GoRouter createPortfolioRouter() {
   return GoRouter(
     navigatorKey: rootNavigatorKey,
     initialLocation: AppRoutes.home,
-    redirect: (context, state) => _portfolioRedirect(state),
+    redirect: _portfolioGlobalRedirect,
     errorBuilder: (context, state) => const PortfolioPage(),
     routes: <RouteBase>[
       GoRoute(
         path: AppRoutes.home,
         name: 'home',
-        pageBuilder: (context, state) => _portfolioHomePage(),
-      ),
-      GoRoute(
-        path: AppRoutes.about,
-        name: 'about',
-        pageBuilder: (context, state) =>
-            _portfolioHomePage(initialSectionIndex: _sectionPathToIndex[AppRoutes.about]),
-      ),
-      GoRoute(
-        path: AppRoutes.skills,
-        name: 'skills',
-        pageBuilder: (context, state) =>
-            _portfolioHomePage(initialSectionIndex: _sectionPathToIndex[AppRoutes.skills]),
-      ),
-      GoRoute(
-        path: AppRoutes.experience,
-        name: 'experience',
-        pageBuilder: (context, state) =>
-            _portfolioHomePage(initialSectionIndex: _sectionPathToIndex[AppRoutes.experience]),
-      ),
-      GoRoute(
-        path: AppRoutes.projects,
-        name: 'projects_list',
-        pageBuilder: (context, state) =>
-            _portfolioHomePage(initialSectionIndex: _sectionPathToIndex[AppRoutes.projects]),
-      ),
-      GoRoute(
-        path: AppRoutes.certificates,
-        name: 'certificates',
-        pageBuilder: (context, state) => _portfolioHomePage(
-          initialSectionIndex: _sectionPathToIndex[AppRoutes.certificates],
+        pageBuilder: (context, state) => _portfolioShellPage(
+          initialSectionIndex:
+              PortfolioSectionRoutes.initialIndexFromState(state),
         ),
       ),
       GoRoute(
-        path: AppRoutes.contact,
-        name: 'contact',
-        pageBuilder: (context, state) =>
-            _portfolioHomePage(initialSectionIndex: _sectionPathToIndex[AppRoutes.contact]),
-      ),
-      GoRoute(
-        path: AppRoutes.education,
-        name: 'education',
-        pageBuilder: (context, state) =>
-            _portfolioHomePage(initialSectionIndex: _sectionPathToIndex[AppRoutes.education]),
-      ),
-      GoRoute(
-        path: AppRoutes.services,
-        name: 'services',
-        pageBuilder: (context, state) =>
-            _portfolioHomePage(initialSectionIndex: _sectionPathToIndex[AppRoutes.services]),
-      ),
-      GoRoute(
-        path: AppRoutes.blog,
-        name: 'blog',
-        pageBuilder: (context, state) =>
-            _portfolioHomePage(initialSectionIndex: _sectionPathToIndex[AppRoutes.blog]),
-      ),
-      GoRoute(
-        path: AppRoutes.privacy,
-        name: 'privacy',
-        pageBuilder: (context, state) =>
-            _portfolioHomePage(initialSectionIndex: _sectionPathToIndex[AppRoutes.privacy]),
-      ),
-      GoRoute(
-        path: AppRoutes.terms,
-        name: 'terms',
-        pageBuilder: (context, state) =>
-            _portfolioHomePage(initialSectionIndex: _sectionPathToIndex[AppRoutes.terms]),
-      ),
-      GoRoute(
-        path: AppRoutes.notFound,
-        name: 'not_found',
-        pageBuilder: (context, state) =>
-            _portfolioHomePage(initialSectionIndex: _sectionPathToIndex[AppRoutes.notFound]),
+        path: PortfolioSectionRoutes.canonicalSectionPath,
+        name: 'portfolio_section',
+        pageBuilder: (context, state) => _portfolioShellPage(
+          initialSectionIndex:
+              PortfolioSectionRoutes.initialIndexFromState(state),
+        ),
       ),
       GoRoute(
         path: '${AppRoutes.projectPrefix}/:pid',
