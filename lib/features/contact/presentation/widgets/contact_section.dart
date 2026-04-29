@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../theme/app_theme.dart';
+import '../../../../core/theme/app_theme.dart';
 import '../../../../utils/assets/app_constants.dart';
 import '../../../../utils/responsive_helper.dart';
-import '../../../../widgets/contact_section/contact_form_widget.dart';
-import '../../../../widgets/contact_section/contact_info_widget.dart';
+import '../../../../core/widgets/contact_section/contact_form_widget.dart';
+import '../../../../core/widgets/contact_section/contact_info_widget.dart';
 import '../bloc/contact_bloc.dart';
 import '../bloc/contact_state.dart';
 
