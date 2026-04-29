@@ -179,7 +179,7 @@ flutter:
 
 # FlutterGen Configuration
 flutter_gen:
-  output: lib/core/utils/
+  output: lib/utils/
   line_length: 80
   
   integrations:
