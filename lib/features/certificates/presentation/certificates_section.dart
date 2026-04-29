@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../../theme/app_theme.dart';
+import '../../../core/theme/app_theme.dart';
 import '../../../utils/assets/app_constants.dart';
 import '../../../utils/responsive_helper.dart';
-import '../../../widgets/certificates_section/certificates_grid.dart';
-import '../../../widgets/certificates_section/certificates_section_header.dart';
-import '../../../widgets/custom_show_more_button.dart';
+import '../../../core/widgets/certificates_section/certificates_grid.dart';
+import '../../../core/widgets/certificates_section/certificates_section_header.dart';
+import '../../../core/widgets/custom_show_more_button.dart';
 import 'bloc/certificates_bloc.dart';
 import 'bloc/certificates_state.dart';
 
