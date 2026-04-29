@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
-import '../l10n/app_localizations.dart';
-import '../utils/assets/app_constants.dart';
-import '../models/project.dart';
+import '../../l10n/app_localizations.dart';
+import '../../utils/assets/app_constants.dart';
+import '../../models/project.dart';
 import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
 import '../routes/app_routes.dart';
 import 'lazy_image.dart';
