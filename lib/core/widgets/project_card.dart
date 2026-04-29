@@ -166,6 +166,8 @@ class _ProjectCardState extends State<ProjectCard>
                     fit: BoxFit.contain,
                     width: double.infinity,
                     height: double.infinity,
+                    semanticLabel:
+                        '${widget.project.localizedTitle} — project screenshot',
                     errorWidget: _buildPlaceholderImage(),
                   ),
                 )
@@ -686,6 +688,8 @@ class ProjectDetailsDialog extends StatelessWidget {
                 imageUrl: images.first,
                 fit: BoxFit.contain,
                 borderRadius: BorderRadius.circular(AppTheme.radiusM),
+                semanticLabel:
+                    '${project.localizedTitle} — screenshot (1/${images.length})',
                 errorWidget: _buildImagePlaceholder(),
               ),
             )
@@ -711,6 +715,8 @@ class ProjectDetailsDialog extends StatelessWidget {
                               width: double.infinity,
                               borderRadius:
                                   BorderRadius.circular(AppTheme.radiusM),
+                              semanticLabel:
+                                  '${project.localizedTitle} — screenshot (${index + 1}/${images.length})',
                               errorWidget: _buildImagePlaceholder(),
                             ),
                             // Image counter overlay

@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **SEO & discoverability** — Aligned [`web/robots.txt`](web/robots.txt) and [`web/sitemap.xml`](web/sitemap.xml) with the GitHub Pages base path (path URLs for portfolio sections and project case studies); canonical link, `og:image` dimensions, JSON-LD `Person`/`WebSite` in [`web/index.html`](web/index.html); [`web/llms.txt`](web/llms.txt); GitHub Pages SPA fallback via `build/web/404.html` (copy from `index.html`) in [.github/workflows/deploy.yml](.github/workflows/deploy.yml) and `scripts/build_optimized.ps1` / `build_optimized.sh`. Documented in [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md).
+
 - **Routing helpers** — `lib/core/routes/portfolio_section_routes.dart` and `test/core/routes/portfolio_section_routes_test.dart` (index ↔ canonical section paths).
 
 - **Documentation** — `tech_readme_files/02_Architecture/CODEBASE_INVENTORY.md`: structured checklist of features, BLoCs, datasources, core layout, tests, and GetIt patterns; linked from `DOCUMENTATION_MAP.md`, `tech_readme_files/README.md`, and `tech_readme_files/02_Architecture/README.md`.
@@ -18,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Contact form build overrides** — `lib/core/config/contact_runtime_config.dart` resolves Formspree URL and recipient email from optional `--dart-define=FORMSPREE_ENDPOINT` / `CONTACT_RECIPIENT_EMAIL`, falling back to `lib/core/config/api_keys.dart`. GitHub Actions workflow and `scripts/build_optimized.ps1` / `build_optimized.sh` pass defines when env/secrets are set. Documented in `tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md` and root `README.md`.
 
 ### Changed
+
+- **SEO & accessibility** — Enriched [`web/index.html`](web/index.html) (`lang`, `meta robots`, `application-name`, `og:locale`/`og:locale:alternate`, `link rel="sitemap"`); expanded JSON-LD (`email`, `address`, broader `sameAs`); aligned [`web/manifest.json`](web/manifest.json) (path-based PWA shortcuts, `theme_color` / `description`). Expanded [`web/llms.txt`](web/llms.txt). [`LazyImage`](lib/core/widgets/lazy_image.dart) supports `semanticLabel` with labels on project cards, case-study hero/gallery, and hero profile image. [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md) SEO table updated accordingly.
 
 - **Routing** — Portfolio shell uses `/` plus `/:section(about|skills|experience|projects|certificates|contact)` with a stable page key; `PortfolioPage` syncs the URL (`context.go` on nav/footer/hero/FAB, debounced updates on scroll) and reacts to `initialSectionIndex` changes (browser back/forward). Legacy paths (`/education` → `/about`, `/services` → `/projects`, `/blog` including `/blog/*`, `/privacy`, `/terms`, `/404` → `/`) redirect in `GoRouter`. Removed unused `AppRoutes.blogPost` / `getBlogPostRoute`.
 

@@ -66,6 +66,10 @@ jobs:
           cp web/.htaccess build/web/ || true
           cp web/_headers build/web/ || true
       
+      # GitHub Pages: route unknown paths to the Flutter shell (SPA deep links).
+      - name: SPA fallback for GitHub Pages (404.html)
+        run: cp build/web/index.html build/web/404.html
+      
       - name: Create .nojekyll
         run: touch build/web/.nojekyll
       

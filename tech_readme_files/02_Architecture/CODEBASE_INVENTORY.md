@@ -191,7 +191,7 @@ Legend: **BLoC** paths are `presentation/bloc/`. **DS** = datasource. **Repo** =
 
 | Path | Role |
 |------|------|
-| `web/index.html`, `manifest.json`, `robots.txt`, `sitemap.xml` | Web shell, PWA, SEO |
+| `web/index.html`, `manifest.json`, `robots.txt`, `sitemap.xml`, `llms.txt` | Web shell, PWA, SEO |
 | `web/service-worker.js` | Copied into `build/web` by CI / optimize scripts |
 | `web/.htaccess`, `web/_headers` | Optional server hints |
 | `scripts/build_optimized.ps1`, `scripts/build_optimized.sh` | Release build parity with CI |

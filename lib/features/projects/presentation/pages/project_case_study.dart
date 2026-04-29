@@ -250,6 +250,8 @@ class _ProjectCaseStudyState extends State<ProjectCaseStudy> {
                                 galleryImages: widget.project.galleryImages!,
                                 isMobile: isMobile,
                                 projectId: widget.project.id,
+                                projectAccessibilityPrefix:
+                                    widget.project.localizedTitle,
                               ),
                               SizedBox(
                                   height: isMobile

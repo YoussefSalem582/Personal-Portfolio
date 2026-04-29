@@ -39,6 +39,9 @@ if (Test-Path (Join-Path $RepoRoot "web\_headers")) {
   Copy-Item -Force (Join-Path $RepoRoot "web\_headers") $webOut
 }
 
+# GitHub Pages: unknown paths serve 404.html; copying index boots the SPA for deep links.
+Copy-Item -Force (Join-Path $webOut "index.html") (Join-Path $webOut "404.html")
+
 New-Item -ItemType File -Path (Join-Path $webOut ".nojekyll") -Force | Out-Null
 
 Write-Host ">> Done. Output: $webOut"

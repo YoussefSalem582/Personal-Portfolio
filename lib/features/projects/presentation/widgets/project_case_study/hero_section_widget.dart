@@ -65,6 +65,7 @@ class HeroSectionWidget extends StatelessWidget {
                 width: double.infinity,
                 height: clampedHeight,
                 fit: BoxFit.contain, // Maintain aspect ratio
+                semanticLabel: '${project.localizedTitle} — case study hero',
               ),
             ),
 

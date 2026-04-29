@@ -26,12 +26,23 @@ class GallerySectionWidget extends StatelessWidget {
   /// Project ID to determine which categories to show
   final String? projectId;
 
+  /// Used for accessibility / web image labeling (typically [Project.localizedTitle]).
+  final String projectAccessibilityPrefix;
+
   const GallerySectionWidget({
     super.key,
     required this.galleryImages,
     required this.isMobile,
+    required this.projectAccessibilityPrefix,
     this.projectId,
   });
+
+  /// Short asset filename for descriptive labels without exposing paths.
+  static String _basenameFromAssetUrl(String assetUrl) {
+    final normalized = assetUrl.replaceAll('\\', '/');
+    final i = normalized.lastIndexOf('/');
+    return i >= 0 ? normalized.substring(i + 1) : normalized;
+  }
 
   /// Returns categorized images for Emosense project
   Map<String, List<String>> _getCategorizedImages() {
@@ -368,8 +379,7 @@ class GallerySectionWidget extends StatelessWidget {
   }
 
   /// Builds a category header with icon and title
-  Widget _buildCategoryHeader(
-      BuildContext context, String title, bool isDark) {
+  Widget _buildCategoryHeader(BuildContext context, String title, bool isDark) {
     final accentColor = isDark ? AppColors.accentDark : AppColors.accentLight;
     final l10n = AppLocalizations.of(context);
     final imageCount = _getCategoryImageCount(title);
@@ -629,8 +639,8 @@ class GallerySectionWidget extends StatelessWidget {
                   ),
                   // Diagram image
                   GestureDetector(
-                    onTap: () => _showImageDialog(
-                        context, images, images.indexOf(imageUrl)),
+                    onTap: () => _showImageDialog(context, images,
+                        images.indexOf(imageUrl), projectAccessibilityPrefix),
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(AppTheme.radiusL),
@@ -657,6 +667,8 @@ class GallerySectionWidget extends StatelessWidget {
                           imageUrl: imageUrl,
                           fit: BoxFit.contain,
                           borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                          semanticLabel:
+                              '$projectAccessibilityPrefix — ${GallerySectionWidget._basenameFromAssetUrl(imageUrl)}',
                         ),
                       ),
                     ),
@@ -676,8 +688,8 @@ class GallerySectionWidget extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(bottom: 16),
             child: GestureDetector(
-              onTap: () =>
-                  _showImageDialog(context, images, images.indexOf(imageUrl)),
+              onTap: () => _showImageDialog(context, images,
+                  images.indexOf(imageUrl), projectAccessibilityPrefix),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(AppTheme.radiusL),
@@ -702,6 +714,8 @@ class GallerySectionWidget extends StatelessWidget {
                     imageUrl: imageUrl,
                     fit: BoxFit.contain,
                     borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                    semanticLabel:
+                        '$projectAccessibilityPrefix — ${GallerySectionWidget._basenameFromAssetUrl(imageUrl)}',
                   ),
                 ),
               ),
@@ -740,8 +754,8 @@ class GallerySectionWidget extends StatelessWidget {
                 ),
                 // Diagram image
                 GestureDetector(
-                  onTap: () => _showImageDialog(
-                      context, images, images.indexOf(imageUrl)),
+                  onTap: () => _showImageDialog(context, images,
+                      images.indexOf(imageUrl), projectAccessibilityPrefix),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(AppTheme.radiusL),
@@ -767,6 +781,8 @@ class GallerySectionWidget extends StatelessWidget {
                         imageUrl: imageUrl,
                         fit: BoxFit.contain,
                         borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                        semanticLabel:
+                            '$projectAccessibilityPrefix — ${GallerySectionWidget._basenameFromAssetUrl(imageUrl)}',
                       ),
                     ),
                   ),
@@ -791,7 +807,8 @@ class GallerySectionWidget extends StatelessWidget {
       itemCount: images.length,
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () => _showImageDialog(context, images, index),
+          onTap: () => _showImageDialog(
+              context, images, index, projectAccessibilityPrefix),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(AppTheme.radiusL),
@@ -815,6 +832,8 @@ class GallerySectionWidget extends StatelessWidget {
                 imageUrl: images[index],
                 fit: BoxFit.contain,
                 borderRadius: BorderRadius.circular(AppTheme.radiusL),
+                semanticLabel:
+                    '$projectAccessibilityPrefix — ${GallerySectionWidget._basenameFromAssetUrl(images[index])}',
               ),
             ),
           ),
@@ -825,8 +844,13 @@ class GallerySectionWidget extends StatelessWidget {
 
   /// Shows a full-screen lightbox dialog for viewing images
   void _showImageDialog(
-      BuildContext context, List<String> images, int initialIndex) {
+    BuildContext context,
+    List<String> images,
+    int initialIndex,
+    String projectAccessibilityPrefix,
+  ) {
     final l10n = AppLocalizations.of(context);
+    final url = images[initialIndex];
     showDialog(
       context: context,
       builder: (dialogContext) => Dialog(
@@ -836,8 +860,10 @@ class GallerySectionWidget extends StatelessWidget {
           child: Stack(
             children: [
               LazyImage(
-                imageUrl: images[initialIndex],
+                imageUrl: url,
                 fit: BoxFit.contain,
+                semanticLabel:
+                    '$projectAccessibilityPrefix — enlarged ${GallerySectionWidget._basenameFromAssetUrl(url)}',
               ),
               Positioned(
                 top: 16,

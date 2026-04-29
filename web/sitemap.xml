@@ -1,39 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://youssefsalem582.github.io/Personal-Portfolio/</loc>
-    <lastmod>2025-01-19</lastmod>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/</loc>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://youssefsalem582.github.io/Personal-Portfolio/#/projects</loc>
-    <lastmod>2025-01-19</lastmod>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/about</loc>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://youssefsalem582.github.io/Personal-Portfolio/#/about</loc>
-    <lastmod>2025-01-19</lastmod>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/skills</loc>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://youssefsalem582.github.io/Personal-Portfolio/#/skills</loc>
-    <lastmod>2025-01-19</lastmod>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/experience</loc>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://youssefsalem582.github.io/Personal-Portfolio/#/certificates</loc>
-    <lastmod>2025-01-19</lastmod>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/projects</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/certificates</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/contact</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/flutter-mate</loc>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://youssefsalem582.github.io/Personal-Portfolio/#/contact</loc>
-    <lastmod>2025-01-19</lastmod>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/technology-ninety-two-job-marketplace</loc>
+    <lastmod>2026-04-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/emosense-app</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/music-player</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/chat-app</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/youssef-hassan-portfolio</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/sprints-shop</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/quizhub</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/gopooling-carpool</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/chargehub</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/gogesh-marketplace</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/quotehub</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/facial-recognition</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/sign-language-translator</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/pothole-detection</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/project/interactive-learning-assistant</loc>
+    <lastmod>2026-04-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

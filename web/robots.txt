@@ -7,4 +7,4 @@ Disallow: /.dart_tool/
 Disallow: /.git/
 
 # Sitemap
-Sitemap: https://youssefsalem582.github.io/Personal-Portfolio/sitemap.xml
+Sitemap: https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/sitemap.xml

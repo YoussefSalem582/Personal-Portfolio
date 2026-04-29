@@ -1,0 +1,35 @@
+# Youssef Hassan — Portfolio (Flutter Web)
+
+> Official public portfolio for Youssef Hassan, Flutter developer (Egypt). Use this file for a concise machine-readable summary of the site.
+
+## Site URL
+
+- Home: https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/
+
+## What this site is
+
+Personal engineering portfolio: responsive Flutter Web app (PWA-capable) deployed on GitHub Pages. Sections cover about, skills, experience, projects (with per-project case studies), certificates, and a contact form.
+
+## Language
+
+User interface is available in **English** and **Arabic** (locale toggle in-app).
+
+## Profiles (authoritative)
+
+- GitHub: https://github.com/YoussefSalem582
+- LinkedIn: https://www.linkedin.com/in/youssef-hassan-8529372b7/
+- YouTube: https://www.youtube.com/@JoeCodezFlutter
+- Upwork: https://www.upwork.com/freelancers/~0124b005ef2bb3f524
+
+## Technology
+
+- **Stack:** Flutter Web, `go_router`, `flutter_bloc`, `get_it`, ARB localization.
+- **Hosting:** GitHub Pages; base path `/Youssef-Hassan-Portfolio/`.
+
+## Sitemap
+
+Published at: https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/sitemap.xml
+
+## Contact
+
+Contact is via the in-app form (Formspree-backed). Public email used in structured data and footer: youssef.salem.hassan582@gmail.com

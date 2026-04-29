@@ -5,8 +5,8 @@
     "scope": "/Youssef-Hassan-Portfolio/",
     "display": "standalone",
     "background_color": "#0D1117",
-    "theme_color": "#3498DB",
-    "description": "Flutter Developer building fast cross-platform mobile and web apps. Expertise in Dart, Python, TensorFlow, Firebase, and machine learning integration.",
+    "theme_color": "#0D1117",
+    "description": "Youssef Hassan — Flutter Developer Portfolio. Cross-platform apps with Flutter, Dart, Python, and machine learning. Projects, certifications, bilingual English/Arabic.",
     "orientation": "any",
     "prefer_related_applications": false,
     "categories": [
@@ -22,7 +22,7 @@
             "name": "View Projects",
             "short_name": "Projects",
             "description": "Browse my portfolio projects",
-            "url": "/Youssef-Hassan-Portfolio/#/projects",
+            "url": "/Youssef-Hassan-Portfolio/projects",
             "icons": [
                 {
                     "src": "icons/Icon-192.png",
@@ -35,7 +35,7 @@
             "name": "Contact Me",
             "short_name": "Contact",
             "description": "Get in touch",
-            "url": "/Youssef-Hassan-Portfolio/#/contact",
+            "url": "/Youssef-Hassan-Portfolio/contact",
             "icons": [
                 {
                     "src": "icons/Icon-192.png",

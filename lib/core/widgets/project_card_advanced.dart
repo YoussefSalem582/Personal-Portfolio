@@ -93,8 +93,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
     final l10n = AppLocalizations.of(context);
     return Semantics(
       button: true,
-      label:
-          '${l10n.projectCardViewProject}: ${widget.project.localizedTitle}',
+      label: '${l10n.projectCardViewProject}: ${widget.project.localizedTitle}',
       child: GestureDetector(
         onTap: () => _showProjectDetails(context),
         child: Container(
@@ -146,8 +145,7 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                 ),
 
                 // Featured badge
-                if (widget.project.isFeatured)
-                  _buildFeaturedBadge(context),
+                if (widget.project.isFeatured) _buildFeaturedBadge(context),
 
                 // Hover overlay (simplified)
                 if (_isHovered) _buildHoverOverlay(context, isDark),
@@ -179,6 +177,8 @@ class _ProjectCardAdvancedState extends State<ProjectCardAdvanced>
                       fit: BoxFit.contain,
                       width: double.infinity,
                       height: double.infinity,
+                      semanticLabel:
+                          '${widget.project.localizedTitle} — project screenshot',
                     ),
                   ),
                 )

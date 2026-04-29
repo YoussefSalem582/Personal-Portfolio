@@ -37,6 +37,9 @@ cp -f "$ROOT/web/service-worker.js" "$WEB_OUT/"
 [[ -f "$ROOT/web/.htaccess" ]] && cp -f "$ROOT/web/.htaccess" "$WEB_OUT/" || true
 [[ -f "$ROOT/web/_headers" ]] && cp -f "$ROOT/web/_headers" "$WEB_OUT/" || true
 
+# GitHub Pages: unknown paths serve 404.html; copying index boots the SPA for deep links.
+cp -f "$WEB_OUT/index.html" "$WEB_OUT/404.html"
+
 touch "$WEB_OUT/.nojekyll"
 
 echo ">> Done. Output: $WEB_OUT"

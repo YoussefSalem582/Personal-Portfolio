@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../../features/hero/data/local/personal_info_data.dart';
 import '../../utils/assets/app_constants.dart';
 
 class ProfileImageWidget extends StatelessWidget {
@@ -35,6 +36,8 @@ class ProfileImageWidget extends StatelessWidget {
               AppImages.profileImage,
               width: width,
               fit: BoxFit.contain,
+              semanticLabel:
+                  'Portrait photograph of ${PersonalInfoData.fullName}',
               alignment: Alignment.center,
               errorBuilder: (context, error, stackTrace) {
                 return Container(

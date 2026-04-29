@@ -12,6 +12,9 @@ class LazyImage extends StatefulWidget {
   final Widget? errorWidget;
   final BorderRadius? borderRadius;
 
+  /// Shown to screen readers / accessibility (also used on web as image label).
+  final String? semanticLabel;
+
   const LazyImage({
     super.key,
     required this.imageUrl,
@@ -21,6 +24,7 @@ class LazyImage extends StatefulWidget {
     this.placeholder,
     this.errorWidget,
     this.borderRadius,
+    this.semanticLabel,
   });
 
   @override
@@ -140,6 +144,7 @@ class _LazyImageState extends State<LazyImage>
             width: widget.width,
             height: widget.height,
             fit: widget.fit,
+            semanticLabel: widget.semanticLabel,
             frameBuilder: (context, child, frame, wasSynchronouslyLoaded) {
               if (wasSynchronouslyLoaded) {
                 // Asset images load synchronously, so mark as loaded immediately
