@@ -1,14 +1,14 @@
 # Youssef Salem - Flutter Developer Portfolio
 
-![Visitor Count](https://hits.sh/youssefsalem582.github.io/Youssef-Salem-Portfolio.svg?style=flat-square&label=Visitors&color=3498db&labelColor=2c3e50)
-![GitHub Pages](https://img.shields.io/badge/Deployed-GitHub%20Pages-success?style=flat-square)
+![Visitor Count](https://hits.sh/https://youssef-salem-portfolio.vercel.app.svg?style=flat-square&label=Visitors&color=3498db&labelColor=2c3e50)
+![Vercel](https://img.shields.io/badge/Deployed-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 ![Flutter](https://img.shields.io/badge/Built%20with-Flutter-02569B?style=flat-square&logo=flutter)
 
 A modern, responsive portfolio website showcasing Flutter development skills, machine learning projects, and professional achievements. Built with Flutter Web and optimized for performance and accessibility.
 
 ## 🚀 Live Demo
 
-Visit the live portfolio: [https://youssefsalem582.github.io/Youssef-Salem-Portfolio/](https://youssefsalem582.github.io/Youssef-Salem-Portfolio/)
+Visit the live portfolio: [https://youssef-salem-portfolio.vercel.app/](https://youssef-salem-portfolio.vercel.app/)
 
 ## ⚡ Performance
 
@@ -41,7 +41,7 @@ Visit the live portfolio: [https://youssefsalem582.github.io/Youssef-Salem-Portf
 - **Contact form**: Formspree via Dio (see `lib/core/config/api_keys.dart` and `contact_runtime_config.dart`)
 - **Testing**: Flutter Test, `bloc_test`, `mocktail`
 - **CI/CD**: GitHub Actions
-- **Deployment**: GitHub Pages
+- **Deployment**: Vercel (GitHub Actions → static `build/web`)
 
 ## 📦 Dependencies
 
@@ -85,9 +85,9 @@ See [`pubspec.yaml`](pubspec.yaml) for exact versions. Main packages include `fl
 
    Manual equivalent (same flags as [.github/workflows/deploy.yml](.github/workflows/deploy.yml)):
    ```bash
-   flutter build web --release --base-href "/Youssef-Salem-Portfolio/" --no-source-maps
+   flutter build web --release --base-href "/" --no-source-maps
    ```
-   Then copy `web/service-worker.js`, `web/.htaccess`, and `web/_headers` into `build/web` if present, and add `build/web/.nojekyll`.
+   Then copy `web/service-worker.js`, `web/.htaccess`, `web/_headers`, and [`vercel.json`](vercel.json) into `build/web` if present.
 
 ### Development Commands
 
@@ -166,16 +166,15 @@ Edit [`lib/core/theme/app_theme.dart`](lib/core/theme/app_theme.dart) to customi
 
 ## 🚀 Deployment
 
-### GitHub Actions (recommended)
+### GitHub Actions → Vercel (recommended)
 
-Workflow: [.github/workflows/deploy.yml](.github/workflows/deploy.yml). On push to **`master`**, it builds **`build/web`** with `--base-href "/Youssef-Salem-Portfolio/"` and deploys to GitHub Pages (not the `docs/` folder).
+Workflow: [.github/workflows/deploy.yml](.github/workflows/deploy.yml). On push to **`master`**, it builds **`build/web`** with `--base-href "/"`, copies [`vercel.json`](vercel.json) into `build/web`, and runs **`vercel deploy --prod`** against that folder.
 
-1. Enable **GitHub Pages** (source: GitHub Actions) in repository settings.
-2. Push to `master` (or run the workflow manually via **Actions**).
+**Repository secrets:** `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`. Optional: `SITE_BASE_URL` (canonical hostname / custom domain), plus Formspree secrets (`FORMSPREE_ENDPOINT`, `CONTACT_RECIPIENT_EMAIL`) — see [tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md).
 
-Details: [tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md).
+Push to `master` or run the workflow manually via **Actions**.
 
-### Local build (then upload if needed)
+### Local build (preview)
 
 Use the same output CI uses:
 
@@ -192,15 +191,15 @@ Artifact: **`build/web`**.
 ### Manual one-off build
 
 ```bash
-flutter build web --release --base-href "/Youssef-Salem-Portfolio/" --no-source-maps
+flutter build web --release --base-href "/" --no-source-maps
 ```
 
-Then copy `web/service-worker.js` (and optional `web/.htaccess`, `web/_headers`) into `build/web`, and create `build/web/.nojekyll`.
+Then copy `web/service-worker.js`, optional `web/.htaccess`, `web/_headers`, and [`vercel.json`](vercel.json) into `build/web`.
 
 ### Environment / API keys
 
 - **Default:** [`lib/core/config/api_keys.dart`](lib/core/config/api_keys.dart) (`ApiKeys.formspreeEndpoint`, `ApiKeys.recipientEmail`). See [`lib/core/config/api_keys.dart.template`](lib/core/config/api_keys.dart.template) for a blank template.
-- **Overrides:** at build/run time, [`lib/core/config/contact_runtime_config.dart`](lib/core/config/contact_runtime_config.dart) prefers `--dart-define=FORMSPREE_ENDPOINT=...` and `--dart-define=CONTACT_RECIPIENT_EMAIL=...`. GitHub Actions can use repository **Secrets** with the same names (see [`tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md`](tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md) and [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md)). Shell examples: [`.env.example`](.env.example) (not loaded by Flutter—export vars or use IDE defines).
+- **Overrides:** at build/run time, [`lib/core/config/contact_runtime_config.dart`](lib/core/config/contact_runtime_config.dart) prefers `--dart-define=FORMSPREE_ENDPOINT=...` and `--dart-define=CONTACT_RECIPIENT_EMAIL=...`. [`AppConfig.siteBaseUrl`](lib/core/config/app_config.dart) accepts `--dart-define=SITE_BASE_URL=...` (GitHub Actions optional secret **`SITE_BASE_URL`**). GitHub Actions can use repository **Secrets** with the same names (see [`tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md`](tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md) and [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md)). Shell examples: [`.env.example`](.env.example) (not loaded by Flutter—export vars or use IDE defines).
 
 ## 🧪 Testing
 
@@ -269,7 +268,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - Email: [youssef.salem.hassan582@gmail.com](mailto:youssef.salem.hassan582@gmail.com)
 - LinkedIn: [linkedin.com/in/youssef-hassan-8529372b7/](https://www.linkedin.com/in/youssef-hassan-8529372b7/)
 - GitHub: [github.com/YoussefSalem582](https://github.com/YoussefSalem582)
-- Portfolio: [youssefsalem582.github.io/Youssef-Salem-Portfolio/](https://youssefsalem582.github.io/Youssef-Salem-Portfolio/)
+- Portfolio: [youssef-salem-portfolio.vercel.app](https://youssef-salem-portfolio.vercel.app/)
 
 ## 🙏 Acknowledgments
 

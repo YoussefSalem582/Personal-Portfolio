@@ -1,7 +1,7 @@
 # Copilot instructions (Flutter Web portfolio)
 
 ## Big picture
-- Flutter Web single-page portfolio, deployed to GitHub Pages.
+- Flutter Web single-page portfolio, deployed to **Vercel** (GitHub Actions builds Flutter; static output under `build/web`).
 - Content is mostly **static**: per-feature Dart data under `lib/features/<name>/data/local/` (e.g. `projects_data.dart`, `personal_info_data.dart`) and types in each feature’s `domain/entities/` (no central `lib/models/`). The main **network** call is **contact form** submission (Formspree via Dio).
 
 ## Architecture

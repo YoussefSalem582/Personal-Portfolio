@@ -11,7 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **SEO & discoverability** — Aligned [`web/robots.txt`](web/robots.txt) and [`web/sitemap.xml`](web/sitemap.xml) with the GitHub Pages base path (path URLs for portfolio sections and project case studies); canonical link, `og:image` dimensions, JSON-LD `Person`/`WebSite` in [`web/index.html`](web/index.html); [`web/llms.txt`](web/llms.txt); GitHub Pages SPA fallback via `build/web/404.html` (copy from `index.html`) in [.github/workflows/deploy.yml](.github/workflows/deploy.yml) and `scripts/build_optimized.ps1` / `build_optimized.sh`. Documented in [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md).
+- **Hosting (Vercel)** — Static Flutter Web deployed via GitHub Actions using **`vercel deploy --prod`** from `build/web`; [`vercel.json`](vercel.json) SPA rewrites copied into the output folder; optional **`SITE_BASE_URL`** repository secret / `--dart-define` for canonical [`AppConfig.siteBaseUrl`](lib/core/config/app_config.dart); optional **`VERCEL_TOKEN`**, **`VERCEL_ORG_ID`**, **`VERCEL_PROJECT_ID`** for CLI deploy.
+
+- **SEO & discoverability** — Aligned [`web/robots.txt`](web/robots.txt) and [`web/sitemap.xml`](web/sitemap.xml) with path URLs for portfolio sections and project case studies; canonical link, `og:image` dimensions, JSON-LD `Person`/`WebSite` in [`web/index.html`](web/index.html); [`web/llms.txt`](web/llms.txt). Documented in [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md).
 
 - **Routing helpers** — `lib/core/routes/portfolio_section_routes.dart` and `test/core/routes/portfolio_section_routes_test.dart` (index ↔ canonical section paths).
 
@@ -21,7 +23,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- **Branding & identifiers** — Public display name updated from “Youssef Hassan” to “Youssef Salem”; Dart package **`youssef_salem_portfolio`**; GitHub Pages base path, workflows, manifests, robots/sitemap, case-study project slug **`youssef-salem-portfolio`**, and resume PDF path **`Youssef-Salem-cv.pdf`** aligned with repo **`Youssef-Salem-Portfolio`** (rename the repo on GitHub and add/rename the resume asset to match URLs).
+- **Deployment** — Replaced GitHub Pages (subpath `/Youssef-Salem-Portfolio/`) with **Vercel**; `--base-href "/"`; canonical URLs in [`web/index.html`](web/index.html), [`web/sitemap.xml`](web/sitemap.xml), [`web/robots.txt`](web/robots.txt), [`web/manifest.json`](web/manifest.json); portfolio [`liveUrl`](lib/features/projects/data/local/projects_data.dart); removed Pages-specific CI/scripts steps (`404.html` SPA fallback copy, `.nojekyll`). Documented in [`README.md`](README.md) and [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md).
+
+- **Branding & identifiers** — Public display name updated from “Youssef Hassan” to “Youssef Salem”; Dart package **`youssef_salem_portfolio`**; CI/CD workflows, manifests, robots/sitemap, case-study project slug **`youssef-salem-portfolio`**, and resume PDF path **`Youssef-Salem-cv.pdf`** aligned with repo **`Youssef-Salem-Portfolio`** (rename the repo on GitHub and add/rename the resume asset to match URLs).
 
 - **SEO & accessibility** — Enriched [`web/index.html`](web/index.html) (`lang`, `meta robots`, `application-name`, `og:locale`/`og:locale:alternate`, `link rel="sitemap"`); expanded JSON-LD (`email`, `address`, broader `sameAs`); aligned [`web/manifest.json`](web/manifest.json) (path-based PWA shortcuts, `theme_color` / `description`). Expanded [`web/llms.txt`](web/llms.txt). [`LazyImage`](lib/core/widgets/lazy_image.dart) supports `semanticLabel` with labels on project cards, case-study hero/gallery, and hero profile image. [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md) SEO table updated accordingly.
 
@@ -39,4 +43,4 @@ Older commits may still contain a changelog for a different product; that histor
 
 ### Added
 
-- Baseline Flutter Web portfolio (projects, certificates, contact, bilingual content, GitHub Pages deployment). See `README.md` and `tech_readme_files/` for architecture and deployment.
+- Baseline Flutter Web portfolio (projects, certificates, contact, bilingual content). See `README.md` and `tech_readme_files/` for architecture and deployment.

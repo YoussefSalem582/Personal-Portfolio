@@ -434,7 +434,7 @@ class ProjectCaseStudyData {
     {
       'title': '🚀 Automated Deployment Pipeline',
       'description':
-          'Setting up GitHub Actions for automated Flutter web builds with CanvasKit renderer, PWA optimization, tree-shaking, and GitHub Pages deployment required CI/CD configuration, build optimization strategies, and proper base-href routing for production deployment.',
+          'Setting up GitHub Actions for automated Flutter web builds with CanvasKit renderer, PWA optimization, tree-shaking, and Vercel deployment required CI/CD configuration, build optimization strategies, and proper base-href routing for production deployment.',
     },
   ];
 

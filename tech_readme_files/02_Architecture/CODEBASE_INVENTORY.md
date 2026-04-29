@@ -25,7 +25,7 @@ For how pieces fit together, see [OVERVIEW.md](OVERVIEW.md), [DEPENDENCY_INJECTI
 | `lib/core/config/routes/app_router.dart` | `GoRouter` factory (`createPortfolioRouter`), redirects (invalid project, legacy aliases), stable portfolio shell page |
 | `lib/core/config/contact_runtime_config.dart` | Formspree / recipient from `--dart-define` or `api_keys` |
 | `lib/core/config/api_keys.dart` | Fallback Formspree URL and display email (template: `api_keys.dart.template`) |
-| `lib/core/config/app_config.dart` | App-level URLs / constants (e.g. GitHub Pages base) |
+| `lib/core/config/app_config.dart` | App-level URLs / constants (e.g. `siteBaseUrl`, GitHub raw URLs) |
 
 ---
 
@@ -193,9 +193,10 @@ Legend: **BLoC** paths are `presentation/bloc/`. **DS** = datasource. **Repo** =
 |------|------|
 | `web/index.html`, `manifest.json`, `robots.txt`, `sitemap.xml`, `llms.txt` | Web shell, PWA, SEO |
 | `web/service-worker.js` | Copied into `build/web` by CI / optimize scripts |
+| [`vercel.json`](../../vercel.json) | SPA rewrites; copied into `build/web` before deploy |
 | `web/.htaccess`, `web/_headers` | Optional server hints |
-| `scripts/build_optimized.ps1`, `scripts/build_optimized.sh` | Release build parity with CI |
-| `.github/workflows/deploy.yml` | GitHub Pages deploy |
+| `scripts/build_optimized.ps1`, `scripts/build_optimized.sh` | Release build parity with CI (copies service worker, headers, [`vercel.json`](../../vercel.json)) |
+| `.github/workflows/deploy.yml` | Flutter Web release build → **`vercel deploy --prod`** from `build/web` |
 
 ---
 

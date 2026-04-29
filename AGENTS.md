@@ -5,7 +5,7 @@
 ## Project overview
 
 - **Product**: Responsive portfolio site (hero, about, skills, expertise, projects, certificates, contact).
-- **Platform**: Flutter Web (primary); PWA / GitHub Pages deployment.
+- **Platform**: Flutter Web (primary); PWA / **Vercel** deployment (GitHub Actions → static `build/web`).
 - **State**: `flutter_bloc` — section/feature BLoCs.
 - **DI**: `get_it` — registrations in `lib/injection_container.dart`.
 - **Routing**: `go_router` — factory `createPortfolioRouter()` in `lib/core/config/routes/app_router.dart`; path constants in `lib/core/routes/app_routes.dart` (use these, avoid hardcoded path strings).

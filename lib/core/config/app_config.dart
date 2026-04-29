@@ -19,9 +19,14 @@ class AppConfig {
   static const String githubRawBaseUrl =
       'https://raw.githubusercontent.com/$githubOwner/$githubRepo/$githubBranch';
 
-  /// Base URL for GitHub Pages
-  static const String githubPagesUrl =
-      'https://$githubOwner.github.io/$githubRepo';
+  /// Canonical deployed site origin (production).
+  ///
+  /// Override with `--dart-define=SITE_BASE_URL=https://your-domain.com`
+  /// (GitHub Actions uses repository secret `SITE_BASE_URL` when set).
+  static const String siteBaseUrl = String.fromEnvironment(
+    'SITE_BASE_URL',
+    defaultValue: 'https://youssef-salem-portfolio.vercel.app',
+  );
 
   // ==================== Asset Configuration ====================
 
@@ -39,18 +44,16 @@ class AppConfig {
     return '$githubRawBaseUrl/$cleanPath';
   }
 
-  /// Get GitHub Pages URL for an asset path
+  /// Absolute URL for an asset on the deployed site (same origin as [siteBaseUrl]).
   ///
   /// Example:
   /// ```dart
-  /// getGitHubPagesUrl('assets/documents/resume.pdf');
-  /// // Returns: https://youssefsalem582.github.io/Youssef-Salem-Portfolio/assets/documents/resume.pdf
+  /// getDeployedSiteAssetUrl('assets/documents/resume.pdf');
   /// ```
-  static String getGithubPagesAssetUrl(String assetPath) {
-    // Remove leading slash if present
+  static String getDeployedSiteAssetUrl(String assetPath) {
     final cleanPath =
         assetPath.startsWith('/') ? assetPath.substring(1) : assetPath;
-    return '$githubPagesUrl/$cleanPath';
+    return '$siteBaseUrl/$cleanPath';
   }
 
   // ==================== App Information ====================

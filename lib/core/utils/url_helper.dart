@@ -70,8 +70,8 @@ class UrlHelper {
           final githubRawUrl = AppConfig.getGithubRawUrl(url);
           viewerUrl = githubRawUrl;
         } else {
-          // For other files, try GitHub Pages first, then raw
-          viewerUrl = AppConfig.getGithubPagesAssetUrl(url);
+          // For other files, try deployed origin first, then raw
+          viewerUrl = AppConfig.getDeployedSiteAssetUrl(url);
         }
 
         try {

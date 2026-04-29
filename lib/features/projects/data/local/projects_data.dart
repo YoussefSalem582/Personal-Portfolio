@@ -304,7 +304,7 @@ class ProjectsData {
           'certificate showcase, contact form with EmailJS integration, smooth animations and transitions, dark/light theme toggle, '
           'SEO optimization with meta tags and sitemap, GetX state management for efficient routing and navigation, '
           'lazy loading and performance optimizations for fast load times, and modular architecture with clean separation of concerns. '
-          'Deployed as a static site on GitHub Pages, demonstrating full-stack web development capabilities from design to deployment.',
+          'Deployed as a static site on Vercel, demonstrating full-stack web development capabilities from design to deployment.',
       technologies: [
         'Flutter Web',
         'Dart',
@@ -313,10 +313,10 @@ class ProjectsData {
         'Responsive Design',
         'State Management',
         'SEO',
-        'GitHub Pages',
+        'Vercel',
       ],
       githubUrl: 'https://github.com/YoussefSalem582/Youssef-Salem-Portfolio',
-      liveUrl: 'https://youssefsalem582.github.io/Youssef-Salem-Portfolio/',
+      liveUrl: 'https://youssef-salem-portfolio.vercel.app/',
       imageUrl: AppImages.portfolioLogo,
       createdAt: DateTime(2025, 10, 1),
       isFeatured: true,

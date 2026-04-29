@@ -1,5 +1,5 @@
 name: youssef_salem_portfolio
-description: "Flutter Web portfolio — projects, certificates, bilingual content, and contact (GitHub Pages)."
+description: "Flutter Web portfolio — projects, certificates, bilingual content, and contact (Vercel)."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev

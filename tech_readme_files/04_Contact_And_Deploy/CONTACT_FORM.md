@@ -24,7 +24,7 @@ Resolved at runtime via [lib/core/config/contact_runtime_config.dart](../../lib/
 
 Template for a fresh fork: [lib/core/config/api_keys.dart.template](../../lib/core/config/api_keys.dart.template).
 
-### GitHub Actions / GitHub Pages
+### GitHub Actions / Vercel
 
 [.github/workflows/deploy.yml](../../.github/workflows/deploy.yml) passes defines when repository **Secrets** are set:
 
@@ -32,8 +32,11 @@ Template for a fresh fork: [lib/core/config/api_keys.dart.template](../../lib/co
 |--------|---------|
 | `FORMSPREE_ENDPOINT` | `--dart-define=FORMSPREE_ENDPOINT` |
 | `CONTACT_RECIPIENT_EMAIL` | `--dart-define=CONTACT_RECIPIENT_EMAIL` |
+| `SITE_BASE_URL` (optional) | `--dart-define=SITE_BASE_URL` — canonical production URL ([`AppConfig.siteBaseUrl`](../../lib/core/config/app_config.dart)); defaults in CI when unset |
 
-If secrets are empty, the workflow still builds and uses `api_keys.dart` values.
+Deploy secrets (`VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`) are documented in [DEPLOYMENT.md](DEPLOYMENT.md).
+
+If Formspree-related secrets are empty, the workflow still builds and uses `api_keys.dart` values for contact.
 
 Local **Windows** / **Unix** optimized builds (`scripts/build_optimized.ps1`, `scripts/build_optimized.sh`) read the same variables from the environment when set. Commented examples: [`.env.example`](../../.env.example).
 

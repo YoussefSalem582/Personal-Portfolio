@@ -4,11 +4,11 @@
 
 ## Site URL
 
-- Home: https://youssefsalem582.github.io/Youssef-Salem-Portfolio/
+- Home: https://youssef-salem-portfolio.vercel.app/
 
 ## What this site is
 
-Personal engineering portfolio: responsive Flutter Web app (PWA-capable) deployed on GitHub Pages. Sections cover about, skills, experience, projects (with per-project case studies), certificates, and a contact form.
+Personal engineering portfolio: responsive Flutter Web app (PWA-capable) deployed on Vercel. Sections cover about, skills, experience, projects (with per-project case studies), certificates, and a contact form.
 
 ## Language
 
@@ -24,11 +24,11 @@ User interface is available in **English** and **Arabic** (locale toggle in-app)
 ## Technology
 
 - **Stack:** Flutter Web, `go_router`, `flutter_bloc`, `get_it`, ARB localization.
-- **Hosting:** GitHub Pages; base path `/Youssef-Salem-Portfolio/`.
+- **Hosting:** Vercel; root path `/`.
 
 ## Sitemap
 
-Published at: https://youssefsalem582.github.io/Youssef-Salem-Portfolio/sitemap.xml
+Published at: https://youssef-salem-portfolio.vercel.app/sitemap.xml
 
 ## Contact
 

@@ -33,15 +33,15 @@ Relevant tests today (non-exhaustive):
 - `test/projects_repository_test.dart`
 - `test/theme_bloc_test.dart`
 
-## Production web build (GitHub Pages)
+## Production web build (Vercel)
 
-The site is often hosted under a **subpath** (example):
+Production uses **`--base-href "/"`** at the domain root:
 
 ```bash
-flutter build web --release --base-href "/Youssef-Salem-Portfolio/" --no-source-maps
+flutter build web --release --base-href "/" --no-source-maps
 ```
 
-Exact CI and local build: [04_Contact_And_Deploy/DEPLOYMENT.md](../04_Contact_And_Deploy/DEPLOYMENT.md). Windows one-liner from repo root: `.\scripts\build_optimized.ps1`. macOS / Linux: `chmod +x ./scripts/build_optimized.sh && ./scripts/build_optimized.sh`.
+Exact CI and local build: [04_Contact_And_Deploy/DEPLOYMENT.md](../04_Contact_And_Deploy/DEPLOYMENT.md). Windows from repo root: `.\scripts\build_optimized.ps1`. macOS / Linux: `chmod +x ./scripts/build_optimized.sh && ./scripts/build_optimized.sh`.
 
 ## Key entry files
 

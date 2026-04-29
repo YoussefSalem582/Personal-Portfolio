@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Optimized Flutter Web build for GitHub Pages (macOS / Linux)
+# Optimized Flutter Web build for production (macOS / Linux).
 # Mirrors .github/workflows/deploy.yml (base-href + service worker copy).
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -20,9 +20,12 @@ fi
 if [[ -n "${CONTACT_RECIPIENT_EMAIL:-}" ]]; then
   EXTRA+=(--dart-define="CONTACT_RECIPIENT_EMAIL=$CONTACT_RECIPIENT_EMAIL")
 fi
+if [[ -n "${SITE_BASE_URL:-}" ]]; then
+  EXTRA+=(--dart-define="SITE_BASE_URL=$SITE_BASE_URL")
+fi
 flutter build web \
   --release \
-  --base-href "/Youssef-Salem-Portfolio/" \
+  --base-href "/" \
   --no-source-maps \
   "${EXTRA[@]}"
 
@@ -32,14 +35,10 @@ if [[ ! -d "$WEB_OUT" ]]; then
   exit 1
 fi
 
-echo ">> Copy service worker / headers"
+echo ">> Copy service worker / headers / vercel.json"
 cp -f "$ROOT/web/service-worker.js" "$WEB_OUT/"
 [[ -f "$ROOT/web/.htaccess" ]] && cp -f "$ROOT/web/.htaccess" "$WEB_OUT/" || true
 [[ -f "$ROOT/web/_headers" ]] && cp -f "$ROOT/web/_headers" "$WEB_OUT/" || true
-
-# GitHub Pages: unknown paths serve 404.html; copying index boots the SPA for deep links.
-cp -f "$WEB_OUT/index.html" "$WEB_OUT/404.html"
-
-touch "$WEB_OUT/.nojekyll"
+cp -f "$ROOT/vercel.json" "$WEB_OUT/"
 
 echo ">> Done. Output: $WEB_OUT"

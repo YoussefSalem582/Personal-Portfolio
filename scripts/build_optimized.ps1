@@ -1,4 +1,4 @@
-# Optimized Flutter Web build for GitHub Pages (Windows)
+# Optimized Flutter Web build for production (Windows).
 # Mirrors .github/workflows/deploy.yml core steps (base-href + service worker copy).
 
 $ErrorActionPreference = "Stop"
@@ -19,9 +19,12 @@ if ($env:FORMSPREE_ENDPOINT) {
 if ($env:CONTACT_RECIPIENT_EMAIL) {
   $defineArgs += "--dart-define=CONTACT_RECIPIENT_EMAIL=$($env:CONTACT_RECIPIENT_EMAIL)"
 }
+if ($env:SITE_BASE_URL) {
+  $defineArgs += "--dart-define=SITE_BASE_URL=$($env:SITE_BASE_URL)"
+}
 flutter build web `
   --release `
-  --base-href "/Youssef-Salem-Portfolio/" `
+  --base-href "/" `
   --no-source-maps `
   @defineArgs
 
@@ -30,7 +33,7 @@ if (-not (Test-Path $webOut)) {
   Write-Error "build/web not found after build."
 }
 
-Write-Host ">> Copy service worker / headers"
+Write-Host ">> Copy service worker / headers / vercel.json"
 Copy-Item -Force (Join-Path $RepoRoot "web\service-worker.js") $webOut
 if (Test-Path (Join-Path $RepoRoot "web\.htaccess")) {
   Copy-Item -Force (Join-Path $RepoRoot "web\.htaccess") $webOut
@@ -38,10 +41,6 @@ if (Test-Path (Join-Path $RepoRoot "web\.htaccess")) {
 if (Test-Path (Join-Path $RepoRoot "web\_headers")) {
   Copy-Item -Force (Join-Path $RepoRoot "web\_headers") $webOut
 }
-
-# GitHub Pages: unknown paths serve 404.html; copying index boots the SPA for deep links.
-Copy-Item -Force (Join-Path $webOut "index.html") (Join-Path $webOut "404.html")
-
-New-Item -ItemType File -Path (Join-Path $webOut ".nojekyll") -Force | Out-Null
+Copy-Item -Force (Join-Path $RepoRoot "vercel.json") $webOut
 
 Write-Host ">> Done. Output: $webOut"

@@ -1,51 +1,45 @@
-name: Deploy Optimized Flutter Web to GitHub Pages
+name: Deploy Flutter Web to Vercel
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: write
-  pages: write
-  id-token: write
+  contents: read
 
-# Allow only one concurrent deployment
 concurrency:
-  group: "pages"
+  group: vercel-deploy
   cancel-in-progress: true
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.24.0'
           channel: 'stable'
           cache: true
-      
+
       - name: Get dependencies
         run: flutter pub get
-      
+
       - name: Clean build cache
         run: flutter clean
-      
+
       - name: Build optimized web app
         env:
-          # Optional: set FORMSPREE_ENDPOINT and CONTACT_RECIPIENT_EMAIL in repo Secrets
-          # to override values in lib/core/config/api_keys.dart for Pages builds.
+          # Optional: FORMSPREE_ENDPOINT and CONTACT_RECIPIENT_EMAIL in repo Secrets.
           FORMSPREE_ENDPOINT: ${{ secrets.FORMSPREE_ENDPOINT }}
           CONTACT_RECIPIENT_EMAIL: ${{ secrets.CONTACT_RECIPIENT_EMAIL }}
+          # Optional: override canonical URL for dart-define (defaults below).
+          SITE_BASE_URL: ${{ secrets.SITE_BASE_URL }}
         run: |
           EXTRA=""
           if [ -n "$FORMSPREE_ENDPOINT" ]; then
@@ -54,38 +48,32 @@ jobs:
           if [ -n "$CONTACT_RECIPIENT_EMAIL" ]; then
             EXTRA="$EXTRA --dart-define=CONTACT_RECIPIENT_EMAIL=$CONTACT_RECIPIENT_EMAIL"
           fi
+          SITE="${SITE_BASE_URL:-https://youssef-salem-portfolio.vercel.app}"
+          EXTRA="$EXTRA --dart-define=SITE_BASE_URL=$SITE"
           flutter build web \
             --release \
-            --base-href "/Youssef-Salem-Portfolio/" \
+            --base-href "/" \
             --no-source-maps \
             $EXTRA
-      
+
       - name: Copy service worker and headers
         run: |
           cp web/service-worker.js build/web/
           cp web/.htaccess build/web/ || true
           cp web/_headers build/web/ || true
-      
-      # GitHub Pages: route unknown paths to the Flutter shell (SPA deep links).
-      - name: SPA fallback for GitHub Pages (404.html)
-        run: cp build/web/index.html build/web/404.html
-      
-      - name: Create .nojekyll
-        run: touch build/web/.nojekyll
-      
+          cp vercel.json build/web/
+
       - name: Display build info
         run: |
           echo "Build folder contents:"
           du -sh build/web
-      
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-      
-      - name: Upload build
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/web
-      
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          npm install -g vercel@latest
+          cd build/web
+          vercel deploy --prod --yes --token="$VERCEL_TOKEN"
