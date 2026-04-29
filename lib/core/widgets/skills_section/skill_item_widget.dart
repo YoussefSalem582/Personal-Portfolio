@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../models/skill.dart';
-import '../../utils/assets/app_constants.dart';
+import '../../../models/skill.dart';
+import '../../../utils/assets/app_constants.dart';
 import 'skill_icon_widget.dart';
 
 /// Individual Skill Item Widget

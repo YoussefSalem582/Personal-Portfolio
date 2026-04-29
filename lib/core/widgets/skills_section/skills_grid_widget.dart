@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/skill.dart';
+import '../../../models/skill.dart';
 import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
 import 'skill_category_widget.dart';
 
