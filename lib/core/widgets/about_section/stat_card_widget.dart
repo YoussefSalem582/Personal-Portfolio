@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/assets/app_constants.dart';
+import '../../../utils/assets/app_constants.dart';
 import '../../theme/app_theme.dart';
 import '../common/animated_card.dart';
 import '../common/common_widgets.dart';

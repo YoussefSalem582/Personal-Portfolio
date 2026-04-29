@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../../l10n/app_localizations.dart';
-import '../../models/contact.dart';
-import '../../utils/assets/app_constants.dart';
-import '../../utils/url_helper.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../models/contact.dart';
+import '../../../utils/assets/app_constants.dart';
+import '../../../utils/url_helper.dart';
 
 import '../../theme/app_theme.dart';
 

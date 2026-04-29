@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../models/contact.dart';
+import '../../../models/contact.dart';
 import 'stats_grid_widget.dart';
 import 'resume_card_widget.dart';
 import 'social_links_widget.dart';
