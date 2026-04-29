@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../../models/certificate.dart';
+import 'package:youssef_hassan_portfolio/features/certificates/domain/entities/certificate.dart';
 import '../../../utils/assets/app_constants.dart';
 import '../../theme/app_theme.dart';
 import 'certificate_card_badges.dart';

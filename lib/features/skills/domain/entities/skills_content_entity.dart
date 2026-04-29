@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../models/skill.dart';
+import 'skill.dart';
 
 class SkillsContentEntity extends Equatable {
   const SkillsContentEntity({required this.skillCategories});

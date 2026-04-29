@@ -1,3 +1,4 @@
+/// Form payload for Formspree / contact submission.
 class ContactForm {
   final String name;
   final String email;
@@ -21,6 +22,24 @@ class ContactForm {
   }
 }
 
+/// Static contact details shown in the contact section and data layer.
+class ContactInfo {
+  final String email;
+  final String location;
+  final String github;
+  final String linkedin;
+  final String twitter;
+
+  ContactInfo({
+    required this.email,
+    required this.location,
+    required this.github,
+    required this.linkedin,
+    this.twitter = '',
+  });
+}
+
+/// Social profile link (hero, about, portfolio aggregates).
 class SocialLink {
   final String name;
   final String url;

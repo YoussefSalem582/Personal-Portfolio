@@ -1,4 +1,4 @@
-import '../../../../models/project.dart';
+import '../../domain/entities/project.dart';
 import '../../../../utils/data/portfolio_data.dart';
 import '../../domain/entities/projects_content_entity.dart';
 import 'projects_local_datasource.dart';

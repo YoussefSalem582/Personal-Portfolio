@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:youssef_hassan_portfolio/features/projects/data/localized/localized_project_filter.dart';
-import '../../../../models/project.dart';
+import '../../domain/entities/project.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../utils/assets/app_constants.dart';

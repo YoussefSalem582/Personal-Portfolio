@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../models/expertise.dart';
+import 'expertise.dart';
 
 class ExpertiseContentEntity extends Equatable {
   const ExpertiseContentEntity({required this.items});

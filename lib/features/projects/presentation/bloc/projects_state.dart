@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../models/project.dart';
+import '../../domain/entities/project.dart';
 import '../../domain/project_filter.dart';
 
 abstract class ProjectsState extends Equatable {

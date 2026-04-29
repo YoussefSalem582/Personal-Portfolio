@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../models/certificate.dart';
+import 'certificate.dart';
 
 class CertificatesContentEntity extends Equatable {
   const CertificatesContentEntity({required this.certificates});

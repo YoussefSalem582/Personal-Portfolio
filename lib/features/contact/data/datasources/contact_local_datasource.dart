@@ -1,4 +1,4 @@
-import '../../../../models/contact_form.dart';
+import '../../domain/entities/contact_entities.dart';
 
 abstract class ContactLocalDataSource {
   ContactInfo getContactInfoSync();

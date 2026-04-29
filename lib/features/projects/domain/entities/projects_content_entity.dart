@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../models/project.dart';
+import 'project.dart';
 
 /// Read model for projects listing and case-study routing.
 class ProjectsContentEntity extends Equatable {

@@ -1,4 +1,4 @@
-import '../../../../models/project.dart';
+import '../../domain/entities/project.dart';
 import '../../domain/entities/projects_content_entity.dart';
 
 abstract class ProjectsLocalDataSource {

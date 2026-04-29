@@ -5,9 +5,9 @@ export 'projects_data.dart';
 export 'certificates_data.dart';
 export 'contact_data.dart';
 
-import '../../models/project.dart';
-import '../../models/skill.dart';
-import '../../models/contact.dart';
+import 'package:youssef_hassan_portfolio/features/contact/domain/entities/contact_entities.dart';
+import 'package:youssef_hassan_portfolio/features/projects/domain/entities/project.dart';
+import 'package:youssef_hassan_portfolio/features/skills/domain/entities/skill.dart';
 import 'personal_info_data.dart';
 import 'skills_data.dart';
 import 'projects_data.dart';

@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../../../../config/contact_runtime_config.dart';
-import '../../../../models/contact_form.dart';
+import '../../domain/entities/contact_entities.dart';
 import '../../domain/contact_submit_error.dart';
 import 'contact_remote_datasource.dart';
 

@@ -1,4 +1,4 @@
-import '../../models/certificate.dart';
+import 'package:youssef_hassan_portfolio/features/certificates/domain/entities/certificate.dart';
 import '../assets/app_constants.dart';
 
 class CertificatesData {

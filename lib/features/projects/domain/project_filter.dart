@@ -1,4 +1,4 @@
-import '../../../models/project.dart';
+import 'entities/project.dart';
 
 /// Pure filter logic for the projects grid (used by [ProjectsBloc]).
 class ProjectFilter {

@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../../models/contact.dart';
+import '../../../contact/domain/entities/contact_entities.dart';
 
 class HeroContentEntity extends Equatable {
   const HeroContentEntity({

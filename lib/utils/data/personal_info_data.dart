@@ -1,4 +1,4 @@
-import '../../models/contact.dart';
+import 'package:youssef_hassan_portfolio/features/contact/domain/entities/contact_entities.dart';
 import '../assets/app_constants.dart';
 
 class PersonalInfoData {

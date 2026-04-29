@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../../models/contact_form.dart';
+import 'package:youssef_hassan_portfolio/features/contact/domain/entities/contact_entities.dart';
 import 'package:youssef_hassan_portfolio/features/hero/data/localized/portfolio_strings.dart';
 import '../../../utils/assets/app_constants.dart';
 import '../../../utils/data/portfolio_data.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../../models/project.dart';
+import '../../../domain/entities/project.dart';
 import '../../../../../utils/assets/app_constants.dart';
 import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
 import '../../../../../core/widgets/lazy_image.dart';

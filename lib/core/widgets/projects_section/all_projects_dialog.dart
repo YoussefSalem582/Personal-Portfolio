@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../l10n/app_localizations.dart';
-import '../../../models/project.dart';
+import 'package:youssef_hassan_portfolio/features/projects/domain/entities/project.dart';
 import '../../routes/app_routes.dart';
 import '../../theme/app_theme.dart';
 import '../../../utils/assets/app_constants.dart';
