@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../../utils/assets/app_constants.dart';
-import '../../../utils/responsive_helper.dart';
+import '../../../core/utils/assets/app_constants.dart';
+import '../../../core/utils/responsive_helper.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/hero_section/hero_text_widget.dart';
 import '../../../core/widgets/hero_section/profile_image_widget.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../../utils/assets/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../common/icon_badge.dart';
 
 /// PDF Badge

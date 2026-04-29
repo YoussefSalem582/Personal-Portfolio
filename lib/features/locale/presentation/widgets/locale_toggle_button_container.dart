@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/assets/app_constants.dart';
+import '../../../../core/utils/assets/app_constants.dart';
 import 'locale_toggle_button.dart';
 
 /// Styled container wrapping [LocaleToggleButton] to match [ThemeToggleButtonContainer].

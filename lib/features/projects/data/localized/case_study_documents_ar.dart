@@ -1,4 +1,4 @@
-import '../../../../utils/assets/app_documents.dart';
+import '../../../../core/utils/assets/app_documents.dart';
 
 /// Arabic display strings for a document card.
 class CaseStudyDocAr {

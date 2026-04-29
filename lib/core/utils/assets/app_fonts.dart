@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../core/locale/app_locale_binding.dart';
+import '../../locale/app_locale_binding.dart';
 
 /// App Fonts - Centralized typography definitions
 /// Used throughout the app for consistent text styling

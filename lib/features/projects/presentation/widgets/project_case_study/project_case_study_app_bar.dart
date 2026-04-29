@@ -5,8 +5,8 @@ import '../../../../../features/theme/presentation/bloc/theme_bloc.dart';
 import '../../../../../features/theme/presentation/bloc/theme_event.dart';
 import '../../../../../features/theme/presentation/bloc/theme_state.dart';
 import '../../../../../l10n/app_localizations.dart';
-import '../../../../../utils/assets/app_constants.dart';
-import '../../../../../utils/responsive_helper.dart';
+import '../../../../../core/utils/assets/app_constants.dart';
+import '../../../../../core/utils/responsive_helper.dart';
 
 /// Custom AppBar for Project Case Study Screen
 ///

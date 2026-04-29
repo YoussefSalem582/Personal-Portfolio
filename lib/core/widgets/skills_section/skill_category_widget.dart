@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:youssef_hassan_portfolio/features/skills/domain/entities/skill.dart';
-import '../../../utils/assets/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import 'skill_item_widget.dart';
 
 /// Skill Category Widget

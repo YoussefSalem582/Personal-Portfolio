@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:visibility_detector/visibility_detector.dart';
-import '../../utils/assets/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 
 /// Lazy loading wrapper that only builds its child when visible
 /// Improves performance by deferring heavy widget builds

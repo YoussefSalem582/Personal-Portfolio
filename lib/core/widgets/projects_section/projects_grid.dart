@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import '../../../utils/responsive_helper.dart';
+import '../../utils/responsive_helper.dart';
 import '../project_card_advanced.dart';
 
 /// Projects Grid

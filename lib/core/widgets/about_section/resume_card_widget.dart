@@ -1,8 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../../utils/assets/app_constants.dart';
-import '../../../utils/url_helper.dart';
+import '../../utils/assets/app_constants.dart';
+import '../../utils/url_helper.dart';
 import '../../theme/app_theme.dart';
 
 /// A prominent card with a button to view the resume/CV.

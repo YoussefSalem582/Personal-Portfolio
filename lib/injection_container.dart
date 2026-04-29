@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'config/routes/app_router.dart';
+import 'core/config/routes/app_router.dart';
 import 'features/projects/data/datasources/projects_local_datasource.dart';
 import 'features/projects/data/datasources/projects_local_datasource_impl.dart';
 import 'features/projects/data/repositories/projects_repository_impl.dart';

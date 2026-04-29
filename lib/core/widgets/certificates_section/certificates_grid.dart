@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:youssef_hassan_portfolio/features/certificates/domain/entities/certificate.dart';
-import '../../../utils/responsive_helper.dart';
+import '../../utils/responsive_helper.dart';
 import 'certificate_card.dart';
 
 /// Certificates Grid

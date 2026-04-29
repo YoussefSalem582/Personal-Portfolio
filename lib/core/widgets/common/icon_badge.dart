@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../utils/assets/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 
 /// Common Icon Badge Widget
 /// Reusable badge with icon and label (like PDF, Verified, etc.)

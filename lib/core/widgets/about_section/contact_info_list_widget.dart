@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../../utils/assets/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import 'package:youssef_hassan_portfolio/features/hero/data/localized/portfolio_strings.dart';
-import '../../../utils/url_helper.dart';
+import '../../utils/url_helper.dart';
 import 'contact_info_item_widget.dart';
 
 import '../../theme/app_theme.dart';

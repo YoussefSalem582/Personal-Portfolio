@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/responsive_helper.dart';
+import '../utils/responsive_helper.dart';
 import 'navigation/desktop_app_bar.dart';
 import 'navigation/mobile_app_bar.dart';
 import 'navigation/mobile_drawer.dart';

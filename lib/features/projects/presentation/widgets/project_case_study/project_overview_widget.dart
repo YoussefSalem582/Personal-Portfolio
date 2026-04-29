@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../domain/entities/project.dart';
-import '../../../../../utils/assets/app_constants.dart';
+import '../../../../../core/utils/assets/app_constants.dart';
 import 'project_content_helper.dart';
 
 import '../../../../../core/theme/app_theme.dart';

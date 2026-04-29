@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../../l10n/app_localizations.dart';
-import '../../../../../utils/assets/app_constants.dart';
-import '../../../../../utils/url_helper.dart';
+import '../../../../../core/utils/assets/app_constants.dart';
+import '../../../../../core/utils/url_helper.dart';
 
 import '../../../../../core/theme/app_theme.dart';
 

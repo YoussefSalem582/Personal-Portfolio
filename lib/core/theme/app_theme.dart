@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/assets/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 
 class AppTheme {
   // Re-export colors from AppColors for backward compatibility

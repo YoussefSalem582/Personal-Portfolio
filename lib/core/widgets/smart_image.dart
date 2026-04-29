@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../l10n/app_localizations.dart';
-import '../../utils/assets/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 
 /// SmartImage widget - Simplified for static asset-only deployment
 /// Now only handles local asset images (no network/Supabase images)

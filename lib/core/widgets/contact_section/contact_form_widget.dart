@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../../utils/assets/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import 'package:youssef_hassan_portfolio/features/contact/domain/entities/contact_entities.dart';
-import '../../../config/contact_runtime_config.dart';
+import '../../config/contact_runtime_config.dart';
 import 'package:youssef_hassan_portfolio/features/contact/domain/contact_submit_error.dart';
 import 'package:youssef_hassan_portfolio/features/contact/presentation/bloc/contact_bloc.dart';
 import 'package:youssef_hassan_portfolio/features/contact/presentation/bloc/contact_event.dart';

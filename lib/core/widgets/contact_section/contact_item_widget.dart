@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../utils/assets/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 
 import '../../theme/app_theme.dart';
 

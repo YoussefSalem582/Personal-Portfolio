@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../../utils/assets/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import 'package:youssef_hassan_portfolio/features/projects/data/localized/localized_project_filter.dart';
 import '../../theme/app_theme.dart';
 

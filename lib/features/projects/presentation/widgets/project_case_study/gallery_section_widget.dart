@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../../l10n/app_localizations.dart';
-import '../../../../../utils/assets/app_constants.dart';
+import '../../../../../core/utils/assets/app_constants.dart';
 import 'package:youssef_hassan_portfolio/features/projects/data/localized/localized_gallery_category.dart';
 import '../../../../../core/widgets/lazy_image.dart';
 

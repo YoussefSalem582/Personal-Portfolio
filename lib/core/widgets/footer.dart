@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../l10n/app_localizations.dart';
 import 'package:youssef_hassan_portfolio/features/hero/data/localized/portfolio_strings.dart';
-import '../../utils/assets/app_constants.dart';
-import '../../utils/responsive_helper.dart';
+import '../utils/assets/app_constants.dart';
+import '../utils/responsive_helper.dart';
 import 'package:youssef_hassan_portfolio/features/contact/data/local/contact_data.dart';
 import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
-import '../../utils/url_helper.dart';
+import '../utils/url_helper.dart';
 
 import '../theme/app_theme.dart';
 

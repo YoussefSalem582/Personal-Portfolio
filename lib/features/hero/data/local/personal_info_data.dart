@@ -1,5 +1,5 @@
 import 'package:youssef_hassan_portfolio/features/contact/domain/entities/contact_entities.dart';
-import 'package:youssef_hassan_portfolio/utils/assets/app_constants.dart';
+import 'package:youssef_hassan_portfolio/core/utils/assets/app_constants.dart';
 
 class PersonalInfoData {
   // Personal information

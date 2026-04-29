@@ -1,5 +1,5 @@
 import 'package:youssef_hassan_portfolio/features/certificates/domain/entities/certificate.dart';
-import 'package:youssef_hassan_portfolio/utils/assets/app_constants.dart';
+import 'package:youssef_hassan_portfolio/core/utils/assets/app_constants.dart';
 
 class CertificatesData {
   static final List<Certificate> certificates = [

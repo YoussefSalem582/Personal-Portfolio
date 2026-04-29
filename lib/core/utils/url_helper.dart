@@ -2,7 +2,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/foundation.dart' show kIsWeb, kDebugMode;
 import 'package:web/web.dart' as web show window;
 import '../config/app_config.dart';
-import '../l10n/app_localizations.dart';
+import '../../l10n/app_localizations.dart';
 
 class UrlHelper {
   static Future<void> launchURL(String url) async {

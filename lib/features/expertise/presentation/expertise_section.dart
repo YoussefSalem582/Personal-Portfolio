@@ -5,7 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/entities/expertise.dart';
-import '../../../utils/assets/app_constants.dart';
+import '../../../core/utils/assets/app_constants.dart';
 import 'bloc/expertise_bloc.dart';
 import 'bloc/expertise_state.dart';
 

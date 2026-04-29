@@ -4,10 +4,10 @@ import 'package:youssef_hassan_portfolio/features/projects/data/localized/locali
 import '../../domain/entities/project.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/theme/app_theme.dart';
-import '../../../../utils/assets/app_constants.dart';
+import '../../../../core/utils/assets/app_constants.dart';
 import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
-import '../../../../utils/responsive_helper.dart';
-import '../../../../utils/url_helper.dart';
+import '../../../../core/utils/responsive_helper.dart';
+import '../../../../core/utils/url_helper.dart';
 import '../../../../core/widgets/custom_show_more_button.dart';
 import '../../../../core/widgets/projects_section/all_projects_dialog.dart';
 import '../../../../core/widgets/projects_section/projects_empty_state.dart';

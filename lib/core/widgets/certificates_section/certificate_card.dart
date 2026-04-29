@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../l10n/app_localizations.dart';
 import 'package:youssef_hassan_portfolio/features/certificates/domain/entities/certificate.dart';
-import '../../../utils/assets/app_constants.dart';
+import '../../utils/assets/app_constants.dart';
 import '../../theme/app_theme.dart';
 import 'certificate_details_dialog.dart';
 import 'certificate_card_image.dart';

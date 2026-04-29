@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../l10n/app_localizations.dart';
-import '../../utils/assets/app_constants.dart';
+import '../utils/assets/app_constants.dart';
 import 'package:youssef_hassan_portfolio/features/projects/domain/entities/project.dart';
 import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
-import '../../utils/url_helper.dart';
-import '../../utils/responsive_helper.dart';
+import '../utils/url_helper.dart';
+import '../utils/responsive_helper.dart';
 import '../routes/app_routes.dart';
 import 'lazy_image.dart';
 
