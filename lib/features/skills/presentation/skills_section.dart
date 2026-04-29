@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../utils/assets/app_constants.dart';
 import '../../../utils/responsive_helper.dart';
-import '../../../widgets/skills_section/skills_grid_widget.dart';
-import '../../../widgets/skills_section/skills_section_header.dart';
+import '../../../core/widgets/skills_section/skills_grid_widget.dart';
+import '../../../core/widgets/skills_section/skills_section_header.dart';
 import 'bloc/skills_bloc.dart';
 import 'bloc/skills_state.dart';
 
