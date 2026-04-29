@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../l10n/app_localizations.dart';
-import '../../utils/assets/app_constants.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../../utils/assets/app_constants.dart';
 import '../../theme/app_theme.dart';
 
 /// Reusable Styled Text Form Field
