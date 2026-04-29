@@ -5,7 +5,7 @@ import '../../features/home/presentation/pages/portfolio_page.dart';
 import '../../features/projects/domain/repositories/projects_repository.dart';
 import '../../features/projects/presentation/pages/project_case_study.dart';
 import '../../injection_container.dart';
-import '../../routes/app_routes.dart';
+import '../../core/routes/app_routes.dart';
 
 /// Root navigator (snackbars, dialogs that need app-level context).
 final GlobalKey<NavigatorState> rootNavigatorKey =
