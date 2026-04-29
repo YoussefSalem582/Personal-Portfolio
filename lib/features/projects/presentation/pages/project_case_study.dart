@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../../../models/project.dart';
-import '../../../../theme/app_theme.dart';
+import '../../../../core/theme/app_theme.dart';
 import '../../../../utils/assets/app_constants.dart';
 import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
 import '../../../../utils/responsive_helper.dart';
