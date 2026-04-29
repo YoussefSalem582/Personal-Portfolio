@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../models/certificate.dart';
-import '../../utils/assets/app_constants.dart';
-import '../../utils/responsive_helper.dart';
+import '../../../models/certificate.dart';
+import '../../../utils/assets/app_constants.dart';
+import '../../../utils/responsive_helper.dart';
 import '../../theme/app_theme.dart';
 import 'certificate_dialog_header.dart';
 import 'certificate_dialog_image.dart';
