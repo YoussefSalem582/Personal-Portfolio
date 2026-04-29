@@ -1,4 +1,4 @@
-# Claude Instructions — Youssef Hassan Portfolio
+# Claude Instructions — Youssef Salem Portfolio
 
 ## Response style
 
@@ -14,7 +14,7 @@
 
 ## Project scope
 
-Single Flutter package at repo root: **`youssef_hassan_portfolio`** (`pubspec.yaml`). Not the Technology 92 monorepo; ignore any instructions that reference `technology_ninety_two_app/`, `ApiClient`, `EnvConfig`, Firebase, Sentry, or offline queues unless you are porting them in explicitly.
+Single Flutter package at repo root: **`youssef_salem_portfolio`** (`pubspec.yaml`). Not the Technology 92 monorepo; ignore any instructions that reference `technology_ninety_two_app/`, `ApiClient`, `EnvConfig`, Firebase, Sentry, or offline queues unless you are porting them in explicitly.
 
 ## Stack (short)
 

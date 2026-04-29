@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../l10n/app_localizations.dart';
-import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
+import 'package:youssef_salem_portfolio/features/hero/data/local/personal_info_data.dart';
 import '../../utils/url_helper.dart';
 import '../../utils/responsive_helper.dart';
 import '../../utils/assets/app_constants.dart';

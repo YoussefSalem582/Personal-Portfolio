@@ -1,4 +1,4 @@
-import 'package:youssef_hassan_portfolio/features/skills/domain/entities/skill.dart';
+import 'package:youssef_salem_portfolio/features/skills/domain/entities/skill.dart';
 
 class SkillsData {
   static final List<SkillCategory> skills = [

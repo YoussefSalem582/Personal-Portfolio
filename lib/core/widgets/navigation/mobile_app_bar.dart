@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
-import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
+import 'package:youssef_salem_portfolio/features/hero/data/local/personal_info_data.dart';
 import '../../utils/responsive_helper.dart';
 import '../common/theme_toggle_button_container.dart';
 

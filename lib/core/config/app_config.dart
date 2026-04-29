@@ -10,7 +10,7 @@ class AppConfig {
   static const String githubOwner = 'YoussefSalem582';
 
   /// GitHub repository name
-  static const String githubRepo = 'Youssef-Hassan-Portfolio';
+  static const String githubRepo = 'Youssef-Salem-Portfolio';
 
   /// GitHub repository branch (usually 'master' or 'main')
   static const String githubBranch = 'master';
@@ -30,7 +30,7 @@ class AppConfig {
   /// Example:
   /// ```dart
   /// getGitHubRawUrl('assets/documents/resume.pdf');
-  /// // Returns: https://raw.githubusercontent.com/YoussefSalem582/Youssef-Hassan-Portfolio/master/assets/documents/resume.pdf
+  /// // Returns: https://raw.githubusercontent.com/YoussefSalem582/Youssef-Salem-Portfolio/master/assets/documents/resume.pdf
   /// ```
   static String getGithubRawUrl(String assetPath) {
     // Remove leading slash if present
@@ -44,7 +44,7 @@ class AppConfig {
   /// Example:
   /// ```dart
   /// getGitHubPagesUrl('assets/documents/resume.pdf');
-  /// // Returns: https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/assets/documents/resume.pdf
+  /// // Returns: https://youssefsalem582.github.io/Youssef-Salem-Portfolio/assets/documents/resume.pdf
   /// ```
   static String getGithubPagesAssetUrl(String assetPath) {
     // Remove leading slash if present
@@ -56,7 +56,7 @@ class AppConfig {
   // ==================== App Information ====================
 
   /// Application name
-  static const String appName = 'Youssef Hassan Portfolio';
+  static const String appName = 'Youssef Salem Portfolio';
 
   /// Application version
   static const String appVersion = '1.0.0';

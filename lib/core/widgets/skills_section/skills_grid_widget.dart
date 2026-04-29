@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:youssef_hassan_portfolio/features/skills/domain/entities/skill.dart';
-import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
+import 'package:youssef_salem_portfolio/features/skills/domain/entities/skill.dart';
+import 'package:youssef_salem_portfolio/core/localization/localized_extensions.dart';
 import 'skill_category_widget.dart';
 
 /// Skills Grid Widget

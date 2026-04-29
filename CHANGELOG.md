@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to **Youssef Hassan Portfolio** (Flutter Web) are documented in this file.
+All notable changes to **Youssef Salem Portfolio** (Flutter Web) are documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -20,6 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Contact form build overrides** — `lib/core/config/contact_runtime_config.dart` resolves Formspree URL and recipient email from optional `--dart-define=FORMSPREE_ENDPOINT` / `CONTACT_RECIPIENT_EMAIL`, falling back to `lib/core/config/api_keys.dart`. GitHub Actions workflow and `scripts/build_optimized.ps1` / `build_optimized.sh` pass defines when env/secrets are set. Documented in `tech_readme_files/04_Contact_And_Deploy/CONTACT_FORM.md` and root `README.md`.
 
 ### Changed
+
+- **Branding & identifiers** — Public display name updated from “Youssef Hassan” to “Youssef Salem”; Dart package **`youssef_salem_portfolio`**; GitHub Pages base path, workflows, manifests, robots/sitemap, case-study project slug **`youssef-salem-portfolio`**, and resume PDF path **`Youssef-Salem-cv.pdf`** aligned with repo **`Youssef-Salem-Portfolio`** (rename the repo on GitHub and add/rename the resume asset to match URLs).
 
 - **SEO & accessibility** — Enriched [`web/index.html`](web/index.html) (`lang`, `meta robots`, `application-name`, `og:locale`/`og:locale:alternate`, `link rel="sitemap"`); expanded JSON-LD (`email`, `address`, broader `sameAs`); aligned [`web/manifest.json`](web/manifest.json) (path-based PWA shortcuts, `theme_color` / `description`). Expanded [`web/llms.txt`](web/llms.txt). [`LazyImage`](lib/core/widgets/lazy_image.dart) supports `semanticLabel` with labels on project cards, case-study hero/gallery, and hero profile image. [`tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md`](tech_readme_files/04_Contact_And_Deploy/DEPLOYMENT.md) SEO table updated accordingly.
 

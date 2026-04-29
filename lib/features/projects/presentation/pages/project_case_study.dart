@@ -3,7 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import '../../domain/entities/project.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/utils/assets/app_constants.dart';
-import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
+import 'package:youssef_salem_portfolio/core/localization/localized_extensions.dart';
 import '../../../../core/utils/responsive_helper.dart';
 import '../widgets/project_case_study/action_buttons_widget.dart';
 import '../widgets/project_case_study/challenges_solutions_widget.dart';

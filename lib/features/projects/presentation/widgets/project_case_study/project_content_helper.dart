@@ -1,6 +1,6 @@
 import '../../../../../core/locale/app_locale_binding.dart';
 import '../../../data/project_case_study_data.dart';
-import 'package:youssef_hassan_portfolio/features/projects/data/localized/project_case_study_data_ar.dart';
+import 'package:youssef_salem_portfolio/features/projects/data/localized/project_case_study_data_ar.dart';
 
 /// Bridges callers to [ProjectCaseStudyData] (`features/projects/data/`).
 ///

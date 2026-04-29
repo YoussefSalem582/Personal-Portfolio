@@ -29,7 +29,7 @@
 ## Developer workflows
 - Local: `flutter pub get`; `flutter run -d chrome`
 - Tests: `flutter test` (e.g. [test/home_bloc_test.dart](../test/home_bloc_test.dart), [test/projects_bloc_test.dart](../test/projects_bloc_test.dart), [test/theme_bloc_test.dart](../test/theme_bloc_test.dart))
-- Production web (example with Pages base-href): `flutter build web --release --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps`
+- Production web (example with Pages base-href): `flutter build web --release --base-href "/Youssef-Salem-Portfolio/" --no-source-maps`
 - CI: [.github/workflows/deploy.yml](workflows/deploy.yml)
 - Deep-dive docs for contributors: [tech_readme_files/README.md](../tech_readme_files/README.md)
 

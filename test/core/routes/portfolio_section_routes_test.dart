@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:youssef_hassan_portfolio/core/routes/app_routes.dart';
-import 'package:youssef_hassan_portfolio/core/routes/portfolio_section_routes.dart';
+import 'package:youssef_salem_portfolio/core/routes/app_routes.dart';
+import 'package:youssef_salem_portfolio/core/routes/portfolio_section_routes.dart';
 
 void main() {
   group('PortfolioSectionRoutes', () {

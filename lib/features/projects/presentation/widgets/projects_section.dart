@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:youssef_hassan_portfolio/features/projects/data/localized/localized_project_filter.dart';
+import 'package:youssef_salem_portfolio/features/projects/data/localized/localized_project_filter.dart';
 import '../../domain/entities/project.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/theme/app_theme.dart';
 import '../../../../core/utils/assets/app_constants.dart';
-import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
+import 'package:youssef_salem_portfolio/features/hero/data/local/personal_info_data.dart';
 import '../../../../core/utils/responsive_helper.dart';
 import '../../../../core/utils/url_helper.dart';
 import '../../../../core/widgets/custom_show_more_button.dart';

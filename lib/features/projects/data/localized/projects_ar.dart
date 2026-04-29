@@ -53,7 +53,7 @@ class ProjectsAr {
       description:
           'تطبيق محادثة عبر Firebase للمصادقة وقاعدة بيانات فورية مع أوضاع فاتح/داكن وواجهة مرتبة.',
     ),
-    'youssef-hassan-portfolio': ArProjectCopy(
+    'youssef-salem-portfolio': ArProjectCopy(
       title: 'موقع ملف أعمال شخصي',
       shortDescription:
           'موقع ملف أعمال ويب متجاوب يعرض المشاريع والمهارات والخبرة',

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
+import 'package:youssef_salem_portfolio/core/localization/localized_extensions.dart';
 import '../../../l10n/app_localizations.dart';
 import '../domain/entities/expertise.dart';
 import '../../../core/utils/assets/app_constants.dart';

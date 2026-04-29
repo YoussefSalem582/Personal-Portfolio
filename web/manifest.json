@@ -1,12 +1,12 @@
 {
-    "name": "Youssef Hassan - Portfolio",
+    "name": "Youssef Salem - Portfolio",
     "short_name": "YH Portfolio",
-    "start_url": "/Youssef-Hassan-Portfolio/",
-    "scope": "/Youssef-Hassan-Portfolio/",
+    "start_url": "/Youssef-Salem-Portfolio/",
+    "scope": "/Youssef-Salem-Portfolio/",
     "display": "standalone",
     "background_color": "#0D1117",
     "theme_color": "#0D1117",
-    "description": "Youssef Hassan — Flutter Developer Portfolio. Cross-platform apps with Flutter, Dart, Python, and machine learning. Projects, certifications, bilingual English/Arabic.",
+    "description": "Youssef Salem — Flutter Developer Portfolio. Cross-platform apps with Flutter, Dart, Python, and machine learning. Projects, certifications, bilingual English/Arabic.",
     "orientation": "any",
     "prefer_related_applications": false,
     "categories": [
@@ -22,7 +22,7 @@
             "name": "View Projects",
             "short_name": "Projects",
             "description": "Browse my portfolio projects",
-            "url": "/Youssef-Hassan-Portfolio/projects",
+            "url": "/Youssef-Salem-Portfolio/projects",
             "icons": [
                 {
                     "src": "icons/Icon-192.png",
@@ -35,7 +35,7 @@
             "name": "Contact Me",
             "short_name": "Contact",
             "description": "Get in touch",
-            "url": "/Youssef-Hassan-Portfolio/contact",
+            "url": "/Youssef-Salem-Portfolio/contact",
             "icons": [
                 {
                     "src": "icons/Icon-192.png",

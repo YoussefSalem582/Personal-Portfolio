@@ -1,6 +1,6 @@
-import 'package:youssef_hassan_portfolio/features/expertise/domain/entities/expertise.dart';
+import 'package:youssef_salem_portfolio/features/expertise/domain/entities/expertise.dart';
 import 'package:flutter/material.dart';
-import 'package:youssef_hassan_portfolio/core/utils/assets/app_constants.dart';
+import 'package:youssef_salem_portfolio/core/utils/assets/app_constants.dart';
 
 class ExpertiseData {
   static final List<Expertise> expertiseList = [

@@ -1,4 +1,4 @@
-import 'package:youssef_hassan_portfolio/features/contact/domain/entities/contact_entities.dart';
+import 'package:youssef_salem_portfolio/features/contact/domain/entities/contact_entities.dart';
 
 class ContactData {
   static final ContactInfo contactInfo = ContactInfo(

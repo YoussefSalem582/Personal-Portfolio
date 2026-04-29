@@ -1,6 +1,6 @@
 # Project scope
 
-**Repository**: Flutter Web portfolio (`youssef_hassan_portfolio`) at the repo root. Not the Technology 92 mobile codebase.
+**Repository**: Flutter Web portfolio (`youssef_salem_portfolio`) at the repo root. Not the Technology 92 mobile codebase.
 
 ## Stack
 

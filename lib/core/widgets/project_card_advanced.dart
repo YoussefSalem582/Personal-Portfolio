@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import '../../l10n/app_localizations.dart';
 import '../utils/assets/app_constants.dart';
-import 'package:youssef_hassan_portfolio/features/projects/domain/entities/project.dart';
-import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
+import 'package:youssef_salem_portfolio/features/projects/domain/entities/project.dart';
+import 'package:youssef_salem_portfolio/core/localization/localized_extensions.dart';
 import '../routes/app_routes.dart';
 import 'lazy_image.dart';
 import 'project_card.dart'; // Import for ProjectDetailsDialog

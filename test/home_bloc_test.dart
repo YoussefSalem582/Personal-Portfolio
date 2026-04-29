@@ -1,11 +1,11 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:youssef_hassan_portfolio/features/home/data/datasources/home_local_datasource_impl.dart';
-import 'package:youssef_hassan_portfolio/features/home/data/repositories/home_repository_impl.dart';
-import 'package:youssef_hassan_portfolio/features/home/domain/entities/home_layout.dart';
-import 'package:youssef_hassan_portfolio/features/home/domain/usecases/resolve_initial_home_section_usecase.dart';
-import 'package:youssef_hassan_portfolio/features/home/presentation/bloc/home_bloc.dart';
-import 'package:youssef_hassan_portfolio/features/home/presentation/bloc/home_event.dart';
-import 'package:youssef_hassan_portfolio/features/home/presentation/bloc/home_state.dart';
+import 'package:youssef_salem_portfolio/features/home/data/datasources/home_local_datasource_impl.dart';
+import 'package:youssef_salem_portfolio/features/home/data/repositories/home_repository_impl.dart';
+import 'package:youssef_salem_portfolio/features/home/domain/entities/home_layout.dart';
+import 'package:youssef_salem_portfolio/features/home/domain/usecases/resolve_initial_home_section_usecase.dart';
+import 'package:youssef_salem_portfolio/features/home/presentation/bloc/home_bloc.dart';
+import 'package:youssef_salem_portfolio/features/home/presentation/bloc/home_event.dart';
+import 'package:youssef_salem_portfolio/features/home/presentation/bloc/home_state.dart';
 
 void main() {
   late ResolveInitialHomeSectionUseCase resolve;

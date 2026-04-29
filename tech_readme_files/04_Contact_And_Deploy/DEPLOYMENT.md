@@ -8,7 +8,7 @@ What it does (summary):
 
 - **Trigger:** push to `master` or manual `workflow_dispatch`
 - **Flutter:** stable `3.24.0`
-- **Build:** `flutter build web --release --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps`, plus optional `--dart-define` flags (see below)
+- **Build:** `flutter build web --release --base-href "/Youssef-Salem-Portfolio/" --no-source-maps`, plus optional `--dart-define` flags (see below)
 - **Extras:** copies `web/service-worker.js`, `web/.htaccess`, `web/_headers` into `build/web` when present; copies `build/web/index.html` to `build/web/404.html` (GitHub Pages SPA fallback); creates `build/web/.nojekyll`
 - **Publish:** uploads **`build/web`** as the GitHub Pages artifact (`actions/deploy-pages`)
 
@@ -29,7 +29,7 @@ Full contact wiring: [CONTACT_FORM.md](CONTACT_FORM.md).
 
 ## Base href
 
-GitHub Pages often serves the app from a **repository subpath** (this repo uses `/Youssef-Hassan-Portfolio/`). Local builds must use the same `--base-href` as CI.
+GitHub Pages often serves the app from a **repository subpath** (this repo uses `/Youssef-Salem-Portfolio/`). Local builds must use the same `--base-href` as CI.
 
 ## Local optimized build
 
@@ -63,7 +63,7 @@ Flutter Web shells start from [`web/index.html`](../../web/index.html). Discover
 | [`web/manifest.json`](../../web/manifest.json) | Shortcuts must use **path** URLs (same as the router), not `#/…`. Keep `description` / `theme_color` aligned with [`web/index.html`](../../web/index.html) when you change positioning. |
 | [`web/llms.txt`](../../web/llms.txt) | Short summary and profile links for tools that consume `llms.txt`. |
 
-**Single origin:** Canonical links, OG `og:url`/images, and sitemap **`loc`** entries assume **`https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/`**. If you add a **custom domain** or rename the repo, update those files plus [`web/manifest.json`](../../web/manifest.json) together.
+**Single origin:** Canonical links, OG `og:url`/images, and sitemap **`loc`** entries assume **`https://youssefsalem582.github.io/Youssef-Salem-Portfolio/`**. If you add a **custom domain** or rename the repo, update those files plus [`web/manifest.json`](../../web/manifest.json) together.
 
 **Search Console:** After deploy, submit **`…/sitemap.xml`** in Google Search Console.
 

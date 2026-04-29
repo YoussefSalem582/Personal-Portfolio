@@ -8,8 +8,8 @@
 ## Setup
 
 ```bash
-git clone https://github.com/YoussefSalem582/Youssef-Hassan-Portfolio.git
-cd Youssef-Hassan-Portfolio
+git clone https://github.com/YoussefSalem582/Youssef-Salem-Portfolio.git
+cd Youssef-Salem-Portfolio
 flutter pub get
 ```
 
@@ -38,7 +38,7 @@ Relevant tests today (non-exhaustive):
 The site is often hosted under a **subpath** (example):
 
 ```bash
-flutter build web --release --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps
+flutter build web --release --base-href "/Youssef-Salem-Portfolio/" --no-source-maps
 ```
 
 Exact CI and local build: [04_Contact_And_Deploy/DEPLOYMENT.md](../04_Contact_And_Deploy/DEPLOYMENT.md). Windows one-liner from repo root: `.\scripts\build_optimized.ps1`. macOS / Linux: `chmod +x ./scripts/build_optimized.sh && ./scripts/build_optimized.sh`.

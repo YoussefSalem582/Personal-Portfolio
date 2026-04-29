@@ -1,12 +1,12 @@
-import 'package:youssef_hassan_portfolio/core/locale/app_locale_binding.dart';
-import 'package:youssef_hassan_portfolio/features/certificates/data/localized/certificates_ar.dart';
-import 'package:youssef_hassan_portfolio/features/expertise/data/localized/expertise_ar.dart';
-import 'package:youssef_hassan_portfolio/features/projects/data/localized/projects_ar.dart';
-import 'package:youssef_hassan_portfolio/features/skills/data/localized/skills_category_ar.dart';
-import 'package:youssef_hassan_portfolio/features/certificates/domain/entities/certificate.dart';
-import 'package:youssef_hassan_portfolio/features/expertise/domain/entities/expertise.dart';
-import 'package:youssef_hassan_portfolio/features/projects/domain/entities/project.dart';
-import 'package:youssef_hassan_portfolio/features/skills/domain/entities/skill.dart';
+import 'package:youssef_salem_portfolio/core/locale/app_locale_binding.dart';
+import 'package:youssef_salem_portfolio/features/certificates/data/localized/certificates_ar.dart';
+import 'package:youssef_salem_portfolio/features/expertise/data/localized/expertise_ar.dart';
+import 'package:youssef_salem_portfolio/features/projects/data/localized/projects_ar.dart';
+import 'package:youssef_salem_portfolio/features/skills/data/localized/skills_category_ar.dart';
+import 'package:youssef_salem_portfolio/features/certificates/domain/entities/certificate.dart';
+import 'package:youssef_salem_portfolio/features/expertise/domain/entities/expertise.dart';
+import 'package:youssef_salem_portfolio/features/projects/domain/entities/project.dart';
+import 'package:youssef_salem_portfolio/features/skills/domain/entities/skill.dart';
 
 extension LocalizedProject on Project {
   String get localizedTitle {

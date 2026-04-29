@@ -1,5 +1,5 @@
-import 'package:youssef_hassan_portfolio/features/projects/domain/entities/project.dart';
-import 'package:youssef_hassan_portfolio/core/utils/assets/app_constants.dart';
+import 'package:youssef_salem_portfolio/features/projects/domain/entities/project.dart';
+import 'package:youssef_salem_portfolio/core/utils/assets/app_constants.dart';
 
 class ProjectsData {
   static final List<Project> projects = [
@@ -294,7 +294,7 @@ class ProjectsData {
       isFeatured: false,
     ),
     Project(
-      id: 'youssef-hassan-portfolio',
+      id: 'youssef-salem-portfolio',
       title: 'Personal Portfolio Website',
       shortDescription:
           'Responsive Flutter web portfolio showcasing projects, skills, and professional experience',
@@ -315,8 +315,8 @@ class ProjectsData {
         'SEO',
         'GitHub Pages',
       ],
-      githubUrl: 'https://github.com/YoussefSalem582/Youssef-Hassan-Portfolio',
-      liveUrl: 'https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/',
+      githubUrl: 'https://github.com/YoussefSalem582/Youssef-Salem-Portfolio',
+      liveUrl: 'https://youssefsalem582.github.io/Youssef-Salem-Portfolio/',
       imageUrl: AppImages.portfolioLogo,
       createdAt: DateTime(2025, 10, 1),
       isFeatured: true,

@@ -1,9 +1,9 @@
-import 'package:youssef_hassan_portfolio/features/contact/domain/entities/contact_entities.dart';
-import 'package:youssef_hassan_portfolio/core/utils/assets/app_constants.dart';
+import 'package:youssef_salem_portfolio/features/contact/domain/entities/contact_entities.dart';
+import 'package:youssef_salem_portfolio/core/utils/assets/app_constants.dart';
 
 class PersonalInfoData {
   // Personal information
-  static const String fullName = 'Youssef Hassan';
+  static const String fullName = 'Youssef Salem';
   static const String title = 'Flutter Developer';
   static const String subtitle = 'Building fast cross-platform apps';
   static const String bio =

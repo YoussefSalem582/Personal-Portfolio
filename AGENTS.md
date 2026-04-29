@@ -1,6 +1,6 @@
-# Youssef Hassan Portfolio — Agent Instructions
+# Youssef Salem Portfolio — Agent Instructions
 
-> **Scope**: This repository is the Flutter **Web** portfolio (`youssef_hassan_portfolio`). Work in the repo root (`lib/`, `web/`, `assets/`, `scripts/`, etc.). There is no nested `technology_ninety_two_app/` folder and no sibling backend/Next.js repos in this project.
+> **Scope**: This repository is the Flutter **Web** portfolio (`youssef_salem_portfolio`). Work in the repo root (`lib/`, `web/`, `assets/`, `scripts/`, etc.). There is no nested `technology_ninety_two_app/` folder and no sibling backend/Next.js repos in this project.
 
 ## Project overview
 

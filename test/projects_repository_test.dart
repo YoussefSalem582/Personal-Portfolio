@@ -1,7 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:youssef_hassan_portfolio/features/projects/data/datasources/projects_local_datasource_impl.dart';
-import 'package:youssef_hassan_portfolio/features/projects/data/repositories/projects_repository_impl.dart';
-import 'package:youssef_hassan_portfolio/features/projects/domain/entities/projects_content_entity.dart';
+import 'package:youssef_salem_portfolio/features/projects/data/datasources/projects_local_datasource_impl.dart';
+import 'package:youssef_salem_portfolio/features/projects/data/repositories/projects_repository_impl.dart';
+import 'package:youssef_salem_portfolio/features/projects/domain/entities/projects_content_entity.dart';
 
 void main() {
   late ProjectsRepositoryImpl repo;

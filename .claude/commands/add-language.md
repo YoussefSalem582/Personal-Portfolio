@@ -1,6 +1,6 @@
 # Add or update localization
 
-For **Youssef Hassan Portfolio**, follow the skill:
+For **Youssef Salem Portfolio**, follow the skill:
 
 - `.agents/skills/add-language/SKILL.md`
 

@@ -1,6 +1,6 @@
-# Youssef Salem Hassan - Flutter Developer Portfolio
+# Youssef Salem - Flutter Developer Portfolio
 
-![Visitor Count](https://hits.sh/youssefsalem582.github.io/Youssef-Hassan-Portfolio.svg?style=flat-square&label=Visitors&color=3498db&labelColor=2c3e50)
+![Visitor Count](https://hits.sh/youssefsalem582.github.io/Youssef-Salem-Portfolio.svg?style=flat-square&label=Visitors&color=3498db&labelColor=2c3e50)
 ![GitHub Pages](https://img.shields.io/badge/Deployed-GitHub%20Pages-success?style=flat-square)
 ![Flutter](https://img.shields.io/badge/Built%20with-Flutter-02569B?style=flat-square&logo=flutter)
 
@@ -8,7 +8,7 @@ A modern, responsive portfolio website showcasing Flutter development skills, ma
 
 ## 🚀 Live Demo
 
-Visit the live portfolio: [https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/](https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/)
+Visit the live portfolio: [https://youssefsalem582.github.io/Youssef-Salem-Portfolio/](https://youssefsalem582.github.io/Youssef-Salem-Portfolio/)
 
 ## ⚡ Performance
 
@@ -59,8 +59,8 @@ See [`pubspec.yaml`](pubspec.yaml) for exact versions. Main packages include `fl
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/YoussefSalem582/Youssef-Hassan-Portfolio.git
-   cd Youssef-Hassan-Portfolio
+   git clone https://github.com/YoussefSalem582/Youssef-Salem-Portfolio.git
+   cd Youssef-Salem-Portfolio
    ```
 
 2. **Install dependencies**
@@ -85,7 +85,7 @@ See [`pubspec.yaml`](pubspec.yaml) for exact versions. Main packages include `fl
 
    Manual equivalent (same flags as [.github/workflows/deploy.yml](.github/workflows/deploy.yml)):
    ```bash
-   flutter build web --release --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps
+   flutter build web --release --base-href "/Youssef-Salem-Portfolio/" --no-source-maps
    ```
    Then copy `web/service-worker.js`, `web/.htaccess`, and `web/_headers` into `build/web` if present, and add `build/web/.nojekyll`.
 
@@ -168,7 +168,7 @@ Edit [`lib/core/theme/app_theme.dart`](lib/core/theme/app_theme.dart) to customi
 
 ### GitHub Actions (recommended)
 
-Workflow: [.github/workflows/deploy.yml](.github/workflows/deploy.yml). On push to **`master`**, it builds **`build/web`** with `--base-href "/Youssef-Hassan-Portfolio/"` and deploys to GitHub Pages (not the `docs/` folder).
+Workflow: [.github/workflows/deploy.yml](.github/workflows/deploy.yml). On push to **`master`**, it builds **`build/web`** with `--base-href "/Youssef-Salem-Portfolio/"` and deploys to GitHub Pages (not the `docs/` folder).
 
 1. Enable **GitHub Pages** (source: GitHub Actions) in repository settings.
 2. Push to `master` (or run the workflow manually via **Actions**).
@@ -192,7 +192,7 @@ Artifact: **`build/web`**.
 ### Manual one-off build
 
 ```bash
-flutter build web --release --base-href "/Youssef-Hassan-Portfolio/" --no-source-maps
+flutter build web --release --base-href "/Youssef-Salem-Portfolio/" --no-source-maps
 ```
 
 Then copy `web/service-worker.js` (and optional `web/.htaccess`, `web/_headers`) into `build/web`, and create `build/web/.nojekyll`.
@@ -265,11 +265,11 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 👤 Contact
 
-**Youssef Salem Hassan**
+**Youssef Salem**
 - Email: [youssef.salem.hassan582@gmail.com](mailto:youssef.salem.hassan582@gmail.com)
 - LinkedIn: [linkedin.com/in/youssef-hassan-8529372b7/](https://www.linkedin.com/in/youssef-hassan-8529372b7/)
 - GitHub: [github.com/YoussefSalem582](https://github.com/YoussefSalem582)
-- Portfolio: [youssefsalem582.github.io/Youssef-Hassan-Portfolio/](https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/)
+- Portfolio: [youssefsalem582.github.io/Youssef-Salem-Portfolio/](https://youssefsalem582.github.io/Youssef-Salem-Portfolio/)
 
 ## 🙏 Acknowledgments
 

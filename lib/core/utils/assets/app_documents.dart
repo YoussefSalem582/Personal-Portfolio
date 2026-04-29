@@ -20,8 +20,8 @@ class AppDocuments {
 
   // ==================== Resume & CV ====================
 
-  /// Youssef Hassan CV/Resume
-  static const String resume = '$_basePath/Youssef-Hassan-cv.pdf';
+  /// Youssef Salem CV/Resume
+  static const String resume = '$_basePath/Youssef-Salem-cv.pdf';
 
   /// Alternative reference (same file)
   static const String cv = resume;
@@ -236,7 +236,7 @@ class DocumentsMetadata {
   /// Resume/CV metadata
   static const DocumentMetadata resume = DocumentMetadata(
     path: AppDocuments.resume,
-    title: 'Youssef Hassan - Resume',
+    title: 'Youssef Salem - Resume',
     description: 'Professional CV/Resume showcasing skills and experience',
     type: DocumentType.pdf,
     tags: ['cv', 'resume', 'professional'],

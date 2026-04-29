@@ -1,6 +1,6 @@
 # Write tests
 
-Write unit or widget tests for **Youssef Hassan Portfolio** following existing patterns under `test/`.
+Write unit or widget tests for **Youssef Salem Portfolio** following existing patterns under `test/`.
 
 ## When to use
 
@@ -14,7 +14,7 @@ Tests live at **`test/`** (see `home_bloc_test.dart`, `projects_bloc_test.dart`,
 Imports use the package name:
 
 ```dart
-import 'package:youssef_hassan_portfolio/features/...';
+import 'package:youssef_salem_portfolio/features/...';
 ```
 
 ## Failure types

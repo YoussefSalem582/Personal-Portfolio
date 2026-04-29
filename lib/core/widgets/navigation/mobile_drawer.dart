@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../../l10n/app_localizations.dart';
 import '../../utils/assets/app_constants.dart';
 import '../../utils/url_helper.dart';
-import 'package:youssef_hassan_portfolio/features/hero/data/local/personal_info_data.dart';
+import 'package:youssef_salem_portfolio/features/hero/data/local/personal_info_data.dart';
 import '../../../features/locale/presentation/bloc/locale_bloc.dart';
 import '../../../features/locale/presentation/bloc/locale_event.dart';
 import '../../../features/locale/presentation/bloc/locale_state.dart';

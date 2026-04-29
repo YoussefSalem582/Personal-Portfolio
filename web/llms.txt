@@ -1,10 +1,10 @@
-# Youssef Hassan — Portfolio (Flutter Web)
+# Youssef Salem — Portfolio (Flutter Web)
 
-> Official public portfolio for Youssef Hassan, Flutter developer (Egypt). Use this file for a concise machine-readable summary of the site.
+> Official public portfolio for Youssef Salem, Flutter developer (Egypt). Use this file for a concise machine-readable summary of the site.
 
 ## Site URL
 
-- Home: https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/
+- Home: https://youssefsalem582.github.io/Youssef-Salem-Portfolio/
 
 ## What this site is
 
@@ -24,11 +24,11 @@ User interface is available in **English** and **Arabic** (locale toggle in-app)
 ## Technology
 
 - **Stack:** Flutter Web, `go_router`, `flutter_bloc`, `get_it`, ARB localization.
-- **Hosting:** GitHub Pages; base path `/Youssef-Hassan-Portfolio/`.
+- **Hosting:** GitHub Pages; base path `/Youssef-Salem-Portfolio/`.
 
 ## Sitemap
 
-Published at: https://youssefsalem582.github.io/Youssef-Hassan-Portfolio/sitemap.xml
+Published at: https://youssefsalem582.github.io/Youssef-Salem-Portfolio/sitemap.xml
 
 ## Contact
 

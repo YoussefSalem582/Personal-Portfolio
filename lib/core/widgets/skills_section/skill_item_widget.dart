@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:youssef_hassan_portfolio/features/skills/domain/entities/skill.dart';
+import 'package:youssef_salem_portfolio/features/skills/domain/entities/skill.dart';
 import '../../utils/assets/app_constants.dart';
 import 'skill_icon_widget.dart';
 

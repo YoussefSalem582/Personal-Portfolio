@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/locale/app_locale_binding.dart';
 import '../../../../../l10n/app_localizations.dart';
 import '../../../../../core/utils/assets/app_constants.dart';
-import 'package:youssef_hassan_portfolio/features/projects/data/localized/case_study_documents_ar.dart';
+import 'package:youssef_salem_portfolio/features/projects/data/localized/case_study_documents_ar.dart';
 import '../../../../../core/utils/url_helper.dart';
 import '../../../../../core/theme/app_theme.dart';
 

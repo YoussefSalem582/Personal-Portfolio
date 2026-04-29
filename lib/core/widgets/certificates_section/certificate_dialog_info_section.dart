@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../l10n/app_localizations.dart';
-import 'package:youssef_hassan_portfolio/features/certificates/domain/entities/certificate.dart';
+import 'package:youssef_salem_portfolio/features/certificates/domain/entities/certificate.dart';
 import '../../utils/assets/app_constants.dart';
-import 'package:youssef_hassan_portfolio/core/localization/localized_extensions.dart';
+import 'package:youssef_salem_portfolio/core/localization/localized_extensions.dart';
 import '../../theme/app_theme.dart';
 import 'certificate_dialog_info_card.dart';
 

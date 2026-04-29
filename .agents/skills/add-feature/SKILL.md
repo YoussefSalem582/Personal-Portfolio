@@ -5,7 +5,7 @@ description: Scaffold a new portfolio feature (data / domain / presentation), wi
 
 # Add new feature (portfolio)
 
-> **Context:** **Youssef Hassan Portfolio** — Flutter Web, repo root `lib/features/<name>/`.
+> **Context:** **Youssef Salem Portfolio** — Flutter Web, repo root `lib/features/<name>/`.
 
 ## When to use
 

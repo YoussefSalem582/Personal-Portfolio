@@ -21,7 +21,7 @@ if ($env:CONTACT_RECIPIENT_EMAIL) {
 }
 flutter build web `
   --release `
-  --base-href "/Youssef-Hassan-Portfolio/" `
+  --base-href "/Youssef-Salem-Portfolio/" `
   --no-source-maps `
   @defineArgs
 

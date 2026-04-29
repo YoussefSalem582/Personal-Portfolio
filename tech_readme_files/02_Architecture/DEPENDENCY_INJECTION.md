@@ -5,7 +5,7 @@
 Global locator: **`sl`** in [lib/injection_container.dart](../../lib/injection_container.dart).
 
 ```dart
-import 'package:youssef_hassan_portfolio/injection_container.dart';
+import 'package:youssef_salem_portfolio/injection_container.dart';
 
 final repo = sl<ProjectsRepository>();
 ```
